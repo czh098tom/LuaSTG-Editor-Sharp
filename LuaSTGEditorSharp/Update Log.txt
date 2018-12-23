@@ -1,6 +1,6 @@
-﻿-- Update Log（最近更新 2018-12-18）
+﻿-- Update Log（最近更新 2018-12-23）
 
-0.0.5.x
+0.0.4.5
 (2018-12-x)
 
 实现节点：
@@ -16,15 +16,20 @@ Laser
 	LaserTurnHalfOn
 	LaserTurnOn
 	LaserTurnOff
+	LaserChangeStyle
+Object
+	SetBlend
 Editor层：
 General
-	BlockCode
+	CodeSegment
 
 实现编辑界面：
 Lib层：
 激光类型
+尺寸
+ARGB颜色
 统一激光与子弹的定义与参数选择
-增加坐标编辑工具，可以按照样例图片直接选取坐标点
+增加坐标与向量、编辑工具，可以按照样例图片直接选取坐标点
 
 消息：
 Editor层：

@@ -151,11 +151,17 @@ namespace LuaSTGEditorSharp.Windows.Input
                 case "color":
                     window = new ColorInput(toEdit, owner);
                     break;
+                case "nullableColor":
+                    window = new ColorInput(toEdit, owner);
+                    break;
                 case "ARGB":
                     window = new ARGBInput(toEdit, owner);
                     break;
                 case "vector":
                     window = new VectorInput(toEdit, owner);
+                    break;
+                case "size":
+                    window = new SizeInput(toEdit, owner);
                     break;
                 case "bossBG":
                     window = new BossBGDefInput(toEdit, owner, source);

@@ -109,11 +109,11 @@ namespace LuaSTGEditorSharp.Windows.Input
             set
             {
                 Result = value;
-                RaiseProertyChanged("ResultTXT");
+                RaisePropertyChanged("ResultTXT");
                 ReCalcDecompostion();
                 ReCalcPolynominal();
-                RaiseProertyChanged("DecomposedX");
-                RaiseProertyChanged("DecomposedY");
+                RaisePropertyChanged("DecomposedX");
+                RaisePropertyChanged("DecomposedY");
             }
         }
 
@@ -123,9 +123,9 @@ namespace LuaSTGEditorSharp.Windows.Input
             set
             {
                 decomposedX = value;
-                RaiseProertyChanged("DecomposedX");
+                RaisePropertyChanged("DecomposedX");
                 ReCalcResult();
-                RaiseProertyChanged("ResultTXT");
+                RaisePropertyChanged("ResultTXT");
                 ReCalcPolynominal();
             }
         }
@@ -136,9 +136,9 @@ namespace LuaSTGEditorSharp.Windows.Input
             set
             {
                 decomposedY = value;
-                RaiseProertyChanged("DecomposedY");
+                RaisePropertyChanged("DecomposedY");
                 ReCalcResult();
-                RaiseProertyChanged("ResultTXT");
+                RaisePropertyChanged("ResultTXT");
                 ReCalcPolynominal();
             }
         }
@@ -153,13 +153,13 @@ namespace LuaSTGEditorSharp.Windows.Input
                     selectedVec.X = value;
                     MergeX();
                     ReCalcResult();
-                    RaiseProertyChanged("CurrentX");
+                    RaisePropertyChanged("CurrentX");
                     object a = sumBox.SelectedItem;
                     sumBox.ItemsSource = null;
                     sumBox.ItemsSource = decomposedVectors;
                     sumBox.SelectedItem = a;
-                    RaiseProertyChanged("DecomposedX");
-                    RaiseProertyChanged("ResultTXT");
+                    RaisePropertyChanged("DecomposedX");
+                    RaisePropertyChanged("ResultTXT");
                 }
             }
         }
@@ -174,13 +174,13 @@ namespace LuaSTGEditorSharp.Windows.Input
                     selectedVec.Y = value;
                     MergeY();
                     ReCalcResult();
-                    RaiseProertyChanged("CurrentY");
+                    RaisePropertyChanged("CurrentY");
                     object a = sumBox.SelectedItem;
                     sumBox.ItemsSource = null;
                     sumBox.ItemsSource = decomposedVectors;
                     sumBox.SelectedItem = a;
-                    RaiseProertyChanged("DecomposedY");
-                    RaiseProertyChanged("ResultTXT");
+                    RaisePropertyChanged("DecomposedY");
+                    RaisePropertyChanged("ResultTXT");
                 }
             }
         }
@@ -394,8 +394,8 @@ namespace LuaSTGEditorSharp.Windows.Input
         private void SumBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             selectedVec = sumBox.SelectedItem as StrVector;
-            RaiseProertyChanged("CurrentX");
-            RaiseProertyChanged("CurrentY");
+            RaisePropertyChanged("CurrentX");
+            RaisePropertyChanged("CurrentY");
         }
 
         private void SyncXY_Click(object sender, RoutedEventArgs e)

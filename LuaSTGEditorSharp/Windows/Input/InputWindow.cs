@@ -72,7 +72,7 @@ namespace LuaSTGEditorSharp.Windows.Input
             set
             {
                 result = value;
-                RaiseProertyChanged("Result");
+                RaisePropertyChanged("Result");
             }
         }
 
@@ -80,7 +80,7 @@ namespace LuaSTGEditorSharp.Windows.Input
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        protected void RaiseProertyChanged(string propName)
+        protected void RaisePropertyChanged(string propName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
         }

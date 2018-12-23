@@ -63,7 +63,7 @@ namespace LuaSTGEditorSharp.Windows.Input
                     this.value = value;
                     RaiseProertyChanged("Value");
                     parent.CombineParams();
-                    parent.RaiseProertyChanged("ResultTXT");
+                    parent.RaisePropertyChanged("ResultTXT");
                 }
             }
 
@@ -134,7 +134,7 @@ namespace LuaSTGEditorSharp.Windows.Input
             set
             {
                 Result = value;
-                RaiseProertyChanged("ResultTXT");
+                RaisePropertyChanged("ResultTXT");
                 DecomposeParams();
             }
         }

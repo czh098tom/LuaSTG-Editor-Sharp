@@ -152,6 +152,9 @@
     <Compile Include="Windows\Input\PathInput.xaml.cs">
       <DependentUpon>PathInput.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\Input\SizeInput.xaml.cs">
+      <DependentUpon>SizeInput.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\Input\PositionInput.xaml.cs">
       <DependentUpon>PositionInput.xaml</DependentUpon>
     </Compile>
@@ -228,6 +231,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Windows\Input\PathInput.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\Input\SizeInput.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

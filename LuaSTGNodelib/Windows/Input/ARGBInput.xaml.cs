@@ -43,7 +43,7 @@ namespace LuaSTGEditorSharp.Windows.Input
             {
                 a = value;
                 UpdateState();
-                RaiseProertyChanged("A");
+                RaisePropertyChanged("A");
                 CombineResult();
             }
         }
@@ -58,10 +58,10 @@ namespace LuaSTGEditorSharp.Windows.Input
                 s = hsv.saturation;
                 v = hsv.value;
                 UpdateState();
-                RaiseProertyChanged("R");
-                RaiseProertyChanged("H");
-                RaiseProertyChanged("S");
-                RaiseProertyChanged("V");
+                RaisePropertyChanged("R");
+                RaisePropertyChanged("H");
+                RaisePropertyChanged("S");
+                RaisePropertyChanged("V");
                 CombineResult();
             }
         }
@@ -76,10 +76,10 @@ namespace LuaSTGEditorSharp.Windows.Input
                 s = hsv.saturation;
                 v = hsv.value;
                 UpdateState();
-                RaiseProertyChanged("G");
-                RaiseProertyChanged("H");
-                RaiseProertyChanged("S");
-                RaiseProertyChanged("V");
+                RaisePropertyChanged("G");
+                RaisePropertyChanged("H");
+                RaisePropertyChanged("S");
+                RaisePropertyChanged("V");
                 CombineResult();
             }
         }
@@ -94,10 +94,10 @@ namespace LuaSTGEditorSharp.Windows.Input
                 s = hsv.saturation;
                 v = hsv.value;
                 UpdateState();
-                RaiseProertyChanged("B");
-                RaiseProertyChanged("H");
-                RaiseProertyChanged("S");
-                RaiseProertyChanged("V");
+                RaisePropertyChanged("B");
+                RaisePropertyChanged("H");
+                RaisePropertyChanged("S");
+                RaisePropertyChanged("V");
                 CombineResult();
             }
         }
@@ -109,10 +109,10 @@ namespace LuaSTGEditorSharp.Windows.Input
             {
                 h = value;
                 UpdateState();
-                RaiseProertyChanged("H");
-                RaiseProertyChanged("R");
-                RaiseProertyChanged("G");
-                RaiseProertyChanged("B");
+                RaisePropertyChanged("H");
+                RaisePropertyChanged("R");
+                RaisePropertyChanged("G");
+                RaisePropertyChanged("B");
                 CombineResult();
             }
         }
@@ -124,10 +124,10 @@ namespace LuaSTGEditorSharp.Windows.Input
             {
                 s = value;
                 UpdateState();
-                RaiseProertyChanged("S");
-                RaiseProertyChanged("R");
-                RaiseProertyChanged("G");
-                RaiseProertyChanged("B");
+                RaisePropertyChanged("S");
+                RaisePropertyChanged("R");
+                RaisePropertyChanged("G");
+                RaisePropertyChanged("B");
                 CombineResult();
             }
         }
@@ -139,10 +139,10 @@ namespace LuaSTGEditorSharp.Windows.Input
             {
                 v = value;
                 UpdateState();
-                RaiseProertyChanged("V");
-                RaiseProertyChanged("R");
-                RaiseProertyChanged("G");
-                RaiseProertyChanged("B");
+                RaisePropertyChanged("V");
+                RaisePropertyChanged("R");
+                RaisePropertyChanged("G");
+                RaisePropertyChanged("B");
                 CombineResult();
             }
         }
@@ -158,14 +158,14 @@ namespace LuaSTGEditorSharp.Windows.Input
                 if (cs.Count >= 2 && !string.IsNullOrEmpty(cs[1]) && byte.TryParse(cs[1], out byte b2)) R = b2;
                 if (cs.Count >= 3 && !string.IsNullOrEmpty(cs[2]) && byte.TryParse(cs[2], out byte b3)) G = b3;
                 if (cs.Count >= 4 && !string.IsNullOrEmpty(cs[3]) && byte.TryParse(cs[3], out byte b4)) B = b4;
-                RaiseProertyChanged("A");
+                RaisePropertyChanged("A");
             }
         }
 
         public void CombineResult()
         {
             result = A + "," + R + "," + G + "," + B;
-            RaiseProertyChanged("Result");
+            RaisePropertyChanged("Result");
         }
 
         public static Color HSVToRGB(HSVColor HSV)
@@ -343,11 +343,11 @@ namespace LuaSTGEditorSharp.Windows.Input
             s = Convert.ToSingle(point.X / 255 * 100);
             v = Convert.ToSingle((255 - point.Y) / 255 * 100);
             UpdateState();
-            RaiseProertyChanged("S");
-            RaiseProertyChanged("V");
-            RaiseProertyChanged("R");
-            RaiseProertyChanged("G");
-            RaiseProertyChanged("B");
+            RaisePropertyChanged("S");
+            RaisePropertyChanged("V");
+            RaisePropertyChanged("R");
+            RaisePropertyChanged("G");
+            RaisePropertyChanged("B");
             CombineResult();
         }
 
