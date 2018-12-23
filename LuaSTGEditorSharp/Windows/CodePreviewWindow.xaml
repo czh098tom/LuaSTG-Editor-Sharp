@@ -1,0 +1,12 @@
+﻿<Window x:Name="window" x:Class="LuaSTGEditorSharp.Windows.CodePreviewWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:LuaSTGEditorSharp.Windows"
+        mc:Ignorable="d"
+        Title="Code Preview" Height="450" Width="800">
+    <Grid>
+        <TextBox x:Name="codeText" AcceptsReturn="True" FontFamily="Courier New" VerticalScrollBarVisibility="Visible"/>
+    </Grid>
+</Window>

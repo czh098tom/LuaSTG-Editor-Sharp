@@ -1,0 +1,94 @@
+﻿<local:InputWindow x:Name="inputWindow"  x:Class="LuaSTGEditorSharp.Windows.Input.ColorInput"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:LuaSTGEditorSharp.Windows.Input;assembly=LuaSTGEditorSharp"
+        mc:Ignorable="d"
+        Title="Color Selection" Height="337.462" Width="303.6" 
+                   Loaded="InputWindow_Loaded">
+    <Grid>
+        <WrapPanel>
+            <Button Click="Color_Click" Tag="COLOR_RED">
+                <Button.Content>
+                    <Image Source="../../images/color/COLOR_RED.png" Stretch="Fill" Width="64" Height="64"/>
+                </Button.Content>
+            </Button>
+            <Button Click="Color_Click" Tag="COLOR_DEEP_RED">
+                <Button.Content>
+                    <Image Source="../../images/color/COLOR_DEEP_RED.png" Stretch="Fill" Width="64" Height="64"/>
+                </Button.Content>
+            </Button>
+            <Button Click="Color_Click" Tag="COLOR_PURPLE">
+                <Button.Content>
+                    <Image Source="../../images/color/COLOR_PURPLE.png" Stretch="Fill" Width="64" Height="64"/>
+                </Button.Content>
+            </Button>
+            <Button Click="Color_Click" Tag="COLOR_DEEP_PURPLE">
+                <Button.Content>
+                    <Image Source="../../images/color/COLOR_DEEP_PURPLE.png" Stretch="Fill" Width="64" Height="64"/>
+                </Button.Content>
+            </Button>
+            <Button Click="Color_Click" Tag="COLOR_BLUE">
+                <Button.Content>
+                    <Image Source="../../images/color/COLOR_BLUE.png" Stretch="Fill" Width="64" Height="64"/>
+                </Button.Content>
+            </Button>
+            <Button Click="Color_Click" Tag="COLOR_DEEP_BLUE">
+                <Button.Content>
+                    <Image Source="../../images/color/COLOR_DEEP_BLUE.png" Stretch="Fill" Width="64" Height="64"/>
+                </Button.Content>
+            </Button>
+            <Button Click="Color_Click" Tag="COLOR_ROYAL_BLUE">
+                <Button.Content>
+                    <Image Source="../../images/color/COLOR_ROYAL_BLUE.png" Stretch="Fill" Width="64" Height="64"/>
+                </Button.Content>
+            </Button>
+            <Button Click="Color_Click" Tag="COLOR_CYAN">
+                <Button.Content>
+                    <Image Source="../../images/color/COLOR_CYAN.png" Stretch="Fill" Width="64" Height="64"/>
+                </Button.Content>
+            </Button>
+            <Button Click="Color_Click" Tag="COLOR_DEEP_GREEN">
+                <Button.Content>
+                    <Image Source="../../images/color/COLOR_DEEP_GREEN.png" Stretch="Fill" Width="64" Height="64"/>
+                </Button.Content>
+            </Button>
+            <Button Click="Color_Click" Tag="COLOR_GREEN">
+                <Button.Content>
+                    <Image Source="../../images/color/COLOR_GREEN.png" Stretch="Fill" Width="64" Height="64"/>
+                </Button.Content>
+            </Button>
+            <Button Click="Color_Click" Tag="COLOR_CHARTREUSE">
+                <Button.Content>
+                    <Image Source="../../images/color/COLOR_CHARTREUSE.png" Stretch="Fill" Width="64" Height="64"/>
+                </Button.Content>
+            </Button>
+            <Button Click="Color_Click" Tag="COLOR_YELLOW">
+                <Button.Content>
+                    <Image Source="../../images/color/COLOR_YELLOW.png" Stretch="Fill" Width="64" Height="64"/>
+                </Button.Content>
+            </Button>
+            <Button Click="Color_Click" Tag="COLOR_GOLDEN_YELLOW">
+                <Button.Content>
+                    <Image Source="../../images/color/COLOR_GOLDEN_YELLOW.png" Stretch="Fill" Width="64" Height="64"/>
+                </Button.Content>
+            </Button>
+            <Button Click="Color_Click" Tag="COLOR_ORANGE">
+                <Button.Content>
+                    <Image Source="../../images/color/COLOR_ORANGE.png" Stretch="Fill" Width="64" Height="64"/>
+                </Button.Content>
+            </Button>
+            <Button Click="Color_Click" Tag="COLOR_DEEP_GRAY">
+                <Button.Content>
+                    <Image Source="../../images/color/COLOR_DEEP_GRAY.png" Stretch="Fill" Width="64" Height="64"/>
+                </Button.Content>
+            </Button>
+            <Button Click="Color_Click" Tag="COLOR_GRAY">
+                <Button.Content>
+                    <Image Source="../../images/color/COLOR_GRAY.png" Stretch="Fill" Width="64" Height="64"/>
+                </Button.Content>
+            </Button>
+        </WrapPanel>
+    </Grid>
+</local:InputWindow>

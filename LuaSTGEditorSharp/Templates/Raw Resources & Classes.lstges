@@ -1,0 +1,5 @@
+﻿0,{"$type":"LuaSTGEditorSharp.EditorData.Node.RootFolder, LuaSTGEditorSharp","attributes":[{"attrCap":"Name","attrInput":"File","EditWindow":""}],"IsExpanded":true,"IsSelected":true}
+1,{"$type":"LuaSTGEditorSharp.EditorData.Node.ProjSettings, LuaSTGEditorSharp","attributes":[{"attrCap":"Output Name","attrInput":"","EditWindow":""},{"attrCap":"Author","attrInput":"","EditWindow":""},{"attrCap":"Allow practice","attrInput":"true","EditWindow":"bool"},{"attrCap":"Allow sc practice","attrInput":"true","EditWindow":"bool"}],"IsExpanded":true,"IsSelected":false}
+1,{"$type":"LuaSTGEditorSharp.EditorData.Node.EditorVersion, LuaSTGEditorSharp","attributes":[{"attrCap":"Editor version","attrInput":"0.0.3","EditWindow":""}],"IsExpanded":true,"IsSelected":false}
+1,{"$type":"LuaSTGEditorSharp.EditorData.Node.General.Folder, LuaSTGEditorSharp","attributes":[{"attrCap":"Name","attrInput":"Resources","EditWindow":""}],"IsExpanded":true,"IsSelected":false}
+1,{"$type":"LuaSTGEditorSharp.EditorData.Node.General.Folder, LuaSTGEditorSharp","attributes":[{"attrCap":"Name","attrInput":"Classes","EditWindow":""}],"IsExpanded":true,"IsSelected":false}

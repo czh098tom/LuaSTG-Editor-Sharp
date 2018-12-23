@@ -1,0 +1,99 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Windows;
+using System.Windows.Data;
+using System.Windows.Input;
+using System.Windows.Controls;
+using System.Windows.Media.Imaging;
+using LuaSTGEditorSharp.EditorData;
+using LuaSTGEditorSharp.Plugin;
+using LuaSTGEditorSharp.Toolbox;
+using LuaSTGEditorSharp.EditorData.Document;
+using LuaSTGEditorSharp.EditorData.Node;
+using LuaSTGEditorSharp.EditorData.Node.General;
+using LuaSTGEditorSharp.EditorData.Node.Advanced;
+using LuaSTGEditorSharp.EditorData.Node.Project;
+
+namespace LuaSTGEditorSharp
+{
+    partial class MainWindow : Window
+    {
+        public AbstractToolbox toolbox;
+
+        public void InitDict()
+        {
+            foreach (KeyValuePair<string, BitmapImage> kvp in toolbox.GetToolBoxImageResources())
+            {
+                if(!Resources.Contains(kvp.Key)) Resources.Add(kvp.Key, kvp.Value);
+            }
+            foreach (KeyValuePair<string, BitmapImage> kvp in PluginHandler.Plugin.GetNodeImageResources())
+            {
+                if (!Resources.Contains(kvp.Key)) Resources.Add(kvp.Key, kvp.Value);
+            }
+        }
+
+        public void Insert(TreeNode node)
+        {
+            try
+            {
+                bool move = (Application.Current as App).AutoMoveToNew;
+                node.IsSelected = move;
+                if (ActivatedWorkSpaceData.AddAndExecuteCommand(
+                    insertState.ValidateAndNewInsert(
+                        selectedNode, node))) CreateInvoke(node);
+            }
+            catch (Exception) { }
+        }
+
+        private void ButtonAdd_Click(object sender, RoutedEventArgs e)
+        {
+            toolbox.NFuncs[(sender as Button)?.Tag.ToString()]();
+        }
+
+        private void ComboDict_GotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
+        {
+            comboDict.IsDropDownOpen = true;
+        }
+
+        private void ComboDict_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                string s = (sender as ComboBox)?.Text;
+                if (!string.IsNullOrEmpty(s))
+                {
+                    if (toolbox.NFuncs.ContainsKey(s))
+                    {
+                        toolbox.NFuncs[s]();
+                        comboDict.Text = "";
+                    }
+                }
+            }
+            CollectionView itemsViewOriginal = (CollectionView)CollectionViewSource.GetDefaultView(comboDict.ItemsSource);
+
+            itemsViewOriginal.Filter = ((o) =>
+            {
+                if (String.IsNullOrEmpty(comboDict.Text)) return true;
+                else
+                {
+                    if ((((SearchModel)o).Name).Contains(comboDict.Text)) return true;
+                    else return false;
+                }
+            });
+            //comboDict.IsDropDownOpen = true;
+            comboDict.SelectedItem = null;
+            itemsViewOriginal.Refresh();
+            /*
+            else if (e.Key != Key.Down && e.Key != Key.Up && e.Key != Key.Left && e.Key != Key.Right) 
+            {
+                List<SearchModel> mylist = new List<SearchModel>();
+                mylist = toolbox.nodeNameList.FindAll(delegate (SearchModel s) { return s.Name.Contains(comboDict.Text.Trim().ToLower()); });
+                comboDict.ItemsSource = mylist;
+                comboDict.SelectedItem = null;
+                comboDict.IsDropDownOpen = true;
+            }
+            */
+        }
+    }
+}

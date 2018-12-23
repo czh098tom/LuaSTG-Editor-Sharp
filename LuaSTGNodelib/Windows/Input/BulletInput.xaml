@@ -1,0 +1,183 @@
+﻿<local:InputWindow x:Name="inputWindow"  x:Class="LuaSTGEditorSharp.Windows.Input.BulletInput"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:LuaSTGEditorSharp.Windows.Input;assembly=LuaSTGEditorSharp"
+        mc:Ignorable="d"
+        Title="Bullet Style Selection" Height="678.818" Width="332.536" 
+                   Loaded="InputWindow_Loaded">
+    <Window.Resources>
+        <Style x:Key="SelectionImg" TargetType="Image">
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="VerticalAlignment" Value="Stretch"/>
+            <Setter Property="LayoutTransform">
+                <Setter.Value>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.75" ScaleY="0.75" />
+                    </TransformGroup>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Stretch" Value="None"/>
+            <Setter Property="Width" Value="96"/>
+            <Setter Property="Height" Value="96"/>
+        </Style>
+    </Window.Resources>
+    <WrapPanel ScrollViewer.VerticalScrollBarVisibility="Auto"  ScrollViewer.CanContentScroll="True">
+        <Button Click="Style_Click" Tag="arrow_big">
+            <Button.Content>
+                <Image Source="../../images/bullet/scale.png" Style="{StaticResource SelectionImg}"/>
+            </Button.Content>
+        </Button>
+        <Button Click="Style_Click" Tag="arrow_mid">
+            <Button.Content>
+                <Image Source="../../images/bullet/arrow.png" Style="{StaticResource SelectionImg}"/>
+            </Button.Content>
+        </Button>
+        <Button Click="Style_Click" Tag="arrow_small">
+            <Button.Content>
+                <Image Source="../../images/bullet/chain.png" Style="{StaticResource SelectionImg}"/>
+            </Button.Content>
+        </Button>
+        <Button Click="Style_Click" Tag="gun_bullet">
+            <Button.Content>
+                <Image Source="../../images/bullet/bullet.png" Style="{StaticResource SelectionImg}"/>
+            </Button.Content>
+        </Button>
+        <Button Click="Style_Click" Tag="butterfly">
+            <Button.Content>
+                <Image Source="../../images/bullet/butterfly.png" Style="{StaticResource SelectionImg}"/>
+            </Button.Content>
+        </Button>
+        <Button Click="Style_Click" Tag="square">
+            <Button.Content>
+                <Image Source="../../images/bullet/ofuda.png" Style="{StaticResource SelectionImg}"/>
+            </Button.Content>
+        </Button>
+        <Button Click="Style_Click" Tag="ball_small">
+            <Button.Content>
+                <Image Source="../../images/bullet/point.png" Style="{StaticResource SelectionImg}"/>
+            </Button.Content>
+        </Button>
+        <Button Click="Style_Click" Tag="ball_mid">
+            <Button.Content>
+                <Image Source="../../images/bullet/smallball.png" Style="{StaticResource SelectionImg}"/>
+            </Button.Content>
+        </Button>
+        <Button Click="Style_Click" Tag="ball_mid_c">
+            <Button.Content>
+                <Image Source="../../images/bullet/circle.png" Style="{StaticResource SelectionImg}"/>
+            </Button.Content>
+        </Button>
+        <Button Click="Style_Click" Tag="ball_big">
+            <Button.Content>
+                <Image Source="../../images/bullet/middleball.png" Style="{StaticResource SelectionImg}"/>
+            </Button.Content>
+        </Button>
+        <Button Click="Style_Click" Tag="ball_huge">
+            <Button.Content>
+                <Image Source="../../images/bullet/bigball.png" Style="{StaticResource SelectionImg}"/>
+            </Button.Content>
+        </Button>
+        <Button Click="Style_Click" Tag="ball_light">
+            <Button.Content>
+                <Image Source="../../images/bullet/lightball.png" Style="{StaticResource SelectionImg}"/>
+            </Button.Content>
+        </Button>
+        <Button Click="Style_Click" Tag="star_small">
+            <Button.Content>
+                <Image Source="../../images/bullet/smallstar.png" Style="{StaticResource SelectionImg}"/>
+            </Button.Content>
+        </Button>
+        <Button Click="Style_Click" Tag="star_big">
+            <Button.Content>
+                <Image Source="../../images/bullet/bigstar.png" Style="{StaticResource SelectionImg}"/>
+            </Button.Content>
+        </Button>
+        <Button Click="Style_Click" Tag="grain_a">
+            <Button.Content>
+                <Image Source="../../images/bullet/grain.png" Style="{StaticResource SelectionImg}"/>
+            </Button.Content>
+        </Button>
+        <Button Click="Style_Click" Tag="grain_b">
+            <Button.Content>
+                <Image Source="../../images/bullet/needle.png" Style="{StaticResource SelectionImg}"/>
+            </Button.Content>
+        </Button>
+        <Button Click="Style_Click" Tag="grain_c">
+            <Button.Content>
+                <Image Source="../../images/bullet/blackgrain.png" Style="{StaticResource SelectionImg}"/>
+            </Button.Content>
+        </Button>
+        <Button Click="Style_Click" Tag="kite">
+            <Button.Content>
+                <Image Source="../../images/bullet/drip.png" Style="{StaticResource SelectionImg}"/>
+            </Button.Content>
+        </Button>
+        <Button Click="Style_Click" Tag="kite">
+            <Button.Content>
+                <Image Source="../../images/bullet/drip.png" Style="{StaticResource SelectionImg}"/>
+            </Button.Content>
+        </Button>
+        <Button Click="Style_Click" Tag="knife">
+            <Button.Content>
+                <Image Source="../../images/bullet/sword.png" Style="{StaticResource SelectionImg}"/>
+            </Button.Content>
+        </Button>
+        <Button Click="Style_Click" Tag="knife_b">
+            <Button.Content>
+                <Image Source="../../images/bullet/knife.png" Style="{StaticResource SelectionImg}"/>
+            </Button.Content>
+        </Button>
+        <Button Click="Style_Click" Tag="water_drop">
+            <Button.Content>
+                <Image Source="../../images/bullet/fire.png" Style="{StaticResource SelectionImg}"/>
+            </Button.Content>
+        </Button>
+        <Button Click="Style_Click" Tag="mildew">
+            <Button.Content>
+                <Image Source="../../images/bullet/mildew.png" Style="{StaticResource SelectionImg}"/>
+            </Button.Content>
+        </Button>
+        <Button Click="Style_Click" Tag="ellipse">
+            <Button.Content>
+                <Image Source="../../images/bullet/ellipse.png" Style="{StaticResource SelectionImg}"/>
+            </Button.Content>
+        </Button>
+        <Button Click="Style_Click" Tag="heart">
+            <Button.Content>
+                <Image Source="../../images/bullet/heart.png" Style="{StaticResource SelectionImg}"/>
+            </Button.Content>
+        </Button>
+        <Button Click="Style_Click" Tag="money">
+            <Button.Content>
+                <Image Source="../../images/bullet/money.png" Style="{StaticResource SelectionImg}"/>
+            </Button.Content>
+        </Button>
+        <Button Click="Style_Click" Tag="music">
+            <Button.Content>
+                <Image Source="../../images/bullet/music.png" Style="{StaticResource SelectionImg}"/>
+            </Button.Content>
+        </Button>
+        <Button Click="Style_Click" Tag="silence">
+            <Button.Content>
+                <Image Source="../../images/bullet/silence.png" Style="{StaticResource SelectionImg}"/>
+            </Button.Content>
+        </Button>
+        <Button Click="Style_Click" Tag="water_drop_dark">
+            <Button.Content>
+                <Image Source="../../images/bullet/fire_dark.png" Style="{StaticResource SelectionImg}"/>
+            </Button.Content>
+        </Button>
+        <Button Click="Style_Click" Tag="ball_huge_dark">
+            <Button.Content>
+                <Image Source="../../images/bullet/bigball_dark.png" Style="{StaticResource SelectionImg}"/>
+            </Button.Content>
+        </Button>
+        <Button Click="Style_Click" Tag="ball_light_dark">
+            <Button.Content>
+                <Image Source="../../images/bullet/lightball_dark.png" Style="{StaticResource SelectionImg}"/>
+            </Button.Content>
+        </Button>
+    </WrapPanel>
+</local:InputWindow>

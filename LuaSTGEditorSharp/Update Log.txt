@@ -1,0 +1,302 @@
+﻿-- Update Log（最近更新 2018-12-18）
+
+0.0.5.x
+(2018-12-x)
+
+实现节点：
+Lib层：
+Laser
+	LaserDefine
+		LaserInit
+	CreateLaser
+	BentLaserDefine
+		BentLaserInit
+	CreateBentLaser
+	LaserGrow
+	LaserTurnHalfOn
+	LaserTurnOn
+	LaserTurnOff
+Editor层：
+General
+	BlockCode
+
+实现编辑界面：
+Lib层：
+激光类型
+统一激光与子弹的定义与参数选择
+增加坐标编辑工具，可以按照样例图片直接选取坐标点
+
+消息：
+Editor层：
+VarNameInvalidMessage：变量名不合法
+RepeatedNameMessage：名称重复
+Lib层：
+ArgCountInfo：变量可变参数数目过小或溢出
+
+改进：
+增加Lua字符串转义符修正
+完善工具栏查找功能
+增加关闭文档对话框的提示图标
+
+修复bug：
+Editor层：
+启动不检查临时文件夹是否被创建的bug
+编译语句出错的bug
+消息系统不完善产生的若干bug
+工具栏region和define macro互换的错误
+关闭文档同时保存产生的bug
+Lib层：
+修复LocalVar节点不初始化时编译不正确的错误
+在编辑坐标时首项负值的切分错误
+
+0.0.4.x
+（2018-11-30)
+编辑器功能完善程度的版本。
+实现功能：工程只打包不运行、代码行跳转、MD5资源校验、搜索节点插入、场景节点测试、符卡测试、消息系统、
+Log显示、从模板新建文件
+实现节点：
+Lib层：
+Data
+	Assignment
+Stage
+	StageBG
+Audio
+	LoadBGM
+	PlayBGM
+Editor层：
+Project
+	ProjectRoot
+	ProjectFile
+
+实现编辑界面：
+Lib层：
+BGM选取
+
+消息：
+Editor层：
+ArgNotNull：参数不能为空
+AttributeMismatch：属性与标准不匹配
+EXEPathNotSet：可执行程序路径未设置
+
+改进：
+增加image类属性下拉选择内容
+修改BossDefine节点部分默认值
+修改StageBG、BossBGLayer及其子节点编译的格式
+修改DefineMacro的应用途径，使之不会应用于其之前的节点
+保存新文件时文件具有默认名称
+优化序列化策略，减小工程文件体积
+增加右键和节点创建时呼出节点属性修改的功能
+增加可变属性节点的数值上限
+移除CallBackFunc对on render的支持
+反转Update Log的顺序
+多处树形图表的图标改为使用上对齐
+添加View - File Folder选项，可以打开当前工程所在目录
+分离非通用节点及其编辑界面至新的dll
+修改编译快捷键至类似原编辑器的位置
+优化树节点加载速度
+优化代码生成速度
+更换新的安装程序
+更换图标和载入图像
+日志及临时文件写入转移至%Temp%\LuaSTG Editor\目录
+
+修复bug：
+修复BossDefine节点Background设置无效的bug
+修复重做建立定义类节点时报错退出的bug
+修复设置无法保存的bug
+修复跨文档粘贴节点产生的一系列bug
+修复负值可变属性节点的bug
+修复第二次点击同一个编辑属性按钮的边缘时报错退出的玄学bug
+
+扩展功能说明：
+1. MD5资源校验
+设置中增加资源校验选项
+在设置打开且文件同目录下存在.meta的前提下，会优先进行资源检验
+若打包时MD5值与.meta相同则不进行打包
+Pack Project命令会删除meta文件并强制不使用此校验功能，可以用于处理校验与zip不一致的错误
+
+2. 工程文件
+新建选项增加工程文件
+工程文件可用ProjectFile节点引用其它文件
+扩展名为.lstgproj
+
+3. 工程合并定义
+在工程文件内引用的文件当工程打开时会自动合并所有引用的定义
+之后只要保证工程打开，工程引用的文件包含的对象间就可以相互引用
+
+4. 工程联合编译
+工程文件打开时，执行工程文件或工程文件包含的文件的编译时自动启动联合编译模式
+联合编译模式下的资源校验会使用.projmeta进行校验
+
+5. 消息系统
+进行操作时如果含有非法内容则会在界面底部生成相应消息
+双击消息可以转到解决它的位置
+
+代码分拆说明：
+除General Advance Project三类节点外所有节点均搬移至新的工程LuaSTGNodeLib
+节点相关（节点对应元数据、输入窗体）也搬移至新的工程LuaSTGNodeLib
+建立新插件时请使用继承接口类LuaSTGEditorSharp.Plugin.AbstractPluginEntry并实现全部接口
+
+0.0.3.x
+（2018-10-3)
+编辑器可以开始制作弹幕程度的版本。
+实现功能：获取工程内元数据（View - Definition）
+实现节点：
+Task
+	TaskMoveTo
+Boss
+	BossDefine
+	BossSpellCard
+		BossSCStart
+		BossSCFinish
+	BossCreate
+	BossBGDefine
+	BossBGLayer
+		BossBGLayerInit
+		BossBGLayerFrame
+		BossBGLayerRender
+Bullet
+	BulletDefine
+		BulletInit
+	BulletCreate
+Object
+	CallBackFunc
+	DefaultAction
+	SetVelocity
+	SetAccel
+Graphics
+	LoadImage
+Internal
+	EditorVersion
+
+实现编辑界面：
+目标，图片文件，混合模式，事件类型，子弹定义，Boss定义，Boss背景定义，子弹参数，插值类型
+
+改进：
+解决程序已经启动时双击文件打开无效的问题
+可以使用下拉菜单选择输入
+保存、另存为、预览代码、导出代码、查看定义、编译、关闭、退出程序与尝试用"..."按钮编辑时自动完成当前编辑项更改
+选项卡Advanced中的内容被移至General
+Do default action 不要求必须是CallBackFunc的直接子节点
+更新了Define节点查找策略，将不匹配""间的内容
+Comment子节点中的Comment不再编译为"--[[ xxx ]]"的形式，而是直接编译为"xxx"
+Comment增加注释子节点功能
+打开大文件时程序会挂起而不是卡死
+优化文件写入策略
+加入工具提示
+更新文件图标（鸽了）
+撤销或重做时自动刷新编辑项
+更改文件类型为.lstges
+新建Stage节点的默认子节点修改
+
+修复bug：
+修复Repeat节点变量数目的值键入非数值项时编译报错的bug
+修复Repeat节点单变量编译无效的bug
+修复Insert As Parent指令验证节点有效性错误的bug
+修复新建文档Patch节点选择路径报错退出的bug
+修复编译时不自动保存时打包资源的bug
+
+0.0.2.x
+（2018-09-17)
+编辑器可以开始制作简单弹幕程度的版本。
+实现功能：打包时附加资源、测试时保存（可以在设置中打开）、打包时附加工程文件（可以在设置中打开）
+实现节点：
+General
+	Patch
+Data
+	LocalVar
+	RecordPos
+Stage
+	StageGroup
+	Stage
+Task
+	Task
+Bullet
+	CreateSimpleBullet
+	CreateBulletGroup
+
+实现编辑界面：
+坐标、lua文件、场景名称、难度、子弹类型、颜色
+
+改进：
+新增Help -> Update Log命令，就是你现在读的这个
+主界面上可调节属性栏与树状区域的比例
+LocalVar节点支持按lua语法的多变量命名
+新建或打开文档时自动选中
+新建节点时自动选中（可通过设置关闭）
+关闭程序窗口时询问是否保存文件
+绑定文件类型：.lstgsharp，双击文件可以直接启动程序并打开该文件（注：程序已经启动时此功能无效，解决方案不明）
+程序现在不允许多开
+一个沙雕载入图像，其实就是默认的，没有P过
+一个沙雕文件图标，其实就是默认的，没有P过
+
+修复bug：
+剪贴板为空的时候可以执行粘贴指令并报错退出的bug
+
+扩展功能说明：
+1. RecordPos节点
+等价于声明一个表并给其x、y索引赋值为目标的x、y。
+
+2. Position输入界面
+第一行文本框为组合后的坐标。
+第二行文本框为分解成x, y分量的坐标
+第二行文本框左下方为按多项式分解的向量列表，选中一项可以在其右文本框中编辑某一分量。
+按Sync XY可以把分解后的向量的一部分同步。
+例：
+	self.x, => Sync XY => self.x,self.y
+	,a.y => Sync XY => a.x,a.y （可以配合RecordPos使用）
+	self.x|（光标在此）,self.x => Sync XY => self.x,self.y
+	self.x,self.x|（光标在此） => Sync XY => self.y,self.x
+Sync Trignometrics同理，会把cos()替换为sin()，sin()替换为cos()。
+注：复杂公式如旋转公式、和差化积公式等使用此功能可能带来不必要的混乱，因此不建议使用。如有需求可以考虑开发。
+
+0.0.1.x
+（2018-08-28）
+编辑器基本功能被实现了程度的版本。
+基本操作：打开、关闭、保存、另存为、复制、剪切、粘贴、撤销、重做、（各个方向）插入、编译、节点代码预览、导出代码
+扩展操作：文档多开、带宏编译、折叠区块、展开区块
+实现节点：
+General
+	Code
+	Comment
+	Folder
+	If
+		If-then
+		If-else
+	Repeat
+Advanced
+	DefineMacro
+	Region
+Internal
+	RootFolder
+	ProjSettings
+
+实现编辑界面：
+表达式 代码 布尔型
+
+扩展功能说明：
+1. 宏定义
+类似C语言的宏定义的部分实现，可用于定义常量。
+用法：
+	Replace 填常量在工程里的名字
+	By 填常量的实际数值
+注意谨慎使用标点符号，防止被识别为正则表达式的一部分。
+在编译过程中宏将字符串会自动替换为常量。
+
+2. Region与折叠区块、展开为区块
+Region节点在编译过程中没有实际用处，但是在编辑过程中可以使用Region作为区域标记。
+当有两个Region处于同一层时，可以对第一个Region使用Fold Region（折叠区块）命令将其转化为文件夹。
+如果一个Region在同一层中找不到另一个Region与之匹配则Fold Region命令会折叠Region到当前层结尾的位置。
+第一个Region的名称会用作文件夹名。
+对于任意节点使用Unfold as Region（展开为区块）会将其打开为两个Region并将其子节点置于两个Region之间。
+
+3. 作为父节点插入
+a
+	b
+		d
+	c
+的结构里选择b，作为父节点插入e，效果为
+a
+	e
+		b
+			d
+	c

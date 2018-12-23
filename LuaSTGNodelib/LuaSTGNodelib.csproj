@@ -1,0 +1,1570 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{06F198EA-762C-4B34-84DA-B58A6C3E6A79}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>LuaSTGEditorSharp</RootNamespace>
+    <AssemblyName>LuaSTGNodelib</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <DocumentationFile>
+    </DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="EditorData\Document\MetaData.cs" />
+    <Compile Include="EditorData\Document\Meta\BentLaserDefineMetaInfo.cs" />
+    <Compile Include="EditorData\Document\Meta\BGMLoadMetaInfo.cs" />
+    <Compile Include="EditorData\Document\Meta\BossBGDefineMetaInfo.cs" />
+    <Compile Include="EditorData\Document\Meta\BossDefineMetaInfo.cs" />
+    <Compile Include="EditorData\Document\Meta\BulletDefineMetaInfo.cs" />
+    <Compile Include="EditorData\Document\Meta\ImageLoadMetaInfo.cs" />
+    <Compile Include="EditorData\Document\Meta\LaserDefineMetaInfo.cs" />
+    <Compile Include="EditorData\Document\Meta\StageGroupDefineMetaInfo.cs" />
+    <Compile Include="EditorData\Message\ArgCountInfo.cs" />
+    <Compile Include="EditorData\Node\Audio\LoadBGM.cs" />
+    <Compile Include="EditorData\Node\Audio\PlayBGM.cs" />
+    <Compile Include="EditorData\Node\Boss\BossBGDefine.cs" />
+    <Compile Include="EditorData\Node\Boss\BossBGLayer.cs" />
+    <Compile Include="EditorData\Node\Boss\BossBGLayerFrame.cs" />
+    <Compile Include="EditorData\Node\Boss\BossBGLayerInit.cs" />
+    <Compile Include="EditorData\Node\Boss\BossBGLayerRender.cs" />
+    <Compile Include="EditorData\Node\Boss\BossDefine.cs" />
+    <Compile Include="EditorData\Node\Boss\BossSCFinish.cs" />
+    <Compile Include="EditorData\Node\Boss\BossSCStart.cs" />
+    <Compile Include="EditorData\Node\Boss\BossSpellCard.cs" />
+    <Compile Include="EditorData\Node\Boss\CreateBoss.cs" />
+    <Compile Include="EditorData\Node\Bullet\BulletDefine.cs" />
+    <Compile Include="EditorData\Node\Bullet\BulletInit.cs" />
+    <Compile Include="EditorData\Node\Bullet\CreateBullet.cs" />
+    <Compile Include="EditorData\Node\Bullet\CreateBulletGroup.cs" />
+    <Compile Include="EditorData\Node\Bullet\CreateSimpleBullet.cs" />
+    <Compile Include="EditorData\Node\Data\Assignment.cs" />
+    <Compile Include="EditorData\Node\Data\LocalVar.cs" />
+    <Compile Include="EditorData\Node\Data\RecordPos.cs" />
+    <Compile Include="EditorData\Node\Graphics\LoadImage.cs" />
+    <Compile Include="EditorData\Node\Laser\BentLaserDefine.cs" />
+    <Compile Include="EditorData\Node\Laser\BentLaserInit.cs" />
+    <Compile Include="EditorData\Node\Laser\CreateBentLaser.cs" />
+    <Compile Include="EditorData\Node\Laser\CreateLaser.cs" />
+    <Compile Include="EditorData\Node\Laser\LaserChangeStyle.cs" />
+    <Compile Include="EditorData\Node\Laser\LaserDefine.cs" />
+    <Compile Include="EditorData\Node\Laser\LaserGrow.cs" />
+    <Compile Include="EditorData\Node\Laser\LaserInit.cs" />
+    <Compile Include="EditorData\Node\Laser\LaserTurnHalfOn.cs" />
+    <Compile Include="EditorData\Node\Laser\LaserTurnOff.cs" />
+    <Compile Include="EditorData\Node\Laser\LaserTurnOn.cs" />
+    <Compile Include="EditorData\Node\NodeTypeCache.cs" />
+    <Compile Include="EditorData\Node\Object\CallBackFunc.cs" />
+    <Compile Include="EditorData\Node\Object\DefaultAction.cs" />
+    <Compile Include="EditorData\Node\Object\Del.cs" />
+    <Compile Include="EditorData\Node\Object\Kill.cs" />
+    <Compile Include="EditorData\Node\Object\SetAccel.cs" />
+    <Compile Include="EditorData\Node\Object\SetBlend.cs" />
+    <Compile Include="EditorData\Node\Object\SetVelocity.cs" />
+    <Compile Include="EditorData\Node\Stage\Stage.cs" />
+    <Compile Include="EditorData\Node\Stage\StageBG.cs" />
+    <Compile Include="EditorData\Node\Stage\StageGroup.cs" />
+    <Compile Include="EditorData\Node\Task\TaskMoveTo.cs" />
+    <Compile Include="EditorData\Node\Task\TaskNode.cs" />
+    <Compile Include="EditorData\Node\Task\TaskWait.cs" />
+    <Compile Include="PluginEntry.cs" />
+    <Compile Include="PluginToolbox.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Windows\Input\BGMInput.xaml.cs">
+      <DependentUpon>BGMInput.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Input\BossBGDefInput.xaml.cs">
+      <DependentUpon>BossBGDefInput.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Input\BossDefInput.xaml.cs">
+      <DependentUpon>BossDefInput.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Input\Canvas\DrawingCanvas.cs" />
+    <Compile Include="Windows\Input\Canvas\VectorEditor.xaml.cs">
+      <DependentUpon>VectorEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Input\Canvas\PositionEditor.xaml.cs">
+      <DependentUpon>PositionEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Input\LaserInput.xaml.cs">
+      <DependentUpon>LaserInput.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Input\EditorObjDefInput.xaml.cs">
+      <DependentUpon>EditorObjDefInput.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Input\BulletInput.xaml.cs">
+      <DependentUpon>BulletInput.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Input\EditorObjParamInput.xaml.cs">
+      <DependentUpon>EditorObjParamInput.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Input\CodeInput.xaml.cs">
+      <DependentUpon>CodeInput.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Input\ColorInput.xaml.cs">
+      <DependentUpon>ColorInput.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Input\ImageInput.xaml.cs">
+      <DependentUpon>ImageInput.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Input\InputWindowSelector.cs" />
+    <Compile Include="Windows\Input\PathInput.xaml.cs">
+      <DependentUpon>PathInput.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Input\PositionInput.xaml.cs">
+      <DependentUpon>PositionInput.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Input\Selector.xaml.cs">
+      <DependentUpon>Selector.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Input\ARGBInput.xaml.cs">
+      <DependentUpon>ARGBInput.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Input\SingleLineInput.xaml.cs">
+      <DependentUpon>SingleLineInput.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Input\VectorInput.xaml.cs">
+      <DependentUpon>VectorInput.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\ViewDefinition.xaml.cs">
+      <DependentUpon>ViewDefinition.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Input\Canvas\Window1.xaml.cs">
+      <DependentUpon>Window1.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Windows\Input\Canvas\DrawingGrid.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\Input\BGMInput.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\Input\BossBGDefInput.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\Input\BossDefInput.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\Input\Canvas\VectorEditor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\Input\Canvas\PositionEditor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\Input\LaserInput.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\Input\EditorObjDefInput.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\Input\BulletInput.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\Input\EditorObjParamInput.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\Input\CodeInput.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\Input\ColorInput.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\Input\ImageInput.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\Input\PathInput.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\Input\PositionInput.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\Input\Selector.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\Input\ARGBInput.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\Input\SingleLineInput.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\Input\VectorInput.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\ViewDefinition.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\Input\Canvas\Window1.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\_node_aa.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\_node_accel.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\_node_atp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\_node_dir.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\_node_g.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\_node_moveto.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\_node_pe.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\_node_pro.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\_node_rot.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\_node_stay.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\_node_toc.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\_node_tof.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\_node_vf.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\_node_aa.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\_node_accel.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\_node_atp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\_node_dir.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\_node_g.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\_node_moveto.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\_node_pe.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\_node_pro.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\_node_rot.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\_node_stay.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\_node_toc.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\_node_tof.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\_node_vf.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\addworld.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\archiexpand.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\archirotate.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\assignment.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\bentlasershooter.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\bgdefine.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\bgframe.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\bginit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\bglayer.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\bgrender.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\bgstage.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\bosscast.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\bosscastcard.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\bosscoopcard.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\bosscreate.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\bossdefine.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\bossexdefine.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\bossexplode.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\bossmoveto.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\bosspreparecards.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\bossscfinish.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\bossscstart.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\bosssetui.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\bossshowaura.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\bossspellcard.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\bossspellcardex.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\break.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\bulletchangestyle.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\bulletcleanrange.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\bulletclear.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\bulletcreate.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\bulletcreatestraight.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\bulletcreatestraightex.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\bulletdefine.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\bulletinit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\callbackfunc.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\code.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\codeblock.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\comment.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\connect.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\defaultaction.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\definemacro.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\dialog.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\dialogtask.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\dropitem.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\else.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\enemycreate.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\enemydefine.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\enemyinit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\enemysimple.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\explode.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\folder.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\highlight.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\if.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\iteration.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\laserbentcreate.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\laserbentdefine.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\laserbentinit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\laserchange.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\lasercreate.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\laserdefine.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\lasergrow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\laserinit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\lasershooter.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\laserturnhalfon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\laserturnoff.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\laserturnon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\listadd.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\listcreate.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\listforeach.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\loadani.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\loadbgm.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\loadFX.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\loadimage.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\loadimagegroup.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\loadmodel.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\loadparticle.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\loadsound.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\loadtexture.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\objectcreate.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\objectdefine.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\objectinit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\objectsetimg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\oncolli.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\ondel.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\onframe.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\onkill.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\pactrometer.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\patch.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\pausebgm.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\playbgm.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\playsound.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\positionVar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\properties.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\propertycontroller.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\reboundercreate.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\rebounderdefine.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\rebounderinit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\region.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\renderimage.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\repeat.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\resumebgm.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\sentence.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\setaccel.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\setcolor.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\setfps.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\setfv.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\setgravity.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\setpace.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\setrelpos.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\setting.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\setv.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\setworlds.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\shakescreen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\shoot.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\shooter.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\shootiterator.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\signal.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\simplerebounder.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\smear.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\stage.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\stagefinish.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\stagefinishgroup.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\stagegoto.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\stagegroup.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\stagegroupinfo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\stagetask.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\stopbgm.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\task.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\taskattach.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\taskBeziermoveto.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\taskBeziermovetoex.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\taskbosswander.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\taskbreak.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\taskclear.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\taskdefine.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\tasker.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\taskmoveto.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\taskmovetoex.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\taskrepeat.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\taskreturn.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\tasksetvalue.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\taskwait.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\taskwaitfor.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\taskwaitto.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\then.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\unitdel.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\unitforeach.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\unitkill.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\variable.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\addworld.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\archiexpand.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\archirotate.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\assignment.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\bentlasershooter.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\bgdefine.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\bgframe.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\bginit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\bglayer.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\bgstage.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\bosscast.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\bosscastcard.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\bosscoopcard.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\bosscreate.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\bossdefine.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\bossexplode.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\bossmoveto.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\bosspreparecards.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\bossscfinish.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\bossscstart.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\bosssetui.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\bossshowaura.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\bossspellcard.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\bossspellcardex.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\break.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\bullet\arrow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\bullet\bigball.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\bullet\bigball_dark.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\bullet\bigstar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\bullet\blackgrain.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\bullet\bullet.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\bullet\butterfly.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\bullet\chain.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\bullet\circle.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\bullet\drip.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\bullet\ellipse.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\bullet\fire.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\bullet\fire_dark.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\bullet\grain.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\bullet\heart.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\bullet\knife.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\bullet\lightball.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\bullet\lightball_dark.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\bullet\middleball.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\bullet\mildew.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\bullet\money.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\bullet\music.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\bullet\needle.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\bullet\ofuda.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\bullet\point.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\bullet\scale.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\bullet\silence.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\bullet\smallball.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\bullet\smallstar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\bullet\sword.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\bulletchangestyle.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\bulletcleanrange.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\bulletclear.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\bulletcreate.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\bulletcreatestraight.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\bulletcreatestraightex.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\bulletdefine.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\bulletinit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\callbackfunc.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\child.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\code.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\codeblock.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\color\COLOR_BLUE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\color\COLOR_CHARTREUSE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\color\COLOR_CYAN.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\color\COLOR_DEEP_BLUE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\color\COLOR_DEEP_GRAY.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\color\COLOR_DEEP_GREEN.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\color\COLOR_DEEP_PURPLE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\color\COLOR_DEEP_RED.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\color\COLOR_GOLDEN_YELLOW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\color\COLOR_GRAY.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\color\COLOR_GREEN.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\color\COLOR_ORANGE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\color\COLOR_PURPLE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\color\COLOR_RED.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\color\COLOR_ROYAL_BLUE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\color\COLOR_YELLOW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\comment.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\connect.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\copy.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\cut.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\debugsc.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\debugstage.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\defaultaction.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\definemacro.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\delete.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\dialog.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\dialogtask.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\down.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\dropitem.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\enemy\enemy1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\enemy\enemy10.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\enemy\enemy11.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\enemy\enemy12.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\enemy\enemy13.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\enemy\enemy14.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\enemy\enemy15.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\enemy\enemy16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\enemy\enemy17.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\enemy\enemy18.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\enemy\enemy19.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\enemy\enemy2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\enemy\enemy20.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\enemy\enemy21.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\enemy\enemy22.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\enemy\enemy23.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\enemy\enemy24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\enemy\enemy25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\enemy\enemy26.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\enemy\enemy27.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\enemy\enemy28.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\enemy\enemy29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\enemy\enemy3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\enemy\enemy30.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\enemy\enemy31.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\enemy\enemy32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\enemy\enemy33.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\enemy\enemy34.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\enemy\enemy4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\enemy\enemy5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\enemy\enemy6.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\enemy\enemy7.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\enemy\enemy8.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\enemy\enemy9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\enemycreate.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\enemydefine.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\enemyinit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\enemysimple.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\Error.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\explode.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\find.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\folder.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\foldregion.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\highlight.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\Icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\if.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\imagebackground.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\Info.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\iteration.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\kill.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\laserbentcreate.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\laserbentdefine.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\laserbentinit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\laserchange.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\lasercreate.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\laserdefine.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\lasergrow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\laserinit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\lasershooter.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\laserturnhalfon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\laserturnoff.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\laserturnon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\left image.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\listadd.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\listcreate.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\listforeach.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\loadani.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\loadbgm.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\loadFX.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\loadimage.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\loadimagegroup.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\loadmodel.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\loadparticle.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\loadsound.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\loadtexture.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\merge.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\new.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\objectcreate.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\objectdefine.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\objectinit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\objectsetimg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\open.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\pack.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\pactrometer.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\parent.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\paste.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\patch.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\pausebgm.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\playbgm.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\playerdefine.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\playsound.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\plus.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\positionVar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\properties.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\propertycontroller.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\reboundercreate.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\rebounderdefine.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\rebounderinit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\redo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\region.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\renderimage.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\repeat.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\resumebgm.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\run.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\save.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\sentence.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\setaccel.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\setcolor.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\setfps.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\setfv.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\setgravity.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\setpace.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\setrelpos.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\setting.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\setv.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\setworlds.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\shakescreen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\shoot.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\shooter.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\shootiterator.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\signal.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\simplerebounder.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\smear.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\stage.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\stagefinish.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\stagefinishgroup.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\stagegoto.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\stagegroup.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\stagegroupinfo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\stagetask.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\stopbgm.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\task.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\taskattach.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\taskBeziermoveto.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\taskBeziermovetoex.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\taskbosswander.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\taskbreak.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\taskclear.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\taskdefine.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\tasker.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\taskmoveto.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\taskmovetoex.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\taskrepeat.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\taskreturn.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\tasksetvalue.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\taskwait.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\taskwaitfor.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\taskwaitto.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\undo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\unfoldasregion.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\unitdel.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\unitforeach.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\unitkill.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\up.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\variable.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\Warning.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LuaSTGEditorSharp\LuaSTGEditorSharp.csproj">
+      <Project>{658393f3-c67a-4abc-9114-48d39ed7e675}</Project>
+      <Name>LuaSTGEditorSharp</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\laser\laser1.png" />
+    <Resource Include="images\laser\laser2.png" />
+    <Resource Include="images\laser\laser3.png" />
+    <Resource Include="images\laser\laser4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\ref\levelRef.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\laserchangestyle.png" />
+    <Resource Include="images\laserchangestyle.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

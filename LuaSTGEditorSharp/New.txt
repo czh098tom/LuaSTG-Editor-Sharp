@@ -1,0 +1,9 @@
+﻿New Functions:
+1. Add as parent (Finished)
+2. Node Group: Identification, Copy and Paste, Preview (Finished)
+3. Define, Template
+
+Ready for GU:
+1. 
+Input of
+Velocity VelocityPos Rotation Omega Length Size

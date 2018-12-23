@@ -1,0 +1,1 @@
+A LuaSTG File with nothing but two folders.
