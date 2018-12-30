@@ -150,7 +150,8 @@ namespace LuaSTGEditorSharp.EditorData
         }
 
         /// <summary>
-        /// This method gets the lua code of current node and its childs.
+        /// This method gets the lua code of current node and its childs. 
+        /// It is a Compile Method.
         /// </summary>
         /// <param name="spacing"> The spacing before each line of lua code. must be unsigned. </param>
         /// <returns> The <see cref="string"/> of lua code. </returns>
@@ -431,10 +432,10 @@ namespace LuaSTGEditorSharp.EditorData
             while (stack.Count != 0)
             {
                 cur = stack.Pop();
-                if (!(cur.FindAncestorIn(cur, toV.Parent) || cur.FindAncestorIn(this, null))) return false;
+                if (!(cur.FindAncestorIn(cur, toV.Parent, this, null))) return false;
                 if (PluginHandler.Plugin.NodeTypeCache.NodeTypeInfo[cur.GetType()].classNode)
                 {
-                    if (!(cur.MatchClassNode(cur, toV.Parent) || cur.MatchClassNode(this, null))) return false;
+                    if (!(MatchClassNode(cur, toV.Parent) || MatchClassNode(this, null))) return false;
                 }
                 foreach (TreeNode t in cur.Children)
                 {
@@ -643,7 +644,7 @@ namespace LuaSTGEditorSharp.EditorData
         /// This method tests whether this <see cref="TreeNode"/> can be unique one 
         /// in a given <see cref="TreeNode"/>'s children. 
         /// </summary>
-        /// <param name="toMatch">The given <see cref="TreeNode"/>.</param>
+        /// <param name="toMatch">The given <see cref="TreeNode"/> as parent.</param>
         private bool MatchUniqueness(TreeNode toMatch)
         {
             foreach(TreeNode t in toMatch.Children)
@@ -653,6 +654,11 @@ namespace LuaSTGEditorSharp.EditorData
             return true;
         }
 
+        /// <summary>
+        /// This method tests whether this <see cref="TreeNode"/> have a direct parent of any type discribed in
+        /// <see cref="TypeCacheData"/>.
+        /// </summary>
+        /// <param name="toMatch">The given <see cref="TreeNode"/> as parent.</param>
         private bool MatchParents(TreeNode toMatch)
         {
             Type[] ts = PluginHandler.Plugin.NodeTypeCache.NodeTypeInfo[GetType()].requireParent;
@@ -665,7 +671,12 @@ namespace LuaSTGEditorSharp.EditorData
             return false;
         }
 
-        private bool MatchClassNode(TreeNode beg, TreeNode end)
+        /// <summary>
+        /// This method tests whether nodes in the given range are folders.
+        /// </summary>
+        /// <param name="beg">The node with lowest depth.</param>
+        /// <param name="end">The parent of node with highest depth.</param>
+        private static bool MatchClassNode(TreeNode beg, TreeNode end)
         {
             while (beg != end)
             {
@@ -676,21 +687,28 @@ namespace LuaSTGEditorSharp.EditorData
             return true;
         }
 
-        private bool FindAncestorIn(TreeNode Beg, TreeNode End)
+        /// <summary>
+        /// This method tests whether this nodes satisfy ancestor condition in two given ranges.
+        /// </summary>
+        /// <param name="Beg1">The node with lowest depth in range 1.</param>
+        /// <param name="End1">The parent of node with highest depth in range 1.</param>
+        /// <param name="Beg2">The node with lowest depth in range 2.</param>
+        /// <param name="End2">The parent of node with highest depth in range 2.</param>
+        private bool FindAncestorIn(TreeNode Beg1, TreeNode End1, TreeNode Beg2, TreeNode End2)
         {
             Type[][] ts = PluginHandler.Plugin.NodeTypeCache.NodeTypeInfo[GetType()].requireAncestor;
             if (ts == null) return true;
             List<Type[]> toSatisfiedGroups = ts.ToList();
             List<Type> Satisfied = new List<Type>();
             List<Type[]> toRemove = new List<Type[]>();
-            while (Beg != End)
+            while (Beg1 != End1)
             {
-                if (Beg.IgnoreValidation) return true;
+                if (Beg1.IgnoreValidation) return true;
                 foreach (Type[] t1 in ts)
                 {
                     foreach (Type t2 in t1)
                     {
-                        if (Beg.GetType().Equals(t2)) Satisfied.Add(t2);
+                        if (Beg1.GetType().Equals(t2)) Satisfied.Add(t2);
                     }
                 }
                 foreach (Type[] t1 in toSatisfiedGroups)
@@ -710,17 +728,67 @@ namespace LuaSTGEditorSharp.EditorData
                 if (toSatisfiedGroups.Count == 0) return true;
                 Satisfied.Clear();
                 toRemove.Clear();
-                Beg = Beg.Parent;
+                Beg1 = Beg1.Parent;
+            }
+            while (Beg2 != End2)
+            {
+                if (Beg2.IgnoreValidation) return true;
+                foreach (Type[] t1 in ts)
+                {
+                    foreach (Type t2 in t1)
+                    {
+                        if (Beg2.GetType().Equals(t2)) Satisfied.Add(t2);
+                    }
+                }
+                foreach (Type[] t1 in toSatisfiedGroups)
+                {
+                    foreach (Type t2 in t1)
+                    {
+                        foreach (Type t3 in Satisfied)
+                        {
+                            if (t2 == t3 && !toRemove.Contains(t1)) toRemove.Add(t1);
+                        }
+                    }
+                }
+                foreach (Type[] t1 in toRemove)
+                {
+                    toSatisfiedGroups.Remove(t1);
+                }
+                if (toSatisfiedGroups.Count == 0) return true;
+                Satisfied.Clear();
+                toRemove.Clear();
+                Beg2 = Beg2.Parent;
             }
             return false;
         }
 
+        /// <summary>
+        /// This method execute a macro to a string by given<see cref="Compile.DefineMarco"/>.
+        /// </summary>
+        /// <param name="marco">The <see cref="Compile.DefineMarco"/> contains macro information.</param>
+        /// <param name="original">The original string.</param>
+        /// <returns>A string after applying macro+.</returns>
         public static string ExecuteMarco(Compile.DefineMarco marco, string original)
         {
-            Regex regex = new Regex("\\b" + marco.ToBeReplaced + "\\b" + @"(?<=^([^""]*(""[^""]*"")+)*[^""]*.)");
+            //Old one considering only "" pairs.
+            //Regex regex = new Regex("\\b" + marco.ToBeReplaced + "\\b" + @"(?<=^([^""]*(""[^""]*"")+)*[^""]*.)");
+            //Considering both "" and '' pairs, also with \" handled.
+            //(?<=^([^"]*((?<!\\)"([^"]|(\\"))*(?<!\\)")+)*[^"]*.)(?<=^([^']*((?<!\\)'([^']|(\\'))*(?<!\\)')+)*[^']*.)
+            //final version below also considers \\" conditions.
+            //(?<=^([^"]*((?<!(^|[^\\])(\\\\)*\\)"([^"]|((?<=(^|[^\\])(\\\\)*\\)"))*(?<!(^|[^\\])(\\\\)*\\)")+)*[^"]*.)
+            //(?<=^([^']*((?<!(^|[^\\])(\\\\)*\\)'([^']|((?<=(^|[^\\])(\\\\)*\\)'))*(?<!(^|[^\\])(\\\\)*\\)')+)*[^']*.)
+            Regex regex = new Regex("\\b" + marco.ToBeReplaced + "\\b"
+                + @"(?<=^([^""]*((?<!(^|[^\\])(\\\\)*\\)""([^""]|((?<=(^|[^\\])(\\\\)*\\)""))*(?<!(^|[^\\])(\\\\)*\\)"")+)*[^""]*.)"
+                + @"(?<=^([^']*((?<!(^|[^\\])(\\\\)*\\)'([^']|((?<=(^|[^\\])(\\\\)*\\)'))*(?<!(^|[^\\])(\\\\)*\\)')+)*[^']*.)");
             return regex.Replace(original, marco.New);
         }
 
+        /// <summary>
+        /// This method executes all macros currently in the <see cref="CompileProcess"/> to an<see cref="AttrItem"/>.
+        /// Can only be called in Compile Methods.
+        /// </summary>
+        /// <param name="attrItem">The target <see cref="AttrItem"/></param>
+        /// <returns>The <see cref="string"/> after applying macros.</returns>
         protected string Macrolize(AttrItem attrItem)
         {
             string s = attrItem.AttrInput;
@@ -731,21 +799,41 @@ namespace LuaSTGEditorSharp.EditorData
             return s;
         }
 
+        /// <summary>
+        /// This method executes all macros currently in the <see cref="CompileProcess"/> to an<see cref="AttrItem"/>.
+        /// Can only be called in Compile Methods.
+        /// </summary>
+        /// <param name="i">The id of target <see cref="AttrItem"/></param>
+        /// <returns>The <see cref="string"/> after applying macros.</returns>
         protected string Macrolize(int i)
         {
             return Macrolize(attributes[i]);
         }
-
+        
+        /// <summary>
+        /// This method gets the directly contents of inputs in a <see cref="AttrItem"/>.
+        /// </summary>
+        /// <param name="attrItem">The target <see cref="AttrItem"/></param>
+        /// <returns>The <see cref="string"/> of inputs.</return
         protected string NonMacrolize(AttrItem attrItem)
         {
             return attrItem.AttrInput;
         }
 
+        /// <summary>
+        /// This method gets the directly contents of inputs in a <see cref="AttrItem"/>.
+        /// </summary>
+        /// <param name="i">The id of target <see cref="AttrItem"/></param>
+        /// <returns>The <see cref="string"/> of inputs.</return
         protected string NonMacrolize(int i)
         {
             return NonMacrolize(attributes[i]);
         }
 
+        /// <summary>
+        /// UNFINISHED
+        /// </summary>
+        [Obsolete]
         public void FixAttr()
         {
             int i = 0, j = 0;
@@ -765,12 +853,25 @@ namespace LuaSTGEditorSharp.EditorData
             }
         }
 
+        /// <summary>
+        /// This method checks name of varible name contents
+        /// </summary>
+        /// <param name="s">The target string</param>
+        /// <returns>a bool.</returns>
         public static bool CheckVarName(string s)
         {
             Regex regex = new Regex("^[a-zA-Z_][\\w\\d_]*$");
             return regex.IsMatch(s);
         }
 
+        /// <summary>
+        /// This method try to simulate parent and child relation for <see cref="Commands.Factory.ParentFac"/> 
+        /// by its parent property (change to ones like <see cref="Commands.Factory.ChildFac"/>) but not actually insert them. 
+        /// Only for validation.
+        /// </summary>
+        /// <param name="parent">The assumed parent.</param>
+        /// <param name="child">The assumed child.</param>
+        /// <returns>parent of original <paramref name="parent"/></returns>
         public static TreeNode TryLink(TreeNode parent, TreeNode child)
         {
             TreeNode toInsP = parent.Parent;
@@ -779,6 +880,12 @@ namespace LuaSTGEditorSharp.EditorData
             return toInsP;
         }
 
+        /// <summary>
+        /// This method revert what <see cref="TryLink(TreeNode, TreeNode)"/> did. Only for validation.
+        /// </summary>
+        /// <param name="parent">The assumed parent.</param>
+        /// <param name="child">The assumed child.</param>
+        /// <param name="originalpp">parent of original <paramref name="parent"/></param>
         public static void TryUnlink(TreeNode parent, TreeNode child, TreeNode originalpp)
         {
             child._parent = parent.Parent;
