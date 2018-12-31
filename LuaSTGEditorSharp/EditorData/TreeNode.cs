@@ -20,6 +20,7 @@ using Newtonsoft.Json;
 namespace LuaSTGEditorSharp.EditorData
 {
     /// <summary>
+    /// This class is the base class for all tree nodes.
     /// </summary>
     /// <remarks>
     /// Remember to invoke base.ToLua() Method if you need to get Lua code of its child, 
@@ -575,7 +576,7 @@ namespace LuaSTGEditorSharp.EditorData
         public event PropertyChangedEventHandler PropertyChanged;
 
         /// <summary>
-        /// The Method that raise property changed.
+        /// The method that raise property changed.
         /// </summary>
         /// <param name="propName">The parameter of event.</param>
         public void RaiseProertyChanged(string propName)
