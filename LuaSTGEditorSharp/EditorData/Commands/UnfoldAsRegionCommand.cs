@@ -9,18 +9,41 @@ using LuaSTGEditorSharp.EditorData.Node.Advanced;
 
 namespace LuaSTGEditorSharp.EditorData.Commands
 {
+    /// <summary>
+    /// <see cref="Command"/> that unfold a <see cref="TreeNode"/> with child to a region.
+    /// </summary>
     public class UnfoldAsRegionCommand : Command
     {
+        /// <summary>
+        /// Stores the range that to be unfolded.
+        /// </summary>
         private ObservableCollection<TreeNode> toAggregate;
+        /// <summary>
+        /// Store <see cref="Region"/> mark the beginning of range.
+        /// </summary>
         private Region regionBegin;
+        /// <summary>
+        /// Store <see cref="Region"/> mark the ending of range.
+        /// </summary>
         private Region regionEnd;
+        /// <summary>
+        /// Store the target <see cref="TreeNode"/>.
+        /// </summary>
         private TreeNode folderP;
 
+        /// <summary>
+        /// Initialize <see cref="Command"/> by its target.
+        /// </summary>
+        /// <param name="folder">The target <see cref="TreeNode"/>.</param>
         public UnfoldAsRegionCommand(TreeNode folder)
         {
             folderP = folder;
         }
 
+        /// <summary>
+        /// Method for forward execution like do or redo.
+        /// Redo will not generate a new <see cref="regionBegin"/> and a <see cref="regionEnd"/>.
+        /// </summary>
         public override void Execute()
         {
             string name = "region";
@@ -39,6 +62,9 @@ namespace LuaSTGEditorSharp.EditorData.Commands
             }
         }
 
+        /// <summary>
+        /// Method for backward execution like undo.
+        /// </summary>
         public override void Undo()
         {
             TreeNode parent = regionBegin.Parent;
