@@ -13,37 +13,90 @@ using LuaSTGEditorSharp.EditorData.Exception;
 
 namespace LuaSTGEditorSharp.EditorData
 {
+    /// <summary>
+    /// Base class for all type of compile process.
+    /// </summary>
     public abstract class CompileProcess
     {
+        /// <summary>
+        /// The source <see cref="DocumentData"/> of the process.
+        /// </summary>
         public DocumentData source;
 
+        /// <summary>
+        /// The resources path.
+        /// </summary>
         public HashSet<string> resourceFilePath = new HashSet<string>();
-        public List<DefineMarco> marcoDefination = new List<DefineMarco>();
+        /// <summary>
+        /// The macro definitions.
+        /// </summary>
+        public List<DefineMarco> marcoDefinition = new List<DefineMarco>();
 
-        public string currentPath;
+        /// <summary>
+        /// Current temporary path for script coding cache.
+        /// </summary>
+        public string currentTempPath;
+        /// <summary>
+        /// Current temporary path for _editor_output.lua.
+        /// </summary>
         public string projLuaPath;
+        /// <summary>
+        /// Current temporary path for root.lua.
+        /// </summary>
         public string rootLuaPath;
+        /// <summary>
+        /// Current temporary path for pack batch.
+        /// </summary>
         public string rootZipPackPath;
 
+        /// <summary>
+        /// Current path of luastg file.
+        /// </summary>
         public string projPath;
+        /// <summary>
+        /// Current path of meta of resource of luastg file.
+        /// </summary>
         public string projMetaPath;
 
+        /// <summary>
+        /// Code for root.lua.
+        /// </summary>
         public string rootCode;
 
+        /// <summary>
+        /// Path for 7z executable.
+        /// </summary>
         public string zipExePath;
+        /// <summary>
+        /// Path for LuaSTG executable.
+        /// </summary>
         public string luaSTGExePath;
 
+        /// <summary>
+        /// Name of the target mod.
+        /// </summary>
         public string projName;
 
+        /// <summary>
+        /// Path for LuaSTG root.
+        /// </summary>
         public string luaSTGFolder;
+        /// <summary>
+        /// Path for target mod folder.
+        /// </summary>
         public string targetZipPath;
         
-        public static string GetMD5HashFromFile(string fileName)
+        /// <summary>
+        /// This method get the MD5 Hash from a given file.
+        /// </summary>
+        /// <param name="filePath">The target path.</param>
+        /// <returns>MD5 Hash.</returns>
+        public static string GetMD5HashFromFile(string filePath)
         {
             FileStream file = null;
             try
             {
-                file = new FileStream(fileName, FileMode.Open);
+                file = new FileStream(filePath, FileMode.Open);
                 var md5 = new System.Security.Cryptography.MD5CryptoServiceProvider();
                 var bytes = md5.ComputeHash(file);
                 file.Close();
@@ -60,8 +113,18 @@ namespace LuaSTGEditorSharp.EditorData
             }
         }
 
+        /// <summary>
+        /// Execute the <see cref="CompileProcess"/>.
+        /// </summary>
+        /// <param name="SCDebug">Whether SCDebug is switched on.</param>
+        /// <param name="StageDebug">Whether Stage Debug is switched on.</param>
         internal abstract void ExecuteProcess(bool SCDebug, bool StageDebug);
 
+        /// <summary>
+        /// Save code based on debug mode.
+        /// </summary>
+        /// <param name="SCDebug">Whether SCDebug is switched on.</param>
+        /// <param name="StageDebug">Whether Stage Debug is switched on.</param>
         protected void GenerateCode(bool SCDebug, bool StageDebug)
         {
             if (SCDebug)
@@ -78,6 +141,9 @@ namespace LuaSTGEditorSharp.EditorData
             }
         }
 
+        /// <summary>
+        /// Write root code.
+        /// </summary>
         protected void WriteRoot()
         {
             FileStream s = null;
@@ -95,6 +161,11 @@ namespace LuaSTGEditorSharp.EditorData
             }
         }
 
+        /// <summary>
+        /// Get resources need to pack by meta.
+        /// </summary>
+        /// <param name="resNeedToPack">The output list of resources need to pack.</param>
+        /// <param name="resPathToMD5">The dictionary of resource path->MD5 Hash of the resource.</param>
         protected void GatherResByResMeta(List<string> resNeedToPack, Dictionary<string, string> resPathToMD5)
         {
             StreamReader srMeta = null;
@@ -151,6 +222,10 @@ namespace LuaSTGEditorSharp.EditorData
             }
         }
 
+        /// <summary>
+        /// Get resources need to pack and save meta.
+        /// </summary>
+        /// <param name="resNeedToPack">The output list of resources need to pack.</param>
         protected void GatherResAndSaveMeta(List<string> resNeedToPack)
         {
             StreamWriter swMeta = null;
@@ -193,6 +268,10 @@ namespace LuaSTGEditorSharp.EditorData
             }
         }
 
+        /// <summary>
+        /// Get all resources need to pack.
+        /// </summary>
+        /// <param name="resNeedToPack">The output list of resources need to pack.</param>
         protected void GatherAllRes(List<string> resNeedToPack)
         {
             if (File.Exists(projMetaPath)) File.Delete(projMetaPath);
@@ -211,6 +290,13 @@ namespace LuaSTGEditorSharp.EditorData
             }
         }
 
+        /// <summary>
+        /// Generate pack batch and execute it by given information.
+        /// </summary>
+        /// <param name="currentApp">The current <see cref="App"/>.</param>
+        /// <param name="resNeedToPack">The output list of resources need to pack.</param>
+        /// <param name="resPathToMD5">The dictionary of resource path->MD5 Hash of the resource.</param>
+        /// <param name="includeRoot">Whether regenerates root.lua.</param>
         protected void PackFileUsingInfo(App currentApp, List<string> resNeedToPack, Dictionary<string, string> resPathToMD5,
             bool includeRoot)
         {
@@ -368,10 +454,10 @@ namespace LuaSTGEditorSharp.EditorData
         }
 
         /// <summary>
-        /// 检查当前用户是否拥有此文件夹的操作权限
+        /// Check the permission of operation at given folder.
         /// </summary>
-        /// <param name="folder"></param>
-        /// <returns></returns>
+        /// <param name="folder">The given path.</param>
+        /// <returns>Whether it have operation permission</returns>
         public static bool HasOperationPermission(string folder)
         {
             var currentUserIdentity = Path.Combine(Environment.UserDomainName, Environment.UserName);
@@ -382,6 +468,11 @@ namespace LuaSTGEditorSharp.EditorData
             return userAccessRules.Any(i => i.AccessControlType == AccessControlType.Deny);
         }
 
+        /// <summary>
+        /// Check whether program can operate directly at given folder.
+        /// </summary>
+        /// <param name="folder">The given path.</param>
+        /// <returns>Whether program can operate directly.</returns>
         public static bool CanOperate(string folder)
         {
             try

@@ -45,7 +45,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Advanced
 
         protected override void AddCompileSettings()
         {
-            parentWorkSpace.CompileProcess.marcoDefination.Add(
+            parentWorkSpace.CompileProcess.marcoDefinition.Add(
                 new DefineMarco() { ToBeReplaced = NonMacrolize(0)
                 , New = Macrolize(1) });
         }

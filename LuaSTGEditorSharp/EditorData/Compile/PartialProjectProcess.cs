@@ -12,10 +12,21 @@ using LuaSTGEditorSharp.EditorData.Exception;
 
 namespace LuaSTGEditorSharp.EditorData.Compile
 {
+    /// <summary>
+    /// The <see cref="CompileProcess"/> of part of a luastg project.
+    /// </summary>
     internal class PartialProjectProcess :  CompileProcess
     {
+        /// <summary>
+        /// The reference of parent <see cref="ProjectProcess"/> of parent <see cref="ProjectData"/>.
+        /// </summary>
         internal ProjectProcess parentProcess;
-
+        
+        /// <summary>
+        /// Execute the <see cref="CompileProcess"/>.
+        /// </summary>
+        /// <param name="SCDebug">Whether SCDebug is switched on.</param>
+        /// <param name="StageDebug">Whether Stage Debug is switched on.</param>
         internal override void ExecuteProcess(bool SCDebug, bool StageDebug)
         {
             App currentApp = Application.Current as App;

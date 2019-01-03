@@ -159,19 +159,19 @@ namespace LuaSTGEditorSharp.EditorData.Document
             {
                 string tempPath = Path.GetFullPath(Path.Combine(Path.GetTempPath(), "LuaSTG Editor/"));
                 if (!Directory.Exists(tempPath)) Directory.CreateDirectory(tempPath);
-                c.currentPath = tempPath;
+                c.currentTempPath = tempPath;
             }
             else
             {
-                c.currentPath = mainAppWithInfo.TempPath;
+                c.currentTempPath = mainAppWithInfo.TempPath;
             }
             CompileProcess = c;
 
-            c.projLuaPath = c.currentPath + "_editor_output.lua";
+            c.projLuaPath = c.currentTempPath + "_editor_output.lua";
 
             c.source = this;
-            c.rootLuaPath = c.currentPath + "root.lua";
-            c.rootZipPackPath = c.currentPath + "pack.bat";
+            c.rootLuaPath = c.currentTempPath + "root.lua";
+            c.rootZipPackPath = c.currentTempPath + "pack.bat";
 
             c.projPath = "";
             if (!string.IsNullOrEmpty(DocPath))

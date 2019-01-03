@@ -12,8 +12,16 @@ using LuaSTGEditorSharp.EditorData.Exception;
 
 namespace LuaSTGEditorSharp.EditorData.Compile
 {
+    /// <summary>
+    /// The <see cref="CompileProcess"/> of single luastg file (.lstges) with no parent project.
+    /// </summary>
     internal class SingleFileProcess : CompileProcess
     {
+        /// <summary>
+        /// Execute the <see cref="CompileProcess"/>.
+        /// </summary>
+        /// <param name="SCDebug">Whether SCDebug is switched on.</param>
+        /// <param name="StageDebug">Whether Stage Debug is switched on.</param>
         internal override void ExecuteProcess(bool SCDebug, bool StageDebug)
         {
             App currentApp = Application.Current as App;

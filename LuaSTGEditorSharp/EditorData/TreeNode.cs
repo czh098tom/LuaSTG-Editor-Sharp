@@ -793,7 +793,7 @@ namespace LuaSTGEditorSharp.EditorData
         protected string Macrolize(AttrItem attrItem)
         {
             string s = attrItem.AttrInput;
-            foreach(Compile.DefineMarco m in parentWorkSpace.CompileProcess.marcoDefination)
+            foreach(Compile.DefineMarco m in parentWorkSpace.CompileProcess.marcoDefinition)
             {
                 s = ExecuteMarco(m, s);
             }
