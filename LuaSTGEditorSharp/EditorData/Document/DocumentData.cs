@@ -10,22 +10,40 @@ using Newtonsoft.Json;
 
 namespace LuaSTGEditorSharp.EditorData.Document
 {
+    /// <summary>
+    /// Base class for all single documents.
+    /// </summary>
     public abstract class DocumentData : INotifyPropertyChanged
     {
+        /// <summary>
+        /// Stores the <see cref="EditorData.CompileProcess"/> of the current document.
+        /// </summary>
         public CompileProcess CompileProcess { get; set; }
+        /// <summary>
+        /// Store the absolute path to the target document.
+        /// </summary>
         public string DocPath { get; set; } = "";
-        private string docName = "";
+        /// <summary>
+        /// Name for binding. Get method will add "*" if unsaved, 
+        /// set will directly set <see cref="RawDocName"/> and notify UI to update.
+        /// </summary>
         public string DocName
         {
-            get => docName + (IsUnsaved ? " *" : "");
+            get => RawDocName + (IsUnsaved ? " *" : "");
             set
             {
-                docName = value;
+                RawDocName = value;
                 RaiseProertyChanged("DocName");
             }
         }
 
+        /// <summary>
+        /// Store whether the document is selected.
+        /// </summary>
         private bool isSelected;
+        /// <summary>
+        /// Selected property for binding.
+        /// </summary>
         public bool IsSelected
         {
             get => isSelected;
@@ -44,19 +62,46 @@ namespace LuaSTGEditorSharp.EditorData.Document
             }
         }
 
-        public string RawDocName { get => docName; }
+        /// <summary>
+        /// Store name of the target document.
+        /// </summary>
+        public string RawDocName { get; set; }
+        /// <summary>
+        /// Store unique document ID.
+        /// </summary>
         public int DocHash { get; } = 0;
 
+        /// <summary>
+        /// Get the overall meta data that this file can find.
+        /// </summary>
         public abstract AbstractMetaData Meta { get; }
+        /// <summary>
+        /// Get the meta data directly stored by this one.
+        /// </summary>
         public abstract MetaDataEntity OriginalMeta { get; }
 
+        /// <summary>
+        /// Store the <see cref="Command"/> that have done.
+        /// </summary>
         public Stack<Command> commandFlow = new Stack<Command>();
+        /// <summary>
+        /// Store the <see cref="Command"/> that is after undo if something is undone.
+        /// </summary>
         public Stack<Command> undoFlow = new Stack<Command>();
 
+        /// <summary>
+        /// Store the reference of currently saved command.
+        /// </summary>
         private Command savedCommand = null;
 
+        /// <summary>
+        /// Store the reference of parent <see cref="DocumentCollection"/>
+        /// </summary>
         public DocumentCollection parent = null;
 
+        /// <summary>
+        /// Get the state that whether the current document is unsaved.
+        /// </summary>
         public bool IsUnsaved
         {
             get
@@ -71,13 +116,23 @@ namespace LuaSTGEditorSharp.EditorData.Document
                 }
             }
         }
+        /// <summary>
+        /// Store the <see cref="TreeNode"/> in the document.
+        /// </summary>
         public WorkTree TreeNodes { get; set; } = new WorkTree();
 
+        /// <summary>
+        /// Initializes document by ID
+        /// </summary>
+        /// <param name="hash">ID of document. Unique.</param>
         public DocumentData(int hash)
         {
             DocHash = hash;
         }
 
+        /// <summary>
+        /// Undo the command.
+        /// </summary>
         public void Undo()
         {
             commandFlow.Peek().Undo();
@@ -86,6 +141,9 @@ namespace LuaSTGEditorSharp.EditorData.Document
             //OnEditing(parent);
         }
 
+        /// <summary>
+        /// Redo the command.
+        /// </summary>
         public void Redo()
         {
             undoFlow.Peek().Execute();
@@ -94,6 +152,9 @@ namespace LuaSTGEditorSharp.EditorData.Document
             //OnEditing(parent);
         }
 
+        /// <summary>
+        /// Call on saving, get saved command.
+        /// </summary>
         public void PushSavedCommand()
         {
             try
@@ -104,6 +165,11 @@ namespace LuaSTGEditorSharp.EditorData.Document
             catch (InvalidOperationException) { }
         }
 
+        /// <summary>
+        /// If command is not null, add a <see cref="Command"/> to <see cref="commandFlow"/> and execute it.
+        /// </summary>
+        /// <param name="command">The <see cref="Command"/> to add, can be null.</param>
+        /// <returns>Whether <paramref name="command"/> is null.</returns>
         public bool AddAndExecuteCommand(Command command)
         {
             if (command != null)
@@ -121,6 +187,14 @@ namespace LuaSTGEditorSharp.EditorData.Document
             }
         }
 
+        /// <summary>
+        /// Get a new document based on extension.
+        /// </summary>
+        /// <param name="extension">Extension of document.</param>
+        /// <param name="maxHash">Max ID of <see cref="DocumentCollection"/>.</param>
+        /// <param name="name">Name of document.</param>
+        /// <param name="path">Path of document.</param>
+        /// <returns></returns>
         public static DocumentData GetNewByExtension(string extension, int maxHash, string name, string path)
         {
             if (extension == ".lstges")
@@ -143,6 +217,11 @@ namespace LuaSTGEditorSharp.EditorData.Document
             }
         }
 
+        /// <summary>
+        /// Save the document.
+        /// </summary>
+        /// <param name="saveAs">Whether force to save to another place.</param>
+        /// <returns>Whether it is not cancelled.</returns>
         public bool Save(bool saveAs = false)
         {
             string path = "";
@@ -172,6 +251,12 @@ namespace LuaSTGEditorSharp.EditorData.Document
             return true;
         }
 
+
+        /// <summary>
+        /// Generate <see cref="TreeNode"/> from file. Asynchronous.
+        /// </summary>
+        /// <param name="fileName">The name of file.</param>
+        /// <returns>The generated root.</returns>
         public async Task<TreeNode> CreateNodeFromFileAsync(string fileName)
         {
             TreeNode root = null;
@@ -229,6 +314,11 @@ namespace LuaSTGEditorSharp.EditorData.Document
             return root;
         }
 
+        /// <summary>
+        /// Generate <see cref="TreeNode"/> from file.
+        /// </summary>
+        /// <param name="fileName">The name of file.</param>
+        /// <returns>The generated root.</returns>
         public TreeNode CreateNodeFromFile(string fileName)
         {
             TreeNode root = null;
@@ -286,16 +376,27 @@ namespace LuaSTGEditorSharp.EditorData.Document
             return root;
         }
 
+        /// <summary>
+        /// The method that call after initializing and creating nodes from file.
+        /// </summary>
         public virtual void OnOpening()
         {
 
         }
 
+        /// <summary>
+        /// The method that call after meta changes.
+        /// </summary>
+        /// <param name="sender">A <see cref="MetaDataEntity"/> that calls it.</param>
+        /// <param name="args">Argument of event. Always be <see cref="string"/> of type of metas.</param>
         public virtual void OnEditing(object sender, PropertyChangedEventArgs args)
         {
 
         }
 
+        /// <summary>
+        /// The method that call after saving on close.
+        /// </summary>
         public virtual void OnClosing()
         {
             RevertUntilSaved();
@@ -313,11 +414,10 @@ namespace LuaSTGEditorSharp.EditorData.Document
             }
         }
 
-        public void CheckGrammar()
-        {
-
-        }
-
+        /// <summary>
+        /// Get the <see cref="EditorData.CompileProcess"/> of this document.
+        /// </summary>
+        /// <param name="mainAppWithInfo">Main <see cref="App"/></param>
         internal abstract void GatherCompileInfo(App mainAppWithInfo);
 
         internal void SaveCode(string path)
@@ -340,6 +440,10 @@ namespace LuaSTGEditorSharp.EditorData.Document
             }
         }
 
+        /// <summary>
+        /// Save code for spell card debug.
+        /// </summary>
+        /// <param name="path">Target path.</param>
         internal void SaveSCDebugCode(string path)
         {
             FileStream s = null;
@@ -361,6 +465,10 @@ namespace LuaSTGEditorSharp.EditorData.Document
             }
         }
 
+        /// <summary>
+        /// Save code for stage debug.
+        /// </summary>
+        /// <param name="path">Target path.</param>
         internal void SaveStageDebugCode(string path)
         {
             FileStream s = null;
@@ -389,6 +497,9 @@ namespace LuaSTGEditorSharp.EditorData.Document
             }
         }
 
+        /// <summary>
+        /// WARNING: POTENTIAL BUG ON META AND MESSAGES
+        /// </summary>
         private void RevertUntilSaved()
         {
             if (savedCommand == null || commandFlow.Contains(savedCommand)) 
@@ -407,13 +518,15 @@ namespace LuaSTGEditorSharp.EditorData.Document
             }
         }
 
-        public void HotFixEditWindow()
-        {
-
-        }
-
+        /// <summary>
+        /// The event of property changed.
+        /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
 
+        /// <summary>
+        /// The method that raise property changed.
+        /// </summary>
+        /// <param name="propName">The parameter of event.</param>
         public void RaiseProertyChanged(string propName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
