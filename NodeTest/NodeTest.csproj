@@ -54,6 +54,7 @@
   <ItemGroup>
     <Compile Include="CodeTest.cs" />
     <Compile Include="ColorTest.cs" />
+    <Compile Include="HugeFileTest.cs" />
     <Compile Include="NodeTestBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
