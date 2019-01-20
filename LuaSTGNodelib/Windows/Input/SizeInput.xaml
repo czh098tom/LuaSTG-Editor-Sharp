@@ -16,7 +16,12 @@
                      AcceptsReturn="False" FontFamily="Courier New" DockPanel.Dock="Top" Height="24"
                      KeyDown="Text_KeyDown"/>
         <DockPanel DockPanel.Dock="Bottom">
-            <WrapPanel HorizontalAlignment="Right" DockPanel.Dock="Left">
+            <WrapPanel HorizontalAlignment="Left" DockPanel.Dock="Left">
+                <RadioButton Content="Do not clip" Height="24" Margin="5,5,5,5" Click="NotClip_Click" IsChecked="True"/>
+                <RadioButton Content="Clip to 1" Height="24" Margin="5,5,5,5" Click="ClipTo1_Click"/>
+                <RadioButton Content="Clip to 10" Height="24" Margin="5,5,5,5" Click="ClipTo10_Click"/>
+            </WrapPanel>
+            <WrapPanel HorizontalAlignment="Right" DockPanel.Dock="Right">
                 <Button Content="OK" Click="ButtonOK_Click" Height="24" Margin="5,5,5,5"/>
                 <Button Content="Cancel" Click="ButtonCancel_Click" Height="24" Margin="5,5,5,5"/>
             </WrapPanel>

@@ -20,6 +20,8 @@ namespace LuaSTGEditorSharp.Windows.Input.Canvas
     /// </summary>
     public partial class PositionEditor : Window, INotifyPropertyChanged
     {
+        private bool? clipTo10 = null;
+
         private double selectedX, selectedY;
 
         private bool dragStarted = false;
@@ -77,9 +79,9 @@ namespace LuaSTGEditorSharp.Windows.Input.Canvas
         private void Canvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             Point point = e.GetPosition(Canvas);
-            DrawCursorAtPoint(point);
-            SelectedX= DrawingCanvas.ScrXToLSTGX(point.X);
-            SelectedY = DrawingCanvas.ScrYToLSTGY(point.Y);
+            //DrawCursorAtPoint(point);
+            SelectedX= DrawingCanvas.ScrXToLSTGX(point.X, clipTo10);
+            SelectedY = DrawingCanvas.ScrYToLSTGY(point.Y, clipTo10);
             dragStarted = true;
         }
 
@@ -110,8 +112,8 @@ namespace LuaSTGEditorSharp.Windows.Input.Canvas
             if (dragStarted)
             {
                 DrawCursorAtPoint(point);
-                SelectedX = DrawingCanvas.ScrXToLSTGX(point.X);
-                SelectedY = DrawingCanvas.ScrYToLSTGY(point.Y);
+                SelectedX = DrawingCanvas.ScrXToLSTGX(point.X, clipTo10);
+                SelectedY = DrawingCanvas.ScrYToLSTGY(point.Y, clipTo10);
             }
         }
 
@@ -125,6 +127,21 @@ namespace LuaSTGEditorSharp.Windows.Input.Canvas
         {
             DialogResult = false;
             Close();
+        }
+
+        private void NotClip_Click(object sender, RoutedEventArgs e)
+        {
+            clipTo10 = null;
+        }
+
+        private void ClipTo1_Click(object sender, RoutedEventArgs e)
+        {
+            clipTo10 = false;
+        }
+
+        private void ClipTo10_Click(object sender, RoutedEventArgs e)
+        {
+            clipTo10 = true;
         }
 
         public void RaisePropertyChanged(string s)

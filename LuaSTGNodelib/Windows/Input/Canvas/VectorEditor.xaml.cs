@@ -20,6 +20,8 @@ namespace LuaSTGEditorSharp.Windows.Input.Canvas
     /// </summary>
     public partial class VectorEditor : Window, INotifyPropertyChanged
     {
+        private bool? clipTo10 = null;
+
         private double selectedX, selectedY;
 
         private double beginX, beginY;
@@ -168,9 +170,9 @@ namespace LuaSTGEditorSharp.Windows.Input.Canvas
         private void Canvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             Point point = e.GetPosition(Canvas);
-            DrawCursorAtPoint(point);
-            OffsetX = DrawingCanvas.ScrXToLSTGX(point.X) - beginX;
-            OffsetY = DrawingCanvas.ScrYToLSTGY(point.Y) - beginY;
+            //DrawCursorAtPoint(point);
+            OffsetX = DrawingCanvas.ScrXToLSTGX(point.X, clipTo10) - beginX;
+            OffsetY = DrawingCanvas.ScrYToLSTGY(point.Y, clipTo10) - beginY;
             headDragStarted = true;
         }
 
@@ -198,9 +200,9 @@ namespace LuaSTGEditorSharp.Windows.Input.Canvas
         private void Canvas_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
             Point point = e.GetPosition(Canvas);
-            DrawCursorAtPoint(new Point(selectedX, selectedY));
-            BeginX = DrawingCanvas.ScrXToLSTGX(point.X);
-            BeginY = DrawingCanvas.ScrYToLSTGY(point.Y);
+            //DrawCursorAtPoint(new Point(selectedX, selectedY));
+            BeginX = DrawingCanvas.ScrXToLSTGX(point.X, clipTo10);
+            BeginY = DrawingCanvas.ScrYToLSTGY(point.Y, clipTo10);
             tailDragStarted = true;
         }
 
@@ -215,14 +217,14 @@ namespace LuaSTGEditorSharp.Windows.Input.Canvas
             if (headDragStarted)
             {
                 DrawCursorAtPoint(point);
-                OffsetX = DrawingCanvas.ScrXToLSTGX(point.X) - beginX;
-                OffsetY = DrawingCanvas.ScrYToLSTGY(point.Y) - beginY;
+                OffsetX = DrawingCanvas.ScrXToLSTGX(point.X, clipTo10) - beginX;
+                OffsetY = DrawingCanvas.ScrYToLSTGY(point.Y, clipTo10) - beginY;
             }
             else if (tailDragStarted)
             {
                 DrawCursorAtPoint(new Point(selectedX, selectedY));
-                BeginX = DrawingCanvas.ScrXToLSTGX(point.X);
-                BeginY = DrawingCanvas.ScrYToLSTGY(point.Y);
+                BeginX = DrawingCanvas.ScrXToLSTGX(point.X, clipTo10);
+                BeginY = DrawingCanvas.ScrYToLSTGY(point.Y, clipTo10);
             }
         }
 
@@ -236,6 +238,21 @@ namespace LuaSTGEditorSharp.Windows.Input.Canvas
         {
             DialogResult = false;
             Close();
+        }
+
+        private void NotClip_Click(object sender, RoutedEventArgs e)
+        {
+            clipTo10 = null;
+        }
+
+        private void ClipTo1_Click(object sender, RoutedEventArgs e)
+        {
+            clipTo10 = false;
+        }
+
+        private void ClipTo10_Click(object sender, RoutedEventArgs e)
+        {
+            clipTo10 = true;
         }
 
         public void RaisePropertyChanged(string s)

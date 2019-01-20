@@ -58,6 +58,38 @@ namespace LuaSTGEditorSharp.Windows.Input.Canvas
             return 240 - y;
         }
 
+        public static double ScrXToLSTGX(double x, bool? clip10)
+        {
+            if (clip10 == null)
+            {
+                return x - 224;
+            }
+            else if (clip10 == false)
+            {
+                return Convert.ToInt32(x - 224);
+            }
+            else
+            {
+                return Convert.ToInt32((x - 224) / 10) * 10;
+            }
+        }
+
+        public static double ScrYToLSTGY(double y, bool? clip10)
+        {
+            if (clip10 == null)
+            {
+                return 240 - y;
+            }
+            else if (clip10 == false)
+            {
+                return Convert.ToInt32(240 - y);
+            }
+            else
+            {
+                return Convert.ToInt32((240 - y) / 10) * 10;
+            }
+        }
+
         public static double LSTGXToScrX(double x)
         {
             return x + 224;
