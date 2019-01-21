@@ -12,7 +12,7 @@ using Newtonsoft.Json;
 namespace LuaSTGEditorSharp.EditorData.Node.Boss
 {
     [Serializable, NodeIcon("/LuaSTGNodeLib;component/images/16x16/bgframe.png")]
-    [CannotDelete]
+    [CannotDelete, CannotBan]
     [RequireParent(typeof(BossBGLayer)), Uniqueness]
     public class BossBGLayerFrame : TreeNode
     {

@@ -9,6 +9,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 using LuaSTGEditorSharp.Plugin;
+using LuaSTGEditorSharp.EditorData.Commands;
 using LuaSTGEditorSharp.EditorData.Message;
 using LuaSTGEditorSharp.EditorData.Interfaces;
 using LuaSTGEditorSharp.EditorData.Document;
@@ -77,7 +78,29 @@ namespace LuaSTGEditorSharp.EditorData
             }
         }
         /// <summary>
-        /// Store whether a <see cref="TreeNode"/> is banned. Using this will refresh the view.
+        /// Store whether a <see cref="TreeNode"/> is banned. 
+        /// Using setter of this will create a new <see cref="Command"/> and execute it.
+        /// </summary>
+        [JsonIgnore]
+        public bool IsBanned_InvokeCommand
+        {
+            get => isBanned;
+            set
+            {
+                parentWorkSpace.AddAndExecuteCommand(new SwitchBanCommand(this, value));
+                if (isBanned)
+                {
+                    RemoveMeta();
+                }
+                else
+                {
+                    CreateMeta();
+                }
+            }
+        }
+        /// <summary>
+        /// Store whether a <see cref="TreeNode"/> is banned. 
+        /// Using this will refresh the view, <see cref="MetaInfo"/> and <see cref="MessageBase"/>.
         /// </summary>
         [JsonProperty, DefaultValue(false)]
         [XmlAttribute("banned")]
@@ -86,7 +109,14 @@ namespace LuaSTGEditorSharp.EditorData
             get => isBanned;
             set
             {
-                isBanned = value;
+                if (CanBeBanned)
+                {
+                    isBanned = value;
+                }
+                else
+                {
+                    isBanned = false;
+                }
                 RaiseProertyChanged("IsBanned");
             }
         }
@@ -102,6 +132,12 @@ namespace LuaSTGEditorSharp.EditorData
         /// </summary>
         [JsonIgnore, XmlIgnore]
         public bool CanDelete { get => PluginHandler.Plugin.NodeTypeCache.NodeTypeInfo[GetType()].canDelete; }
+        /// <summary>
+        /// Use this to get whether the <see cref="TreeNode"/> cannot be banned. 
+        /// This property is always synced with <see cref="Node.NodeAttributes.CannotBanAttribute"/> (reverted).
+        /// </summary>
+        [JsonIgnore, XmlIgnore]
+        public bool CanBeBanned { get => PluginHandler.Plugin.NodeTypeCache.NodeTypeInfo[GetType()].canBeBanned; }
         /// <summary>
         /// Use this to get whether the <see cref="TreeNode"/> ignores validation. 
         /// This property is always synced with <see cref="Node.NodeAttributes.IgnoreValidationAttribute"/>.
@@ -547,9 +583,7 @@ namespace LuaSTGEditorSharp.EditorData
         {
             Children.Insert(index, n);
             n._parent = this;
-            MetaInfo meta = n.GetMeta();
-            n.RaiseProertyChanged("m");
-            if (meta != null) meta.Create(meta, parentWorkSpace.OriginalMeta);
+            n.CreateMeta();
         }
 
         /// <summary>
@@ -559,11 +593,31 @@ namespace LuaSTGEditorSharp.EditorData
         public void RemoveChild(TreeNode t)
         {
             Children.Remove(t);
-            MetaInfo meta = t.GetMeta();
+            t.RemoveMeta();
+        }
+
+        #endregion
+
+        /// <summary>
+        /// Create related <see cref="MetaInfo"/> and <see cref="MessageBase"/>.
+        /// </summary>
+        private void CreateMeta()
+        {
+            MetaInfo meta = GetMeta();
+            RaiseProertyChanged("m");
+            if (meta != null) meta.Create(meta, parentWorkSpace.OriginalMeta);
+        }
+
+        /// <summary>
+        /// Remove related <see cref="MetaInfo"/> and <see cref="MessageBase"/>.
+        /// </summary>
+        private void RemoveMeta()
+        {
+            MetaInfo meta = this.GetMeta();
             if (meta != null) meta.Remove(meta, parentWorkSpace.OriginalMeta);
             var s = from MessageBase mb
                     in MessageContainer.Messages
-                    where mb.Source == t
+                    where mb.Source == this
                     select mb;
             //DO NOT REMOVE LINE BELOW! LINQ CREATE INDEXES INSTEAD OF STATIC LIST
             List<MessageBase> lst = new List<MessageBase>(s);
@@ -572,8 +626,6 @@ namespace LuaSTGEditorSharp.EditorData
                 MessageContainer.Messages.Remove(mb);
             }
         }
-
-        #endregion
 
         /// <summary>
         /// Get <see cref="AttrItem"/> that to be edited when create this node.
@@ -636,6 +688,25 @@ namespace LuaSTGEditorSharp.EditorData
             foreach (TreeNode t in Children)
             {
                 t._parent = this;
+            }
+        }
+
+        /// <summary>
+        /// This method fixes banned situation.
+        /// </summary>
+        public void FixBan()
+        {
+            if (isBanned)
+            {
+                RemoveMeta();
+            }
+            else
+            {
+                CreateMeta();
+            }
+            foreach (TreeNode t in Children)
+            {
+                t.FixBan();
             }
         }
 

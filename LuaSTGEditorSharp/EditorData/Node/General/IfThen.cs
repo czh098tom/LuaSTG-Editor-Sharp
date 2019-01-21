@@ -11,7 +11,7 @@ using Newtonsoft.Json;
 namespace LuaSTGEditorSharp.EditorData.Node.General
 {
     [Serializable, NodeIcon("images/16x16/then.png")]
-    [CannotDelete]
+    [CannotDelete, CannotBan]
     [RequireParent(typeof(IfNode)), Uniqueness]
     public class IfThen : TreeNode
     {

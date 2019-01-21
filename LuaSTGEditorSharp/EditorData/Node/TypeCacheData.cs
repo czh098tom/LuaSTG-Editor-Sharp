@@ -17,6 +17,7 @@ namespace LuaSTGEditorSharp.EditorData.Node
         public Type[][] requireAncestor;
         public bool uniqueness;
         public bool ignoreValidation;
+        public bool canBeBanned;
 
         public int? createInvokeID;
         public int? rightClickInvokeID;

@@ -72,7 +72,7 @@ namespace LuaSTGEditorSharp.EditorData.Document
 
         public void QuietAdd(IAggregatableMeta meta)
         {
-            base.Add((meta as MetaInfo).target, meta);
+            if (!base.ContainsKey((meta as MetaInfo).target)) base.Add((meta as MetaInfo).target, meta);
         }
     }
 }

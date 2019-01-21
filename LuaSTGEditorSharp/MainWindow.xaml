@@ -25,6 +25,7 @@
         <CommandBinding Command="ApplicationCommands.Delete" Executed="DeleteCommandExecuted" CanExecute="DeleteCommand_CanExecute"/>
         <CommandBinding Command="local:EditorRoutedCommands.FoldRegion" Executed="FoldRegionCommandExecuted" CanExecute="FoldRegionCommand_CanExecute"/>
         <CommandBinding Command="local:EditorRoutedCommands.UnfoldAsRegion" Executed="UnfoldAsRegionCommandExecuted" CanExecute="UnfoldAsRegionCommand_CanExecute"/>
+        <CommandBinding Command="local:EditorRoutedCommands.SwitchBan" Executed="SwitchBanCommandExecuted" CanExecute="SwitchBanCommand_CanExecute"/>
         <!--#endregion-->
         <!--#region Export-->
         <CommandBinding Command="local:EditorRoutedCommands.ViewCode" Executed="ViewCodeCommandExecuted" CanExecute="ViewCodeCommand_CanExecute"/>
@@ -106,6 +107,8 @@
                     <MenuItem Header="_Paste" Command="ApplicationCommands.Paste"/>
                     <Separator/>
                     <MenuItem Header="_Delete" Command="ApplicationCommands.Delete"/>
+                    <Separator/>
+                    <MenuItem Header="_Switch Ban" Command="local:EditorRoutedCommands.SwitchBan"/>
                     <Separator/>
                     <MenuItem Header="_Fold region" Command="local:EditorRoutedCommands.FoldRegion"/>
                     <MenuItem Header="_Unfold as region"  Command="local:EditorRoutedCommands.UnfoldAsRegion"/>
@@ -569,7 +572,7 @@
                                         <Setter Property="IsSelected" 
                                             Value="{Binding IsSelected, Mode=TwoWay}"/>
                                         <EventSetter Event="PreviewMouseRightButtonDown" 
-                                                         Handler="TreeViewItem_PreviewMouseRightButtonDown"/>
+                                                     Handler="TreeViewItem_PreviewMouseRightButtonDown"/>
                                         <!--
                                         <EventSetter Event="PreviewMouseRightButtonUp" 
                                                          Handler="TreeViewItem_PreviewMouseRightButtonUp"/>
@@ -592,8 +595,8 @@
                                                 <ContextMenu DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}">
                                                     <MenuItem Header="Edit.." Click="MenuItem_Click"/>
                                                     <Separator/>
-                                                    <MenuItem Header="Ban" 
-                                                              IsChecked="{Binding IsBanned, UpdateSourceTrigger=PropertyChanged}" Click="Ban_Clicked"/>
+                                                    <MenuItem Header="Ban" Command="local:EditorRoutedCommands.SwitchBan"
+                                                              IsChecked="{Binding IsBanned, UpdateSourceTrigger=PropertyChanged}"/>
                                                 </ContextMenu>
                                             </StackPanel.ContextMenu>
                                         </StackPanel>

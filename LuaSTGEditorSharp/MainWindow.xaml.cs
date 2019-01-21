@@ -200,11 +200,13 @@ namespace LuaSTGEditorSharp
                 TreeNode t = await newDoc.CreateNodeFromFileAsync(path);
                 newDoc.TreeNodes.Add(t);
                 newDoc.OnOpening();
+                newDoc.TreeNodes[0].FixBan();
                 newDoc.OriginalMeta.PropertyChanged += newDoc.OnEditing;
             }
-            catch (JsonException)
+            catch (JsonException e)
             {
-                MessageBox.Show("Failed to open document. Please check whether the targeted file is in current version"
+                MessageBox.Show("Failed to open document. Please check whether the targeted file is in current version.\n"
+                    + "Error Message: " + e.ToString()
                     , "LuaSTG Editor Sharp", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
@@ -233,6 +235,7 @@ namespace LuaSTGEditorSharp
                     }
                 }
                 newDoc.OnOpening();
+                newDoc.TreeNodes[0].FixBan();
                 newDoc.OriginalMeta.PropertyChanged += newDoc.OnEditing;
             }
             catch (JsonException)
@@ -607,7 +610,6 @@ namespace LuaSTGEditorSharp
             if (VisualUpwardSearch<TreeViewItem>(e.OriginalSource as DependencyObject) is TreeViewItem treeViewItem)
             {
                 treeViewItem.Focus();
-                //e.Handled = true;
             }
         }
 
@@ -794,6 +796,16 @@ namespace LuaSTGEditorSharp
                 canE &= selectedNode.Parent.ValidateChildType(t);
             }
             e.CanExecute = canE;
+        }
+
+        private void SwitchBanCommandExecuted(object sender, ExecutedRoutedEventArgs e)
+        {
+            selectedNode.IsBanned_InvokeCommand = !selectedNode.IsBanned;
+        }
+
+        private void SwitchBanCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = selectedNode != null && selectedNode.CanBeBanned;
         }
 
         private void GoToLineXCommandExecuted(object sender, ExecutedRoutedEventArgs e)
@@ -1046,15 +1058,6 @@ namespace LuaSTGEditorSharp
                     propData.ItemsSource = null;
                     propData.ItemsSource = a;
                 }
-            }
-        }
-
-        private void Ban_Clicked(object sender, RoutedEventArgs e)
-        {
-            TreeNode t = ((sender as MenuItem).DataContext as TreeNode);
-            if (t != null)
-            {
-                t.IsBanned = !t.IsBanned;
             }
         }
     }

@@ -12,7 +12,7 @@ using Newtonsoft.Json;
 namespace LuaSTGEditorSharp.EditorData.Node
 {
     [Serializable, NodeIcon("images/16x16/setting.png")]
-    [CannotDelete]
+    [CannotDelete, CannotBan]
     [LeafNode]
     [RCInvoke(0)]
     public class ProjSettings : TreeNode

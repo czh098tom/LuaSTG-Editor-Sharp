@@ -12,7 +12,7 @@ using Newtonsoft.Json;
 namespace LuaSTGEditorSharp.EditorData.Node.Boss
 {
     [Serializable, NodeIcon("/LuaSTGNodeLib;component/images/16x16/bossscstart.png")]
-    [CannotDelete]
+    [CannotDelete, CannotBan]
     [RequireParent(typeof(BossSpellCard)), Uniqueness]
     public class BossSCFinish : TreeNode
     {

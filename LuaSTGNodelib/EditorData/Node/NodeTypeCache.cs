@@ -28,6 +28,7 @@ namespace LuaSTGEditorSharp.EditorData.Node
                 {
                     icon = t.GetCustomAttribute<NodeIconAttribute>().Path,
                     canDelete = !t.IsDefined(typeof(CannotDeleteAttribute), false),
+                    canBeBanned = !t.IsDefined(typeof(CannotBanAttribute), false),
                     classNode = t.IsDefined(typeof(ClassNodeAttribute), false),
                     leaf = t.IsDefined(typeof(LeafNodeAttribute), false),
                     requireParent = t.GetCustomAttribute<RequireParentAttribute>()?.ParentType,

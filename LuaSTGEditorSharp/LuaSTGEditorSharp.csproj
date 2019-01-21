@@ -130,6 +130,7 @@
     <Compile Include="EditorData\Commands\InsertAsParentCommand.cs" />
     <Compile Include="EditorData\Commands\InsertBeforeCommand.cs" />
     <Compile Include="EditorData\Commands\InsertCommand.cs" />
+    <Compile Include="EditorData\Commands\SwitchBanCommand.cs" />
     <Compile Include="EditorData\Commands\UnfoldAsRegionCommand.cs" />
     <Compile Include="EditorData\Compile\DefineMarco.cs" />
     <Compile Include="EditorData\CompileProcess.cs" />
@@ -178,6 +179,7 @@
     <Compile Include="EditorData\Node\General\IfThen.cs" />
     <Compile Include="EditorData\Node\General\Patch.cs" />
     <Compile Include="EditorData\Node\General\Repeat.cs" />
+    <Compile Include="EditorData\Node\NodeAttributes\CannotBanAttribute.cs" />
     <Compile Include="EditorData\Node\NodeAttributes\CannotDeleteAttribute.cs" />
     <Compile Include="EditorData\Node\NodeAttributes\ClassNodeAttribute.cs" />
     <Compile Include="EditorData\Node\NodeAttributes\CreateInvokeAttribute.cs" />
