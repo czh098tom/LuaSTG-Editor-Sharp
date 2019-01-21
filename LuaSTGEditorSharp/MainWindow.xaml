@@ -84,6 +84,7 @@
             </StackPanel>
         </ControlTemplate>
         <tool:BannedToStrikeThrough x:Key="banned2Strike"/>
+        <tool:BoolToOpacity x:Key="banned2Opacity"/>
         <!--<cm:BackgroundWorker x:Key="backgroundWorker" WorkerReportsProgress="True"/>-->
     </Window.Resources>
     <DockPanel>
@@ -573,10 +574,6 @@
                                             Value="{Binding IsSelected, Mode=TwoWay}"/>
                                         <EventSetter Event="PreviewMouseRightButtonDown" 
                                                      Handler="TreeViewItem_PreviewMouseRightButtonDown"/>
-                                        <!--
-                                        <EventSetter Event="PreviewMouseRightButtonUp" 
-                                                         Handler="TreeViewItem_PreviewMouseRightButtonUp"/>
-                                        -->
                                         <Style.Triggers>
                                             <Trigger Property="IsSelected" Value="True"/>
                                             <Trigger Property="IsSelected" Value="False"/>
@@ -589,7 +586,7 @@
                                     <HierarchicalDataTemplate ItemsSource="{Binding Children}">
                                         <StackPanel Orientation="Horizontal">
                                             <Image VerticalAlignment="Top" Source="{tool:BindableStaticResource {Binding Icon}}"
-                                                   Stretch="Fill" Width="16" Height="16" Margin="0,0,2,2"/>
+                                                   Stretch="Fill" Width="16" Height="16" Margin="0,0,2,2" Opacity="{Binding IsBanned, Converter={StaticResource banned2Opacity}}"/>
                                             <TextBlock VerticalAlignment="Center" Text="{Binding ScreenString}" TextDecorations="{Binding IsBanned, Converter={StaticResource banned2Strike}}"/>
                                             <StackPanel.ContextMenu>
                                                 <ContextMenu DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}">

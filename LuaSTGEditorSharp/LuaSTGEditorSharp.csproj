@@ -130,6 +130,7 @@
     <Compile Include="EditorData\Commands\InsertAsParentCommand.cs" />
     <Compile Include="EditorData\Commands\InsertBeforeCommand.cs" />
     <Compile Include="EditorData\Commands\InsertCommand.cs" />
+    <Compile Include="EditorData\Commands\MoveCommand.cs" />
     <Compile Include="EditorData\Commands\SwitchBanCommand.cs" />
     <Compile Include="EditorData\Commands\UnfoldAsRegionCommand.cs" />
     <Compile Include="EditorData\Compile\DefineMarco.cs" />

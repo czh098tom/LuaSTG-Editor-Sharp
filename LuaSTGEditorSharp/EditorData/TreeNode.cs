@@ -404,7 +404,11 @@ namespace LuaSTGEditorSharp.EditorData
                 && parentWorkSpace != null
                 && (GetType() == typeof(RootFolder) || GetType() == typeof(ProjectRoot) || _parent != null))  
             {
-                var a = GetMessage();
+                List<MessageBase> a = new List<MessageBase>();
+                if(!isBanned)
+                {
+                    a = GetMessage();
+                }
                 a.AddRange(GetMismatchedAttributeMessage());
                 Messages.Clear();
                 foreach (MessageBase mb in a)

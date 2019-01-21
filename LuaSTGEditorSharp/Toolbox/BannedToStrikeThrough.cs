@@ -33,4 +33,33 @@ namespace LuaSTGEditorSharp.Toolbox
             return value == TextDecorations.Strikethrough;
         }
     }
+
+    public class BoolToOpacity : IValueConverter
+    {
+        //Bool2Opacity
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (bool.TryParse(value.ToString(), out bool b))
+            {
+                if (b)
+                {
+                    return 0.4;
+                }
+                else
+                {
+                    return 1;
+                }
+            }
+            return 1;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (float.TryParse(value.ToString(), out float f)) 
+            {
+                return f > 0.4;
+            }
+            return true;
+        }
+    }
 }
