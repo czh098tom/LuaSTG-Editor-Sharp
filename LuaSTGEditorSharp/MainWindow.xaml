@@ -82,6 +82,7 @@
                 <TextBlock Text="{Binding Path=Name}"/>
             </StackPanel>
         </ControlTemplate>
+        <tool:BannedToStrikeThrough x:Key="banned2Strike"/>
         <!--<cm:BackgroundWorker x:Key="backgroundWorker" WorkerReportsProgress="True"/>-->
     </Window.Resources>
     <DockPanel>
@@ -585,20 +586,19 @@
                                     <HierarchicalDataTemplate ItemsSource="{Binding Children}">
                                         <StackPanel Orientation="Horizontal">
                                             <Image VerticalAlignment="Top" Source="{tool:BindableStaticResource {Binding Icon}}"
-                                                Stretch="Fill" Width="16" Height="16" Margin="0,0,2,2"/>
-                                            <TextBlock VerticalAlignment="Center" Text="{Binding ScreenString}"/>
+                                                   Stretch="Fill" Width="16" Height="16" Margin="0,0,2,2"/>
+                                            <TextBlock VerticalAlignment="Center" Text="{Binding ScreenString}" TextDecorations="{Binding IsBanned, Converter={StaticResource banned2Strike}}"/>
+                                            <StackPanel.ContextMenu>
+                                                <ContextMenu DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}">
+                                                    <MenuItem Header="Edit.." Click="MenuItem_Click"/>
+                                                    <Separator/>
+                                                    <MenuItem Header="Ban" 
+                                                              IsChecked="{Binding IsBanned, UpdateSourceTrigger=PropertyChanged}" Click="Ban_Clicked"/>
+                                                </ContextMenu>
+                                            </StackPanel.ContextMenu>
                                         </StackPanel>
                                     </HierarchicalDataTemplate>
                                 </TreeView.ItemTemplate>
-                                <TreeView.ContextMenu>
-                                    <ContextMenu>
-                                        <ContextMenu.ItemsSource>
-                                            <CompositeCollection>
-                                                <MenuItem Header="Edit.." Click="MenuItem_Click"/>
-                                            </CompositeCollection>
-                                        </ContextMenu.ItemsSource>
-                                    </ContextMenu>
-                                </TreeView.ContextMenu>
                             </TreeView>
                         </DataTemplate>
                     </TabControl.ContentTemplate>

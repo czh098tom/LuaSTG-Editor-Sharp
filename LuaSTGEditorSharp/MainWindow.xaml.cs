@@ -72,6 +72,16 @@ namespace LuaSTGEditorSharp
 
         public TreeNode selectedNode = null;
 
+        public TreeNode SelectedNode
+        {
+            get => selectedNode;
+            set
+            {
+                selectedNode = value;
+                RaiseProertyChanged("SelectedNode");
+            }
+        }
+
         public DocumentData ActivatedWorkSpaceData
         {
             get
@@ -535,7 +545,7 @@ namespace LuaSTGEditorSharp
         private void WorkSpaceSelectedChanged(object sender,RoutedEventArgs e)
         {
             workSpace = sender as TreeView;
-            selectedNode = ((TreeNode)(workSpace.SelectedItem));
+            SelectedNode = ((TreeNode)(workSpace.SelectedItem));
             if (selectedNode != null) this.propData.ItemsSource = selectedNode.attributes;
             //EditorConsole.Text = selectedNode.ToLua(0);
         }
@@ -1036,6 +1046,15 @@ namespace LuaSTGEditorSharp
                     propData.ItemsSource = null;
                     propData.ItemsSource = a;
                 }
+            }
+        }
+
+        private void Ban_Clicked(object sender, RoutedEventArgs e)
+        {
+            TreeNode t = ((sender as MenuItem).DataContext as TreeNode);
+            if (t != null)
+            {
+                t.IsBanned = !t.IsBanned;
             }
         }
     }

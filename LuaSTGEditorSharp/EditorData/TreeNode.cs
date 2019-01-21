@@ -46,9 +46,14 @@ namespace LuaSTGEditorSharp.EditorData
         [JsonIgnore, XmlIgnore]
         public bool isSelected = false;
         /// <summary>
+        /// Store whether a <see cref="TreeNode"/> is banned. Use this only when you do not want to refresh the view.
+        /// </summary>
+        [JsonIgnore, XmlIgnore]
+        private bool isBanned = false;
+        /// <summary>
         /// Store whether a <see cref="TreeNode"/> is expanded in view. Using this will refresh the view.
         /// </summary>
-        [JsonProperty, XmlAttribute("expanded")]
+        [JsonProperty, DefaultValue(true)][XmlAttribute("expanded")]
         public bool IsExpanded
         {
             get => isExpanded;
@@ -61,7 +66,7 @@ namespace LuaSTGEditorSharp.EditorData
         /// <summary>
         /// Store whether a <see cref="TreeNode"/> is selected in view. Using this will refresh the view.
         /// </summary>
-        [JsonProperty, XmlAttribute("selected")]
+        [JsonProperty, DefaultValue(false)][XmlAttribute("selected")]
         public bool IsSelected
         {
             get => isSelected;
@@ -69,6 +74,20 @@ namespace LuaSTGEditorSharp.EditorData
             {
                 isSelected = value;
                 RaiseProertyChanged("IsSelected");
+            }
+        }
+        /// <summary>
+        /// Store whether a <see cref="TreeNode"/> is banned. Using this will refresh the view.
+        /// </summary>
+        [JsonProperty, DefaultValue(false)]
+        [XmlAttribute("banned")]
+        public bool IsBanned
+        {
+            get => isBanned;
+            set
+            {
+                isBanned = value;
+                RaiseProertyChanged("IsBanned");
             }
         }
         /// <summary>
@@ -176,41 +195,44 @@ namespace LuaSTGEditorSharp.EditorData
             bool firstC = false;
             foreach (TreeNode t in Children)
             {
-                if (GlobalCompileData.SCDebugger == t)
+                if (!t.isBanned)
                 {
-                    foreach(var a in t.ToLua(spacing))
+                    if (GlobalCompileData.SCDebugger == t)
                     {
-                        yield return a;
+                        foreach (var a in t.ToLua(spacing))
+                        {
+                            yield return a;
+                        }
+                        string difficultyS = (NonMacrolize(1) == "All" ? "" : ":" + NonMacrolize(1));
+                        string fullName = "\"" + NonMacrolize(0) + difficultyS + "\"";
+                        yield return "_boss_class_name=" + fullName + "\n";
+                        yield return "_editor_class[" + fullName + "].cards={boss.move.New(0,144,60,MOVE_NORMAL),_tmp_sc}\n";
                     }
-                    string difficultyS = (NonMacrolize(1) == "All" ? "" : ":" + NonMacrolize(1));
-                    string fullName = "\"" + NonMacrolize(0) + difficultyS + "\"";
-                    yield return "_boss_class_name=" + fullName + "\n";
-                    yield return "_editor_class[" + fullName + "].cards={boss.move.New(0,144,60,MOVE_NORMAL),_tmp_sc}\n";
+                    else if (GlobalCompileData.StageDebugger != null)
+                    {
+                        if (childof && !firstC && (!(t is Folder) || temp == t))
+                        {
+                            firstC = true;
+                            yield return "if false then\n";
+                        }
+                        if (GlobalCompileData.StageDebugger == t)
+                        {
+                            yield return "end\n";
+                        }
+                        foreach (var a in t.ToLua(spacing))
+                        {
+                            yield return a;
+                        }
+                    }
+                    else
+                    {
+                        foreach (var a in t.ToLua(spacing))
+                        {
+                            yield return a;
+                        }
+                    }
+                    t.AddCompileSettings();
                 }
-                else if (GlobalCompileData.StageDebugger != null)
-                {
-                    if (childof && !firstC && (!(t is Folder) || temp == t)) 
-                    {
-                        firstC = true;
-                        yield return "if false then\n";
-                    }
-                    if (GlobalCompileData.StageDebugger == t)
-                    {
-                        yield return "end\n";
-                    }
-                    foreach (var a in t.ToLua(spacing))
-                    {
-                        yield return a;
-                    }
-                }
-                else
-                {
-                    foreach (var a in t.ToLua(spacing))
-                    {
-                        yield return a;
-                    }
-                }
-                t.AddCompileSettings();
             }
         }
 
@@ -394,9 +416,12 @@ namespace LuaSTGEditorSharp.EditorData
         {
             foreach (TreeNode t in Children)
             {
-                foreach (Tuple<int,TreeNode> ti in t.GetLines())
+                if(!t.isBanned)
                 {
-                    yield return ti;
+                    foreach (Tuple<int, TreeNode> ti in t.GetLines())
+                    {
+                        yield return ti;
+                    }
                 }
             }
         }

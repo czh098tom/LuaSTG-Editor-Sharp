@@ -12,7 +12,11 @@ namespace LuaSTGEditorSharp.EditorData
     public static class EditorSerializer
     {
         public static readonly JsonSerializerSettings DefaultSettings =
-            new JsonSerializerSettings() { TypeNameHandling = TypeNameHandling.Auto };
+            new JsonSerializerSettings()
+            {
+                TypeNameHandling = TypeNameHandling.Auto,
+                DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate
+            };
 
         public static string SerializeTreeNode(object o)
         {

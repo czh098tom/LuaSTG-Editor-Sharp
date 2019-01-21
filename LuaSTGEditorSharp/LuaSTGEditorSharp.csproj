@@ -206,6 +206,7 @@
     <Compile Include="Settings.cs" />
     <Compile Include="SingleInstanceWrapper.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="Toolbox\BannedToStrikeThrough.cs" />
     <Compile Include="Toolbox\BindableStaticResource.cs" />
     <Compile Include="Toolbox\ComboBoxItemTemplateSelector.cs" />
     <Compile Include="Toolbox\DependencyObjectExtensions.cs" />
