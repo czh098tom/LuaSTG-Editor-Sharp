@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using LuaSTGEditorSharp.EditorData.Document;
+using LuaSTGEditorSharp.EditorData.Message;
 using LuaSTGEditorSharp.EditorData.Node.NodeAttributes;
 using Newtonsoft.Json;
 
@@ -37,8 +38,13 @@ namespace LuaSTGEditorSharp.EditorData.Node.Laser
         public override IEnumerable<string> ToLua(int spacing)
         {
             string sp = "".PadLeft(4);
-            string parentName = Lua.StringParser.ParseLua(NonMacrolize(Parent.attributes[0]) +
-                (NonMacrolize(Parent.attributes[1]) == "All" ? "" : ":" + NonMacrolize(Parent.attributes[1])));
+            TreeNode Parent = this.Parent;
+            string parentName = "";
+            if (Parent?.attributes != null && Parent.AttributeCount >= 2)
+            {
+                parentName = Lua.StringParser.ParseLua(Parent.NonMacrolize(0) +
+                    (Parent.NonMacrolize(1) == "All" ? "" : ":" + Parent.NonMacrolize(1)));
+            }
             string p = (!string.IsNullOrEmpty(NonMacrolize(0)) ? NonMacrolize(0) : "_");
             yield return "_editor_class[\"" + parentName + "\"].init=function(self,_x,_y," + p + ")\n"
                          + sp + "laser_bent.init(self," + Macrolize(1) + ",_x,_y," + Macrolize(2) + ","
@@ -77,6 +83,16 @@ namespace LuaSTGEditorSharp.EditorData.Node.Laser
             n.FixAttrParent();
             n.FixChildrenParent();
             return n;
+        }
+
+        public override List<MessageBase> GetMessage()
+        {
+            var a = new List<MessageBase>();
+            if (Parent?.attributes == null || Parent.AttributeCount < 2)
+            {
+                a.Add(new CannotFindAttributeInParent(2, this));
+            }
+            return a;
         }
     }
 }

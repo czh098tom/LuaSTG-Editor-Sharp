@@ -178,6 +178,11 @@ namespace LuaSTGEditorSharp.EditorData
         public string ScreenString { get { return this.ToString(); } }
 
         /// <summary>
+        /// Use this property to get the attribute count of this node.
+        /// </summary>
+        public int AttributeCount { get => attributes.Count; }
+
+        /// <summary>
         /// The constructor used by Serializer. Classes who inherit it must override this.
         /// </summary>
         protected TreeNode()
@@ -916,7 +921,7 @@ namespace LuaSTGEditorSharp.EditorData
         /// </summary>
         /// <param name="attrItem">The target <see cref="AttrItem"/></param>
         /// <returns>The <see cref="string"/> of inputs.</return
-        protected string NonMacrolize(AttrItem attrItem)
+        public string NonMacrolize(AttrItem attrItem)
         {
             return attrItem.AttrInput;
         }
@@ -926,7 +931,7 @@ namespace LuaSTGEditorSharp.EditorData
         /// </summary>
         /// <param name="i">The id of target <see cref="AttrItem"/></param>
         /// <returns>The <see cref="string"/> of inputs.</return
-        protected string NonMacrolize(int i)
+        public string NonMacrolize(int i)
         {
             return NonMacrolize(attributes[i]);
         }

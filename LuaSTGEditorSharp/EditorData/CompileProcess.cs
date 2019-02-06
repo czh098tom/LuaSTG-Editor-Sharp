@@ -10,6 +10,7 @@ using System.Windows;
 using LuaSTGEditorSharp.EditorData.Document;
 using LuaSTGEditorSharp.EditorData.Compile;
 using LuaSTGEditorSharp.EditorData.Exception;
+using LuaSTGEditorSharp.Zip;
 
 namespace LuaSTGEditorSharp.EditorData
 {
@@ -300,6 +301,71 @@ namespace LuaSTGEditorSharp.EditorData
         protected void PackFileUsingInfo(App currentApp, List<string> resNeedToPack, Dictionary<string, string> resPathToMD5,
             bool includeRoot)
         {
+            ZipCompressorBatch compressor = new ZipCompressorBatch(targetZipPath, zipExePath, rootZipPackPath);
+            Dictionary<string, string> entry2File = new Dictionary<string, string>();
+            string temp;
+            try
+            {
+                if (includeRoot)
+                {
+                    entry2File.Add(Path.GetFileName(rootLuaPath), rootLuaPath);
+                }
+                entry2File.Add(Path.GetFileName(projLuaPath), projLuaPath);
+                if (currentApp.SaveResMeta)
+                {
+                    foreach (string resPath in resNeedToPack)
+                    {
+                        entry2File.Add(Path.GetFileName(resPath), resPath);
+                    }
+                    foreach (KeyValuePair<string, string> kvp in resPathToMD5)
+                    {
+                        entry2File.Add(Path.GetFileName(kvp.Key), kvp.Key);
+                    }
+                }
+                else
+                {
+                    //if (File.Exists(targetZipPath)) File.Delete(targetZipPath);
+                    foreach (string resPath in resourceFilePath)
+                    {
+                        bool? undcPath = RelativePathConverter.IsRelativePath(resPath);
+                        if (undcPath == true)
+                        {
+                            if (string.IsNullOrEmpty(projPath)) throw new InvalidRelativeResPathException(resPath);
+                            temp = Path.GetFullPath(Path.Combine(projPath, resPath));
+                            entry2File.Add(Path.GetFileName(temp), temp);
+                        }
+                        else if (undcPath == false)
+                        {
+                            entry2File.Add(Path.GetFileName(resPath), resPath);
+                        }
+                    }
+                }
+
+                if (currentApp.PackProj)
+                {
+                    if (!string.IsNullOrEmpty(source.DocPath))
+                    {
+                        entry2File.Add(source.RawDocName, source.DocPath);
+                    }
+                }
+                compressor.PackByDict(entry2File, !currentApp.SaveResMeta);
+            }
+            finally
+            {
+                if (File.Exists(projLuaPath)) File.Delete(projLuaPath);
+            }
+        }
+
+        /// <summary>
+        /// Generate pack batch and execute it by given information.
+        /// </summary>
+        /// <param name="currentApp">The current <see cref="App"/>.</param>
+        /// <param name="resNeedToPack">The output list of resources need to pack.</param>
+        /// <param name="resPathToMD5">The dictionary of resource path->MD5 Hash of the resource.</param>
+        /// <param name="includeRoot">Whether regenerates root.lua.</param>
+        protected void PackFileUsingInfo_old(App currentApp, List<string> resNeedToPack, Dictionary<string, string> resPathToMD5,
+            bool includeRoot)
+        {
             //Pack File using info
             FileStream packBatS = null;
             StreamWriter packBat = null;
@@ -324,7 +390,7 @@ namespace LuaSTGEditorSharp.EditorData
                         packBat.WriteLine(zipExePath + " u -tzip -mcu=on \"" + targetZipPath + "\" \""
                             + resPath + "\"");
                     }
-                    foreach(KeyValuePair<string,string> kvp in resPathToMD5)
+                    foreach (KeyValuePair<string, string> kvp in resPathToMD5)
                     {
                         packBat.WriteLine(zipExePath + " d -tzip -mcu=on \"" + targetZipPath + "\" \""
                             + kvp.Key + "\"");
@@ -379,7 +445,7 @@ namespace LuaSTGEditorSharp.EditorData
             }
         }
 
-        protected void PackFileUsingInfo_old(App currentApp, List<string> resNeedToPack, Dictionary<string, string> resPathToMD5)
+        protected void PackFileUsingInfo_old2(App currentApp, List<string> resNeedToPack, Dictionary<string, string> resPathToMD5)
         {
             //Pack File using info
             FileStream packBatS = null;

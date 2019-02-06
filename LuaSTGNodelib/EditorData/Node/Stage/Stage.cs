@@ -41,7 +41,12 @@ namespace LuaSTGEditorSharp.EditorData.Node.Stage
         public override IEnumerable<string> ToLua(int spacing)
         {
             string sp = "".PadLeft(4);
-            string parentStageGroupName = Lua.StringParser.ParseLua(NonMacrolize(Parent.attributes[0]));
+            TreeNode Parent = this.Parent;
+            string parentStageGroupName = "";
+            if (Parent?.attributes != null && Parent.AttributeCount >= 1)
+            {
+                parentStageGroupName = Lua.StringParser.ParseLua(Parent.NonMacrolize(0));
+            }
             string stageName = Lua.StringParser.ParseLua(NonMacrolize(0));
             yield return "stage.group.AddStage(\'" + parentStageGroupName + "\',\'" 
                        + stageName
@@ -108,6 +113,10 @@ namespace LuaSTGEditorSharp.EditorData.Node.Stage
             List<MessageBase> messages = new List<MessageBase>();
             if (string.IsNullOrEmpty(NonMacrolize(0)))
                 messages.Add(new ArgNotNullMessage(attributes[0].AttrCap, 0, this));
+            if (Parent?.attributes == null || Parent.AttributeCount < 1)
+            {
+                messages.Add(new CannotFindAttributeInParent(1, this));
+            }
             return messages;
         }
     }

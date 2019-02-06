@@ -10,28 +10,30 @@ using Newtonsoft.Json;
 
 namespace LuaSTGEditorSharp.EditorData.Document
 {
-    public enum MetaType { proj, stageGroup, Boss, Bullet, ImageLoad, BGMLoad, BossBG, Laser, BentLaser, __max }
+    public enum MetaType { proj, userDefined
+            , stageGroup, Boss, Bullet, ImageLoad
+            , BGMLoad, BossBG, Laser, BentLaser, __max }
 
     //List version, used in non-immediate update cases
     [Serializable]
     public class MetaData : AbstractMetaData
     {
         [JsonIgnore]
-        public IMetaInfoCollection StageGroupDefineData { get => aggregatableMetas[1]; }
+        public IMetaInfoCollection StageGroupDefineData { get => aggregatableMetas[(int)MetaType.stageGroup]; }
         [JsonIgnore]
-        public IMetaInfoCollection BossDefineData { get => aggregatableMetas[2]; }
+        public IMetaInfoCollection BossDefineData { get => aggregatableMetas[(int)MetaType.Boss]; }
         [JsonIgnore]
-        public IMetaInfoCollection BulletDefineData { get => aggregatableMetas[3]; }
+        public IMetaInfoCollection BulletDefineData { get => aggregatableMetas[(int)MetaType.Bullet]; }
         [JsonIgnore]
-        public IMetaInfoCollection ImageLoadData { get => aggregatableMetas[4]; }
+        public IMetaInfoCollection ImageLoadData { get => aggregatableMetas[(int)MetaType.ImageLoad]; }
         [JsonIgnore]
-        public IMetaInfoCollection BGMLoadData { get => aggregatableMetas[5]; }
+        public IMetaInfoCollection BGMLoadData { get => aggregatableMetas[(int)MetaType.BGMLoad]; }
         [JsonIgnore]
-        public IMetaInfoCollection BossBGDefineData { get => aggregatableMetas[6]; }
+        public IMetaInfoCollection BossBGDefineData { get => aggregatableMetas[(int)MetaType.BossBG]; }
         [JsonIgnore]
-        public IMetaInfoCollection LaserDefineData { get => aggregatableMetas[7]; }
+        public IMetaInfoCollection LaserDefineData { get => aggregatableMetas[(int)MetaType.Laser]; }
         [JsonIgnore]
-        public IMetaInfoCollection BentLaserDefineData { get => aggregatableMetas[8]; }
+        public IMetaInfoCollection BentLaserDefineData { get => aggregatableMetas[(int)MetaType.BentLaser]; }
 
         public MetaData()
         {

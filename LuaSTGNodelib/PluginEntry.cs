@@ -55,10 +55,11 @@ namespace LuaSTGEditorSharp
 
         public override int[][] MetaInfoCollectionWatchDict
             => new int[][]{
-                new int[]{ 1 },
-                new int[]{ 2, 3, 6, 7, 8 },
-                new int[]{ 4 },
-                new int[]{ 5 }
+                new int[]{ (int)MetaType.stageGroup },
+                new int[]{ (int)MetaType.Boss, (int)MetaType.Bullet, (int)MetaType.BossBG
+                    , (int)MetaType.Laser, (int)MetaType.BentLaser },
+                new int[]{ (int)MetaType.ImageLoad },
+                new int[]{ (int)MetaType.BGMLoad }
             };
 
         public override int MetaInfoCollectionTypeCount { get => (int)MetaType.__max; }

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using LuaSTGEditorSharp.EditorData;
+using LuaSTGEditorSharp.EditorData.Message;
 using LuaSTGEditorSharp.EditorData.Document;
 using LuaSTGEditorSharp.EditorData.Node.NodeAttributes;
 using Newtonsoft.Json;
@@ -26,12 +27,19 @@ namespace LuaSTGEditorSharp.EditorData.Node.Object
         {
             string sp = "".PadLeft(spacing * 4);
             TreeNode callBackFunc = this;
-            while(!(callBackFunc is CallBackFunc))
+            while(!(callBackFunc is CallBackFunc) && callBackFunc != null)
             {
                 callBackFunc = callBackFunc.Parent;
             }
-            string other = NonMacrolize(callBackFunc.attributes[0]) == "colli" ? ",other" : "";
-            yield return sp + "self.class.base." + NonMacrolize(callBackFunc.attributes[0]) + "(self" + other + ")\n";
+            if (callBackFunc != null)
+            {
+                string other = callBackFunc.NonMacrolize(0) == "colli" ? ",other" : "";
+                yield return sp + "self.class.base." + callBackFunc.NonMacrolize(0) + "(self" + other + ")\n";
+            }
+            else
+            {
+                yield return "\n";
+            }
         }
 
         public override IEnumerable<Tuple<int,TreeNode>> GetLines()
@@ -56,6 +64,21 @@ namespace LuaSTGEditorSharp.EditorData.Node.Object
             n.FixAttrParent();
             n.FixChildrenParent();
             return n;
+        }
+
+        public override List<MessageBase> GetMessage()
+        {
+            var a = new List<MessageBase>();
+            TreeNode callBackFunc = this;
+            while (!(callBackFunc is CallBackFunc) && callBackFunc != null)
+            {
+                callBackFunc = callBackFunc.Parent;
+            }
+            if (callBackFunc == null) 
+            {
+                a.Add(new CannotFindAncestorTypeOf("CallBackFunc", this));
+            }
+            return a;
         }
     }
 }

@@ -25,6 +25,8 @@ namespace LuaSTGEditorSharp.EditorData.Document
 
         [JsonIgnore]
         public IMetaInfoCollection ProjFileData { get => aggregatableMetas[0]; }
+        [JsonIgnore]
+        public IMetaInfoCollection UserDefinedData { get => aggregatableMetas[1]; }
 
         [JsonConstructor]
         protected AbstractMetaData() { }

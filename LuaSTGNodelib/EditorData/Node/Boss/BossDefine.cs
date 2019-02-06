@@ -74,6 +74,18 @@ namespace LuaSTGEditorSharp.EditorData.Node.Boss
             else
             {
                 string filename = "\"" + Lua.StringParser.ParseLua(Path.GetFileName(NonMacrolize(5))) + "\"";
+                yield return "_editor_class[" + fullName + "]=Class(boss)\n"
+                           + "_editor_class[" + fullName + "].cards={}\n"
+                           + "_editor_class[" + fullName + "].name=\"" + displayedName + "\"\n"
+                           + "_editor_class[" + fullName + "].init=function(self,cards)\n"
+                           + "    boss.init(self," + Macrolize(3) + ",\"" + displayedName + "\",cards,New(" + scbg + "),\"" + difficultyString + "\")\n"
+                           + "    self._wisys:SetImage(" + filename + "," + Macrolize(7) + "," + Macrolize(6) 
+                           + ",{" + Macrolize(12) + "},{" + Macrolize(13) + "}," + Macrolize(9) + "," + Macrolize(8) + ")\n"
+                           + "end\n"
+                           + "_editor_class[" + fullName + "].bgm=" + Macrolize(11) + "\n"
+                           + "_editor_class[" + fullName + "]._bg=" + bg + "\n"
+                           + "_editor_class[" + fullName + "].difficulty=\"" + difficultyString + "\"\n";
+                /*
                 yield return "LoadTexture(\'anonymous:\'.." + filename + "," + filename + ")\n"
                            + "bossimg_number_n={" + Macrolize(12) + "}\n"
                            + "bosstexture_n,bosstexture_m=GetTextureSize('anonymous:'.." + filename + ")\n"
@@ -101,6 +113,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Boss
                            + "_editor_class[" + fullName + "].bgm=" + Macrolize(11) + "\n"
                            + "_editor_class[" + fullName + "]._bg=" + bg + "\n"
                            + "_editor_class[" + fullName + "].difficulty=\"" + difficultyString + "\"\n";
+                           */
                 foreach (var a in base.ToLua(spacing))
                 {
                     yield return a;
@@ -120,7 +133,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Boss
             }
             else
             {
-                yield return new Tuple<int, TreeNode>(26, this);
+                yield return new Tuple<int, TreeNode>(10, this);
                 foreach (Tuple<int, TreeNode> t in GetChildLines())
                 {
                     yield return t;

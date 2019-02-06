@@ -590,10 +590,24 @@
                                             <TextBlock VerticalAlignment="Center" Text="{Binding ScreenString}" TextDecorations="{Binding IsBanned, Converter={StaticResource banned2Strike}}"/>
                                             <StackPanel.ContextMenu>
                                                 <ContextMenu DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}">
-                                                    <MenuItem Header="Edit.." Click="MenuItem_Click"/>
-                                                    <Separator/>
-                                                    <MenuItem Header="Ban" Command="local:EditorRoutedCommands.SwitchBan"
-                                                              IsChecked="{Binding IsBanned, UpdateSourceTrigger=PropertyChanged}"/>
+                                                    <ContextMenu.ItemsSource>
+                                                        <CompositeCollection>
+                                                            <MenuItem Header="_Edit.." Click="MenuItem_Click"/>
+                                                            <Separator/>
+                                                            <MenuItem Header="_Cut" Command="ApplicationCommands.Cut"/>
+                                                            <MenuItem Header="_Copy" Command="ApplicationCommands.Copy"/>
+                                                            <MenuItem Header="_Paste" Command="ApplicationCommands.Paste"/>
+                                                            <Separator/>
+                                                            <MenuItem Header="_Delete" Command="ApplicationCommands.Delete"/>
+                                                            <Separator/>
+                                                            <MenuItem Header="_Replace...">
+                                                                <CollectionContainer x:Name="contextMenuCollectionContainer"/>
+                                                            </MenuItem>
+                                                            <Separator/>
+                                                            <MenuItem Header="_Ban" Command="local:EditorRoutedCommands.SwitchBan"
+                                                                      IsChecked="{Binding IsBanned, UpdateSourceTrigger=PropertyChanged}"/>
+                                                        </CompositeCollection>
+                                                    </ContextMenu.ItemsSource>
                                                 </ContextMenu>
                                             </StackPanel.ContextMenu>
                                         </StackPanel>

@@ -86,12 +86,15 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=1.1.0.145, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpZipLib.1.1.0\lib\net45\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
     <Reference Include="Irony, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ca48ace7223ead47, processorArchitecture=MSIL">
       <HintPath>..\packages\Irony.0.9.1\lib\net40\Irony.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.VisualBasic" />
-    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -170,6 +173,7 @@
     <Compile Include="EditorData\Node\AbstractNodeTypeCache.cs" />
     <Compile Include="EditorData\Node\Advanced\DefineMacro.cs" />
     <Compile Include="EditorData\Node\Advanced\Region.cs" />
+    <Compile Include="EditorData\Node\Advanced\UserDefinedNode.cs" />
     <Compile Include="EditorData\Node\EditorVersion.cs" />
     <Compile Include="EditorData\Node\General\Code.cs" />
     <Compile Include="EditorData\Node\General\CodeSegment.cs" />
@@ -231,6 +235,8 @@
     <Compile Include="Windows\SettingsWindow.xaml.cs">
       <DependentUpon>SettingsWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Zip\ZipCompressor.cs" />
+    <Compile Include="Zip\ZipCompressorBatch.cs" />
     <Page Include="Fonts.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -295,6 +301,8 @@
     <Resource Include="images\codesegment.png" />
     <Resource Include="images\16x16\codesegment.png" />
     <Resource Include="images\search.png" />
+    <Resource Include="images\userdefinednode.png" />
+    <Resource Include="images\16x16\userdefinednode.png" />
     <Content Include="Templates\Empty Project.lstgproj">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

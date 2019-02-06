@@ -29,7 +29,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Boss
             {
                 yield return a;
             }
-            yield return "end\n";
+            yield return sp + "end\n";
         }
 
         public override IEnumerable<Tuple<int,TreeNode>> GetLines()

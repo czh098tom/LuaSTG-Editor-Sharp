@@ -1,6 +1,9 @@
 ﻿using System;
 using System.IO;
+using System.Collections.Generic;
+using ICSharpCode.SharpZipLib.Zip;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SevenZip;
 
 namespace NodeTest
 {
@@ -27,6 +30,23 @@ namespace NodeTest
             }
             sw.Close();
             fs.Close();
+        }
+
+        [TestMethod]
+        public void SevenZip2Folder()
+        {
+            /*
+            SevenZipBase.SetLibraryPath(@"D:\7zdll-master\7z\7z.dll");
+            SevenZipCompressor szc = new SevenZipCompressor();
+            szc.ArchiveFormat = OutArchiveFormat.Zip;
+            szc.CompressionMode = CompressionMode.Append;
+            szc.CompressFileDictionary(new Dictionary<string, string>() { { @"aaa\啊♂.txt", @"D:\test.tex" } }, @"D:\test.zip");
+            */
+            ZipFile.Create(@"D:\test.zip").Close();
+            ZipFile zf = new ZipFile(@"D:\test.zip");
+            zf.BeginUpdate();
+            zf.Add(@"D:\test.tex", @"aaa\啊♂.txt");
+            zf.Close();
         }
     }
 }

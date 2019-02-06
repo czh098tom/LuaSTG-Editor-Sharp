@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using LuaSTGEditorSharp.EditorData.Document;
+using LuaSTGEditorSharp.EditorData.Message;
 using LuaSTGEditorSharp.EditorData.Node.NodeAttributes;
 using Newtonsoft.Json;
 
@@ -40,9 +41,15 @@ namespace LuaSTGEditorSharp.EditorData.Node.Boss
 
         public override IEnumerable<string> ToLua(int spacing)
         {
-            string tmpD = Lua.StringParser.ParseLua(NonMacrolize(Parent.attributes[1]));
-            string difficultyS = tmpD == "All" ? "" : ":" + tmpD;
-            string className = "\"" + Lua.StringParser.ParseLua(NonMacrolize(Parent.attributes[0]) + difficultyS) + "\"";
+            TreeNode Parent = this.Parent;
+            string tmpD = "";
+            string className = "";
+            if (Parent.attributes != null && Parent.AttributeCount > 2) 
+            {
+                tmpD = Lua.StringParser.ParseLua(Parent.NonMacrolize(1));
+                string difficultyS = tmpD == "All" ? "" : ":" + tmpD;
+                className = "\"" + Lua.StringParser.ParseLua(Parent.NonMacrolize(0) + difficultyS) + "\"";
+            }
             string cardName = Lua.StringParser.ParseLua(NonMacrolize(0));
             string a = "";
             if(!string.IsNullOrEmpty(Macrolize(10)))
@@ -55,6 +62,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Boss
             {
                 yield return m;
             }
+            yield return "_tmp_sc.perform=" + Macrolize(9) + "\n";
             yield return a + "table.insert(_editor_class[" + className + "].cards,_tmp_sc)\n"
                       + (!string.IsNullOrEmpty(NonMacrolize(0)) ? "table.insert(_sc_table,{" + className + ",\"" + cardName
                       + "\",_tmp_sc,#_editor_class[" + className + "].cards," + Macrolize(9) + "})\n" : "\n");
@@ -62,14 +70,14 @@ namespace LuaSTGEditorSharp.EditorData.Node.Boss
 
         public override IEnumerable<Tuple<int,TreeNode>> GetLines()
         {
-            yield return new Tuple<int, TreeNode>(1, this);
+            int i = 1;
+            if (!string.IsNullOrEmpty(Macrolize(10))) i++;
+            yield return new Tuple<int, TreeNode>(i, this);
             foreach(Tuple<int,TreeNode> t in GetChildLines())
             {
                 yield return t;
             }
-            int i = 2;
-            if (!string.IsNullOrEmpty(Macrolize(10))) i++;
-            yield return new Tuple<int, TreeNode>(i, this);
+            yield return new Tuple<int, TreeNode>(3, this);
         }
 
         public override string ToString()
@@ -96,6 +104,16 @@ namespace LuaSTGEditorSharp.EditorData.Node.Boss
             n.FixAttrParent();
             n.FixChildrenParent();
             return n;
+        }
+
+        public override List<MessageBase> GetMessage()
+        {
+            var a = new List<MessageBase>();
+            if (Parent?.attributes == null || Parent.AttributeCount < 2)
+            {
+                a.Add(new CannotFindAttributeInParent(2, this));
+            }
+            return a;
         }
     }
 }

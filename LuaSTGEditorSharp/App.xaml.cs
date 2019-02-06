@@ -183,7 +183,8 @@ namespace LuaSTGEditorSharp
 
         public bool DebugUpdateLib
         {
-            get => Settings.Default.DebugUpdateLib;
+            //get => Settings.Default.DebugUpdateLib;
+            get => false;
             set
             {
                 Settings.Default["DebugUpdateLib"] = value;

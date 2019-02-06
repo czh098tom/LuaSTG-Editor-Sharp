@@ -58,8 +58,8 @@ namespace LuaSTGEditorSharp.Windows.Input
                     return new string[] { "temple_background", "magic_forest_background", "bamboo_background"
                         , "bamboo2_background", "cube_background", "gensokyosora_background", "hongmoguanB_background"
                         , "icepool_background", "lake_background", "le03_5_background", "magic_forest_fast_background"
-                        , "redsky_background", "river_background", "skyandcloud_background", "starlight_background"
-                        , "temple2_background", "woods_background", "world_background"};
+                        , "river_background", "starlight_background", "temple2_background", "woods_background"
+                        , "world_background"};
                 default:
                     return new string[] { };
             }

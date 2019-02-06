@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using LuaSTGEditorSharp.EditorData.Document;
+using LuaSTGEditorSharp.EditorData.Message;
 using LuaSTGEditorSharp.EditorData.Document.Meta;
 using LuaSTGEditorSharp.EditorData.Node.NodeAttributes;
 using Newtonsoft.Json;
@@ -30,8 +31,13 @@ namespace LuaSTGEditorSharp.EditorData.Node.Object
 
         public override IEnumerable<string> ToLua(int spacing)
         {
-            string parentName = Lua.StringParser.ParseLua(NonMacrolize(Parent.attributes[0]) + 
-                (NonMacrolize(Parent.attributes[1]) == "All" ? "" : ":" + NonMacrolize(Parent.attributes[1])));
+            TreeNode Parent = this.Parent;
+            string parentName = "";
+            if (Parent?.attributes != null && Parent.AttributeCount >= 2) 
+            {
+                parentName = Lua.StringParser.ParseLua(Parent.NonMacrolize(0) +
+                   (Parent.NonMacrolize(1) == "All" ? "" : ":" + Parent.NonMacrolize(1)));
+            }
             string other = NonMacrolize(0) == "colli" ? ",other" : "";
             yield return "_editor_class[\"" + parentName + "\"]." + NonMacrolize(0) + "=function(self" + other + ")\n";
             foreach (var a in base.ToLua(spacing + 1))
@@ -68,6 +74,16 @@ namespace LuaSTGEditorSharp.EditorData.Node.Object
             n.FixAttrParent();
             n.FixChildrenParent();
             return n;
+        }
+
+        public override List<MessageBase> GetMessage()
+        {
+            var a = new List<MessageBase>();
+            if (Parent?.attributes == null || Parent.AttributeCount < 2)
+            {
+                a.Add(new CannotFindAttributeInParent(2, this));
+            }
+            return a;
         }
     }
 }
