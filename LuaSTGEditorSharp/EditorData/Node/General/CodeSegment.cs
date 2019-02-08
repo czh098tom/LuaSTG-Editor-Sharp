@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Xml.Serialization;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -25,8 +27,28 @@ namespace LuaSTGEditorSharp.EditorData.Node.General
         public CodeSegment(DocumentData workSpaceData, string head, string tail) 
             : base(workSpaceData)
         {
+            /*
             attributes.Add(new AttrItem("Head", head, this, "code"));
             attributes.Add(new AttrItem("Tail", tail, this, "code"));
+            */
+            Head = head;
+            Tail = tail;
+        }
+
+        [JsonIgnore, XmlAttribute("Head")]
+        //[DefaultValue("do")]
+        public string Head
+        {
+            get => DoubleCheckAttr(0, "Head", "code").attrInput;
+            set => DoubleCheckAttr(0, "Head", "code").attrInput = value;
+        }
+
+        [JsonIgnore, XmlAttribute("Tail")]
+        //[DefaultValue("end")]
+        public string Tail
+        {
+            get => DoubleCheckAttr(1, "Tail", "code").attrInput;
+            set => DoubleCheckAttr(1, "Tail", "code").attrInput = value;
         }
 
         public override IEnumerable<string> ToLua(int spacing)

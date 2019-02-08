@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Xml.Serialization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,7 +25,16 @@ namespace LuaSTGEditorSharp.EditorData.Node.General
         public IfNode(DocumentData workSpaceData, string code)
             : base(workSpaceData)
         {
-            attributes.Add(new AttrItem("Condition", this) { AttrInput = code });
+            //attributes.Add(new AttrItem("Condition", this) { AttrInput = code });
+            Condition = code;
+        }
+
+        [JsonIgnore, XmlAttribute("Condition")]
+        //[DefaultValue("")]
+        public string Condition
+        {
+            get => DoubleCheckAttr(0, "Condition").attrInput;
+            set => DoubleCheckAttr(0, "Condition").attrInput = value;
         }
 
         public override IEnumerable<string> ToLua(int spacing)

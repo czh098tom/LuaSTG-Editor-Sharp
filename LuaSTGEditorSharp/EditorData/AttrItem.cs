@@ -26,7 +26,7 @@ namespace LuaSTGEditorSharp.EditorData
         /// Store input <see cref="string"/>.
         /// </summary>
         [JsonProperty, XmlAttribute("input")]
-        protected string attrInput;
+        public string attrInput;
         /// <summary>
         /// Store parent <see cref="TreeNode"/> of this attribute.
         /// </summary>

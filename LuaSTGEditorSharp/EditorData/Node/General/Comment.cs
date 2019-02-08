@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Xml.Serialization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,8 +26,28 @@ namespace LuaSTGEditorSharp.EditorData.Node.General
         public Comment(DocumentData workSpaceData, string code) 
             : base(workSpaceData)
         {
+            /*
             attributes.Add(new AttrItem("Comment", code, this));
             attributes.Add(new AttrItem("Comment on child", "true", this, "bool"));
+            */
+            CommentContent = code;
+            CommentOnChild = "true";
+        }
+
+        [JsonIgnore, XmlAttribute("Comment")]
+        //[DefaultValue("")]
+        public string CommentContent
+        {
+            get => DoubleCheckAttr(0, "Comment").attrInput;
+            set => DoubleCheckAttr(0, "Comment").attrInput = value;
+        }
+
+        [JsonIgnore, XmlAttribute("CommentOnChild")]
+        //[DefaultValue("true")]
+        public string CommentOnChild
+        {
+            get => DoubleCheckAttr(1, "Comment on child", "bool").attrInput;
+            set => DoubleCheckAttr(1, "Comment on child", "bool").attrInput = value;
         }
 
         public override IEnumerable<string> ToLua(int spacing)

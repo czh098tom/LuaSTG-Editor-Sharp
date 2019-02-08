@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Xml.Serialization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,6 +17,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Bullet
     [Serializable, NodeIcon("/LuaSTGNodeLib;component/images/16x16/bulletdefine.png")]
     [ClassNode]
     [CreateInvoke(0), RCInvoke(0)]
+    //[XmlType(TypeName = "BulletDefine")]
     public class BulletDefine : TreeNode
     {
         [JsonConstructor]
@@ -26,8 +29,28 @@ namespace LuaSTGEditorSharp.EditorData.Node.Bullet
         public BulletDefine(DocumentData workSpaceData, string name, string difficulty)
             : base(workSpaceData)
         {
+            /*
             attributes.Add(new AttrItem("Name", name, this));
             attributes.Add(new AttrItem("Difficulty", difficulty, this, "objDifficulty"));
+            */
+            Name = name;
+            Difficulty = difficulty;
+        }
+
+        [JsonIgnore, XmlAttribute("Name")]
+        //[DefaultValue("")]
+        public string Name
+        {
+            get => DoubleCheckAttr(0, "Name").attrInput;
+            set => DoubleCheckAttr(0, "Name").attrInput = value;
+        }
+
+        [JsonIgnore, XmlAttribute("Difficulty")]
+        //[DefaultValue("All")]
+        public string Difficulty
+        {
+            get => DoubleCheckAttr(1, "Difficulty", "objDifficulty").attrInput;
+            set => DoubleCheckAttr(1, "Difficulty", "objDifficulty").attrInput = value;
         }
 
         public override IEnumerable<string> ToLua(int spacing)

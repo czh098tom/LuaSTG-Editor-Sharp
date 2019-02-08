@@ -2,6 +2,8 @@
 using System.IO;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Xml.Serialization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,11 +24,21 @@ namespace LuaSTGEditorSharp.EditorData.Node.General
         [JsonConstructor]
         private Patch() : base() { }
 
-        public Patch(DocumentData workSpaceData) 
-            : base(workSpaceData) { attributes.Add(new AttrItem("Path", this, "luaFile")); }
+        public Patch(DocumentData workSpaceData) : this(workSpaceData, "") { }
 
-        public Patch(DocumentData workSpaceData, string code) 
-            : base(workSpaceData) { attributes.Add(new AttrItem("Path", this, "luaFile") { AttrInput = code }); }
+        public Patch(DocumentData workSpaceData, string code) : base(workSpaceData)
+        {
+            //attributes.Add(new AttrItem("Path", this, "luaFile") { AttrInput = code });
+            PathContent = code;
+        }
+
+        [JsonIgnore, XmlAttribute("Path")]
+        //[DefaultValue("")]
+        public string PathContent
+        {
+            get => DoubleCheckAttr(0, "Path", "luaFile").attrInput;
+            set => DoubleCheckAttr(0, "Path", "luaFile").attrInput = value;
+        }
 
         public override IEnumerable<string> ToLua(int spacing)
         {

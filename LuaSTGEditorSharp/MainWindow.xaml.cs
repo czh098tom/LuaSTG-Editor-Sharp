@@ -3,6 +3,8 @@ using System.Text.RegularExpressions;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Xml;
+using System.Xml.Serialization;
 using System.Threading;
 using System.IO;
 using System.Linq;
@@ -340,8 +342,36 @@ namespace LuaSTGEditorSharp
                 ActivatedWorkSpaceData.GatherCompileInfo(App.Current as App);
                 var w = new CodePreviewWindow(string.Concat(selectedNode.ToLua(0)));
                 w.ShowDialog();
+                //SaveXML();
             }
-            catch { }
+            catch (Exception e) { MessageBox.Show(e.ToString()); }
+        }
+
+        private void SaveXML()
+        {
+            var namespaces = new XmlSerializerNamespaces();
+            namespaces.Add("xsi", @"http://www.w3.org/2001/XMLSchema-instance");
+            namespaces.Add("m", "LuaSTG/Generic");
+            XmlSerializer serializer =
+                new XmlSerializer(typeof(RootFolder)
+                , PluginHandler.Plugin.NodeTypeCache.NodeTypes.ToArray());
+            StreamWriter sw = new StreamWriter(
+                Path.GetFullPath(Path.Combine(Path.GetTempPath(), "LuaSTG Editor/xmltest.xml")));
+            serializer.Serialize(sw, ActivatedWorkSpaceData.TreeNodes[0], namespaces);
+            sw.Close();
+            MessageBox.Show("");
+
+            XmlReaderSettings readerSettings = new XmlReaderSettings();
+            
+            var sr = new StreamReader(Path.GetFullPath(Path.Combine(Path.GetTempPath(), "LuaSTG Editor/xmltest.xml")));
+            DocumentData newDoc = DocumentData.GetNewByExtension(".lstges", Documents.MaxHash, "xmltest", Path.GetFullPath(Path.Combine(Path.GetTempPath(), "LuaSTG Editor/xmltest.xml")));
+            Documents.AddAndAllocHash(newDoc);
+            TreeNode t = serializer.Deserialize(sr) as TreeNode;
+            newDoc.TreeNodes.Add(t);
+            newDoc.OnOpening();
+            newDoc.TreeNodes[0].FixBan();
+            newDoc.OriginalMeta.PropertyChanged += newDoc.OnEditing;
+            sr.Close();
         }
 
         private void ExportCode()

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Xml.Serialization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,10 +19,19 @@ namespace LuaSTGEditorSharp.EditorData.Node.General
         [JsonConstructor]
         private Folder() : base() { }
 
-        public Folder(DocumentData workSpaceData)
-            : base(workSpaceData) { attributes.Add(new AttrItem("Name", this)); }
-        public Folder(DocumentData workSpaceData, string name) 
-            : base(workSpaceData) { attributes.Add(new AttrItem("Name", this) { AttrInput = name }); }
+        public Folder(DocumentData workSpaceData) : this(workSpaceData, "") { }
+        public Folder(DocumentData workSpaceData, string name) : base(workSpaceData)
+        {
+            Name = name;
+        }
+
+        [JsonIgnore, XmlAttribute("Name")]
+        //[DefaultValue("")]
+        public string Name
+        {
+            get => DoubleCheckAttr(0, "Name").attrInput;
+            set => DoubleCheckAttr(0, "Name").attrInput = value;
+        }
 
         public override IEnumerable<Tuple<int,TreeNode>> GetLines()
         {

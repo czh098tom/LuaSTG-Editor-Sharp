@@ -34,7 +34,8 @@ namespace LuaSTGEditorSharp.EditorData
         /// <summary>
         /// Store attributes in <see cref="TreeNode"/>.
         /// </summary>
-        [XmlArray("attributes")]
+        //[XmlArray("attributes")]
+        [XmlIgnore]
         public ObservableCollection<AttrItem> attributes = new ObservableCollection<AttrItem>();
         /// <summary>
         /// Store whether a <see cref="TreeNode"/> is expanded in view. Use this only when you do not want to refresh the view.
@@ -81,7 +82,7 @@ namespace LuaSTGEditorSharp.EditorData
         /// Store whether a <see cref="TreeNode"/> is banned. 
         /// Using setter of this will create a new <see cref="Command"/> and execute it.
         /// </summary>
-        [JsonIgnore]
+        [JsonIgnore, XmlIgnore]
         public bool IsBanned_InvokeCommand
         {
             get => isBanned;
@@ -156,7 +157,7 @@ namespace LuaSTGEditorSharp.EditorData
         /// <summary>
         /// Store the child <see cref="TreeNode"/> of this <see cref="TreeNode"/>.
         /// </summary>
-        [JsonIgnore, XmlArray("children")]
+        [JsonIgnore, XmlElement("Node")]
         public ObservableCollection<TreeNode> Children { get; set; }
         /// <summary>
         /// Store the child <see cref="TreeNode"/> of this <see cref="TreeNode"/>.
@@ -603,6 +604,94 @@ namespace LuaSTGEditorSharp.EditorData
         {
             Children.Remove(t);
             t.RemoveMeta();
+        }
+
+        /// <summary>
+        /// Get an <see cref="AttrItem"/> by id.
+        /// </summary>
+        /// <param name="n">ID of a <see cref="AttrItem"/>.</param>
+        /// <returns>The targeted <see cref="AttrItem"/> if in bound, otherwise null.</returns>
+        private AttrItem GetAttr(int n)
+        {
+            if (attributes.Count > n)
+            {
+                return attributes[n];
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Get an <see cref="AttrItem"/> by name.
+        /// </summary>
+        /// <param name="name">Name of a <see cref="AttrItem"/>.</param>
+        /// <returns>The targeted <see cref="AttrItem"/> if found, otherwise null.</returns>
+        private AttrItem GetAttr(string name)
+        {
+            var attrs = from AttrItem ai in attributes
+                        where ai != null && !string.IsNullOrEmpty(ai.AttrCap) && ai.AttrCap == name
+                        select ai;
+            if (attrs != null && attrs.Count() > 0) return attrs.First();
+            return null;
+        }
+
+        /// <summary>
+        /// Insert <see cref="AttrItem"/> in a desired place. If place is out of bounds, create null entries.
+        /// </summary>
+        /// <param name="id">The desired ID.</param>
+        /// <param name="target">The <see cref="AttrItem"/></param>
+        private void InsertAttrAt(int id, AttrItem target)
+        {
+            if (id > attributes.Count)
+            {
+                for(int i = attributes.Count; i < id; i++)
+                {
+                    attributes.Add(null);
+                }
+                attributes.Insert(id, target);
+            }
+            else
+            {
+                if (id < attributes.Count && attributes[id] == null)
+                {
+                    attributes[id] = target;
+                }
+                else
+                {
+                    attributes.Insert(id, target);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Get an <see cref="AttrItem"/> check by both id and name. If not found, create one.
+        /// </summary>
+        /// <param name="id">ID of a <see cref="AttrItem"/>.</param>
+        /// <param name="name">Name of a <see cref="AttrItem"/>.</param>
+        /// <param name="defaultEditWindow">Indicate default editwindow property.</param>
+        /// <param name="isDependency">Indicate whether a default <see cref="AttrItem"/> 
+        /// is <see cref="DependencyAttrItem"/>.</param>
+        /// <returns>The targeted <see cref="AttrItem"/> if found, otherwise a default <see cref="AttrItem"/>.</returns>
+        protected AttrItem DoubleCheckAttr(int id, string name, string defaultEditWindow = "", bool isDependency = false)
+        {
+            AttrItem ai = GetAttr(id);
+            if (ai == null || string.IsNullOrEmpty(ai.AttrCap) || ai.AttrCap != name) ai = GetAttr(name);
+            if (ai == null)
+            {
+                if (isDependency)
+                {
+                    ai = new DependencyAttrItem(name, this, defaultEditWindow);
+                }
+                else
+                {
+                    ai = new AttrItem(name, this, defaultEditWindow);
+                }
+                InsertAttrAt(id, ai);
+            }
+            if (!string.IsNullOrEmpty(defaultEditWindow)) ai.EditWindow = defaultEditWindow;
+            return ai;
         }
 
         #endregion

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Xml.Serialization;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -22,8 +24,19 @@ namespace LuaSTGEditorSharp.EditorData.Node.General
         public Code(DocumentData workSpaceData) 
             : base(workSpaceData) { attributes.Add(new AttrItem("Code", this, "code")); }
 
-        public Code(DocumentData workSpaceData, string code) 
-            : base(workSpaceData) { attributes.Add(new AttrItem("Code", this, "code") { AttrInput = code }); }
+        public Code(DocumentData workSpaceData, string code) : base(workSpaceData)
+        {
+            //attributes.Add(new AttrItem("Code", this, "code") { AttrInput = code });
+            CodeContent = code;
+        }
+
+        [JsonIgnore, XmlAttribute("Code")]
+        //[DefaultValue("")]
+        public string CodeContent
+        {
+            get => DoubleCheckAttr(0, "Code", "Code").attrInput;
+            set => DoubleCheckAttr(0, "Code", "Code").attrInput = value;
+        }
 
         public override IEnumerable<string> ToLua(int spacing)
         {

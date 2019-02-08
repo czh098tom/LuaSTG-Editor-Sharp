@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
+using System.Xml.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using LuaSTGEditorSharp.EditorData.Document;
@@ -15,6 +17,7 @@ namespace LuaSTGEditorSharp.EditorData.Node
     [CannotDelete, CannotBan]
     [LeafNode]
     [RCInvoke(0)]
+    //[XmlType(TypeName = "ProjSettings")]
     public class ProjSettings : TreeNode
     {
         [JsonConstructor]
@@ -26,10 +29,48 @@ namespace LuaSTGEditorSharp.EditorData.Node
         public ProjSettings(DocumentData workSpaceData, string name, string auth, string pr, string scpr) 
             : base(workSpaceData)
         {
+            /*
             attributes.Add(new AttrItem("Output Name", name, this));
             attributes.Add(new AttrItem("Author", auth, this));
             attributes.Add(new AttrItem("Allow practice", pr, this, "bool"));
             attributes.Add(new AttrItem("Allow sc practice", scpr, this, "bool"));
+            */
+            OutputName = name;
+            AllowPractice = pr;
+            AllowSCPractice = scpr;
+            Author = auth;
+        }
+
+        [JsonIgnore, XmlAttribute("OutputName")]
+        //[DefaultValue("")]
+        public string OutputName
+        {
+            get => DoubleCheckAttr(0, "Output Name").attrInput;
+            set => DoubleCheckAttr(0, "Output Name").attrInput = value;
+        }
+
+        [JsonIgnore, XmlAttribute("Author")]
+        //[DefaultValue("")]
+        public string Author
+        {
+            get => DoubleCheckAttr(1, "Author").attrInput;
+            set => DoubleCheckAttr(1, "Author").attrInput = value;
+        }
+
+        [JsonIgnore, XmlAttribute("AllowPractice")]
+        //[DefaultValue("true")]
+        public string AllowPractice
+        {
+            get => DoubleCheckAttr(2, "Allow practice", "bool").attrInput;
+            set => DoubleCheckAttr(2, "Allow practice", "bool").attrInput = value;
+        }
+
+        [JsonIgnore, XmlAttribute("AllowSCPractice")]
+        //[DefaultValue("true")]
+        public string AllowSCPractice
+        {
+            get => DoubleCheckAttr(3, "Allow sc practice", "bool").attrInput;
+            set => DoubleCheckAttr(3, "Allow sc practice", "bool").attrInput = value;
         }
 
         public override string ToString()

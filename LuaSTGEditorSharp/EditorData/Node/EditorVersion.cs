@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Xml.Serialization;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,6 +18,7 @@ namespace LuaSTGEditorSharp.EditorData.Node
     [Serializable, NodeIcon("images/16x16/setting.png")]
     [CannotDelete, CannotBan]
     [LeafNode]
+    //[XmlType(TypeName = "EditorVersion")]
     public class EditorVersion : TreeNode
     {
         [JsonConstructor]
@@ -24,6 +27,14 @@ namespace LuaSTGEditorSharp.EditorData.Node
         public EditorVersion(DocumentData workSpaceData) : base(workSpaceData)
         {
             attributes.Add(new AttrItem("Editor version", PluginHandler.Plugin.NodeTypeCache.Version, this));
+        }
+
+        [JsonIgnore, XmlAttribute("EditorVersion")]
+        //[DefaultValue("")]
+        public string Version
+        {
+            get => DoubleCheckAttr(0, "Editor version").attrInput;
+            set => DoubleCheckAttr(0, "Editor version").attrInput = value;
         }
 
         public override IEnumerable<Tuple<int, TreeNode>> GetLines()
