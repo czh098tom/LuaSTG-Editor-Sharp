@@ -41,12 +41,19 @@ namespace NodeTest
             szc.ArchiveFormat = OutArchiveFormat.Zip;
             szc.CompressionMode = CompressionMode.Append;
             szc.CompressFileDictionary(new Dictionary<string, string>() { { @"aaa\啊♂.txt", @"D:\test.tex" } }, @"D:\test.zip");
-            */
+            
             ZipFile.Create(@"D:\test.zip").Close();
             ZipFile zf = new ZipFile(@"D:\test.zip");
             zf.BeginUpdate();
             zf.Add(@"D:\test.tex", @"aaa\啊♂.txt");
             zf.Close();
+            */
+            var zipCompressorInternal = new LuaSTGEditorSharp.Zip.ZipCompressorInternal(@"D:\test.zip");
+            var dict = new Dictionary<string, string>
+            {
+                { @"aaa\啊♂.txt", @"D:\test.tex" }
+            };
+            zipCompressorInternal.PackByDict(dict, true);
         }
     }
 }

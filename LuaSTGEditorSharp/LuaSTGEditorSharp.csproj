@@ -237,6 +237,7 @@
     </Compile>
     <Compile Include="Zip\ZipCompressor.cs" />
     <Compile Include="Zip\ZipCompressorBatch.cs" />
+    <Compile Include="Zip\ZipCompressorInternal.cs" />
     <Page Include="Fonts.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

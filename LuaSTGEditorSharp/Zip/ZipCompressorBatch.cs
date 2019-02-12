@@ -11,12 +11,12 @@ namespace LuaSTGEditorSharp.Zip
     public class ZipCompressorBatch : ZipCompressor
     {
         private readonly string zipExePath;
-        private readonly string path;
+        private readonly string targetArchivePath;
         private readonly string batchTempPath;
 
-        public ZipCompressorBatch(string path, string zipExePath, string batchTempPath)
+        public ZipCompressorBatch(string targetArchivePath, string zipExePath, string batchTempPath)
         {
-            this.path = path;
+            this.targetArchivePath = targetArchivePath;
             this.zipExePath = zipExePath;
             this.batchTempPath = batchTempPath;
         }
@@ -25,14 +25,14 @@ namespace LuaSTGEditorSharp.Zip
         {
             FileStream packBatS = null;
             StreamWriter packBat = null;
-            if (removeIfExists && File.Exists(path)) File.Delete(path);
+            if (removeIfExists && File.Exists(targetArchivePath)) File.Delete(targetArchivePath);
             try
             {
                 packBatS = new FileStream(batchTempPath, FileMode.Create);
                 packBat = new StreamWriter(packBatS, Encoding.Default);
                 foreach (KeyValuePair<string, string> kvp in fileInfo)
                 {
-                    packBat.WriteLine(zipExePath + " u -tzip -mcu=on \"" + path + "\" \"" + kvp.Value + "\"");
+                    packBat.WriteLine(zipExePath + " u -tzip -mcu=on \"" + targetArchivePath + "\" \"" + kvp.Value + "\"");
                 }
                 packBat.Close();
                 packBatS.Close();
@@ -52,11 +52,6 @@ namespace LuaSTGEditorSharp.Zip
                 if (packBat != null) packBat.Close();
                 if (packBatS != null) packBatS.Close();
             }
-        }
-
-        public override void Dispose()
-        {
-
         }
     }
 }

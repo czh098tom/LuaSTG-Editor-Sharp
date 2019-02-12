@@ -8,10 +8,8 @@ using ICSharpCode.SharpZipLib.Zip;
 
 namespace LuaSTGEditorSharp.Zip
 {
-    public abstract class ZipCompressor : IDisposable
+    public abstract class ZipCompressor
     {
-        public abstract void Dispose();
-
         public abstract void PackByDict(Dictionary<string, string> path, bool removeIfExists);
     }
 }

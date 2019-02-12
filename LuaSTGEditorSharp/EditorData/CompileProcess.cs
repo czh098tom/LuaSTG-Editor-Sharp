@@ -301,7 +301,9 @@ namespace LuaSTGEditorSharp.EditorData
         protected void PackFileUsingInfo(App currentApp, List<string> resNeedToPack, Dictionary<string, string> resPathToMD5,
             bool includeRoot)
         {
-            ZipCompressorBatch compressor = new ZipCompressorBatch(targetZipPath, zipExePath, rootZipPackPath);
+            ZipCompressor compressor =
+                //new ZipCompressorBatch(targetZipPath, zipExePath, rootZipPackPath);
+                new ZipCompressorInternal(targetZipPath);
             Dictionary<string, string> entry2File = new Dictionary<string, string>();
             string temp;
             try
