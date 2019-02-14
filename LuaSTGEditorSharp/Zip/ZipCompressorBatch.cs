@@ -53,5 +53,11 @@ namespace LuaSTGEditorSharp.Zip
                 if (packBatS != null) packBatS.Close();
             }
         }
+
+        public override IEnumerable<string> PackByDictReporting(Dictionary<string, string> path, bool removeIfExists)
+        {
+            PackByDict(path, removeIfExists);
+            yield break;
+        }
     }
 }

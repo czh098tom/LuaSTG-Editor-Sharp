@@ -11,5 +11,6 @@ namespace LuaSTGEditorSharp.Zip
     public abstract class ZipCompressor
     {
         public abstract void PackByDict(Dictionary<string, string> path, bool removeIfExists);
+        public abstract IEnumerable<string> PackByDictReporting(Dictionary<string, string> path, bool removeIfExists);
     }
 }

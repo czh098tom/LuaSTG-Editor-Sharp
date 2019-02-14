@@ -60,6 +60,8 @@ namespace LuaSTGEditorSharp
 
         public ObservableCollection<MessageBase> Messages { get => MessageContainer.Messages; }
 
+        private bool packagingLocked = false;
+
         public string DebugString
         {
             get => debugString;
@@ -94,6 +96,8 @@ namespace LuaSTGEditorSharp
 
         public TreeView workSpace;
 
+        private BackgroundWorker CompileWorker;
+
         public MainWindow()
         {
             toolbox = PluginHandler.Plugin.GetToolbox(this);
@@ -104,6 +108,7 @@ namespace LuaSTGEditorSharp
             comboDict.ItemsSource = toolbox.nodeNameList;
             this.docTabs.ItemsSource = Documents;
             EditorConsole.ItemsSource = Messages;
+            CompileWorker = this.FindResource("CompileWorker") as BackgroundWorker;
         }
 
         private bool CloseFile(DocumentData DocumentToRemove)
@@ -410,29 +415,11 @@ namespace LuaSTGEditorSharp
 
                 if (currentApp.DebugSaveProj) if (!SaveActiveFile()) return;
 
-                CompileProcess process = null;
-                if(!(ActivatedWorkSpaceData is PlainDocumentData pdd && pdd.parentProj != null))
-                {
-                    ActivatedWorkSpaceData.GatherCompileInfo(currentApp);
-                    ActivatedWorkSpaceData.CompileProcess.ExecuteProcess(SCDebugger != null, StageDebugger != null);
-                    process = ActivatedWorkSpaceData.CompileProcess;
-                }
-                else
-                {
-                    pdd.parentProj.GatherCompileInfo(currentApp);
-                    pdd.parentProj.CompileProcess.ExecuteProcess(SCDebugger != null, StageDebugger != null);
-                    process = pdd.parentProj.CompileProcess;
-                }
-
-                if (run)
-                {
-                    TxtLine.Text = "";
-                    RunLuaSTG(currentApp, process);
-                }
-                else
-                {
-                    currentApp.SaveResMeta = saveMeta;
-                }
+                DocumentData current = ActivatedWorkSpaceData;
+                TxtLine.Text = "";
+                DebugString = "";
+                tabOutput.IsSelected = true;
+                CompileWorker.RunWorkerAsync(new object[] { current, SCDebugger, StageDebugger, run, saveMeta });
             }
             catch (EXEPathNotSetException)
             {
@@ -443,6 +430,60 @@ namespace LuaSTGEditorSharp
                 
             }
             //catch { }
+        }
+
+        private void BeginPackaging(object sender, DoWorkEventArgs args)
+        {
+            object[] arguments = args.Argument as object[];
+            DocumentData current = arguments[0] as DocumentData;
+            TreeNode SCDebugger = arguments[1] as TreeNode;
+            TreeNode StageDebugger = arguments[2] as TreeNode;
+
+            App currentApp = Application.Current as App;
+            CompileProcess process = null;
+            if (!(current is PlainDocumentData pdd && pdd.parentProj != null))
+            {
+                current.GatherCompileInfo(currentApp);
+                current.CompileProcess.ProgressChanged += 
+                    (o, e) => CompileWorker.ReportProgress(e.ProgressPercentage, e.UserState);
+                current.CompileProcess.ExecuteProcess(SCDebugger != null, StageDebugger != null);
+                process = current.CompileProcess;
+            }
+            else
+            {
+                pdd.parentProj.GatherCompileInfo(currentApp);
+                current.CompileProcess.ProgressChanged +=
+                    (o, e) => CompileWorker.ReportProgress(e.ProgressPercentage, e.UserState);
+                pdd.parentProj.CompileProcess.ExecuteProcess(SCDebugger != null, StageDebugger != null);
+                process = pdd.parentProj.CompileProcess;
+            }
+            args.Result = new object[] { process, arguments[3], arguments[4] };
+        }
+
+        private void PackageProgressReport(object sender, ProgressChangedEventArgs args)
+        {
+            packagingLocked = true;
+            DebugString += args.UserState.ToString() + "\n";
+            debugOutput.ScrollToEnd();
+        }
+
+        private void FinishPackaging(object sender, RunWorkerCompletedEventArgs args)
+        {
+            object[] arguments = args.Result as object[];
+            CompileProcess process = arguments[0] as CompileProcess;
+            bool run = Convert.ToBoolean(arguments[1]);
+            bool saveMeta = Convert.ToBoolean(arguments[2]);
+            App currentApp = Application.Current as App;
+
+            packagingLocked = false;
+            if (run)
+            {
+                RunLuaSTG(currentApp, process);
+            }
+            else
+            {
+                currentApp.SaveResMeta = saveMeta;
+            }
         }
 
         private void RunLuaSTG(App currentApp, CompileProcess process)
@@ -467,8 +508,7 @@ namespace LuaSTGEditorSharp
                     }
                 };
                 lstg.Start();
-                DebugString = "LuaSTG is Running.\n\n";
-                tabOutput.IsSelected = true;
+                DebugString += "LuaSTG is Running.\n\n";
                 /* 
                  * what it should be like:
                  * 
@@ -486,6 +526,7 @@ namespace LuaSTGEditorSharp
                             Path.GetDirectoryName(process.luaSTGExePath), "log.txt")), FileMode.Open);
                         sr = new StreamReader(fs);
                         DebugString += sr.ReadToEnd();
+                        //debugOutput.ScrollToEnd();
                     }
                     finally
                     {
@@ -504,6 +545,7 @@ namespace LuaSTGEditorSharp
                 throw new EXEPathNotSetException();
             }
         }
+
         private void FoldRegion()
         {
             Region beg = selectedNode as Region;
@@ -876,7 +918,7 @@ namespace LuaSTGEditorSharp
 
         private void ExportZipCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            e.CanExecute = ActivatedWorkSpaceData != null;
+            e.CanExecute = ActivatedWorkSpaceData != null && !packagingLocked;
         }
 
         private void RunProjectCommandExecuted(object sender, ExecutedRoutedEventArgs e)
@@ -886,7 +928,7 @@ namespace LuaSTGEditorSharp
 
         private void RunProjectCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            e.CanExecute = ActivatedWorkSpaceData != null;
+            e.CanExecute = ActivatedWorkSpaceData != null && !packagingLocked;
         }
 
         private void SCDebugCommandExecuted(object sender, ExecutedRoutedEventArgs e)
@@ -916,6 +958,7 @@ namespace LuaSTGEditorSharp
                 }
                 t = t.Parent;
             }
+            e.CanExecute = e.CanExecute && !packagingLocked;
         }
 
         private void StageDebugCommandExecuted(object sender, ExecutedRoutedEventArgs e)
@@ -932,7 +975,7 @@ namespace LuaSTGEditorSharp
             {
                 t = t.Parent;
             }
-            e.CanExecute = PluginHandler.Plugin.MatchStageNodeTypes(t?.Parent?.Parent?.GetType());
+            e.CanExecute = PluginHandler.Plugin.MatchStageNodeTypes(t?.Parent?.Parent?.GetType()) && !packagingLocked;
         }
 
         private void SwitchBeforeCommandExecuted(object sender, ExecutedRoutedEventArgs e)

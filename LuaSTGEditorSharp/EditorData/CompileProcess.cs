@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Security.AccessControl;
@@ -86,7 +87,9 @@ namespace LuaSTGEditorSharp.EditorData
         /// Path for target mod folder.
         /// </summary>
         public string targetZipPath;
-        
+
+        public event ProgressChangedEventHandler ProgressChanged;
+
         /// <summary>
         /// This method get the MD5 Hash from a given file.
         /// </summary>
@@ -350,7 +353,13 @@ namespace LuaSTGEditorSharp.EditorData
                         entry2File.Add(source.RawDocName, source.DocPath);
                     }
                 }
-                compressor.PackByDict(entry2File, !currentApp.SaveResMeta);
+                int entryCount = entry2File.Count;
+                float currentCount = 0;
+                foreach (string s in compressor.PackByDictReporting(entry2File, !currentApp.SaveResMeta))
+                {
+                    ProgressChanged?.Invoke(this, new ProgressChangedEventArgs(Convert.ToInt32(currentCount), s));
+                    currentCount += 1.0f / entryCount;
+                }
             }
             finally
             {

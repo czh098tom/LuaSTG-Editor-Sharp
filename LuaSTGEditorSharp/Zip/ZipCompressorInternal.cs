@@ -22,39 +22,142 @@ namespace LuaSTGEditorSharp.Zip
 
         public override void PackByDict(Dictionary<string, string> path, bool removeIfExists)
         {
-            HashSet<string> zipNames = new HashSet<string>();
-            if (File.Exists(targetArchivePath))
+            try
             {
-                if (removeIfExists)
+                foreach (string s in PackByDictReporting(path, removeIfExists)) { }
+            }
+            catch
+            {
+                System.Windows.MessageBox.Show("Packaging failed.");
+            }
+        }
+
+        public override IEnumerable<string> PackByDictReporting(Dictionary<string, string> path, bool removeIfExists)
+        {
+            HashSet<string> zipNames = new HashSet<string>();
+            try
+            {
+                if (File.Exists(targetArchivePath))
                 {
-                    File.Delete(targetArchivePath);
-                    targetArchive = ZipFile.Create(targetArchivePath);
+                    if (removeIfExists)
+                    {
+                        File.Delete(targetArchivePath);
+                        targetArchive = ZipFile.Create(targetArchivePath);
+                    }
+                    else
+                    {
+                        targetArchive = new ZipFile(targetArchivePath);
+                    }
                 }
                 else
                 {
-                    targetArchive = new ZipFile(targetArchivePath);
+                    targetArchive = ZipFile.Create(targetArchivePath);
                 }
             }
-            else
+            catch
             {
-                targetArchive = ZipFile.Create(targetArchivePath);
+                System.Windows.MessageBox.Show("Packaging failed.");
+                yield break;
             }
-            foreach(ZipEntry ze in targetArchive)
+            /*
+            foreach (ZipEntry ze in targetArchive)
             {
                 zipNames.Add(ze.Name);
                 //System.Windows.MessageBox.Show(ze.Name);
             }
             targetArchive.BeginUpdate();
-            foreach(KeyValuePair<string,string> kvp in path)
+            foreach (KeyValuePair<string, string> kvp in path)
             {
-                if (targetArchive.FindEntry(kvp.Key, true) > 0) 
+                if (targetArchive.FindEntry(kvp.Key, true) > 0)
+                {
+                    targetArchive.Delete(kvp.Key);
+                }
+            }
+            targetArchive.CommitUpdate();
+            */
+            //targetArchive.Close();
+            ((IDisposable)targetArchive).Dispose();
+
+            using (ZipOutputStream ZipStream = new ZipOutputStream(new FileStream(targetArchivePath, FileMode.Open)))
+            {
+                foreach (KeyValuePair<string, string> kvp in path)
+                {
+                    using (FileStream StreamToZip = new FileStream(kvp.Value, FileMode.Open, FileAccess.Read))
+                    {
+                        ZipEntry ZipEntry = new ZipEntry(kvp.Key);
+                        
+                        ZipStream.PutNextEntry(ZipEntry);
+                        ZipStream.Flush();
+
+                        byte[] buffer = new byte[2048];
+
+                        int sizeRead = 0;
+
+                        try
+                        {
+                            do
+                            {
+                                sizeRead = StreamToZip.Read(buffer, 0, buffer.Length);
+                                ZipStream.Write(buffer, 0, sizeRead);
+                            }
+                            while (sizeRead > 0);
+                        }
+                        catch (Exception ex)
+                        {
+                            throw ex;
+                        }
+                        StreamToZip.Close();
+                    }
+                    yield return $"Add file \"{kvp.Value}\" into archive, internal name: \"{kvp.Key}\"";
+                }
+                ZipStream.Finish();
+                ZipStream.Close();
+            }
+        }
+
+        public IEnumerable<string> PackByDictReporting_old(Dictionary<string, string> path, bool removeIfExists)
+        {
+            HashSet<string> zipNames = new HashSet<string>();
+            try
+            {
+                if (File.Exists(targetArchivePath))
+                {
+                    if (removeIfExists)
+                    {
+                        File.Delete(targetArchivePath);
+                        targetArchive = ZipFile.Create(targetArchivePath);
+                    }
+                    else
+                    {
+                        targetArchive = new ZipFile(targetArchivePath);
+                    }
+                }
+                else
+                {
+                    targetArchive = ZipFile.Create(targetArchivePath);
+                }
+            }
+            catch
+            {
+                System.Windows.MessageBox.Show("Packaging failed.");
+                yield break;
+            }
+            foreach (ZipEntry ze in targetArchive)
+            {
+                zipNames.Add(ze.Name);
+                //System.Windows.MessageBox.Show(ze.Name);
+            }
+            targetArchive.BeginUpdate();
+            foreach (KeyValuePair<string, string> kvp in path)
+            {
+                if (targetArchive.FindEntry(kvp.Key, true) > 0)
                 {
                     targetArchive.Delete(kvp.Key);
                 }
                 targetArchive.Add(kvp.Value, kvp.Key);
+                yield return $"Add file \"{kvp.Value}\" in to zip.";
             }
             targetArchive.CommitUpdate();
-            //targetArchive.Dispose();
             ((IDisposable)targetArchive).Dispose();
         }
     }

@@ -85,6 +85,10 @@
         </ControlTemplate>
         <tool:BannedToStrikeThrough x:Key="banned2Strike"/>
         <tool:BoolToOpacity x:Key="banned2Opacity"/>
+        <cm:BackgroundWorker x:Key="CompileWorker" WorkerReportsProgress="True"
+                             DoWork="BeginPackaging"
+                             ProgressChanged="PackageProgressReport"
+                             RunWorkerCompleted="FinishPackaging"/>
         <!--<cm:BackgroundWorker x:Key="backgroundWorker" WorkerReportsProgress="True"/>-->
     </Window.Resources>
     <DockPanel>
