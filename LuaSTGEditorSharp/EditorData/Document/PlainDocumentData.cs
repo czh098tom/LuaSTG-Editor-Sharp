@@ -17,9 +17,9 @@ namespace LuaSTGEditorSharp.EditorData.Document
     {
         public ProjectData parentProj = null;
 
-        public PlainDocumentData(int hash) : base(hash)
+        public PlainDocumentData(int hash, bool supressMessage = false) : base(hash, supressMessage)
         {
-            meta = new MetaDataEntity(this);
+            meta = new MetaDataEntity(this, supressMessage);
         }
 
         private readonly MetaDataEntity meta;

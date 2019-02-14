@@ -407,7 +407,7 @@ namespace LuaSTGEditorSharp.EditorData
         public void CheckMessage(object sender, PropertyChangedEventArgs e)
         {
             if (e?.PropertyName != "Selected" && e?.PropertyName != "Expanded"
-                && parentWorkSpace != null
+                && parentWorkSpace != null && !parentWorkSpace.SupressMessage
                 && (GetType() == typeof(RootFolder) || GetType() == typeof(ProjectRoot) || _parent != null))  
             {
                 List<MessageBase> a = new List<MessageBase>();
@@ -423,7 +423,10 @@ namespace LuaSTGEditorSharp.EditorData
                 }
                 MessageContainer.UpdateMessage(this);
             }
-            parentWorkSpace?.OriginalMeta.CheckMessage(null, new PropertyChangedEventArgs(""));
+            if (parentWorkSpace != null && !parentWorkSpace.SupressMessage)
+            {
+                parentWorkSpace?.OriginalMeta.CheckMessage(null, new PropertyChangedEventArgs(""));
+            }
         }
 
         /// <summary>

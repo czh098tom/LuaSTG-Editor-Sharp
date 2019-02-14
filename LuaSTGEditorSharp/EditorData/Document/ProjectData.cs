@@ -66,9 +66,9 @@ namespace LuaSTGEditorSharp.EditorData.Document
             }
         }
 
-        public ProjectData(int hash) : base(hash)
+        public ProjectData(int hash, bool supressMessage = false) : base(hash, supressMessage)
         {
-            meta = new MetaDataEntity(this);
+            meta = new MetaDataEntity(this, supressMessage);
         }
 
         public override void OnOpening()
@@ -216,7 +216,7 @@ namespace LuaSTGEditorSharp.EditorData.Document
                     //try
                     {
                         DocumentData newDoc = GetNewByExtension(Path.GetExtension(s), -1
-                            , Path.GetFileNameWithoutExtension(s), s);
+                            , Path.GetFileNameWithoutExtension(s), s, true);
                         TreeNode t = newDoc.CreateNodeFromFile(s);
                         newDoc.TreeNodes.Add(t);
                         (newDoc as PlainDocumentData).parentProj = this;

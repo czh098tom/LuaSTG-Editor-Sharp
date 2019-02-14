@@ -100,6 +100,11 @@ namespace LuaSTGEditorSharp.EditorData.Document
         public DocumentCollection parent = null;
 
         /// <summary>
+        /// Store whether the message is blocked.
+        /// </summary>
+        public bool SupressMessage { get; }
+
+        /// <summary>
         /// Get the state that whether the current document is unsaved.
         /// </summary>
         public bool IsUnsaved
@@ -125,9 +130,10 @@ namespace LuaSTGEditorSharp.EditorData.Document
         /// Initializes document by ID
         /// </summary>
         /// <param name="hash">ID of document. Unique.</param>
-        public DocumentData(int hash)
+        public DocumentData(int hash, bool supressMessage = false)
         {
             DocHash = hash;
+            SupressMessage = supressMessage;
         }
 
         /// <summary>
@@ -195,11 +201,12 @@ namespace LuaSTGEditorSharp.EditorData.Document
         /// <param name="name">Name of document.</param>
         /// <param name="path">Path of document.</param>
         /// <returns></returns>
-        public static DocumentData GetNewByExtension(string extension, int maxHash, string name, string path)
+        public static DocumentData GetNewByExtension(string extension, int maxHash, string name, string path
+            , bool supressMessage = false)
         {
             if (extension == ".lstges")
             {
-                return new PlainDocumentData(maxHash)
+                return new PlainDocumentData(maxHash, supressMessage)
                 {
                     DocName = name,
                     DocPath = path,
@@ -208,7 +215,7 @@ namespace LuaSTGEditorSharp.EditorData.Document
             }
             else
             {
-                return new ProjectData(maxHash)
+                return new ProjectData(maxHash, supressMessage)
                 {
                     DocName = name,
                     DocPath = path,

@@ -21,9 +21,12 @@ namespace LuaSTGEditorSharp.EditorData.Document
         [JsonConstructor]
         protected MetaDataEntity() { }
 
-        public MetaDataEntity(DocumentData parent)
+        public MetaDataEntity(DocumentData parent, bool supressMessage = false)
         {
-            PropertyChanged += CheckMessage;
+            if (!supressMessage)
+            {
+                PropertyChanged += CheckMessage;
+            }
             aggregatableMetas = new MetaInfoDict[PluginHandler.Plugin.MetaInfoCollectionTypeCount];
             for (int i = 0; i < aggregatableMetas.Length; i++) 
             {

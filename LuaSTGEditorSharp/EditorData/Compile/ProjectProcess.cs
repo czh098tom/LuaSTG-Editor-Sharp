@@ -58,6 +58,7 @@ namespace LuaSTGEditorSharp.EditorData.Compile
 
             foreach (PartialProjectProcess process in fileProcess)
             {
+                process.ProgressChanged += ProgressChangedEventHandler;
                 process.ExecuteProcess(SCDebug, StageDebug);
             }
         }

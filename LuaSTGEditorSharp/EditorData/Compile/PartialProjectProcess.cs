@@ -53,7 +53,7 @@ namespace LuaSTGEditorSharp.EditorData.Compile
                 GatherAllRes(resNeedToPack);
             }
 
-            PackFileUsingInfo(currentApp, resNeedToPack, resPathToMD5, false);
+            PackFileUsingInfo(currentApp, resNeedToPack, resPathToMD5, false, true);
         }
     }
 }

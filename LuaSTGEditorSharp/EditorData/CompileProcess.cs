@@ -87,8 +87,30 @@ namespace LuaSTGEditorSharp.EditorData
         /// Path for target mod folder.
         /// </summary>
         public string targetZipPath;
-
-        public event ProgressChangedEventHandler ProgressChanged;
+        /// <summary>
+        /// Store the method when progress changed.
+        /// </summary>
+        public ProgressChangedEventHandler ProgressChangedEventHandler { get; private set; }
+        /// <summary>
+        /// Event on progress changed.
+        /// </summary>
+        private event ProgressChangedEventHandler ProgressChanged_Private;
+        /// <summary>
+        /// Public setter of both event and method on progress changed.
+        /// </summary>
+        public event ProgressChangedEventHandler ProgressChanged
+        {
+            add
+            {
+                ProgressChanged_Private += value;
+                ProgressChangedEventHandler = new ProgressChangedEventHandler(value);
+            }
+            remove
+            {
+                ProgressChanged_Private -= value;
+                ProgressChangedEventHandler = null;
+            }
+        }
 
         /// <summary>
         /// This method get the MD5 Hash from a given file.
@@ -301,8 +323,9 @@ namespace LuaSTGEditorSharp.EditorData
         /// <param name="resNeedToPack">The output list of resources need to pack.</param>
         /// <param name="resPathToMD5">The dictionary of resource path->MD5 Hash of the resource.</param>
         /// <param name="includeRoot">Whether regenerates root.lua.</param>
+        /// <param name="preserveZip">Whether zip file must be preserved.</param>
         protected void PackFileUsingInfo(App currentApp, List<string> resNeedToPack, Dictionary<string, string> resPathToMD5,
-            bool includeRoot)
+            bool includeRoot, bool preserveZip = false)
         {
             ZipCompressor compressor =
                 //new ZipCompressorBatch(targetZipPath, zipExePath, rootZipPackPath);
@@ -355,11 +378,15 @@ namespace LuaSTGEditorSharp.EditorData
                 }
                 int entryCount = entry2File.Count;
                 float currentCount = 0;
-                foreach (string s in compressor.PackByDictReporting(entry2File, !currentApp.SaveResMeta))
+                foreach (string s in compressor.PackByDictReporting(entry2File, !currentApp.SaveResMeta && !preserveZip))
                 {
-                    ProgressChanged?.Invoke(this, new ProgressChangedEventArgs(Convert.ToInt32(currentCount), s));
+                    ProgressChanged_Private?.Invoke(this, new ProgressChangedEventArgs(Convert.ToInt32(currentCount), s));
                     currentCount += 1.0f / entryCount;
                 }
+            }
+            catch
+            {
+                System.Windows.MessageBox.Show("Pack process failed.");
             }
             finally
             {
