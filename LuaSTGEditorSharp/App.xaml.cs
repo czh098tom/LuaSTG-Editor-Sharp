@@ -102,7 +102,7 @@ namespace LuaSTGEditorSharp
             {
                 a.Add(new EXEPathNotSetMessage(LuaSTGExecutablePath, "LuaSTG Path", 0, this));
             }
-            if (!File.Exists(ZipExecutablePath) || Path.GetFileName(ZipExecutablePath) != "7z.exe")
+            if (BatchPacking && (!File.Exists(ZipExecutablePath) || Path.GetFileName(ZipExecutablePath) != "7z.exe"))
             {
                 a.Add(new EXEPathNotSetMessage(ZipExecutablePath, "7z Path", 0, this));
             }
@@ -251,6 +251,15 @@ namespace LuaSTGEditorSharp
             set
             {
                 Settings.Default["TempPath"] = value;
+            }
+        }
+
+        public bool BatchPacking
+        {
+            get => !Settings.Default.UseInternalZipCompressor;
+            set
+            {
+                Settings.Default["UseInternalZipCompressor"] = !value;
             }
         }
 

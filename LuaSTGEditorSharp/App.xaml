@@ -4,6 +4,5 @@
              xmlns:local="clr-namespace:LuaSTGEditorSharp"
              StartupUri="MainWindow.xaml" Exit="Application_Exit">
     <Application.Resources>
-         
     </Application.Resources>
 </Application>

@@ -146,7 +146,7 @@
                     <MenuItem Header="_Definitions" Command="local:EditorRoutedCommands.ViewDefinition"/>
                 </MenuItem>
                 <MenuItem Header="_Settings">
-                    <MenuItem Header="_Compiler settings" Command="local:EditorRoutedCommands.Settings"/>
+                    <MenuItem Header="_Settings" Command="local:EditorRoutedCommands.Settings"/>
                 </MenuItem>
                 <MenuItem Header="_Help">
                     <MenuItem Header="_Nodes" Command="local:EditorRoutedCommands.AboutNode"/>
@@ -591,7 +591,8 @@
                                         <StackPanel Orientation="Horizontal">
                                             <Image VerticalAlignment="Top" Source="{tool:BindableStaticResource {Binding Icon}}"
                                                    Stretch="Fill" Width="16" Height="16" Margin="0,0,2,2" Opacity="{Binding IsBanned, Converter={StaticResource banned2Opacity}}"/>
-                                            <TextBlock VerticalAlignment="Center" Text="{Binding ScreenString}" TextDecorations="{Binding IsBanned, Converter={StaticResource banned2Strike}}"/>
+                                            <TextBlock VerticalAlignment="Center" Text="{Binding ScreenString}" TextDecorations="{Binding IsBanned, Converter={StaticResource banned2Strike}}"
+                                                       />
                                             <StackPanel.ContextMenu>
                                                 <ContextMenu DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}">
                                                     <ContextMenu.ItemsSource>

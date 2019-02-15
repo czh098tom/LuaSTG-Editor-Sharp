@@ -6,37 +6,53 @@
         xmlns:local="clr-namespace:LuaSTGEditorSharp.Windows"
         mc:Ignorable="d"
         Title="Settings" Height="498.433" Width="700.178" ResizeMode="NoResize" Closing="Window_Closing">
-    <Grid>
+    <DockPanel>
+        <StackPanel Orientation="Horizontal" DockPanel.Dock="Bottom" HorizontalAlignment="Right">
+            <Button Content="OK" Margin="5,5" Height="32" Width="96" Click="ButtonOK_Click"/>
+            <Button Content="Cancel" Margin="5,5" Height="32" Width="96" Click="ButtonCancel_Click"/>
+            <Button Content="Apply" Margin="5,5" Height="32" Width="96" Click="ButtonApply_Click"/>
+        </StackPanel>
         <TabControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,-0.4,-0.4">
-            <TabItem Header="Compiler Path">
+            <TabItem x:Name="CompilerTab" Header="Compiler">
                 <Grid>
-                    <Label Content="Zip Executable Path" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="150"/>
-                    <Label Content="LuaSTG Executable Path" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top" Width="150"/>
-                    <Label Content="Temp Path" HorizontalAlignment="Left" Margin="10,72,0,0" VerticalAlignment="Top" Width="150"/>
-                    <TextBox HorizontalAlignment="Left" Height="26" Margin="178,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="470" Text="{Binding ZipExecutablePath, ElementName=window}"/>
-                    <TextBox HorizontalAlignment="Left" Height="26" Margin="178,41,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="470" Text="{Binding LuaSTGExecutablePath, ElementName=window}"/>
-                    <TextBox HorizontalAlignment="Left" Height="26" Margin="178,72,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="470" Text="{Binding TempPath, ElementName=window}"/>
-                    <Button Content="..." HorizontalAlignment="Left" Height="26" Margin="653,10,0,0" VerticalAlignment="Top" Width="26" Click="ButtonZipExecutablePath_Click"/>
-                    <Button Content="..." HorizontalAlignment="Left" Height="26" Margin="653,41,0,0" VerticalAlignment="Top" Width="26" Click="ButtonLuaSTGExecutablePath_Click"/>
+                    <CheckBox x:Name="BatchPackingCheck" Content="Use Batch Packing" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="669" Height="26" 
+                              IsChecked="{Binding BatchPacking, ElementName=window}"/>
+                    <Label Content="Zip Executable Path" HorizontalAlignment="Left" Margin="10,34,0,0" VerticalAlignment="Top" Width="150"/>
+                    <Label Content="LuaSTG Executable Path" HorizontalAlignment="Left" Margin="10,65,0,0" VerticalAlignment="Top" Width="150"/>
+                    <Label Content="Temp Path" HorizontalAlignment="Left" Margin="10,96,0,0" VerticalAlignment="Top" Width="150"/>
+                    <TextBox HorizontalAlignment="Left" Height="26" Margin="178,33,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="470" 
+                             Text="{Binding ZipExecutablePath, ElementName=window}" IsEnabled="{Binding IsChecked, ElementName=BatchPackingCheck}"/>
+                    <TextBox HorizontalAlignment="Left" Height="26" Margin="178,64,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="470" 
+                             Text="{Binding LuaSTGExecutablePath, ElementName=window}"/>
+                    <TextBox HorizontalAlignment="Left" Height="26" Margin="178,96,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="470" 
+                             Text="{Binding TempPath, ElementName=window}"/>
+                    <Button Content="..." HorizontalAlignment="Left" Height="26" Margin="653,34,0,0" VerticalAlignment="Top" Width="26" Click="ButtonZipExecutablePath_Click" 
+                            IsEnabled="{Binding IsChecked, ElementName=BatchPackingCheck}"/>
+                    <Button Content="..." HorizontalAlignment="Left" Height="26" Margin="653,65,0,0" VerticalAlignment="Top" Width="26" Click="ButtonLuaSTGExecutablePath_Click"/>
+                    <CheckBox Content="Update Thlib before running" HorizontalAlignment="Left" Height="26" Margin="10,131,0,0" VerticalAlignment="Top" Width="250" 
+                              IsChecked="{Binding DebugUpdateLib, ElementName=window}"/>
+                    <CheckBox Content="Save project before running" HorizontalAlignment="Left" Height="26" Margin="10,162,0,0" VerticalAlignment="Top" Width="250" 
+                              IsChecked="{Binding DebugSaveProj, ElementName=window}"/>
+                    <CheckBox Content="Pack project" HorizontalAlignment="Left" Height="26" Margin="10,193,0,0" VerticalAlignment="Top" Width="205" 
+                              IsChecked="{Binding PackProj, ElementName=window}"/>
+                    <CheckBox Content="Use MD5 resource check in packing" HorizontalAlignment="Left" Height="26" Margin="10,224,0,0" VerticalAlignment="Top" Width="250" 
+                              IsChecked="{Binding MD5Check, ElementName=window}"/>
                 </Grid>
             </TabItem>
-            <TabItem Header="Debug Settings">
+            <TabItem x:Name="DebugTab" Header="Debug">
                 <Grid>
                     <Label Content="Resolution" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="84"/>
-                    <ComboBox SelectedIndex="{Binding IndexedReso, ElementName=window}" HorizontalAlignment="Left" Height="26" Margin="99,10,0,0" VerticalAlignment="Top" Width="161">
+                    <ComboBox Text="{Binding CombinedResolution, ElementName=window}" IsEditable="True"
+                              HorizontalAlignment="Left" Height="26" Margin="99,10,0,0" VerticalAlignment="Top" Width="161">
                         <ComboBoxItem Content="640x480"/>
                         <ComboBoxItem Content="960x720"/>
                         <ComboBoxItem Content="1280x960"/>
                     </ComboBox>
                     <CheckBox Content="Windowed" HorizontalAlignment="Left" Height="26" Margin="10,41,0,0" VerticalAlignment="Top" Width="250" IsChecked="{Binding DebugWindowed, ElementName=window}"/>
                     <CheckBox Content="Cheat" HorizontalAlignment="Left" Height="26" Margin="10,72,0,0" VerticalAlignment="Top" Width="250" IsChecked="{Binding DebugCheat, ElementName=window}"/>
-                    <CheckBox Content="Update Thlib before running" HorizontalAlignment="Left" Height="26" Margin="10,103,0,0" VerticalAlignment="Top" Width="250" IsChecked="{Binding DebugUpdateLib, ElementName=window}"/>
-                    <CheckBox Content="Save project before running" HorizontalAlignment="Left" Height="26" Margin="10,134,0,0" VerticalAlignment="Top" Width="250" IsChecked="{Binding DebugSaveProj, ElementName=window}"/>
-                    <CheckBox Content="Pack project" HorizontalAlignment="Left" Height="26" Margin="10,165,0,0" VerticalAlignment="Top" Width="205" IsChecked="{Binding PackProj, ElementName=window}"/>
-                    <CheckBox Content="Use MD5 resource check in packing" HorizontalAlignment="Left" Height="26" Margin="10,196,0,0" VerticalAlignment="Top" Width="250" IsChecked="{Binding MD5Check, ElementName=window}"/>
                 </Grid>
             </TabItem>
-            <TabItem Header="Editor Settings">
+            <TabItem x:Name="EditorTab" Header="Editor">
                 <Grid>
                     <Label Content="Default Author Name" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="150"/>
                     <TextBox HorizontalAlignment="Left" Height="26" Margin="178,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="470" Text="{Binding AuthorName, ElementName=window}"/>
@@ -44,5 +60,5 @@
                 </Grid>
             </TabItem>
         </TabControl>
-    </Grid>
+    </DockPanel>
 </Window>

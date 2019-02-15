@@ -327,9 +327,6 @@ namespace LuaSTGEditorSharp.EditorData
         protected void PackFileUsingInfo(App currentApp, List<string> resNeedToPack, Dictionary<string, string> resPathToMD5,
             bool includeRoot, bool preserveZip = false)
         {
-            ZipCompressor compressor =
-                //new ZipCompressorBatch(targetZipPath, zipExePath, rootZipPackPath);
-                new ZipCompressorInternal(targetZipPath);
             Dictionary<string, string> entry2File = new Dictionary<string, string>();
             string temp;
             try
@@ -378,6 +375,15 @@ namespace LuaSTGEditorSharp.EditorData
                 }
                 int entryCount = entry2File.Count;
                 float currentCount = 0;
+                ZipCompressor compressor;
+                if (currentApp.BatchPacking)
+                {
+                    compressor = new ZipCompressorBatch(targetZipPath, zipExePath, rootZipPackPath);
+                }
+                else
+                {
+                    compressor = new ZipCompressorInternal(targetZipPath);
+                }
                 foreach (string s in compressor.PackByDictReporting(entry2File, !currentApp.SaveResMeta && !preserveZip))
                 {
                     ProgressChanged_Private?.Invoke(this, new ProgressChangedEventArgs(Convert.ToInt32(currentCount), s));

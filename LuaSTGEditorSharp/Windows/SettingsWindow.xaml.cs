@@ -27,53 +27,79 @@ namespace LuaSTGEditorSharp.Windows
         static readonly int[] resX = { 640, 960, 1280 };
         static readonly int[] resY = { 480, 720, 960 };
 
+        private string zipExecutablePath;
         public string ZipExecutablePath
         {
-            get => mainApp.ZipExecutablePath;
+            get => zipExecutablePath;
             set
             {
-                mainApp.ZipExecutablePath = value;
+                zipExecutablePath = value;
                 RaiseProertyChanged("ZipExecutablePath");
             }
         }
 
+        private string luaSTGExecutablePath;
         public string LuaSTGExecutablePath
         {
-            get => mainApp.LuaSTGExecutablePath;
+            get => luaSTGExecutablePath;
             set
             {
-                mainApp.LuaSTGExecutablePath = value;
+                luaSTGExecutablePath = value;
                 RaiseProertyChanged("LuaSTGExecutablePath");
             }
         }
 
+        private string tempPath;
         public string TempPath
         {
-            get => mainApp.TempPath;
+            get => tempPath;
             set
             {
-                mainApp.TempPath = value;
+                tempPath = value;
                 RaiseProertyChanged("TempPath");
             }
         }
 
+        private int debugResolutionX;
         public int DebugResolutionX
         {
-            get => mainApp.DebugResolutionX;
+            get => debugResolutionX;
             set
             {
-                mainApp.DebugResolutionX = value;
+                debugResolutionX = value;
                 RaiseProertyChanged("DebugResolutionX");
             }
         }
 
+        private int debugResolutionY;
         public int DebugResolutionY
         {
-            get => mainApp.DebugResolutionY;
+            get => debugResolutionY;
             set
             {
-                mainApp.DebugResolutionY = value;
+                debugResolutionY = value;
                 RaiseProertyChanged("DebugResolutionY");
+            }
+        }
+
+        public string CombinedResolution
+        {
+            get => DebugResolutionX + "x" + DebugResolutionY;
+            set
+            {
+                string[] vs = value.Split('x');
+                if(vs!=null && vs.Count() > 1)
+                {
+                    if(int.TryParse(vs[0], out int x))
+                    {
+                        DebugResolutionX = x;
+                    }
+                    if (int.TryParse(vs[1], out int y))
+                    {
+                        DebugResolutionY = y;
+                    }
+                    RaiseProertyChanged("CombinedResolution");
+                }
             }
         }
 
@@ -87,100 +113,289 @@ namespace LuaSTGEditorSharp.Windows
                         return 0;
                     case 960:
                         return 1;
-                    default:
+                    case 1280:
                         return 2;
+                    default:
+                        return -1;
                 }
             }
             set
             {
-                DebugResolutionX = resX[value];
-                DebugResolutionY = resY[value];
-                RaiseProertyChanged("IndexedReso");
+                if (value != -1)
+                {
+                    DebugResolutionX = resX[value];
+                    DebugResolutionY = resY[value];
+                    RaiseProertyChanged("IndexedReso");
+                }
             }
         }
 
+        private bool debugWindowed;
         public bool DebugWindowed
+        {
+            get => debugWindowed;
+            set
+            {
+                debugWindowed = value;
+                RaiseProertyChanged("DebugWindowed");
+            }
+        }
+
+        private bool debugCheat;
+        public bool DebugCheat
+        {
+            get => debugCheat;
+            set
+            {
+                debugCheat = value;
+                RaiseProertyChanged("DebugCheat");
+            }
+        }
+
+        private bool debugUpdateLib;
+        public bool DebugUpdateLib
+        {
+            get => debugUpdateLib;
+            set
+            {
+                debugUpdateLib = value;
+                RaiseProertyChanged("DebugUpdateLib");
+            }
+        }
+
+        private bool debugSaveProj;
+        public bool DebugSaveProj
+        {
+            get => debugSaveProj;
+            set
+            {
+                debugSaveProj = value;
+                RaiseProertyChanged("DebugSaveProj");
+            }
+        }
+
+        private bool packProj;
+        public bool PackProj
+        {
+            get => packProj;
+            set
+            {
+                packProj = value;
+                RaiseProertyChanged("PackProj");
+            }
+        }
+
+        private bool autoMoveToNew;
+        public bool AutoMoveToNew
+        {
+            get => autoMoveToNew;
+            set
+            {
+                autoMoveToNew = value;
+                RaiseProertyChanged("AutoMoveToNew");
+            }
+        }
+
+        private bool md5Check;
+        public bool MD5Check
+        {
+            get => md5Check;
+            set
+            {
+                md5Check = value;
+                RaiseProertyChanged("MD5Check");
+            }
+        }
+
+        private string authorName;
+        public string AuthorName
+        {
+            get => authorName;
+            set
+            {
+                authorName = value;
+                RaiseProertyChanged("AuthorName");
+            }
+        }
+
+        private bool batchPacking;
+        public bool BatchPacking
+        {
+            get => batchPacking;
+            set
+            {
+                batchPacking = value;
+                RaiseProertyChanged("BatchPacking");
+            }
+        }
+
+        #region InSettings
+        public string ZipExecutablePathSettings
+        {
+            get => mainApp.ZipExecutablePath;
+            set
+            {
+                mainApp.ZipExecutablePath = value;
+            }
+        }
+
+        public string LuaSTGExecutablePathSettings
+        {
+            get => mainApp.LuaSTGExecutablePath;
+            set
+            {
+                mainApp.LuaSTGExecutablePath = value;
+            }
+        }
+
+        public string TempPathSettings
+        {
+            get => mainApp.TempPath;
+            set
+            {
+                mainApp.TempPath = value;
+            }
+        }
+
+        public int DebugResolutionXSettings
+        {
+            get => mainApp.DebugResolutionX;
+            set
+            {
+                mainApp.DebugResolutionX = value;
+            }
+        }
+
+        public int DebugResolutionYSettings
+        {
+            get => mainApp.DebugResolutionY;
+            set
+            {
+                mainApp.DebugResolutionY = value;
+            }
+        }
+
+        public bool DebugWindowedSettings
         {
             get => mainApp.DebugWindowed;
             set
             {
                 mainApp.DebugWindowed = value;
-                RaiseProertyChanged("DebugWindowed");
             }
         }
 
-        public bool DebugCheat
+        public bool DebugCheatSettings
         {
             get => mainApp.DebugCheat;
             set
             {
                 mainApp.DebugCheat = value;
-                RaiseProertyChanged("DebugCheat");
             }
         }
 
-        public bool DebugUpdateLib
+        public bool DebugUpdateLibSettings
         {
             get => mainApp.DebugUpdateLib;
             set
             {
                 mainApp.DebugUpdateLib = value;
-                RaiseProertyChanged("DebugUpdateLib");
             }
         }
 
-        public bool DebugSaveProj
+        public bool DebugSaveProjSettings
         {
             get => mainApp.DebugSaveProj;
             set
             {
                 mainApp.DebugSaveProj = value;
-                RaiseProertyChanged("DebugSaveProj");
             }
         }
 
-        public bool PackProj
+        public bool PackProjSettings
         {
             get => mainApp.PackProj;
             set
             {
                 mainApp.PackProj = value;
-                RaiseProertyChanged("PackProj");
             }
         }
 
-        public bool AutoMoveToNew
+        public bool AutoMoveToNewSettings
         {
             get => mainApp.AutoMoveToNew;
             set
             {
                 mainApp.AutoMoveToNew = value;
-                RaiseProertyChanged("AutoMoveToNew");
             }
         }
 
-        public bool MD5Check
+        public bool MD5CheckSettings
         {
             get => mainApp.SaveResMeta;
             set
             {
                 mainApp.SaveResMeta = value;
-                RaiseProertyChanged("MD5Check");
             }
         }
 
-        public string AuthorName
+        public string AuthorNameSettings
         {
             get => mainApp.AuthorName;
             set
             {
                 mainApp.AuthorName = value;
-                RaiseProertyChanged("AuthorName");
             }
+        }
+
+        public bool BatchPackingSettings
+        {
+            get => mainApp.BatchPacking;
+            set
+            {
+                mainApp.BatchPacking = value;
+            }
+        }
+        #endregion
+
+        private void WriteSettings()
+        {
+            AuthorNameSettings = AuthorName;
+            AutoMoveToNewSettings = AutoMoveToNew;
+            BatchPackingSettings = BatchPacking;
+            DebugCheatSettings = DebugCheat;
+            DebugResolutionXSettings = DebugResolutionX;
+            DebugResolutionYSettings = DebugResolutionY;
+            DebugSaveProjSettings = DebugSaveProj;
+            DebugUpdateLibSettings = DebugUpdateLib;
+            DebugWindowedSettings = DebugWindowed;
+            LuaSTGExecutablePathSettings = LuaSTGExecutablePath;
+            MD5CheckSettings = MD5Check;
+            PackProjSettings = PackProj;
+            TempPathSettings = TempPath;
+            ZipExecutablePathSettings = ZipExecutablePath;
+        }
+
+        private void ReadSettings()
+        {
+            AuthorName = AuthorNameSettings;
+            AutoMoveToNew = AutoMoveToNewSettings;
+            BatchPacking = BatchPackingSettings;
+            DebugCheat = DebugCheatSettings;
+            DebugResolutionX = DebugResolutionXSettings;
+            DebugResolutionY = DebugResolutionYSettings;
+            DebugSaveProj = DebugSaveProjSettings;
+            DebugUpdateLib = DebugUpdateLibSettings;
+            DebugWindowed = DebugWindowedSettings;
+            LuaSTGExecutablePath = LuaSTGExecutablePathSettings;
+            MD5Check = MD5CheckSettings;
+            PackProj = PackProjSettings;
+            TempPath = TempPathSettings;
+            ZipExecutablePath = ZipExecutablePathSettings;
         }
 
         public SettingsWindow()
         {
+            ReadSettings();
             InitializeComponent();
         }
 
@@ -217,6 +432,25 @@ namespace LuaSTGEditorSharp.Windows
 
         private void Window_Closing(object sender, CancelEventArgs e)
         {
+            WriteSettings();
+            Properties.Settings.Default.Save();
+        }
+
+        private void ButtonOK_Click(object sender, RoutedEventArgs e)
+        {
+            WriteSettings();
+            Properties.Settings.Default.Save();
+            Close();
+        }
+
+        private void ButtonCancel_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+
+        private void ButtonApply_Click(object sender, RoutedEventArgs e)
+        {
+            WriteSettings();
             Properties.Settings.Default.Save();
         }
     }

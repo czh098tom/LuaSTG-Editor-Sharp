@@ -80,6 +80,7 @@ namespace LuaSTGEditorSharp.Zip
             ((IDisposable)targetArchive).Dispose();
         }
 
+        //Problem occurs when updating
         public IEnumerable<string> PackByDictReporting_old(Dictionary<string, string> path, bool removeIfExists)
         {
             HashSet<string> zipNames = new HashSet<string>();
