@@ -50,8 +50,7 @@ namespace LuaSTGEditorSharp
                 Console.SetOut(sw);
                 base.OnStartup(e);
                 RaiseProertyChanged("m");
-                if (!PluginHandler.LoadPlugin(Path.GetFullPath(
-                    Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "LuaSTGNodelib.dll"))))
+                if (!PluginHandler.LoadPlugin(PluginPath))
                 {
                     MessageBox.Show("Load Plugin Failed.");
                 }
@@ -76,6 +75,7 @@ namespace LuaSTGEditorSharp
             catch(Exception ex)
             {
                 Console.WriteLine(ex.ToString());
+                Current.Shutdown();
             }
             finally
             {

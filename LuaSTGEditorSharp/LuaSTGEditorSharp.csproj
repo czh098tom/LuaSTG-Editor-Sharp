@@ -207,6 +207,14 @@
     <Compile Include="Lua\StringParser.cs" />
     <Compile Include="Plugin\AbstractPluginEntry.cs" />
     <Compile Include="Plugin\AbstractToolbox.cs" />
+    <Compile Include="Plugin\DefaultNullPlugin\DefaultInputWindowSelector.cs" />
+    <Compile Include="Plugin\DefaultNullPlugin\DefaultMetaData.cs" />
+    <Compile Include="Plugin\DefaultNullPlugin\DefaultNodeTypeCache.cs" />
+    <Compile Include="Plugin\DefaultNullPlugin\DefaultPluginEntry.cs" />
+    <Compile Include="Plugin\DefaultNullPlugin\DefaultToolBox.cs" />
+    <Compile Include="Plugin\DefaultNullPlugin\DefaultViewDefinition.xaml.cs">
+      <DependentUpon>DefaultViewDefinition.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Plugin\IInputWindowSelector.cs" />
     <Compile Include="Plugin\IViewDefinition.cs" />
     <Compile Include="Plugin\PluginHandler.cs" />
@@ -228,6 +236,13 @@
       <DependentUpon>AboutNode.xaml</DependentUpon>
     </Compile>
     <Compile Include="EditorData\Document\Meta\MetaModel.cs" />
+    <Compile Include="Windows\Input\Selector.xaml.cs">
+      <DependentUpon>Selector.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Input\SingleLineInput.xaml.cs">
+      <DependentUpon>SingleLineInput.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\ViewDefinitionBase.cs" />
     <Compile Include="Windows\NewWindow.xaml.cs">
       <DependentUpon>NewWindow.xaml</DependentUpon>
     </Compile>
@@ -239,6 +254,10 @@
     <Compile Include="Zip\ZipCompressorBatch.cs" />
     <Compile Include="Zip\ZipCompressorInternal.cs" />
     <Page Include="Fonts.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Plugin\DefaultNullPlugin\DefaultViewDefinition.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -270,6 +289,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Windows\Input\Selector.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\Input\SingleLineInput.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Windows\NewWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

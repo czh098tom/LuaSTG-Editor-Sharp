@@ -1033,7 +1033,14 @@ namespace LuaSTGEditorSharp
 
         private void SettingsCommandExecuted(object sender, ExecutedRoutedEventArgs e)
         {
-            new SettingsWindow().ShowDialog();
+            if(int.TryParse(e.Parameter.ToString(), out int i))
+            {
+                new SettingsWindow(i).ShowDialog();
+            }
+            else
+            {
+                new SettingsWindow().ShowDialog();
+            }
         }
 
         private void AboutNodeCommandExecuted(object sender, ExecutedRoutedEventArgs e)

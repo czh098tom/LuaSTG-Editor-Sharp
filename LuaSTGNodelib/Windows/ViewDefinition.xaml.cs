@@ -20,17 +20,11 @@ using LuaSTGEditorSharp.EditorData.Document.Meta;
 
 namespace LuaSTGEditorSharp.Windows
 {
-    /// <summary>
-    /// Defination.xaml 的交互逻辑
-    /// </summary>
-    public partial class ViewDefinition : Window, IViewDefinition
+    public partial class ViewDefinition : ViewDefinitionBase
     {
-        private DocumentData data;
-
-        ObservableCollection<MetaModel> Tree { get; set; } = new ObservableCollection<MetaModel>();
-
-        public void InitializeTree()
+        public override void InitializeTree()
         {
+            base.InitializeTree();
             Tree.Add(GetStageGroupMeta());
             Tree.Add(GetEditorObjMeta(MetaType.Bullet, "Bullet", "bulletdefine.png"));
             Tree.Add(GetEditorObjMeta(MetaType.Laser, "Laser", "laserdefine.png"));

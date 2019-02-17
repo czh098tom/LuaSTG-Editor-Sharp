@@ -41,7 +41,7 @@ namespace LuaSTGEditorSharp.EditorData.Document
             _parent = parent;
         }
 
-        public AbstractMetaData(DocumentData parent, IMetaInfoCollection[] meta)
+        public AbstractMetaData(DocumentData parent, IMetaInfoCollection[] meta) : this(parent)
         {
             aggregatableMetas = meta;
         }

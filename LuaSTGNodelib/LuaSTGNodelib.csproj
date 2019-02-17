@@ -160,14 +160,8 @@
     <Compile Include="Windows\Input\PositionInput.xaml.cs">
       <DependentUpon>PositionInput.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\Input\Selector.xaml.cs">
-      <DependentUpon>Selector.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Windows\Input\ARGBInput.xaml.cs">
       <DependentUpon>ARGBInput.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Windows\Input\SingleLineInput.xaml.cs">
-      <DependentUpon>SingleLineInput.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\Input\VectorInput.xaml.cs">
       <DependentUpon>VectorInput.xaml</DependentUpon>
@@ -244,15 +238,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Windows\Input\Selector.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Windows\Input\ARGBInput.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Windows\Input\SingleLineInput.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

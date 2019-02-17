@@ -1,10 +1,10 @@
-﻿<w:ViewDefinitionBase x:Class="LuaSTGEditorSharp.Windows.ViewDefinition"
+﻿<b:ViewDefinitionBase x:Class="LuaSTGEditorSharp.Plugin.DefaultNullPlugin.DefaultViewDefinition"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:w="clr-namespace:LuaSTGEditorSharp.Windows;assembly=LuaSTGEditorSharp"
-        xmlns:local="clr-namespace:LuaSTGEditorSharp.Windows"
+        xmlns:b="clr-namespace:LuaSTGEditorSharp.Windows"
+        xmlns:local="clr-namespace:LuaSTGEditorSharp.Plugin.DefaultNullPlugin"
         mc:Ignorable="d"
         Title="Definition" Height="450" Width="800">
     <Grid>
@@ -20,4 +20,4 @@
             </TreeView.ItemTemplate>
         </TreeView>
     </Grid>
-</w:ViewDefinitionBase>
+</b:ViewDefinitionBase>

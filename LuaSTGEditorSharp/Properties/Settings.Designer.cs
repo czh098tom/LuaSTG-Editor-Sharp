@@ -169,7 +169,7 @@ namespace LuaSTGEditorSharp.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.DefaultSettingValueAttribute("LuaSTGNodeLib.dll")]
         public string LuaSTGNodeLibPath {
             get {
                 return ((string)(this["LuaSTGNodeLibPath"]));

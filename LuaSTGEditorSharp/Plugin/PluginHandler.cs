@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Reflection;
+using System.IO;
 using System.Windows;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,29 +11,28 @@ namespace LuaSTGEditorSharp.Plugin
 {
     public static class PluginHandler
     {
-        private static AbstractPluginEntry plugin;
-
-        public static AbstractPluginEntry Plugin { get => plugin; }
+        public static AbstractPluginEntry Plugin { get; private set; } = new DefaultNullPlugin.DefaultPluginEntry();
 
         public static bool LoadPlugin(string PluginPath)
         {
-            if (!string.IsNullOrEmpty(PluginPath))
+            Assembly pluginAssembly = null;
+            try
             {
-                Assembly pluginAssembly = Assembly.LoadFile(PluginPath);
-                plugin = (AbstractPluginEntry)pluginAssembly.CreateInstance("LuaSTGEditorSharp.PluginEntry");
-                if (plugin == null)
-                {
-                    return false;
-                }
-                else
-                {
-                    plugin.NodeTypeCache.Initialize(Assembly.GetExecutingAssembly(), pluginAssembly);
-                    return true;
-                }
+                string path = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, PluginPath));
+                pluginAssembly = Assembly.LoadFile(path);
+                Plugin = (AbstractPluginEntry)pluginAssembly.CreateInstance("LuaSTGEditorSharp.PluginEntry");
+            }
+            catch { }
+            if (pluginAssembly == null)
+            {
+                if (Plugin == null) Plugin = new DefaultNullPlugin.DefaultPluginEntry();
+                Plugin.NodeTypeCache.Initialize(Assembly.GetExecutingAssembly());
+                return false;
             }
             else
             {
-                return false;
+                Plugin.NodeTypeCache.Initialize(Assembly.GetExecutingAssembly(), pluginAssembly);
+                return true;
             }
         }
     }

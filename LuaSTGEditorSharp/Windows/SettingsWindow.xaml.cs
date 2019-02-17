@@ -1,5 +1,7 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -12,7 +14,6 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace LuaSTGEditorSharp.Windows
 {
@@ -26,6 +27,8 @@ namespace LuaSTGEditorSharp.Windows
 
         static readonly int[] resX = { 640, 960, 1280 };
         static readonly int[] resY = { 480, 720, 960 };
+
+        ObservableCollection<string> pluginPaths = new ObservableCollection<string>();
 
         private string zipExecutablePath;
         public string ZipExecutablePath
@@ -229,131 +232,106 @@ namespace LuaSTGEditorSharp.Windows
             }
         }
 
+        private string pluginPath;
+        public string PluginPath
+        {
+            get => pluginPath;
+            set
+            {
+                pluginPath = value;
+                RaiseProertyChanged("PluginPath");
+            }
+        }
+
         #region InSettings
         public string ZipExecutablePathSettings
         {
             get => mainApp.ZipExecutablePath;
-            set
-            {
-                mainApp.ZipExecutablePath = value;
-            }
+            set => mainApp.ZipExecutablePath = value;
         }
 
         public string LuaSTGExecutablePathSettings
         {
             get => mainApp.LuaSTGExecutablePath;
-            set
-            {
-                mainApp.LuaSTGExecutablePath = value;
-            }
+            set => mainApp.LuaSTGExecutablePath = value;
         }
 
         public string TempPathSettings
         {
             get => mainApp.TempPath;
-            set
-            {
-                mainApp.TempPath = value;
-            }
+            set => mainApp.TempPath = value;
         }
 
         public int DebugResolutionXSettings
         {
             get => mainApp.DebugResolutionX;
-            set
-            {
-                mainApp.DebugResolutionX = value;
-            }
+            set => mainApp.DebugResolutionX = value;
         }
 
         public int DebugResolutionYSettings
         {
             get => mainApp.DebugResolutionY;
-            set
-            {
-                mainApp.DebugResolutionY = value;
-            }
+            set => mainApp.DebugResolutionY = value;
         }
 
         public bool DebugWindowedSettings
         {
             get => mainApp.DebugWindowed;
-            set
-            {
-                mainApp.DebugWindowed = value;
-            }
+            set => mainApp.DebugWindowed = value;
         }
 
         public bool DebugCheatSettings
         {
             get => mainApp.DebugCheat;
-            set
-            {
-                mainApp.DebugCheat = value;
-            }
+            set => mainApp.DebugCheat = value;
         }
 
         public bool DebugUpdateLibSettings
         {
             get => mainApp.DebugUpdateLib;
-            set
-            {
-                mainApp.DebugUpdateLib = value;
-            }
+            set => mainApp.DebugUpdateLib = value;
         }
 
         public bool DebugSaveProjSettings
         {
             get => mainApp.DebugSaveProj;
-            set
-            {
-                mainApp.DebugSaveProj = value;
-            }
+            set => mainApp.DebugSaveProj = value;
         }
 
         public bool PackProjSettings
         {
             get => mainApp.PackProj;
-            set
-            {
-                mainApp.PackProj = value;
-            }
+            set => mainApp.PackProj = value;
         }
 
         public bool AutoMoveToNewSettings
         {
             get => mainApp.AutoMoveToNew;
-            set
-            {
-                mainApp.AutoMoveToNew = value;
-            }
+            set => mainApp.AutoMoveToNew = value;
         }
 
         public bool MD5CheckSettings
         {
             get => mainApp.SaveResMeta;
-            set
-            {
-                mainApp.SaveResMeta = value;
-            }
+            set => mainApp.SaveResMeta = value;
         }
 
         public string AuthorNameSettings
         {
             get => mainApp.AuthorName;
-            set
-            {
-                mainApp.AuthorName = value;
-            }
+            set => mainApp.AuthorName = value;
         }
 
         public bool BatchPackingSettings
         {
             get => mainApp.BatchPacking;
-            set
-            {
-                mainApp.BatchPacking = value;
-            }
+            set => mainApp.BatchPacking = value;
+        }
+
+        public string PluginPathSettings
+        {
+            get => mainApp.PluginPath;
+            set => mainApp.PluginPath = value;
         }
         #endregion
 
@@ -371,6 +349,7 @@ namespace LuaSTGEditorSharp.Windows
             LuaSTGExecutablePathSettings = LuaSTGExecutablePath;
             MD5CheckSettings = MD5Check;
             PackProjSettings = PackProj;
+            PluginPathSettings = PluginPath;
             TempPathSettings = TempPath;
             ZipExecutablePathSettings = ZipExecutablePath;
         }
@@ -389,6 +368,7 @@ namespace LuaSTGEditorSharp.Windows
             LuaSTGExecutablePath = LuaSTGExecutablePathSettings;
             MD5Check = MD5CheckSettings;
             PackProj = PackProjSettings;
+            PluginPath = PluginPathSettings;
             TempPath = TempPathSettings;
             ZipExecutablePath = ZipExecutablePathSettings;
         }
@@ -397,6 +377,37 @@ namespace LuaSTGEditorSharp.Windows
         {
             ReadSettings();
             InitializeComponent();
+            pluginPaths = new ObservableCollection<string>(
+                from string s
+                in Directory.GetFiles(AppDomain.CurrentDomain.BaseDirectory)
+                where Path.GetExtension(s) == ".dll"
+                && Path.GetFileName(s) != "Irony.dll" && Path.GetFileName(s) != "ICSharpCode.SharpZipLib.dll" 
+                && Path.GetFileName(s) != "Newtonsoft.Json.dll"
+                select Path.GetFileName(s)
+                );
+            PluginList.ItemsSource = pluginPaths;
+        }
+
+        public SettingsWindow(int i) : this()
+        {
+            switch (i)
+            {
+                case 0:
+                    GeneralTab.IsSelected = true;
+                    break;
+                case 1:
+                    CompilerTab.IsSelected = true;
+                    break;
+                case 2:
+                    DebugTab.IsSelected = true;
+                    break;
+                case 3:
+                    EditorTab.IsSelected = true;
+                    break;
+                default:
+                    GeneralTab.IsSelected = true;
+                    break;
+            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

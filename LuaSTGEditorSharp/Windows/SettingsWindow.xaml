@@ -13,6 +13,14 @@
             <Button Content="Apply" Margin="5,5" Height="32" Width="96" Click="ButtonApply_Click"/>
         </StackPanel>
         <TabControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,-0.4,-0.4">
+            <TabItem x:Name="GeneralTab" Header="General">
+                <Grid>
+                    <Label Content="Plugin" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="84"/>
+                    <ComboBox x:Name="PluginList" Text="{Binding PluginPath,ElementName=window}" IsEditable="True" 
+                              HorizontalAlignment="Left" Height="26" Margin="99,10,0,0" VerticalAlignment="Top" Width="512"/>
+                    <Label Content="Note: The selection of plugin will only apply once you restart the application." HorizontalAlignment="Left" Height="34" Margin="10,41,0,0" VerticalAlignment="Top" Width="669"/>
+                </Grid>
+            </TabItem>
             <TabItem x:Name="CompilerTab" Header="Compiler">
                 <Grid>
                     <CheckBox x:Name="BatchPackingCheck" Content="Use Batch Packing" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="669" Height="26" 
