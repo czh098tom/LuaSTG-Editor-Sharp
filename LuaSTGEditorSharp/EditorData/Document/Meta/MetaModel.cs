@@ -41,15 +41,15 @@ namespace LuaSTGEditorSharp.EditorData.Document.Meta
         [JsonProperty]
         public string Result { get; set; }
         [JsonProperty]
-        public string PreviewPath { get; set; }
-        [JsonProperty]
         public string Difficulty { get; set; }
         [JsonProperty]
         public string FullName { get; set; }
         [JsonProperty]
         public string Param { get; set; }
         [JsonProperty]
-        public string ExInfo { get; set; }
+        public string ExInfo1 { get; set; }
+        [JsonProperty]
+        public string ExInfo2 { get; set; }
 
         public string GetDifficulty()
         {
@@ -99,9 +99,9 @@ namespace LuaSTGEditorSharp.EditorData.Document.Meta
                 Text = Text,
                 Result = Result,
                 Difficulty = Difficulty,
-                PreviewPath = PreviewPath,
+                ExInfo1 = ExInfo1,
                 FullName = FullName,
-                ExInfo = ExInfo,
+                ExInfo2 = ExInfo2,
                 Param = Param,
                 Children = new ObservableCollection<MetaModel>(from MetaModel m in Children select m)
             };

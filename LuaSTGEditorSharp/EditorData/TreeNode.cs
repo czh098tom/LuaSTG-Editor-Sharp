@@ -14,6 +14,7 @@ using LuaSTGEditorSharp.EditorData.Message;
 using LuaSTGEditorSharp.EditorData.Interfaces;
 using LuaSTGEditorSharp.EditorData.Document;
 using LuaSTGEditorSharp.EditorData.Node;
+using LuaSTGEditorSharp.EditorData.Node.Advanced;
 using LuaSTGEditorSharp.EditorData.Node.General;
 using LuaSTGEditorSharp.EditorData.Node.Project;
 using Newtonsoft.Json;
@@ -182,6 +183,12 @@ namespace LuaSTGEditorSharp.EditorData
         /// Use this property to get the attribute count of this node.
         /// </summary>
         public int AttributeCount { get => attributes.Count; }
+
+        /// <summary>
+        /// Identify whether ignore parity check for this node.
+        /// </summary>
+        [JsonIgnore, XmlIgnore]
+        protected virtual bool EnableParityCheck { get => true; }
 
         /// <summary>
         /// The constructor used by Serializer. Classes who inherit it must override this.
@@ -415,7 +422,7 @@ namespace LuaSTGEditorSharp.EditorData
                 {
                     a = GetMessage();
                 }
-                a.AddRange(GetMismatchedAttributeMessage());
+                if(EnableParityCheck) a.AddRange(GetMismatchedAttributeMessage());
                 Messages.Clear();
                 foreach (MessageBase mb in a)
                 {
@@ -987,7 +994,7 @@ namespace LuaSTGEditorSharp.EditorData
         /// </summary>
         /// <param name="attrItem">The target <see cref="AttrItem"/></param>
         /// <returns>The <see cref="string"/> after applying macros.</returns>
-        protected string Macrolize(AttrItem attrItem)
+        private string Macrolize(AttrItem attrItem)
         {
             string s = attrItem.AttrInput;
             foreach(Compile.DefineMarco m in parentWorkSpace.CompileProcess.marcoDefinition)
@@ -1005,7 +1012,14 @@ namespace LuaSTGEditorSharp.EditorData
         /// <returns>The <see cref="string"/> after applying macros.</returns>
         protected string Macrolize(int i)
         {
-            return Macrolize(attributes[i]);
+            if (GetType() != typeof(UnidentifiedNode))
+            {
+                return Macrolize(attributes[i]);
+            }
+            else
+            {
+                return Macrolize(attributes[i + 1]);
+            }
         }
         
         /// <summary>
@@ -1013,7 +1027,7 @@ namespace LuaSTGEditorSharp.EditorData
         /// </summary>
         /// <param name="attrItem">The target <see cref="AttrItem"/></param>
         /// <returns>The <see cref="string"/> of inputs.</return
-        public string NonMacrolize(AttrItem attrItem)
+        private string NonMacrolize(AttrItem attrItem)
         {
             return attrItem.AttrInput;
         }
@@ -1025,7 +1039,14 @@ namespace LuaSTGEditorSharp.EditorData
         /// <returns>The <see cref="string"/> of inputs.</return
         public string NonMacrolize(int i)
         {
-            return NonMacrolize(attributes[i]);
+            if (GetType() != typeof(UnidentifiedNode))
+            {
+                return NonMacrolize(attributes[i]);
+            }
+            else
+            {
+                return NonMacrolize(attributes[i + 1]);
+            }
         }
 
         /// <summary>

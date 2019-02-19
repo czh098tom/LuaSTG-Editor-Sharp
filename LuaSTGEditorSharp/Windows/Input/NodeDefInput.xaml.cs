@@ -19,19 +19,25 @@ using LuaSTGEditorSharp.EditorData.Document.Meta;
 namespace LuaSTGEditorSharp.Windows.Input
 {
     /// <summary>
-    /// ImageInput.xaml 的交互逻辑
+    /// BulletDefInput.xaml 的交互逻辑
     /// </summary>
-    public partial class ImageInput : InputWindow
+    public partial class NodeDefInput : InputWindow
     {
-        ObservableCollection<MetaModel> ImageInfo { get; set; }
+        private readonly string difficulty;
 
-        public ImageInput(string s, MainWindow owner, AttrItem item)
+        ObservableCollection<MetaModel> NodeDefModel { get; set; }
+
+        public NodeDefInput(string s, MainWindow owner, AttrItem item)
         {
-            ImageInfo = item.Parent.parentWorkSpace.Meta.aggregatableMetas[(int)MetaType.ImageLoad].GetAllSimpleWithDifficulty();
+            difficulty = item.Parent.GetDifficulty();
+
+            NodeDefModel = item.Parent.parentWorkSpace.Meta.aggregatableMetas[1].GetAllSimpleWithDifficulty(difficulty);
 
             InitializeComponent();
 
-            BoxImageData.ItemsSource = ImageInfo;
+            Title = "Choose node";
+
+            BoxNodeDefinitionData.ItemsSource = NodeDefModel;
 
             Result = s;
             codeText.Text = Result;
@@ -54,15 +60,10 @@ namespace LuaSTGEditorSharp.Windows.Input
             Keyboard.Focus(codeText);
         }
 
-        private void BoxImageData_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void BoxEditorObjDefinitionData_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            MetaModel m = (BoxImageData.SelectedItem as MetaModel);
+            MetaModel m = (BoxNodeDefinitionData.SelectedItem as MetaModel);
             if (!string.IsNullOrEmpty(m?.Result)) Result = m?.Result;
-            try
-            {
-                ImageExample.Source = new BitmapImage(new Uri(m?.ExInfo1));
-            }
-            catch { }
             codeText.Focus();
         }
 

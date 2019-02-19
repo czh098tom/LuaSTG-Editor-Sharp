@@ -89,7 +89,7 @@ namespace LuaSTGEditorSharp.EditorData.Document.Meta
                 Text = FullName,
                 FullName = FullName,
                 Icon = "/LuaSTGNodeLib;component/images/16x16/loadimage.png",
-                PreviewPath = ppath
+                ExInfo1 = ppath
             };
         }
     }

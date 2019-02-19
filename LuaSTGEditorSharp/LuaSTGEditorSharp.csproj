@@ -150,6 +150,7 @@
     <Compile Include="EditorData\Document\MetaInfoCollectionTypeCountAttribute.cs" />
     <Compile Include="EditorData\Document\MetaInfoDict.cs" />
     <Compile Include="EditorData\Document\Meta\ProjectFileMetaInfo.cs" />
+    <Compile Include="EditorData\Document\Meta\UserDefinedNodeMetaInfo.cs" />
     <Compile Include="EditorData\Document\PlainDocumentData.cs" />
     <Compile Include="EditorData\Document\ProjectData.cs" />
     <Compile Include="EditorData\Document\VirtualDoc.cs" />
@@ -173,6 +174,7 @@
     <Compile Include="EditorData\Node\AbstractNodeTypeCache.cs" />
     <Compile Include="EditorData\Node\Advanced\DefineMacro.cs" />
     <Compile Include="EditorData\Node\Advanced\Region.cs" />
+    <Compile Include="EditorData\Node\Advanced\UnidentifiedNode.cs" />
     <Compile Include="EditorData\Node\Advanced\UserDefinedNode.cs" />
     <Compile Include="EditorData\Node\EditorVersion.cs" />
     <Compile Include="EditorData\Node\General\Code.cs" />
@@ -236,6 +238,9 @@
       <DependentUpon>AboutNode.xaml</DependentUpon>
     </Compile>
     <Compile Include="EditorData\Document\Meta\MetaModel.cs" />
+    <Compile Include="Windows\Input\NodeDefInput.xaml.cs">
+      <DependentUpon>NodeDefInput.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\Input\Selector.xaml.cs">
       <DependentUpon>Selector.xaml</DependentUpon>
     </Compile>
@@ -289,6 +294,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Windows\Input\NodeDefInput.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Windows\Input\Selector.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -331,6 +340,8 @@
     <Resource Include="images\search.png" />
     <Resource Include="images\userdefinednode.png" />
     <Resource Include="images\16x16\userdefinednode.png" />
+    <Resource Include="images\unidentifiedNode.png" />
+    <Resource Include="images\16x16\unidentifiedNode.png" />
     <Content Include="Templates\Empty Project.lstgproj">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

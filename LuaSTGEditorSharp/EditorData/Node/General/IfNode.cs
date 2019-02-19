@@ -74,7 +74,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.General
 
         public override string ToString()
         {
-            return "if (" + NonMacrolize(attributes[0]) + ")";
+            return "if (" + NonMacrolize(0) + ")";
         }
 
         public override object Clone()

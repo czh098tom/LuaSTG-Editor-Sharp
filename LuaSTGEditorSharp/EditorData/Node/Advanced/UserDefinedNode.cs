@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using LuaSTGEditorSharp.EditorData.Message;
 using LuaSTGEditorSharp.EditorData.Document;
+using LuaSTGEditorSharp.EditorData.Document.Meta;
 using LuaSTGEditorSharp.EditorData.Node.NodeAttributes;
 using Newtonsoft.Json;
 
@@ -13,7 +14,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Advanced
 {
     [Serializable, NodeIcon("images/16x16/userdefinednode.png")]
     [LeafNode]
-    [RCInvoke(0)]
+    [CreateInvoke(0), RCInvoke(1)]
     public class UserDefinedNode : TreeNode
     {
         [JsonConstructor]
@@ -29,6 +30,11 @@ namespace LuaSTGEditorSharp.EditorData.Node.Advanced
             attributes.Add(new AttrItem("Prop 1 name", this));
             attributes.Add(new AttrItem("Prop 1 is string", "false", this, "bool"));
             attributes.Add(new AttrItem("Prop 1 edit window", this, "editWindow"));
+        }
+
+        public override MetaInfo GetMeta()
+        {
+            return new UserDefinedNodeMetaInfo(this);
         }
 
         public override IEnumerable<string> ToLua(int spacing)
@@ -63,11 +69,11 @@ namespace LuaSTGEditorSharp.EditorData.Node.Advanced
             }
             if (first)
             {
-                return "define node " + attributes[0].AttrInput;
+                return "Define node " + attributes[0].AttrInput;
             }
             else
             {
-                return "define node " + attributes[0].AttrInput + " with property " + bres;
+                return "Define node \"" + attributes[0].AttrInput + "\" with property (" + bres + ")";
             }
         }
 

@@ -55,7 +55,9 @@ namespace LuaSTGEditorSharp.Plugin
             #region advanced
             gen.Add(new ToolboxItemData("region", "images/region.png", "Region"), new AddNode(AddRegionNode));
             gen.Add(new ToolboxItemData("defmacro", "images/definemacro.png", "Define Macro"), new AddNode(AddDefineMacroNode));
+            gen.Add(new ToolboxItemData(true), null);
             gen.Add(new ToolboxItemData("userdef", "images/userdefinednode.png", "User Defined Node"), new AddNode(AddUserDefinedNode));
+            gen.Add(new ToolboxItemData("unidentified", "images/unidentifiednode.png", "Unidentified Node"), new AddNode(AddUnidentifiedNode));
             #endregion
             ToolInfo.Add("General", gen);
         }
@@ -163,6 +165,11 @@ namespace LuaSTGEditorSharp.Plugin
         private void AddUserDefinedNode()
         {
             parent.Insert(new UserDefinedNode(parent.ActivatedWorkSpaceData));
+        }
+
+        private void AddUnidentifiedNode()
+        {
+            parent.Insert(new UnidentifiedNode(parent.ActivatedWorkSpaceData));
         }
         #endregion
         #region project

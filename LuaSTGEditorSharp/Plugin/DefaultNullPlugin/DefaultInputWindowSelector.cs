@@ -29,6 +29,9 @@ namespace LuaSTGEditorSharp.Plugin.DefaultNullPlugin
                 case "bool":
                     window = new Selector(toEdit, owner, SelectComboBox(name), "Input Bool");
                     break;
+                case "userDefinedNode":
+                    window = new NodeDefInput(toEdit, owner, source);
+                    break;
                 default:
                     window = new SingleLineInput(toEdit, owner);
                     break;

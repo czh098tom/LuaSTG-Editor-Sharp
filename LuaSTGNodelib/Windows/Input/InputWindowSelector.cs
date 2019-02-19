@@ -121,6 +121,9 @@ namespace LuaSTGEditorSharp.Windows.Input
                 case "laserStyle":
                     window = new LaserInput(toEdit, owner);
                     break;
+                case "userDefinedNode":
+                    window = new NodeDefInput(toEdit, owner, source);
+                    break;
                 case "bulletDef":
                     window = new EditorObjDefInput(toEdit, MetaType.Bullet, owner, source);
                     break;

@@ -28,6 +28,23 @@ namespace LuaSTGEditorSharp.Windows
 
         public virtual void InitializeTree()
         {
+            Tree.Add(GetUserDefinedMeta());
+        }
+
+        protected MetaModel GetUserDefinedMeta()
+        {
+            MetaModel userDefinedNode = new MetaModel
+            {
+                Icon = "/LuaSTGEditorSharp;component/images/16x16/userdefinednode.png",
+                Text = "User Defined Nodes"
+            };
+            var a = data.Meta.aggregatableMetas[1].GetAllFullWithDifficulty("");
+            foreach (MetaModel info in a)
+            {
+                userDefinedNode.Children.Add(info);
+            }
+
+            return userDefinedNode;
         }
     }
 }
