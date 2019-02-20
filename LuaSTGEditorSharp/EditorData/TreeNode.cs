@@ -994,7 +994,7 @@ namespace LuaSTGEditorSharp.EditorData
         /// </summary>
         /// <param name="attrItem">The target <see cref="AttrItem"/></param>
         /// <returns>The <see cref="string"/> after applying macros.</returns>
-        private string Macrolize(AttrItem attrItem)
+        protected string Macrolize(AttrItem attrItem)
         {
             string s = attrItem.AttrInput;
             foreach(Compile.DefineMarco m in parentWorkSpace.CompileProcess.marcoDefinition)
@@ -1008,7 +1008,10 @@ namespace LuaSTGEditorSharp.EditorData
         /// This method executes all macros currently in the <see cref="CompileProcess"/> to an<see cref="AttrItem"/>.
         /// Can only be called in Compile Methods.
         /// </summary>
-        /// <param name="i">The id of target <see cref="AttrItem"/></param>
+        /// <param name="i">
+        /// The id of target <see cref="AttrItem"/>.
+        /// Case of <see cref="UnidentifiedNode"/> has taken into account.
+        /// </param>
         /// <returns>The <see cref="string"/> after applying macros.</returns>
         protected string Macrolize(int i)
         {
@@ -1027,7 +1030,7 @@ namespace LuaSTGEditorSharp.EditorData
         /// </summary>
         /// <param name="attrItem">The target <see cref="AttrItem"/></param>
         /// <returns>The <see cref="string"/> of inputs.</return
-        private string NonMacrolize(AttrItem attrItem)
+        protected string NonMacrolize(AttrItem attrItem)
         {
             return attrItem.AttrInput;
         }
@@ -1035,7 +1038,10 @@ namespace LuaSTGEditorSharp.EditorData
         /// <summary>
         /// This method gets the directly contents of inputs in a <see cref="AttrItem"/>.
         /// </summary>
-        /// <param name="i">The id of target <see cref="AttrItem"/></param>
+        /// <param name="i">
+        /// The id of target <see cref="AttrItem"/>.
+        /// Case of <see cref="UnidentifiedNode"/> has taken into account.
+        /// </param>
         /// <returns>The <see cref="string"/> of inputs.</return
         public string NonMacrolize(int i)
         {

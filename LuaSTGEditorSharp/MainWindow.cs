@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows;
@@ -94,6 +95,32 @@ namespace LuaSTGEditorSharp
                 comboDict.IsDropDownOpen = true;
             }
             */
+        }
+
+        public void GetPresets()
+        {
+            Presets.Clear();
+            string s = Path.GetFullPath(Path.Combine(
+                Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
+                , "LuaSTG Editor Sharp Presets"));
+            if (!Directory.Exists(s)) Directory.CreateDirectory(s);
+            GetDirInfo(new DirectoryInfo(s), Presets);
+        }
+        
+        private void GetDirInfo(DirectoryInfo path, ObservableCollection<FileDirectoryModel> input)
+        {
+            FileDirectoryModel temp;
+            foreach(DirectoryInfo di in path.EnumerateDirectories())
+            {
+                temp = new FileDirectoryModel() { Name = di.Name, FullPath = di.FullName };
+                GetDirInfo(di, temp.Children);
+                input.Add(temp);
+            }
+            foreach(FileInfo fi in path.EnumerateFiles())
+            {
+                temp = new FileDirectoryModel() { Name = fi.Name, FullPath = fi.FullName };
+                input.Add(temp);
+            }
         }
     }
 }

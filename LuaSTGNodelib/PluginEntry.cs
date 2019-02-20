@@ -55,6 +55,7 @@ namespace LuaSTGEditorSharp
 
         public override int[][] MetaInfoCollectionWatchDict
             => new int[][]{
+                new int[]{ (int)MetaType.userDefined },
                 new int[]{ (int)MetaType.stageGroup },
                 new int[]{ (int)MetaType.Boss, (int)MetaType.Bullet, (int)MetaType.BossBG
                     , (int)MetaType.Laser, (int)MetaType.BentLaser },

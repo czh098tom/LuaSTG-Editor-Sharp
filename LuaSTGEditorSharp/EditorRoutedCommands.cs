@@ -23,6 +23,11 @@ namespace LuaSTGEditorSharp
         public static RoutedUICommand StageDebug { get; }
         public static RoutedUICommand ExportZip { get; }
         #endregion
+        #region insert
+        public static RoutedUICommand InsertPreset { get; }
+        public static RoutedUICommand SavePreset { get; }
+        public static RoutedUICommand RefreshPreset { get; }
+        #endregion
         #region insertFac
         public static RoutedUICommand SwitchBefore { get; }
         public static RoutedUICommand SwitchAfter { get; }
@@ -81,6 +86,9 @@ namespace LuaSTGEditorSharp
             StageDebug = new RoutedUICommand("Debug Stage", "DebugStage", typeof(EditorRoutedCommands), inputs);
             ExportCode = new RoutedUICommand("Export Code", "ExportCode", typeof(EditorRoutedCommands));
             ExportZip = new RoutedUICommand("Export Zip", "ExportZip", typeof(EditorRoutedCommands));
+            InsertPreset = new RoutedUICommand("Insert Preset", "InsertPreset", typeof(EditorRoutedCommands));
+            SavePreset = new RoutedUICommand("Save Preset", "SavePreset", typeof(EditorRoutedCommands));
+            RefreshPreset = new RoutedUICommand("Refresh Preset", "RefreshPreset", typeof(EditorRoutedCommands));
             inputs = new InputGestureCollection
             {
                 new KeyGesture(Key.Up, ModifierKeys.Alt, "Alt+Up")

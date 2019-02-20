@@ -227,6 +227,7 @@
     <Compile Include="Toolbox\BindableStaticResource.cs" />
     <Compile Include="Toolbox\ComboBoxItemTemplateSelector.cs" />
     <Compile Include="Toolbox\DependencyObjectExtensions.cs" />
+    <Compile Include="Toolbox\FileDirectoryModel.cs" />
     <Compile Include="Toolbox\SearchModel.cs" />
     <Compile Include="Toolbox\ToolboxItemData.cs" />
     <Compile Include="Toolbox\ToolboxTab.cs" />

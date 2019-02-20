@@ -21,7 +21,7 @@ namespace LuaSTGEditorSharp.Plugin.DefaultNullPlugin
 
         public override int MetaInfoCollectionTypeCount => 2;
 
-        public override int[][] MetaInfoCollectionWatchDict => new int[][] { new int[] { 0 }, new int[] { 1 } };
+        public override int[][] MetaInfoCollectionWatchDict => new int[][] { new int[] { 1 } };
 
         public override IInputWindowSelector GetInputWindowSelector()
         {

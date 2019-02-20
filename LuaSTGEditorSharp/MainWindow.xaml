@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:LuaSTGEditorSharp"
         xmlns:cm="clr-namespace:System.ComponentModel;assembly=System"
         xmlns:tool="clr-namespace:LuaSTGEditorSharp.Toolbox"
+        xmlns:om="clr-namespace:System.Collections.Generic;assembly=mscorlib"
         mc:Ignorable="d"
         Title="LuaSTG Editor Sharp" Height="679.6" Width="800" WindowState="Maximized" Closing="Window_Closing">
     <Window.CommandBindings>
@@ -35,6 +36,9 @@
         <CommandBinding Command="local:EditorRoutedCommands.SCDebug" Executed="SCDebugCommandExecuted" CanExecute="SCDebugCommand_CanExecute"/>
         <CommandBinding Command="local:EditorRoutedCommands.StageDebug" Executed="StageDebugCommandExecuted" CanExecute="StageDebugCommand_CanExecute"/>
         <!--#endregion-->
+        <CommandBinding Command="local:EditorRoutedCommands.InsertPreset" Executed="InsertPresetCommandExecuted" CanExecute="InsertPresetCommand_CanExecute"/>
+        <CommandBinding Command="local:EditorRoutedCommands.SavePreset" Executed="SavePresetCommandExecuted" CanExecute="SavePresetCommand_CanExecute"/>
+        <CommandBinding Command="local:EditorRoutedCommands.RefreshPreset" Executed="RefreshPresetCommandExecuted"/>
         <CommandBinding Command="local:EditorRoutedCommands.SwitchBefore" Executed="SwitchBeforeCommandExecuted"/>
         <CommandBinding Command="local:EditorRoutedCommands.SwitchAfter" Executed="SwitchAfterCommandExecuted"/>
         <CommandBinding Command="local:EditorRoutedCommands.SwitchChild" Executed="SwitchChildCommandExecuted"/>
@@ -89,34 +93,77 @@
                              DoWork="BeginPackaging"
                              ProgressChanged="PackageProgressReport"
                              RunWorkerCompleted="FinishPackaging"/>
-        <!--<cm:BackgroundWorker x:Key="backgroundWorker" WorkerReportsProgress="True"/>-->
     </Window.Resources>
     <DockPanel>
         <Border DockPanel.Dock="Top">
             <Menu>
                 <MenuItem Header="_File">
-                    <MenuItem Header="_New" Command="ApplicationCommands.New"/>
-                    <MenuItem Header="_Open" Command="ApplicationCommands.Open"/>
+                    <MenuItem Header="_New" Command="ApplicationCommands.New">
+                        <MenuItem.Icon>
+                            <Image Source="images/new.png"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="_Open" Command="ApplicationCommands.Open">
+                        <MenuItem.Icon>
+                            <Image Source="images/open.png"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
                     <Separator/>
-                    <MenuItem Header="_Save" Command="ApplicationCommands.Save"/>
+                    <MenuItem Header="_Save" Command="ApplicationCommands.Save">
+                        <MenuItem.Icon>
+                            <Image Source="images/save.png"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
                     <MenuItem Header="_Save as" Command="ApplicationCommands.SaveAs"/>
                     <Separator/>
                     <MenuItem Header="_Close" Command="ApplicationCommands.Close"/>
                 </MenuItem>
                 <MenuItem Header="_Edit">
-                    <MenuItem Header="_Undo" Command="ApplicationCommands.Undo"/>
-                    <MenuItem Header="_Redo" Command="ApplicationCommands.Redo"/>
+                    <MenuItem Header="_Undo" Command="ApplicationCommands.Undo">
+                        <MenuItem.Icon>
+                            <Image Source="images/undo.png"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="_Redo" Command="ApplicationCommands.Redo">
+                        <MenuItem.Icon>
+                            <Image Source="images/redo.png"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
                     <Separator/>
-                    <MenuItem Header="_Cut" Command="ApplicationCommands.Cut"/>
-                    <MenuItem Header="_Copy" Command="ApplicationCommands.Copy"/>
-                    <MenuItem Header="_Paste" Command="ApplicationCommands.Paste"/>
+                    <MenuItem Header="_Cut" Command="ApplicationCommands.Cut">
+                        <MenuItem.Icon>
+                            <Image Source="images/cut.png"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="_Copy" Command="ApplicationCommands.Copy">
+                        <MenuItem.Icon>
+                            <Image Source="images/copy.png"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="_Paste" Command="ApplicationCommands.Paste">
+                        <MenuItem.Icon>
+                            <Image Source="images/paste.png"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
                     <Separator/>
-                    <MenuItem Header="_Delete" Command="ApplicationCommands.Delete"/>
+                    <MenuItem Header="_Delete" Command="ApplicationCommands.Delete">
+                        <MenuItem.Icon>
+                            <Image Source="images/delete.png"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
                     <Separator/>
                     <MenuItem Header="_Switch Ban" Command="local:EditorRoutedCommands.SwitchBan"/>
                     <Separator/>
-                    <MenuItem Header="_Fold region" Command="local:EditorRoutedCommands.FoldRegion"/>
-                    <MenuItem Header="_Unfold as region"  Command="local:EditorRoutedCommands.UnfoldAsRegion"/>
+                    <MenuItem Header="_Fold region" Command="local:EditorRoutedCommands.FoldRegion">
+                        <MenuItem.Icon>
+                            <Image Source="images/foldregion.png"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="_Unfold as region" Command="local:EditorRoutedCommands.UnfoldAsRegion">
+                        <MenuItem.Icon>
+                            <Image Source="images/unfoldasregion.png"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
                 </MenuItem>
                 <MenuItem Header="_Tools">
                     <MenuItem Header="_Refactor..."/>
@@ -126,16 +173,68 @@
                     <MenuItem Header="_Library tools..."/>
                 </MenuItem>
                 <MenuItem Header="_Insert">
-                    <MenuItem Header="_Before" Command="local:EditorRoutedCommands.SwitchBefore" IsChecked="{Binding IsBeforeState, ElementName=window, Mode=OneWay}"/>
-                    <MenuItem Header="_After" Command="local:EditorRoutedCommands.SwitchAfter" IsChecked="{Binding IsAfterState, ElementName=window, Mode=OneWay}"/>
-                    <MenuItem Header="_Child" Command="local:EditorRoutedCommands.SwitchChild" IsChecked="{Binding IsChildState, ElementName=window, Mode=OneWay}"/>
-                    <MenuItem Header="_Parent" Command="local:EditorRoutedCommands.SwitchParent" IsChecked="{Binding IsParentState, ElementName=window, Mode=OneWay}"/>
+                    <MenuItem Header="_Presets..." x:Name="presetsMenu" Command="local:EditorRoutedCommands.InsertPreset">
+                        <MenuItem.ItemTemplate>
+                            <HierarchicalDataTemplate ItemsSource="{Binding Children}">
+                                <TextBlock Text="{Binding Name}"/>
+                            </HierarchicalDataTemplate>
+                        </MenuItem.ItemTemplate>
+                        <MenuItem.ItemContainerStyle>
+                            <Style TargetType="MenuItem">
+                                <Setter Property="Command" Value="local:EditorRoutedCommands.InsertPreset"/>
+                                <Setter Property="CommandParameter" Value="{Binding FullPath}"/>
+                            </Style>
+                        </MenuItem.ItemContainerStyle>
+                    </MenuItem>
+                    <MenuItem Header="_Save preset" Command="local:EditorRoutedCommands.SavePreset"/>
+                    <MenuItem Header="_Refresh preset list" Command="local:EditorRoutedCommands.RefreshPreset"/>
+                    <Separator/>
+                    <MenuItem Header="_Before" Command="local:EditorRoutedCommands.SwitchBefore" 
+                              IsChecked="{Binding IsBeforeState, ElementName=window, Mode=OneWay}">
+                        <MenuItem.Icon>
+                            <Image Source="images/up.png"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="_After" Command="local:EditorRoutedCommands.SwitchAfter" 
+                              IsChecked="{Binding IsAfterState, ElementName=window, Mode=OneWay}">
+                        <MenuItem.Icon>
+                            <Image Source="images/down.png"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="_Child" Command="local:EditorRoutedCommands.SwitchChild" 
+                              IsChecked="{Binding IsChildState, ElementName=window, Mode=OneWay}">
+                        <MenuItem.Icon>
+                            <Image Source="images/child.png"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="_Parent" Command="local:EditorRoutedCommands.SwitchParent" 
+                              IsChecked="{Binding IsParentState, ElementName=window, Mode=OneWay}">
+                        <MenuItem.Icon>
+                            <Image Source="images/parent.png"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
                 </MenuItem>
                 <MenuItem Header="_Compile">
-                    <MenuItem Header="_Run" Command="local:EditorRoutedCommands.RunProject"/>
-                    <MenuItem Header="_Test spell card" Command="local:EditorRoutedCommands.SCDebug"/>
-                    <MenuItem Header="_Test from scene node" Command="local:EditorRoutedCommands.StageDebug"/>
-                    <MenuItem Header="_Pack project" Command="local:EditorRoutedCommands.ExportZip"/>
+                    <MenuItem Header="_Run" Command="local:EditorRoutedCommands.RunProject">
+                        <MenuItem.Icon>
+                            <Image Source="images/run.png"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="_Test spell card" Command="local:EditorRoutedCommands.SCDebug">
+                        <MenuItem.Icon>
+                            <Image Source="images/debugsc.png"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="_Test from scene node" Command="local:EditorRoutedCommands.StageDebug">
+                        <MenuItem.Icon>
+                            <Image Source="images/debugstage.png"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="_Pack project" Command="local:EditorRoutedCommands.ExportZip">
+                        <MenuItem.Icon>
+                            <Image Source="images/pack.png"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
                 </MenuItem>
                 <MenuItem Header="_View">
                     <MenuItem Header="_File Folder" Command="local:EditorRoutedCommands.ViewFileFolder"/>
@@ -146,7 +245,11 @@
                     <MenuItem Header="_Definitions" Command="local:EditorRoutedCommands.ViewDefinition"/>
                 </MenuItem>
                 <MenuItem Header="_Settings">
-                    <MenuItem Header="_General settings" Command="local:EditorRoutedCommands.Settings" CommandParameter="0"/>
+                    <MenuItem Header="_General settings" Command="local:EditorRoutedCommands.Settings" CommandParameter="0">
+                        <MenuItem.Icon>
+                            <Image Source="images/setting.png"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
                     <MenuItem Header="_Compiler settings" Command="local:EditorRoutedCommands.Settings" CommandParameter="1"/>
                     <MenuItem Header="_Debug settings" Command="local:EditorRoutedCommands.Settings" CommandParameter="2"/>
                     <MenuItem Header="_Editor settings" Command="local:EditorRoutedCommands.Settings" CommandParameter="3"/>

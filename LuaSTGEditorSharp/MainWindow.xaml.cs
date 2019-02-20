@@ -51,6 +51,8 @@ namespace LuaSTGEditorSharp
         public ObservableCollection<ToolboxTab> toolboxData;
         public ObservableCollection<ToolboxTab> ToolboxData { get => toolboxData; }
 
+        ObservableCollection<FileDirectoryModel> Presets { get; } = new ObservableCollection<FileDirectoryModel>();
+
         private CommandTypeFac insertState = new AfterFac();
         
         public bool IsBeforeState { get => insertState.GetType() == typeof(BeforeFac); }
@@ -108,6 +110,8 @@ namespace LuaSTGEditorSharp
             comboDict.ItemsSource = toolbox.nodeNameList;
             this.docTabs.ItemsSource = Documents;
             EditorConsole.ItemsSource = Messages;
+            GetPresets();
+            presetsMenu.ItemsSource = Presets;
             CompileWorker = this.FindResource("CompileWorker") as BackgroundWorker;
         }
 
@@ -978,6 +982,31 @@ namespace LuaSTGEditorSharp
             e.CanExecute = PluginHandler.Plugin.MatchStageNodeTypes(t?.Parent?.Parent?.GetType()) && !packagingLocked;
         }
 
+        private void InsertPresetCommandExecuted(object sender, ExecutedRoutedEventArgs e)
+        {
+            MessageBox.Show(e.Parameter.ToString());
+        }
+
+        private void InsertPresetCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = selectedNode != null;
+        }
+
+        private void SavePresetCommandExecuted(object sender, ExecutedRoutedEventArgs e)
+        {
+
+        }
+
+        private void SavePresetCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = selectedNode != null;
+        }
+
+        private void RefreshPresetCommandExecuted(object sender, ExecutedRoutedEventArgs e)
+        {
+            GetPresets();
+        }
+
         private void SwitchBeforeCommandExecuted(object sender, ExecutedRoutedEventArgs e)
         {
             insertState = new BeforeFac();
@@ -1004,15 +1033,19 @@ namespace LuaSTGEditorSharp
         
         private void ViewFileFolderCommandExecuted(object sender, ExecutedRoutedEventArgs e)
         {
-            Process folder = new Process
+            try
             {
-                StartInfo = new ProcessStartInfo(Path.GetDirectoryName(ActivatedWorkSpaceData.DocPath))
+                Process folder = new Process
                 {
-                    UseShellExecute = true,
-                    CreateNoWindow = false
-                }
-            };
-            folder.Start();
+                    StartInfo = new ProcessStartInfo(Path.GetDirectoryName(ActivatedWorkSpaceData.DocPath))
+                    {
+                        UseShellExecute = true,
+                        CreateNoWindow = false
+                    }
+                };
+                folder.Start();
+            }
+            catch { }
         }
         
         private void ViewFileFolderCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
