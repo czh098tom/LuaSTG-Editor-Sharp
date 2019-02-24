@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using LuaSTGEditorSharp.EditorData;
 using LuaSTGEditorSharp.EditorData.Interfaces;
 using LuaSTGEditorSharp.EditorData.Document;
 using LuaSTGEditorSharp.EditorData.Node;

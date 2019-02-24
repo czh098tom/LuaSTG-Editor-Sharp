@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using LuaSTGEditorSharp.Windows;
-using LuaSTGEditorSharp.EditorData.Document;
+using LuaSTGEditorSharp.EditorData;
 
 namespace LuaSTGEditorSharp.Plugin.DefaultNullPlugin
 {

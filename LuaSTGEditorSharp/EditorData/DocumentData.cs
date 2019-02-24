@@ -5,10 +5,11 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using LuaSTGEditorSharp.EditorData.Document;
 using LuaSTGEditorSharp.Plugin;
 using Newtonsoft.Json;
 
-namespace LuaSTGEditorSharp.EditorData.Document
+namespace LuaSTGEditorSharp.EditorData
 {
     /// <summary>
     /// Base class for all single documents.
@@ -264,7 +265,7 @@ namespace LuaSTGEditorSharp.EditorData.Document
         /// </summary>
         /// <param name="fileName">The name of file.</param>
         /// <returns>The generated root.</returns>
-        public async Task<TreeNode> CreateNodeFromFileAsync(string fileName)
+        public static async Task<TreeNode> CreateNodeFromFileAsync(string fileName, DocumentData target)
         {
             TreeNode root = null;
             TreeNode prev = null;
@@ -298,7 +299,7 @@ namespace LuaSTGEditorSharp.EditorData.Document
                             }
                         }
                         tempN = (TreeNode)EditorSerializer.DeserializeTreeNode(des);
-                        tempN.parentWorkSpace = this;
+                        tempN.parentWorkSpace = target;
                         tempN.FixAttrParent();
                         prev.AddChild(tempN);
                         prev = tempN;
@@ -308,7 +309,7 @@ namespace LuaSTGEditorSharp.EditorData.Document
                     {
                         root = (TreeNode)EditorSerializer.DeserializeTreeNode(des);
                         root.FixAttrParent();
-                        root.parentWorkSpace = this;
+                        root.parentWorkSpace = target;
                         prev = root;
                         prevLevel = 0;
                     }

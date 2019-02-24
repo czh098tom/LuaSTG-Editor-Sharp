@@ -208,7 +208,7 @@ namespace LuaSTGEditorSharp
             {
                 DocumentData newDoc = DocumentData.GetNewByExtension(Path.GetExtension(path), Documents.MaxHash, name, path);
                 Documents.AddAndAllocHash(newDoc);
-                TreeNode t = await newDoc.CreateNodeFromFileAsync(path);
+                TreeNode t = await DocumentData.CreateNodeFromFileAsync(path, newDoc);
                 newDoc.TreeNodes.Add(t);
                 newDoc.OnOpening();
                 newDoc.TreeNodes[0].FixBan();
@@ -229,7 +229,7 @@ namespace LuaSTGEditorSharp
                 DocumentData newDoc = DocumentData.GetNewByExtension(Path.GetExtension(path), Documents.MaxHash, name, path);
                 newDoc.DocPath = "";
                 Documents.AddAndAllocHash(newDoc);
-                TreeNode t = await newDoc.CreateNodeFromFileAsync(path);
+                TreeNode t = await DocumentData.CreateNodeFromFileAsync(path, newDoc);
                 newDoc.TreeNodes.Add(t);
                 foreach (TreeNode node in t.Children)
                 {

@@ -144,7 +144,7 @@
     <Compile Include="EditorData\DependencyAttrItem.cs" />
     <Compile Include="EditorData\Document\AbstractMetaData.cs" />
     <Compile Include="EditorData\Document\DocumentCollection.cs" />
-    <Compile Include="EditorData\Document\DocumentData.cs" />
+    <Compile Include="EditorData\DocumentData.cs" />
     <Compile Include="EditorData\Document\MetaDataEntity.cs" />
     <Compile Include="EditorData\Document\MetaInfoCollection.cs" />
     <Compile Include="EditorData\Document\MetaInfoCollectionTypeCountAttribute.cs" />
@@ -154,6 +154,7 @@
     <Compile Include="EditorData\Document\PlainDocumentData.cs" />
     <Compile Include="EditorData\Document\ProjectData.cs" />
     <Compile Include="EditorData\Document\VirtualDoc.cs" />
+    <Compile Include="EditorData\DummyDoc.cs" />
     <Compile Include="EditorData\EditorSerializer.cs" />
     <Compile Include="EditorData\Exception\EXEPathNotSetException.cs" />
     <Compile Include="EditorData\Exception\InvalidRelativeResPathException.cs" />

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using LuaSTGEditorSharp.Plugin;
 using LuaSTGEditorSharp.Windows;
+using LuaSTGEditorSharp.EditorData;
 using LuaSTGEditorSharp.EditorData.Node;
 using LuaSTGEditorSharp.EditorData.Document;
 using LuaSTGEditorSharp.EditorData.Interfaces;
