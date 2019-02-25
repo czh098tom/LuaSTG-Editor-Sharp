@@ -210,8 +210,9 @@ namespace LuaSTGEditorSharp
                 Documents.AddAndAllocHash(newDoc);
                 TreeNode t = await DocumentData.CreateNodeFromFileAsync(path, newDoc);
                 newDoc.TreeNodes.Add(t);
+                t.RaiseCreate(new OnCreateEventArgs() { parent = null });
                 newDoc.OnOpening();
-                newDoc.TreeNodes[0].FixBan();
+                //newDoc.TreeNodes[0].FixBan();
                 newDoc.OriginalMeta.PropertyChanged += newDoc.OnEditing;
             }
             catch (JsonException e)
@@ -231,6 +232,7 @@ namespace LuaSTGEditorSharp
                 Documents.AddAndAllocHash(newDoc);
                 TreeNode t = await DocumentData.CreateNodeFromFileAsync(path, newDoc);
                 newDoc.TreeNodes.Add(t);
+                t.RaiseCreate(new OnCreateEventArgs() { parent = null });
                 foreach (TreeNode node in t.Children)
                 {
                     if (node is ProjSettings)
@@ -246,7 +248,7 @@ namespace LuaSTGEditorSharp
                     }
                 }
                 newDoc.OnOpening();
-                newDoc.TreeNodes[0].FixBan();
+                //newDoc.TreeNodes[0].FixBan();
                 newDoc.OriginalMeta.PropertyChanged += newDoc.OnEditing;
             }
             catch (JsonException)
@@ -286,11 +288,16 @@ namespace LuaSTGEditorSharp
 
         private void PasteNode()
         {
-            TreeNode node = (TreeNode)clipBoard.Clone();
-            node.FixParentDoc(ActivatedWorkSpaceData);
-            ActivatedWorkSpaceData.AddAndExecuteCommand(
-                insertState.ValidateAndNewInsert(
-                    selectedNode, node));
+            try
+            {
+                TreeNode node = (TreeNode)clipBoard.Clone();
+                node.FixParentDoc(ActivatedWorkSpaceData);
+                node.IsSelected = (Application.Current as App).AutoMoveToNew;
+                ActivatedWorkSpaceData.AddAndExecuteCommand(
+                    insertState.ValidateAndNewInsert(
+                        selectedNode, node));
+            }
+            catch { }
         }
 
         private void Undo()
@@ -378,7 +385,7 @@ namespace LuaSTGEditorSharp
             TreeNode t = serializer.Deserialize(sr) as TreeNode;
             newDoc.TreeNodes.Add(t);
             newDoc.OnOpening();
-            newDoc.TreeNodes[0].FixBan();
+            //newDoc.TreeNodes[0].FixBan();
             newDoc.OriginalMeta.PropertyChanged += newDoc.OnEditing;
             sr.Close();
         }

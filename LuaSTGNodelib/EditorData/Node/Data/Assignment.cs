@@ -81,7 +81,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Data
             return bres;
         }
 
-        public override void ReflectAttr(DependencyAttrItem relatedAttrItem, string originalvalue)
+        public override void ReflectAttr(DependencyAttrItem relatedAttrItem, DependencyAttributeChangedEventArgs args)
         {
             int n = (attributes.Count - 1) / 2;
             if (!int.TryParse(NonMacrolize(0), out int nAttr)) nAttr = 0;

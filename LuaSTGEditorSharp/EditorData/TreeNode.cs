@@ -92,11 +92,11 @@ namespace LuaSTGEditorSharp.EditorData
                 parentWorkSpace.AddAndExecuteCommand(new SwitchBanCommand(this, value));
                 if (isBanned)
                 {
-                    RemoveMeta();
+                    RaiseVirtuallyRemove(new OnRemoveEventArgs() { parent = Parent });
                 }
                 else
                 {
-                    CreateMeta();
+                    RaiseVirtuallyCreate(new OnCreateEventArgs() { parent = Parent });
                 }
             }
         }
@@ -191,11 +191,128 @@ namespace LuaSTGEditorSharp.EditorData
         protected virtual bool EnableParityCheck { get => true; }
 
         /// <summary>
+        /// Identify whether a <see cref="TreeNode"/> is belong to a proper document. 
+        /// This property will determine whether event <see cref="OnCreate"/> and <see cref="OnRemove"/> are invoked.
+        /// </summary>
+        [JsonIgnore, XmlIgnore]
+        protected bool activated = false;
+
+        /// <summary>
+        /// Event when node is created.
+        /// </summary>
+        private event OnCreateNodeHandler OnCreate;
+        /// <summary>
+        /// Event when node switched banned off.
+        /// </summary>
+        private event OnCreateNodeHandler OnVirtuallyCreate;
+        /// <summary>
+        /// Event when node is removed.
+        /// </summary>
+        private event OnRemoveNodeHandler OnRemove;
+        /// <summary>
+        /// Event when node switched banned on.
+        /// </summary>
+        private event OnRemoveNodeHandler OnVirtuallyRemove;
+        /// <summary>
+        /// Event when node have an <see cref="DependencyAttrItem"/> changed.
+        /// </summary>
+        private event OnDependencyAttributeChangedHandler OnDependencyAttributeItemChanged;
+
+        /// <summary>
+        /// Raise <see cref="OnCreate"/> event.
+        /// </summary>
+        /// <param name="e">Arguments for this event.</param>
+        public void RaiseCreate(OnCreateEventArgs e)
+        {
+            if (e.parent == null || e.parent.activated)
+            {
+                if (!isBanned)
+                {
+                    OnVirtuallyCreate?.Invoke(e);
+                }
+                OnCreate?.Invoke(e);
+                OnCreateEventArgs args = new OnCreateEventArgs() { parent = this };
+                foreach (TreeNode t in Children)
+                {
+                    t.RaiseCreate(args);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Raise <see cref="OnVirtuallyCreate"/> event.
+        /// </summary>
+        /// <param name="e">Arguments for this event.</param>
+        public void RaiseVirtuallyCreate(OnCreateEventArgs e)
+        {
+            if (activated && !isBanned)
+            {
+                OnVirtuallyCreate?.Invoke(e);
+                foreach (TreeNode t in Children)
+                {
+                    t.RaiseVirtuallyCreate(e);
+                }
+            }
+        }
+        /// <summary>
+        /// Raise <see cref="OnRemove"/> event.
+        /// </summary>
+        /// <param name="e">Arguments for this event.</param>
+        public void RaiseRemove(OnRemoveEventArgs e)
+        {
+            if (e.parent == null || e.parent.activated)
+            {
+                if (!isBanned)
+                {
+                    OnVirtuallyRemove?.Invoke(e);
+                }
+                OnRemove?.Invoke(e);
+                OnCreateEventArgs args = new OnCreateEventArgs() { parent = this };
+                foreach (TreeNode t in Children)
+                {
+                    t.RaiseRemove(e);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Raise <see cref="OnVirtuallyRemove"/> event.
+        /// </summary>
+        /// <param name="e">Arguments for this event.</param>
+        public void RaiseVirtuallyRemove(OnRemoveEventArgs e)
+        {
+            //System.Windows.MessageBox.Show(activated.ToString());
+            if (activated && isBanned)
+            {
+                OnVirtuallyRemove?.Invoke(e);
+                foreach (TreeNode t in Children)
+                {
+                    t.RaiseVirtuallyRemove(e);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Raise <see cref="OnDependencyAttributeItemChanged"/> event.
+        /// </summary>
+        /// <param name="o">Object that trigger this event.</param>
+        /// <param name="e">Arguments for this event.</param>
+        public void RaiseDependencyPropertyChanged(DependencyAttrItem o, DependencyAttributeChangedEventArgs e)
+        {
+            OnDependencyAttributeItemChanged?.Invoke(o, e);
+        }
+
+        /// <summary>
         /// The constructor used by Serializer. Classes who inherit it must override this.
         /// </summary>
         protected TreeNode()
         {
             PropertyChanged += new PropertyChangedEventHandler(CheckMessage);
+            OnDependencyAttributeItemChanged += new OnDependencyAttributeChangedHandler(ReflectAttr);
+            OnVirtuallyCreate += new OnCreateNodeHandler(CreateMeta);
+            OnCreate += new OnCreateNodeHandler(CreatedActivation);
+            OnVirtuallyRemove += new OnRemoveNodeHandler(RemoveMeta);
+            OnRemove += new OnRemoveNodeHandler(RemovedDeactivation);
             Children = new ObservableCollection<TreeNode>();
             isExpanded = true;
         }
@@ -442,7 +559,7 @@ namespace LuaSTGEditorSharp.EditorData
         /// </summary>
         /// <param name="relatedAttrItem"> The <see cref="DependencyAttrItem"/> who call this. </param>
         /// <param name="originalvalue"> The original <see cref="DependencyAttrItem.AttrInput"/> value before it was changed. </param>
-        public virtual void ReflectAttr(DependencyAttrItem relatedAttrItem, string originalvalue) { }
+        public virtual void ReflectAttr(DependencyAttrItem relatedAttrItem, DependencyAttributeChangedEventArgs e) { }
         
         protected virtual void AddCompileSettings() { }
 
@@ -589,9 +706,7 @@ namespace LuaSTGEditorSharp.EditorData
         {
             Children.Add(n);
             n._parent = this;
-            MetaInfo meta = n.GetMeta();
-            n.RaiseProertyChanged("m");
-            if (meta != null) meta.Create(meta, parentWorkSpace.OriginalMeta);
+            n.RaiseCreate(new OnCreateEventArgs() { parent = this });
         }
 
         /// <summary>
@@ -603,7 +718,7 @@ namespace LuaSTGEditorSharp.EditorData
         {
             Children.Insert(index, n);
             n._parent = this;
-            n.CreateMeta();
+            n.RaiseCreate(new OnCreateEventArgs() { parent = this });
         }
 
         /// <summary>
@@ -613,7 +728,23 @@ namespace LuaSTGEditorSharp.EditorData
         public void RemoveChild(TreeNode t)
         {
             Children.Remove(t);
-            t.RemoveMeta();
+            t.RaiseRemove(new OnRemoveEventArgs() { parent = this });
+        }
+
+        /// <summary>
+        /// Activation after created.
+        /// </summary>
+        private void CreatedActivation(OnCreateEventArgs e)
+        {
+            activated = true;
+        }
+
+        /// <summary>
+        /// Deactivation after removed.
+        /// </summary>
+        private void RemovedDeactivation(OnRemoveEventArgs e)
+        {
+            activated = false;
         }
 
         /// <summary>
@@ -709,17 +840,19 @@ namespace LuaSTGEditorSharp.EditorData
         /// <summary>
         /// Create related <see cref="MetaInfo"/> and <see cref="MessageBase"/>.
         /// </summary>
-        private void CreateMeta()
+        /// <param name="e">Argument for event.</param>
+        private void CreateMeta(OnCreateEventArgs e)
         {
             MetaInfo meta = GetMeta();
             RaiseProertyChanged("m");
-            if (meta != null) meta.Create(meta, parentWorkSpace.OriginalMeta);
+            meta?.Create(meta, parentWorkSpace.OriginalMeta);
         }
 
         /// <summary>
         /// Remove related <see cref="MetaInfo"/> and <see cref="MessageBase"/>.
         /// </summary>
-        private void RemoveMeta()
+        /// <param name="e">Argument for event.</param>
+        private void RemoveMeta(OnRemoveEventArgs e)
         {
             MetaInfo meta = this.GetMeta();
             if (meta != null) meta.Remove(meta, parentWorkSpace.OriginalMeta);
@@ -806,11 +939,11 @@ namespace LuaSTGEditorSharp.EditorData
         {
             if (isBanned)
             {
-                RemoveMeta();
+                RemoveMeta(new OnRemoveEventArgs());
             }
             else
             {
-                CreateMeta();
+                CreateMeta(new OnCreateEventArgs());
             }
             foreach (TreeNode t in Children)
             {

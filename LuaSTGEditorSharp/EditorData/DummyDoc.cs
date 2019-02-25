@@ -24,7 +24,7 @@ namespace LuaSTGEditorSharp.EditorData
                 TreeNode t = null;
                 //TreeNode t = await DocumentData.CreateNodeFromFileAsync(path, null);
                 treeNodes.Add(t);
-                treeNodes[0].FixBan();
+                //treeNodes[0].FixBan();
             }
             catch (JsonException e)
             {

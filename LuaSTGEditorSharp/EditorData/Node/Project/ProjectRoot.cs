@@ -16,12 +16,19 @@ namespace LuaSTGEditorSharp.EditorData.Node.Project
     public class ProjectRoot : TreeNode
     { 
         [JsonConstructor]
-        private ProjectRoot() :base() { }
+        private ProjectRoot() :base()
+        {
+            //activated = true;
+        }
 
         public ProjectRoot(DocumentData workSpaceData)
-            : base(workSpaceData) { attributes.Add(new AttrItem("Name", this)); }
+            : this(workSpaceData, "") { attributes.Add(new AttrItem("Name", this)); }
         public ProjectRoot(DocumentData workSpaceData, string name) 
-            : base(workSpaceData) { attributes.Add(new AttrItem("Name", this) { AttrInput = name }); }
+            : base(workSpaceData)
+        {
+            attributes.Add(new AttrItem("Name", this) { AttrInput = name });
+            //activated = true;
+        }
 
         public override IEnumerable<Tuple<int, TreeNode>> GetLines()
         {

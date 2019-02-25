@@ -65,7 +65,8 @@ namespace LuaSTGEditorSharp.EditorData
             {
                 string s = attrInput;
                 attrInput = value;
-                _parent.ReflectAttr(this, s);
+                _parent.RaiseDependencyPropertyChanged(this
+                    , new DependencyAttributeChangedEventArgs() { originalValue = s });
                 RaiseProertyChanged("AttrInput");
                 _parent?.RaiseProertyChanged("ScreenString");
                 _parent?.parentWorkSpace?.OriginalMeta.RaisePropertyChanged(_parent.GetType().ToString());

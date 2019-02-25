@@ -24,7 +24,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Boss
         public override IEnumerable<string> ToLua(int spacing)
         {
             string sp = "".PadLeft(spacing * 4);
-            yield return sp + "function(self)\n" + sp + "    task.Do(self)\n";
+            yield return sp + "function(self)\n";
             foreach (var a in base.ToLua(spacing + 1))
             {
                 yield return a;
@@ -34,7 +34,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Boss
 
         public override IEnumerable<Tuple<int,TreeNode>> GetLines()
         {
-            yield return new Tuple<int, TreeNode>(2, this);
+            yield return new Tuple<int, TreeNode>(1, this);
             foreach(Tuple<int,TreeNode> t in GetChildLines())
             {
                 yield return t;

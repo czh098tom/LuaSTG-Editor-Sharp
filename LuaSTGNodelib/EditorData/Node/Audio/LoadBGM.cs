@@ -58,9 +58,9 @@ namespace LuaSTGEditorSharp.EditorData.Node.Audio
             return "Load background music \"" + NonMacrolize(1) + "\" from \"" + NonMacrolize(0) + "\"" + s;
         }
 
-        public override void ReflectAttr(DependencyAttrItem relatedAttrItem, string originalvalue)
+        public override void ReflectAttr(DependencyAttrItem relatedAttrItem, DependencyAttributeChangedEventArgs args)
         {
-            if (relatedAttrItem.AttrInput != originalvalue) 
+            if (relatedAttrItem.AttrInput != args.originalValue) 
             {
                 attributes[1].AttrInput = Path.GetFileNameWithoutExtension(attributes[0].AttrInput);
             }

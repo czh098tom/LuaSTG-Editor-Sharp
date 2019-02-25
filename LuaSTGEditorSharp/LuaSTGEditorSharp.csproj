@@ -197,6 +197,7 @@
     <Compile Include="EditorData\Node\NodeAttributes\NodeIconAttribute.cs" />
     <Compile Include="EditorData\Node\NodeAttributes\RequireAncestorAttribute.cs" />
     <Compile Include="EditorData\Node\NodeAttributes\RequireParentAttribute.cs" />
+    <Compile Include="EditorData\Node\NodeAttributes\RootNodeAttribute.cs" />
     <Compile Include="EditorData\Node\NodeAttributes\UniquenessAttribute.cs" />
     <Compile Include="EditorData\Node\Project\ProjectFile.cs" />
     <Compile Include="EditorData\Node\Project\ProjectRoot.cs" />
@@ -205,6 +206,7 @@
     <Compile Include="EditorData\Node\TypeCacheData.cs" />
     <Compile Include="EditorData\RelativePathConverter.cs" />
     <Compile Include="EditorData\TreeNode.cs" />
+    <Compile Include="EditorData\TreeNodeEventHandlers.cs" />
     <Compile Include="EditorData\WorkTree.cs" />
     <Compile Include="EditorRoutedCommands.cs" />
     <Compile Include="Lua\StringParser.cs" />

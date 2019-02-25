@@ -19,17 +19,17 @@ namespace LuaSTGEditorSharp.EditorData.Node
     public class RootFolder : TreeNode
     { 
         [JsonConstructor]
-        private RootFolder() :base() { }
-
-        public RootFolder(DocumentData workSpaceData) : base(workSpaceData)
+        private RootFolder() :base()
         {
-            //attributes.Add(new AttrItem("Name", this));
-            Name = "";
+            //activated = true; 
         }
+
+        public RootFolder(DocumentData workSpaceData) : this(workSpaceData, "") { }
         public RootFolder(DocumentData workSpaceData, string name) : base(workSpaceData)
         {
             //attributes.Add(new AttrItem("Name", this) { AttrInput = name });
             Name = name;
+            //activated = true;
         }
 
         [JsonIgnore, XmlAttribute("Name")]
