@@ -8,6 +8,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
+using System.Collections.Specialized;
 using LuaSTGEditorSharp.Plugin;
 using LuaSTGEditorSharp.EditorData.Commands;
 using LuaSTGEditorSharp.EditorData.Message;
@@ -155,11 +156,21 @@ namespace LuaSTGEditorSharp.EditorData
         /// </summary>
         [JsonIgnore, XmlIgnore]
         public DocumentData parentWorkSpace = null;
+        [JsonIgnore, XmlIgnore]
+        private ObservableCollection<TreeNode> children;
         /// <summary>
         /// Store the child <see cref="TreeNode"/> of this <see cref="TreeNode"/>.
         /// </summary>
         [JsonIgnore, XmlElement("Node")]
-        public ObservableCollection<TreeNode> Children { get; set; }
+        public ObservableCollection<TreeNode> Children
+        {
+            get => children;
+            set
+            {
+                children = value;
+                children.CollectionChanged += new NotifyCollectionChangedEventHandler(this.ChildrenChanged);
+            }
+        }
         /// <summary>
         /// Store the child <see cref="TreeNode"/> of this <see cref="TreeNode"/>.
         /// </summary>
@@ -300,6 +311,27 @@ namespace LuaSTGEditorSharp.EditorData
         public void RaiseDependencyPropertyChanged(DependencyAttrItem o, DependencyAttributeChangedEventArgs e)
         {
             OnDependencyAttributeItemChanged?.Invoke(o, e);
+        }
+
+        private void ChildrenChanged(object o, NotifyCollectionChangedEventArgs e)
+        {
+            TreeNode t;
+            if (e.NewItems != null)
+            {
+                foreach (var i in e.NewItems)
+                {
+                    t = (TreeNode)i;
+                    t.RaiseCreate(new OnCreateEventArgs() { parent = this });
+                    t._parent = this;
+                }
+            }
+            if (e.OldItems != null)
+            {
+                foreach (var i in e.OldItems)
+                {
+                    ((TreeNode)i).RaiseRemove(new OnRemoveEventArgs() { parent = this });
+                }
+            }
         }
 
         /// <summary>
@@ -705,8 +737,8 @@ namespace LuaSTGEditorSharp.EditorData
         public void AddChild(TreeNode n)
         {
             Children.Add(n);
-            n._parent = this;
-            n.RaiseCreate(new OnCreateEventArgs() { parent = this });
+            //n._parent = this;
+            //n.RaiseCreate(new OnCreateEventArgs() { parent = this });
         }
 
         /// <summary>
@@ -717,8 +749,8 @@ namespace LuaSTGEditorSharp.EditorData
         public void InsertChild(TreeNode n, int index)
         {
             Children.Insert(index, n);
-            n._parent = this;
-            n.RaiseCreate(new OnCreateEventArgs() { parent = this });
+            //n._parent = this;
+            //n.RaiseCreate(new OnCreateEventArgs() { parent = this });
         }
 
         /// <summary>
@@ -728,7 +760,7 @@ namespace LuaSTGEditorSharp.EditorData
         public void RemoveChild(TreeNode t)
         {
             Children.Remove(t);
-            t.RaiseRemove(new OnRemoveEventArgs() { parent = this });
+            //t.RaiseRemove(new OnRemoveEventArgs() { parent = this });
         }
 
         /// <summary>
