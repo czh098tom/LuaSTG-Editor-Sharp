@@ -159,7 +159,8 @@ namespace LuaSTGEditorSharp.EditorData
         [JsonIgnore, XmlIgnore]
         private ObservableCollection<TreeNode> children;
         /// <summary>
-        /// Store the child <see cref="TreeNode"/> of this <see cref="TreeNode"/>.
+        /// Get the child <see cref="TreeNode"/> of this <see cref="TreeNode"/>.
+        /// If is setted, register the <see cref="ObservableCollection{T}.CollectionChanged"/> event.
         /// </summary>
         [JsonIgnore, XmlElement("Node")]
         public ObservableCollection<TreeNode> Children
@@ -265,6 +266,7 @@ namespace LuaSTGEditorSharp.EditorData
                 }
             }
         }
+
         /// <summary>
         /// Raise <see cref="OnRemove"/> event.
         /// </summary>
@@ -313,6 +315,11 @@ namespace LuaSTGEditorSharp.EditorData
             OnDependencyAttributeItemChanged?.Invoke(o, e);
         }
 
+        /// <summary>
+        /// Event handler for <see cref="ObservableCollection{T}.CollectionChanged"/> in <see cref="Children"/>.
+        /// </summary>
+        /// <param name="o"></param>
+        /// <param name="e"></param>
         private void ChildrenChanged(object o, NotifyCollectionChangedEventArgs e)
         {
             TreeNode t;
@@ -332,6 +339,28 @@ namespace LuaSTGEditorSharp.EditorData
                     ((TreeNode)i).RaiseRemove(new OnRemoveEventArgs() { parent = this });
                 }
             }
+        }
+
+        /// <summary>
+        /// Rearrange all attributes by a given source.
+        /// </summary>
+        /// <param name="source">Source <see cref="TreeNode"/>.</param>
+        protected void DeepCopyFrom(TreeNode source)
+        {
+            var attrs = from AttrItem a in source.attributes select (AttrItem)a.Clone();
+            var childrens = from TreeNode t in source.Children select (TreeNode)t.Clone();
+            attributes = new ObservableCollection<AttrItem>();
+            foreach(AttrItem ai in attrs)
+            {
+                attributes.Add(ai);
+            }
+            Children = new ObservableCollection<TreeNode>();
+            foreach (TreeNode treeNode in childrens)
+            {
+                Children.Add(treeNode);
+            }
+            _parent = source._parent;
+            isExpanded = source.isExpanded;
         }
 
         /// <summary>

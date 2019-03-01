@@ -258,8 +258,7 @@ namespace LuaSTGEditorSharp.EditorData
             s.Close();
             return true;
         }
-
-
+        
         /// <summary>
         /// Generate <see cref="TreeNode"/> from file. Asynchronous.
         /// </summary>
