@@ -35,8 +35,20 @@ namespace LuaSTGEditorSharp.EditorData
         /// <summary>
         /// Store edit window args.
         /// </summary>
+        private string editWindow = "";
+        /// <summary>
+        /// Store edit window args.
+        /// </summary>
         [JsonProperty, XmlAttribute("edit")]
-        public string EditWindow { get; set; } = "";
+        public string EditWindow
+        {
+            get => editWindow;
+            set
+            {
+                editWindow = value;
+                RaiseProertyChanged("EditWindow");
+            }
+        }
 
         /// <summary>
         /// Store parent <see cref="TreeNode"/> of this attribute.
@@ -100,6 +112,19 @@ namespace LuaSTGEditorSharp.EditorData
         public AttrItem(string capital, string input, TreeNode parent, string editWindow) : this(capital, input, parent)
         {
             EditWindow = editWindow;
+        }
+
+        /// <summary>
+        /// Initializes <see cref="AttrItem"/> by capital, input and edit window.
+        /// </summary>
+        /// <param name="capital">The capital.</param>
+        /// <param name="input">The input.</param>
+        /// <param name="editWindow">The edit window args.</param>
+        public AttrItem(string capital, string input = "", string editWindow = "") : this()
+        {
+            this.attrCap = capital;
+            this.attrInput = input;
+            this.editWindow = editWindow;
         }
 
         /// <summary>

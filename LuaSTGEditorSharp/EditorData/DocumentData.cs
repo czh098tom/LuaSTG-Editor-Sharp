@@ -299,7 +299,7 @@ namespace LuaSTGEditorSharp.EditorData
                         }
                         tempN = (TreeNode)EditorSerializer.DeserializeTreeNode(des);
                         tempN.parentWorkSpace = target;
-                        tempN.FixAttrParent();
+                        //tempN.FixAttrParent();
                         prev.AddChild(tempN);
                         prev = tempN;
                         prevLevel += levelgrad;
@@ -307,7 +307,7 @@ namespace LuaSTGEditorSharp.EditorData
                     else
                     {
                         root = (TreeNode)EditorSerializer.DeserializeTreeNode(des);
-                        root.FixAttrParent();
+                        //root.FixAttrParent();
                         root.parentWorkSpace = target;
                         prev = root;
                         prevLevel = 0;
@@ -361,7 +361,7 @@ namespace LuaSTGEditorSharp.EditorData
                         }
                         tempN = (TreeNode)EditorSerializer.DeserializeTreeNode(des);
                         tempN.parentWorkSpace = this;
-                        tempN.FixAttrParent();
+                        //tempN.FixAttrParent();
                         prev.AddChild(tempN);
                         prev = tempN;
                         prevLevel += levelgrad;
@@ -369,7 +369,7 @@ namespace LuaSTGEditorSharp.EditorData
                     else
                     {
                         root = (TreeNode)EditorSerializer.DeserializeTreeNode(des);
-                        root.FixAttrParent();
+                        //root.FixAttrParent();
                         root.parentWorkSpace = this;
                         prev = root;
                         prevLevel = 0;

@@ -72,15 +72,8 @@ namespace LuaSTGEditorSharp.EditorData.Node.Boss
 
         public override object Clone()
         {
-            var n = new BossBGLayer(parentWorkSpace)
-            {
-                attributes = new ObservableCollection<AttrItem>(from AttrItem a in attributes select (AttrItem)a.Clone()),
-                Children = new ObservableCollection<TreeNode>(from TreeNode t in Children select (TreeNode)t.Clone()),
-                _parent = _parent,
-                isExpanded = isExpanded
-            };
-            n.FixAttrParent();
-            n.FixChildrenParent();
+            var n = new BossBGLayer(parentWorkSpace);
+            n.DeepCopyFrom(this);
             return n;
         }
     }

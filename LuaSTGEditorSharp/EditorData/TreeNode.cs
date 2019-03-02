@@ -37,8 +37,19 @@ namespace LuaSTGEditorSharp.EditorData
         /// Store attributes in <see cref="TreeNode"/>.
         /// </summary>
         //[XmlArray("attributes")]
-        [XmlIgnore]
+        [JsonIgnore, XmlIgnore]
         public ObservableCollection<AttrItem> attributes = new ObservableCollection<AttrItem>();
+
+        [XmlIgnore]
+        public ObservableCollection<AttrItem> Attributes
+        {
+            get => attributes;
+            set
+            {
+                attributes = value;
+                attributes.CollectionChanged += new NotifyCollectionChangedEventHandler(this.AttributesChanged);
+            }
+        }
         /// <summary>
         /// Store whether a <see cref="TreeNode"/> is expanded in view. Use this only when you do not want to refresh the view.
         /// </summary>
@@ -156,6 +167,10 @@ namespace LuaSTGEditorSharp.EditorData
         /// </summary>
         [JsonIgnore, XmlIgnore]
         public DocumentData parentWorkSpace = null;
+
+        /// <summary>
+        /// Store the child <see cref="TreeNode"/> of this <see cref="TreeNode"/>.
+        /// </summary>
         [JsonIgnore, XmlIgnore]
         private ObservableCollection<TreeNode> children;
         /// <summary>
@@ -340,16 +355,32 @@ namespace LuaSTGEditorSharp.EditorData
                 }
             }
         }
+        
+        private void AttributesChanged(object o, NotifyCollectionChangedEventArgs e)
+        {
+            AttrItem ai;
+            if (e.NewItems != null)
+            {
+                foreach (var i in e.NewItems)
+                {
+                    ai = (AttrItem)i;
+                    if (ai != null)
+                    {
+                        ai.Parent = this;
+                    }
+                }
+            }
+        }
 
         /// <summary>
         /// Rearrange all attributes by a given source.
         /// </summary>
         /// <param name="source">Source <see cref="TreeNode"/>.</param>
-        protected void DeepCopyFrom(TreeNode source)
+        public void DeepCopyFrom(TreeNode source)
         {
             var attrs = from AttrItem a in source.attributes select (AttrItem)a.Clone();
             var childrens = from TreeNode t in source.Children select (TreeNode)t.Clone();
-            attributes = new ObservableCollection<AttrItem>();
+            Attributes = new ObservableCollection<AttrItem>();
             foreach(AttrItem ai in attrs)
             {
                 attributes.Add(ai);
@@ -361,6 +392,7 @@ namespace LuaSTGEditorSharp.EditorData
             }
             _parent = source._parent;
             isExpanded = source.isExpanded;
+            isBanned = source.isBanned;
         }
 
         /// <summary>
@@ -375,6 +407,7 @@ namespace LuaSTGEditorSharp.EditorData
             OnVirtuallyRemove += new OnRemoveNodeHandler(RemoveMeta);
             OnRemove += new OnRemoveNodeHandler(RemovedDeactivation);
             Children = new ObservableCollection<TreeNode>();
+            Attributes = new ObservableCollection<AttrItem>();
             isExpanded = true;
         }
 
@@ -884,11 +917,11 @@ namespace LuaSTGEditorSharp.EditorData
             {
                 if (isDependency)
                 {
-                    ai = new DependencyAttrItem(name, this, defaultEditWindow);
+                    ai = new DependencyAttrItem(name, "", defaultEditWindow);
                 }
                 else
                 {
-                    ai = new AttrItem(name, this, defaultEditWindow);
+                    ai = new AttrItem(name, "", defaultEditWindow);
                 }
                 InsertAttrAt(id, ai);
             }

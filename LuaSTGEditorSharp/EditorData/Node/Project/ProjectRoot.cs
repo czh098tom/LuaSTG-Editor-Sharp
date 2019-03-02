@@ -45,14 +45,8 @@ namespace LuaSTGEditorSharp.EditorData.Node.Project
 
         public override object Clone()
         {
-            var n = new Folder(parentWorkSpace)
-            {
-                attributes = new ObservableCollection<AttrItem>(from AttrItem a in attributes select (AttrItem)a.Clone()),
-                Children = new ObservableCollection<TreeNode>(from TreeNode t in Children select (TreeNode)t.Clone()),
-                isExpanded = isExpanded
-            };
-            n.FixAttrParent();
-            n.FixChildrenParent();
+            var n = new Folder(parentWorkSpace);
+            n.DeepCopyFrom(this);
             return n;
         }
     }

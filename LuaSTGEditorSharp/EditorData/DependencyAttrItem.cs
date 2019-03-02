@@ -54,6 +54,15 @@ namespace LuaSTGEditorSharp.EditorData
             : base(capital, input, parent, editWindow) { }
 
         /// <summary>
+        /// Initializes <see cref="AttrItem"/> by capital, input and edit window.
+        /// </summary>
+        /// <param name="capital">The capital.</param>
+        /// <param name="input">The input.</param>
+        /// <param name="editWindow">The edit window args.</param>
+        public DependencyAttrItem(string capital, string input = "", string editWindow = "") 
+            : base(capital, input, editWindow) { }
+
+        /// <summary>
         /// Non-UI triggers for <see cref="attrInput"/>. Set value and raise events.
         /// Also tell parent <see cref="TreeNode"/> to update its <see cref="AttrItem"/>.
         /// </summary>

@@ -53,15 +53,8 @@ namespace LuaSTGEditorSharp.EditorData.Node.Laser
 
         public override object Clone()
         {
-            var n = new CreateLaser(parentWorkSpace)
-            {
-                attributes = new ObservableCollection<AttrItem>(from AttrItem a in attributes select (AttrItem)a.Clone()),
-                Children = new ObservableCollection<TreeNode>(from TreeNode t in Children select (TreeNode)t.Clone()),
-                _parent = _parent,
-                isExpanded = isExpanded
-            };
-            n.FixAttrParent();
-            n.FixChildrenParent();
+            var n = new CreateLaser(parentWorkSpace);
+            n.DeepCopyFrom(this);
             return n;
         }
     }
