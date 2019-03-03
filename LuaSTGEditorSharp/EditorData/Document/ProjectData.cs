@@ -111,6 +111,7 @@ namespace LuaSTGEditorSharp.EditorData.Document
                                     , Path.GetFileNameWithoutExtension(s), s);
                                 TreeNode t = newDoc.CreateNodeFromFile(s);
                                 newDoc.TreeNodes.Add(t);
+                                t.RaiseCreate(new OnCreateEventArgs() { parent = null });
                                 pdd = (newDoc as PlainDocumentData)?.GetVirtualDoc();
                             }
                             referencedDoc.Add(pdd);
