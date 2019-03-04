@@ -237,6 +237,7 @@ namespace LuaSTGEditorSharp.EditorData
             {
                 var saveFileDialog = new System.Windows.Forms.SaveFileDialog()
                 {
+                    InitialDirectory = (App.Current as App).SLDir,
                     Filter = ExtensionInfo,
                     FileName = saveAs ? "" : RawDocName
                 };
@@ -246,16 +247,31 @@ namespace LuaSTGEditorSharp.EditorData
                 }
                 while (string.IsNullOrEmpty(saveFileDialog.FileName));
                 path = saveFileDialog.FileName;
+                (App.Current as App).SLDir = Path.GetDirectoryName(path);
                 DocPath = path;
                 DocName = path.Substring(path.LastIndexOf("\\") + 1);
             }
             else path = DocPath;
             PushSavedCommand();
-            var s = new FileStream(path, FileMode.Create, FileAccess.Write);
-            var sw = new StreamWriter(s, Encoding.UTF8);
-            TreeNodes[0].SerializeFile(sw, 0);
-            sw.Close();
-            s.Close();
+            FileStream s = null;
+            StreamWriter sw = null;
+            try
+            {
+                s = new FileStream(path, FileMode.Create, FileAccess.Write);
+                sw = new StreamWriter(s, Encoding.UTF8);
+                TreeNodes[0].SerializeFile(sw, 0);
+            }
+            catch
+            {
+                System.Windows.MessageBox.Show("Unable to write to file \"" + path + "\".", "LuaSTG Editor Sharp"
+                    , System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+                return false;
+            }
+            finally
+            {
+                if (sw != null) sw.Close();
+                if (s != null) s.Close();
+            }
             return true;
         }
         

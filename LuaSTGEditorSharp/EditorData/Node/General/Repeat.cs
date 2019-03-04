@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 using LuaSTGEditorSharp.EditorData.Message;
 using LuaSTGEditorSharp.EditorData.Document;
 using LuaSTGEditorSharp.EditorData.Node.NodeAttributes;
@@ -36,6 +37,22 @@ namespace LuaSTGEditorSharp.EditorData.Node.General
             attributes.Add(new AttrItem("Var 1 name", this));
             attributes.Add(new AttrItem("Var 1 init value", this));
             attributes.Add(new AttrItem("Var 1 increment", this));
+        }
+
+        [JsonIgnore, XmlAttribute("RepeatTimes")]
+        //[DefaultValue("_infinity")]
+        public string RepeatTimes
+        {
+            get => DoubleCheckAttr(0, "Times").attrInput;
+            set => DoubleCheckAttr(0, "Times").attrInput = value;
+        }
+
+        [JsonIgnore, XmlAttribute("NumOfVar")]
+        //[DefaultValue("1")]
+        public string NumOfVar
+        {
+            get => DoubleCheckAttr(1, "Number of Var", isDependency: true).attrInput;
+            set => DoubleCheckAttr(1, "Number of Var", isDependency: true).attrInput = value;
         }
 
         public override IEnumerable<string> ToLua(int spacing)

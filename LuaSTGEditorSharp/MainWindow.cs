@@ -34,7 +34,7 @@ namespace LuaSTGEditorSharp
             }
         }
 
-        public void Insert(TreeNode node)
+        public void Insert(TreeNode node, bool isInvoke = true)
         {
             try
             {
@@ -42,7 +42,7 @@ namespace LuaSTGEditorSharp
                 node.IsSelected = move;
                 if (ActivatedWorkSpaceData.AddAndExecuteCommand(
                     insertState.ValidateAndNewInsert(
-                        selectedNode, node))) CreateInvoke(node);
+                        selectedNode, node)) && isInvoke) CreateInvoke(node);
             }
             catch (Exception) { }
         }
@@ -99,12 +99,12 @@ namespace LuaSTGEditorSharp
 
         public void GetPresets()
         {
-            Presets.Clear();
+            PresetsGetList.Clear();
             string s = Path.GetFullPath(Path.Combine(
                 Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
                 , "LuaSTG Editor Sharp Presets"));
             if (!Directory.Exists(s)) Directory.CreateDirectory(s);
-            GetDirInfo(new DirectoryInfo(s), Presets);
+            GetDirInfo(new DirectoryInfo(s), PresetsGetList);
         }
         
         private void GetDirInfo(DirectoryInfo path, ObservableCollection<FileDirectoryModel> input)
@@ -118,9 +118,11 @@ namespace LuaSTGEditorSharp
             }
             foreach(FileInfo fi in path.EnumerateFiles())
             {
-                temp = new FileDirectoryModel() { Name = fi.Name, FullPath = fi.FullName };
+                temp = new FileDirectoryModel() { Name = Path.GetFileNameWithoutExtension(fi.Name), FullPath = fi.FullName };
                 input.Add(temp);
             }
+            temp = new FileDirectoryModel() { Name = "New folder...", FullPath = path.FullName };
+            input.Add(temp);
         }
     }
 }

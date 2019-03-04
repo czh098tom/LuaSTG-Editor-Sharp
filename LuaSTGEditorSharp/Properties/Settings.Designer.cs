@@ -202,5 +202,17 @@ namespace LuaSTGEditorSharp.Properties {
                 this["UseInternalZipCompressor"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string SLDir {
+            get {
+                return ((string)(this["SLDir"]));
+            }
+            set {
+                this["SLDir"] = value;
+            }
+        }
     }
 }

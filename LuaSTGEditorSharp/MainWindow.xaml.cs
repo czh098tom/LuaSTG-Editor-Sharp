@@ -51,7 +51,7 @@ namespace LuaSTGEditorSharp
         public ObservableCollection<ToolboxTab> toolboxData;
         public ObservableCollection<ToolboxTab> ToolboxData { get => toolboxData; }
 
-        ObservableCollection<FileDirectoryModel> Presets { get; } = new ObservableCollection<FileDirectoryModel>();
+        ObservableCollection<FileDirectoryModel> PresetsGetList { get; } = new ObservableCollection<FileDirectoryModel>();
 
         private CommandTypeFac insertState = new AfterFac();
         
@@ -111,7 +111,7 @@ namespace LuaSTGEditorSharp
             this.docTabs.ItemsSource = Documents;
             EditorConsole.ItemsSource = Messages;
             GetPresets();
-            presetsMenu.ItemsSource = Presets;
+            presetsMenu.ItemsSource = PresetsGetList;
             CompileWorker = this.FindResource("CompileWorker") as BackgroundWorker;
         }
 
@@ -180,6 +180,7 @@ namespace LuaSTGEditorSharp
         {
             var loadFileDialog = new System.Windows.Forms.OpenFileDialog()
             {
+                InitialDirectory = (App.Current as App).SLDir,
                 Filter = "LuaSTG Sharp Editor File (*.lstges, *.lstgproj)|*.lstges;*.lstgproj",
                 Multiselect = true
             };
@@ -187,6 +188,7 @@ namespace LuaSTGEditorSharp
             for (int i = 0; i < loadFileDialog.FileNames.Length; i++)
             {
                 if (!IsOpened(loadFileDialog.FileNames[i])) OpenDocFromPath(loadFileDialog.SafeFileNames[i], loadFileDialog.FileNames[i]);
+                (App.Current as App).SLDir = Path.GetDirectoryName(loadFileDialog.FileNames[i]);
             }
         }
 
@@ -315,6 +317,70 @@ namespace LuaSTGEditorSharp
             ActivatedWorkSpaceData.AddAndExecuteCommand(new DeleteCommand(selectedNode));
         }
 
+        private void SavePreset()
+        {
+            TreeNode t = new RootFolder(null);
+            TreeNode selected = SelectedNode.Clone() as TreeNode;
+            t.AddChild(selected);
+            var dialog = new System.Windows.Forms.SaveFileDialog
+            {
+                Filter = "Lua Presets|*.lstgpreset",
+            };
+            dialog.InitialDirectory = Path.GetFullPath(Path.Combine(
+                Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
+                , "LuaSTG Editor Sharp Presets"));
+            string path = "";
+            if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                path = dialog.FileName;
+                FileStream s = null;
+                StreamWriter sw = null;
+                try
+                {
+                    s = new FileStream(path, FileMode.Create, FileAccess.Write);
+                    sw = new StreamWriter(s, Encoding.UTF8);
+                    t.SerializeFile(sw, 0);
+                    GetPresets();
+                }
+                catch
+                {
+                    MessageBox.Show("Unable to write to file \"" + path + "\".", "LuaSTG Editor Sharp"
+                        , MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                finally
+                {
+                    if (sw != null) sw.Close();
+                    if (s != null) s.Close();
+                }
+            }
+        }
+
+        private async Task InsertPreset(string s)
+        {
+            if (Directory.Exists(s))
+            {
+                var dialog = new SingleLineInput("", this) { Title = "Input Directory Name" };
+                if (dialog.ShowDialog() == true)
+                {
+                    Directory.CreateDirectory(Path.GetFullPath(Path.Combine(s, dialog.Result)));
+                    GetPresets();
+                }
+            }
+            else if (Path.GetExtension(s) == ".lstgpreset")
+            {
+                try
+                {
+                    TreeNode t = await DocumentData.CreateNodeFromFileAsync(s, ActivatedWorkSpaceData);
+                    if (t.Children == null || t.Children.Count < 1 || t.Children[0] == null) throw new Exception();
+                    Insert(t.Children[0], false);
+                }
+                catch
+                {
+                    MessageBox.Show("Failed to load preset.");
+                }
+            }
+        }
+
         private void GotoLine(int line)
         {
             int c = 0;
@@ -397,10 +463,12 @@ namespace LuaSTGEditorSharp
                 propData.CommitEdit();
                 var saveFileDialog = new System.Windows.Forms.SaveFileDialog()
                 {
+                    InitialDirectory = (App.Current as App).SLDir,
                     Filter = "Lua Code|*.lua"
                 };
                 saveFileDialog.ShowDialog();
                 if (string.IsNullOrEmpty(saveFileDialog.FileName)) return;
+                (App.Current as App).SLDir = Path.GetDirectoryName(saveFileDialog.FileName);
                 ActivatedWorkSpaceData.GatherCompileInfo(App.Current as App);
                 ActivatedWorkSpaceData.SaveCode(saveFileDialog.FileName);
             }
@@ -989,9 +1057,10 @@ namespace LuaSTGEditorSharp
             e.CanExecute = PluginHandler.Plugin.MatchStageNodeTypes(t?.Parent?.Parent?.GetType()) && !packagingLocked;
         }
 
-        private void InsertPresetCommandExecuted(object sender, ExecutedRoutedEventArgs e)
+        private async void InsertPresetCommandExecuted(object sender, ExecutedRoutedEventArgs e)
         {
-            MessageBox.Show(e.Parameter.ToString());
+            string s = e.Parameter.ToString();
+            await InsertPreset(s);
         }
 
         private void InsertPresetCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
@@ -1001,7 +1070,7 @@ namespace LuaSTGEditorSharp
 
         private void SavePresetCommandExecuted(object sender, ExecutedRoutedEventArgs e)
         {
-
+            SavePreset();
         }
 
         private void SavePresetCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)

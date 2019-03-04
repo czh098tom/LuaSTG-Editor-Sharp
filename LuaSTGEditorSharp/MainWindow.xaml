@@ -173,22 +173,6 @@
                     <MenuItem Header="_Library tools..."/>
                 </MenuItem>
                 <MenuItem Header="_Insert">
-                    <MenuItem Header="_Presets..." x:Name="presetsMenu" Command="local:EditorRoutedCommands.InsertPreset">
-                        <MenuItem.ItemTemplate>
-                            <HierarchicalDataTemplate ItemsSource="{Binding Children}">
-                                <TextBlock Text="{Binding Name}"/>
-                            </HierarchicalDataTemplate>
-                        </MenuItem.ItemTemplate>
-                        <MenuItem.ItemContainerStyle>
-                            <Style TargetType="MenuItem">
-                                <Setter Property="Command" Value="local:EditorRoutedCommands.InsertPreset"/>
-                                <Setter Property="CommandParameter" Value="{Binding FullPath}"/>
-                            </Style>
-                        </MenuItem.ItemContainerStyle>
-                    </MenuItem>
-                    <MenuItem Header="_Save preset" Command="local:EditorRoutedCommands.SavePreset"/>
-                    <MenuItem Header="_Refresh preset list" Command="local:EditorRoutedCommands.RefreshPreset"/>
-                    <Separator/>
                     <MenuItem Header="_Before" Command="local:EditorRoutedCommands.SwitchBefore" 
                               IsChecked="{Binding IsBeforeState, ElementName=window, Mode=OneWay}">
                         <MenuItem.Icon>
@@ -213,6 +197,23 @@
                             <Image Source="images/parent.png"/>
                         </MenuItem.Icon>
                     </MenuItem>
+                </MenuItem>
+                <MenuItem Header="Preset">
+                    <MenuItem Header="_Presets..." x:Name="presetsMenu" Command="local:EditorRoutedCommands.InsertPreset">
+                        <MenuItem.ItemTemplate>
+                            <HierarchicalDataTemplate ItemsSource="{Binding Children}">
+                                <TextBlock Text="{Binding Name}"/>
+                            </HierarchicalDataTemplate>
+                        </MenuItem.ItemTemplate>
+                        <MenuItem.ItemContainerStyle>
+                            <Style TargetType="MenuItem">
+                                <Setter Property="Command" Value="local:EditorRoutedCommands.InsertPreset"/>
+                                <Setter Property="CommandParameter" Value="{Binding FullPath}"/>
+                            </Style>
+                        </MenuItem.ItemContainerStyle>
+                    </MenuItem>
+                    <MenuItem Header="_Save preset..." Command="local:EditorRoutedCommands.SavePreset"/>
+                    <MenuItem Header="_Refresh preset list" Command="local:EditorRoutedCommands.RefreshPreset"/>
                 </MenuItem>
                 <MenuItem Header="_Compile">
                     <MenuItem Header="_Run" Command="local:EditorRoutedCommands.RunProject">
@@ -717,6 +718,8 @@
                                                             <Separator/>
                                                             <MenuItem Header="_Ban" Command="local:EditorRoutedCommands.SwitchBan"
                                                                       IsChecked="{Binding IsBanned, UpdateSourceTrigger=PropertyChanged}"/>
+                                                            <Separator/>
+                                                            <MenuItem Header="_Save Preset..." Command="local:EditorRoutedCommands.SavePreset"/>
                                                         </CompositeCollection>
                                                     </ContextMenu.ItemsSource>
                                                 </ContextMenu>

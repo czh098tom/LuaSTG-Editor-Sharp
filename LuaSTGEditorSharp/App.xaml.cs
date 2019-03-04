@@ -263,6 +263,15 @@ namespace LuaSTGEditorSharp
             }
         }
 
+        public string SLDir
+        {
+            get => Settings.Default.SLDir;
+            set
+            {
+                Settings.Default["SLDir"] = value;
+            }
+        }
+
         private void Application_Exit(object sender, ExitEventArgs e)
         {
             Settings.Default.Save();

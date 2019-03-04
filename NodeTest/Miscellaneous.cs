@@ -19,5 +19,12 @@ namespace NodeTest
         {
             Assert.AreEqual("LuaSTG Editor", new DirectoryInfo(@"C:\Users\czh\AppData\Local\Temp\LuaSTG Editor").Name);
         }
+
+        [TestMethod]
+        public void TestMethod3()
+        {
+            Assert.AreEqual(true, Directory.Exists(@"C:\Users\czh\AppData\Local\Temp\LuaSTG Editor"));
+            Assert.AreEqual(false, Directory.Exists(@"C:\Users\czh\AppData\Local\Temp\LuaSTG Editor\log.txt"));
+        }
     }
 }

@@ -11,7 +11,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+using System.IO;
 using LuaSTGEditorSharp.EditorData;
 
 namespace LuaSTGEditorSharp.Windows.Input
@@ -44,6 +44,7 @@ namespace LuaSTGEditorSharp.Windows.Input
         {
             var chooseFile = new OpenFileDialog()
             {
+                InitialDirectory = (App.Current as App).SLDir,
                 Filter = Extension
             };
             if (chooseFile.ShowDialog() != System.Windows.Forms.DialogResult.Cancel)
@@ -56,6 +57,11 @@ namespace LuaSTGEditorSharp.Windows.Input
                 {
                     Result = chooseFile.FileName;
                 }
+                try
+                {
+                    (App.Current as App).SLDir = Path.GetDirectoryName(chooseFile.FileName);
+                }
+                catch { }
             }
         }
 

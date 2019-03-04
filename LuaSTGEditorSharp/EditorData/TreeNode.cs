@@ -40,14 +40,27 @@ namespace LuaSTGEditorSharp.EditorData
         [JsonIgnore, XmlIgnore]
         public ObservableCollection<AttrItem> attributes = new ObservableCollection<AttrItem>();
 
+        /// <summary>
+        /// Get the <see cref="Attribute"/> of this <see cref="TreeNode"/>.
+        /// If is setted to null, create a new <see cref="ObservableCollection{T}"/>,
+        /// and register the <see cref="ObservableCollection{T}.CollectionChanged"/> event.
+        /// </summary>
         [XmlIgnore]
         public ObservableCollection<AttrItem> Attributes
         {
             get => attributes;
             set
             {
-                attributes = value;
-                attributes.CollectionChanged += new NotifyCollectionChangedEventHandler(this.AttributesChanged);
+                if (value == null)
+                {
+                    attributes = new ObservableCollection<AttrItem>();
+                    attributes.CollectionChanged += new NotifyCollectionChangedEventHandler(this.AttributesChanged);
+                }
+                else
+                {
+                    throw new InvalidOperationException();
+                    //attributes = value;
+                }
             }
         }
         /// <summary>
@@ -175,7 +188,8 @@ namespace LuaSTGEditorSharp.EditorData
         private ObservableCollection<TreeNode> children;
         /// <summary>
         /// Get the child <see cref="TreeNode"/> of this <see cref="TreeNode"/>.
-        /// If is setted, register the <see cref="ObservableCollection{T}.CollectionChanged"/> event.
+        /// If is setted to null, create a new <see cref="ObservableCollection{T}"/>,
+        /// and register the <see cref="ObservableCollection{T}.CollectionChanged"/> event.
         /// </summary>
         [JsonIgnore, XmlElement("Node")]
         public ObservableCollection<TreeNode> Children
@@ -183,8 +197,16 @@ namespace LuaSTGEditorSharp.EditorData
             get => children;
             set
             {
-                children = value;
-                children.CollectionChanged += new NotifyCollectionChangedEventHandler(this.ChildrenChanged);
+                if (value == null)
+                {
+                    children = new ObservableCollection<TreeNode>();
+                    children.CollectionChanged += new NotifyCollectionChangedEventHandler(this.ChildrenChanged);
+                }
+                else
+                {
+                    throw new InvalidOperationException();
+                    //children = value;
+                }
             }
         }
         /// <summary>
@@ -380,12 +402,12 @@ namespace LuaSTGEditorSharp.EditorData
         {
             var attrs = from AttrItem a in source.attributes select (AttrItem)a.Clone();
             var childrens = from TreeNode t in source.Children select (TreeNode)t.Clone();
-            Attributes = new ObservableCollection<AttrItem>();
+            Attributes = null;
             foreach(AttrItem ai in attrs)
             {
                 attributes.Add(ai);
             }
-            Children = new ObservableCollection<TreeNode>();
+            Children = null;
             foreach (TreeNode treeNode in childrens)
             {
                 Children.Add(treeNode);
@@ -406,8 +428,8 @@ namespace LuaSTGEditorSharp.EditorData
             OnCreate += new OnCreateNodeHandler(CreatedActivation);
             OnVirtuallyRemove += new OnRemoveNodeHandler(RemoveMeta);
             OnRemove += new OnRemoveNodeHandler(RemovedDeactivation);
-            Children = new ObservableCollection<TreeNode>();
-            Attributes = new ObservableCollection<AttrItem>();
+            Children = null;
+            Attributes = null;
             isExpanded = true;
         }
 
@@ -909,7 +931,7 @@ namespace LuaSTGEditorSharp.EditorData
         /// <param name="isDependency">Indicate whether a default <see cref="AttrItem"/> 
         /// is <see cref="DependencyAttrItem"/>.</param>
         /// <returns>The targeted <see cref="AttrItem"/> if found, otherwise a default <see cref="AttrItem"/>.</returns>
-        protected AttrItem DoubleCheckAttr(int id, string name, string defaultEditWindow = "", bool isDependency = false)
+        public AttrItem DoubleCheckAttr(int id, string name, string defaultEditWindow = "", bool isDependency = false)
         {
             AttrItem ai = GetAttr(id);
             if (ai == null || string.IsNullOrEmpty(ai.AttrCap) || ai.AttrCap != name) ai = GetAttr(name);

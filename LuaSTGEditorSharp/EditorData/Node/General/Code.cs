@@ -21,8 +21,8 @@ namespace LuaSTGEditorSharp.EditorData.Node.General
         [JsonConstructor]
         private Code() : base() { }
 
-        public Code(DocumentData workSpaceData) 
-            : base(workSpaceData) { attributes.Add(new AttrItem("Code", this, "code")); }
+        public Code(DocumentData workSpaceData)
+            : this(workSpaceData, "") { }
 
         public Code(DocumentData workSpaceData, string code) : base(workSpaceData)
         {

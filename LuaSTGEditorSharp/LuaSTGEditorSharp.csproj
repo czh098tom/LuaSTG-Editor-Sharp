@@ -177,6 +177,7 @@
     <Compile Include="EditorData\Node\Advanced\Region.cs" />
     <Compile Include="EditorData\Node\Advanced\UnidentifiedNode.cs" />
     <Compile Include="EditorData\Node\Advanced\UserDefinedNode.cs" />
+    <Compile Include="EditorData\Node\AttrItemListHelper.cs" />
     <Compile Include="EditorData\Node\EditorVersion.cs" />
     <Compile Include="EditorData\Node\General\Code.cs" />
     <Compile Include="EditorData\Node\General\CodeSegment.cs" />
@@ -187,6 +188,7 @@
     <Compile Include="EditorData\Node\General\IfThen.cs" />
     <Compile Include="EditorData\Node\General\Patch.cs" />
     <Compile Include="EditorData\Node\General\Repeat.cs" />
+    <Compile Include="EditorData\Node\GroupableAttrItemHelper.cs" />
     <Compile Include="EditorData\Node\NodeAttributes\CannotBanAttribute.cs" />
     <Compile Include="EditorData\Node\NodeAttributes\CannotDeleteAttribute.cs" />
     <Compile Include="EditorData\Node\NodeAttributes\ClassNodeAttribute.cs" />

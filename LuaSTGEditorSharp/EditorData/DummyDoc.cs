@@ -17,14 +17,12 @@ namespace LuaSTGEditorSharp.EditorData
             get => treeNodes.Count > 0 ? (treeNodes[0].Children.Count > 0 ? treeNodes[0].Children[0] : null) : null;
         }
 
-        public DummyDoc(string path)
+        private async void Create(string path)
         {
             try
             {
-                TreeNode t = null;
-                //TreeNode t = await DocumentData.CreateNodeFromFileAsync(path, null);
+                TreeNode t = await DocumentData.CreateNodeFromFileAsync(path, null);
                 treeNodes.Add(t);
-                //treeNodes[0].FixBan();
             }
             catch (JsonException e)
             {
