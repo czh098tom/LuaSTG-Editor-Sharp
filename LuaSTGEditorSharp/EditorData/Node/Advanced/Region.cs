@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 using LuaSTGEditorSharp.EditorData;
 using LuaSTGEditorSharp.EditorData.Document;
 using LuaSTGEditorSharp.EditorData.Node.NodeAttributes;
@@ -19,11 +20,21 @@ namespace LuaSTGEditorSharp.EditorData.Node.Advanced
         [JsonConstructor]
         private Region() : base() { }
 
-        public Region(DocumentData workSpaceData) 
-            : base(workSpaceData) { attributes.Add(new AttrItem("Name", this)); }
+        public Region(DocumentData workSpaceData) : this(workSpaceData, "") { }
 
-        public Region(DocumentData workSpaceData, string code) 
-            : base(workSpaceData) { attributes.Add(new AttrItem("Name", this) { AttrInput = code }); }
+        public Region(DocumentData workSpaceData, string code) : base(workSpaceData)
+        {
+            //attributes.Add(new AttrItem("Name", this) { AttrInput = code });
+            Name = code;
+        }
+
+        [JsonIgnore, XmlAttribute("Name")]
+        //[DefaultValue("do")]
+        public string Name
+        {
+            get => DoubleCheckAttr(0, "Name").attrInput;
+            set => DoubleCheckAttr(0, "Name").attrInput = value;
+        }
 
         public override IEnumerable<string> ToLua(int spacing)
         {

@@ -136,8 +136,8 @@
     <Compile Include="EditorData\Commands\MoveCommand.cs" />
     <Compile Include="EditorData\Commands\SwitchBanCommand.cs" />
     <Compile Include="EditorData\Commands\UnfoldAsRegionCommand.cs" />
-    <Compile Include="EditorData\Compile\DefineMarco.cs" />
     <Compile Include="EditorData\CompileProcess.cs" />
+    <Compile Include="EditorData\Compile\DefineMarcoSettings.cs" />
     <Compile Include="EditorData\Compile\PartialProjectProcess.cs" />
     <Compile Include="EditorData\Compile\ProjectProcess.cs" />
     <Compile Include="EditorData\Compile\SingleFileProcess.cs" />
@@ -169,10 +169,12 @@
     <Compile Include="EditorData\Message\ArgNotNullMessage.cs" />
     <Compile Include="EditorData\Message\AttributeMismatchMessage.cs" />
     <Compile Include="EditorData\Message\EXEPathNotSetMessage.cs" />
+    <Compile Include="EditorData\Message\InvalidArchiveSpaceMessage.cs" />
     <Compile Include="EditorData\Message\RepeatedNameMessage.cs" />
     <Compile Include="EditorData\Message\VarNameInvalidMessage.cs" />
     <Compile Include="EditorData\NodeType.cs" />
     <Compile Include="EditorData\Node\AbstractNodeTypeCache.cs" />
+    <Compile Include="EditorData\Node\Advanced\ArchiveSpaceIndicator.cs" />
     <Compile Include="EditorData\Node\Advanced\DefineMacro.cs" />
     <Compile Include="EditorData\Node\Advanced\Region.cs" />
     <Compile Include="EditorData\Node\Advanced\UnidentifiedNode.cs" />
@@ -348,6 +350,8 @@
     <Resource Include="images\16x16\userdefinednode.png" />
     <Resource Include="images\unidentifiedNode.png" />
     <Resource Include="images\16x16\unidentifiedNode.png" />
+    <Resource Include="images\archispace.png" />
+    <Resource Include="images\16x16\archispace.png" />
     <Content Include="Templates\Empty Project.lstgproj">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

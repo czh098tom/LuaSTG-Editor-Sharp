@@ -36,6 +36,7 @@ namespace LuaSTGEditorSharp
         #endregion
         #region view
         public static RoutedUICommand ViewFileFolder { get; }
+        public static RoutedUICommand ViewModFolder { get; }
         public static RoutedUICommand ViewDefinition { get; }
         #endregion
         public static RoutedUICommand Settings { get; }
@@ -110,6 +111,7 @@ namespace LuaSTGEditorSharp
             };
             SwitchParent = new RoutedUICommand("Switch Parent State", "SwitchParent", typeof(EditorRoutedCommands), inputs);
             ViewFileFolder = new RoutedUICommand("View File Folder", "ViewFileFolder", typeof(EditorRoutedCommands));
+            ViewModFolder = new RoutedUICommand("View Mod Folder", "ViewModFolder", typeof(EditorRoutedCommands));
             ViewDefinition = new RoutedUICommand("View Definition", "ViewDefination", typeof(EditorRoutedCommands));
             Settings = new RoutedUICommand("Settings", "Settings", typeof(EditorRoutedCommands));
             AboutNode = new RoutedUICommand("About Node", "AboutNode", typeof(EditorRoutedCommands));

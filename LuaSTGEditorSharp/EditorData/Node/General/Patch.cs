@@ -42,8 +42,9 @@ namespace LuaSTGEditorSharp.EditorData.Node.General
 
         public override IEnumerable<string> ToLua(int spacing)
         {
+            string sk = GetPath(0);
             string sp = "".PadLeft(spacing * 4);
-            yield return sp + "Include\'" + StringParser.ParseLua(Path.GetFileName(NonMacrolize(0))) + "\'\n";
+            yield return sp + "Include\'" + sk + "\'\n";
         }
 
         public override IEnumerable<Tuple<int,TreeNode>> GetLines()
@@ -58,9 +59,10 @@ namespace LuaSTGEditorSharp.EditorData.Node.General
 
         protected override void AddCompileSettings()
         {
-            if (!parentWorkSpace.CompileProcess.resourceFilePath.Contains(NonMacrolize(0)))
+            string sk = parentWorkSpace.CompileProcess.archiveSpace + Path.GetFileName(NonMacrolize(0));
+            if (!parentWorkSpace.CompileProcess.resourceFilePath.ContainsKey(sk))
             {
-                parentWorkSpace.CompileProcess.resourceFilePath.Add(attributes[0].AttrInput);
+                parentWorkSpace.CompileProcess.resourceFilePath.Add(sk, NonMacrolize(0));
             }
         }
 

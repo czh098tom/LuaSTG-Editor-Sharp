@@ -26,13 +26,24 @@ namespace LuaSTGEditorSharp.EditorData
         public DocumentData source;
 
         /// <summary>
-        /// The resources path.
+        /// The dictionary of archive path to resources path.
         /// </summary>
-        public HashSet<string> resourceFilePath = new HashSet<string>();
+        public Dictionary<string, string> resourceFilePath = new Dictionary<string, string>();
+
         /// <summary>
         /// The macro definitions.
         /// </summary>
-        public List<DefineMarco> marcoDefinition = new List<DefineMarco>();
+        public List<DefineMarcoSettings> marcoDefinition = new List<DefineMarcoSettings>();
+
+        /// <summary>
+        /// The namespace for given objects.
+        /// </summary>
+        public string NameSpace = "editor";
+
+        /// <summary>
+        /// The base directory of archive.
+        /// </summary>
+        public string archiveSpace = "";
 
         /// <summary>
         /// Current temporary path for script coding cache.
@@ -191,8 +202,10 @@ namespace LuaSTGEditorSharp.EditorData
         /// Get resources need to pack by meta.
         /// </summary>
         /// <param name="resNeedToPack">The output list of resources need to pack.</param>
-        /// <param name="resPathToMD5">The dictionary of resource path->MD5 Hash of the resource.</param>
-        protected void GatherResByResMeta(List<string> resNeedToPack, Dictionary<string, string> resPathToMD5)
+        /// <param name="resPathToMD5">The dictionary of resource archivePath -> (directoryPath, MD5 Hash)
+        /// of the resource.</param>
+        protected void GatherResByResMeta(Dictionary<string, string> resNeedToPack
+            , Dictionary<string, Tuple<string, string>> resPathToMD5)
         {
             StreamReader srMeta = null;
             StreamWriter swMeta = null;
@@ -204,40 +217,50 @@ namespace LuaSTGEditorSharp.EditorData
                 {
                     temp = srMeta.ReadLine();
                     string[] scom = temp.Split(',');
-                    string spath = "";
+                    string spathWithArchive = "";
                     for (int i = 1; i < scom.Length; i++)
                     {
-                        spath += scom[i];
+                        spathWithArchive += scom[i];
                     }
-                    if (!resPathToMD5.ContainsKey(spath)) resPathToMD5.Add(spath, scom[0]);
+                    string md5 = scom[0];
+                    scom = spathWithArchive.Split(',');
+                    string sArchive = "";
+                    for (int i = 1; i < scom.Length; i++)
+                    {
+                        sArchive += scom[i];
+                    }
+                    string spath = scom[0];
+                    if (!resPathToMD5.ContainsKey(sArchive))
+                        resPathToMD5.Add(sArchive, new Tuple<string, string>(spath, md5));
                 }
                 srMeta.Close();
                 swMeta = new StreamWriter(projMetaPath, false);
-                foreach (string resPath in resourceFilePath)
+                foreach (KeyValuePair<string, string> resPath in resourceFilePath)
                 {
                     string resFullPath = null;
-                    bool? undcPath = RelativePathConverter.IsRelativePath(resPath);
+                    bool? undcPath = RelativePathConverter.IsRelativePath(resPath.Value);
                     if (undcPath == true)
                     {
-                        if (string.IsNullOrEmpty(projPath)) throw new InvalidRelativeResPathException(resPath);
-                        resFullPath = Path.GetFullPath(Path.Combine(projPath, resPath));
+                        if (string.IsNullOrEmpty(projPath)) throw new InvalidRelativeResPathException(resPath.Value);
+                        resFullPath = Path.GetFullPath(Path.Combine(projPath, resPath.Value));
                     }
                     else if(undcPath == false)
                     {
-                        resFullPath = resPath;
+                        resFullPath = resPath.Value;
                     }
                     if (undcPath != null)
                     {
                         if (resPathToMD5.ContainsKey(resFullPath))
                         {
-                            if (GetMD5HashFromFile(resFullPath) != resPathToMD5[resFullPath]) resNeedToPack.Add(resFullPath);
+                            if (GetMD5HashFromFile(resFullPath) != resPathToMD5[resFullPath].Item2)
+                                resNeedToPack.Add(resPath.Key, resFullPath);
                         }
                         else
                         {
-                            resNeedToPack.Add(resFullPath);
+                            resNeedToPack.Add(resPath.Key, resFullPath);
                         }
                         resPathToMD5.Remove(resFullPath);
-                        swMeta.WriteLine(GetMD5HashFromFile(resFullPath) + "," + resFullPath);
+                        swMeta.WriteLine(GetMD5HashFromFile(resFullPath) + "," + resFullPath + "," + resPath.Key);
                     }
                 }
             }
@@ -252,38 +275,38 @@ namespace LuaSTGEditorSharp.EditorData
         /// Get resources need to pack and save meta.
         /// </summary>
         /// <param name="resNeedToPack">The output list of resources need to pack.</param>
-        protected void GatherResAndSaveMeta(List<string> resNeedToPack)
+        protected void GatherResAndSaveMeta(Dictionary<string, string> resNeedToPack)
         {
             StreamWriter swMeta = null;
             try
             {
-                foreach (string resPath in resourceFilePath)
+                foreach (KeyValuePair<string, string> resPath in resourceFilePath)
                 {
-                    bool? undcPath = RelativePathConverter.IsRelativePath(resPath);
+                    bool? undcPath = RelativePathConverter.IsRelativePath(resPath.Value);
                     if (undcPath == true)
                     {
-                        if (string.IsNullOrEmpty(projPath)) throw new InvalidRelativeResPathException(resPath);
-                        string sp = Path.GetFullPath(Path.Combine(projPath, resPath));
-                        resNeedToPack.Add(sp);
+                        if (string.IsNullOrEmpty(projPath)) throw new InvalidRelativeResPathException(resPath.Value);
+                        string sp = Path.GetFullPath(Path.Combine(projPath, resPath.Value));
+                        resNeedToPack.Add(resPath.Key, sp);
                     }
                     else if (undcPath == false)
                     {
-                        resNeedToPack.Add(resPath);
+                        resNeedToPack.Add(resPath.Key, resPath.Value);
                     }
                 }
                 swMeta = new StreamWriter(projMetaPath, false);
-                foreach (string resPath in resourceFilePath)
+                foreach (KeyValuePair<string, string> resPath in resourceFilePath)
                 {
-                    bool? undcPath = RelativePathConverter.IsRelativePath(resPath);
+                    bool? undcPath = RelativePathConverter.IsRelativePath(resPath.Value);
                     if (undcPath == true)
                     {
-                        if (string.IsNullOrEmpty(projPath)) throw new InvalidRelativeResPathException(resPath);
-                        string sp = Path.GetFullPath(Path.Combine(projPath, resPath));
-                        swMeta.WriteLine(GetMD5HashFromFile(sp) + "," + sp);
+                        if (string.IsNullOrEmpty(projPath)) throw new InvalidRelativeResPathException(resPath.Value);
+                        string sp = Path.GetFullPath(Path.Combine(projPath, resPath.Value));
+                        swMeta.WriteLine(GetMD5HashFromFile(sp) + "," + sp + "," + resPath.Key);
                     }
                     else if(undcPath == false)
                     {
-                        swMeta.WriteLine(GetMD5HashFromFile(resPath) + "," + resPath);
+                        swMeta.WriteLine(GetMD5HashFromFile(resPath.Value) + "," + resPath.Value + "," + resPath.Key);
                     }
                 }
                 swMeta.Close();
@@ -298,20 +321,20 @@ namespace LuaSTGEditorSharp.EditorData
         /// Get all resources need to pack.
         /// </summary>
         /// <param name="resNeedToPack">The output list of resources need to pack.</param>
-        protected void GatherAllRes(List<string> resNeedToPack)
+        protected void GatherAllRes(Dictionary<string, string> resNeedToPack)
         {
             if (File.Exists(projMetaPath)) File.Delete(projMetaPath);
-            foreach (string resPath in resourceFilePath)
+            foreach (KeyValuePair<string,string> resPath in resourceFilePath)
             {
-                bool? undcPath = RelativePathConverter.IsRelativePath(resPath);
+                bool? undcPath = RelativePathConverter.IsRelativePath(resPath.Value);
                 if (undcPath == true)
                 {
-                    if (string.IsNullOrEmpty(projPath)) throw new InvalidRelativeResPathException(resPath);
-                    resNeedToPack.Add(Path.GetFullPath(Path.Combine(projPath, resPath)));
+                    if (string.IsNullOrEmpty(projPath)) throw new InvalidRelativeResPathException(resPath.Value);
+                    resNeedToPack.Add(resPath.Key, Path.GetFullPath(Path.Combine(projPath, resPath.Value)));
                 }
                 else if (undcPath == false)
                 {
-                    resNeedToPack.Add(resPath);
+                    resNeedToPack.Add(resPath.Key, resPath.Value);
                 }
             }
         }
@@ -321,11 +344,12 @@ namespace LuaSTGEditorSharp.EditorData
         /// </summary>
         /// <param name="currentApp">The current <see cref="App"/>.</param>
         /// <param name="resNeedToPack">The output list of resources need to pack.</param>
-        /// <param name="resPathToMD5">The dictionary of resource path->MD5 Hash of the resource.</param>
+        /// <param name="resPathToMD5">The dictionary of resource archivePath -> (directoryPath, MD5 Hash)
+        /// of the resource.</param>
         /// <param name="includeRoot">Whether regenerates root.lua.</param>
         /// <param name="preserveZip">Whether zip file must be preserved.</param>
-        protected void PackFileUsingInfo(App currentApp, List<string> resNeedToPack, Dictionary<string, string> resPathToMD5,
-            bool includeRoot, bool preserveZip = false)
+        protected void PackFileUsingInfo(App currentApp, Dictionary<string, string> resNeedToPack
+            , Dictionary<string, Tuple<string, string>> resPathToMD5, bool includeRoot, bool preserveZip = false)
         {
             Dictionary<string, string> entry2File = new Dictionary<string, string>();
             string temp;
@@ -338,30 +362,30 @@ namespace LuaSTGEditorSharp.EditorData
                 entry2File.Add(Path.GetFileName(projLuaPath), projLuaPath);
                 if (currentApp.SaveResMeta)
                 {
-                    foreach (string resPath in resNeedToPack)
+                    foreach (KeyValuePair<string, string> resPath in resNeedToPack)
                     {
-                        entry2File.Add(Path.GetFileName(resPath), resPath);
+                        entry2File.Add(resPath.Key, resPath.Value);
                     }
-                    foreach (KeyValuePair<string, string> kvp in resPathToMD5)
+                    foreach (KeyValuePair<string, Tuple<string, string>> kvp in resPathToMD5)
                     {
-                        entry2File.Add(Path.GetFileName(kvp.Key), kvp.Key);
+                        entry2File.Add(kvp.Key, kvp.Value.Item1);
                     }
                 }
                 else
                 {
                     //if (File.Exists(targetZipPath)) File.Delete(targetZipPath);
-                    foreach (string resPath in resourceFilePath)
+                    foreach (KeyValuePair<string, string> resPath in resourceFilePath)
                     {
-                        bool? undcPath = RelativePathConverter.IsRelativePath(resPath);
+                        bool? undcPath = RelativePathConverter.IsRelativePath(resPath.Value);
                         if (undcPath == true)
                         {
-                            if (string.IsNullOrEmpty(projPath)) throw new InvalidRelativeResPathException(resPath);
-                            temp = Path.GetFullPath(Path.Combine(projPath, resPath));
-                            entry2File.Add(Path.GetFileName(temp), temp);
+                            if (string.IsNullOrEmpty(projPath)) throw new InvalidRelativeResPathException(resPath.Value);
+                            temp = Path.GetFullPath(Path.Combine(projPath, resPath.Value));
+                            entry2File.Add(resPath.Key, temp);
                         }
                         else if (undcPath == false)
                         {
-                            entry2File.Add(Path.GetFileName(resPath), resPath);
+                            entry2File.Add(resPath.Key, resPath.Value);
                         }
                     }
                 }
@@ -405,10 +429,11 @@ namespace LuaSTGEditorSharp.EditorData
         /// </summary>
         /// <param name="currentApp">The current <see cref="App"/>.</param>
         /// <param name="resNeedToPack">The output list of resources need to pack.</param>
-        /// <param name="resPathToMD5">The dictionary of resource path->MD5 Hash of the resource.</param>
+        /// <param name="resPathToMD5">The dictionary of resource archivePath -> (directoryPath, MD5 Hash) 
+        /// of the resource.</param>
         /// <param name="includeRoot">Whether regenerates root.lua.</param>
-        protected void PackFileUsingInfo_old(App currentApp, List<string> resNeedToPack, Dictionary<string, string> resPathToMD5,
-            bool includeRoot)
+        protected void PackFileUsingInfo_old(App currentApp, List<string> resNeedToPack
+            , Dictionary<string, Tuple<string, string>> resPathToMD5, bool includeRoot)
         {
             //Pack File using info
             FileStream packBatS = null;
@@ -434,7 +459,7 @@ namespace LuaSTGEditorSharp.EditorData
                         packBat.WriteLine(zipExePath + " u -tzip -mcu=on \"" + targetZipPath + "\" \""
                             + resPath + "\"");
                     }
-                    foreach (KeyValuePair<string, string> kvp in resPathToMD5)
+                    foreach (KeyValuePair<string, Tuple<string, string>> kvp in resPathToMD5)
                     {
                         packBat.WriteLine(zipExePath + " d -tzip -mcu=on \"" + targetZipPath + "\" \""
                             + kvp.Key + "\"");
@@ -443,14 +468,14 @@ namespace LuaSTGEditorSharp.EditorData
                 else
                 {
                     if (File.Exists(targetZipPath)) File.Delete(targetZipPath);
-                    foreach (string resPath in resourceFilePath)
+                    foreach (KeyValuePair<string, string> resPath in resourceFilePath)
                     {
-                        bool? undcPath = RelativePathConverter.IsRelativePath(resPath);
+                        bool? undcPath = RelativePathConverter.IsRelativePath(resPath.Value);
                         if (undcPath == true)
                         {
-                            if (string.IsNullOrEmpty(projPath)) throw new InvalidRelativeResPathException(resPath);
+                            if (string.IsNullOrEmpty(projPath)) throw new InvalidRelativeResPathException(resPath.Value);
                             packBat.WriteLine(zipExePath + " u -tzip -mcu=on \"" + targetZipPath + "\" \""
-                                + Path.GetFullPath(Path.Combine(projPath, resPath)) + "\"");
+                                + Path.GetFullPath(Path.Combine(projPath, resPath.Value)) + "\"");
                         }
                         else if (undcPath == false)
                         {
@@ -517,14 +542,14 @@ namespace LuaSTGEditorSharp.EditorData
                 }
                 else
                 {
-                    foreach (string resPath in resourceFilePath)
+                    foreach (KeyValuePair<string, string> resPath in resourceFilePath)
                     {
-                        bool? undcPath = RelativePathConverter.IsRelativePath(resPath);
+                        bool? undcPath = RelativePathConverter.IsRelativePath(resPath.Value);
                         if (undcPath == true)
                         {
-                            if (string.IsNullOrEmpty(projPath)) throw new InvalidRelativeResPathException(resPath);
+                            if (string.IsNullOrEmpty(projPath)) throw new InvalidRelativeResPathException(resPath.Value);
                             packBat.WriteLine(zipExePath + " u -tzip -mcu=on \"" + targetZipPath + "\" \""
-                                + Path.GetFullPath(Path.Combine(projPath, resPath)) + "\"");
+                                + Path.GetFullPath(Path.Combine(projPath, resPath.Value)) + "\"");
                         }
                         else if(undcPath == false)
                         {

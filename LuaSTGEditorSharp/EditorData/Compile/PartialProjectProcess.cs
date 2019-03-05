@@ -34,8 +34,8 @@ namespace LuaSTGEditorSharp.EditorData.Compile
             GenerateCode(SCDebug, StageDebug);
 
             //Gather file need to pack
-            List<string> resNeedToPack = new List<string>();
-            Dictionary<string, string> resPathToMD5 = new Dictionary<string, string>();
+            Dictionary<string, string> resNeedToPack = new Dictionary<string, string>();
+            Dictionary<string, Tuple<string, string>> resPathToMD5 = new Dictionary<string, Tuple<string, string>>();
 
             if (currentApp.SaveResMeta)
             {

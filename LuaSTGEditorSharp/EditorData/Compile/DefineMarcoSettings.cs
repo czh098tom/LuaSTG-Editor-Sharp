@@ -9,7 +9,7 @@ namespace LuaSTGEditorSharp.EditorData.Compile
     /// <summary>
     /// Class to store macro definitions.
     /// </summary>
-    public class DefineMarco
+    public class DefineMarcoSettings
     {
         /// <summary>
         /// The <see cref="string"/> to search.

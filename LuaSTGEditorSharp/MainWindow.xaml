@@ -45,6 +45,7 @@
         <CommandBinding Command="local:EditorRoutedCommands.SwitchParent" Executed="SwitchParentCommandExecuted"/>
         <!--#region View-->
         <CommandBinding Command="local:EditorRoutedCommands.ViewFileFolder" Executed="ViewFileFolderCommandExecuted" CanExecute="ViewFileFolderCommand_CanExecute"/>
+        <CommandBinding Command="local:EditorRoutedCommands.ViewModFolder" Executed="ViewModFolderCommandExecuted" CanExecute="ViewModFolderCommand_CanExecute"/>
         <CommandBinding Command="local:EditorRoutedCommands.ViewDefinition" Executed="ViewDefinitionCommandExecuted" CanExecute="ViewDefinitionCommand_CanExecute"/>
         <!--#endregion-->
         <CommandBinding Command="local:EditorRoutedCommands.Settings" Executed="SettingsCommandExecuted"/>
@@ -198,7 +199,7 @@
                         </MenuItem.Icon>
                     </MenuItem>
                 </MenuItem>
-                <MenuItem Header="Preset">
+                <MenuItem Header="_Preset">
                     <MenuItem Header="_Presets..." x:Name="presetsMenu" Command="local:EditorRoutedCommands.InsertPreset">
                         <MenuItem.ItemTemplate>
                             <HierarchicalDataTemplate ItemsSource="{Binding Children}">
@@ -239,6 +240,7 @@
                 </MenuItem>
                 <MenuItem Header="_View">
                     <MenuItem Header="_File Folder" Command="local:EditorRoutedCommands.ViewFileFolder"/>
+                    <MenuItem Header="_Mod Folder" Command="local:EditorRoutedCommands.ViewModFolder"/>
                     <Separator/>
                     <MenuItem Header="_View selected code" Command="local:EditorRoutedCommands.ViewCode"/>
                     <MenuItem Header="_Export all code" Command="local:EditorRoutedCommands.ExportCode"/>

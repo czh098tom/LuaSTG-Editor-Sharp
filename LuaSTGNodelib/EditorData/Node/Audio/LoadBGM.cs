@@ -37,9 +37,10 @@ namespace LuaSTGEditorSharp.EditorData.Node.Audio
 
         public override IEnumerable<string> ToLua(int spacing)
         {
+            string sk = GetPath(0);
             string sp = "".PadLeft(spacing * 4);
             yield return sp + "MusicRecord(\'" + StringParser.ParseLua(NonMacrolize(1)) + "\',\'" 
-                + StringParser.ParseLua(Path.GetFileName(NonMacrolize(0)))
+                + sk
                 + "\'," + Macrolize(2) + "," + Macrolize(3) + ")\n";
         }
 
@@ -68,9 +69,10 @@ namespace LuaSTGEditorSharp.EditorData.Node.Audio
 
         protected override void AddCompileSettings()
         {
-            if (!parentWorkSpace.CompileProcess.resourceFilePath.Contains(NonMacrolize(0)))
+            string sk = parentWorkSpace.CompileProcess.archiveSpace + Path.GetFileName(NonMacrolize(0));
+            if (!parentWorkSpace.CompileProcess.resourceFilePath.ContainsKey(NonMacrolize(0)))
             {
-                parentWorkSpace.CompileProcess.resourceFilePath.Add(attributes[0].AttrInput);
+                parentWorkSpace.CompileProcess.resourceFilePath.Add(sk, attributes[0].AttrInput);
             }
         }
 

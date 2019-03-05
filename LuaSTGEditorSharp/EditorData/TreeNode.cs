@@ -1217,12 +1217,12 @@ namespace LuaSTGEditorSharp.EditorData
         }
 
         /// <summary>
-        /// This method execute a macro to a string by given<see cref="Compile.DefineMarco"/>.
+        /// This method execute a macro to a string by given<see cref="Compile.DefineMarcoSettings"/>.
         /// </summary>
-        /// <param name="marco">The <see cref="Compile.DefineMarco"/> contains macro information.</param>
+        /// <param name="marco">The <see cref="Compile.DefineMarcoSettings"/> contains macro information.</param>
         /// <param name="original">The original string.</param>
         /// <returns>A string after applying macro+.</returns>
-        public static string ExecuteMarco(Compile.DefineMarco marco, string original)
+        public static string ExecuteMarco(Compile.DefineMarcoSettings marco, string original)
         {
             //Old one considering only "" pairs.
             //Regex regex = new Regex("\\b" + marco.ToBeReplaced + "\\b" + @"(?<=^([^""]*(""[^""]*"")+)*[^""]*.)");
@@ -1246,7 +1246,7 @@ namespace LuaSTGEditorSharp.EditorData
         protected string Macrolize(AttrItem attrItem)
         {
             string s = attrItem.AttrInput;
-            foreach(Compile.DefineMarco m in parentWorkSpace.CompileProcess.marcoDefinition)
+            foreach(Compile.DefineMarcoSettings m in parentWorkSpace.CompileProcess.marcoDefinition)
             {
                 s = ExecuteMarco(m, s);
             }
@@ -1302,6 +1302,36 @@ namespace LuaSTGEditorSharp.EditorData
             {
                 return NonMacrolize(attributes[i + 1]);
             }
+        }
+
+        /// <summary>
+        /// Get the path string of a given attribute.
+        /// </summary>
+        /// <param name="pathAttrID">The id of attribute</param>
+        /// <returns><see cref="string"/> after applying archive space and lua escape sequences.</returns>
+        protected string GetPath(int pathAttrID)
+        {
+            string s = parentWorkSpace.CompileProcess.archiveSpace;
+            if (s != "")
+            {
+                if (!s.EndsWith("\\") && !s.EndsWith("/"))
+                {
+                    s = "";
+                }
+                else
+                {
+                    char[] cs = Path.GetInvalidPathChars();
+                    foreach (char c in cs)
+                    {
+                        if (s.Contains(c))
+                        {
+                            s = "";
+                            break;
+                        }
+                    }
+                }
+            }
+            return Lua.StringParser.ParseLua(s + Path.GetFileName(NonMacrolize(pathAttrID)));
         }
 
         /// <summary>

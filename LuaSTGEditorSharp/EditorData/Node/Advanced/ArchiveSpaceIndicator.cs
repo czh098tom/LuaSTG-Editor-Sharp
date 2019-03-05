@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 using System.Xml.Serialization;
 using LuaSTGEditorSharp.EditorData;
 using LuaSTGEditorSharp.EditorData.Message;
@@ -14,44 +15,31 @@ using Newtonsoft.Json;
 
 namespace LuaSTGEditorSharp.EditorData.Node.Advanced
 {
-    [Serializable, NodeIcon("images/16x16/definemacro.png")]
+    [Serializable, NodeIcon("images/16x16/archispace.png")]
     [LeafNode]
-    [CreateInvoke(0), RCInvoke(1)]
-    public class DefineMacro : TreeNode
+    [CreateInvoke(0), RCInvoke(0)]
+    public class ArchiveSpaceIndicator : TreeNode
     {
         [JsonConstructor]
-        private DefineMacro() : base() { }
+        private ArchiveSpaceIndicator() : base() { }
 
-        public DefineMacro(DocumentData workSpaceData) : base(workSpaceData)
+        public ArchiveSpaceIndicator(DocumentData workSpaceData) : base(workSpaceData)
         {
-            /*
-            attributes.Add(new AttrItem("Replace", this));
-            attributes.Add(new AttrItem("By", this));
-            */
-            Replace = "";
-            By = "";
+            Name = "";
         }
 
-        [JsonIgnore, XmlAttribute("Replace")]
+        [JsonIgnore, XmlAttribute("Name")]
         //[DefaultValue("")]
-        public string Replace
+        public string Name
         {
-            get => DoubleCheckAttr(0, "Replace").attrInput;
-            set => DoubleCheckAttr(0, "Replace").attrInput = value;
-        }
-
-        [JsonIgnore, XmlAttribute("By")]
-        //[DefaultValue("")]
-        public string By
-        {
-            get => DoubleCheckAttr(1, "By").attrInput;
-            set => DoubleCheckAttr(1, "By").attrInput = value;
+            get => DoubleCheckAttr(0, "Name").attrInput;
+            set => DoubleCheckAttr(0, "Name").attrInput = value;
         }
 
         public override IEnumerable<string> ToLua(int spacing)
         {
             string sp = "".PadLeft(spacing * 4);
-            yield return sp + "-- #define " + NonMacrolize(0) + " " + NonMacrolize(1) + sp + "\n";
+            yield return sp + "-- archive space: " + NonMacrolize(0) + "\n";
         }
 
         public override IEnumerable<Tuple<int,TreeNode>> GetLines()
@@ -61,19 +49,17 @@ namespace LuaSTGEditorSharp.EditorData.Node.Advanced
 
         public override string ToString()
         {
-            return "Macro: Replace " + attributes[0].AttrInput + " by " + attributes[1].AttrInput + " in compile process";
+            return "Archive space: " + NonMacrolize(0);
         }
 
         protected override void AddCompileSettings()
         {
-            parentWorkSpace.CompileProcess.marcoDefinition.Add(
-                new DefineMarcoSettings() { ToBeReplaced = NonMacrolize(0)
-                , New = Macrolize(1) });
+            parentWorkSpace.CompileProcess.archiveSpace = NonMacrolize(0);
         }
 
         public override object Clone()
         {
-            var n = new DefineMacro(parentWorkSpace);
+            var n = new ArchiveSpaceIndicator(parentWorkSpace);
             n.DeepCopyFrom(this);
             return n;
         }
@@ -83,6 +69,26 @@ namespace LuaSTGEditorSharp.EditorData.Node.Advanced
             List<MessageBase> messages = new List<MessageBase>();
             if (string.IsNullOrEmpty(NonMacrolize(0)))
                 messages.Add(new ArgNotNullMessage(attributes[0].AttrCap, 0, this));
+            string s = NonMacrolize(0);
+            if (s != "")
+            {
+                if (!s.EndsWith("\\") && !s.EndsWith("/"))
+                {
+                    messages.Add(new InvalidArchiveSpaceMessage(this));
+                }
+                else
+                {
+                    char[] cs = Path.GetInvalidPathChars();
+                    foreach (char c in cs)
+                    {
+                        if (s.Contains(c))
+                        {
+                            messages.Add(new InvalidArchiveSpaceMessage(this));
+                            break;
+                        }
+                    }
+                }
+            }
             return messages;
         }
     }

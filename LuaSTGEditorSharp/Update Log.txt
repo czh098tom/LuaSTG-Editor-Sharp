@@ -10,6 +10,7 @@
 Editor层：
 General
 	CodeSegment
+	ArchiveSpaceIndicator
 	UserDefinedNode
 	UnidentifiedNode
 Lib层：
@@ -51,6 +52,7 @@ ArgCountInfo：变量可变参数数目过小或溢出
 坐标、向量与尺寸编辑界面增加对齐功能
 改进设置功能
 加入菜单项的图标
+添加View - Mod Folder选项，可以打开Mod所在目录
 
 修复bug：
 Editor层：
@@ -58,10 +60,11 @@ Editor层：
 启动不检查临时文件夹是否被创建的bug
 编译语句出错的bug
 消息系统不完善产生的若干bug
-工具栏region和define macro互换的错误
+工具栏region和define macro互换的bug
 关闭文档同时保存产生的bug
 修复文件夹内带定义型节点时unfold as region命令报错的bug
 启动报错退出不完全的bug
+修复插入、粘贴、删除行为作用在非当前根节点时信息出错的bug
 Lib层：
 修复LocalVar节点不初始化时编译不正确的错误
 在编辑坐标时首项负值的切分错误
@@ -87,8 +90,12 @@ UnidentifiedNode（绿色UFO）用于使用临时定义的节点
 预设功能：
 使用右键（或菜单Preset栏）-> Save preset 可以存储某种节点及其子节点到预设
 之后可以使用菜单栏 Preset -> Presets 中查找存储的节点插入
-节点预设存储目录位于当前用户\Document\LuaSTG Editor Sharp Presets
+节点预设存储目录位于当前用户文档\LuaSTG Editor Sharp Presets
 注意如果运行使用非编辑器方式变更了节点预设存储目录下的文件，需要使用 Preset -> Refresh preset list 刷新之
+
+内置打包与ArchiveSpaceIndicator
+若开启内置打包功能，使用ArchiveSpaceIndicator节点会将其下方的打包资源类型的节点强制打包到指定文件夹下
+注：节点Name属性必须以\或/结尾
 
 0.0.4.0
 （2018-11-30)

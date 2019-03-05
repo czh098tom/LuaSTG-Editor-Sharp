@@ -73,7 +73,8 @@ namespace LuaSTGEditorSharp.EditorData.Node.Boss
             }
             else
             {
-                string filename = "\"" + Lua.StringParser.ParseLua(Path.GetFileName(NonMacrolize(5))) + "\"";
+                string sk = GetPath(5);
+                string filename = "\"" + sk + "\"";
                 yield return "_editor_class[" + fullName + "]=Class(boss)\n"
                            + "_editor_class[" + fullName + "].cards={}\n"
                            + "_editor_class[" + fullName + "].name=\"" + displayedName + "\"\n"
@@ -149,8 +150,10 @@ namespace LuaSTGEditorSharp.EditorData.Node.Boss
 
         protected override void AddCompileSettings()
         {
-            if (!string.IsNullOrEmpty(NonMacrolize(5)) && !parentWorkSpace.CompileProcess.resourceFilePath.Contains(NonMacrolize(5)))
-                parentWorkSpace.CompileProcess.resourceFilePath.Add(attributes[5].AttrInput);
+            string sk = parentWorkSpace.CompileProcess.archiveSpace + Path.GetFileName(NonMacrolize(5));
+            if (!string.IsNullOrEmpty(NonMacrolize(5)) 
+                && !parentWorkSpace.CompileProcess.resourceFilePath.ContainsKey(sk))
+                parentWorkSpace.CompileProcess.resourceFilePath.Add(sk, attributes[5].AttrInput);
         }
 
         public override object Clone()

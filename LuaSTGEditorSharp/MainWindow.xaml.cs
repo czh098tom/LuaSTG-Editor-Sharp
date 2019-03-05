@@ -1128,7 +1128,31 @@ namespace LuaSTGEditorSharp
         {
             e.CanExecute = ActivatedWorkSpaceData != null;
         }
-        
+
+        private void ViewModFolderCommandExecuted(object sender, ExecutedRoutedEventArgs e)
+        {
+            try
+            {
+                Process folder = new Process
+                {
+                    StartInfo = new ProcessStartInfo(Path.GetFullPath(Path.Combine(
+                        Path.GetDirectoryName((App.Current as App).LuaSTGExecutablePath), "mod")))
+                    {
+                        UseShellExecute = true,
+                        CreateNoWindow = false
+                    }
+                };
+                folder.Start();
+            }
+            catch { }
+        }
+
+        private void ViewModFolderCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            string s = (App.Current as App).LuaSTGExecutablePath;
+            e.CanExecute = File.Exists(s) && Directory.Exists(Path.Combine(Path.GetDirectoryName(s), "mod"));
+        }
+
         private void ViewDefinitionCommandExecuted(object sender, ExecutedRoutedEventArgs e)
         {
             propData.CommitEdit();
