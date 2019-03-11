@@ -1,9 +1,10 @@
 # LuaSTG Editor Sharp User Manual
-- - - -
 ## 1. Installation
 ### 1.1 Prerequisite
 Platform required: Windows system (Windows 10 is recommend)
+
 Runtime library: .Net Framework 4.6.1.
+
 Storage space: At least 32MB is recommended
 
 ### 1.2 Steps
