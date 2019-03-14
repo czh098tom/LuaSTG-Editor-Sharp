@@ -222,6 +222,18 @@ namespace LuaSTGEditorSharp.EditorData
         public TreeNode Parent { get { return _parent; } }
 
         /// <summary>
+        /// Store the next term of double linked list organized tree.
+        /// </summary>
+        [JsonIgnore, XmlIgnore]
+        private TreeNode dblLinkedNext = null;
+
+        /// <summary>
+        /// Store the previous term of double linked list organized tree.
+        /// </summary>
+        [JsonIgnore, XmlIgnore]
+        private TreeNode dblLinkedPrev = null;
+
+        /// <summary>
         /// Use this property to get the <see cref="string"/> displayed on screen. 
         /// This property is synced with result of <see cref="ToString"/> method.
         /// </summary>
@@ -359,21 +371,57 @@ namespace LuaSTGEditorSharp.EditorData
         /// <param name="e"></param>
         private void ChildrenChanged(object o, NotifyCollectionChangedEventArgs e)
         {
-            TreeNode t;
-            if (e.NewItems != null)
-            {
-                foreach (var i in e.NewItems)
-                {
-                    t = (TreeNode)i;
-                    t.RaiseCreate(new OnCreateEventArgs() { parent = this });
-                    t._parent = this;
-                }
-            }
+            TreeNode t, tPrev = null;
             if (e.OldItems != null)
             {
-                foreach (var i in e.OldItems)
+                for (int index = 0; index < e.OldItems.Count; index++)
                 {
-                    ((TreeNode)i).RaiseRemove(new OnRemoveEventArgs() { parent = this });
+                    t = (TreeNode)e.OldItems[index];
+                    t.RaiseRemove(new OnRemoveEventArgs() { parent = this });
+                    if (index + e.OldStartingIndex != 0)
+                    {
+                        if (tPrev == null)
+                        {
+                            tPrev = Children[index + e.OldStartingIndex - 1];
+                        }
+                        tPrev.dblLinkedNext = t.dblLinkedNext;
+                        if (t.dblLinkedNext != null) t.dblLinkedNext.dblLinkedPrev = tPrev;
+                    }
+                    else
+                    {
+                        this.dblLinkedNext = t.dblLinkedNext;
+                        if (this.dblLinkedNext != null) t.dblLinkedNext.dblLinkedPrev = this;
+                        tPrev = this;
+                    }
+                }
+            }
+            if (e.NewItems != null)
+            {
+                for (int index = 0; index < e.NewItems.Count; index++) 
+                {
+                    t = (TreeNode)e.NewItems[index];
+                    t.RaiseCreate(new OnCreateEventArgs() { parent = this });
+                    t._parent = this;
+                    //Manage double linked list
+                    if (index + e.NewStartingIndex != 0)
+                    {
+                        if (tPrev == null)
+                        {
+                            tPrev = Children[index + e.NewStartingIndex - 1];
+                        }
+                        t.dblLinkedPrev = tPrev;
+                        t.dblLinkedNext = tPrev.dblLinkedNext;
+                        if (tPrev.dblLinkedNext != null) tPrev.dblLinkedNext.dblLinkedPrev = t;
+                        tPrev.dblLinkedNext = t;
+                    }
+                    else
+                    {
+                        t.dblLinkedPrev = this;
+                        t.dblLinkedNext = this.dblLinkedNext;
+                        if (this.dblLinkedNext != null) this.dblLinkedNext.dblLinkedPrev = t;
+                        this.dblLinkedNext = t;
+                    }
+                    tPrev = t;
                 }
             }
         }
@@ -1395,6 +1443,34 @@ namespace LuaSTGEditorSharp.EditorData
         {
             child._parent = parent.Parent;
             parent._parent = originalpp;
+        }
+
+        /// <summary>
+        /// Get the enumerator fowardly iterate the rest of the tree.
+        /// </summary>
+        /// <returns>An enumerator of the tree.</returns>
+        public IEnumerator<TreeNode> GetFowardEnumerator()
+        {
+            TreeNode t = this;
+            while (t.dblLinkedNext != null)
+            {
+                yield return t;
+                t = t.dblLinkedNext;
+            }
+        }
+
+        /// <summary>
+        /// Get the enumerator backwardly iterate the rest of the tree.
+        /// </summary>
+        /// <returns>An enumerator of the tree.</returns>
+        public IEnumerator<TreeNode> GetBackwardEnumerator()
+        {
+            TreeNode t = this;
+            while (t.dblLinkedPrev != null)
+            {
+                yield return t;
+                t = t.dblLinkedPrev;
+            }
         }
     }
 }
