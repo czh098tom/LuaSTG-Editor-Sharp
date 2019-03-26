@@ -17,6 +17,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		User Manual.md = User Manual.md
 	EndProjectSection
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoreLib", "CoreLib\CoreLib.csproj", "{1885E897-08FB-4280-A423-08C863845C5C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Release", "Release", "{7E1A263D-5B62-4E4D-987E-08F883206B15}"
+	ProjectSection(SolutionItems) = preProject
+		publish\LuaSTG Editor Sharp 0.0.5.zip = publish\LuaSTG Editor Sharp 0.0.5.zip
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,9 +76,24 @@ Global
 		{BE946F66-829A-4D02-B258-9920FF812223}.Release|Any CPU.ActiveCfg = Release
 		{BE946F66-829A-4D02-B258-9920FF812223}.Release|x64.ActiveCfg = Release
 		{BE946F66-829A-4D02-B258-9920FF812223}.Release|x86.ActiveCfg = Release
+		{1885E897-08FB-4280-A423-08C863845C5C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1885E897-08FB-4280-A423-08C863845C5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1885E897-08FB-4280-A423-08C863845C5C}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{1885E897-08FB-4280-A423-08C863845C5C}.Debug|x64.Build.0 = Debug|Any CPU
+		{1885E897-08FB-4280-A423-08C863845C5C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{1885E897-08FB-4280-A423-08C863845C5C}.Debug|x86.Build.0 = Debug|Any CPU
+		{1885E897-08FB-4280-A423-08C863845C5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1885E897-08FB-4280-A423-08C863845C5C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1885E897-08FB-4280-A423-08C863845C5C}.Release|x64.ActiveCfg = Release|Any CPU
+		{1885E897-08FB-4280-A423-08C863845C5C}.Release|x64.Build.0 = Release|Any CPU
+		{1885E897-08FB-4280-A423-08C863845C5C}.Release|x86.ActiveCfg = Release|Any CPU
+		{1885E897-08FB-4280-A423-08C863845C5C}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{7E1A263D-5B62-4E4D-987E-08F883206B15} = {8572669B-65DA-442E-9EC1-63BF18B13390}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0FAB694C-FEB1-4FCA-9F07-4DAD96FF1194}
