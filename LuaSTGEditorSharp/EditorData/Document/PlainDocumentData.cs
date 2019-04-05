@@ -148,7 +148,7 @@ namespace LuaSTGEditorSharp.EditorData.Document
             c.zipExePath = mainAppWithInfo.ZipExecutablePath;
             c.luaSTGExePath = mainAppWithInfo.LuaSTGExecutablePath;
 
-            if (string.IsNullOrEmpty(c.zipExePath) || string.IsNullOrEmpty(c.luaSTGExePath))
+            if (((App.Current as App).BatchPacking && string.IsNullOrEmpty(c.zipExePath)) || string.IsNullOrEmpty(c.luaSTGExePath))
                 throw new EXEPathNotSetException();
 
             c.projName = Path.GetFileNameWithoutExtension(RawDocName);
