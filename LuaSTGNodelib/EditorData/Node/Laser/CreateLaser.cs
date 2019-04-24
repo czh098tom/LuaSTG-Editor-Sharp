@@ -13,7 +13,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Laser
     [Serializable, NodeIcon("/LuaSTGNodeLib;component/images/16x16/lasercreate.png")]
     [RequireAncestor(typeof(Stage.Stage), typeof(Object.CallBackFunc), typeof(Bullet.BulletInit), typeof(Boss.BossBGLayerInit)
         , typeof(Boss.BossBGLayerFrame), typeof(Boss.BossBGLayerRender), typeof(Boss.BossSCStart), typeof(Boss.BossSCFinish)
-        , typeof(Laser.LaserInit), typeof(Laser.BentLaserInit))]
+        , typeof(Laser.LaserInit), typeof(Laser.BentLaserInit), typeof(Data.Function))]
     [LeafNode]
     [CreateInvoke(0), RCInvoke(2)]
     public class CreateLaser : TreeNode

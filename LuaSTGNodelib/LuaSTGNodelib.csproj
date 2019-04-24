@@ -82,6 +82,7 @@
     <Compile Include="EditorData\Node\Bullet\CreateBulletGroup.cs" />
     <Compile Include="EditorData\Node\Bullet\CreateSimpleBullet.cs" />
     <Compile Include="EditorData\Node\Data\Assignment.cs" />
+    <Compile Include="EditorData\Node\Data\Function.cs" />
     <Compile Include="EditorData\Node\Data\LocalVar.cs" />
     <Compile Include="EditorData\Node\Data\RecordPos.cs" />
     <Compile Include="EditorData\Node\Graphics\LoadImage.cs" />
@@ -1560,6 +1561,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\func.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\func.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

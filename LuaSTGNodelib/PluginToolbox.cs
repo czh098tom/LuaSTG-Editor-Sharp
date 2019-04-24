@@ -32,6 +32,9 @@ namespace LuaSTGEditorSharp
                 , new AddNode(AddLocalVarNode));
             data.Add(new ToolboxItemData("assign", "/LuaSTGNodeLib;component/images/assignment.png", "Assignment")
                 , new AddNode(AddAssignmentNode));
+            data.Add(new ToolboxItemData("function", "/LuaSTGNodeLib;component/images/func.png", "Function")
+                , new AddNode(AddFunctionNode));
+            data.Add(new ToolboxItemData(true), null);
             data.Add(new ToolboxItemData("recordpos", "/LuaSTGNodeLib;component/images/positionVar.png", "Record Position")
                 ,  new AddNode(AddRecordPosNode));
             #endregion
@@ -179,6 +182,10 @@ namespace LuaSTGEditorSharp
         private void AddAssignmentNode()
         {
             parent.Insert(new Assignment(parent.ActivatedWorkSpaceData));
+        }
+        private void AddFunctionNode()
+        {
+            parent.Insert(new Function(parent.ActivatedWorkSpaceData));
         }
 
         private void AddRecordPosNode()

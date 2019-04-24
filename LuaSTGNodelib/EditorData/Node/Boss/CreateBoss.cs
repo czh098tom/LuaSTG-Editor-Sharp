@@ -11,7 +11,7 @@ using Newtonsoft.Json;
 namespace LuaSTGEditorSharp.EditorData.Node.Boss
 {
     [Serializable, NodeIcon("/LuaSTGNodeLib;component/images/16x16/bosscreate.png")]
-    [RequireAncestor(typeof(Stage.Stage))]
+    [RequireAncestor(typeof(Stage.Stage), typeof(Data.Function))]
     [LeafNode]
     [CreateInvoke(0), RCInvoke(0)]
     public class CreateBoss : TreeNode

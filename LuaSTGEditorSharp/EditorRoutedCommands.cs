@@ -67,7 +67,7 @@ namespace LuaSTGEditorSharp
             SwitchBan = new RoutedUICommand("Ban", "Ban", typeof(EditorRoutedCommands), inputs);
             inputs = new InputGestureCollection
             {
-                new KeyGesture(Key.C, ModifierKeys.Alt, "Alt+C")
+                new KeyGesture(Key.F2)
             };
             ViewCode = new RoutedUICommand("View Code", "ViewCode", typeof(EditorRoutedCommands), inputs);
             inputs = new InputGestureCollection

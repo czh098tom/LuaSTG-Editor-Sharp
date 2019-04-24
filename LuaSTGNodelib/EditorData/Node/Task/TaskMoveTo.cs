@@ -12,7 +12,7 @@ using Newtonsoft.Json;
 namespace LuaSTGEditorSharp.EditorData.Node.Task
 {
     [Serializable, NodeIcon("/LuaSTGNodeLib;component/images/16x16/taskmoveto.png")]
-    [RequireAncestor(typeof(TaskNode))]
+    [RequireAncestor(typeof(TaskNode), typeof(Data.Function))]
     [LeafNode]
     [RCInvoke(1)]
     public class TaskMoveTo : TreeNode

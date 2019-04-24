@@ -722,6 +722,8 @@
                                                             <MenuItem Header="_Ban" Command="local:EditorRoutedCommands.SwitchBan"
                                                                       IsChecked="{Binding IsBanned, UpdateSourceTrigger=PropertyChanged}"/>
                                                             <Separator/>
+                                                            <MenuItem Header="_View Code" Command="local:EditorRoutedCommands.ViewCode"/>
+                                                            <Separator/>
                                                             <MenuItem Header="_Save Preset..." Command="local:EditorRoutedCommands.SavePreset"/>
                                                         </CompositeCollection>
                                                     </ContextMenu.ItemsSource>

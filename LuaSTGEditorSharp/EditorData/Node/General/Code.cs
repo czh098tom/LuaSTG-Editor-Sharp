@@ -34,8 +34,8 @@ namespace LuaSTGEditorSharp.EditorData.Node.General
         //[DefaultValue("")]
         public string CodeContent
         {
-            get => DoubleCheckAttr(0, "Code", "Code").attrInput;
-            set => DoubleCheckAttr(0, "Code", "Code").attrInput = value;
+            get => DoubleCheckAttr(0, "Code", "code").attrInput;
+            set => DoubleCheckAttr(0, "Code", "code").attrInput = value;
         }
 
         public override IEnumerable<string> ToLua(int spacing)

@@ -13,7 +13,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Task
     [Serializable, NodeIcon("/LuaSTGNodeLib;component/images/16x16/task.png")]
     [RequireAncestor(typeof(Stage.Stage), typeof(Object.CallBackFunc), typeof(Bullet.BulletInit), typeof(Boss.BossBGLayerInit)
         , typeof(Boss.BossBGLayerFrame), typeof(Boss.BossBGLayerRender), typeof(Boss.BossSCStart), typeof(Boss.BossSCFinish)
-        , typeof(Laser.LaserInit), typeof(Laser.BentLaserInit))]
+        , typeof(Laser.LaserInit), typeof(Laser.BentLaserInit), typeof(Data.Function))]
     public class TaskNode : TreeNode
     {
         [JsonConstructor]
