@@ -216,14 +216,14 @@ namespace LuaSTGEditorSharp.EditorData
                 while (!srMeta.EndOfStream)
                 {
                     temp = srMeta.ReadLine();
-                    string[] scom = temp.Split(',');
+                    string[] scom = temp.Split('|');
                     string spathWithArchive = "";
                     for (int i = 1; i < scom.Length; i++)
                     {
-                        spathWithArchive += scom[i];
+                        spathWithArchive += scom[i] + "|";
                     }
                     string md5 = scom[0];
-                    scom = spathWithArchive.Split(',');
+                    scom = spathWithArchive.Split('|');
                     string sArchive = "";
                     for (int i = 1; i < scom.Length; i++)
                     {
@@ -250,17 +250,17 @@ namespace LuaSTGEditorSharp.EditorData
                     }
                     if (undcPath != null)
                     {
-                        if (resPathToMD5.ContainsKey(resFullPath))
+                        if (resPathToMD5.ContainsKey(resPath.Key))
                         {
-                            if (GetMD5HashFromFile(resFullPath) != resPathToMD5[resFullPath].Item2)
+                            if (GetMD5HashFromFile(resFullPath) != resPathToMD5[resPath.Key].Item2)
                                 resNeedToPack.Add(resPath.Key, resFullPath);
                         }
                         else
                         {
                             resNeedToPack.Add(resPath.Key, resFullPath);
                         }
-                        resPathToMD5.Remove(resFullPath);
-                        swMeta.WriteLine(GetMD5HashFromFile(resFullPath) + "," + resFullPath + "," + resPath.Key);
+                        resPathToMD5.Remove(resPath.Key);
+                        swMeta.WriteLine(GetMD5HashFromFile(resFullPath) + "|" + resFullPath + "|" + resPath.Key);
                     }
                 }
             }
@@ -302,11 +302,11 @@ namespace LuaSTGEditorSharp.EditorData
                     {
                         if (string.IsNullOrEmpty(projPath)) throw new InvalidRelativeResPathException(resPath.Value);
                         string sp = Path.GetFullPath(Path.Combine(projPath, resPath.Value));
-                        swMeta.WriteLine(GetMD5HashFromFile(sp) + "," + sp + "," + resPath.Key);
+                        swMeta.WriteLine(GetMD5HashFromFile(sp) + "|" + sp + "|" + resPath.Key);
                     }
                     else if(undcPath == false)
                     {
-                        swMeta.WriteLine(GetMD5HashFromFile(resPath.Value) + "," + resPath.Value + "," + resPath.Key);
+                        swMeta.WriteLine(GetMD5HashFromFile(resPath.Value) + "|" + resPath.Value + "|" + resPath.Key);
                     }
                 }
                 swMeta.Close();
@@ -414,9 +414,9 @@ namespace LuaSTGEditorSharp.EditorData
                     currentCount += 1.0f / entryCount;
                 }
             }
-            catch
+            catch(System.Exception e)
             {
-                System.Windows.MessageBox.Show("Pack process failed.");
+                System.Windows.MessageBox.Show("Pack process failed.\n"+e.ToString());
             }
             finally
             {

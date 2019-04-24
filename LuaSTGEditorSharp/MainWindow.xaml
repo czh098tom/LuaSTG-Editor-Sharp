@@ -93,7 +93,8 @@
         <cm:BackgroundWorker x:Key="CompileWorker" WorkerReportsProgress="True"
                              DoWork="BeginPackaging"
                              ProgressChanged="PackageProgressReport"
-                             RunWorkerCompleted="FinishPackaging"/>
+                             RunWorkerCompleted="FinishPackaging"
+                             />
     </Window.Resources>
     <DockPanel>
         <Border DockPanel.Dock="Top">

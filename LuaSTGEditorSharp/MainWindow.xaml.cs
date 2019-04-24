@@ -54,6 +54,8 @@ namespace LuaSTGEditorSharp
         ObservableCollection<FileDirectoryModel> PresetsGetList { get; } = new ObservableCollection<FileDirectoryModel>();
 
         private CommandTypeFac insertState = new AfterFac();
+
+        //private object locker = new object();
         
         public bool IsBeforeState { get => insertState.GetType() == typeof(BeforeFac); }
         public bool IsAfterState { get => insertState.GetType() == typeof(AfterFac); }
@@ -496,9 +498,9 @@ namespace LuaSTGEditorSharp
 
                 DocumentData current = ActivatedWorkSpaceData;
                 TxtLine.Text = "";
+                CompileWorker.RunWorkerAsync(new object[] { current, SCDebugger, StageDebugger, run, saveMeta });
                 DebugString = "";
                 tabOutput.IsSelected = true;
-                CompileWorker.RunWorkerAsync(new object[] { current, SCDebugger, StageDebugger, run, saveMeta });
             }
             catch (EXEPathNotSetException)
             {
@@ -507,6 +509,10 @@ namespace LuaSTGEditorSharp
             catch (InvalidRelativeResPathException)
             {
                 
+            }
+            catch (InvalidOperationException)
+            {
+
             }
             //catch { }
         }
@@ -548,13 +554,12 @@ namespace LuaSTGEditorSharp
 
         private void FinishPackaging(object sender, RunWorkerCompletedEventArgs args)
         {
+            packagingLocked = false;
             object[] arguments = args.Result as object[];
             CompileProcess process = arguments[0] as CompileProcess;
             bool run = Convert.ToBoolean(arguments[1]);
             bool saveMeta = Convert.ToBoolean(arguments[2]);
             App currentApp = Application.Current as App;
-
-            packagingLocked = false;
             if (run)
             {
                 RunLuaSTG(currentApp, process);
@@ -997,7 +1002,7 @@ namespace LuaSTGEditorSharp
 
         private void ExportZipCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            e.CanExecute = ActivatedWorkSpaceData != null && !packagingLocked;
+            e.CanExecute = ActivatedWorkSpaceData != null && !packagingLocked && (App.Current as App).IsEXEPathSet;
         }
 
         private void RunProjectCommandExecuted(object sender, ExecutedRoutedEventArgs e)
@@ -1007,7 +1012,7 @@ namespace LuaSTGEditorSharp
 
         private void RunProjectCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            e.CanExecute = ActivatedWorkSpaceData != null && !packagingLocked;
+            e.CanExecute = ActivatedWorkSpaceData != null && !packagingLocked && (App.Current as App).IsEXEPathSet;
         }
 
         private void SCDebugCommandExecuted(object sender, ExecutedRoutedEventArgs e)
@@ -1037,7 +1042,7 @@ namespace LuaSTGEditorSharp
                 }
                 t = t.Parent;
             }
-            e.CanExecute = e.CanExecute && !packagingLocked;
+            e.CanExecute = e.CanExecute && !packagingLocked && (App.Current as App).IsEXEPathSet;
         }
 
         private void StageDebugCommandExecuted(object sender, ExecutedRoutedEventArgs e)
@@ -1054,7 +1059,8 @@ namespace LuaSTGEditorSharp
             {
                 t = t.Parent;
             }
-            e.CanExecute = PluginHandler.Plugin.MatchStageNodeTypes(t?.Parent?.Parent?.GetType()) && !packagingLocked;
+            e.CanExecute = PluginHandler.Plugin.MatchStageNodeTypes(t?.Parent?.Parent?.GetType()) && !packagingLocked 
+                && (App.Current as App).IsEXEPathSet;
         }
 
         private async void InsertPresetCommandExecuted(object sender, ExecutedRoutedEventArgs e)
