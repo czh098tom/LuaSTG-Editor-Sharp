@@ -6,8 +6,10 @@ Lib层：
 Data
 	Function
 修复bug：
+Editor层：
 未选择Batch Packing且7z路径未设置时编译运行立即出错的bug
 带MD5校验打包期名称错误的相关bug
+修复If-Else中Else子节点行数计数错误的bug
 
 0.0.5.0
 (2019-03-26)
