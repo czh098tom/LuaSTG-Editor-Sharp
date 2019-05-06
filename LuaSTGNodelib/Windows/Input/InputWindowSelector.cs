@@ -169,6 +169,9 @@ namespace LuaSTGEditorSharp.Windows.Input
                 case "bossBG":
                     window = new BossBGDefInput(toEdit, owner, source);
                     break;
+                case "colrow":
+                    //throw new NotImplementedException();
+                    //break;
                 default:
                     window = new SingleLineInput(toEdit, owner);
                     break;

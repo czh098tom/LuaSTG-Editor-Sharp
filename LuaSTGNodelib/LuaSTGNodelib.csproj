@@ -58,6 +58,7 @@
     <Compile Include="EditorData\Document\Meta\BossBGDefineMetaInfo.cs" />
     <Compile Include="EditorData\Document\Meta\BossDefineMetaInfo.cs" />
     <Compile Include="EditorData\Document\Meta\BulletDefineMetaInfo.cs" />
+    <Compile Include="EditorData\Document\Meta\ImageGroupLoadMetaInfo.cs" />
     <Compile Include="EditorData\Document\Meta\ImageLoadMetaInfo.cs" />
     <Compile Include="EditorData\Document\Meta\LaserDefineMetaInfo.cs" />
     <Compile Include="EditorData\Document\Meta\StageGroupDefineMetaInfo.cs" />
@@ -86,6 +87,7 @@
     <Compile Include="EditorData\Node\Data\LocalVar.cs" />
     <Compile Include="EditorData\Node\Data\RecordPos.cs" />
     <Compile Include="EditorData\Node\Graphics\LoadImage.cs" />
+    <Compile Include="EditorData\Node\Graphics\LoadImageGroup.cs" />
     <Compile Include="EditorData\Node\Laser\BentLaserDefine.cs" />
     <Compile Include="EditorData\Node\Laser\BentLaserInit.cs" />
     <Compile Include="EditorData\Node\Laser\CreateBentLaser.cs" />

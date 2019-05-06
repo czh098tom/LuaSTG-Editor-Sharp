@@ -4,8 +4,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LuaSTGEditorSharp.Windows.Input;assembly=LuaSTGEditorSharp"
+        xmlns:cv="clr-namespace:LuaSTGEditorSharp.Windows.Input.Canvas"
         mc:Ignorable="d"
-        Title="Choose Image" Height="293.418" Width="539.815" MinHeight="100" MinWidth="200"
+        Title="Choose Image" Height="475.012" Width="840.879" MinHeight="100" MinWidth="200"
                    Loaded="InputWindow_Loaded">
     <Grid>
         <DockPanel>
@@ -15,14 +16,14 @@
             </StackPanel>
             <TextBox DockPanel.Dock="Top" Height="24" x:Name="codeText" Text="{Binding Result, ElementName=inputWindow, Mode=TwoWay}" 
                              AcceptsReturn="False" FontFamily="Courier New" KeyDown="Text_KeyDown"/>
-            <TabControl>
+            <TabControl x:Name="tabControl" SelectionChanged="TabControl_SelectionChanged">
                 <TabItem Header="Images">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="2*"/>
                         </Grid.ColumnDefinitions>
-                        <ListBox x:Name="BoxImageData" SelectionChanged="BoxImageData_SelectionChanged" Grid.Column="0">
+                        <ListBox x:Name="BoxImageData" Grid.Column="0" SelectionChanged="BoxImageData_SelectionChanged">
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
@@ -33,7 +34,41 @@
                                 </DataTemplate>
                             </ListBox.ItemTemplate>
                         </ListBox>
-                        <Image x:Name="ImageExample" Stretch="None" Grid.Column="1"/>
+                        <Image x:Name="ImageExample" Stretch="Uniform" Grid.Column="1"/>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Image Group">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="2*"/>
+                        </Grid.ColumnDefinitions>
+                        <ListBox x:Name="BoxImageGroupData" Grid.Column="0" SelectionChanged="BoxImageGroupData_SelectionChanged">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image VerticalAlignment="Center" Source="{Binding Icon}"
+                                                Stretch="UniformToFill" Width="16" Height="16" Margin="0,0,2,2"/>
+                                        <TextBlock VerticalAlignment="Center" Text="{Binding Text}"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                        <DockPanel Grid.Column="1">
+                            <TextBox DockPanel.Dock="Bottom" Text="{Binding SelectedIndex, ElementName=inputWindow
+                                , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                            <Grid>
+                                <Image x:Name="ImageGroupExample" Stretch="Uniform"/>
+                                <cv:DrawingCanvas x:Name="SplitGrid"
+                                                  Height="{Binding ActualHeight, ElementName=ImageGroupExample}"
+                                                  Width="{Binding ActualWidth, ElementName=ImageGroupExample}" 
+                                                  HorizontalAlignment="Center" VerticalAlignment="Center"
+                                                  MouseLeftButtonDown="SplitGrid_MouseLeftButtonDown"
+                                                  MouseMove="SplitGrid_MouseMove"
+                                                  MouseLeftButtonUp="SplitGrid_MouseLeftButtonUp">
+                                </cv:DrawingCanvas>
+                            </Grid>
+                        </DockPanel>
                     </Grid>
                 </TabItem>
             </TabControl>

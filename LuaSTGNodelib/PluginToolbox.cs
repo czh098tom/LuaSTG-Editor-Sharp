@@ -148,6 +148,8 @@ namespace LuaSTGEditorSharp
             #region graphics
             graphics.Add(new ToolboxItemData("loadimage", "/LuaSTGNodeLib;component/images/loadimage.png", "Load Image")
                 , new AddNode(AddLoadImageNode));
+            graphics.Add(new ToolboxItemData("loadimagegroup", "/LuaSTGNodeLib;component/images/loadimagegroup.png", "Load Image Group")
+                , new AddNode(AddLoadImageGroupNode));
             #endregion
             ToolInfo.Add("Graphics", graphics);
 
@@ -416,6 +418,10 @@ namespace LuaSTGEditorSharp
         private void AddLoadImageNode()
         {
             parent.Insert(new LoadImage(parent.ActivatedWorkSpaceData));
+        }
+        private void AddLoadImageGroupNode()
+        {
+            parent.Insert(new LoadImageGroup(parent.ActivatedWorkSpaceData));
         }
         #endregion
         #region audio

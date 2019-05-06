@@ -61,6 +61,7 @@ namespace LuaSTGEditorSharp
                 new int[]{ (int)MetaType.Boss, (int)MetaType.Bullet, (int)MetaType.BossBG
                     , (int)MetaType.Laser, (int)MetaType.BentLaser },
                 new int[]{ (int)MetaType.ImageLoad },
+                new int[]{ (int)MetaType.ImageGroupLoad },
                 new int[]{ (int)MetaType.BGMLoad }
             };
 

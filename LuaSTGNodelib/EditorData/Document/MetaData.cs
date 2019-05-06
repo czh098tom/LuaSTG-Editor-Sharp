@@ -11,7 +11,7 @@ using Newtonsoft.Json;
 namespace LuaSTGEditorSharp.EditorData.Document
 {
     public enum MetaType { proj, userDefined
-            , stageGroup, Boss, Bullet, ImageLoad
+            , stageGroup, Boss, Bullet, ImageLoad, ImageGroupLoad
             , BGMLoad, BossBG, Laser, BentLaser, __max }
 
     //List version, used in non-immediate update cases
@@ -26,6 +26,8 @@ namespace LuaSTGEditorSharp.EditorData.Document
         public IMetaInfoCollection BulletDefineData { get => aggregatableMetas[(int)MetaType.Bullet]; }
         [JsonIgnore]
         public IMetaInfoCollection ImageLoadData { get => aggregatableMetas[(int)MetaType.ImageLoad]; }
+        [JsonIgnore]
+        public IMetaInfoCollection ImageGroupLoadData { get => aggregatableMetas[(int)MetaType.ImageGroupLoad]; }
         [JsonIgnore]
         public IMetaInfoCollection BGMLoadData { get => aggregatableMetas[(int)MetaType.BGMLoad]; }
         [JsonIgnore]
