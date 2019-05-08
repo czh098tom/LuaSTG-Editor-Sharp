@@ -1446,6 +1446,30 @@ namespace LuaSTGEditorSharp.EditorData
         }
 
         /// <summary>
+        /// This method expands all child nodes in this branch.
+        /// </summary>
+        public void ExpandTree()
+        {
+            this.IsExpanded = true;
+            foreach(TreeNode t in children)
+            {
+                t.ExpandTree();
+            }
+        }
+
+        /// <summary>
+        /// This method folds all child nodes in this branch.
+        /// </summary>
+        public void FoldTree()
+        {
+            this.IsExpanded = false;
+            foreach (TreeNode t in children)
+            {
+                t.FoldTree();
+            }
+        }
+
+        /// <summary>
         /// Get the enumerator fowardly iterate the rest of the tree.
         /// </summary>
         /// <returns>An enumerator of the tree.</returns>

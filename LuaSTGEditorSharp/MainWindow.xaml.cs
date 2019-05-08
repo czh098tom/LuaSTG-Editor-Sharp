@@ -919,6 +919,26 @@ namespace LuaSTGEditorSharp
             else e.CanExecute = false;
         }
 
+        private void FoldTreeCommandExecuted(object sender, ExecutedRoutedEventArgs e)
+        {
+            selectedNode.FoldTree();
+        }
+
+        private void FoldTreeCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = selectedNode != null;
+        }
+
+        private void UnfoldTreeCommandExecuted(object sender, ExecutedRoutedEventArgs e)
+        {
+            selectedNode.ExpandTree();
+        }
+
+        private void UnfoldTreeCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = selectedNode != null;
+        }
+
         private void FoldRegionCommandExecuted(object sender, ExecutedRoutedEventArgs e)
         {
             FoldRegion();
