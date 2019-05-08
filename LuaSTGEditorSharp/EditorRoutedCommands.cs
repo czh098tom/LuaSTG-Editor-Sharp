@@ -58,7 +58,7 @@ namespace LuaSTGEditorSharp
             FoldTree = new RoutedUICommand("Fold Tree", "FoldTree", typeof(EditorRoutedCommands), inputs);
             inputs = new InputGestureCollection
             {
-                new KeyGesture(Key.S, ModifierKeys.Control | ModifierKeys.Alt, "Ctrl+Alt+A")
+                new KeyGesture(Key.S, ModifierKeys.Control | ModifierKeys.Alt, "Ctrl+Alt+S")
             };
             UnfoldTree = new RoutedUICommand("Unfold Tree", "UnfoldTree", typeof(EditorRoutedCommands), inputs);
             inputs = new InputGestureCollection
