@@ -60,6 +60,8 @@ namespace LuaSTGEditorSharp
                 , new AddNode(AddTaskWaitNode));
             task.Add(new ToolboxItemData("moveto", "/LuaSTGNodeLib;component/images/taskmoveto.png", "Move To")
                 , new AddNode(AddTaskMoveToNode));
+            task.Add(new ToolboxItemData("taskrepeat", "/LuaSTGNodeLib;component/images/taskrepeat.png", "Task Repeat")
+                , new AddNode(AddTaskRepeatNode));
             #endregion
             ToolInfo.Add("Task", task);
             
@@ -250,6 +252,13 @@ namespace LuaSTGEditorSharp
         private void AddTaskMoveToNode()
         {
             parent.Insert(new TaskMoveTo(parent.ActivatedWorkSpaceData));
+        }
+
+        private void AddTaskRepeatNode()
+        {
+            TreeNode repeat = new Repeat(parent.ActivatedWorkSpaceData, "_infinite");
+            repeat.AddChild(new TaskWait(parent.ActivatedWorkSpaceData));
+            parent.Insert(repeat);
         }
         #endregion
         #region boss
