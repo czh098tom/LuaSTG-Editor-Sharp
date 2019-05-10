@@ -85,6 +85,7 @@ namespace LuaSTGEditorSharp
             //comboDict.IsDropDownOpen = true;
             comboDict.SelectedItem = null;
             itemsViewOriginal.Refresh();
+            comboDict.IsDropDownOpen = true;
             /*
             else if (e.Key != Key.Down && e.Key != Key.Up && e.Key != Key.Left && e.Key != Key.Right) 
             {
