@@ -22,19 +22,20 @@ namespace LuaSTGEditorSharp.Windows.Input
         public CodeInput(string s, MainWindow owner)
         {
             InitializeComponent();
-            Result = s;
-            codeText.Text = Result;
+            codeText.Text = s;
         }
 
         private void ButtonOK_Click(object sender, RoutedEventArgs e)
         {
             DialogResult = true;
+            Result = codeText.Text;
             this.Close();
         }
 
         private void ButtonCancel_Click(object sender, RoutedEventArgs e)
         {
             DialogResult = false;
+            Result = codeText.Text;
             this.Close();
         }
 

@@ -86,6 +86,9 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ICSharpCode.AvalonEdit, Version=5.0.3.0, Culture=neutral, PublicKeyToken=9cc39be672370310, processorArchitecture=MSIL">
+      <HintPath>..\packages\AvalonEdit.5.0.4\lib\Net40\ICSharpCode.AvalonEdit.dll</HintPath>
+    </Reference>
     <Reference Include="ICSharpCode.SharpZipLib, Version=1.1.0.145, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
       <HintPath>..\packages\SharpZipLib.1.1.0\lib\net45\ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
@@ -214,6 +217,7 @@
     <Compile Include="EditorData\WorkTree.cs" />
     <Compile Include="EditorRoutedCommands.cs" />
     <Compile Include="Lua\StringParser.cs" />
+    <Compile Include="Lua\SyntaxHighlightLoader.cs" />
     <Compile Include="Plugin\AbstractPluginEntry.cs" />
     <Compile Include="Plugin\AbstractToolbox.cs" />
     <Compile Include="Plugin\DefaultNullPlugin\DefaultInputWindowSelector.cs" />
@@ -246,6 +250,9 @@
       <DependentUpon>AboutNode.xaml</DependentUpon>
     </Compile>
     <Compile Include="EditorData\Document\Meta\MetaModel.cs" />
+    <Compile Include="Windows\Input\CodeInput.xaml.cs">
+      <DependentUpon>CodeInput.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\Input\NodeDefInput.xaml.cs">
       <DependentUpon>NodeDefInput.xaml</DependentUpon>
     </Compile>
@@ -302,6 +309,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Windows\Input\CodeInput.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Windows\Input\NodeDefInput.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -352,6 +363,7 @@
     <Resource Include="images\16x16\unidentifiedNode.png" />
     <Resource Include="images\archispace.png" />
     <Resource Include="images\16x16\archispace.png" />
+    <EmbeddedResource Include="Lua\LuaSyntax.xml" />
     <Content Include="Templates\Empty Project.lstgproj">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

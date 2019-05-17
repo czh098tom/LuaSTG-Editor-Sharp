@@ -3,7 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:LuaSTGEditorSharp.Windows.Input;assembly=LuaSTGEditorSharp"
+        xmlns:local="clr-namespace:LuaSTGEditorSharp.Windows.Input"
+        xmlns:avalon="clr-namespace:ICSharpCode.AvalonEdit;assembly=ICSharpCode.AvalonEdit"
         mc:Ignorable="d"
         Title="Input Code" Height="450" Width="800" MinHeight="200" MinWidth="200"
                    Loaded="InputWindow_Loaded">
@@ -13,8 +14,7 @@
                 <Button Content="OK" Margin="10,10,2,10" Padding="3" Click="ButtonOK_Click"/>
                 <Button Content="Cancel" Margin="2,10,10,10" Padding="3" Click="ButtonCancel_Click"/>
             </StackPanel>
-            <TextBox x:Name="codeText" Text="{Binding Result, ElementName=inputWindow, Mode=TwoWay}" 
-                             AcceptsReturn="True" FontFamily="Courier New" VerticalScrollBarVisibility="Visible"/>
+            <avalon:TextEditor x:Name="codeText" FontFamily="Courier New" FontSize="14" SyntaxHighlighting="Lua" ShowLineNumbers="True"/>
         </DockPanel>
     </Grid>
 </local:InputWindow>

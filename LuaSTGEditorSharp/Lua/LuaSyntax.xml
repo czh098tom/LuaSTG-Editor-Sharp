@@ -1,0 +1,79 @@
+﻿<SyntaxDefinition name="C#"
+        xmlns="http://icsharpcode.net/sharpdevelop/syntaxdefinition/2008">
+  <Color name="Comment" foreground="Green" />
+  <Color name="String" foreground="#FF808080"/>
+  <Color name="MultilineString" foreground="#FF8F0000"/>
+  <Color name="Number" foreground="#FFFF8000"/>
+  <Color name="Keyword" foreground="Blue" fontWeight="bold"/>
+  
+  <Color name="TEST" foreground="#FFFF00FF"/>
+
+  <!-- This is the main ruleset. -->
+  <RuleSet>
+    <Span color="Comment" multiline="true" begin="--\[\[" end="\]\]" />
+    <Span color="Comment" multiline="true" begin="--\[=\[" end="\]=\]" />
+    <Span color="Comment" multiline="true" begin="--\[==\[" end="\]==\]" />
+    <Span color="Comment" multiline="true" begin="--\[===\[" end="\]===\]" />
+    <Span color="Comment" multiline="true" begin="--\[====\[" end="\]====\]" />
+    <Span color="Comment" multiline="true" begin="--\[=====\[" end="\]=====\]" />
+    <Span color="Comment" begin="--" />
+    
+    <Span color="MultilineString" multiline="true" begin="\[\[" end="\]\]" />
+    <Span color="MultilineString" multiline="true" begin="\[=\[" end="\]=\]" />
+    <Span color="MultilineString" multiline="true" begin="\[==\[" end="\]==\]" />
+    <Span color="MultilineString" multiline="true" begin="\[===\[" end="\]===\]" />
+    <Span color="MultilineString" multiline="true" begin="\[====\[" end="\]====\]" />
+    <Span color="MultilineString" multiline="true" begin="\[=====\[" end="\]=====\]" />
+      
+    <Span color="String" multiline="true">
+      <Begin>"</Begin>
+      <End>"|((?&lt;!\\)$)</End>
+      <RuleSet>
+        <Span begin="\\" end="." />
+      </RuleSet>
+    </Span>
+    
+    <Span color="String" multiline="true">
+      <Begin>'</Begin>
+      <End>'|((?&lt;!\\)$)</End>
+      <RuleSet>
+        <Span begin="\\" end="." />
+      </RuleSet>
+    </Span>
+
+    <Keywords color="Keyword">
+      <Word>and</Word>
+      <Word>break</Word>
+      <Word>do</Word>
+      <Word>else</Word>
+      <Word>elseif</Word>
+      <Word>end</Word>
+      <Word>false</Word>
+      <Word>for</Word>
+      <Word>function</Word>
+      <Word>if</Word>
+      <Word>in</Word>
+      <Word>local</Word>
+      <Word>nil</Word>
+      <Word>not</Word>
+      <Word>or</Word>
+      <Word>repeat</Word>
+      <Word>return</Word>
+      <Word>then</Word>
+      <Word>true</Word>
+      <Word>until</Word>
+      <Word>while</Word>
+    </Keywords>
+
+    <!--String Fullword, but it does not consider multiline "([^\\"\s]|(\\[\s\S]))*"-->
+    <!-- Digits -->
+    <Rule color="Number">
+      \b0[xX][0-9a-fA-F]+  # hex number
+      |    \b
+      (    \d+(\.[0-9]+)?   #number with optional floating point
+      |    \.[0-9]+         #or just starting with floating point
+      )
+      ([eE][+-]?[0-9]+)? # optional exponent
+    </Rule>
+  </RuleSet>
+</SyntaxDefinition>

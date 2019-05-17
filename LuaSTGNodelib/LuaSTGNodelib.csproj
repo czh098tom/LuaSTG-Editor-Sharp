@@ -144,9 +144,6 @@
     <Compile Include="Windows\Input\EditorObjParamInput.xaml.cs">
       <DependentUpon>EditorObjParamInput.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\Input\CodeInput.xaml.cs">
-      <DependentUpon>CodeInput.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Windows\Input\ColorInput.xaml.cs">
       <DependentUpon>ColorInput.xaml</DependentUpon>
     </Compile>
@@ -214,10 +211,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Windows\Input\EditorObjParamInput.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Windows\Input\CodeInput.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

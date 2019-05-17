@@ -54,6 +54,9 @@ namespace LuaSTGEditorSharp
                 {
                     MessageBox.Show("Load Plugin Failed.");
                 }
+
+                Lua.SyntaxHighlightLoader.LoadLuaDef();
+
                 var mainWindow = new MainWindow();
                 //string arg = AppDomain.CurrentDomain.SetupInformation.ActivationArguments?.ActivationData?[0];
                 string arg = "";
