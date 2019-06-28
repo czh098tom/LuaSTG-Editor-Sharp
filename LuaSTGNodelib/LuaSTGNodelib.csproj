@@ -57,6 +57,7 @@
     <Compile Include="EditorData\Document\Meta\BGMLoadMetaInfo.cs" />
     <Compile Include="EditorData\Document\Meta\BossBGDefineMetaInfo.cs" />
     <Compile Include="EditorData\Document\Meta\BossDefineMetaInfo.cs" />
+    <Compile Include="EditorData\Document\Meta\ObjectDefineMetaInfo.cs" />
     <Compile Include="EditorData\Document\Meta\BulletDefineMetaInfo.cs" />
     <Compile Include="EditorData\Document\Meta\ImageGroupLoadMetaInfo.cs" />
     <Compile Include="EditorData\Document\Meta\ImageLoadMetaInfo.cs" />
@@ -100,6 +101,9 @@
     <Compile Include="EditorData\Node\Laser\LaserTurnOff.cs" />
     <Compile Include="EditorData\Node\Laser\LaserTurnOn.cs" />
     <Compile Include="EditorData\Node\NodeTypeCache.cs" />
+    <Compile Include="EditorData\Node\Object\CreateBullet.cs" />
+    <Compile Include="EditorData\Node\Object\ObjectDefine.cs" />
+    <Compile Include="EditorData\Node\Object\ObjectInit.cs" />
     <Compile Include="EditorData\Node\Object\CallBackFunc.cs" />
     <Compile Include="EditorData\Node\Object\DefaultAction.cs" />
     <Compile Include="EditorData\Node\Object\Del.cs" />
@@ -110,7 +114,9 @@
     <Compile Include="EditorData\Node\Stage\Stage.cs" />
     <Compile Include="EditorData\Node\Stage\StageBG.cs" />
     <Compile Include="EditorData\Node\Stage\StageGroup.cs" />
+    <Compile Include="EditorData\Node\Task\TaskMoveBy.cs" />
     <Compile Include="EditorData\Node\Task\TaskMoveTo.cs" />
+    <Compile Include="EditorData\Node\Task\Tasker.cs" />
     <Compile Include="EditorData\Node\Task\TaskNode.cs" />
     <Compile Include="EditorData\Node\Task\TaskWait.cs" />
     <Compile Include="PluginEntry.cs" />

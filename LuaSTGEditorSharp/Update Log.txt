@@ -7,6 +7,12 @@ Data
 	Function
 Task
 	TaskRepeat（伪
+	Tasker
+	TaskMoveBy
+Object
+	ObjectDefine
+		ObjectInit
+	ObjectCreate
 Graphics
 	LoadImageGroup
 修复bug：

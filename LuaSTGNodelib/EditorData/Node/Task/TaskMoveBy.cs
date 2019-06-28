@@ -11,19 +11,19 @@ using Newtonsoft.Json;
 
 namespace LuaSTGEditorSharp.EditorData.Node.Task
 {
-    [Serializable, NodeIcon("/LuaSTGNodeLib;component/images/16x16/taskmoveto.png")]
+    [Serializable, NodeIcon("/LuaSTGNodeLib;component/images/16x16/taskmovetoex.png")]
     [RequireAncestor(typeof(TaskNode), typeof(Data.Function), typeof(Tasker))]
     [LeafNode]
     [RCInvoke(1)]
-    public class TaskMoveTo : TreeNode
+    public class TaskMoveBy : TreeNode
     {
         [JsonConstructor]
-        private TaskMoveTo() : base() { }
+        private TaskMoveBy() : base() { }
 
-        public TaskMoveTo(DocumentData workSpaceData)
+        public TaskMoveBy(DocumentData workSpaceData)
             : this(workSpaceData, "0,0", "60", "MOVE_NORMAL") { }
 
-        public TaskMoveTo(DocumentData workSpaceData, string dest, string frame, string mode)
+        public TaskMoveBy(DocumentData workSpaceData, string dest, string frame, string mode)
             : base(workSpaceData)
         {
             attributes.Add(new AttrItem("Destination", dest, this, "position"));
@@ -38,7 +38,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Task
             fr = string.IsNullOrEmpty(fr) ? "1" : fr;
             string mode = Macrolize(2);
             mode = string.IsNullOrEmpty(mode) ? "MOVE_NORMAL" : mode;
-            yield return sp + "task.MoveTo(" + Macrolize(0) + "," + fr + "," + mode + ")\n";
+            yield return sp + "task.MoveToEx(" + Macrolize(0) + "," + fr + "," + mode + ")\n";
         }
 
         public override IEnumerable<Tuple<int, TreeNode>> GetLines()
@@ -52,12 +52,12 @@ namespace LuaSTGEditorSharp.EditorData.Node.Task
             fr = string.IsNullOrEmpty(fr) ? "1" : fr;
             string mode = NonMacrolize(2);
             mode = string.IsNullOrEmpty(mode) || mode == "MOVE_NORMAL" ? "" : ", interpolation mode: " + mode;
-            return "Move to (" + NonMacrolize(0) + ") in " + fr + " frame(s)" + mode;
+            return "Move by (" + NonMacrolize(0) + ") in " + fr + " frame(s)" + mode;
         }
 
         public override object Clone()
         {
-            var n = new TaskMoveTo(parentWorkSpace);
+            var n = new TaskMoveBy(parentWorkSpace);
             n.DeepCopyFrom(this);
             return n;
         }

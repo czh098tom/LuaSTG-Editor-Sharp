@@ -44,7 +44,10 @@ namespace LuaSTGEditorSharp
                     insertState.ValidateAndNewInsert(
                         selectedNode, node)) && isInvoke) CreateInvoke(node);
             }
-            catch (Exception) { }
+            catch (Exception)
+            {
+                //MessageBox.Show(e.ToString());
+            }
         }
 
         private void ButtonAdd_Click(object sender, RoutedEventArgs e)

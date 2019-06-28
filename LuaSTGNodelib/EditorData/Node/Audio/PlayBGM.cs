@@ -15,7 +15,8 @@ namespace LuaSTGEditorSharp.EditorData.Node.Audio
 {
     [Serializable, NodeIcon("/LuaSTGNodeLib;component/images/16x16/playbgm.png")]
     [RequireAncestor(typeof(Stage.Stage), typeof(Object.CallBackFunc), typeof(Bullet.BulletInit), typeof(Boss.BossBGLayerInit)
-        , typeof(Boss.BossBGLayerFrame), typeof(Boss.BossBGLayerRender), typeof(Boss.BossSCStart), typeof(Boss.BossSCFinish))]
+        , typeof(Boss.BossBGLayerFrame), typeof(Boss.BossBGLayerRender), typeof(Boss.BossSCStart), typeof(Boss.BossSCFinish)
+        , typeof(Laser.LaserInit), typeof(Laser.BentLaserInit), typeof(Data.Function), typeof(Object.ObjectDefine))]
     [LeafNode]
     [CreateInvoke(0), RCInvoke(1)]
     public class PlayBGM : TreeNode

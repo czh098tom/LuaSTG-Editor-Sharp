@@ -29,6 +29,7 @@ namespace LuaSTGEditorSharp.Windows
             Tree.Add(GetEditorObjMeta(MetaType.Bullet, "Bullet", "bulletdefine.png"));
             Tree.Add(GetEditorObjMeta(MetaType.Laser, "Laser", "laserdefine.png"));
             Tree.Add(GetEditorObjMeta(MetaType.BentLaser, "Bent Laser", "laserbentdefine.png"));
+            Tree.Add(GetEditorObjMeta(MetaType.Object, "Object", "objectdefine.png"));
             Tree.Add(GetBossMeta());
             Tree.Add(GetImageMeta());
             Tree.Add(GetImageGroupMeta());
@@ -43,7 +44,7 @@ namespace LuaSTGEditorSharp.Windows
                 Icon = "/LuaSTGNodeLib;component/images/16x16/stagegroup.png",
                 Text = "Stage Groups"
             };
-            var a = data.Meta.aggregatableMetas[(int)MetaType.stageGroup].GetAllFullWithDifficulty("");
+            var a = data.Meta.aggregatableMetas[(int)MetaType.StageGroup].GetAllFullWithDifficulty("");
             foreach (MetaModel info in a)
             {
                 stageGroup.Children.Add(info);

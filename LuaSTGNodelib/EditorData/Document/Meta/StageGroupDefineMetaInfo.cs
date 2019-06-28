@@ -30,12 +30,12 @@ namespace LuaSTGEditorSharp.EditorData.Document.Meta
 
         public override void Create(IAggregatableMeta meta, MetaDataEntity documentMetaData)
         {
-            documentMetaData.aggregatableMetas[(int)MetaType.stageGroup].Add(meta);
+            documentMetaData.aggregatableMetas[(int)MetaType.StageGroup].Add(meta);
         }
 
         public override void Remove(IAggregatableMeta meta, MetaDataEntity documentMetaData)
         {
-            documentMetaData.aggregatableMetas[(int)MetaType.stageGroup].Remove(meta);
+            documentMetaData.aggregatableMetas[(int)MetaType.StageGroup].Remove(meta);
         }
 
         public string[] GetStages()

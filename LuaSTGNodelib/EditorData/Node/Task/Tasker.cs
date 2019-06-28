@@ -4,53 +4,53 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using LuaSTGEditorSharp.EditorData;
 using LuaSTGEditorSharp.EditorData.Document;
 using LuaSTGEditorSharp.EditorData.Node.NodeAttributes;
 using Newtonsoft.Json;
 
-namespace LuaSTGEditorSharp.EditorData.Node.Object
+namespace LuaSTGEditorSharp.EditorData.Node.Task
 {
-    [Serializable, NodeIcon("/LuaSTGNodeLib;component/images/16x16/unitdel.png")]
+    [Serializable, NodeIcon("/LuaSTGNodeLib;component/images/16x16/tasker.png")]
     [RequireAncestor(typeof(Stage.Stage), typeof(Object.CallBackFunc), typeof(Bullet.BulletInit), typeof(Boss.BossBGLayerInit)
         , typeof(Boss.BossBGLayerFrame), typeof(Boss.BossBGLayerRender), typeof(Boss.BossSCStart), typeof(Boss.BossSCFinish)
         , typeof(Laser.LaserInit), typeof(Laser.BentLaserInit), typeof(Data.Function), typeof(Object.ObjectDefine))]
-    [LeafNode]
-    [RCInvoke(0)]
-    public class Del : TreeNode
+    public class Tasker : TreeNode
     {
         [JsonConstructor]
-        private Del() : base() { }
+        private Tasker() { }
 
-        public Del(DocumentData workSpaceData)
-            : this(workSpaceData, "self", "true") { }
-
-        public Del(DocumentData workSpaceData, string tar, string trigger)
-            : base(workSpaceData)
-        {
-            attributes.Add(new AttrItem("Target", tar, this, "target"));
-            attributes.Add(new AttrItem("Trigger event", trigger, this, "bool"));
-        }
+        public Tasker(DocumentData workSpaceData)
+            : base(workSpaceData) { }
 
         public override IEnumerable<string> ToLua(int spacing)
         {
             string sp = "".PadLeft(spacing * 4);
-            yield return sp + "_del(" + Macrolize(0) + "," + Macrolize(1) + ")\n";
+            yield return sp + "New(tasker, function()\n";
+            foreach (var a in base.ToLua(spacing + 1))
+            {
+                yield return a;
+            }
+            yield return sp + "end)\n";
         }
-
-        public override IEnumerable<Tuple<int,TreeNode>> GetLines()
+        
+        public override IEnumerable<Tuple<int, TreeNode>> GetLines()
         {
+            yield return new Tuple<int, TreeNode>(1, this);
+            foreach (Tuple<int, TreeNode> t in GetChildLines())
+            {
+                yield return t;
+            }
             yield return new Tuple<int, TreeNode>(1, this);
         }
 
         public override string ToString()
         {
-            return "Delete " + NonMacrolize(0);
+            return "Create tasker";
         }
 
         public override object Clone()
         {
-            var n = new Del(parentWorkSpace);
+            var n = new Tasker(parentWorkSpace);
             n.DeepCopyFrom(this);
             return n;
         }

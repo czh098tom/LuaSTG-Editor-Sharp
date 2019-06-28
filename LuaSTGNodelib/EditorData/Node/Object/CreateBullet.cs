@@ -4,39 +4,41 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using LuaSTGEditorSharp.EditorData;
 using LuaSTGEditorSharp.EditorData.Document;
 using LuaSTGEditorSharp.EditorData.Node.NodeAttributes;
 using Newtonsoft.Json;
 
 namespace LuaSTGEditorSharp.EditorData.Node.Object
 {
-    [Serializable, NodeIcon("/LuaSTGNodeLib;component/images/16x16/setcolor.png")]
+    [Serializable, NodeIcon("/LuaSTGNodeLib;component/images/16x16/objectcreate.png")]
     [RequireAncestor(typeof(Stage.Stage), typeof(Object.CallBackFunc), typeof(Bullet.BulletInit), typeof(Boss.BossBGLayerInit)
         , typeof(Boss.BossBGLayerFrame), typeof(Boss.BossBGLayerRender), typeof(Boss.BossSCStart), typeof(Boss.BossSCFinish)
         , typeof(Laser.LaserInit), typeof(Laser.BentLaserInit), typeof(Data.Function), typeof(Object.ObjectDefine))]
     [LeafNode]
-    [RCInvoke(2)]
-    public class SetBlend : TreeNode
+    [CreateInvoke(0), RCInvoke(2)]
+    public class CreateObject : TreeNode
     {
         [JsonConstructor]
-        private SetBlend() : base() { }
+        private CreateObject() : base() { }
 
-        public SetBlend(DocumentData workSpaceData)
-            : this(workSpaceData, "self", "\"\"", "255,255,255,255") { }
+        public CreateObject(DocumentData workSpaceData)
+            : this(workSpaceData, "", "self.x,self.y", "")
+        { }
 
-        public SetBlend(DocumentData workSpaceData, string tar, string blend, string color)
+        public CreateObject(DocumentData workSpaceData, string name, string pos, string param)
             : base(workSpaceData)
         {
-            attributes.Add(new AttrItem("Target", tar, this, "target"));
-            attributes.Add(new AttrItem("Blend Mode", blend, this, "blend"));
-            attributes.Add(new AttrItem("ARGB", color, this, "ARGB"));
+            attributes.Add(new AttrItem("Name", name, this, "objectDef"));
+            attributes.Add(new AttrItem("Position", pos, this, "position"));
+            attributes.Add(new AttrItem("Parameters", param, this, "bulletParam"));
         }
 
         public override IEnumerable<string> ToLua(int spacing)
         {
             string sp = "".PadLeft(spacing * 4);
-            yield return sp + "_object.set_color(" + Macrolize(0) + "," + Macrolize(1) + "," + Macrolize(2) + ")\n";
+            string p = Macrolize(2);
+            if (string.IsNullOrEmpty(p)) p = "_";
+            yield return sp + "last=New(_editor_class[" + Macrolize(0) + "]," + Macrolize(1) + "," + p + ")\n";
         }
 
         public override IEnumerable<Tuple<int,TreeNode>> GetLines()
@@ -46,13 +48,12 @@ namespace LuaSTGEditorSharp.EditorData.Node.Object
 
         public override string ToString()
         {
-            return "Set color of " + NonMacrolize(0) + " to(" + NonMacrolize(2) + "), blend mode to " 
-                + NonMacrolize(1);
+            return "Create object of type " + NonMacrolize(0) + " at (" + NonMacrolize(1) + ") with parameter " + NonMacrolize(2);
         }
 
         public override object Clone()
         {
-            var n = new SetBlend(parentWorkSpace);
+            var n = new CreateObject(parentWorkSpace);
             n.DeepCopyFrom(this);
             return n;
         }

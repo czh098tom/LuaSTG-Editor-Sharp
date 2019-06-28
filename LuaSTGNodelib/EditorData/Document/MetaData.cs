@@ -10,16 +10,16 @@ using Newtonsoft.Json;
 
 namespace LuaSTGEditorSharp.EditorData.Document
 {
-    public enum MetaType { proj, userDefined
-            , stageGroup, Boss, Bullet, ImageLoad, ImageGroupLoad
-            , BGMLoad, BossBG, Laser, BentLaser, __max }
+    public enum MetaType { Proj, UserDefined
+            , StageGroup, Boss, Bullet, ImageLoad, ImageGroupLoad
+            , BGMLoad, BossBG, Laser, BentLaser, Object, Enemy, TaskEX, __max }
 
     //List version, used in non-immediate update cases
     [Serializable]
     public class MetaData : AbstractMetaData
     {
         [JsonIgnore]
-        public IMetaInfoCollection StageGroupDefineData { get => aggregatableMetas[(int)MetaType.stageGroup]; }
+        public IMetaInfoCollection StageGroupDefineData { get => aggregatableMetas[(int)MetaType.StageGroup]; }
         [JsonIgnore]
         public IMetaInfoCollection BossDefineData { get => aggregatableMetas[(int)MetaType.Boss]; }
         [JsonIgnore]
@@ -36,6 +36,12 @@ namespace LuaSTGEditorSharp.EditorData.Document
         public IMetaInfoCollection LaserDefineData { get => aggregatableMetas[(int)MetaType.Laser]; }
         [JsonIgnore]
         public IMetaInfoCollection BentLaserDefineData { get => aggregatableMetas[(int)MetaType.BentLaser]; }
+        [JsonIgnore]
+        public IMetaInfoCollection ObjectDefineData { get => aggregatableMetas[(int)MetaType.Object]; }
+        [JsonIgnore]
+        public IMetaInfoCollection EnemyDefineData { get => aggregatableMetas[(int)MetaType.Enemy]; }
+        [JsonIgnore]
+        public IMetaInfoCollection TaskEXDefineData { get => aggregatableMetas[(int)MetaType.TaskEX]; }
 
         public MetaData()
         {

@@ -45,9 +45,9 @@
                 <ImageBrush Stretch="Fill" ImageSource="../../images/ref/levelRef.png" />
             </Canvas.Background>
             <cv:DrawingCanvas x:Name="Canvas" Width="640" Height="480" Background="{StaticResource GridTile}"
-                                 MouseLeftButtonDown="Canvas_MouseLeftButtonDown"
-                                 MouseLeftButtonUp="Canvas_MouseLeftButtonUp"
-                                 MouseMove="Canvas_MouseMove"/>
+                              MouseLeftButtonDown="Canvas_MouseLeftButtonDown"
+                              MouseLeftButtonUp="Canvas_MouseLeftButtonUp"
+                              MouseMove="Canvas_MouseMove"/>
         </Canvas>
     </DockPanel>
 </local:InputWindow>

@@ -10,7 +10,7 @@ using LuaSTGEditorSharp.Windows;
 
 namespace LuaSTGEditorSharp.EditorData.Document.Meta
 { 
-    public class BossDefineMetaInfo : MetaInfo, IComparable<BulletDefineMetaInfo>
+    public class BossDefineMetaInfo : MetaInfo, IComparable<BossDefineMetaInfo>
     {
         public BossDefineMetaInfo(BossDefine target) : base(target) { }
 
@@ -53,7 +53,7 @@ namespace LuaSTGEditorSharp.EditorData.Document.Meta
             }
         }
 
-        public int CompareTo(BulletDefineMetaInfo other)
+        public int CompareTo(BossDefineMetaInfo other)
         {
             return Name.CompareTo(other.Name);
         }

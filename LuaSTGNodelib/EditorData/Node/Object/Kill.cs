@@ -14,7 +14,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Object
     [Serializable, NodeIcon("/LuaSTGNodeLib;component/images/16x16/unitkill.png")]
     [RequireAncestor(typeof(Stage.Stage), typeof(Object.CallBackFunc), typeof(Bullet.BulletInit), typeof(Boss.BossBGLayerInit)
         , typeof(Boss.BossBGLayerFrame), typeof(Boss.BossBGLayerRender), typeof(Boss.BossSCStart), typeof(Boss.BossSCFinish)
-        , typeof(Laser.LaserInit), typeof(Laser.BentLaserInit), typeof(Data.Function))]
+        , typeof(Laser.LaserInit), typeof(Laser.BentLaserInit), typeof(Data.Function), typeof(Object.ObjectDefine))]
     [LeafNode]
     [RCInvoke(0)]
     public class Kill : TreeNode

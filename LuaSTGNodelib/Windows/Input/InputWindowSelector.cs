@@ -26,6 +26,16 @@ namespace LuaSTGEditorSharp.Windows.Input
                     return new string[] { "frame", "kill", "del", "colli" };//, "render" };
                 case "interpolation":
                     return new string[] { "MOVE_NORMAL", "MOVE_ACCEL", "MOVE_DECEL", "MOVE_ACC_DEC" };
+                case "group":
+                    return new string[] { "GROUP_GHOST", "GROUP_ENEMY_BULLET", "GROUP_ENEMY", "GROUP_PLAYER_BULLET"
+                        , "GROUP_PLAYER", "GROUP_INDIES", "GROUP_ITEM", "GROUP_NONTJT" };
+                case "layer":
+                    return new string[] { "LAYER_BG-5", "LAYER_BG", "LAYER_BG+5", "LAYER_ENEMY-5", "LAYER_ENEMY"
+                        , "LAYER_ENEMY+5", "LAYER_PLAYER_BULLET-5", "LAYER_PLAYER_BULLET", "LAYER_PLAYER_BULLET+5"
+                        , "LAYER_PLAYER-5", "LAYER_PLAYER", "LAYER_PLAYER+5", "LAYER_ITEM-5", "LAYER_ITEM"
+                        , "LAYER_ITEM+5", "LAYER_ENEMY_BULLET-5", "LAYER_ENEMY_BULLET", "LAYER_ENEMY_BULLET+5"
+                        , "LAYER_ENEMY_BULLET_EF-5", "LAYER_ENEMY_BULLET_EF", "LAYER_ENEMY_BULLET_EF+5"
+                        , "LAYER_TOP-5", "LAYER_TOP", "LAYER_TOP+5" };
                 case "stageGroup":
                     return new string[] { "Easy", "Normal", "Hard", "Lunatic", "Extra" };
                 case "objDifficulty":
@@ -106,6 +116,12 @@ namespace LuaSTGEditorSharp.Windows.Input
                 case "interpolation":
                     window = new Selector(toEdit, owner, SelectComboBox(name), "Input Interpolation Type");
                     break;
+                case "group":
+                    window = new Selector(toEdit, owner, SelectComboBox(name), "Input Group Type");
+                    break;
+                case "layer":
+                    window = new Selector(toEdit, owner, SelectComboBox(name), "Input Layer");
+                    break;
                 case "stageGroup":
                     window = new Selector(toEdit, owner, SelectComboBox(name), "Input Stage Group");
                     break;
@@ -133,8 +149,11 @@ namespace LuaSTGEditorSharp.Windows.Input
                 case "bentLaserDef":
                     window = new EditorObjDefInput(toEdit, MetaType.BentLaser, owner, source);
                     break;
+                case "objectDef":
+                    window = new EditorObjDefInput(toEdit, MetaType.Object, owner, source);
+                    break;
                 case "bossDef":
-                    window = new BossDefInput(toEdit, owner, source);
+                    window = new EditorObjDefInput(toEdit, MetaType.Boss, owner, source);//new BossDefInput(toEdit, owner, source);
                     break;
                 case "image":
                     window = new ImageInput(toEdit, owner, source);

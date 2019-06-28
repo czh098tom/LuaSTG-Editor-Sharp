@@ -34,10 +34,8 @@ namespace LuaSTGEditorSharp.Windows.Input
             {
                 base.Result = value;
                 List<string> cs = Separate(Result);
-                if (cs.Count >= 1 && !string.IsNullOrEmpty(cs[0]) && double.TryParse(cs[0], out double b1)) selectedX = b1;
-                if (cs.Count >= 2 && !string.IsNullOrEmpty(cs[1]) && double.TryParse(cs[1], out double b2)) selectedY = b2;
-                RaisePropertyChanged("SelectX");
-                RaisePropertyChanged("SelectY");
+                if (cs.Count >= 1 && !string.IsNullOrEmpty(cs[0]) && double.TryParse(cs[0], out double b1)) SelectedX = b1;
+                if (cs.Count >= 2 && !string.IsNullOrEmpty(cs[1]) && double.TryParse(cs[1], out double b2)) SelectedY = b2;
             }
         }
 

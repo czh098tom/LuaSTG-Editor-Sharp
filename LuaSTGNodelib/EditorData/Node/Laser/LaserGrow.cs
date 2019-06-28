@@ -12,7 +12,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Laser
 {
     [Serializable, NodeIcon("/LuaSTGNodeLib;component/images/16x16/lasergrow.png")]
     [RequireAncestor(typeof(Object.CallBackFunc), typeof(Laser.LaserInit), typeof(Data.Function))]
-    [RequireAncestor(typeof(Task.TaskNode), typeof(Data.Function))]
+    [RequireAncestor(typeof(Task.TaskNode), typeof(Data.Function), typeof(Task.Tasker))]
     [LeafNode]
     [CreateInvoke(0), RCInvoke(2)]
     public class LaserGrow : TreeNode

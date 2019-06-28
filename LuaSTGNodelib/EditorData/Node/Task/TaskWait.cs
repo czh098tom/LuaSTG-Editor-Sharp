@@ -12,7 +12,7 @@ using Newtonsoft.Json;
 namespace LuaSTGEditorSharp.EditorData.Node.Task
 {
     [Serializable, NodeIcon("/LuaSTGNodeLib;component/images/16x16/taskwait.png")]
-    [RequireAncestor(typeof(TaskNode), typeof(Data.Function))]
+    [RequireAncestor(typeof(TaskNode), typeof(Data.Function), typeof(Tasker))]
     [LeafNode]
     [RCInvoke(0)]
     public class TaskWait : TreeNode

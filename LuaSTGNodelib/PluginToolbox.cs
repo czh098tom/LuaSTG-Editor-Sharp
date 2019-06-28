@@ -56,12 +56,18 @@ namespace LuaSTGEditorSharp
             #region task
             task.Add(new ToolboxItemData("task", "/LuaSTGNodeLib;component/images/task.png", "Task")
                 , new AddNode(AddTaskNode));
+            task.Add(new ToolboxItemData("tasker", "/LuaSTGNodeLib;component/images/tasker.png", "Tasker")
+                , new AddNode(AddTaskerNode));
+            task.Add(new ToolboxItemData(true), null);
             task.Add(new ToolboxItemData("wait", "/LuaSTGNodeLib;component/images/taskwait.png", "Wait")
                 , new AddNode(AddTaskWaitNode));
-            task.Add(new ToolboxItemData("moveto", "/LuaSTGNodeLib;component/images/taskmoveto.png", "Move To")
-                , new AddNode(AddTaskMoveToNode));
             task.Add(new ToolboxItemData("taskrepeat", "/LuaSTGNodeLib;component/images/taskrepeat.png", "Task Repeat")
                 , new AddNode(AddTaskRepeatNode));
+            task.Add(new ToolboxItemData(true), null);
+            task.Add(new ToolboxItemData("moveto", "/LuaSTGNodeLib;component/images/taskmoveto.png", "Move To")
+                , new AddNode(AddTaskMoveToNode));
+            task.Add(new ToolboxItemData("moveby", "/LuaSTGNodeLib;component/images/taskmovetoex.png", "Move By")
+                , new AddNode(AddTaskMoveByNode));
             #endregion
             ToolInfo.Add("Task", task);
             
@@ -127,6 +133,11 @@ namespace LuaSTGEditorSharp
 
             var obj = new Dictionary<ToolboxItemData, AddNode>();
             #region object
+            obj.Add(new ToolboxItemData("defobject", "/LuaSTGNodeLib;component/images/objectdefine.png", "Define Object")
+                , new AddNode(AddDefineObjectNode));
+            obj.Add(new ToolboxItemData("createobject", "/LuaSTGNodeLib;component/images/objectcreate.png", "Create Object")
+                , new AddNode(AddCreateObjectNode));
+            obj.Add(new ToolboxItemData(true), null);
             obj.Add(new ToolboxItemData("callbackfunc", "/LuaSTGNodeLib;component/images/callbackfunc.png", "Call Back Functions")
                 , new AddNode(AddCallBackFuncNode));
             obj.Add(new ToolboxItemData("defaultaction", "/LuaSTGNodeLib;component/images/defaultaction.png", "Default Action")
@@ -243,15 +254,14 @@ namespace LuaSTGEditorSharp
         {
             parent.Insert(new TaskNode(parent.ActivatedWorkSpaceData));
         }
+        private void AddTaskerNode()
+        {
+            parent.Insert(new Tasker(parent.ActivatedWorkSpaceData));
+        }
 
         private void AddTaskWaitNode()
         {
             parent.Insert(new TaskWait(parent.ActivatedWorkSpaceData));
-        }
-
-        private void AddTaskMoveToNode()
-        {
-            parent.Insert(new TaskMoveTo(parent.ActivatedWorkSpaceData));
         }
 
         private void AddTaskRepeatNode()
@@ -259,6 +269,16 @@ namespace LuaSTGEditorSharp
             TreeNode repeat = new Repeat(parent.ActivatedWorkSpaceData, "_infinite");
             repeat.AddChild(new TaskWait(parent.ActivatedWorkSpaceData));
             parent.Insert(repeat);
+        }
+
+        private void AddTaskMoveToNode()
+        {
+            parent.Insert(new TaskMoveTo(parent.ActivatedWorkSpaceData));
+        }
+
+        private void AddTaskMoveByNode()
+        {
+            parent.Insert(new TaskMoveBy(parent.ActivatedWorkSpaceData));
         }
         #endregion
         #region boss
@@ -386,6 +406,18 @@ namespace LuaSTGEditorSharp
         }
         #endregion
         #region object
+        private void AddDefineObjectNode()
+        {
+            TreeNode objdef = new ObjectDefine(parent.ActivatedWorkSpaceData);
+            objdef.AddChild(new ObjectInit(parent.ActivatedWorkSpaceData));
+            parent.Insert(objdef);
+        }
+
+        private void AddCreateObjectNode()
+        {
+            parent.Insert(new CreateObject(parent.ActivatedWorkSpaceData));
+        }
+
         private void AddCallBackFuncNode()
         {
             TreeNode newCBF = new CallBackFunc(parent.ActivatedWorkSpaceData);

@@ -13,7 +13,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Bullet
     [Serializable, NodeIcon("/LuaSTGNodeLib;component/images/16x16/bulletcreatestraightex.png")]
     [RequireAncestor(typeof(Stage.Stage), typeof(Object.CallBackFunc), typeof(Bullet.BulletInit), typeof(Boss.BossBGLayerInit)
         , typeof(Boss.BossBGLayerFrame), typeof(Boss.BossBGLayerRender), typeof(Boss.BossSCStart), typeof(Boss.BossSCFinish)
-        , typeof(Laser.LaserInit), typeof(Laser.BentLaserInit), typeof(Data.Function))]
+        , typeof(Laser.LaserInit), typeof(Laser.BentLaserInit), typeof(Data.Function), typeof(Object.ObjectDefine))]
     [LeafNode]
     [CreateInvoke(0), RCInvoke(3)]
     public class CreateBulletGroup : TreeNode
