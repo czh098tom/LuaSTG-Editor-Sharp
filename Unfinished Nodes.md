@@ -13,6 +13,7 @@ Nodes with & token may need extra time to create GUI (hence finishing time is un
 
 
 Names below are desired class names for the unfinished nodes.
+"--" means a group separation.
 
 ## General
 	CodeBlock(?)
