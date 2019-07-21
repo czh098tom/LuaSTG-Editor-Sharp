@@ -71,12 +71,12 @@ Names below are desired class names for the unfinished nodes.
 	BulletClear
 	BulletClearRange
 
-## BulletEX is killed
+## BulletEX Is Killed
 
 ## Laser
 	Finished.
 
-## Object (merged old Unit)
+## Object (Merged Old "Unit")
 	ObjectChangeImage
 	Properties
 	--
@@ -89,12 +89,12 @@ Names below are desired class names for the unfinished nodes.
 	SetVelocityLimit
 	PreserveUnit
 	GroupForEach
-	CreateSmear (From old Effect)
+	CreateSmear (From old "Effect")
 	--
 	SetParent(*)
 	SetRelativePositiion(*)
 	--
-	DropItem (From old Effect)
+	DropItem (From old "Effect")
 
 ## Graphics
 	LoadAnimation
@@ -102,7 +102,7 @@ Names below are desired class names for the unfinished nodes.
 	LoadTexture
 	LoadFX
 	--
-	ShakeScreen (From old Effect)
+	ShakeScreen (From old "Effect")
 
 ## Audio
 	PauseBGM
