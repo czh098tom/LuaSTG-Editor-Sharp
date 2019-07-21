@@ -12,6 +12,8 @@ Nodes with * token may cost more time to finish.
 Nodes with & token may need extra time to create GUI (hence finishing time is unknown)
 
 
+Names below are desired class names for the unfinished nodes.
+
 ## General
 	CodeBlock(?)
 
