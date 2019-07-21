@@ -2,6 +2,9 @@
 
 0.0.6.0
 实现节点：
+Editor层：
+General
+	Break
 Lib层：
 Data
 	Function

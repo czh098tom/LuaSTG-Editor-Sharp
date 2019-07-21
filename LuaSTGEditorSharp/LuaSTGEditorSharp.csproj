@@ -167,6 +167,7 @@
     <Compile Include="EditorData\Interfaces\IMessageThrowable.cs" />
     <Compile Include="EditorData\Interfaces\IMetaInfoCollection.cs" />
     <Compile Include="EditorData\Document\MetaInfo.cs" />
+    <Compile Include="EditorData\ITypeEnumerable.cs" />
     <Compile Include="EditorData\MessageBase.cs" />
     <Compile Include="EditorData\MessageContainer.cs" />
     <Compile Include="EditorData\Message\ArgNotNullMessage.cs" />
@@ -184,6 +185,7 @@
     <Compile Include="EditorData\Node\Advanced\UserDefinedNode.cs" />
     <Compile Include="EditorData\Node\AttrItemListHelper.cs" />
     <Compile Include="EditorData\Node\EditorVersion.cs" />
+    <Compile Include="EditorData\Node\General\Break.cs" />
     <Compile Include="EditorData\Node\General\Code.cs" />
     <Compile Include="EditorData\Node\General\CodeSegment.cs" />
     <Compile Include="EditorData\Node\General\Comment.cs" />
@@ -215,6 +217,7 @@
     <Compile Include="EditorData\TreeNode.cs" />
     <Compile Include="EditorData\TreeNodeEventHandlers.cs" />
     <Compile Include="EditorData\WorkTree.cs" />
+    <Compile Include="EditorData\WrappedType.cs" />
     <Compile Include="EditorRoutedCommands.cs" />
     <Compile Include="Lua\StringParser.cs" />
     <Compile Include="Lua\SyntaxHighlightLoader.cs" />

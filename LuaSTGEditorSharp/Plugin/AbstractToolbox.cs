@@ -44,12 +44,14 @@ namespace LuaSTGEditorSharp.Plugin
             #region general
             gen.Add(new ToolboxItemData("folder", "images/folder.png", "Folder"), new AddNode(AddFolderNode));
             gen.Add(new ToolboxItemData("code", "images/code.png", "Code"), new AddNode(AddCodeNode));
+            gen.Add(new ToolboxItemData("codeseg", "images/codesegment.png", "Code Segment"), new AddNode(AddBlockCodeNode));
             gen.Add(new ToolboxItemData("comment", "images/comment.png", "Comment"), new AddNode(AddCommentNode));
+            gen.Add(new ToolboxItemData(true), null);
             gen.Add(new ToolboxItemData("if", "images/if.png", "If"), new AddNode(AddIfNode));
             gen.Add(new ToolboxItemData("repeat", "images/repeat.png", "Repeat"), new AddNode(AddRepeatNode));
-            gen.Add(new ToolboxItemData("patch", "images/patch.png", "Patch"), new AddNode(AddPatchNode));
+            gen.Add(new ToolboxItemData("break", "images/break.png", "Break"), new AddNode(AddBreakNode));
             gen.Add(new ToolboxItemData(true), null);
-            gen.Add(new ToolboxItemData("codeseg", "images/codesegment.png", "Code Segment"), new AddNode(AddBlockCodeNode));
+            gen.Add(new ToolboxItemData("patch", "images/patch.png", "Patch"), new AddNode(AddPatchNode));
             #endregion
             gen.Add(new ToolboxItemData(true), null);
             #region advanced
@@ -141,6 +143,11 @@ namespace LuaSTGEditorSharp.Plugin
         private void AddRepeatNode()
         {
             parent.Insert(new Repeat(parent.ActivatedWorkSpaceData));
+        }
+
+        private void AddBreakNode()
+        {
+            parent.Insert(new Break(parent.ActivatedWorkSpaceData));
         }
 
         private void AddPatchNode()

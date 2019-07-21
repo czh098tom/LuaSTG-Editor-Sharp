@@ -11,8 +11,8 @@ using Newtonsoft.Json;
 namespace LuaSTGEditorSharp.EditorData.Node.Laser
 {
     [Serializable, NodeIcon("/LuaSTGNodeLib;component/images/16x16/laserturnoff.png")]
-    [RequireAncestor(typeof(Object.CallBackFunc), typeof(Laser.LaserInit), typeof(Laser.BentLaserInit), typeof(Data.Function))]
-    [RequireAncestor(typeof(Task.TaskNode), typeof(Data.Function), typeof(Task.Tasker))]
+    [RequireAncestor(typeof(LaserAlikeTypes), typeof(Laser.BentLaserInit))]
+    [RequireAncestor(typeof(TaskAlikeTypes))]
     [LeafNode]
     [CreateInvoke(0), RCInvoke(2)]
     public class LaserTurnOff : TreeNode

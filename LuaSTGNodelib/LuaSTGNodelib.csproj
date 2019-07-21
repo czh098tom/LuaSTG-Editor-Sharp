@@ -114,11 +114,14 @@
     <Compile Include="EditorData\Node\Stage\Stage.cs" />
     <Compile Include="EditorData\Node\Stage\StageBG.cs" />
     <Compile Include="EditorData\Node\Stage\StageGroup.cs" />
+    <Compile Include="EditorData\Node\LaserAlikeTypes.cs" />
+    <Compile Include="EditorData\Node\TaskAlikeTypes.cs" />
     <Compile Include="EditorData\Node\Task\TaskMoveBy.cs" />
     <Compile Include="EditorData\Node\Task\TaskMoveTo.cs" />
     <Compile Include="EditorData\Node\Task\Tasker.cs" />
     <Compile Include="EditorData\Node\Task\TaskNode.cs" />
     <Compile Include="EditorData\Node\Task\TaskWait.cs" />
+    <Compile Include="EditorData\Node\CodeAlikeTypes.cs" />
     <Compile Include="PluginEntry.cs" />
     <Compile Include="PluginToolbox.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

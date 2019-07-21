@@ -36,7 +36,7 @@ namespace LuaSTGEditorSharp.EditorData.Node
                     canBeBanned = !t.IsDefined(typeof(CannotBanAttribute), false),
                     classNode = t.IsDefined(typeof(ClassNodeAttribute), false),
                     leaf = t.IsDefined(typeof(LeafNodeAttribute), false),
-                    requireParent = t.GetCustomAttribute<RequireParentAttribute>()?.ParentType,
+                    requireParent = GetTypes(t.GetCustomAttribute<RequireParentAttribute>()?.ParentType),
                     uniqueness = t.IsDefined(typeof(UniquenessAttribute), false),
                     ignoreValidation = t.IsDefined(typeof(IgnoreValidationAttribute), false),
                     createInvokeID = t.GetCustomAttribute<CreateInvokeAttribute>()?.id,
@@ -47,11 +47,37 @@ namespace LuaSTGEditorSharp.EditorData.Node
                 if (attrs.Count() != 0)
                 {
                     data.requireAncestor = (from RequireAncestorAttribute at in attrs
-                                            select at.RequiredTypes).ToArray();
+                                            select GetTypes(at.RequiredTypes)).ToArray();
                 }
                 NodeTypeInfo.Add(t, data);
                 StandardNode.Add(t, t.GetConstructor(new Type[] { typeof(DocumentData) }).Invoke(new object[] { null }) as TreeNode);
             }
+        }
+
+        public static Type[] GetTypes(Type[] src)
+        {
+            if (src != null)
+            {
+                LinkedList<Type> types = new LinkedList<Type>();
+                Type it = typeof(ITypeEnumerable);
+                foreach (Type t in src)
+                {
+                    if (it.IsAssignableFrom(t))
+                    {
+                        ITypeEnumerable o = t.GetConstructor(Type.EmptyTypes).Invoke(new object[0]) as ITypeEnumerable;
+                        foreach (Type ty in o)
+                        {
+                            types.AddLast(ty);
+                        }
+                    }
+                    else
+                    {
+                        types.AddLast(t);
+                    }
+                }
+                return types.ToArray();
+            }
+            return null;
         }
     }
 }
