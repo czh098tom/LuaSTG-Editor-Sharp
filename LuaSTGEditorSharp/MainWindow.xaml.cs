@@ -296,7 +296,7 @@ namespace LuaSTGEditorSharp
             {
                 TreeNode node = (TreeNode)clipBoard.Clone();
                 node.FixParentDoc(ActivatedWorkSpaceData);
-                node.IsSelected = (Application.Current as App).AutoMoveToNew;
+                node.Selected = (Application.Current as App).AutoMoveToNew;
                 ActivatedWorkSpaceData.AddAndExecuteCommand(
                     insertState.ValidateAndNewInsert(
                         selectedNode, node));
@@ -412,10 +412,10 @@ namespace LuaSTGEditorSharp
             
             while (sta.Count > 0)
             {
-                sta.Pop().IsExpanded = true;
+                sta.Pop().Expanded = true;
             }
             
-            node.IsSelected = true;
+            node.Selected = true;
         }
 
         private void ViewCode()

@@ -121,6 +121,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Toolbox\TreeViewLineConverter.cs" />
     <Compile Include="EditorData\AttrItem.cs" />
     <Compile Include="EditorData\Command.cs" />
     <Compile Include="EditorData\Commands\DeleteCommand.cs" />

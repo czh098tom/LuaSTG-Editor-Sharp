@@ -82,26 +82,26 @@ namespace LuaSTGEditorSharp.EditorData
         /// Store whether a <see cref="TreeNode"/> is expanded in view. Using this will refresh the view.
         /// </summary>
         [JsonProperty, DefaultValue(true)][XmlAttribute("expanded")]
-        public bool IsExpanded
+        public bool Expanded
         {
             get => isExpanded;
             set
             {
                 isExpanded = value;
-                RaiseProertyChanged("IsExpanded");
+                RaiseProertyChanged("Expanded");
             }
         }
         /// <summary>
         /// Store whether a <see cref="TreeNode"/> is selected in view. Using this will refresh the view.
         /// </summary>
         [JsonProperty, DefaultValue(false)][XmlAttribute("selected")]
-        public bool IsSelected
+        public bool Selected
         {
             get => isSelected;
             set
             {
                 isSelected = value;
-                RaiseProertyChanged("IsSelected");
+                RaiseProertyChanged("Selected");
             }
         }
         /// <summary>
@@ -1450,7 +1450,7 @@ namespace LuaSTGEditorSharp.EditorData
         /// </summary>
         public void ExpandTree()
         {
-            this.IsExpanded = true;
+            this.Expanded = true;
             foreach(TreeNode t in children)
             {
                 t.ExpandTree();
@@ -1462,7 +1462,7 @@ namespace LuaSTGEditorSharp.EditorData
         /// </summary>
         public void FoldTree()
         {
-            this.IsExpanded = false;
+            this.Expanded = false;
             foreach (TreeNode t in children)
             {
                 t.FoldTree();
