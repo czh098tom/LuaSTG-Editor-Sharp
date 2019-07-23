@@ -97,32 +97,54 @@
                              ProgressChanged="PackageProgressReport"
                              RunWorkerCompleted="FinishPackaging"
                              />
+        
+        <!--#region Linked Tree Style-->
         <tool:TreeViewLineConverter x:Key="TreeViewLineConverter"/>
-
-        <SolidColorBrush x:Key="GlyphBrush" Color="#444" />
-
-        <Style x:Key="ExpandCollapseToggleStyle" TargetType="ToggleButton">
+        <SolidColorBrush x:Key="TreeViewItem.TreeArrow.Static.Checked.Fill" Color="#FF595959"/>
+        <SolidColorBrush x:Key="TreeViewItem.TreeArrow.Static.Checked.Stroke" Color="#FF262626"/>
+        <SolidColorBrush x:Key="TreeViewItem.TreeArrow.MouseOver.Stroke" Color="#FF27C7F7"/>
+        <SolidColorBrush x:Key="TreeViewItem.TreeArrow.MouseOver.Fill" Color="#FFCCEEFB"/>
+        <SolidColorBrush x:Key="TreeViewItem.TreeArrow.MouseOver.Checked.Stroke" Color="#FF1CC4F7"/>
+        <SolidColorBrush x:Key="TreeViewItem.TreeArrow.MouseOver.Checked.Fill" Color="#FF82DFFB"/>
+        <PathGeometry x:Key="TreeArrow" Figures="M0,0 L0,6 L6,0 z"/>
+        <SolidColorBrush x:Key="TreeViewItem.TreeArrow.Static.Fill" Color="#FFFFFFFF"/>
+        <SolidColorBrush x:Key="TreeViewItem.TreeArrow.Static.Stroke" Color="#FF818181"/>
+        <Style x:Key="ExpandCollapseToggleStyle" TargetType="{x:Type ToggleButton}">
             <Setter Property="Focusable" Value="False"/>
+            <Setter Property="Width" Value="16"/>
+            <Setter Property="Height" Value="16"/>
             <Setter Property="Template">
                 <Setter.Value>
-                    <ControlTemplate TargetType="ToggleButton">
-                        <Grid Width="15"
-                              Height="13"
-                              Background="White">
-                            <Path x:Name="ExpandPath"
-                                  HorizontalAlignment="Left"
-                                  VerticalAlignment="Center"
-                                  Margin="1,1,1,1"
-                                  Fill="{StaticResource GlyphBrush}"
-                                  Data="M 4 0 L 8 4 L 4 8 Z"/>
-                        </Grid>
+                    <ControlTemplate TargetType="{x:Type ToggleButton}">
+                        <Border Background="Transparent" Height="16" Padding="5,5,5,5" Width="16">
+                            <Path x:Name="ExpandPath" Data="{StaticResource TreeArrow}" Fill="{StaticResource TreeViewItem.TreeArrow.Static.Fill}" Stroke="{StaticResource TreeViewItem.TreeArrow.Static.Stroke}">
+                                <Path.RenderTransform>
+                                    <RotateTransform Angle="135" CenterY="3" CenterX="3"/>
+                                </Path.RenderTransform>
+                            </Path>
+                        </Border>
                         <ControlTemplate.Triggers>
-                            <Trigger Property="IsChecked"
-                                     Value="True">
-                                <Setter Property="Data"
-                                        TargetName="ExpandPath"
-                                        Value="M 0 4 L 8 4 L 4 8 Z"/>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter Property="RenderTransform" TargetName="ExpandPath">
+                                    <Setter.Value>
+                                        <RotateTransform Angle="180" CenterY="3" CenterX="3"/>
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter Property="Fill" TargetName="ExpandPath" Value="{StaticResource TreeViewItem.TreeArrow.Static.Checked.Fill}"/>
+                                <Setter Property="Stroke" TargetName="ExpandPath" Value="{StaticResource TreeViewItem.TreeArrow.Static.Checked.Stroke}"/>
                             </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Stroke" TargetName="ExpandPath" Value="{StaticResource TreeViewItem.TreeArrow.MouseOver.Stroke}"/>
+                                <Setter Property="Fill" TargetName="ExpandPath" Value="{StaticResource TreeViewItem.TreeArrow.MouseOver.Fill}"/>
+                            </Trigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsMouseOver" Value="True"/>
+                                    <Condition Property="IsChecked" Value="True"/>
+                                </MultiTrigger.Conditions>
+                                <Setter Property="Stroke" TargetName="ExpandPath" Value="{StaticResource TreeViewItem.TreeArrow.MouseOver.Checked.Stroke}"/>
+                                <Setter Property="Fill" TargetName="ExpandPath" Value="{StaticResource TreeViewItem.TreeArrow.MouseOver.Checked.Fill}"/>
+                            </MultiTrigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
@@ -274,6 +296,7 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <!--#endregion-->
         
     </Window.Resources>
     <DockPanel>
@@ -863,22 +886,6 @@
                             <TreeView x:Name="workSpace" ItemsSource="{Binding TreeNodes}" FontFamily="Terminal"
                                   SelectedItemChanged="WorkSpaceSelectedChanged"
                                   Grid.Column="2" VirtualizingPanel.IsVirtualizing="True">
-                                <TreeView.ItemContainerStyle>
-                                    <Style TargetType="{x:Type TreeViewItem}">
-                                        <Setter Property="IsExpanded" 
-                                            Value="{Binding Expanded, Mode=TwoWay}"/>
-                                        <Setter Property="IsSelected" 
-                                            Value="{Binding Selected, Mode=TwoWay}"/>
-                                        <EventSetter Event="PreviewMouseRightButtonDown" 
-                                                     Handler="TreeViewItem_PreviewMouseRightButtonDown"/>
-                                        <Style.Triggers>
-                                            <Trigger Property="IsSelected" Value="True"/>
-                                            <Trigger Property="IsSelected" Value="False"/>
-                                            <Trigger Property="IsExpanded" Value="True"/>
-                                            <Trigger Property="IsExpanded" Value="False"/>
-                                        </Style.Triggers>
-                                    </Style>
-                                </TreeView.ItemContainerStyle>
                                 <TreeView.ItemTemplate>
                                     <HierarchicalDataTemplate ItemsSource="{Binding Children}" ItemContainerStyle="{StaticResource DottedTreeViewItem}">
                                         <StackPanel Orientation="Horizontal">
