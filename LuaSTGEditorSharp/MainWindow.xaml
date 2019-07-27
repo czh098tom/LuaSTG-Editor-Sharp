@@ -180,9 +180,9 @@
             <Setter Property="FocusVisualStyle"
                     Value="{StaticResource TreeViewItemFocusVisual}"/>
             <Setter Property="IsExpanded" 
-                    Value="{Binding Expanded, Mode=TwoWay}"/>
+                    Value="{Binding Path=IsExpanded, Mode=TwoWay}"/>
             <Setter Property="IsSelected" 
-                    Value="{Binding Selected, Mode=TwoWay}"/>
+                    Value="{Binding Path=IsSelected, Mode=TwoWay}"/>
             <EventSetter Event="PreviewMouseRightButtonDown" 
                          Handler="TreeViewItem_PreviewMouseRightButtonDown"/>
             <Setter Property="Template">
@@ -884,10 +884,11 @@
                     <TabControl.ContentTemplate>
                         <DataTemplate>
                             <TreeView x:Name="workSpace" ItemsSource="{Binding TreeNodes}" FontFamily="Terminal"
-                                  SelectedItemChanged="WorkSpaceSelectedChanged"
-                                  Grid.Column="2" VirtualizingPanel.IsVirtualizing="True">
+                                      SelectedItemChanged="WorkSpaceSelectedChanged"
+                                      Grid.Column="2" VirtualizingPanel.IsVirtualizing="True"
+                                      ItemContainerStyle="{StaticResource DottedTreeViewItem}">
                                 <TreeView.ItemTemplate>
-                                    <HierarchicalDataTemplate ItemsSource="{Binding Children}" ItemContainerStyle="{StaticResource DottedTreeViewItem}">
+                                    <HierarchicalDataTemplate ItemsSource="{Binding Children}">
                                         <StackPanel Orientation="Horizontal">
                                             <Image Source="{tool:BindableStaticResource {Binding Icon}}"
                                                    Stretch="Fill" Width="16" Height="16" Margin="0,0,2,2" VerticalAlignment="Top"

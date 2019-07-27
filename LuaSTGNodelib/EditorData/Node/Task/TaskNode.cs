@@ -15,7 +15,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Task
     public class TaskNode : TreeNode
     {
         [JsonConstructor]
-        private TaskNode() { }
+        private TaskNode() : base() { }
 
         public TaskNode(DocumentData workSpaceData)
             : base(workSpaceData) { }

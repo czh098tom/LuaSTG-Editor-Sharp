@@ -15,7 +15,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Task
     public class Tasker : TreeNode
     {
         [JsonConstructor]
-        private Tasker() { }
+        private Tasker() : base() { }
 
         public Tasker(DocumentData workSpaceData)
             : base(workSpaceData) { }

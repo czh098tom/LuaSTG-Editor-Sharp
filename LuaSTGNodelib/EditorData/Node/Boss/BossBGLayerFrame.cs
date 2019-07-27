@@ -17,7 +17,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Boss
     public class BossBGLayerFrame : TreeNode
     {
         [JsonConstructor]
-        private BossBGLayerFrame() { }
+        private BossBGLayerFrame() : base() { }
 
         public BossBGLayerFrame(DocumentData workSpaceData) : base(workSpaceData) { }
 

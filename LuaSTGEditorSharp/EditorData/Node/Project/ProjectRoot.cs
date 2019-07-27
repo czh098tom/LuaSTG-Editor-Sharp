@@ -16,7 +16,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Project
     public class ProjectRoot : TreeNode
     { 
         [JsonConstructor]
-        private ProjectRoot() :base()
+        private ProjectRoot() : base()
         {
             //activated = true;
         }

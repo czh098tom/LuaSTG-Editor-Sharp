@@ -10,7 +10,7 @@ namespace LuaSTGEditorSharp.EditorData.Node
     public class TaskAlikeTypes : ITypeEnumerable
     {
         private static readonly Type[] types =
-            { typeof(Task.TaskNode), typeof(Data.Function), typeof(Task.Tasker) };
+            { typeof(Task.TaskNode), typeof(Task.DefineTask), typeof(Data.Function), typeof(Task.Tasker) };
 
         public IEnumerator<Type> GetEnumerator()
         {

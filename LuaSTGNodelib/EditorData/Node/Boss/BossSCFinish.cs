@@ -17,7 +17,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Boss
     public class BossSCFinish : TreeNode
     {
         [JsonConstructor]
-        private BossSCFinish() { }
+        private BossSCFinish() : base() { }
 
         public BossSCFinish(DocumentData workSpaceData) : base(workSpaceData) { }
 

@@ -39,10 +39,14 @@ namespace LuaSTGEditorSharp
             try
             {
                 bool move = (Application.Current as App).AutoMoveToNew;
-                node.Selected = move;
+                node.IsSelected = move;
                 if (ActivatedWorkSpaceData.AddAndExecuteCommand(
                     insertState.ValidateAndNewInsert(
-                        selectedNode, node)) && isInvoke) CreateInvoke(node);
+                        selectedNode, node)) && isInvoke)
+                {
+                    node.CheckMessage(null, new System.ComponentModel.PropertyChangedEventArgs(""));
+                    CreateInvoke(node);
+                }
             }
             catch (Exception)
             {

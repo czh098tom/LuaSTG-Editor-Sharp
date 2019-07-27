@@ -116,6 +116,7 @@
     <Compile Include="EditorData\Node\Stage\StageGroup.cs" />
     <Compile Include="EditorData\Node\LaserAlikeTypes.cs" />
     <Compile Include="EditorData\Node\TaskAlikeTypes.cs" />
+    <Compile Include="EditorData\Node\Task\DefineTask.cs" />
     <Compile Include="EditorData\Node\Task\TaskMoveBy.cs" />
     <Compile Include="EditorData\Node\Task\TaskMoveTo.cs" />
     <Compile Include="EditorData\Node\Task\Tasker.cs" />
