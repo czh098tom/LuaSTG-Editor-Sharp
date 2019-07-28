@@ -18,6 +18,9 @@ Names below are desired class names for the unfinished nodes.
 ## General
 	CodeBlock(?)
 
+## Data
+    InverseVar(!)(Inverse a given variable)
+
 ## Stage
 	StageGroupInfo
 	StageGoTo
