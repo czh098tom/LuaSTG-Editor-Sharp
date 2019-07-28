@@ -32,22 +32,22 @@ namespace LuaSTGEditorSharp.EditorData.Node.Data
         [JsonIgnore, XmlAttribute("Name")]
         public string FuncName
         {
-            get => DoubleCheckAttr(0, "Name").attrInput;
-            set => DoubleCheckAttr(0, "Name").attrInput = value;
+            get => DoubleCheckAttr(0, name: "Name").attrInput;
+            set => DoubleCheckAttr(0, name: "Name").attrInput = value;
         }
 
         [JsonIgnore, XmlAttribute("Parameters")]
         public string Parameters
         {
-            get => DoubleCheckAttr(1, "Parameter List").attrInput;
-            set => DoubleCheckAttr(1, "Parameter List").attrInput = value;
+            get => DoubleCheckAttr(1, name: "Parameter List").attrInput;
+            set => DoubleCheckAttr(1, name: "Parameter List").attrInput = value;
         }
 
         [JsonIgnore, XmlAttribute("Localized")]
         public string Localized
         {
-            get => DoubleCheckAttr(2, "Localized", "bool").attrInput;
-            set => DoubleCheckAttr(2, "Localized", "bool").attrInput = value;
+            get => DoubleCheckAttr(2, "bool").attrInput;
+            set => DoubleCheckAttr(2, "bool").attrInput = value;
         }
 
         public override IEnumerable<string> ToLua(int spacing)

@@ -31,15 +31,15 @@ namespace LuaSTGEditorSharp.EditorData.Node.Task
         [JsonIgnore]
         public string Name
         {
-            get => DoubleCheckAttr(0, "Name").attrInput;
-            set => DoubleCheckAttr(0, "Name").attrInput = value;
+            get => DoubleCheckAttr(0).attrInput;
+            set => DoubleCheckAttr(0).attrInput = value;
         }
 
         [JsonIgnore]
         public string Parameter
         {
-            get => DoubleCheckAttr(1, "Parameter").attrInput;
-            set => DoubleCheckAttr(1, "Parameter").attrInput = value;
+            get => DoubleCheckAttr(1).attrInput;
+            set => DoubleCheckAttr(1).attrInput = value;
         }
 
         public override IEnumerable<string> ToLua(int spacing)

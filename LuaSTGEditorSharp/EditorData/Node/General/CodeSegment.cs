@@ -39,16 +39,16 @@ namespace LuaSTGEditorSharp.EditorData.Node.General
         //[DefaultValue("do")]
         public string Head
         {
-            get => DoubleCheckAttr(0, "Head", "code").attrInput;
-            set => DoubleCheckAttr(0, "Head", "code").attrInput = value;
+            get => DoubleCheckAttr(0, "code").attrInput;
+            set => DoubleCheckAttr(0, "code").attrInput = value;
         }
 
         [JsonIgnore, XmlAttribute("Tail")]
         //[DefaultValue("end")]
         public string Tail
         {
-            get => DoubleCheckAttr(1, "Tail", "code").attrInput;
-            set => DoubleCheckAttr(1, "Tail", "code").attrInput = value;
+            get => DoubleCheckAttr(1, "code").attrInput;
+            set => DoubleCheckAttr(1, "code").attrInput = value;
         }
 
         public override IEnumerable<string> ToLua(int spacing)

@@ -43,16 +43,16 @@ namespace LuaSTGEditorSharp.EditorData.Node.General
         //[DefaultValue("_infinity")]
         public string RepeatTimes
         {
-            get => DoubleCheckAttr(0, "Times").attrInput;
-            set => DoubleCheckAttr(0, "Times").attrInput = value;
+            get => DoubleCheckAttr(0, name: "Times").attrInput;
+            set => DoubleCheckAttr(0, name: "Times").attrInput = value;
         }
 
         [JsonIgnore, XmlAttribute("NumOfVar")]
         //[DefaultValue("1")]
         public string NumOfVar
         {
-            get => DoubleCheckAttr(1, "Number of Var", isDependency: true).attrInput;
-            set => DoubleCheckAttr(1, "Number of Var", isDependency: true).attrInput = value;
+            get => DoubleCheckAttr(1, name: "Number of Var", isDependency: true).attrInput;
+            set => DoubleCheckAttr(1, name: "Number of Var", isDependency: true).attrInput = value;
         }
 
         public override IEnumerable<string> ToLua(int spacing)

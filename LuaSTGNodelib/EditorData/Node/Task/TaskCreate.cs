@@ -23,29 +23,29 @@ namespace LuaSTGEditorSharp.EditorData.Node.Task
         public TaskCreate(DocumentData workSpaceData, string name, string parameter, string target) : base(workSpaceData)
         {
             Name = name;
-            Parameter = parameter;
+            Parameters = parameter;
             Target = target;
         }
 
         [JsonIgnore]
         public string Name
         {
-            get => DoubleCheckAttr(0, "Name", "taskDef").attrInput;
-            set => DoubleCheckAttr(0, "Name", "taskDef").attrInput = value;
+            get => DoubleCheckAttr(0, "taskDef").attrInput;
+            set => DoubleCheckAttr(0, "taskDef").attrInput = value;
         }
 
         [JsonIgnore]
-        public string Parameter
+        public string Parameters
         {
-            get => DoubleCheckAttr(1, "Parameters", "taskParam").attrInput;
-            set => DoubleCheckAttr(1, "Parameters", "taskParam").attrInput = value;
+            get => DoubleCheckAttr(1, "taskParam").attrInput;
+            set => DoubleCheckAttr(1, "taskParam").attrInput = value;
         }
 
         [JsonIgnore]
         public string Target
         {
-            get => DoubleCheckAttr(2, "Target", "target").attrInput;
-            set => DoubleCheckAttr(2, "Target", "target").attrInput = value;
+            get => DoubleCheckAttr(2, "target").attrInput;
+            set => DoubleCheckAttr(2, "target").attrInput = value;
         }
 
         public override IEnumerable<string> ToLua(int spacing)

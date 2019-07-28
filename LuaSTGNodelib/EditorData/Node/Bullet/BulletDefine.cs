@@ -41,16 +41,16 @@ namespace LuaSTGEditorSharp.EditorData.Node.Bullet
         //[DefaultValue("")]
         public string Name
         {
-            get => DoubleCheckAttr(0, "Name").attrInput;
-            set => DoubleCheckAttr(0, "Name").attrInput = value;
+            get => DoubleCheckAttr(0).attrInput;
+            set => DoubleCheckAttr(0).attrInput = value;
         }
 
         [JsonIgnore, XmlAttribute("Difficulty")]
         //[DefaultValue("All")]
         public string Difficulty
         {
-            get => DoubleCheckAttr(1, "Difficulty", "objDifficulty").attrInput;
-            set => DoubleCheckAttr(1, "Difficulty", "objDifficulty").attrInput = value;
+            get => DoubleCheckAttr(1, "objDifficulty").attrInput;
+            set => DoubleCheckAttr(1, "objDifficulty").attrInput = value;
         }
 
         public override IEnumerable<string> ToLua(int spacing)

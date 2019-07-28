@@ -38,16 +38,16 @@ namespace LuaSTGEditorSharp.EditorData.Node.General
         //[DefaultValue("")]
         public string CommentContent
         {
-            get => DoubleCheckAttr(0, "Comment").attrInput;
-            set => DoubleCheckAttr(0, "Comment").attrInput = value;
+            get => DoubleCheckAttr(0, name: "Comment").attrInput;
+            set => DoubleCheckAttr(0, name: "Comment").attrInput = value;
         }
 
         [JsonIgnore, XmlAttribute("CommentOnChild")]
         //[DefaultValue("true")]
         public string CommentOnChild
         {
-            get => DoubleCheckAttr(1, "Comment on child", "bool").attrInput;
-            set => DoubleCheckAttr(1, "Comment on child", "bool").attrInput = value;
+            get => DoubleCheckAttr(1, "bool", "Comment on child").attrInput;
+            set => DoubleCheckAttr(1, "bool", "Comment on child").attrInput = value;
         }
 
         public override IEnumerable<string> ToLua(int spacing)

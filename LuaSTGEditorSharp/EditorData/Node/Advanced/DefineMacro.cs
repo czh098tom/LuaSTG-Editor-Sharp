@@ -36,16 +36,16 @@ namespace LuaSTGEditorSharp.EditorData.Node.Advanced
         //[DefaultValue("")]
         public string Replace
         {
-            get => DoubleCheckAttr(0, "Replace").attrInput;
-            set => DoubleCheckAttr(0, "Replace").attrInput = value;
+            get => DoubleCheckAttr(0).attrInput;
+            set => DoubleCheckAttr(0).attrInput = value;
         }
 
         [JsonIgnore, XmlAttribute("By")]
         //[DefaultValue("")]
         public string By
         {
-            get => DoubleCheckAttr(1, "By").attrInput;
-            set => DoubleCheckAttr(1, "By").attrInput = value;
+            get => DoubleCheckAttr(1).attrInput;
+            set => DoubleCheckAttr(1).attrInput = value;
         }
 
         public override IEnumerable<string> ToLua(int spacing)

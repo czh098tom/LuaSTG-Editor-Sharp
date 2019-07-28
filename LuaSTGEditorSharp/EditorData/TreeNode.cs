@@ -9,6 +9,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 using System.Collections.Specialized;
+using System.Runtime.CompilerServices;
 using LuaSTGEditorSharp.Plugin;
 using LuaSTGEditorSharp.EditorData.Commands;
 using LuaSTGEditorSharp.EditorData.Message;
@@ -974,12 +975,15 @@ namespace LuaSTGEditorSharp.EditorData
         /// Get an <see cref="AttrItem"/> check by both id and name. If not found, create one.
         /// </summary>
         /// <param name="id">ID of a <see cref="AttrItem"/>.</param>
-        /// <param name="name">Name of a <see cref="AttrItem"/>.</param>
         /// <param name="defaultEditWindow">Indicate default editwindow property.</param>
+        /// <param name="name">
+        /// Name of a <see cref="AttrItem"/>. 
+        /// It will set to caller's name if no <see cref="string"/> is assigned to it.
+        /// </param>
         /// <param name="isDependency">Indicate whether a default <see cref="AttrItem"/> 
         /// is <see cref="DependencyAttrItem"/>.</param>
         /// <returns>The targeted <see cref="AttrItem"/> if found, otherwise a default <see cref="AttrItem"/>.</returns>
-        public AttrItem DoubleCheckAttr(int id, string name, string defaultEditWindow = "", bool isDependency = false)
+        public AttrItem DoubleCheckAttr(int id, string defaultEditWindow = "", [CallerMemberName] string name = "", bool isDependency = false)
         {
             AttrItem ai = GetAttr(id);
             if (ai == null || string.IsNullOrEmpty(ai.AttrCap) || ai.AttrCap != name) ai = GetAttr(name);

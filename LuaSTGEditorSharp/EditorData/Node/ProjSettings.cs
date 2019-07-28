@@ -45,32 +45,32 @@ namespace LuaSTGEditorSharp.EditorData.Node
         //[DefaultValue("")]
         public string OutputName
         {
-            get => DoubleCheckAttr(0, "Output Name").attrInput;
-            set => DoubleCheckAttr(0, "Output Name").attrInput = value;
+            get => DoubleCheckAttr(0, name: "Output Name").attrInput;
+            set => DoubleCheckAttr(0, name: "Output Name").attrInput = value;
         }
 
         [JsonIgnore, XmlAttribute("Author")]
         //[DefaultValue("")]
         public string Author
         {
-            get => DoubleCheckAttr(1, "Author").attrInput;
-            set => DoubleCheckAttr(1, "Author").attrInput = value;
+            get => DoubleCheckAttr(1).attrInput;
+            set => DoubleCheckAttr(1).attrInput = value;
         }
 
         [JsonIgnore, XmlAttribute("AllowPractice")]
         //[DefaultValue("true")]
         public string AllowPractice
         {
-            get => DoubleCheckAttr(2, "Allow practice", "bool").attrInput;
-            set => DoubleCheckAttr(2, "Allow practice", "bool").attrInput = value;
+            get => DoubleCheckAttr(2, "bool", "Allow practice").attrInput;
+            set => DoubleCheckAttr(2, "bool", "Allow practice").attrInput = value;
         }
 
         [JsonIgnore, XmlAttribute("AllowSCPractice")]
         //[DefaultValue("true")]
         public string AllowSCPractice
         {
-            get => DoubleCheckAttr(3, "Allow sc practice", "bool").attrInput;
-            set => DoubleCheckAttr(3, "Allow sc practice", "bool").attrInput = value;
+            get => DoubleCheckAttr(3, "bool", "Allow sc practice").attrInput;
+            set => DoubleCheckAttr(3, "bool", "Allow sc practice").attrInput = value;
         }
 
         public override string ToString()

@@ -33,8 +33,8 @@ namespace LuaSTGEditorSharp.EditorData.Node
         //[DefaultValue("")]
         public string Version
         {
-            get => DoubleCheckAttr(0, "Editor version").attrInput;
-            set => DoubleCheckAttr(0, "Editor version").attrInput = value;
+            get => DoubleCheckAttr(0, name: "Editor version").attrInput;
+            set => DoubleCheckAttr(0, name: "Editor version").attrInput = value;
         }
 
         public override IEnumerable<Tuple<int, TreeNode>> GetLines()

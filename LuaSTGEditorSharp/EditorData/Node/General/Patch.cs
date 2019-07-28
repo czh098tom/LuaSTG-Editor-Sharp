@@ -36,8 +36,8 @@ namespace LuaSTGEditorSharp.EditorData.Node.General
         //[DefaultValue("")]
         public string PathContent
         {
-            get => DoubleCheckAttr(0, "Path", "luaFile").attrInput;
-            set => DoubleCheckAttr(0, "Path", "luaFile").attrInput = value;
+            get => DoubleCheckAttr(0, "luaFile", "Path").attrInput;
+            set => DoubleCheckAttr(0, "luaFile", "Path").attrInput = value;
         }
 
         public override IEnumerable<string> ToLua(int spacing)
