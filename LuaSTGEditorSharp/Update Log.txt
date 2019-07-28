@@ -11,6 +11,8 @@ Data
 Task
 	TaskRepeat（伪
 	Tasker
+	TaskDefine
+	TaskCreate
 	TaskMoveBy
 Object
 	ObjectDefine

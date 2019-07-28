@@ -59,7 +59,9 @@ namespace LuaSTGEditorSharp
             task.Add(new ToolboxItemData("tasker", "/LuaSTGNodeLib;component/images/tasker.png", "Tasker")
                 , new AddNode(AddTaskerNode));
             task.Add(new ToolboxItemData("taskdefine", "/LuaSTGNodeLib;component/images/taskdefine.png", "Define Task")
-                , new AddNode(AddDefineTaskNode));
+                , new AddNode(AddTaskDefineNode));
+            task.Add(new ToolboxItemData("taskcreate", "/LuaSTGNodeLib;component/images/taskattach.png", "Create Task")
+                , new AddNode(AddTaskCreateNode));
             task.Add(new ToolboxItemData(true), null);
             task.Add(new ToolboxItemData("wait", "/LuaSTGNodeLib;component/images/taskwait.png", "Wait")
                 , new AddNode(AddTaskWaitNode));
@@ -262,9 +264,14 @@ namespace LuaSTGEditorSharp
             parent.Insert(new Tasker(parent.ActivatedWorkSpaceData));
         }
 
-        private void AddDefineTaskNode()
+        private void AddTaskDefineNode()
         {
-            parent.Insert(new DefineTask(parent.ActivatedWorkSpaceData));
+            parent.Insert(new TaskDefine(parent.ActivatedWorkSpaceData));
+        }
+
+        private void AddTaskCreateNode()
+        {
+            parent.Insert(new TaskCreate(parent.ActivatedWorkSpaceData));
         }
 
         private void AddTaskWaitNode()

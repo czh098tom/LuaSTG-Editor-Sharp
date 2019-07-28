@@ -30,8 +30,6 @@ Names below are desired class names for the unfinished nodes.
 ## Task
 	FinishTask
 	ClearTasks
-	DefineTask *
-	AttachTask *
 	--
 	SetSignal
 	WaitForSignal

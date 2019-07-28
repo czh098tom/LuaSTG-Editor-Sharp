@@ -152,6 +152,9 @@ namespace LuaSTGEditorSharp.Windows.Input
                 case "objectDef":
                     window = new EditorObjDefInput(toEdit, MetaType.Object, owner, source);
                     break;
+                case "taskDef":
+                    window = new EditorObjDefInput(toEdit, MetaType.Task, owner, source);
+                    break;
                 case "bossDef":
                     window = new EditorObjDefInput(toEdit, MetaType.Boss, owner, source);//new BossDefInput(toEdit, owner, source);
                     break;
@@ -169,6 +172,9 @@ namespace LuaSTGEditorSharp.Windows.Input
                     break;
                 case "bentLaserParam":
                     window = new EditorObjParamInput(source, MetaType.BentLaser, toEdit, owner);
+                    break;
+                case "taskParam":
+                    window = new EditorObjParamInput(source, MetaType.Task, toEdit, owner);
                     break;
                 case "color":
                     window = new ColorInput(toEdit, owner);

@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace LuaSTGEditorSharp.EditorData.Node
 {
-    public class LaserAlikeTypes : ITypeEnumerable
+    public class BulletAlikeTypes : ITypeEnumerable
     {
         private static readonly Type[] types =
-            { typeof(Object.CallBackFunc), typeof(Laser.LaserInit), typeof(Data.Function), typeof(Task.TaskDefine) };
+            { typeof(Object.CallBackFunc), typeof(Bullet.BulletInit), typeof(Data.Function), typeof(Task.TaskDefine) };
 
         public IEnumerator<Type> GetEnumerator()
         {

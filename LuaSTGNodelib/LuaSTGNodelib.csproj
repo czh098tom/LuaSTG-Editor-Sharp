@@ -63,11 +63,13 @@
     <Compile Include="EditorData\Document\Meta\ImageLoadMetaInfo.cs" />
     <Compile Include="EditorData\Document\Meta\LaserDefineMetaInfo.cs" />
     <Compile Include="EditorData\Document\Meta\StageGroupDefineMetaInfo.cs" />
+    <Compile Include="EditorData\Document\Meta\TaskDefineMetaInfo.cs" />
     <Compile Include="EditorData\Message\ArgCountInfo.cs" />
     <Compile Include="EditorData\Message\CannotFindAncestorTypeOf.cs" />
     <Compile Include="EditorData\Message\CannotFindAttributeInParent.cs" />
     <Compile Include="EditorData\Node\Audio\LoadBGM.cs" />
     <Compile Include="EditorData\Node\Audio\PlayBGM.cs" />
+    <Compile Include="EditorData\Node\BossAlikeTypes.cs" />
     <Compile Include="EditorData\Node\Boss\BossBGDefine.cs" />
     <Compile Include="EditorData\Node\Boss\BossBGLayer.cs" />
     <Compile Include="EditorData\Node\Boss\BossBGLayerFrame.cs" />
@@ -78,6 +80,7 @@
     <Compile Include="EditorData\Node\Boss\BossSCStart.cs" />
     <Compile Include="EditorData\Node\Boss\BossSpellCard.cs" />
     <Compile Include="EditorData\Node\Boss\CreateBoss.cs" />
+    <Compile Include="EditorData\Node\BulletAlikeTypes.cs" />
     <Compile Include="EditorData\Node\Bullet\BulletDefine.cs" />
     <Compile Include="EditorData\Node\Bullet\BulletInit.cs" />
     <Compile Include="EditorData\Node\Bullet\CreateBullet.cs" />
@@ -116,7 +119,8 @@
     <Compile Include="EditorData\Node\Stage\StageGroup.cs" />
     <Compile Include="EditorData\Node\LaserAlikeTypes.cs" />
     <Compile Include="EditorData\Node\TaskAlikeTypes.cs" />
-    <Compile Include="EditorData\Node\Task\DefineTask.cs" />
+    <Compile Include="EditorData\Node\Task\TaskCreate.cs" />
+    <Compile Include="EditorData\Node\Task\TaskDefine.cs" />
     <Compile Include="EditorData\Node\Task\TaskMoveBy.cs" />
     <Compile Include="EditorData\Node\Task\TaskMoveTo.cs" />
     <Compile Include="EditorData\Node\Task\Tasker.cs" />

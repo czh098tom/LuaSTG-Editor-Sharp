@@ -5,37 +5,41 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 
+using LuaSTGEditorSharp.EditorData.Document.Meta;
 using LuaSTGEditorSharp.EditorData.Message;
 using LuaSTGEditorSharp.EditorData.Node.NodeAttributes;
+using LuaSTGEditorSharp.EditorData.Document;
 
 namespace LuaSTGEditorSharp.EditorData.Node.Task
 {
     [Serializable, NodeIcon("/LuaSTGNodeLib;component/images/16x16/taskdefine.png")]
     [ClassNode]
     [CreateInvoke(0), RCInvoke(1)]
-    public class DefineTask : TreeNode
+    public class TaskDefine : TreeNode
     {
         [JsonConstructor]
-        private DefineTask() : base() { }
+        private TaskDefine() : base() { }
 
-        public DefineTask(DocumentData workSpaceData) : this(workSpaceData, "", "") { }
+        public TaskDefine(DocumentData workSpaceData) : this(workSpaceData, "", "") { }
 
-        public DefineTask(DocumentData workSpaceData, string name, string parameter) : base(workSpaceData)
+        public TaskDefine(DocumentData workSpaceData, string name, string parameter) : base(workSpaceData)
         {
             Name = name;
             Parameter = parameter;
         }
 
+        [JsonIgnore]
         public string Name
         {
-            get => DoubleCheckAttr(0, "Name").AttrInput;
-            set => DoubleCheckAttr(0, "Name").AttrInput = value;
+            get => DoubleCheckAttr(0, "Name").attrInput;
+            set => DoubleCheckAttr(0, "Name").attrInput = value;
         }
 
+        [JsonIgnore]
         public string Parameter
         {
-            get => DoubleCheckAttr(1, "Parameter").AttrInput;
-            set => DoubleCheckAttr(1, "Parameter").AttrInput = value;
+            get => DoubleCheckAttr(1, "Parameter").attrInput;
+            set => DoubleCheckAttr(1, "Parameter").attrInput = value;
         }
 
         public override IEnumerable<string> ToLua(int spacing)
@@ -66,9 +70,14 @@ namespace LuaSTGEditorSharp.EditorData.Node.Task
             return "Define task \"" + NonMacrolize(0) + "\" with parameter (" + NonMacrolize(1) + ")";
         }
 
+        public override MetaInfo GetMeta()
+        {
+            return new TaskDefineMetaInfo(this);
+        }
+
         public override object Clone()
         {
-            TreeNode n = new DefineTask(parentWorkSpace);
+            TreeNode n = new TaskDefine(parentWorkSpace);
             n.DeepCopyFrom(this);
             return n;
         }

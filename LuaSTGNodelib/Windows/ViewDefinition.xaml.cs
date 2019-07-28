@@ -30,6 +30,7 @@ namespace LuaSTGEditorSharp.Windows
             Tree.Add(GetEditorObjMeta(MetaType.Laser, "Laser", "laserdefine.png"));
             Tree.Add(GetEditorObjMeta(MetaType.BentLaser, "Bent Laser", "laserbentdefine.png"));
             Tree.Add(GetEditorObjMeta(MetaType.Object, "Object", "objectdefine.png"));
+            Tree.Add(GetTaskMeta());
             Tree.Add(GetBossMeta());
             Tree.Add(GetImageMeta());
             Tree.Add(GetImageGroupMeta());
@@ -412,6 +413,23 @@ namespace LuaSTGEditorSharp.Windows
 
             return images;
         }
+
+        private MetaModel GetTaskMeta()
+        {
+            MetaModel tasks = new MetaModel
+            {
+                Icon = "/LuaSTGNodeLib;component/images/16x16/taskdefine.png",
+                Text = "Task"
+            };
+            var a = data.Meta.aggregatableMetas[(int)MetaType.Task].GetAllFullWithDifficulty();
+            foreach (MetaModel info in a)
+            {
+                tasks.Children.Add(info);
+            }
+
+            return tasks;
+        }
+
         private MetaModel GetImageGroupMeta()
         {
             MetaModel images = new MetaModel
