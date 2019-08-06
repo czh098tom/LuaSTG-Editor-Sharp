@@ -23,8 +23,15 @@ namespace LuaSTGEditorSharp.Windows.Input
     /// </summary>
     public partial class ImageInput : InputWindow
     {
-        ObservableCollection<MetaModel> ImageInfo { get; set; }
-        ObservableCollection<MetaModel> ImageGroupInfo { get; set; }
+        public ObservableCollection<MetaModel> imageInfo;
+        public ObservableCollection<MetaModel> ImageInfo { get => imageInfo; }
+        public ObservableCollection<MetaModel> imageGroupInfo;
+        public ObservableCollection<MetaModel> ImageGroupInfo { get => imageGroupInfo; }
+
+        public ObservableCollection<MetaModel> imageInfoSys;
+        public ObservableCollection<MetaModel> ImageInfoSys { get => imageInfoSys; }
+        public ObservableCollection<MetaModel> imageGroupInfoSys;
+        public ObservableCollection<MetaModel> ImageGroupInfoSys { get => imageGroupInfoSys; }
 
         int cols = 1, rows = 1;
 
@@ -58,16 +65,58 @@ namespace LuaSTGEditorSharp.Windows.Input
 
         public ImageInput(string s, MainWindow owner, AttrItem item)
         {
-            ImageInfo = item.Parent.parentWorkSpace.Meta.aggregatableMetas[(int)MetaType.ImageLoad].GetAllSimpleWithDifficulty();
-            ImageGroupInfo = item.Parent.parentWorkSpace.Meta.aggregatableMetas[(int)MetaType.ImageGroupLoad].GetAllSimpleWithDifficulty();
+            imageInfo = item.Parent.parentWorkSpace.Meta.aggregatableMetas[(int)MetaType.ImageLoad].GetAllSimpleWithDifficulty();
+            imageGroupInfo = item.Parent.parentWorkSpace.Meta.aggregatableMetas[(int)MetaType.ImageGroupLoad].GetAllSimpleWithDifficulty();
+
+            AddInternalMetas();
 
             InitializeComponent();
 
-            BoxImageData.ItemsSource = ImageInfo;
-            BoxImageGroupData.ItemsSource = ImageGroupInfo;
+            //BoxImageData.ItemsSource = ImageInfo;
+            //BoxImageGroupData.ItemsSource = ImageGroupInfo;
 
             Result = s;
             codeText.Text = Result;
+        }
+
+        private void AddInternalMetas()
+        {
+            imageInfoSys = new ObservableCollection<MetaModel>()
+            {
+                new MetaModel(){
+                    Icon = "/LuaSTGNodeLib;component/images/16x16/loadimage_Sys.png",
+                    Text = "(Internal) img_void",
+                    Result = "\"img_void\"",
+                    FullName = "img_void",
+                    ExInfo1 = "pack://application:,,,/LuaSTGNodeLib;component/images/picture/img_void.png"
+                },
+                new MetaModel(){
+                    Icon = "/LuaSTGNodeLib;component/images/16x16/loadimage_Sys.png",
+                    Text = "(Internal) white",
+                    Result = "\"white\"",
+                    FullName = "white",
+                    ExInfo1 = "pack://application:,,,/LuaSTGNodeLib;component/images/picture/white.png"
+                },
+                new MetaModel(){
+                    Icon = "/LuaSTGNodeLib;component/images/16x16/loadimage_Sys.png",
+                    Text = "(Internal) leaf",
+                    Result = "\"leaf\"",
+                    FullName = "leaf",
+                    ExInfo1 = "pack://application:,,,/LuaSTGNodeLib;component/images/picture/leaf.png"
+                }
+            };
+
+            imageGroupInfoSys = new ObservableCollection<MetaModel>()
+            {
+                new MetaModel(){
+                    Icon = "/LuaSTGNodeLib;component/images/16x16/loadimagegroup_Sys.png",
+                    Text = "(Internal) parimg",
+                    Result = "\"parimg\"",
+                    FullName = "parimg",
+                    ExInfo1 = "pack://application:,,,/LuaSTGNodeLib;component/images/picture/particles.png",
+                    ExInfo2 = "4,4"
+                },
+            };
         }
 
         private void ButtonOK_Click(object sender, RoutedEventArgs e)

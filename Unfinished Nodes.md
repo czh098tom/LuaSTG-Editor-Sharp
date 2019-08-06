@@ -69,6 +69,7 @@ Names below are desired class names for the unfinished nodes.
 
 ## Bullet
 	BulletStyle
+    --
 	BulletClear
 	BulletClearRange
 
@@ -112,4 +113,4 @@ Names below are desired class names for the unfinished nodes.
 	SetPace(?)
 	--
 	PlaySound &
-	LoadSound
+	LoadSound *

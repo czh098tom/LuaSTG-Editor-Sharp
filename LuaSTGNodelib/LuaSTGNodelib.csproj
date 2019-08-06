@@ -146,6 +146,7 @@
     <Compile Include="Windows\Input\Canvas\PositionEditor.xaml.cs">
       <DependentUpon>PositionEditor.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\Input\Converter\StrToPicStrechConverter.cs" />
     <Compile Include="Windows\Input\LaserInput.xaml.cs">
       <DependentUpon>LaserInput.xaml</DependentUpon>
     </Compile>
@@ -1576,6 +1577,24 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images\16x16\func.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\loadimagegroup_Sys.png" />
+    <Resource Include="images\loadimage_Sys.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\loadimagegroup_Sys.png" />
+    <Resource Include="images\16x16\loadimage_Sys.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\picture\img_void.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\picture\leaf.png" />
+    <Resource Include="images\picture\white.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\picture\particles.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
