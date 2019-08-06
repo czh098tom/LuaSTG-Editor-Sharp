@@ -13,7 +13,7 @@ using Newtonsoft.Json;
 namespace LuaSTGEditorSharp.EditorData.Node.Object
 {
     [Serializable, NodeIcon("/LuaSTGNodeLib;component/images/16x16/callbackfunc.png")]
-    [RequireParent(typeof(Bullet.BulletDefine), typeof(Laser.BentLaserDefine))]
+    [RequireParent(typeof(Bullet.BulletDefine), typeof(Laser.BentLaserDefine), typeof(Object.ObjectDefine))]
     [RCInvoke(0)]
     public class CallBackFunc : TreeNode
     {

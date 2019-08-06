@@ -24,6 +24,8 @@ namespace LuaSTGEditorSharp.Plugin.DefaultNullPlugin
 
         public override int[][] MetaInfoCollectionWatchDict => new int[][] { new int[] { 1 } };
 
+        public override string TargetLSTGVersion => "Unknown Version";
+
         public override IInputWindowSelector GetInputWindowSelector()
         {
             return new DefaultInputWindowSelector();

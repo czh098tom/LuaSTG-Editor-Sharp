@@ -197,6 +197,9 @@ namespace LuaSTGEditorSharp.Windows.Input
                 case "colrow":
                     //throw new NotImplementedException();
                     //break;
+                case "velocity":
+                case "rotation":
+                case "animinterval":
                 default:
                     window = new SingleLineInput(toEdit, owner);
                     break;

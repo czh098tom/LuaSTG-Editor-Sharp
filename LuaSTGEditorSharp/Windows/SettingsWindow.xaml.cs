@@ -335,6 +335,11 @@ namespace LuaSTGEditorSharp.Windows
         }
         #endregion
 
+        public string TargetVersion
+        {
+            get => Plugin.PluginHandler.Plugin.TargetLSTGVersion;
+        }
+
         private void WriteSettings()
         {
             AuthorNameSettings = AuthorName;

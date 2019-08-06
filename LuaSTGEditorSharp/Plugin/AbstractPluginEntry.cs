@@ -25,6 +25,8 @@ namespace LuaSTGEditorSharp.Plugin
         public abstract int MetaInfoCollectionTypeCount { get; }
         public abstract int[][] MetaInfoCollectionWatchDict { get; }
 
+        public abstract string TargetLSTGVersion { get; }
+
         public bool MatchStageNodeTypes(Type tov)
         {
             foreach(Type t in StageNodeType)

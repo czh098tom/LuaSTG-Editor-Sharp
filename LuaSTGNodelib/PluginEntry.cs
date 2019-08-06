@@ -67,5 +67,7 @@ namespace LuaSTGEditorSharp
             };
 
         public override int MetaInfoCollectionTypeCount { get => (int)MetaType.__max; }
+
+        public override string TargetLSTGVersion => "LuaSTG ex+ 0.81b";
     }
 }

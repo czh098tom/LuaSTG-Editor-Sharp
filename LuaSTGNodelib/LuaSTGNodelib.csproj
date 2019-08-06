@@ -80,6 +80,7 @@
     <Compile Include="EditorData\Node\Boss\BossSCStart.cs" />
     <Compile Include="EditorData\Node\Boss\BossSpellCard.cs" />
     <Compile Include="EditorData\Node\Boss\CreateBoss.cs" />
+    <Compile Include="EditorData\Node\Boss\SetWalkImageSystem.cs" />
     <Compile Include="EditorData\Node\BulletAlikeTypes.cs" />
     <Compile Include="EditorData\Node\Bullet\BulletDefine.cs" />
     <Compile Include="EditorData\Node\Bullet\BulletInit.cs" />
@@ -1595,6 +1596,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images\picture\particles.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\bosswalkimg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\bosswalkimg.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
