@@ -14,6 +14,10 @@ Task
 	TaskDefine
 	TaskCreate
 	TaskMoveBy
+Boss
+	BossDefine
+		BossInit
+	SetBossWalkImageSystem
 Object
 	ObjectDefine
 		ObjectInit
@@ -36,6 +40,7 @@ Lib层：
 改进图片选择界面，支持图片组
 向图片选择界面中添加系统资源
 图片选择界面的预览功能改进
+重整BossDefine节点
 
 0.0.5.0
 (2019-03-26)

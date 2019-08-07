@@ -79,6 +79,7 @@
     <Compile Include="EditorData\Node\Boss\BossSCFinish.cs" />
     <Compile Include="EditorData\Node\Boss\BossSCStart.cs" />
     <Compile Include="EditorData\Node\Boss\BossSpellCard.cs" />
+    <Compile Include="EditorData\Node\Boss\BossInit.cs" />
     <Compile Include="EditorData\Node\Boss\CreateBoss.cs" />
     <Compile Include="EditorData\Node\Boss\SetWalkImageSystem.cs" />
     <Compile Include="EditorData\Node\BulletAlikeTypes.cs" />
@@ -1602,6 +1603,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images\16x16\bosswalkimg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\bossinit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\bossinit.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -14,7 +14,7 @@ namespace LuaSTGEditorSharp.EditorData.Message
 
         public override DocumentData SourceDoc { get => (Source as TreeNode).parentWorkSpace; }
 
-        public CannotFindAttributeInParent(int count, IMessageThrowable source) : base(1, source)
+        public CannotFindAttributeInParent(int count, IMessageThrowable source) : base(0, source)
         {
             Count = count;
         }

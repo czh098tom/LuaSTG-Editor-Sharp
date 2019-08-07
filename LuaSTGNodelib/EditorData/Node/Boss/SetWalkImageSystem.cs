@@ -15,15 +15,15 @@ namespace LuaSTGEditorSharp.EditorData.Node.Boss
     [RequireAncestor(typeof(CodeAlikeTypes))]
     [LeafNode]
     [CreateInvoke(0)]
-    public class SetWalkImageSystem : TreeNode
+    public class SetBossWalkImageSystem : TreeNode
     {
         [JsonConstructor]
-        private SetWalkImageSystem() : base() { }
+        private SetBossWalkImageSystem() : base() { }
 
-        public SetWalkImageSystem(DocumentData workSpaceData)
+        public SetBossWalkImageSystem(DocumentData workSpaceData)
             : this(workSpaceData, "", "4,3", "4,4,4", "1,1", "6", "16,16") { }
 
-        public SetWalkImageSystem(DocumentData workSpaceData, string imgpath, string colrow,
+        public SetBossWalkImageSystem(DocumentData workSpaceData, string imgpath, string colrow,
             string noi, string noa, string animintv, string collisize) : base(workSpaceData)
         {
             ImagePath = imgpath;
@@ -104,7 +104,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Boss
 
         public override object Clone()
         {
-            var n = new SetWalkImageSystem(parentWorkSpace);
+            var n = new SetBossWalkImageSystem(parentWorkSpace);
             n.DeepCopyFrom(this);
             return n;
         }

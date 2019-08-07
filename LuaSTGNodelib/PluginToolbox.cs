@@ -89,7 +89,7 @@ namespace LuaSTGEditorSharp
                 , new AddNode(AddCreateBossNode));
             boss.Add(new ToolboxItemData(true), null);
             boss.Add(new ToolboxItemData("bosssetwisys", "/LuaSTGNodeLib;component/images/bosswalkimg.png", "Set Walk Image of an Object")
-                , new AddNode(AddSetWISysNode));
+                , new AddNode(AddSetBossWISysNode));
             boss.Add(new ToolboxItemData(true), null);
             boss.Add(new ToolboxItemData("defbossbg", "/LuaSTGNodeLib;component/images/bgdefine.png", "Define Boss Background")
                 , new AddNode(AddBossBGDefineNode));
@@ -303,6 +303,7 @@ namespace LuaSTGEditorSharp
         private void AddDefineBossNode()
         {
             TreeNode newDef = new BossDefine(parent.ActivatedWorkSpaceData);
+            TreeNode init = new BossInit(parent.ActivatedWorkSpaceData);
             TreeNode newSC = new BossSpellCard(parent.ActivatedWorkSpaceData);
             TreeNode newSCStart = new BossSCStart(parent.ActivatedWorkSpaceData);
             TreeNode newTask = new TaskNode(parent.ActivatedWorkSpaceData);
@@ -310,6 +311,7 @@ namespace LuaSTGEditorSharp
             newTask.AddChild(new TaskMoveTo(parent.ActivatedWorkSpaceData, "0,120", "60", "MOVE_NORMAL"));
             newSC.AddChild(newSCStart);
             newSC.AddChild(new BossSCFinish(parent.ActivatedWorkSpaceData));
+            newDef.AddChild(init);
             newDef.AddChild(newSC);
             parent.Insert(newDef);
         }
@@ -331,9 +333,9 @@ namespace LuaSTGEditorSharp
             parent.Insert(new CreateBoss(parent.ActivatedWorkSpaceData));
         }
 
-        private void AddSetWISysNode()
+        private void AddSetBossWISysNode()
         {
-            parent.Insert(new SetWalkImageSystem(parent.ActivatedWorkSpaceData));
+            parent.Insert(new SetBossWalkImageSystem(parent.ActivatedWorkSpaceData));
         }
 
         private void AddBossBGDefineNode()
