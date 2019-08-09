@@ -6,11 +6,12 @@
         xmlns:local="clr-namespace:LuaSTGEditorSharp.Windows.Input;assembly=LuaSTGEditorSharp"
         xmlns:cv="clr-namespace:LuaSTGEditorSharp.Windows.Input.Canvas"
         xmlns:conv="clr-namespace:LuaSTGEditorSharp.Windows.Input.Converter"
+        xmlns:tool="clr-namespace:LuaSTGEditorSharp.Toolbox;assembly=LuaSTGEditorSharp"
         mc:Ignorable="d"
         Title="Choose Image" Height="475.012" Width="840.879" MinHeight="100" MinWidth="200"
                    Loaded="InputWindow_Loaded">
     <Window.Resources>
-        <DrawingBrush x:Key="TransparentBrush" Viewport="0,0,16,16" ViewportUnits="Absolute" TileMode="Tile">
+        <DrawingBrush x:Key="TransparentBrushW" Viewport="0,0,16,16" ViewportUnits="Absolute" TileMode="Tile">
             <DrawingBrush.Drawing>
                 <DrawingGroup>
                     <GeometryDrawing>
@@ -27,6 +28,36 @@
                 </DrawingGroup>
             </DrawingBrush.Drawing>
         </DrawingBrush>
+        <DrawingBrush x:Key="TransparentBrushB" Viewport="0,0,16,16" ViewportUnits="Absolute" TileMode="Tile">
+            <DrawingBrush.Drawing>
+                <DrawingGroup>
+                    <GeometryDrawing>
+                        <GeometryDrawing.Geometry>
+                            <GeometryGroup>
+                                <RectangleGeometry Rect="0,0,16,16"/>
+                                <RectangleGeometry Rect="16,16,16,16"/>
+                            </GeometryGroup>
+                        </GeometryDrawing.Geometry>
+                        <GeometryDrawing.Brush>
+                            <SolidColorBrush Color="DimGray"/>
+                        </GeometryDrawing.Brush>
+                    </GeometryDrawing>
+                    <GeometryDrawing>
+                        <GeometryDrawing.Geometry>
+                            <GeometryGroup>
+                                <RectangleGeometry Rect="0,16,16,16"/>
+                                <RectangleGeometry Rect="16,0,16,16"/>
+                            </GeometryGroup>
+                        </GeometryDrawing.Geometry>
+                        <GeometryDrawing.Brush>
+                            <SolidColorBrush Color="Black"/>
+                        </GeometryDrawing.Brush>
+                    </GeometryDrawing>
+                </DrawingGroup>
+            </DrawingBrush.Drawing>
+        </DrawingBrush>
+        <SolidColorBrush x:Key="ColorW" Color="White"/>
+        <SolidColorBrush x:Key="ColorB" Color="Black"/>
         <conv:StrToPicStrechConverter x:Key="StrToPicStrechConverter"/>
     </Window.Resources>
     <Grid>
@@ -35,6 +66,37 @@
                 <ComboBox x:Name="comboPicStrech" Margin="10,10,2,10" IsEditable="False" SelectedIndex="0" Visibility="Hidden">
                     <ComboBoxItem Content="Original"/>
                     <ComboBoxItem Content="Fill"/>
+                </ComboBox>
+                <Label Margin="10,10,2,10" Content="Transparent background: "/>
+                <ComboBox x:Name="comboPicBG" Margin="10,10,2,10" Width="150" IsEditable="False" SelectedIndex="0">
+                    <ComboBoxItem Tag="{StaticResource TransparentBrushW}">
+                        <StackPanel Orientation="Horizontal">
+                            <Label BorderThickness="0.5" BorderBrush="Black" Height="12" Width="12"
+                                   Background="{StaticResource TransparentBrushW}" />
+                            <TextBlock Text="Grid (White)"/>
+                        </StackPanel>
+                    </ComboBoxItem>
+                    <ComboBoxItem Tag="{StaticResource TransparentBrushB}">
+                        <StackPanel Orientation="Horizontal">
+                            <Label BorderThickness="0.5" BorderBrush="Black" Height="12" Width="12"
+                                   Background="{StaticResource TransparentBrushB}" />
+                            <TextBlock Text="Grid (Black)"/>
+                        </StackPanel>
+                    </ComboBoxItem>
+                    <ComboBoxItem Tag="{StaticResource ColorW}">
+                        <StackPanel Orientation="Horizontal">
+                            <Label BorderThickness="0.5" BorderBrush="Black" Height="12" Width="12"
+                                   Background="{StaticResource ColorW}"/>
+                            <TextBlock Text="White"/>
+                        </StackPanel>
+                    </ComboBoxItem>
+                    <ComboBoxItem Tag="{StaticResource ColorB}">
+                        <StackPanel Orientation="Horizontal">
+                            <Label BorderThickness="0.5" BorderBrush="Black" Height="12" Width="12" 
+                                   Background="{StaticResource ColorB}" />
+                            <TextBlock Text="Black"/>
+                        </StackPanel>
+                    </ComboBoxItem>
                 </ComboBox>
                 <Button Content="OK" Margin="10,10,2,10" Padding="3" Click="ButtonOK_Click"/>
                 <Button Content="Cancel" Margin="2,10,10,10" Padding="3" Click="ButtonCancel_Click"/>
@@ -74,7 +136,7 @@
                                 <Canvas Height="{Binding ActualHeight, ElementName=ImageExample}"
                                         Width="{Binding ActualWidth, ElementName=ImageExample}" 
                                         HorizontalAlignment="Center" VerticalAlignment="Center"
-                                        Background="{StaticResource TransparentBrush}"/>
+                                        Background="{Binding SelectedItem.Tag, ElementName=comboPicBG}"/>
                                 <Image x:Name="ImageExample" 
                                        Stretch="{Binding Text, ElementName=comboPicStrech, Converter={StaticResource StrToPicStrechConverter}}" 
                                        HorizontalAlignment="Center" VerticalAlignment="Center"/>
@@ -117,7 +179,7 @@
                                     <Canvas Height="{Binding ActualHeight, ElementName=ImageGroupExample}"
                                             Width="{Binding ActualWidth, ElementName=ImageGroupExample}" 
                                             HorizontalAlignment="Center" VerticalAlignment="Center"
-                                            Background="{StaticResource TransparentBrush}"/>
+                                            Background="{Binding SelectedItem.Tag, ElementName=comboPicBG}"/>
                                     <Image x:Name="ImageGroupExample"
                                            HorizontalAlignment="Center" VerticalAlignment="Center"
                                            Stretch="{Binding Text, ElementName=comboPicStrech, 
