@@ -18,6 +18,8 @@ Boss
 	BossDefine
 		BossInit
 	SetBossWalkImageSystem
+	BossCast
+	BossExplode
 Bullet
 	BulletStyle
 	BulletClear

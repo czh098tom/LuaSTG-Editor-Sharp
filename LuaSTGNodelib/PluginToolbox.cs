@@ -91,6 +91,11 @@ namespace LuaSTGEditorSharp
             boss.Add(new ToolboxItemData("bosssetwisys", "/LuaSTGNodeLib;component/images/bosswalkimg.png", "Set Walk Image of an Object")
                 , new AddNode(AddSetBossWISysNode));
             boss.Add(new ToolboxItemData(true), null);
+            boss.Add(new ToolboxItemData("bosscast", "/LuaSTGNodeLib;component/images/bosscast.png", "Play cast animation")
+                , new AddNode(AddBossCastNode));
+            boss.Add(new ToolboxItemData("bossexplode", "/LuaSTGNodeLib;component/images/bossexplode.png", "Boss Explode")
+                , new AddNode(AddBossExplodeNode));
+            boss.Add(new ToolboxItemData(true), null);
             boss.Add(new ToolboxItemData("defbossbg", "/LuaSTGNodeLib;component/images/bgdefine.png", "Define Boss Background")
                 , new AddNode(AddBossBGDefineNode));
             boss.Add(new ToolboxItemData("bossbglayer", "/LuaSTGNodeLib;component/images/bglayer.png", "Define Boss Background Layer")
@@ -344,6 +349,16 @@ namespace LuaSTGEditorSharp
         private void AddSetBossWISysNode()
         {
             parent.Insert(new SetBossWalkImageSystem(parent.ActivatedWorkSpaceData));
+        }
+
+        private void AddBossCastNode()
+        {
+            parent.Insert(new BossCast(parent.ActivatedWorkSpaceData));
+        }
+
+        private void AddBossExplodeNode()
+        {
+            parent.Insert(new BossExplode(parent.ActivatedWorkSpaceData));
         }
 
         private void AddBossBGDefineNode()

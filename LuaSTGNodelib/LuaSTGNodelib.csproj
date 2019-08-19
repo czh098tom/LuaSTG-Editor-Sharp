@@ -75,7 +75,9 @@
     <Compile Include="EditorData\Node\Boss\BossBGLayerFrame.cs" />
     <Compile Include="EditorData\Node\Boss\BossBGLayerInit.cs" />
     <Compile Include="EditorData\Node\Boss\BossBGLayerRender.cs" />
+    <Compile Include="EditorData\Node\Boss\BossCast.cs" />
     <Compile Include="EditorData\Node\Boss\BossDefine.cs" />
+    <Compile Include="EditorData\Node\Boss\BossExplode.cs" />
     <Compile Include="EditorData\Node\Boss\BossSCFinish.cs" />
     <Compile Include="EditorData\Node\Boss\BossSCStart.cs" />
     <Compile Include="EditorData\Node\Boss\BossSpellCard.cs" />

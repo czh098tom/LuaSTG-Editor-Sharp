@@ -10,7 +10,8 @@ namespace LuaSTGEditorSharp.EditorData.Node
     public class BossAlikeTypes : ITypeEnumerable
     {
         private static readonly Type[] types =
-            { typeof(Boss.BossSCStart), typeof(Boss.BossSCFinish), typeof(Data.Function), typeof(Task.TaskDefine) };
+            { typeof(Boss.BossSCStart), typeof(Boss.BossSCFinish), typeof(Boss.BossInit)
+                , typeof(Data.Function), typeof(Task.TaskDefine) };
 
         public IEnumerator<Type> GetEnumerator()
         {

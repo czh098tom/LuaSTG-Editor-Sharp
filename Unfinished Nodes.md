@@ -51,6 +51,7 @@ Names below are desired class names for the unfinished nodes.
 	DefineEnemy *
 	CreateEnemy *
 	CreateSimpleEnemy(*)
+	EnemyCharge (From pactrometer in old "Boss")
 
 ## Boss
 	BossMoveTo(?)
@@ -58,9 +59,6 @@ Names below are desired class names for the unfinished nodes.
 	Sentence
 	--
 	BossWander
-	BossCast
-	BossCharge
-	BossExplode
 	--
 	BossAura
 	BossUI
