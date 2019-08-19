@@ -744,6 +744,7 @@ namespace LuaSTGEditorSharp
                     break;
                 }
             }
+            App.Current.Shutdown();
         }
 
         private void ButtonCloseFile_Click(object sender, RoutedEventArgs e)
