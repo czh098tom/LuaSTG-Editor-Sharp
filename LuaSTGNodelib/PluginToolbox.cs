@@ -109,6 +109,14 @@ namespace LuaSTGEditorSharp
                 , new AddNode(AddCreateSimpleBulletNode));
             bullet.Add(new ToolboxItemData("bulletgroup", "/LuaSTGNodeLib;component/images/bulletcreatestraightex.png", "Create Simple Bullet Group")
                 , new AddNode(AddCreateBulletGroupNode));
+            bullet.Add(new ToolboxItemData(true), null);
+            bullet.Add(new ToolboxItemData("bulletstyle", "/LuaSTGNodeLib;component/images/bulletchangestyle.png", "Change Bullet Style")
+                , new AddNode(AddBulletChangeStyleNode));
+            bullet.Add(new ToolboxItemData(true), null);
+            bullet.Add(new ToolboxItemData("bulletclear", "/LuaSTGNodeLib;component/images/bulletclear.png", "Clear Bullets")
+                , new AddNode(AddBulletClearNode));
+            bullet.Add(new ToolboxItemData("bulletclearrange", "/LuaSTGNodeLib;component/images/bulletcleanrange.png", "Clear Bullets in range")
+                , new AddNode(AddBulletClearRangeNode));
             #endregion
             ToolInfo.Add("Bullet", bullet);
 
@@ -373,6 +381,21 @@ namespace LuaSTGEditorSharp
         private void AddCreateBulletGroupNode()
         {
             parent.Insert(new CreateBulletGroup(parent.ActivatedWorkSpaceData));
+        }
+
+        private void AddBulletChangeStyleNode()
+        {
+            parent.Insert(new BulletChangeStyle(parent.ActivatedWorkSpaceData));
+        }
+
+        private void AddBulletClearNode()
+        {
+            parent.Insert(new BulletClear(parent.ActivatedWorkSpaceData));
+        }
+
+        private void AddBulletClearRangeNode()
+        {
+            parent.Insert(new BulletClearRange(parent.ActivatedWorkSpaceData));
         }
         #endregion
         #region laser

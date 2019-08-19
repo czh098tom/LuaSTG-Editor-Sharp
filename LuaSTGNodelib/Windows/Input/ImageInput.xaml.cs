@@ -35,6 +35,8 @@ namespace LuaSTGEditorSharp.Windows.Input
 
         int cols = 1, rows = 1;
 
+        DrawingVisual hint;
+
         public override string Result
         {
             get => result;
@@ -187,6 +189,8 @@ namespace LuaSTGEditorSharp.Windows.Input
                 ImageGroupExample.Source = new BitmapImage(new Uri(m?.ExInfo1));
             }
             catch { }
+            SelectedIndex = 1;
+            SplitGrid.RemoveVisual(hint);
             codeText.Focus();
         }
 
@@ -257,20 +261,19 @@ namespace LuaSTGEditorSharp.Windows.Input
 
         private void DrawCursorAtPoint(int selX, int selY)
         {
-            DrawingVisual v;
             double x0 = selX * SplitGrid.ActualWidth / cols;
             double y0 = selY * SplitGrid.ActualHeight / rows;
             if (SplitGrid.ChildrenCount <= 0)
             {
-                v = new DrawingVisual();
-                DrawRect(v, new Point(x0, y0)
+                hint = new DrawingVisual();
+                DrawRect(hint, new Point(x0, y0)
                     , new Point(x0 + SplitGrid.ActualWidth / cols, y0 + SplitGrid.ActualHeight / rows));
-                SplitGrid.AddVisual(v);
+                SplitGrid.AddVisual(hint);
             }
             else
             {
-                v = (DrawingVisual)SplitGrid[0];
-                DrawRect(v, new Point(x0, y0)
+                hint = (DrawingVisual)SplitGrid[0];
+                DrawRect(hint, new Point(x0, y0)
                     , new Point(x0 + SplitGrid.ActualWidth / cols, y0 + SplitGrid.ActualHeight / rows));
             }
         }

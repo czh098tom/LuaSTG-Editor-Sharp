@@ -283,6 +283,7 @@ namespace LuaSTGEditorSharp
         private void Application_Exit(object sender, ExitEventArgs e)
         {
             Settings.Default.Save();
+            Current.Shutdown();
         }
     }
 }

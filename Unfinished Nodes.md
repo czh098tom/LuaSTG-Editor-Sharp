@@ -68,10 +68,7 @@ Names below are desired class names for the unfinished nodes.
 	BossEX(?)
 
 ## Bullet
-	BulletStyle
-    --
-	BulletClear
-	BulletClearRange
+	Finished.
 
 ## BulletEX Is Killed
 
@@ -90,8 +87,8 @@ Names below are desired class names for the unfinished nodes.
 	SetGravity
 	SetVelocityLimit
 	PreserveUnit
-	GroupForEach
 	CreateSmear (From old "Effect")
+	GroupForEach
 	--
 	SetParent(*)
 	SetRelativePositiion(*)

@@ -83,6 +83,9 @@
     <Compile Include="EditorData\Node\Boss\CreateBoss.cs" />
     <Compile Include="EditorData\Node\Boss\SetWalkImageSystem.cs" />
     <Compile Include="EditorData\Node\BulletAlikeTypes.cs" />
+    <Compile Include="EditorData\Node\Bullet\BulletChangeStyle.cs" />
+    <Compile Include="EditorData\Node\Bullet\BulletClear.cs" />
+    <Compile Include="EditorData\Node\Bullet\BulletClearRange.cs" />
     <Compile Include="EditorData\Node\Bullet\BulletDefine.cs" />
     <Compile Include="EditorData\Node\Bullet\BulletInit.cs" />
     <Compile Include="EditorData\Node\Bullet\CreateBullet.cs" />

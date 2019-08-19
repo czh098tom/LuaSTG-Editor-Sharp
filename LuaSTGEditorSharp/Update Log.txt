@@ -18,6 +18,10 @@ Boss
 	BossDefine
 		BossInit
 	SetBossWalkImageSystem
+Bullet
+	BulletStyle
+	BulletClear
+	BulletClearRange
 Object
 	ObjectDefine
 		ObjectInit
@@ -36,6 +40,7 @@ Editor层：
 增加简易的语法高亮功能
 改进插入校验中父节点与祖先节点验证的写法
 改进DoubleCheckAttr方法的写法
+稍微修正进程没完全退出的问题，但是不知道行不行
 Lib层：
 改进图片选择界面，支持图片组
 向图片选择界面中添加系统资源
