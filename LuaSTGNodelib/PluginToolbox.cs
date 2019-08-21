@@ -11,6 +11,7 @@ using LuaSTGEditorSharp.EditorData.Node.General;
 using LuaSTGEditorSharp.EditorData.Node.Data;
 using LuaSTGEditorSharp.EditorData.Node.Stage;
 using LuaSTGEditorSharp.EditorData.Node.Task;
+using LuaSTGEditorSharp.EditorData.Node.Enemy;
 using LuaSTGEditorSharp.EditorData.Node.Boss;
 using LuaSTGEditorSharp.EditorData.Node.Bullet;
 using LuaSTGEditorSharp.EditorData.Node.Laser;
@@ -76,6 +77,10 @@ namespace LuaSTGEditorSharp
             ToolInfo.Add("Task", task);
             
             var enemy = new Dictionary<ToolboxItemData, AddNode>();
+            #region enemy
+            enemy.Add(new ToolboxItemData("enemycharge", "/LuaSTGNodeLib;component/images/pactrometer.png", "Enemy Charge")
+                , new AddNode(AddEnemyChargeNode));
+            #endregion
             ToolInfo.Add("Enemy", enemy);
 
             var boss = new Dictionary<ToolboxItemData, AddNode>();
@@ -310,6 +315,12 @@ namespace LuaSTGEditorSharp
         private void AddTaskMoveByNode()
         {
             parent.Insert(new TaskMoveBy(parent.ActivatedWorkSpaceData));
+        }
+        #endregion
+        #region enemy
+        private void AddEnemyChargeNode()
+        {
+            parent.Insert(new EnemyCharge(parent.ActivatedWorkSpaceData));
         }
         #endregion
         #region boss

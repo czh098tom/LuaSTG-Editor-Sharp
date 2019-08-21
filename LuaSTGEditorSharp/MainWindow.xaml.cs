@@ -102,6 +102,8 @@ namespace LuaSTGEditorSharp
 
         private BackgroundWorker CompileWorker;
 
+        private Process lstgInstance;
+
         public MainWindow()
         {
             toolbox = PluginHandler.Plugin.GetToolbox(this);
@@ -498,6 +500,7 @@ namespace LuaSTGEditorSharp
 
                 DocumentData current = ActivatedWorkSpaceData;
                 TxtLine.Text = "";
+                if (CompileWorker.IsBusy) throw new InvalidOperationException();
                 CompileWorker.RunWorkerAsync(new object[] { current, SCDebugger, StageDebugger, run, saveMeta });
                 DebugString = "";
                 tabOutput.IsSelected = true;
@@ -580,49 +583,57 @@ namespace LuaSTGEditorSharp
                                 + process.projName + "\'\"";
             try
             {
-                Process lstg = new Process
+                if (lstgInstance == null || lstgInstance.HasExited)
                 {
-                    StartInfo = new ProcessStartInfo(process.luaSTGExePath, LuaSTGparam)
+                    lstgInstance = new Process
                     {
-                        UseShellExecute = false,
-                        CreateNoWindow = true,
-                        WorkingDirectory = process.luaSTGFolder,
-                        RedirectStandardError = true,
-                        RedirectStandardOutput = true
-                    }
-                };
-                lstg.Start();
-                DebugString += "LuaSTG is Running.\n\n";
-                /* 
-                 * what it should be like:
-                 * 
-                lstg.OutputDataReceived += (s, e) => DebugString += e.Data;
-                lstg.ErrorDataReceived += (s, e) => DebugString += e.Data;
-                 *
-                 * what it actually is:
-                 */
-                lstg.Exited += (s, e) => {
-                    FileStream fs = null;
-                    StreamReader sr = null;
-                    try
-                    {
-                        fs = new FileStream(Path.GetFullPath(Path.Combine(
-                            Path.GetDirectoryName(process.luaSTGExePath), "log.txt")), FileMode.Open);
-                        sr = new StreamReader(fs);
-                        DebugString += sr.ReadToEnd();
-                        //debugOutput.ScrollToEnd();
-                    }
-                    finally
-                    {
-                        if (fs != null) fs.Close();
-                        if (sr != null) sr.Close();
-                    }
-                    DebugString += "\nExited with code " + lstg.ExitCode + ".";
-                };
-                lstg.EnableRaisingEvents = true;
-                lstg.BeginOutputReadLine();
-                lstg.BeginErrorReadLine();
-                //lstg.WaitForExit();
+                        StartInfo = new ProcessStartInfo(process.luaSTGExePath, LuaSTGparam)
+                        {
+                            UseShellExecute = false,
+                            CreateNoWindow = true,
+                            WorkingDirectory = process.luaSTGFolder,
+                            RedirectStandardError = true,
+                            RedirectStandardOutput = true
+                        }
+                    };
+                    lstgInstance.Start();
+                    DebugString += "LuaSTG is Running.\n\n";
+                    /* 
+                     * what it should be like:
+                     * 
+                    lstg.OutputDataReceived += (s, e) => DebugString += e.Data;
+                    lstg.ErrorDataReceived += (s, e) => DebugString += e.Data;
+                     *
+                     * what it actually is:
+                     */
+                    lstgInstance.Exited += (s, e) => {
+                        FileStream fs = null;
+                        StreamReader sr = null;
+                        try
+                        {
+                            fs = new FileStream(Path.GetFullPath(Path.Combine(
+                                Path.GetDirectoryName(process.luaSTGExePath), "log.txt")), FileMode.Open);
+                            sr = new StreamReader(fs);
+                            DebugString += sr.ReadToEnd();
+                            //debugOutput.ScrollToEnd();
+                        }
+                        finally
+                        {
+                            if (fs != null) fs.Close();
+                            if (sr != null) sr.Close();
+                        }
+                        DebugString += "\nExited with code " + lstgInstance.ExitCode + ".";
+                    };
+                    lstgInstance.EnableRaisingEvents = true;
+                    lstgInstance.BeginOutputReadLine();
+                    lstgInstance.BeginErrorReadLine();
+                    //lstg.WaitForExit();
+                }
+                else
+                {
+                    MessageBox.Show("LuaSTG is already running, please exit first."
+                        , "LuaSTG Editor Sharp", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
             catch (Win32Exception)
             {

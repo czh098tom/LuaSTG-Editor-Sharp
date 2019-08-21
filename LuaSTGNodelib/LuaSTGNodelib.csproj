@@ -97,6 +97,7 @@
     <Compile Include="EditorData\Node\Data\Function.cs" />
     <Compile Include="EditorData\Node\Data\LocalVar.cs" />
     <Compile Include="EditorData\Node\Data\RecordPos.cs" />
+    <Compile Include="EditorData\Node\Enemy\EnemyCharge.cs" />
     <Compile Include="EditorData\Node\Graphics\LoadImage.cs" />
     <Compile Include="EditorData\Node\Graphics\LoadImageGroup.cs" />
     <Compile Include="EditorData\Node\Laser\BentLaserDefine.cs" />
@@ -126,6 +127,7 @@
     <Compile Include="EditorData\Node\Stage\StageGroup.cs" />
     <Compile Include="EditorData\Node\LaserAlikeTypes.cs" />
     <Compile Include="EditorData\Node\TaskAlikeTypes.cs" />
+    <Compile Include="EditorData\Node\Task\SmoothSetValueTo.cs" />
     <Compile Include="EditorData\Node\Task\TaskCreate.cs" />
     <Compile Include="EditorData\Node\Task\TaskDefine.cs" />
     <Compile Include="EditorData\Node\Task\TaskMoveBy.cs" />
