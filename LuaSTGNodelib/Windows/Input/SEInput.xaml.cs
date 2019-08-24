@@ -21,7 +21,7 @@ namespace LuaSTGEditorSharp.Windows.Input
     /// <summary>
     /// ImageInput.xaml 的交互逻辑
     /// </summary>
-    public partial class ImageInput : InputWindow
+    public partial class SEInput : InputWindow
     {
         public ObservableCollection<MetaModel> imageInfo;
         public ObservableCollection<MetaModel> ImageInfo { get => imageInfo; }
@@ -65,7 +65,7 @@ namespace LuaSTGEditorSharp.Windows.Input
 
         private bool mouseDown = false;
 
-        public ImageInput(string s, MainWindow owner, AttrItem item)
+        public SEInput(string s, MainWindow owner, AttrItem item)
         {
             imageInfo = item.Parent.parentWorkSpace.Meta.aggregatableMetas[(int)MetaType.ImageLoad].GetAllSimpleWithDifficulty();
             imageGroupInfo = item.Parent.parentWorkSpace.Meta.aggregatableMetas[(int)MetaType.ImageGroupLoad].GetAllSimpleWithDifficulty();
@@ -83,9 +83,42 @@ namespace LuaSTGEditorSharp.Windows.Input
 
         private void AddInternalMetas()
         {
-            imageInfoSys = new ObservableCollection<MetaModel>(PluginEntry.SysImage);
+            imageInfoSys = new ObservableCollection<MetaModel>()
+            {
+                new MetaModel(){
+                    Icon = "/LuaSTGNodeLib;component/images/16x16/loadimage_Sys.png",
+                    Text = "(Internal) img_void",
+                    Result = "\"img_void\"",
+                    FullName = "img_void",
+                    ExInfo1 = "pack://application:,,,/LuaSTGNodeLib;component/images/picture/img_void.png"
+                },
+                new MetaModel(){
+                    Icon = "/LuaSTGNodeLib;component/images/16x16/loadimage_Sys.png",
+                    Text = "(Internal) white",
+                    Result = "\"white\"",
+                    FullName = "white",
+                    ExInfo1 = "pack://application:,,,/LuaSTGNodeLib;component/images/picture/white.png"
+                },
+                new MetaModel(){
+                    Icon = "/LuaSTGNodeLib;component/images/16x16/loadimage_Sys.png",
+                    Text = "(Internal) leaf",
+                    Result = "\"leaf\"",
+                    FullName = "leaf",
+                    ExInfo1 = "pack://application:,,,/LuaSTGNodeLib;component/images/picture/leaf.png"
+                }
+            };
 
-            imageGroupInfoSys = new ObservableCollection<MetaModel>(PluginEntry.SysImageGroup);
+            imageGroupInfoSys = new ObservableCollection<MetaModel>()
+            {
+                new MetaModel(){
+                    Icon = "/LuaSTGNodeLib;component/images/16x16/loadimagegroup_Sys.png",
+                    Text = "(Internal) parimg",
+                    Result = "\"parimg\"",
+                    FullName = "parimg",
+                    ExInfo1 = "pack://application:,,,/LuaSTGNodeLib;component/images/picture/particles.png",
+                    ExInfo2 = "4,4"
+                },
+            };
         }
 
         private void ButtonOK_Click(object sender, RoutedEventArgs e)

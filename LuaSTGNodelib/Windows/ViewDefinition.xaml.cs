@@ -35,6 +35,7 @@ namespace LuaSTGEditorSharp.Windows
             Tree.Add(GetImageMeta());
             Tree.Add(GetImageGroupMeta());
             Tree.Add(GetBGMMeta());
+            Tree.Add(GetSEMeta());
             Tree.Add(GetBossBGDefineMeta());
         }
 
@@ -460,6 +461,22 @@ namespace LuaSTGEditorSharp.Windows
             }
 
             return bgms;
+        }
+
+        private MetaModel GetSEMeta()
+        {
+            MetaModel ses = new MetaModel
+            {
+                Icon = "/LuaSTGNodeLib;component/images/16x16/loadsound.png",
+                Text = "SE"
+            };
+            var a = data.Meta.aggregatableMetas[(int)MetaType.SELoad].GetAllFullWithDifficulty();
+            foreach (MetaModel info in a)
+            {
+                ses.Children.Add(info);
+            }
+
+            return ses;
         }
 
         private MetaModel GetBossBGDefineMeta()

@@ -44,8 +44,6 @@ Names below are desired class names for the unfinished nodes.
 	MoveByCR &
 	MoveToBasis2 &
 	MoveByBasis2 &
-	--
-	SmoothSetValue
 
 ## Enemy
 	DefineEnemy *
@@ -88,7 +86,7 @@ Names below are desired class names for the unfinished nodes.
 	GroupForEach
 	--
 	SetParent(*)
-	SetRelativePositiion(*)
+	SetRelativePosition(*)
 	--
 	DropItem (From old "Effect")
 

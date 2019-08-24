@@ -1290,7 +1290,7 @@ namespace LuaSTGEditorSharp.EditorData
         }
 
         /// <summary>
-        /// This method executes all macros currently in the <see cref="CompileProcess"/> to an<see cref="AttrItem"/>.
+        /// This method executes all macros currently in the <see cref="CompileProcess"/> to an <see cref="AttrItem"/>.
         /// Can only be called in Compile Methods.
         /// </summary>
         /// <param name="attrItem">The target <see cref="AttrItem"/></param>

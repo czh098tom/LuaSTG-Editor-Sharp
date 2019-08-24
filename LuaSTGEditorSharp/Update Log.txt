@@ -14,6 +14,7 @@ Task
 	TaskDefine
 	TaskCreate
 	TaskMoveBy
+	SmoothSetValue
 Enemy
 	EnemyCharge (From pactrometer in old "Boss")
 Boss
@@ -32,6 +33,8 @@ Object
 	ObjectCreate
 Graphics
 	LoadImageGroup
+Audio
+	LoadSE
 修复bug：
 Editor层：
 未选择Batch Packing且7z路径未设置时编译运行立即出错的bug

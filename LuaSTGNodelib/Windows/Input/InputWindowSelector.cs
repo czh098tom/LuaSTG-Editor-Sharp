@@ -19,6 +19,8 @@ namespace LuaSTGEditorSharp.Windows.Input
                     return new string[] { "true", "false" };
                 case "target":
                     return new string[] { "self", "last", "unit", "player", "_boss" };
+                case "nullabletarget":
+                    return new string[] { "", "self", "last", "unit", "player", "_boss" };
                 case "blend":
                     return new string[] { "\"\"", "\"mul+add\"", "\"mul+alpha\"", "\"add+add\"", "\"add+alpha\""
                         , "\"mul+sub\"", "\"mul+rev\"", "\"add+sub\"", "\"add+rev\"", "\"alpha+bal\"" };
@@ -26,6 +28,8 @@ namespace LuaSTGEditorSharp.Windows.Input
                     return new string[] { "frame", "kill", "del", "colli" };//, "render" };
                 case "interpolation":
                     return new string[] { "MOVE_NORMAL", "MOVE_ACCEL", "MOVE_DECEL", "MOVE_ACC_DEC" };
+                case "modification":
+                    return new string[] { "MODE_SET", "MODE_ADD", "MODE_MUL" };
                 case "group":
                     return new string[] { "GROUP_GHOST", "GROUP_ENEMY_BULLET", "GROUP_ENEMY", "GROUP_PLAYER_BULLET"
                         , "GROUP_PLAYER", "GROUP_INDIES", "GROUP_ITEM", "GROUP_NONTJT" };
@@ -58,7 +62,7 @@ namespace LuaSTGEditorSharp.Windows.Input
                         , "COLOR_GREEN", "COLOR_CHARTREUSE", "COLOR_YELLOW", "COLOR_GOLDEN_YELLOW", "COLOR_ORANGE"
                         , "COLOR_DEEP_GRAY", "COLOR_GRAY"};
                 case "nullableColor":
-                    return new string[] { "original", "COLOR_RED", "COLOR_DEEP_RED", "COLOR_PURPLE", "COLOR_DEEP_PURPLE"
+                    return new string[] { "", "COLOR_RED", "COLOR_DEEP_RED", "COLOR_PURPLE", "COLOR_DEEP_PURPLE"
                         , "COLOR_BLUE", "COLOR_DEEP_BLUE", "COLOR_ROYAL_BLUE", "COLOR_CYAN", "COLOR_DEEP_GREEN"
                         , "COLOR_GREEN", "COLOR_CHARTREUSE", "COLOR_YELLOW", "COLOR_GOLDEN_YELLOW", "COLOR_ORANGE"
                         , "COLOR_DEEP_GRAY", "COLOR_GRAY"};
@@ -70,6 +74,10 @@ namespace LuaSTGEditorSharp.Windows.Input
                         , "icepool_background", "lake_background", "le03_5_background", "magic_forest_fast_background"
                         , "river_background", "starlight_background", "temple2_background", "woods_background"
                         , "world_background"};
+                case "prop":
+                    return new string[] { "x", "y", "rot", "omiga", "timer", "vx", "vy", "ax", "ay", "layer", "group"
+                        , "hide", "bound", "navi", "colli", "status", "hscale", "vscale", "a", "b", "rect", "img"
+                        , "pause", "rmove", "nopause", "_angle", "_speed" };
                 default:
                     return new string[] { };
             }
@@ -98,6 +106,9 @@ namespace LuaSTGEditorSharp.Windows.Input
                 case "audioFile":
                     window = new PathInput(toEdit, "Audio File (*.wav;*.ogg)|*.wav;*.ogg", owner);
                     break;
+                case "seFile":
+                    window = new PathInput(toEdit, "Sound Effect File (*.wav;*.ogg)|*.wav;*.ogg", owner);
+                    break;
                 case "luaFile":
                     window = new PathInput(toEdit, "Lua File (*.lua)|*.lua", owner);
                     break;
@@ -116,6 +127,9 @@ namespace LuaSTGEditorSharp.Windows.Input
                 case "interpolation":
                     window = new Selector(toEdit, owner, SelectComboBox(name), "Input Interpolation Type");
                     break;
+                case "modification":
+                    window = new Selector(toEdit, owner, SelectComboBox(name), "Input Modification Type");
+                    break;
                 case "group":
                     window = new Selector(toEdit, owner, SelectComboBox(name), "Input Group Type");
                     break;
@@ -129,6 +143,9 @@ namespace LuaSTGEditorSharp.Windows.Input
                     window = new Selector(toEdit, owner, SelectComboBox(name), "Input Difficulty");
                     break;
                 case "difficulty":
+                    window = new Selector(toEdit, owner, SelectComboBox(name), "Input Difficulty Value");
+                    break;
+                case "prop":
                     window = new Selector(toEdit, owner, SelectComboBox(name), "Input Difficulty Value");
                     break;
                 case "bulletStyle":

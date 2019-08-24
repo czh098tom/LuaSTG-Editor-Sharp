@@ -21,7 +21,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Laser
         private LaserChangeStyle() : base() { }
 
         public LaserChangeStyle(DocumentData workSpaceData)
-            : this(workSpaceData, "original", "1")
+            : this(workSpaceData, "", "1")
         { }
 
         public LaserChangeStyle(DocumentData workSpaceData, string color, string style)
@@ -36,7 +36,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Laser
         {
             string sp = "".PadLeft(spacing * 4);
             string target;
-            if (NonMacrolize(1) == "original")
+            if (string.IsNullOrEmpty(NonMacrolize(1)))
             {
                 target = "";
             }

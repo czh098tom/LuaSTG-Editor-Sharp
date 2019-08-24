@@ -12,7 +12,8 @@ namespace LuaSTGEditorSharp.EditorData.Document
 {
     public enum MetaType { Proj, UserDefined
             , StageGroup, Boss, Bullet, ImageLoad, ImageGroupLoad
-            , BGMLoad, BossBG, Laser, BentLaser, Object, Enemy, Task, __max }
+            , BGMLoad, BossBG, Laser, BentLaser, Object, Enemy, Task
+            , SELoad, __max }
 
     //List version, used in non-immediate update cases
     [Serializable]
@@ -42,6 +43,8 @@ namespace LuaSTGEditorSharp.EditorData.Document
         public IMetaInfoCollection EnemyDefineData { get => aggregatableMetas[(int)MetaType.Enemy]; }
         [JsonIgnore]
         public IMetaInfoCollection TaskEXDefineData { get => aggregatableMetas[(int)MetaType.Task]; }
+        [JsonIgnore]
+        public IMetaInfoCollection SEDefineData { get => aggregatableMetas[(int)MetaType.SELoad]; }
 
         public MetaData()
         {

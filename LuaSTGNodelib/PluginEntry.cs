@@ -8,6 +8,7 @@ using LuaSTGEditorSharp.Windows;
 using LuaSTGEditorSharp.EditorData;
 using LuaSTGEditorSharp.EditorData.Node;
 using LuaSTGEditorSharp.EditorData.Document;
+using LuaSTGEditorSharp.EditorData.Document.Meta;
 using LuaSTGEditorSharp.EditorData.Interfaces;
 
 namespace LuaSTGEditorSharp
@@ -69,5 +70,10 @@ namespace LuaSTGEditorSharp
         public override int MetaInfoCollectionTypeCount { get => (int)MetaType.__max; }
 
         public override string TargetLSTGVersion => "LuaSTG ex+ 0.81b";
+
+        public static MetaModel[] SysImage = 
+            SystemMetaLoader.FromResource("pack://application:,,,/LuaSTGNodeLib;component/ResourceList/SysImage.json");
+        public static MetaModel[] SysImageGroup =
+            SystemMetaLoader.FromResource("pack://application:,,,/LuaSTGNodeLib;component/ResourceList/SysImageGroup.json");
     }
 }

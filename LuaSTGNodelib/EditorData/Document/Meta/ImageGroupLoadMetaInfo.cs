@@ -25,7 +25,7 @@ namespace LuaSTGEditorSharp.EditorData.Document.Meta
 
         public string Path
         {
-            get => Lua.StringParser.ParseLua(target.attributes[0].AttrInput);
+            get => target.attributes[0].AttrInput;
         }
         public string ColsAndRows
         {

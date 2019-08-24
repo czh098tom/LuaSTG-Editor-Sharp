@@ -13,19 +13,19 @@ namespace LuaSTGEditorSharp.EditorData.Document.Meta
     {
         public override string Name
         {
-            get => target.attributes[1].AttrInput;
+            get => Lua.StringParser.ParseLua(target.attributes[1].AttrInput);
         }
 
         public override string Difficulty => "";
 
         public override string FullName
         {
-            get => "image:" + Lua.StringParser.ParseLua(target.attributes[1].AttrInput);
+            get => "image:" + Name;
         }
 
         public string Path
         {
-            get => Lua.StringParser.ParseLua(target.attributes[0].AttrInput);
+            get => target.attributes[0].AttrInput;
         }
 
         public override string ScrString => Name;

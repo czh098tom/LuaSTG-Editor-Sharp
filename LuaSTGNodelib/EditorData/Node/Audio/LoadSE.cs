@@ -14,34 +14,31 @@ using Newtonsoft.Json;
 
 namespace LuaSTGEditorSharp.EditorData.Node.Audio
 {
-    [Serializable, NodeIcon("/LuaSTGNodeLib;component/images/16x16/loadbgm.png")]
+    [Serializable, NodeIcon("/LuaSTGNodeLib;component/images/16x16/loadsound.png")]
     [ClassNode]
     [LeafNode]
     [CreateInvoke(0), RCInvoke(1)]
-    public class LoadBGM : TreeNode
+    public class LoadSE : TreeNode
     {
         [JsonConstructor]
-        private LoadBGM() : base() { }
+        private LoadSE() : base() { }
 
-        public LoadBGM(DocumentData workSpaceData)
+        public LoadSE(DocumentData workSpaceData)
             : this(workSpaceData, "", "", "", "") { }
 
-        public LoadBGM(DocumentData workSpaceData, string path, string name, string lend, string llen)
+        public LoadSE(DocumentData workSpaceData, string path, string name, string lend, string llen)
             : base(workSpaceData)
         {
-            attributes.Add(new DependencyAttrItem("Path", path, this, "audioFile"));
+            attributes.Add(new DependencyAttrItem("Path", path, this, "seFile"));
             attributes.Add(new AttrItem("Resource name", name, this));
-            attributes.Add(new AttrItem("Loop end (sec)", lend, this));
-            attributes.Add(new AttrItem("Loop length (sec)", llen, this));
         }
 
         public override IEnumerable<string> ToLua(int spacing)
         {
             string sk = GetPath(0);
             string sp = "".PadLeft(spacing * 4);
-            yield return sp + "MusicRecord(\'bgm:\'..\'" + StringParser.ParseLua(NonMacrolize(1)) + "\',\'" 
-                + sk
-                + "\'," + Macrolize(2) + "," + Macrolize(3) + ")\n";
+            yield return sp + "LoadSound(\'se:\'..\'" + StringParser.ParseLua(NonMacrolize(1)) + "\',\'" 
+                + sk + "\')\n";
         }
 
         public override IEnumerable<Tuple<int,TreeNode>> GetLines()
@@ -51,12 +48,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Audio
 
         public override string ToString()
         {
-            string s = "";
-            if(!(string.IsNullOrEmpty(NonMacrolize(2))|| string.IsNullOrEmpty(NonMacrolize(3))))
-            {
-                s = ", loop";
-            }
-            return "Load background music \"" + NonMacrolize(1) + "\" from \"" + NonMacrolize(0) + "\"" + s;
+            return "Load sound effect \"" + NonMacrolize(1) + "\" from \"" + NonMacrolize(0) + "\"";
         }
 
         public override void ReflectAttr(DependencyAttrItem relatedAttrItem, DependencyAttributeChangedEventArgs args)
@@ -78,12 +70,12 @@ namespace LuaSTGEditorSharp.EditorData.Node.Audio
 
         public override MetaInfo GetMeta()
         {
-            return new BGMLoadMetaInfo(this);
+            return new SELoadMetaInfo(this);
         }
 
         public override object Clone()
         {
-            var n = new LoadBGM(parentWorkSpace);
+            var n = new LoadSE(parentWorkSpace);
             n.DeepCopyFrom(this);
             return n;
         }

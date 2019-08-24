@@ -10,7 +10,7 @@ using LuaSTGEditorSharp.Windows;
 
 namespace LuaSTGEditorSharp.EditorData.Document.Meta
 {
-    public class BGMLoadMetaInfo : MetaInfo, IComparable<BGMLoadMetaInfo>
+    public class SELoadMetaInfo : MetaInfo, IComparable<BGMLoadMetaInfo>
     {
         public override string Name
         {
@@ -19,7 +19,7 @@ namespace LuaSTGEditorSharp.EditorData.Document.Meta
 
         public override string FullName
         {
-            get => "bgm:" + Name;
+            get => "se:" + Name;
         }
 
         public override string Difficulty => "";
@@ -31,23 +31,23 @@ namespace LuaSTGEditorSharp.EditorData.Document.Meta
 
         public override string ScrString => Name;
         
-        public BGMLoadMetaInfo(LoadBGM target) : base(target) { }
+        public SELoadMetaInfo(LoadSE target) : base(target) { }
 
         public override void Create(IAggregatableMeta meta, MetaDataEntity documentMetaData)
         {
-            documentMetaData.aggregatableMetas[(int)MetaType.BGMLoad].Add(meta);
+            documentMetaData.aggregatableMetas[(int)MetaType.SELoad].Add(meta);
         }
 
         public override void Remove(IAggregatableMeta meta, MetaDataEntity documentMetaData)
         {
-            documentMetaData.aggregatableMetas[(int)MetaType.BGMLoad].Remove(meta);
+            documentMetaData.aggregatableMetas[(int)MetaType.SELoad].Remove(meta);
         }
 
         public override MetaModel GetFullMetaModel()
         {
             MetaModel metaModel = new MetaModel
             {
-                Icon = "/LuaSTGNodeLib;component/images/16x16/loadbgm.png",
+                Icon = "/LuaSTGNodeLib;component/images/16x16/loadsound.png",
                 Text = Name
             };
             MetaModel path = new MetaModel
@@ -71,7 +71,7 @@ namespace LuaSTGEditorSharp.EditorData.Document.Meta
                 Result = "\"" + FullName + "\"",
                 Text = FullName,
                 FullName = FullName,
-                Icon = "/LuaSTGNodeLib;component/images/16x16/loadbgm.png"
+                Icon = "/LuaSTGNodeLib;component/images/16x16/loadsound.png"
             };
         }
     }

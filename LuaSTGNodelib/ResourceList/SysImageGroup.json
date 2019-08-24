@@ -1,0 +1,10 @@
+﻿[
+  {
+    "Icon": "/LuaSTGNodeLib;component/images/16x16/loadimagegroup_Sys.png",
+    "Text": "(Internal) parimg",
+    "Result": "\"parimg\"",
+    "FullName": "parimg",
+    "ExInfo1": "pack://application:,,,/LuaSTGNodeLib;component/images/picture/particles.png",
+    "ExInfo2": "4,4"
+  }
+]

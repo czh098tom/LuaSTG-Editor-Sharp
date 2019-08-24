@@ -73,6 +73,9 @@ namespace LuaSTGEditorSharp
                 , new AddNode(AddTaskMoveToNode));
             task.Add(new ToolboxItemData("moveby", "/LuaSTGNodeLib;component/images/taskmovetoex.png", "Move By")
                 , new AddNode(AddTaskMoveByNode));
+            task.Add(new ToolboxItemData(true), null);
+            task.Add(new ToolboxItemData("smoothset", "/LuaSTGNodeLib;component/images/tasksetvalue.png", "Smooth set value to")
+                , new AddNode(AddSmoothSetValueNode));
             #endregion
             ToolInfo.Add("Task", task);
             
@@ -172,6 +175,10 @@ namespace LuaSTGEditorSharp
                 , new AddNode(AddSetVNode));
             obj.Add(new ToolboxItemData("seta", "/LuaSTGNodeLib;component/images/setaccel.png", "Set Acceleration")
                 , new AddNode(AddSetANode));
+            obj.Add(new ToolboxItemData("setg", "/LuaSTGNodeLib;component/images/setgravity.png", "Set Gravity")
+                , new AddNode(AddSetGNode));
+            obj.Add(new ToolboxItemData("setvlim", "/LuaSTGNodeLib;component/images/setfv.png", "Set Velocity Limit")
+                , new AddNode(AddSetVLimitNode));
             obj.Add(new ToolboxItemData("delete", "/LuaSTGNodeLib;component/images/unitdel.png", "Delete Unit")
                 , new AddNode(AddDelNode));
             obj.Add(new ToolboxItemData("kill", "/LuaSTGNodeLib;component/images/unitkill.png", "Kill Unit")
@@ -193,6 +200,9 @@ namespace LuaSTGEditorSharp
 
             var audio = new Dictionary<ToolboxItemData, AddNode>();
             #region audio
+            audio.Add(new ToolboxItemData("loadse", "/LuaSTGNodeLib;component/images/loadsound.png", "Load Sound Effect")
+                , new AddNode(AddLoadSENode));
+            audio.Add(new ToolboxItemData(true), null);
             audio.Add(new ToolboxItemData("loadbgm", "/LuaSTGNodeLib;component/images/loadbgm.png", "Load Background Music")
                 , new AddNode(AddLoadBGMNode));
             audio.Add(new ToolboxItemData("playbgm", "/LuaSTGNodeLib;component/images/playbgm.png", "Play Background Music")
@@ -315,6 +325,11 @@ namespace LuaSTGEditorSharp
         private void AddTaskMoveByNode()
         {
             parent.Insert(new TaskMoveBy(parent.ActivatedWorkSpaceData));
+        }
+
+        private void AddSmoothSetValueNode()
+        {
+            parent.Insert(new SmoothSetValueTo(parent.ActivatedWorkSpaceData));
         }
         #endregion
         #region enemy
@@ -514,6 +529,16 @@ namespace LuaSTGEditorSharp
             parent.Insert(new SetAccel(parent.ActivatedWorkSpaceData));
         }
 
+        private void AddSetGNode()
+        {
+            parent.Insert(new SetGravity(parent.ActivatedWorkSpaceData));
+        }
+
+        private void AddSetVLimitNode()
+        {
+            parent.Insert(new SetVelocityLimit(parent.ActivatedWorkSpaceData));
+        }
+
         private void AddDelNode()
         {
             parent.Insert(new Del(parent.ActivatedWorkSpaceData));
@@ -540,6 +565,11 @@ namespace LuaSTGEditorSharp
         }
         #endregion
         #region audio
+        private void AddLoadSENode()
+        {
+            parent.Insert(new LoadSE(parent.ActivatedWorkSpaceData));
+        }
+
         private void AddLoadBGMNode()
         {
             parent.Insert(new LoadBGM(parent.ActivatedWorkSpaceData));
