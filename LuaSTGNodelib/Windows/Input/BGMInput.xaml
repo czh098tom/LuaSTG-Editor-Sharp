@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LuaSTGEditorSharp.Windows.Input;assembly=LuaSTGEditorSharp"
+        xmlns:m="clr-namespace:LuaSTGEditorSharp.Windows.Input.MediaPlayer"
         mc:Ignorable="d"
         Title="Choose BGM" Height="293.418" Width="539.815" MinHeight="100" MinWidth="200"
                    Loaded="InputWindow_Loaded">
@@ -15,18 +16,28 @@
             </StackPanel>
             <TextBox DockPanel.Dock="Top" Height="24" x:Name="codeText" Text="{Binding Result, ElementName=inputWindow, Mode=TwoWay}" 
                              AcceptsReturn="False" FontFamily="Courier New" KeyDown="Text_KeyDown"/>
-            <ListBox x:Name="BoxBGMData" SelectionChanged="BoxBGMData_SelectionChanged" Grid.Column="0"
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="10"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <ListBox x:Name="BoxBGMData" SelectionChanged="BoxBGMData_SelectionChanged" Grid.Column="0"
                      MouseDoubleClick="UserControl_MouseDoubleClick">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel Orientation="Horizontal">
-                            <Image VerticalAlignment="Center" Source="{Binding Icon}"
-                                                Stretch="Fill" Width="16" Height="16" Margin="0,0,2,2"/>
-                            <TextBlock VerticalAlignment="Center" Text="{Binding Text}"/>
-                        </StackPanel>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <Image VerticalAlignment="Center" Source="{Binding Icon}"
+                                       Stretch="Fill" Width="16" Height="16" Margin="0,0,2,2"/>
+                                <TextBlock VerticalAlignment="Center" Text="{Binding Text}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+                <GridSplitter Grid.Column="1"/>
+                <m:MediaPlayer x:Name="mediaPlayer" Grid.Column="2"/>
+            </Grid>
         </DockPanel>
     </Grid>
 </local:InputWindow>

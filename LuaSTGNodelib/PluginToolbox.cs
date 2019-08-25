@@ -202,6 +202,8 @@ namespace LuaSTGEditorSharp
             #region audio
             audio.Add(new ToolboxItemData("loadse", "/LuaSTGNodeLib;component/images/loadsound.png", "Load Sound Effect")
                 , new AddNode(AddLoadSENode));
+            audio.Add(new ToolboxItemData("playse", "/LuaSTGNodeLib;component/images/playsound.png", "Play Sound Effect")
+                , new AddNode(AddPlaySENode));
             audio.Add(new ToolboxItemData(true), null);
             audio.Add(new ToolboxItemData("loadbgm", "/LuaSTGNodeLib;component/images/loadbgm.png", "Load Background Music")
                 , new AddNode(AddLoadBGMNode));
@@ -568,6 +570,11 @@ namespace LuaSTGEditorSharp
         private void AddLoadSENode()
         {
             parent.Insert(new LoadSE(parent.ActivatedWorkSpaceData));
+        }
+
+        private void AddPlaySENode()
+        {
+            parent.Insert(new PlaySE(parent.ActivatedWorkSpaceData));
         }
 
         private void AddLoadBGMNode()

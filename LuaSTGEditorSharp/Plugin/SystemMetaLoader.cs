@@ -10,9 +10,9 @@ using Newtonsoft.Json;
 
 using LuaSTGEditorSharp.EditorData.Document.Meta;
 
-namespace LuaSTGEditorSharp
+namespace LuaSTGEditorSharp.Plugin
 {
-    class SystemMetaLoader
+    public class SystemMetaLoader
     {
         public static MetaModel[] FromResource(string path)
         {
@@ -25,7 +25,7 @@ namespace LuaSTGEditorSharp
                 sr = new StreamReader(info.Stream);
                 string s = sr.ReadToEnd();
                 mm = JsonConvert.DeserializeObject<MetaModel[]>(s);
-                Console.WriteLine(s);
+                //Console.WriteLine(s);
             }
             catch(Exception e)
             {

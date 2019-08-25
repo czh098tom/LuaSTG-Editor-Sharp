@@ -12,6 +12,8 @@
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -34,8 +36,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CSCore, Version=1.2.1.2, Culture=neutral, PublicKeyToken=5a08f2b6f4415dea, processorArchitecture=MSIL">
+      <HintPath>..\packages\CSCore.1.2.1.2\lib\net35-client\CSCore.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NVorbis, Version=0.8.6.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NVorbis.0.8.6\lib\net35\NVorbis.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -71,6 +79,7 @@
     <Compile Include="EditorData\Node\Audio\LoadSE.cs" />
     <Compile Include="EditorData\Node\Audio\LoadBGM.cs" />
     <Compile Include="EditorData\Node\Audio\PlayBGM.cs" />
+    <Compile Include="EditorData\Node\Audio\PlaySE.cs" />
     <Compile Include="EditorData\Node\BossAlikeTypes.cs" />
     <Compile Include="EditorData\Node\Boss\BossBGDefine.cs" />
     <Compile Include="EditorData\Node\Boss\BossBGLayer.cs" />
@@ -143,7 +152,6 @@
     <Compile Include="PluginEntry.cs" />
     <Compile Include="PluginToolbox.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SystemMetaLoader.cs" />
     <Compile Include="Windows\Input\BGMInput.xaml.cs">
       <DependentUpon>BGMInput.xaml</DependentUpon>
     </Compile>
@@ -161,6 +169,11 @@
       <DependentUpon>PositionEditor.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\Input\Converter\StrToPicStrechConverter.cs" />
+    <Compile Include="Windows\Input\MediaPlayer\CodecFactory.cs" />
+    <Compile Include="Windows\Input\MediaPlayer\MediaPlayer.xaml.cs">
+      <DependentUpon>MediaPlayer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Input\MediaPlayer\OggSource.cs" />
     <Compile Include="Windows\Input\SEInput.xaml.cs">
       <DependentUpon>SEInput.xaml</DependentUpon>
     </Compile>
@@ -229,6 +242,10 @@
     <Page Include="Windows\Input\Canvas\PositionEditor.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\Input\MediaPlayer\MediaPlayer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\Input\SEInput.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -1592,6 +1609,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <Resource Include="ResourceList\SysSE.json" />
     <Resource Include="ResourceList\SysImageGroup.json" />
   </ItemGroup>
   <ItemGroup>
@@ -1632,6 +1650,120 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="ResourceList\SysImage.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="se\se_alert.wav" />
+    <Resource Include="se\se_astralup.wav" />
+    <Resource Include="se\se_big.wav" />
+    <Resource Include="se\se_bonus.wav" />
+    <Resource Include="se\se_bonus2.wav" />
+    <Resource Include="se\se_bonus3.wav" />
+    <Resource Include="se\se_boon00.wav" />
+    <Resource Include="se\se_boon01.wav" />
+    <Resource Include="se\se_border.wav" />
+    <Resource Include="se\se_cancel00.wav" />
+    <Resource Include="se\se_cardget.wav" />
+    <Resource Include="se\se_cat00.wav" />
+    <Resource Include="se\se_cat01.wav" />
+    <Resource Include="se\se_ch00.wav" />
+    <Resource Include="se\se_ch01.wav" />
+    <Resource Include="se\se_ch02.wav" />
+    <Resource Include="se\se_changeitem.wav" />
+    <Resource Include="se\se_damage00.wav" />
+    <Resource Include="se\se_damage01.wav" />
+    <Resource Include="se\se_don00.wav" />
+    <Resource Include="se\se_down.wav" />
+    <Resource Include="se\se_enep00.wav" />
+    <Resource Include="se\se_enep01.wav" />
+    <Resource Include="se\se_enep02.wav" />
+    <Resource Include="se\se_explode.wav" />
+    <Resource Include="se\se_extend.wav" />
+    <Resource Include="se\se_extend2.wav" />
+    <Resource Include="se\se_fault.wav" />
+    <Resource Include="se\se_focusfix.wav" />
+    <Resource Include="se\se_focusfix2.wav" />
+    <Resource Include="se\se_focusin.wav" />
+    <Resource Include="se\se_graze.wav" />
+    <Resource Include="se\se_gun00.wav" />
+    <Resource Include="se\se_heal.wav" />
+    <Resource Include="se\se_hint00.wav" />
+    <Resource Include="se\se_hyz_charge00.wav" />
+    <Resource Include="se\se_hyz_charge01b.wav" />
+    <Resource Include="se\se_hyz_chargeup.wav" />
+    <Resource Include="se\se_hyz_eterase.wav" />
+    <Resource Include="se\se_hyz_exattack.wav" />
+    <Resource Include="se\se_hyz_gosp.wav" />
+    <Resource Include="se\se_hyz_life1.wav" />
+    <Resource Include="se\se_hyz_playerdead.wav" />
+    <Resource Include="se\se_hyz_timestop0.wav" />
+    <Resource Include="se\se_hyz_warning.wav" />
+    <Resource Include="se\se_ice.wav" />
+    <Resource Include="se\se_ice2.wav" />
+    <Resource Include="se\se_invalid.wav" />
+    <Resource Include="se\se_item00.wav" />
+    <Resource Include="se\se_item01.wav" />
+    <Resource Include="se\se_kira00.wav" />
+    <Resource Include="se\se_kira01.wav" />
+    <Resource Include="se\se_kira02.wav" />
+    <Resource Include="se\se_lazer00.wav" />
+    <Resource Include="se\se_lazer01.wav" />
+    <Resource Include="se\se_lazer02.wav" />
+    <Resource Include="se\se_lgods1.wav" />
+    <Resource Include="se\se_lgods2.wav" />
+    <Resource Include="se\se_lgods3.wav" />
+    <Resource Include="se\se_lgods4.wav" />
+    <Resource Include="se\se_lgodsget.wav" />
+    <Resource Include="se\se_msl.wav" />
+    <Resource Include="se\se_msl2.wav" />
+    <Resource Include="se\se_msl3.wav" />
+    <Resource Include="se\se_nep00.wav" />
+    <Resource Include="se\se_nice.wav" />
+    <Resource Include="se\se_nodamage.wav" />
+    <Resource Include="se\se_noise.wav" />
+    <Resource Include="se\se_ok00.wav" />
+    <Resource Include="se\se_old_cat00.wav" />
+    <Resource Include="se\se_old_enep00.wav" />
+    <Resource Include="se\se_old_enep01.wav" />
+    <Resource Include="se\se_old_extend.wav" />
+    <Resource Include="se\se_old_gun00.wav" />
+    <Resource Include="se\se_old_kira00.wav" />
+    <Resource Include="se\se_old_kira01.wav" />
+    <Resource Include="se\se_old_lazer01.wav" />
+    <Resource Include="se\se_old_nep00.wav" />
+    <Resource Include="se\se_old_pldead00.wav" />
+    <Resource Include="se\se_old_power0.wav" />
+    <Resource Include="se\se_old_power1.wav" />
+    <Resource Include="se\se_old_powerup.wav" />
+    <Resource Include="se\se_ophide.wav" />
+    <Resource Include="se\se_opshow.wav" />
+    <Resource Include="se\se_option.wav" />
+    <Resource Include="se\se_pause.wav" />
+    <Resource Include="se\se_pin00.wav" />
+    <Resource Include="se\se_pldead00.wav" />
+    <Resource Include="se\se_plst00.wav" />
+    <Resource Include="se\se_power0.wav" />
+    <Resource Include="se\se_power02.wav" />
+    <Resource Include="se\se_power1.wav" />
+    <Resource Include="se\se_power2.wav" />
+    <Resource Include="se\se_powerup.wav" />
+    <Resource Include="se\se_powerup1.wav" />
+    <Resource Include="se\se_select00.wav" />
+    <Resource Include="se\se_slash.wav" />
+    <Resource Include="se\se_tan00.wav" />
+    <Resource Include="se\se_tan01.wav" />
+    <Resource Include="se\se_tan02.wav" />
+    <Resource Include="se\se_timeout.wav" />
+    <Resource Include="se\se_timeout2.wav" />
+    <Resource Include="se\se_warpl.wav" />
+    <Resource Include="se\se_warpr.wav" />
+    <Resource Include="se\se_water.wav" />
+    <Resource Include="se\se_wolf.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\loadsound_Sys.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\loadsound_Sys.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

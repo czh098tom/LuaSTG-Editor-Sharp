@@ -31,16 +31,23 @@ Object
 	ObjectDefine
 		ObjectInit
 	ObjectCreate
+	SetGravity
+	SetVelocityLimit
 Graphics
 	LoadImageGroup
 Audio
 	LoadSE
+	PlaySE
+
+实现编辑界面：
+音效选择
 修复bug：
 Editor层：
 未选择Batch Packing且7z路径未设置时编译运行立即出错的bug
 带MD5校验打包期名称错误的相关bug
 修复If-Else中Else子节点行数计数错误的bug
 修复LuaSTG运行中再启动LuaSTG后退出报错产生的bug
+修复设置界面无法取消的bug
 
 改进：
 Editor层：
@@ -54,6 +61,7 @@ Lib层：
 向图片选择界面中添加系统资源
 图片选择界面的预览功能改进
 重整BossDefine节点
+改进BGM选择界面，现在带有声音
 
 0.0.5.0
 (2019-03-26)

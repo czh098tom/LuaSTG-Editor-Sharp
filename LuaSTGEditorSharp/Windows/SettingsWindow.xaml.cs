@@ -388,6 +388,7 @@ namespace LuaSTGEditorSharp.Windows
                 where Path.GetExtension(s) == ".dll"
                 && Path.GetFileName(s) != "Irony.dll" && Path.GetFileName(s) != "ICSharpCode.SharpZipLib.dll" 
                 && Path.GetFileName(s) != "Newtonsoft.Json.dll" && Path.GetFileName(s) != "ICSharpCode.AvalonEdit.dll"
+                && Path.GetFileName(s) != "CSCore.dll" && Path.GetFileName(s) != "NVorbis.dll"
                 select Path.GetFileName(s)
                 );
             PluginList.ItemsSource = pluginPaths;
@@ -448,8 +449,7 @@ namespace LuaSTGEditorSharp.Windows
 
         private void Window_Closing(object sender, CancelEventArgs e)
         {
-            WriteSettings();
-            Properties.Settings.Default.Save();
+
         }
 
         private void ButtonOK_Click(object sender, RoutedEventArgs e)

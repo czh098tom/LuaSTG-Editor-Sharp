@@ -23,19 +23,11 @@ namespace LuaSTGEditorSharp.Windows.Input
     /// </summary>
     public partial class SEInput : InputWindow
     {
-        public ObservableCollection<MetaModel> imageInfo;
-        public ObservableCollection<MetaModel> ImageInfo { get => imageInfo; }
-        public ObservableCollection<MetaModel> imageGroupInfo;
-        public ObservableCollection<MetaModel> ImageGroupInfo { get => imageGroupInfo; }
+        public ObservableCollection<MetaModel> seInfo;
+        public ObservableCollection<MetaModel> SEInfo { get => seInfo; }
 
-        public ObservableCollection<MetaModel> imageInfoSys;
-        public ObservableCollection<MetaModel> ImageInfoSys { get => imageInfoSys; }
-        public ObservableCollection<MetaModel> imageGroupInfoSys;
-        public ObservableCollection<MetaModel> ImageGroupInfoSys { get => imageGroupInfoSys; }
-
-        int cols = 1, rows = 1;
-
-        DrawingVisual hint;
+        public ObservableCollection<MetaModel> seInfoSys;
+        public ObservableCollection<MetaModel> SEInfoSys { get => seInfoSys; }
 
         public override string Result
         {
@@ -47,35 +39,13 @@ namespace LuaSTGEditorSharp.Windows.Input
             }
         }
 
-        private int selectedIndex = 1;
-        public int SelectedIndex
-        {
-            get => selectedIndex;
-            set
-            {
-                value = value < 1 ? 1 : value;
-                value = value > cols * rows ? cols * rows : value;
-                selectedIndex = value;
-                RaisePropertyChanged("SelectedIndex");
-                int selX = (value - 1) % cols;
-                int selY = (value - 1) / cols;
-                RefreshView(selX, selY);
-            }
-        }
-
-        private bool mouseDown = false;
-
         public SEInput(string s, MainWindow owner, AttrItem item)
         {
-            imageInfo = item.Parent.parentWorkSpace.Meta.aggregatableMetas[(int)MetaType.ImageLoad].GetAllSimpleWithDifficulty();
-            imageGroupInfo = item.Parent.parentWorkSpace.Meta.aggregatableMetas[(int)MetaType.ImageGroupLoad].GetAllSimpleWithDifficulty();
+            seInfo = item.Parent.parentWorkSpace.Meta.aggregatableMetas[(int)MetaType.SELoad].GetAllSimpleWithDifficulty();
 
             AddInternalMetas();
 
             InitializeComponent();
-
-            //BoxImageData.ItemsSource = ImageInfo;
-            //BoxImageGroupData.ItemsSource = ImageGroupInfo;
 
             Result = s;
             codeText.Text = Result;
@@ -83,42 +53,7 @@ namespace LuaSTGEditorSharp.Windows.Input
 
         private void AddInternalMetas()
         {
-            imageInfoSys = new ObservableCollection<MetaModel>()
-            {
-                new MetaModel(){
-                    Icon = "/LuaSTGNodeLib;component/images/16x16/loadimage_Sys.png",
-                    Text = "(Internal) img_void",
-                    Result = "\"img_void\"",
-                    FullName = "img_void",
-                    ExInfo1 = "pack://application:,,,/LuaSTGNodeLib;component/images/picture/img_void.png"
-                },
-                new MetaModel(){
-                    Icon = "/LuaSTGNodeLib;component/images/16x16/loadimage_Sys.png",
-                    Text = "(Internal) white",
-                    Result = "\"white\"",
-                    FullName = "white",
-                    ExInfo1 = "pack://application:,,,/LuaSTGNodeLib;component/images/picture/white.png"
-                },
-                new MetaModel(){
-                    Icon = "/LuaSTGNodeLib;component/images/16x16/loadimage_Sys.png",
-                    Text = "(Internal) leaf",
-                    Result = "\"leaf\"",
-                    FullName = "leaf",
-                    ExInfo1 = "pack://application:,,,/LuaSTGNodeLib;component/images/picture/leaf.png"
-                }
-            };
-
-            imageGroupInfoSys = new ObservableCollection<MetaModel>()
-            {
-                new MetaModel(){
-                    Icon = "/LuaSTGNodeLib;component/images/16x16/loadimagegroup_Sys.png",
-                    Text = "(Internal) parimg",
-                    Result = "\"parimg\"",
-                    FullName = "parimg",
-                    ExInfo1 = "pack://application:,,,/LuaSTGNodeLib;component/images/picture/particles.png",
-                    ExInfo2 = "4,4"
-                },
-            };
+            seInfoSys = new ObservableCollection<MetaModel>(PluginEntry.SysSE);
         }
 
         private void ButtonOK_Click(object sender, RoutedEventArgs e)
@@ -138,81 +73,17 @@ namespace LuaSTGEditorSharp.Windows.Input
             Keyboard.Focus(codeText);
         }
 
-        private void BoxImageData_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void BoxSEData_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            RefreshAsImage();
-        }
-
-        private void BoxImageGroupData_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            RefreshAsImageGroup();
-        }
-
-        private void BoxImageData_GotFocus(object sender, RoutedEventArgs e)
-        {
-            RefreshAsImage();
-        }
-
-        private void BoxImageGroupData_GotFocus(object sender, RoutedEventArgs e)
-        {
-            RefreshAsImageGroup();
-        }
-
-        private void RefreshAsImage()
-        {
-            MetaModel m = (BoxImageData.SelectedItem as MetaModel);
+            MetaModel m = (BoxSEData.SelectedItem as MetaModel);
             if (!string.IsNullOrEmpty(m?.Result)) Result = m?.Result;
             try
             {
-                ImageExample.Source = new BitmapImage(new Uri(m?.ExInfo1));
+                mediaPlayer.Source = new Uri(m?.ExInfo1);
+                mediaPlayer.Play();
             }
-            catch { }
+            catch (Exception exc){ MessageBox.Show(exc.ToString()); }
             codeText.Focus();
-        }
-
-        private void RefreshAsImageGroup()
-        {
-            MetaModel m = (BoxImageGroupData.SelectedItem as MetaModel);
-            string[] colrow = m?.ExInfo2.Split(',');
-            int cols = 1, rows = 1;
-            if (colrow != null && colrow.Length > 1)
-            {
-                if (int.TryParse(colrow[0], out int colsX) && colsX > 0) cols = colsX;
-                if (int.TryParse(colrow[1], out int rowsX) && rowsX > 0) rows = rowsX;
-            }
-            this.cols = cols;
-            this.rows = rows;
-            if (!string.IsNullOrEmpty(m?.Result)) Result = "\"" + m.Result.Trim('"') + selectedIndex + "\"";
-            SplitGrid.Background = GetGridBrush();
-            try
-            {
-                ImageGroupExample.Source = new BitmapImage(new Uri(m?.ExInfo1));
-            }
-            catch { }
-            SelectedIndex = 1;
-            SplitGrid.RemoveVisual(hint);
-            codeText.Focus();
-        }
-
-        private DrawingBrush GetGridBrush()
-        {
-            DrawingBrush db = new DrawingBrush();
-            DrawingGroup dg = new DrawingGroup();
-            GeometryDrawing gd = new GeometryDrawing();
-            GeometryGroup gg = new GeometryGroup();
-            for(int i = 1; i < rows; i++)
-            {
-                gg.Children.Add(new LineGeometry(new Point(0, (double)i / rows), new Point(1, (double)i / rows)));
-            }
-            for (int i = 1; i < cols; i++)
-            {
-                gg.Children.Add(new LineGeometry(new Point((double)i / cols, 0), new Point((double)i / cols, 1)));
-            }
-            gd.Geometry = gg;
-            gd.Pen = new Pen(new SolidColorBrush(Color.FromArgb(255, 0, 0, 0)), 0.001);
-            dg.Children.Add(gd);
-            db.Drawing = dg;
-            return db;
         }
 
         private void UserControl_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -227,80 +98,6 @@ namespace LuaSTGEditorSharp.Windows.Input
             {
                 DialogResult = true;
                 this.Close();
-            }
-        }
-
-        private void SplitGrid_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            CalculateSelection(e);
-            mouseDown = true;
-        }
-
-        private void SplitGrid_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (mouseDown)
-            {
-                CalculateSelection(e);
-            }
-        }
-
-        private void CalculateSelection(MouseEventArgs e)
-        {
-            Point p = e.GetPosition(SplitGrid);
-            int selX = Convert.ToInt32(p.X / SplitGrid.ActualWidth * cols - 0.5);
-            int selY = Convert.ToInt32(p.Y / SplitGrid.ActualHeight * rows - 0.5);
-            SelectedIndex = 1 + selX + selY * cols;
-        }
-
-        private void RefreshView(int selX, int selY)
-        {
-            DrawCursorAtPoint(selX, selY);
-            MetaModel m = (BoxImageGroupData.SelectedItem as MetaModel);
-            if (!string.IsNullOrEmpty(m?.Result)) Result = "\"" + m.Result.Trim('"') + selectedIndex + "\"";
-        }
-
-        private void DrawCursorAtPoint(int selX, int selY)
-        {
-            double x0 = selX * SplitGrid.ActualWidth / cols;
-            double y0 = selY * SplitGrid.ActualHeight / rows;
-            if (SplitGrid.ChildrenCount <= 0)
-            {
-                hint = new DrawingVisual();
-                DrawRect(hint, new Point(x0, y0)
-                    , new Point(x0 + SplitGrid.ActualWidth / cols, y0 + SplitGrid.ActualHeight / rows));
-                SplitGrid.AddVisual(hint);
-            }
-            else
-            {
-                hint = (DrawingVisual)SplitGrid[0];
-                DrawRect(hint, new Point(x0, y0)
-                    , new Point(x0 + SplitGrid.ActualWidth / cols, y0 + SplitGrid.ActualHeight / rows));
-            }
-        }
-
-        private void DrawRect(DrawingVisual v, Point p1, Point p2)
-        {
-            using (DrawingContext dc = v.RenderOpen())
-            {
-                dc.DrawRectangle(new SolidColorBrush(Color.FromArgb(128, 153, 217, 234))
-                    , new Pen(new SolidColorBrush(Color.FromArgb(255, 0, 162, 232)), 1.0), new Rect(p1, p2));
-            }
-        }
-
-        private void SplitGrid_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            mouseDown = false;
-        }
-
-        private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (tabControl.SelectedIndex == 0)
-            {
-                RefreshAsImage();
-            }
-            else
-            {
-                RefreshAsImageGroup();
             }
         }
     }

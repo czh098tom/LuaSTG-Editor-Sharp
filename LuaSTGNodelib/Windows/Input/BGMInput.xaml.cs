@@ -60,6 +60,13 @@ namespace LuaSTGEditorSharp.Windows.Input
         {
             MetaModel m = (BoxBGMData.SelectedItem as MetaModel);
             if (!string.IsNullOrEmpty(m?.Result)) Result = m?.Result;
+            try
+            {
+                mediaPlayer.Source = new Uri(m?.ExInfo1);
+                //MessageBox.Show(m?.ExInfo1);
+                mediaPlayer.Play();
+            }
+            catch {  }
             codeText.Focus();
         }
 

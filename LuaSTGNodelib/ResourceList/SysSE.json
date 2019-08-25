@@ -1,0 +1,723 @@
+[
+  {
+    "Icon": "/LuaSTGNodeLib;component/images/16x16/loadsound.png",
+    "Text": "(Internal) alert",
+    "Result": "\"alert\"",
+    "FullName": "alert",
+    "ExInfo1": "pack://application:,,,/LuaSTGNodeLib;component/se/se_alert.wav"
+  },
+  {
+    "Icon": "/LuaSTGNodeLib;component/images/16x16/loadsound.png",
+    "Text": "(Internal) astralup",
+    "Result": "\"astralup\"",
+    "FullName": "astralup",
+    "ExInfo1": "pack://application:,,,/LuaSTGNodeLib;component/se/se_astralup.wav"
+  },
+  {
+    "Icon": "/LuaSTGNodeLib;component/images/16x16/loadsound.png",
+    "Text": "(Internal) bonus",
+    "Result": "\"bonus\"",
+    "FullName": "bonus",
+    "ExInfo1": "pack://application:,,,/LuaSTGNodeLib;component/se/se_bonus.wav"
+  },
+  {
+    "Icon": "/LuaSTGNodeLib;component/images/16x16/loadsound.png",
+    "Text": "(Internal) bonus2",
+    "Result": "\"bonus2\"",
+    "FullName": "bonus2",
+    "ExInfo1": "pack://application:,,,/LuaSTGNodeLib;component/se/se_bonus2.wav"
+  },
+  {
+    "Icon": "/LuaSTGNodeLib;component/images/16x16/loadsound.png",
+    "Text": "(Internal) boon00",
+    "Result": "\"boon00\"",
+    "FullName": "boon00",
+    "ExInfo1": "pack://application:,,,/LuaSTGNodeLib;component/se/se_boon00.wav"
+  },
+  {
+    "Icon": "/LuaSTGNodeLib;component/images/16x16/loadsound.png",
+    "Text": "(Internal) boon01",
+    "Result": "\"boon01\"",
+    "FullName": "boon01",
+    "ExInfo1": "pack://application:,,,/LuaSTGNodeLib;component/se/se_boon01.wav"
+  },
+  {
+    "Icon": "/LuaSTGNodeLib;component/images/16x16/loadsound.png",
+    "Text": "(Internal) cancel00",
+    "Result": "\"cancel00\"",
+    "FullName": "cancel00",
+    "ExInfo1": "pack://application:,,,/LuaSTGNodeLib;component/se/se_cancel00.wav"
+  },
+  {
+    "Icon": "/LuaSTGNodeLib;component/images/16x16/loadsound.png",
+    "Text": "(Internal) cardget",
+    "Result": "\"cardget\"",
+    "FullName": "cardget",
+    "ExInfo1": "pack://application:,,,/LuaSTGNodeLib;component/se/se_cardget.wav"
+  },
+  {
+    "Icon": "/LuaSTGNodeLib;component/images/16x16/loadsound.png",
+    "Text": "(Internal) cat00",
+    "Result": "\"cat00\"",
+    "FullName": "cat00",
+    "ExInfo1": "pack://application:,,,/LuaSTGNodeLib;component/se/se_cat00.wav"
+  },
+  {
+    "Icon": "/LuaSTGNodeLib;component/images/16x16/loadsound.png",
+    "Text": "(Internal) cat01",
+    "Result": "\"cat01\"",
+    "FullName": "cat01",
+    "ExInfo1": "pack://application:,,,/LuaSTGNodeLib;component/se/se_cat01.wav"
+  },
+  {
+    "Icon": "/LuaSTGNodeLib;component/images/16x16/loadsound.png",
+    "Text": "(Internal) ch00",
+    "Result": "\"ch00\"",
+    "FullName": "ch00",
+    "ExInfo1": "pack://application:,,,/LuaSTGNodeLib;component/se/se_ch00.wav"
+  },
+  {
+    "Icon": "/LuaSTGNodeLib;component/images/16x16/loadsound.png",
+    "Text": "(Internal) ch01",
+    "Result": "\"ch01\"",
+    "FullName": "ch01",
+    "ExInfo1": "pack://application:,,,/LuaSTGNodeLib;component/se/se_ch01.wav"
+  },
+  {
+    "Icon": "/LuaSTGNodeLib;component/images/16x16/loadsound.png",
+    "Text": "(Internal) ch02",
+    "Result": "\"ch02\"",
+    "FullName": "ch02",
+    "ExInfo1": "pack://application:,,,/LuaSTGNodeLib;component/se/se_ch02.wav"
+  },
+  {
+    "Icon": "/LuaSTGNodeLib;component/images/16x16/loadsound.png",
+    "Text": "(Internal) don00",
+    "Result": "\"don00\"",
+    "FullName": "don00",
+    "ExInfo1": "pack://application:,,,/LuaSTGNodeLib;component/se/se_don00.wav"
+  },
+  {
+    "Icon": "/LuaSTGNodeLib;component/images/16x16/loadsound.png",
+    "Text": "(Internal) damage00",
+    "Result": "\"damage00\"",
+    "FullName": "damage00",
+    "ExInfo1": "pack://application:,,,/LuaSTGNodeLib;component/se/se_damage00.wav"
+  },
+  {
+    "Icon": "/LuaSTGNodeLib;component/images/16x16/loadsound.png",
+    "Text": "(Internal) damage01",
+    "Result": "\"damage01\"",
+    "FullName": "damage01",
+    "ExInfo1": "pack://application:,,,/LuaSTGNodeLib;component/se/se_damage01.wav"
+  },
+  {
+    "Icon": "/LuaSTGNodeLib;component/images/16x16/loadsound.png",
+    "Text": "(Internal) enep00",
+    "Result": "\"enep00\"",
+    "FullName": "enep00",
+    "ExInfo1": "pack://application:,,,/LuaSTGNodeLib;component/se/se_enep00.wav"
+  },
+  {
+    "Icon": "/LuaSTGNodeLib;component/images/16x16/loadsound.png",
+    "Text": "(Internal) enep01",
+    "Result": "\"enep01\"",
+    "FullName": "enep01",
+    "ExInfo1": "pack://application:,,,/LuaSTGNodeLib;component/se/se_enep01.wav"
+  },
+  {
+    "Icon": "/LuaSTGNodeLib;component/images/16x16/loadsound.png",
+    "Text": "(Internal) enep02",
+    "Result": "\"enep02\"",
+    "FullName": "enep02",
+    "ExInfo1": "pack://application:,,,/LuaSTGNodeLib;component/se/se_enep02.wav"
+  },
+  {
+    "Icon": "/LuaSTGNodeLib;component/images/16x16/loadsound.png",
+    "Text": "(Internal) extend",
+    "Result": "\"extend\"",
+    "FullName": "extend",
+    "ExInfo1": "pack://application:,,,/LuaSTGNodeLib;component/se/se_extend.wav"
+  },
+  {
+    "Icon": "/LuaSTGNodeLib;component/images/16x16/loadsound.png",
+    "Text": "(Internal) fault",
+    "Result": "\"fault\"",
+    "FullName": "fault",
+    "ExInfo1": "pack://application:,,,/LuaSTGNodeLib;component/se/se_fault.wav"
+  },
+  {
+    "Icon": "/LuaSTGNodeLib;component/images/16x16/loadsound.png",
+    "Text": "(Internal) graze",
+    "Result": "\"graze\"",
+    "FullName": "graze",
+    "ExInfo1": "pack://application:,,,/LuaSTGNodeLib;component/se/se_graze.wav"
+  },
+  {
+    "Icon": "/LuaSTGNodeLib;component/images/16x16/loadsound.png",
+    "Text": "(Internal) gun00",
+    "Result": "\"gun00\"",
+    "FullName": "gun00",
+    "ExInfo1": "pack://application:,,,/LuaSTGNodeLib;component/se/se_gun00.wav"
+  },
+  {
+    "Icon": "/LuaSTGNodeLib;component/images/16x16/loadsound.png",
+    "Text": "(Internal) hint00",
+    "Result": "\"hint00\"",
+    "FullName": "hint00",
+    "ExInfo1": "pack://application:,,,/LuaSTGNodeLib;component/se/se_hint00.wav"
+  },
+  {
+    "Icon": "/LuaSTGNodeLib;component/images/16x16/loadsound.png",
+    "Text": "(Internal) invalid",
+    "Result": "\"invalid\"",
+    "FullName": "invalid",
+    "ExInfo1": "pack://application:,,,/LuaSTGNodeLib;component/se/se_invalid.wav"
+  },
+  {
+    "Icon": "/LuaSTGNodeLib;component/images/16x16/loadsound.png",
+    "Text": "(Internal) item00",
+    "Result": "\"item00\"",
+    "FullName": "item00",
+    "ExInfo1": "pack://application:,,,/LuaSTGNodeLib;component/se/se_item00.wav"
+  },
+  {
+    "Icon": "/LuaSTGNodeLib;component/images/16x16/loadsound.png",
+    "Text": "(Internal) kira00",
+    "Result": "\"kira00\"",
+    "FullName": "kira00",
+    "ExInfo1": "pack://application:,,,/LuaSTGNodeLib;component/se/se_kira00.wav"
+  },
+  {
+    "Icon": "/LuaSTGNodeLib;component/images/16x16/loadsound.png",
+    "Text": "(Internal) kira01",
+    "Result": "\"kira01\"",
+    "FullName": "kira01",
+    "ExInfo1": "pack://application:,,,/LuaSTGNodeLib;component/se/se_kira01.wav"
+  },
+  {
+    "Icon": "/LuaSTGNodeLib;component/images/16x16/loadsound.png",
+    "Text": "(Internal) kira02",
+    "Result": "\"kira02\"",
+    "FullName": "kira02",
+    "ExInfo1": "pack://application:,,,/LuaSTGNodeLib;component/se/se_kira02.wav"
+  },
+  {
+    "Icon": "/LuaSTGNodeLib;component/images/16x16/loadsound.png",
+    "Text": "(Internal) lazer00",
+    "Result": "\"lazer00\"",
+    "FullName": "lazer00",
+    "ExInfo1": "pack://application:,,,/LuaSTGNodeLib;component/se/se_lazer00.wav"
+  },
+  {
+    "Icon": "/LuaSTGNodeLib;component/images/16x16/loadsound.png",
+    "Text": "(Internal) lazer01",
+    "Result": "\"lazer01\"",
+    "FullName": "lazer01",
+    "ExInfo1": "pack://application:,,,/LuaSTGNodeLib;component/se/se_lazer01.wav"
+  },
+  {
+    "Icon": "/LuaSTGNodeLib;component/images/16x16/loadsound.png",
+    "Text": "(Internal) lazer02",
+    "Result": "\"lazer02\"",
+    "FullName": "lazer02",
+    "ExInfo1": "pack://application:,,,/LuaSTGNodeLib;component/se/se_lazer02.wav"
+  },
+  {
+    "Icon": "/LuaSTGNodeLib;component/images/16x16/loadsound.png",
+    "Text": "(Internal) msl",
+    "Result": "\"msl\"",
+    "FullName": "msl",
+    "ExInfo1": "pack://application:,,,/LuaSTGNodeLib;component/se/se_msl.wav"
+  },
+  {
+    "Icon": "/LuaSTGNodeLib;component/images/16x16/loadsound.png",
+    "Text": "(Internal) msl2",
+    "Result": "\"msl2\"",
+    "FullName": "msl2",
+    "ExInfo1": "pack://application:,,,/LuaSTGNodeLib;component/se/se_msl2.wav"
+  },
+  {
+    "Icon": "/LuaSTGNodeLib;component/images/16x16/loadsound.png",
+    "Text": "(Internal) nep00",
+    "Result": "\"nep00\"",
+    "FullName": "nep00",
+    "ExInfo1": "pack://application:,,,/LuaSTGNodeLib;component/se/se_nep00.wav"
+  },
+  {
+    "Icon": "/LuaSTGNodeLib;component/images/16x16/loadsound.png",
+    "Text": "(Internal) ok00",
+    "Result": "\"ok00\"",
+    "FullName": "ok00",
+    "ExInfo1": "pack://application:,,,/LuaSTGNodeLib;component/se/se_ok00.wav"
+  },
+  {
+    "Icon": "/LuaSTGNodeLib;component/images/16x16/loadsound.png",
+    "Text": "(Internal) option",
+    "Result": "\"option\"",
+    "FullName": "option",
+    "ExInfo1": "pack://application:,,,/LuaSTGNodeLib;component/se/se_option.wav"
+  },
+  {
+    "Icon": "/LuaSTGNodeLib;component/images/16x16/loadsound.png",
+    "Text": "(Internal) pause",
+    "Result": "\"pause\"",
+    "FullName": "pause",
+    "ExInfo1": "pack://application:,,,/LuaSTGNodeLib;component/se/se_pause.wav"
+  },
+  {
+    "Icon": "/LuaSTGNodeLib;component/images/16x16/loadsound.png",
+    "Text": "(Internal) pldead00",
+    "Result": "\"pldead00\"",
+    "FullName": "pldead00",
+    "ExInfo1": "pack://application:,,,/LuaSTGNodeLib;component/se/se_pldead00.wav"
+  },
+  {
+    "Icon": "/LuaSTGNodeLib;component/images/16x16/loadsound.png",
+    "Text": "(Internal) plst00",
+    "Result": "\"plst00\"",
+    "FullName": "plst00",
+    "ExInfo1": "pack://application:,,,/LuaSTGNodeLib;component/se/se_plst00.wav"
+  },
+  {
+    "Icon": "/LuaSTGNodeLib;component/images/16x16/loadsound.png",
+    "Text": "(Internal) power0",
+    "Result": "\"power0\"",
+    "FullName": "power0",
+    "ExInfo1": "pack://application:,,,/LuaSTGNodeLib;component/se/se_power0.wav"
+  },
+  {
+    "Icon": "/LuaSTGNodeLib;component/images/16x16/loadsound.png",
+    "Text": "(Internal) power1",
+    "Result": "\"power1\"",
+    "FullName": "power1",
+    "ExInfo1": "pack://application:,,,/LuaSTGNodeLib;component/se/se_power1.wav"
+  },
+  {
+    "Icon": "/LuaSTGNodeLib;component/images/16x16/loadsound.png",
+    "Text": "(Internal) powerup",
+    "Result": "\"powerup\"",
+    "FullName": "powerup",
+    "ExInfo1": "pack://application:,,,/LuaSTGNodeLib;component/se/se_powerup.wav"
+  },
+  {
+    "Icon": "/LuaSTGNodeLib;component/images/16x16/loadsound.png",
+    "Text": "(Internal) select00",
+    "Result": "\"select00\"",
+    "FullName": "select00",
+    "ExInfo1": "pack://application:,,,/LuaSTGNodeLib;component/se/se_select00.wav"
+  },
+  {
+    "Icon": "/LuaSTGNodeLib;component/images/16x16/loadsound.png",
+    "Text": "(Internal) slash",
+    "Result": "\"slash\"",
+    "FullName": "slash",
+    "ExInfo1": "pack://application:,,,/LuaSTGNodeLib;component/se/se_slash.wav"
+  },
+  {
+    "Icon": "/LuaSTGNodeLib;component/images/16x16/loadsound.png",
+    "Text": "(Internal) tan00",
+    "Result": "\"tan00\"",
+    "FullName": "tan00",
+    "ExInfo1": "pack://application:,,,/LuaSTGNodeLib;component/se/se_tan00.wav"
+  },
+  {
+    "Icon": "/LuaSTGNodeLib;component/images/16x16/loadsound.png",
+    "Text": "(Internal) tan01",
+    "Result": "\"tan01\"",
+    "FullName": "tan01",
+    "ExInfo1": "pack://application:,,,/LuaSTGNodeLib;component/se/se_tan01.wav"
+  },
+  {
+    "Icon": "/LuaSTGNodeLib;component/images/16x16/loadsound.png",
+    "Text": "(Internal) tan02",
+    "Result": "\"tan02\"",
+    "FullName": "tan02",
+    "ExInfo1": "pack://application:,,,/LuaSTGNodeLib;component/se/se_tan02.wav"
+  },
+  {
+    "Icon": "/LuaSTGNodeLib;component/images/16x16/loadsound.png",
+    "Text": "(Internal) timeout",
+    "Result": "\"timeout\"",
+    "FullName": "timeout",
+    "ExInfo1": "pack://application:,,,/LuaSTGNodeLib;component/se/se_timeout.wav"
+  },
+  {
+    "Icon": "/LuaSTGNodeLib;component/images/16x16/loadsound.png",
+    "Text": "(Internal) timeout2",
+    "Result": "\"timeout2\"",
+    "FullName": "timeout2",
+    "ExInfo1": "pack://application:,,,/LuaSTGNodeLib;component/se/se_timeout2.wav"
+  },
+  {
+    "Icon": "/LuaSTGNodeLib;component/images/16x16/loadsound.png",
+    "Text": "(Internal) warpl",
+    "Result": "\"warpl\"",
+    "FullName": "warpl",
+    "ExInfo1": "pack://application:,,,/LuaSTGNodeLib;component/se/se_warpl.wav"
+  },
+  {
+    "Icon": "/LuaSTGNodeLib;component/images/16x16/loadsound.png",
+    "Text": "(Internal) warpr",
+    "Result": "\"warpr\"",
+    "FullName": "warpr",
+    "ExInfo1": "pack://application:,,,/LuaSTGNodeLib;component/se/se_warpr.wav"
+  },
+  {
+    "Icon": "/LuaSTGNodeLib;component/images/16x16/loadsound.png",
+    "Text": "(Internal) water",
+    "Result": "\"water\"",
+    "FullName": "water",
+    "ExInfo1": "pack://application:,,,/LuaSTGNodeLib;component/se/se_water.wav"
+  },
+  {
+    "Icon": "/LuaSTGNodeLib;component/images/16x16/loadsound.png",
+    "Text": "(Internal) explode",
+    "Result": "\"explode\"",
+    "FullName": "explode",
+    "ExInfo1": "pack://application:,,,/LuaSTGNodeLib;component/se/se_explode.wav"
+  },
+  {
+    "Icon": "/LuaSTGNodeLib;component/images/16x16/loadsound.png",
+    "Text": "(Internal) nice",
+    "Result": "\"nice\"",
+    "FullName": "nice",
+    "ExInfo1": "pack://application:,,,/LuaSTGNodeLib;component/se/se_nice.wav"
+  },
+  {
+    "Icon": "/LuaSTGNodeLib;component/images/16x16/loadsound.png",
+    "Text": "(Internal) nodamage",
+    "Result": "\"nodamage\"",
+    "FullName": "nodamage",
+    "ExInfo1": "pack://application:,,,/LuaSTGNodeLib;component/se/se_nodamage.wav"
+  },
+  {
+    "Icon": "/LuaSTGNodeLib;component/images/16x16/loadsound.png",
+    "Text": "(Internal) power02",
+    "Result": "\"power02\"",
+    "FullName": "power02",
+    "ExInfo1": "pack://application:,,,/LuaSTGNodeLib;component/se/se_power02.wav"
+  },
+  {
+    "Icon": "/LuaSTGNodeLib;component/images/16x16/loadsound.png",
+    "Text": "(Internal) lgods1",
+    "Result": "\"lgods1\"",
+    "FullName": "lgods1",
+    "ExInfo1": "pack://application:,,,/LuaSTGNodeLib;component/se/se_lgods1.wav"
+  },
+  {
+    "Icon": "/LuaSTGNodeLib;component/images/16x16/loadsound.png",
+    "Text": "(Internal) lgods2",
+    "Result": "\"lgods2\"",
+    "FullName": "lgods2",
+    "ExInfo1": "pack://application:,,,/LuaSTGNodeLib;component/se/se_lgods2.wav"
+  },
+  {
+    "Icon": "/LuaSTGNodeLib;component/images/16x16/loadsound.png",
+    "Text": "(Internal) lgods3",
+    "Result": "\"lgods3\"",
+    "FullName": "lgods3",
+    "ExInfo1": "pack://application:,,,/LuaSTGNodeLib;component/se/se_lgods3.wav"
+  },
+  {
+    "Icon": "/LuaSTGNodeLib;component/images/16x16/loadsound.png",
+    "Text": "(Internal) lgods4",
+    "Result": "\"lgods4\"",
+    "FullName": "lgods4",
+    "ExInfo1": "pack://application:,,,/LuaSTGNodeLib;component/se/se_lgods4.wav"
+  },
+  {
+    "Icon": "/LuaSTGNodeLib;component/images/16x16/loadsound.png",
+    "Text": "(Internal) lgodsget",
+    "Result": "\"lgodsget\"",
+    "FullName": "lgodsget",
+    "ExInfo1": "pack://application:,,,/LuaSTGNodeLib;component/se/se_lgodsget.wav"
+  },
+  {
+    "Icon": "/LuaSTGNodeLib;component/images/16x16/loadsound.png",
+    "Text": "(Internal) big",
+    "Result": "\"big\"",
+    "FullName": "big",
+    "ExInfo1": "pack://application:,,,/LuaSTGNodeLib;component/se/se_big.wav"
+  },
+  {
+    "Icon": "/LuaSTGNodeLib;component/images/16x16/loadsound.png",
+    "Text": "(Internal) wolf",
+    "Result": "\"wolf\"",
+    "FullName": "wolf",
+    "ExInfo1": "pack://application:,,,/LuaSTGNodeLib;component/se/se_wolf.wav"
+  },
+  {
+    "Icon": "/LuaSTGNodeLib;component/images/16x16/loadsound.png",
+    "Text": "(Internal) noise",
+    "Result": "\"noise\"",
+    "FullName": "noise",
+    "ExInfo1": "pack://application:,,,/LuaSTGNodeLib;component/se/se_noise.wav"
+  },
+  {
+    "Icon": "/LuaSTGNodeLib;component/images/16x16/loadsound.png",
+    "Text": "(Internal) pin00",
+    "Result": "\"pin00\"",
+    "FullName": "pin00",
+    "ExInfo1": "pack://application:,,,/LuaSTGNodeLib;component/se/se_pin00.wav"
+  },
+  {
+    "Icon": "/LuaSTGNodeLib;component/images/16x16/loadsound.png",
+    "Text": "(Internal) powerup1",
+    "Result": "\"powerup1\"",
+    "FullName": "powerup1",
+    "ExInfo1": "pack://application:,,,/LuaSTGNodeLib;component/se/se_powerup1.wav"
+  },
+  {
+    "Icon": "/LuaSTGNodeLib;component/images/16x16/loadsound.png",
+    "Text": "(Internal) old_cat00",
+    "Result": "\"old_cat00\"",
+    "FullName": "old_cat00",
+    "ExInfo1": "pack://application:,,,/LuaSTGNodeLib;component/se/se_old_cat00.wav"
+  },
+  {
+    "Icon": "/LuaSTGNodeLib;component/images/16x16/loadsound.png",
+    "Text": "(Internal) old_enep00",
+    "Result": "\"old_enep00\"",
+    "FullName": "old_enep00",
+    "ExInfo1": "pack://application:,,,/LuaSTGNodeLib;component/se/se_old_enep00.wav"
+  },
+  {
+    "Icon": "/LuaSTGNodeLib;component/images/16x16/loadsound.png",
+    "Text": "(Internal) old_extend",
+    "Result": "\"old_extend\"",
+    "FullName": "old_extend",
+    "ExInfo1": "pack://application:,,,/LuaSTGNodeLib;component/se/se_old_extend.wav"
+  },
+  {
+    "Icon": "/LuaSTGNodeLib;component/images/16x16/loadsound.png",
+    "Text": "(Internal) old_gun00",
+    "Result": "\"old_gun00\"",
+    "FullName": "old_gun00",
+    "ExInfo1": "pack://application:,,,/LuaSTGNodeLib;component/se/se_old_gun00.wav"
+  },
+  {
+    "Icon": "/LuaSTGNodeLib;component/images/16x16/loadsound.png",
+    "Text": "(Internal) old_kira00",
+    "Result": "\"old_kira00\"",
+    "FullName": "old_kira00",
+    "ExInfo1": "pack://application:,,,/LuaSTGNodeLib;component/se/se_old_kira00.wav"
+  },
+  {
+    "Icon": "/LuaSTGNodeLib;component/images/16x16/loadsound.png",
+    "Text": "(Internal) old_kira01",
+    "Result": "\"old_kira01\"",
+    "FullName": "old_kira01",
+    "ExInfo1": "pack://application:,,,/LuaSTGNodeLib;component/se/se_old_kira01.wav"
+  },
+  {
+    "Icon": "/LuaSTGNodeLib;component/images/16x16/loadsound.png",
+    "Text": "(Internal) old_lazer01",
+    "Result": "\"old_lazer01\"",
+    "FullName": "old_lazer01",
+    "ExInfo1": "pack://application:,,,/LuaSTGNodeLib;component/se/se_old_lazer01.wav"
+  },
+  {
+    "Icon": "/LuaSTGNodeLib;component/images/16x16/loadsound.png",
+    "Text": "(Internal) old_nep00",
+    "Result": "\"old_nep00\"",
+    "FullName": "old_nep00",
+    "ExInfo1": "pack://application:,,,/LuaSTGNodeLib;component/se/se_old_nep00.wav"
+  },
+  {
+    "Icon": "/LuaSTGNodeLib;component/images/16x16/loadsound.png",
+    "Text": "(Internal) old_pldead00",
+    "Result": "\"old_pldead00\"",
+    "FullName": "old_pldead00",
+    "ExInfo1": "pack://application:,,,/LuaSTGNodeLib;component/se/se_old_pldead00.wav"
+  },
+  {
+    "Icon": "/LuaSTGNodeLib;component/images/16x16/loadsound.png",
+    "Text": "(Internal) old_power0",
+    "Result": "\"old_power0\"",
+    "FullName": "old_power0",
+    "ExInfo1": "pack://application:,,,/LuaSTGNodeLib;component/se/se_old_power0.wav"
+  },
+  {
+    "Icon": "/LuaSTGNodeLib;component/images/16x16/loadsound.png",
+    "Text": "(Internal) old_power1",
+    "Result": "\"old_power1\"",
+    "FullName": "old_power1",
+    "ExInfo1": "pack://application:,,,/LuaSTGNodeLib;component/se/se_old_power1.wav"
+  },
+  {
+    "Icon": "/LuaSTGNodeLib;component/images/16x16/loadsound.png",
+    "Text": "(Internal) old_powerup",
+    "Result": "\"old_powerup\"",
+    "FullName": "old_powerup",
+    "ExInfo1": "pack://application:,,,/LuaSTGNodeLib;component/se/se_old_powerup.wav"
+  },
+  {
+    "Icon": "/LuaSTGNodeLib;component/images/16x16/loadsound.png",
+    "Text": "(Internal) hyz_charge00",
+    "Result": "\"hyz_charge00\"",
+    "FullName": "hyz_charge00",
+    "ExInfo1": "pack://application:,,,/LuaSTGNodeLib;component/se/se_hyz_charge00.wav"
+  },
+  {
+    "Icon": "/LuaSTGNodeLib;component/images/16x16/loadsound.png",
+    "Text": "(Internal) hyz_charge01b",
+    "Result": "\"hyz_charge01b\"",
+    "FullName": "hyz_charge01b",
+    "ExInfo1": "pack://application:,,,/LuaSTGNodeLib;component/se/se_hyz_charge01b.wav"
+  },
+  {
+    "Icon": "/LuaSTGNodeLib;component/images/16x16/loadsound.png",
+    "Text": "(Internal) hyz_chargeup",
+    "Result": "\"hyz_chargeup\"",
+    "FullName": "hyz_chargeup",
+    "ExInfo1": "pack://application:,,,/LuaSTGNodeLib;component/se/se_hyz_chargeup.wav"
+  },
+  {
+    "Icon": "/LuaSTGNodeLib;component/images/16x16/loadsound.png",
+    "Text": "(Internal) hyz_eterase",
+    "Result": "\"hyz_eterase\"",
+    "FullName": "hyz_eterase",
+    "ExInfo1": "pack://application:,,,/LuaSTGNodeLib;component/se/se_hyz_eterase.wav"
+  },
+  {
+    "Icon": "/LuaSTGNodeLib;component/images/16x16/loadsound.png",
+    "Text": "(Internal) hyz_exattack",
+    "Result": "\"hyz_exattack\"",
+    "FullName": "hyz_exattack",
+    "ExInfo1": "pack://application:,,,/LuaSTGNodeLib;component/se/se_hyz_exattack.wav"
+  },
+  {
+    "Icon": "/LuaSTGNodeLib;component/images/16x16/loadsound.png",
+    "Text": "(Internal) hyz_gosp",
+    "Result": "\"hyz_gosp\"",
+    "FullName": "hyz_gosp",
+    "ExInfo1": "pack://application:,,,/LuaSTGNodeLib;component/se/se_hyz_gosp.wav"
+  },
+  {
+    "Icon": "/LuaSTGNodeLib;component/images/16x16/loadsound.png",
+    "Text": "(Internal) hyz_life1",
+    "Result": "\"hyz_life1\"",
+    "FullName": "hyz_life1",
+    "ExInfo1": "pack://application:,,,/LuaSTGNodeLib;component/se/se_hyz_life1.wav"
+  },
+  {
+    "Icon": "/LuaSTGNodeLib;component/images/16x16/loadsound.png",
+    "Text": "(Internal) hyz_playerdead",
+    "Result": "\"hyz_playerdead\"",
+    "FullName": "hyz_playerdead",
+    "ExInfo1": "pack://application:,,,/LuaSTGNodeLib;component/se/se_hyz_playerdead.wav"
+  },
+  {
+    "Icon": "/LuaSTGNodeLib;component/images/16x16/loadsound.png",
+    "Text": "(Internal) hyz_timestop0",
+    "Result": "\"hyz_timestop0\"",
+    "FullName": "hyz_timestop0",
+    "ExInfo1": "pack://application:,,,/LuaSTGNodeLib;component/se/se_hyz_timestop0.wav"
+  },
+  {
+    "Icon": "/LuaSTGNodeLib;component/images/16x16/loadsound.png",
+    "Text": "(Internal) hyz_warning",
+    "Result": "\"hyz_warning\"",
+    "FullName": "hyz_warning",
+    "ExInfo1": "pack://application:,,,/LuaSTGNodeLib;component/se/se_hyz_warning.wav"
+  },
+  {
+    "Icon": "/LuaSTGNodeLib;component/images/16x16/loadsound.png",
+    "Text": "(Internal) bonus3",
+    "Result": "\"bonus3\"",
+    "FullName": "bonus3",
+    "ExInfo1": "pack://application:,,,/LuaSTGNodeLib;component/se/se_bonus3.wav"
+  },
+  {
+    "Icon": "/LuaSTGNodeLib;component/images/16x16/loadsound.png",
+    "Text": "(Internal) border",
+    "Result": "\"border\"",
+    "FullName": "border",
+    "ExInfo1": "pack://application:,,,/LuaSTGNodeLib;component/se/se_border.wav"
+  },
+  {
+    "Icon": "/LuaSTGNodeLib;component/images/16x16/loadsound.png",
+    "Text": "(Internal) changeitem",
+    "Result": "\"changeitem\"",
+    "FullName": "changeitem",
+    "ExInfo1": "pack://application:,,,/LuaSTGNodeLib;component/se/se_changeitem.wav"
+  },
+  {
+    "Icon": "/LuaSTGNodeLib;component/images/16x16/loadsound.png",
+    "Text": "(Internal) down",
+    "Result": "\"down\"",
+    "FullName": "down",
+    "ExInfo1": "pack://application:,,,/LuaSTGNodeLib;component/se/se_down.wav"
+  },
+  {
+    "Icon": "/LuaSTGNodeLib;component/images/16x16/loadsound.png",
+    "Text": "(Internal) extend2",
+    "Result": "\"extend2\"",
+    "FullName": "extend2",
+    "ExInfo1": "pack://application:,,,/LuaSTGNodeLib;component/se/se_extend2.wav"
+  },
+  {
+    "Icon": "/LuaSTGNodeLib;component/images/16x16/loadsound.png",
+    "Text": "(Internal) focusfix",
+    "Result": "\"focusfix\"",
+    "FullName": "focusfix",
+    "ExInfo1": "pack://application:,,,/LuaSTGNodeLib;component/se/se_focusfix.wav"
+  },
+  {
+    "Icon": "/LuaSTGNodeLib;component/images/16x16/loadsound.png",
+    "Text": "(Internal) focusfix2",
+    "Result": "\"focusfix2\"",
+    "FullName": "focusfix2",
+    "ExInfo1": "pack://application:,,,/LuaSTGNodeLib;component/se/se_focusfix2.wav"
+  },
+  {
+    "Icon": "/LuaSTGNodeLib;component/images/16x16/loadsound.png",
+    "Text": "(Internal) focusin",
+    "Result": "\"focusin\"",
+    "FullName": "focusin",
+    "ExInfo1": "pack://application:,,,/LuaSTGNodeLib;component/se/se_focusin.wav"
+  },
+  {
+    "Icon": "/LuaSTGNodeLib;component/images/16x16/loadsound.png",
+    "Text": "(Internal) heal",
+    "Result": "\"heal\"",
+    "FullName": "heal",
+    "ExInfo1": "pack://application:,,,/LuaSTGNodeLib;component/se/se_heal.wav"
+  },
+  {
+    "Icon": "/LuaSTGNodeLib;component/images/16x16/loadsound.png",
+    "Text": "(Internal) ice",
+    "Result": "\"ice\"",
+    "FullName": "ice",
+    "ExInfo1": "pack://application:,,,/LuaSTGNodeLib;component/se/se_ice.wav"
+  },
+  {
+    "Icon": "/LuaSTGNodeLib;component/images/16x16/loadsound.png",
+    "Text": "(Internal) ice2",
+    "Result": "\"ice2\"",
+    "FullName": "ice2",
+    "ExInfo1": "pack://application:,,,/LuaSTGNodeLib;component/se/se_ice2.wav"
+  },
+  {
+    "Icon": "/LuaSTGNodeLib;component/images/16x16/loadsound.png",
+    "Text": "(Internal) item01",
+    "Result": "\"item01\"",
+    "FullName": "item01",
+    "ExInfo1": "pack://application:,,,/LuaSTGNodeLib;component/se/se_item01.wav"
+  },
+  {
+    "Icon": "/LuaSTGNodeLib;component/images/16x16/loadsound.png",
+    "Text": "(Internal) ophide",
+    "Result": "\"ophide\"",
+    "FullName": "ophide",
+    "ExInfo1": "pack://application:,,,/LuaSTGNodeLib;component/se/se_ophide.wav"
+  },
+  {
+    "Icon": "/LuaSTGNodeLib;component/images/16x16/loadsound.png",
+    "Text": "(Internal) opshow",
+    "Result": "\"opshow\"",
+    "FullName": "opshow",
+    "ExInfo1": "pack://application:,,,/LuaSTGNodeLib;component/se/se_opshow.wav"
+  }
+]

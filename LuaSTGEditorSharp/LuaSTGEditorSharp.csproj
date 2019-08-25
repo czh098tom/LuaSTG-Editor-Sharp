@@ -122,6 +122,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Lua\StaticAnalysis.cs" />
+    <Compile Include="Plugin\SystemMetaLoader.cs" />
     <Compile Include="Toolbox\TreeViewLineConverter.cs" />
     <Compile Include="EditorData\AttrItem.cs" />
     <Compile Include="EditorData\Command.cs" />

@@ -66,12 +66,31 @@ namespace LuaSTGEditorSharp.EditorData.Document.Meta
 
         public override MetaModel GetSimpleMetaModel()
         {
+            DocumentData current = target.parentWorkSpace;
+            string projPath = "";
+            if (!string.IsNullOrEmpty(current.DocPath))
+                projPath = System.IO.Path.GetDirectoryName(current.DocPath);
+            string ppath = "";
+            try
+            {
+                bool? undcPath = RelativePathConverter.IsRelativePath(Path);
+                if (undcPath == true)
+                {
+                    ppath = System.IO.Path.GetFullPath(System.IO.Path.Combine(projPath, Path));
+                }
+                else if (undcPath == false)
+                {
+                    ppath = Path;
+                }
+            }
+            catch { }
             return new MetaModel
             {
                 Result = "\"" + FullName + "\"",
                 Text = FullName,
                 FullName = FullName,
-                Icon = "/LuaSTGNodeLib;component/images/16x16/loadbgm.png"
+                Icon = "/LuaSTGNodeLib;component/images/16x16/loadbgm.png",
+                ExInfo1 = ppath
             };
         }
     }

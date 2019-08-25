@@ -75,5 +75,7 @@ namespace LuaSTGEditorSharp
             SystemMetaLoader.FromResource("pack://application:,,,/LuaSTGNodeLib;component/ResourceList/SysImage.json");
         public static MetaModel[] SysImageGroup =
             SystemMetaLoader.FromResource("pack://application:,,,/LuaSTGNodeLib;component/ResourceList/SysImageGroup.json");
+        public static MetaModel[] SysSE =
+            SystemMetaLoader.FromResource("pack://application:,,,/LuaSTGNodeLib;component/ResourceList/SysSE.json");
     }
 }
