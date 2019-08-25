@@ -79,8 +79,6 @@ Names below are desired class names for the unfinished nodes.
 	ObjectListRemove
 	ObjectListForEach
 	--
-	SetGravity
-	SetVelocityLimit
 	PreserveUnit
 	CreateSmear (From old "Effect")
 	GroupForEach
@@ -103,6 +101,3 @@ Names below are desired class names for the unfinished nodes.
 	ResumeBGM
 	StopBGM
 	SetPace(?)
-	--
-	PlaySound &
-	LoadSound *
