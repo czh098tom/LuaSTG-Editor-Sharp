@@ -13,7 +13,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.General
     [Serializable, NodeIcon("images/16x16/then.png")]
     [CannotDelete, CannotBan]
     [RequireParent(typeof(IfNode)), Uniqueness]
-    public class IfThen : TreeNode
+    public class IfThen : TreeNode, IIfChild
     {
         [JsonConstructor]
         private IfThen() : base() { }
@@ -49,5 +49,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.General
             n.DeepCopyFrom(this);
             return n;
         }
+
+        public int Priority => -1;
     }
 }

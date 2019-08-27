@@ -12,7 +12,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.General
 {
     [Serializable, NodeIcon("images/16x16/else.png")]
     [RequireParent(typeof(IfNode)), Uniqueness]
-    public class IfElse : TreeNode
+    public class IfElse : TreeNode, IIfChild
     {
         [JsonConstructor]
         private IfElse() : base() { }
@@ -50,5 +50,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.General
             n.DeepCopyFrom(this);
             return n;
         }
+
+        public int Priority => 1;
     }
 }

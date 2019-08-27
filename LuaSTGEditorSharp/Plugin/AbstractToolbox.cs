@@ -48,6 +48,7 @@ namespace LuaSTGEditorSharp.Plugin
             gen.Add(new ToolboxItemData("comment", "images/comment.png", "Comment"), new AddNode(AddCommentNode));
             gen.Add(new ToolboxItemData(true), null);
             gen.Add(new ToolboxItemData("if", "images/if.png", "If"), new AddNode(AddIfNode));
+            gen.Add(new ToolboxItemData("elseif", "images/elseif.png", "Else If"), new AddNode(AddElseIfNode));
             gen.Add(new ToolboxItemData("repeat", "images/repeat.png", "Repeat"), new AddNode(AddRepeatNode));
             gen.Add(new ToolboxItemData("break", "images/break.png", "Break"), new AddNode(AddBreakNode));
             gen.Add(new ToolboxItemData(true), null);
@@ -138,6 +139,11 @@ namespace LuaSTGEditorSharp.Plugin
             newIf.AddChild(new IfThen(parent.ActivatedWorkSpaceData));
             newIf.AddChild(new IfElse(parent.ActivatedWorkSpaceData));
             parent.Insert(newIf);
+        }
+
+        private void AddElseIfNode()
+        {
+            parent.Insert(new IfElseIf(parent.ActivatedWorkSpaceData));
         }
 
         private void AddRepeatNode()

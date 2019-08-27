@@ -121,6 +121,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="EditorData\Node\General\IfElseIf.cs" />
+    <Compile Include="EditorData\Node\IIfChild.cs" />
     <Compile Include="Lua\StaticAnalysis.cs" />
     <Compile Include="Plugin\SystemMetaLoader.cs" />
     <Compile Include="Toolbox\TreeViewLineConverter.cs" />
@@ -370,6 +372,8 @@
     <Resource Include="images\archispace.png" />
     <Resource Include="images\16x16\archispace.png" />
     <EmbeddedResource Include="Lua\LuaSyntax.xml" />
+    <Resource Include="images\elseif.png" />
+    <Resource Include="images\16x16\elseif.png" />
     <Content Include="Templates\Empty Project.lstgproj">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
