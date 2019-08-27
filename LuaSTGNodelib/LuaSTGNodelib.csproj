@@ -73,6 +73,7 @@
     <Compile Include="EditorData\Document\Meta\LaserDefineMetaInfo.cs" />
     <Compile Include="EditorData\Document\Meta\StageGroupDefineMetaInfo.cs" />
     <Compile Include="EditorData\Document\Meta\TaskDefineMetaInfo.cs" />
+    <Compile Include="EditorData\Node\ICallBackFunc.cs" />
     <Compile Include="EditorData\Message\ArgCountInfo.cs" />
     <Compile Include="EditorData\Message\CannotFindAncestorTypeOf.cs" />
     <Compile Include="EditorData\Message\CannotFindAttributeInParent.cs" />
@@ -133,8 +134,11 @@
     <Compile Include="EditorData\Node\Object\SetAccel.cs" />
     <Compile Include="EditorData\Node\Object\SetBlend.cs" />
     <Compile Include="EditorData\Node\Object\SetGravity.cs" />
+    <Compile Include="EditorData\Node\Object\SetBinding.cs" />
+    <Compile Include="EditorData\Node\Object\SetRelativePosition.cs" />
     <Compile Include="EditorData\Node\Object\SetVelocityLimit.cs" />
     <Compile Include="EditorData\Node\Object\SetVelocity.cs" />
+    <Compile Include="EditorData\Node\Render\OnRender.cs" />
     <Compile Include="EditorData\Node\Stage\Stage.cs" />
     <Compile Include="EditorData\Node\Stage\StageBG.cs" />
     <Compile Include="EditorData\Node\Stage\StageGroup.cs" />
@@ -1764,6 +1768,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images\16x16\loadsound_Sys.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\onrender.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\onrender.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

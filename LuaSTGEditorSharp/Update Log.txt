@@ -33,11 +33,15 @@ Object
 	ObjectCreate
 	SetGravity
 	SetVelocityLimit
+	SetBinding
+	SetRelativePosition
 Graphics
 	LoadImageGroup
 Audio
 	LoadSE
 	PlaySE
+Render
+	OnRender
 
 实现编辑界面：
 音效选择

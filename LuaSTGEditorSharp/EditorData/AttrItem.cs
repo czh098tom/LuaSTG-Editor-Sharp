@@ -151,6 +151,7 @@ namespace LuaSTGEditorSharp.EditorData
             {
                 attrInput = value;
                 RaiseProertyChanged("AttrInput");
+                RaiseProertyChanged("AttrInput_InvokeCommand");
                 _parent?.RaiseProertyChanged("ScreenString");
                 _parent?.parentWorkSpace?.OriginalMeta.RaisePropertyChanged(_parent.GetType().ToString());
             }

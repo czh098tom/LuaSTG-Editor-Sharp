@@ -15,7 +15,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Object
     [Serializable, NodeIcon("/LuaSTGNodeLib;component/images/16x16/callbackfunc.png")]
     [RequireParent(typeof(Bullet.BulletDefine), typeof(Laser.BentLaserDefine), typeof(Object.ObjectDefine))]
     [RCInvoke(0)]
-    public class CallBackFunc : TreeNode
+    public class CallBackFunc : TreeNode, ICallBackFunc
     {
         [JsonConstructor]
         private CallBackFunc() : base() { }
@@ -77,6 +77,11 @@ namespace LuaSTGEditorSharp.EditorData.Node.Object
                 a.Add(new CannotFindAttributeInParent(2, this));
             }
             return a;
+        }
+
+        public string FuncName
+        {
+            get => Macrolize(0);
         }
     }
 }

@@ -13,7 +13,7 @@ using Newtonsoft.Json;
 namespace LuaSTGEditorSharp.EditorData.Node.Object
 {
     [Serializable, NodeIcon("/LuaSTGNodeLib;component/images/16x16/defaultaction.png")]
-    [RequireAncestor(typeof(CallBackFunc), typeof(Data.Function))]
+    [RequireAncestor(typeof(CallBackFunc), typeof(Data.Function), typeof(Render.OnRender))]
     [LeafNode]
     public class DefaultAction : TreeNode
     {
@@ -27,14 +27,15 @@ namespace LuaSTGEditorSharp.EditorData.Node.Object
         {
             string sp = "".PadLeft(spacing * 4);
             TreeNode callBackFunc = this;
-            while(!(callBackFunc is CallBackFunc) && callBackFunc != null)
+            while(!(callBackFunc is ICallBackFunc) && callBackFunc != null)
             {
                 callBackFunc = callBackFunc.Parent;
             }
+            ICallBackFunc func = (ICallBackFunc)callBackFunc;
             if (callBackFunc != null)
             {
-                string other = callBackFunc.NonMacrolize(0) == "colli" ? ",other" : "";
-                yield return sp + "self.class.base." + callBackFunc.NonMacrolize(0) + "(self" + other + ")\n";
+                string other = func.FuncName == "colli" ? ",other" : "";
+                yield return sp + "self.class.base." + func.FuncName + "(self" + other + ")\n";
             }
             else
             {
@@ -63,7 +64,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Object
         {
             var a = new List<MessageBase>();
             TreeNode callBackFunc = this;
-            while (!(callBackFunc is CallBackFunc) && callBackFunc != null)
+            while (!(callBackFunc is ICallBackFunc) && callBackFunc != null)
             {
                 callBackFunc = callBackFunc.Parent;
             }

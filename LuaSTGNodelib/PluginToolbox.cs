@@ -18,6 +18,7 @@ using LuaSTGEditorSharp.EditorData.Node.Laser;
 using LuaSTGEditorSharp.EditorData.Node.Object;
 using LuaSTGEditorSharp.EditorData.Node.Graphics;
 using LuaSTGEditorSharp.EditorData.Node.Audio;
+using LuaSTGEditorSharp.EditorData.Node.Render;
 
 namespace LuaSTGEditorSharp
 {
@@ -186,6 +187,11 @@ namespace LuaSTGEditorSharp
             obj.Add(new ToolboxItemData(true), null);
             obj.Add(new ToolboxItemData("setblend", "/LuaSTGNodeLib;component/images/setcolor.png", "Set Color and Blend Mode")
                 , new AddNode(AddSetBlendNode));
+            obj.Add(new ToolboxItemData(true), null);
+            obj.Add(new ToolboxItemData("setbinding", "/LuaSTGNodeLib;component/images/connect.png", "Set Parent")
+                , new AddNode(AddSetBindingNode));
+            obj.Add(new ToolboxItemData("setrelativepos", "/LuaSTGNodeLib;component/images/setrelpos.png", "Set Relative Position")
+                , new AddNode(AddSetRelativePositionNode));
             #endregion
             ToolInfo.Add("Object", obj);
 
@@ -216,6 +222,10 @@ namespace LuaSTGEditorSharp
             ToolInfo.Add("Inheritance", inherit);
 
             var render = new Dictionary<ToolboxItemData, AddNode>();
+            #region render
+            render.Add(new ToolboxItemData("onrender", "/LuaSTGNodeLib;component/images/onrender.png", "On Render")
+                , new AddNode(AddOnRenderNode));
+            #endregion
             ToolInfo.Add("Render", render);
 
             var background = new Dictionary<ToolboxItemData, AddNode>();
@@ -555,6 +565,16 @@ namespace LuaSTGEditorSharp
         {
             parent.Insert(new SetBlend(parent.ActivatedWorkSpaceData));
         }
+
+        private void AddSetBindingNode()
+        {
+            parent.Insert(new SetBinding(parent.ActivatedWorkSpaceData));
+        }
+
+        private void AddSetRelativePositionNode()
+        {
+            parent.Insert(new SetRelativePosition(parent.ActivatedWorkSpaceData));
+        }
         #endregion
         #region graphics
         private void AddLoadImageNode()
@@ -585,6 +605,14 @@ namespace LuaSTGEditorSharp
         private void AddPlayBGMNode()
         {
             parent.Insert(new PlayBGM(parent.ActivatedWorkSpaceData));
+        }
+        #endregion
+        #region render
+        private void AddOnRenderNode()
+        {
+            var o = new OnRender(parent.ActivatedWorkSpaceData);
+            o.AddChild(new DefaultAction(parent.ActivatedWorkSpaceData));
+            parent.Insert(o);
         }
         #endregion
     }

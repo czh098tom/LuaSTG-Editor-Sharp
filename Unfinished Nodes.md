@@ -83,9 +83,6 @@ Names below are desired class names for the unfinished nodes.
 	CreateSmear (From old "Effect")
 	GroupForEach
 	--
-	SetParent(*)
-	SetRelativePosition(*)
-	--
 	DropItem (From old "Effect")
 
 ## Graphics

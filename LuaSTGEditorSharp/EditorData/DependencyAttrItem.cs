@@ -77,6 +77,7 @@ namespace LuaSTGEditorSharp.EditorData
                 _parent.RaiseDependencyPropertyChanged(this
                     , new DependencyAttributeChangedEventArgs() { originalValue = s });
                 RaiseProertyChanged("AttrInput");
+                RaiseProertyChanged("AttrInput_InvokeCommand");
                 _parent?.RaiseProertyChanged("ScreenString");
                 _parent?.parentWorkSpace?.OriginalMeta.RaisePropertyChanged(_parent.GetType().ToString());
             }
