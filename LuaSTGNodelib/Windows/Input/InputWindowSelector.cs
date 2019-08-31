@@ -92,6 +92,8 @@ namespace LuaSTGEditorSharp.Windows.Input
                         , "hyz_chargeup", "hyz_eterase", "hyz_exattack", "hyz_gosp", "hyz_life1", "hyz_playerdead"
                         , "hyz_timestop0", "hyz_warning", "bonus3", "border", "changeitem", "down", "extend2"
                         , "focusfix", "focusfix2", "focusin", "heal", "ice", "ice2", "item01", "ophide", "opshow" };
+                case "lrstr":
+                    return new string[] { "\"left\"", "\"right\"" };
                 default:
                     return new string[] { };
             }
@@ -198,6 +200,9 @@ namespace LuaSTGEditorSharp.Windows.Input
                 case "se":
                     window = new SEInput(toEdit, owner, source);
                     break;
+                case "multilineText":
+                    window = new MultilineInput(toEdit);
+                    break;
                 case "bulletParam":
                     window = new EditorObjParamInput(source, MetaType.Bullet, toEdit, owner);
                     break;
@@ -225,6 +230,7 @@ namespace LuaSTGEditorSharp.Windows.Input
                 case "size":
                     window = new SizeInput(toEdit, owner);
                     break;
+                case "scale":
                 case "bossBG":
                     window = new BossBGDefInput(toEdit, owner, source);
                     break;

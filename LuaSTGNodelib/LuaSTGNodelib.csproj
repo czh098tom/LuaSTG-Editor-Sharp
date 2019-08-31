@@ -73,6 +73,8 @@
     <Compile Include="EditorData\Document\Meta\LaserDefineMetaInfo.cs" />
     <Compile Include="EditorData\Document\Meta\StageGroupDefineMetaInfo.cs" />
     <Compile Include="EditorData\Document\Meta\TaskDefineMetaInfo.cs" />
+    <Compile Include="EditorData\Node\Boss\Dialog.cs" />
+    <Compile Include="EditorData\Node\Boss\Sentence.cs" />
     <Compile Include="EditorData\Node\ICallBackFunc.cs" />
     <Compile Include="EditorData\Message\ArgCountInfo.cs" />
     <Compile Include="EditorData\Message\CannotFindAncestorTypeOf.cs" />
@@ -178,6 +180,9 @@
       <DependentUpon>MediaPlayer.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\Input\MediaPlayer\OggSource.cs" />
+    <Compile Include="Windows\Input\MultilineInput.xaml.cs">
+      <DependentUpon>MultilineInput.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\Input\SEInput.xaml.cs">
       <DependentUpon>SEInput.xaml</DependentUpon>
     </Compile>
@@ -250,6 +255,10 @@
     <Page Include="Windows\Input\MediaPlayer\MediaPlayer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\Input\MultilineInput.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Windows\Input\SEInput.xaml">
       <Generator>MSBuild:Compile</Generator>

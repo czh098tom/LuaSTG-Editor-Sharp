@@ -809,7 +809,7 @@
                         </DataGridTemplateColumn.CellStyle>
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Button Content="..." Height="20" Width="20" 
+                                <Button Content="..." Width="20" 
                                         Command="local:EditorRoutedCommands.AdjustProp" CommandParameter="{Binding Path=EditWindow}" 
                                         Tag="{Binding Path=This, UpdateSourceTrigger=PropertyChanged}">
                                     <Button.CommandBindings>

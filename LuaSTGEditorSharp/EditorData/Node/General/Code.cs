@@ -42,7 +42,8 @@ namespace LuaSTGEditorSharp.EditorData.Node.General
         {
             Regex r = new Regex("\\n\\b");
             string sp = "".PadLeft(spacing * 4);
-            yield return sp + r.Replace(Macrolize(0), "\n" + sp) + "\n";
+            string nsp = "\n" + sp;
+            yield return sp + r.Replace(Macrolize(0), nsp) + "\n";
         }
 
         public override IEnumerable<Tuple<int,TreeNode>> GetLines()

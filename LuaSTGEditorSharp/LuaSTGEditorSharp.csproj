@@ -65,10 +65,10 @@
     <StartupObject>LuaSTGEditorSharp.Startup</StartupObject>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>49FB39F8F865CF43694E6ADA67AD36DF951029CE</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>32363362413D65847AE18398D63A70A61628B8F0</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>LuaSTGEditorSharp_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>LuaSTGEditorSharp_1_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <GenerateManifests>true</GenerateManifests>
@@ -361,6 +361,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="exeIcoLib.icl" />
+    <None Include="LuaSTGEditorSharp_1_TemporaryKey.pfx" />
     <None Include="Resources\File.ico" />
     <Resource Include="images\codesegment.png" />
     <Resource Include="images\16x16\codesegment.png" />
