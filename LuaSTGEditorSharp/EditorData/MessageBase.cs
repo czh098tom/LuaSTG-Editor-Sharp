@@ -12,7 +12,7 @@ namespace LuaSTGEditorSharp.EditorData
     {
         public IMessageThrowable Source { get; }
         public IMessageThrowable Manager { get; }
-        public string ManagerName => Manager.ToString() + ":" + (Manager as MetaDataEntity).Parent.RawDocName;
+        public string ManagerName => Manager.ToString() + ":" + ((Manager as MetaDataEntity)?.Parent.RawDocName ?? "");
         public virtual string SourceName => SourceDoc.RawDocName;
         public abstract DocumentData SourceDoc { get; }
         public MessageBase This { get => this; }
