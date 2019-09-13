@@ -50,6 +50,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.General
             return n;
         }
 
+        [JsonIgnore]
         public int Priority => -1;
     }
 }

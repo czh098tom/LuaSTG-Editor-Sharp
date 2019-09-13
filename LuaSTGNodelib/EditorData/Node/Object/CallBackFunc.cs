@@ -79,6 +79,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Object
             return a;
         }
 
+        [JsonIgnore]
         public string FuncName
         {
             get => Macrolize(0);

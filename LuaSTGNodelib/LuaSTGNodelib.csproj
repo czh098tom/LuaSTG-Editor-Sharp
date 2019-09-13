@@ -155,6 +155,7 @@
     <Compile Include="EditorData\Node\Task\TaskNode.cs" />
     <Compile Include="EditorData\Node\Task\TaskWait.cs" />
     <Compile Include="EditorData\Node\CodeAlikeTypes.cs" />
+    <Compile Include="LSTGEXPlusExecution.cs" />
     <Compile Include="PluginEntry.cs" />
     <Compile Include="PluginToolbox.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

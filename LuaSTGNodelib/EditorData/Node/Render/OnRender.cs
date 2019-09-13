@@ -55,6 +55,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Render
             yield return new Tuple<int, TreeNode>(1, this);
         }
 
+        [JsonIgnore]
         public string FuncName
         {
             get => "render";

@@ -7,6 +7,7 @@ using LuaSTGEditorSharp.EditorData;
 using LuaSTGEditorSharp.EditorData.Interfaces;
 using LuaSTGEditorSharp.EditorData.Document;
 using LuaSTGEditorSharp.EditorData.Node;
+using LuaSTGEditorSharp.Execution;
 using System.Windows.Media.Imaging;
 
 namespace LuaSTGEditorSharp.Plugin
@@ -20,6 +21,8 @@ namespace LuaSTGEditorSharp.Plugin
         public abstract IViewDefinition GetViewDefinitionWindow(DocumentData document);
         protected AbstractNodeTypeCache nodeTypeCache;
         public AbstractNodeTypeCache NodeTypeCache { get => nodeTypeCache; }
+        protected LSTGExecution execution;
+        public LSTGExecution Execution { get => execution; }
         public abstract Type[] StageNodeType { get; }
         public abstract Type[] BossSCNodeType { get; }
         public abstract int MetaInfoCollectionTypeCount { get; }

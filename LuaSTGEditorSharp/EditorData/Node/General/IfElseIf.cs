@@ -59,6 +59,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.General
             yield return new Tuple<int, TreeNode>(1, this);
         }
 
+        [JsonIgnore]
         public int Priority
         {
             get => 0;

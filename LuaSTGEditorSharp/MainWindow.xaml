@@ -842,9 +842,6 @@
                                 </DataGridTemplateColumn>
                                 <DataGridTextColumn Width="400" Header="Message" Binding="{Binding Path=Message}"/>
                                 <DataGridTextColumn Width="100" Header="Trace" Binding="{Binding Path=SourceName}"/>
-                                <!--
-                                <DataGridTextColumn Width="100" Header="Manager" Binding="{Binding Path=ManagerName}"/>
-                                -->
                             </DataGrid.Columns>
                             <DataGrid.ItemContainerStyle>
                                 <Style TargetType="DataGridRow">

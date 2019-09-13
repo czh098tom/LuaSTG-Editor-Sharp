@@ -18,6 +18,7 @@ namespace LuaSTGEditorSharp
         public PluginEntry() : base()
         {
             nodeTypeCache = new NodeTypeCache();
+            execution = new LSTGEXPlusExecution();
         }
 
         public override IInputWindowSelector GetInputWindowSelector()

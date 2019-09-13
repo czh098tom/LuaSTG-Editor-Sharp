@@ -20,6 +20,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Diagnostics;
+using LuaSTGEditorSharp.Execution;
 using LuaSTGEditorSharp.Plugin;
 using LuaSTGEditorSharp.Toolbox;
 using LuaSTGEditorSharp.Windows;
@@ -102,7 +103,7 @@ namespace LuaSTGEditorSharp
 
         private BackgroundWorker CompileWorker;
 
-        private Process lstgInstance;
+        //private Process lstgInstance;
 
         public MainWindow()
         {
@@ -575,6 +576,7 @@ namespace LuaSTGEditorSharp
 
         private void RunLuaSTG(App currentApp, CompileProcess process)
         {
+            /*
             string LuaSTGparam = "\"" +
                                 "start_game=true is_debug=true setting.nosplash=true setting.windowed="
                                 + currentApp.DebugWindowed.ToString().ToLower() + " setting.resx=" + currentApp.DebugResolutionX +
@@ -598,6 +600,7 @@ namespace LuaSTGEditorSharp
                     };
                     lstgInstance.Start();
                     DebugString += "LuaSTG is Running.\n\n";
+                    */
                     /* 
                      * what it should be like:
                      * 
@@ -606,6 +609,7 @@ namespace LuaSTGEditorSharp
                      *
                      * what it actually is:
                      */
+                     /*
                     lstgInstance.Exited += (s, e) => {
                         FileStream fs = null;
                         StreamReader sr = null;
@@ -639,6 +643,12 @@ namespace LuaSTGEditorSharp
             {
                 throw new EXEPathNotSetException();
             }
+            */
+            PluginHandler.Plugin.Execution.BeforeRun(new ExecutionConfig()
+            {
+                ModName = process.projName
+            });
+            PluginHandler.Plugin.Execution.Run((s) => DebugString += s);
         }
 
         private void FoldRegion()

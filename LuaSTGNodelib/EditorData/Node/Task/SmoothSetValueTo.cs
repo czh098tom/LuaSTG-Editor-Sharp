@@ -13,7 +13,7 @@ using LuaSTGEditorSharp.EditorData.Node.NodeAttributes;
 namespace LuaSTGEditorSharp.EditorData.Node.Task
 {
     [Serializable, NodeIcon("/LuaSTGNodeLib;component/images/16x16/tasksetvalue.png")]
-    [RequireAncestor(typeof(TaskAlikeTypes))]
+    [RequireAncestor(typeof(CodeAlikeTypes))]
     [LeafNode]
     public class SmoothSetValueTo : TreeNode
     {
