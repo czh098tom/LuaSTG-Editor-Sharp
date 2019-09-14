@@ -144,6 +144,11 @@ namespace LuaSTGEditorSharp.EditorData
                 }
                 return sb.ToString();
             }
+            catch(System.Exception e)
+            {
+                MessageBox.Show(e.ToString());
+                return "";
+            }
             finally
             {
                 if (file != null) file.Close();
@@ -190,6 +195,10 @@ namespace LuaSTGEditorSharp.EditorData
                 s = new FileStream(rootLuaPath, FileMode.Create, FileAccess.Write);
                 sw = new StreamWriter(s, Encoding.UTF8);
                 sw.Write(rootCode);
+            }
+            catch (System.Exception e)
+            {
+                MessageBox.Show(e.ToString());
             }
             finally
             {
@@ -264,6 +273,10 @@ namespace LuaSTGEditorSharp.EditorData
                     }
                 }
             }
+            catch(System.Exception e)
+            {
+                MessageBox.Show(e.ToString());
+            }
             finally
             {
                 if (srMeta != null) srMeta.Close();
@@ -310,6 +323,10 @@ namespace LuaSTGEditorSharp.EditorData
                     }
                 }
                 swMeta.Close();
+            }
+            catch (System.Exception e)
+            {
+                MessageBox.Show(e.ToString());
             }
             finally
             {
@@ -416,7 +433,7 @@ namespace LuaSTGEditorSharp.EditorData
             }
             catch(System.Exception e)
             {
-                System.Windows.MessageBox.Show("Pack process failed.\n"+e.ToString());
+                MessageBox.Show("Pack process failed.\n"+e.ToString());
             }
             finally
             {
@@ -506,6 +523,10 @@ namespace LuaSTGEditorSharp.EditorData
                 pack.WaitForExit();
                 //catch { }
             }
+            catch (System.Exception e)
+            {
+                MessageBox.Show(e.ToString());
+            }
             finally
             {
                 if (packBat != null) packBat.Close();
@@ -579,6 +600,10 @@ namespace LuaSTGEditorSharp.EditorData
                 pack.Start();
                 pack.WaitForExit();
                 //catch { }
+            }
+            catch (System.Exception e)
+            {
+                MessageBox.Show(e.ToString());
             }
             finally
             {

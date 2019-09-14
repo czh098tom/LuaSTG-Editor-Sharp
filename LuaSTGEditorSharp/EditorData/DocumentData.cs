@@ -330,6 +330,10 @@ namespace LuaSTGEditorSharp.EditorData
                     }
                 }
             }
+            catch (System.Exception e)
+            {
+                System.Windows.MessageBox.Show(e.ToString());
+            }
             finally
             {
                 if (sr != null) sr.Close();
@@ -391,6 +395,10 @@ namespace LuaSTGEditorSharp.EditorData
                         prevLevel = 0;
                     }
                 }
+            }
+            catch (System.Exception e)
+            {
+                System.Windows.MessageBox.Show(e.ToString());
             }
             finally
             {
@@ -456,6 +464,10 @@ namespace LuaSTGEditorSharp.EditorData
                     sw.Write(a);
                 }
             }
+            catch (System.Exception e)
+            {
+                System.Windows.MessageBox.Show(e.ToString());
+            }
             finally
             {
                 if (sw != null) sw.Close();
@@ -480,6 +492,10 @@ namespace LuaSTGEditorSharp.EditorData
                     sw.Write(a);
                 }
                 sw.Write("Include \'THlib\\\\UI\\\\scdebugger.lua\'");
+            }
+            catch (System.Exception e)
+            {
+                System.Windows.MessageBox.Show(e.ToString());
             }
             finally
             {
@@ -512,6 +528,10 @@ namespace LuaSTGEditorSharp.EditorData
                 string parentStageGroupName = stage.Parent.attributes[0].AttrInput;
                 sw.Write("_debug_stage_name=\'" + stage.attributes[0].AttrInput + "@" + parentStageGroupName + "\'");
                 sw.Write("Include \'THlib\\\\UI\\\\debugger.lua\'");
+            }
+            catch (System.Exception e)
+            {
+                System.Windows.MessageBox.Show(e.ToString());
             }
             finally
             {

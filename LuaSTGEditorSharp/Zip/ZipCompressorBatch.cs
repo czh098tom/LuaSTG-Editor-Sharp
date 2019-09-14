@@ -47,6 +47,10 @@ namespace LuaSTGEditorSharp.Zip
                 pack.Start();
                 pack.WaitForExit();
             }
+            catch (System.Exception e)
+            {
+                System.Windows.MessageBox.Show(e.ToString());
+            }
             finally
             {
                 if (packBat != null) packBat.Close();

@@ -20,7 +20,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Boss
         private BossSpellCard() : base() { }
 
         public BossSpellCard(DocumentData workSpaceData)
-            : this(workSpaceData, "", "2", "15", "60", "600", "0", "0", "0", "false", "false", "") { }
+            : this(workSpaceData, "", "2", "5", "60", "1800", "0", "0", "0", "false", "false", "") { }
 
         public BossSpellCard(DocumentData workSpaceData, string name, string protectT, string reductT, string totalT
             , string HP, string power, string faith, string point, string bombImmune, string perform, string OID)

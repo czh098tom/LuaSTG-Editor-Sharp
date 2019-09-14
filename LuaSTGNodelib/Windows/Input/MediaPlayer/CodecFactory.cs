@@ -174,6 +174,10 @@ namespace LuaSTGEditorSharp.Windows.Input.MediaPlayer
                         }
                     }
                 }
+                catch (System.Exception e)
+                {
+                    System.Windows.MessageBox.Show(e.ToString());
+                }
                 finally
                 {
                     if (source == null)

@@ -52,10 +52,6 @@ Names below are desired class names for the unfinished nodes.
 
 ## Boss
 	BossMoveTo(?)
-	Dialog
-	Sentence
-	--
-	BossWander
 	--
 	BossAura
 	BossUI

@@ -1249,28 +1249,6 @@ namespace LuaSTGEditorSharp
             //catch { }
         }
 
-        public static string GetMD5HashFromFile(string fileName)
-        {
-            FileStream file = null;
-            try
-            {
-                file = new FileStream(fileName, FileMode.Open);
-                var md5 = new System.Security.Cryptography.MD5CryptoServiceProvider();
-                var bytes = md5.ComputeHash(file);
-                file.Close();
-                var sb = new StringBuilder();
-                for (int i = 0; i < bytes.Length; i++)
-                {
-                    sb.Append(bytes[i].ToString("x2"));
-                }
-                return sb.ToString();
-            }
-            finally
-            {
-                if (file != null) file.Close();
-            }
-        }
-
         #endregion
 
         public event PropertyChangedEventHandler PropertyChanged;

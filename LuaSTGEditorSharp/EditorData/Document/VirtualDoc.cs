@@ -24,6 +24,10 @@ namespace LuaSTGEditorSharp.EditorData.Document
                 sw = new StreamWriter(fs);
                 sw.Write(EditorSerializer.SerializeMetaData(UndecidedMeta));
             }
+            catch (System.Exception e)
+            {
+                System.Windows.MessageBox.Show(e.ToString());
+            }
             finally
             {
                 if (sw != null) sw.Close();

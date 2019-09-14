@@ -94,6 +94,8 @@ namespace LuaSTGEditorSharp.Windows.Input
                         , "focusfix", "focusfix2", "focusin", "heal", "ice", "ice2", "item01", "ophide", "opshow" };
                 case "lrstr":
                     return new string[] { "\"left\"", "\"right\"" };
+                case "directionMode":
+                    return new string[] { "MOVE_X_TOWARDS_PLAYER", "MOVE_Y_TOWARDS_PLAYER", "MOVE_TOWARDS_PLAYER", "MOVE_RANDOM" };
                 default:
                     return new string[] { };
             }
@@ -162,7 +164,10 @@ namespace LuaSTGEditorSharp.Windows.Input
                     window = new Selector(toEdit, owner, SelectComboBox(name), "Input Difficulty Value");
                     break;
                 case "prop":
-                    window = new Selector(toEdit, owner, SelectComboBox(name), "Input Difficulty Value");
+                    window = new Selector(toEdit, owner, SelectComboBox(name), "Input Properties");
+                    break;
+                case "directionMode":
+                    window = new Selector(toEdit, owner, SelectComboBox(name), "Input Direction Mode");
                     break;
                 case "bulletStyle":
                     window = new BulletInput(toEdit, owner);
@@ -235,11 +240,11 @@ namespace LuaSTGEditorSharp.Windows.Input
                     window = new BossBGDefInput(toEdit, owner, source);
                     break;
                 case "colrow":
-                    //throw new NotImplementedException();
-                    //break;
                 case "velocity":
                 case "rotation":
                 case "animinterval":
+                case "rect":
+                case "rectNonNegative":
                 default:
                     window = new SingleLineInput(toEdit, owner);
                     break;

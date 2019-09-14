@@ -1,6 +1,7 @@
 ﻿-- Update Log（最近更新 2019-05-10）
 
 0.0.6.0
+常用节点版本
 实现节点：
 Editor层：
 General
@@ -19,7 +20,10 @@ Task
 	SmoothSetValue
 Enemy
 	EnemyCharge (From pactrometer in old "Boss")
+	EnemyWander (From taskbosswander in old "Boss")
 Boss
+	Dialog
+		Sentence
 	BossDefine
 		BossInit
 	SetBossWalkImageSystem
@@ -69,8 +73,10 @@ Lib层：
 图片选择界面的预览功能改进
 重整BossDefine节点
 改进BGM选择界面，现在带有声音
+修正Boss符卡默认值，变得更加合理一些
 
 0.0.5.0
+扩展功能版本
 (2019-03-26)
 合并
 0.0.4.5

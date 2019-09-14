@@ -1500,5 +1500,16 @@ namespace LuaSTGEditorSharp.EditorData
                 t = t.dblLinkedPrev;
             }
         }
+
+        /// <summary>
+        /// Get a default <see cref="string"/> if source is null or empty, otherwise return itself.
+        /// </summary>
+        /// <param name="source">The source <see cref="string"/>.</param>
+        /// <param name="def">The default <see cref="string"/>.</param>
+        /// <returns>A <see cref="string"/> based on source itself.</returns>
+        public static string NullOrDefault(string source, string def = "")
+        {
+            return string.IsNullOrEmpty(source) ? def : source;
+        }
     }
 }

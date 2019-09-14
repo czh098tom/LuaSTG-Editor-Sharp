@@ -84,6 +84,8 @@ namespace LuaSTGEditorSharp
             #region enemy
             enemy.Add(new ToolboxItemData("enemycharge", "/LuaSTGNodeLib;component/images/pactrometer.png", "Enemy Charge")
                 , new AddNode(AddEnemyChargeNode));
+            enemy.Add(new ToolboxItemData("enemywander", "/LuaSTGNodeLib;component/images/taskbosswander.png", "Enemy Wander")
+                , new AddNode(AddEnemyWanderNode));
             #endregion
             ToolInfo.Add("Enemy", enemy);
 
@@ -353,6 +355,11 @@ namespace LuaSTGEditorSharp
         private void AddEnemyChargeNode()
         {
             parent.Insert(new EnemyCharge(parent.ActivatedWorkSpaceData));
+        }
+
+        private void AddEnemyWanderNode()
+        {
+            parent.Insert(new EnemyWander(parent.ActivatedWorkSpaceData));
         }
         #endregion
         #region boss

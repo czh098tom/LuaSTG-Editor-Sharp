@@ -67,6 +67,10 @@ namespace LuaSTGEditorSharp.Execution
                         logger(sr.ReadToEnd());
                         //debugOutput.ScrollToEnd();
                     }
+                    catch (System.Exception exc)
+                    {
+                        System.Windows.MessageBox.Show(exc.ToString());
+                    }
                     finally
                     {
                         if (fs != null) fs.Close();
