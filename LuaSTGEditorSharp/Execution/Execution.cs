@@ -25,9 +25,9 @@ namespace LuaSTGEditorSharp.Execution
 
         protected bool RedirectStandardOutput { get; set; }
 
-        protected string WorkingDirectory { get; set; } = Path.GetDirectoryName((App.Current as App)?.LuaSTGExecutablePath);
+        protected virtual string WorkingDirectory { get => Path.GetDirectoryName((App.Current as App)?.LuaSTGExecutablePath); }
 
-        protected string LuaSTGPath { get; set; } = (App.Current as App)?.LuaSTGExecutablePath;
+        protected virtual string LuaSTGPath { get => (App.Current as App)?.LuaSTGExecutablePath; }
 
         public abstract void BeforeRun(ExecutionConfig config);
 

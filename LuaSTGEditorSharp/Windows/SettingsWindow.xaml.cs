@@ -389,6 +389,7 @@ namespace LuaSTGEditorSharp.Windows
                 && Path.GetFileName(s) != "Irony.dll" && Path.GetFileName(s) != "ICSharpCode.SharpZipLib.dll" 
                 && Path.GetFileName(s) != "Newtonsoft.Json.dll" && Path.GetFileName(s) != "ICSharpCode.AvalonEdit.dll"
                 && Path.GetFileName(s) != "CSCore.dll" && Path.GetFileName(s) != "NVorbis.dll"
+                && Path.GetFileName(s) != "System.Net.Http.dll"
                 select Path.GetFileName(s)
                 );
             PluginList.ItemsSource = pluginPaths;
