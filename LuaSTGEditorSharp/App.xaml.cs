@@ -277,7 +277,7 @@ namespace LuaSTGEditorSharp
 
         public bool IsEXEPathSet
         {
-            get=> !(BatchPacking && string.IsNullOrEmpty(ZipExecutablePath)) || string.IsNullOrEmpty(LuaSTGExecutablePath);
+            get => !(BatchPacking && string.IsNullOrEmpty(ZipExecutablePath)) && !string.IsNullOrEmpty(LuaSTGExecutablePath);
         }
 
         private void Application_Exit(object sender, ExitEventArgs e)
