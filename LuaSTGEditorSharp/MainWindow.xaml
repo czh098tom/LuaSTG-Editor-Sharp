@@ -790,7 +790,8 @@
                         <DataGridTemplateColumn.CellEditingTemplate>
                             <DataTemplate>
                                 <ComboBox IsEditable="True" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-                                          Height="20" Loaded="ComboBox_Loaded" BorderThickness="0"
+                                          Height="20" Loaded="ComboBox_Loaded" BorderThickness="0" 
+                                          IsTextSearchEnabled="False"
                                           Text="{Binding Path=AttrInput_InvokeCommand, UpdateSourceTrigger=LostFocus, Mode=TwoWay}"
                                           Tag="{Binding Path=EditWindow}" BorderBrush="White"/>
                             </DataTemplate>

@@ -58,6 +58,8 @@ Editor层：
 修复If-Else中Else子节点行数计数错误的bug
 修复LuaSTG运行中再启动LuaSTG后退出报错产生的bug
 修复设置界面无法取消的bug
+修复运行判定bug
+关闭属性栏的自动检索
 
 改进：
 Editor层：
