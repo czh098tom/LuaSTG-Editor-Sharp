@@ -75,6 +75,7 @@
     <Compile Include="EditorData\Document\Meta\TaskDefineMetaInfo.cs" />
     <Compile Include="EditorData\Node\Boss\Dialog.cs" />
     <Compile Include="EditorData\Node\Boss\Sentence.cs" />
+    <Compile Include="EditorData\Node\Data\PositionAssignment.cs" />
     <Compile Include="EditorData\Node\Enemy\EnemyWander.cs" />
     <Compile Include="EditorData\Node\ICallBackFunc.cs" />
     <Compile Include="EditorData\Message\ArgCountInfo.cs" />
@@ -1785,6 +1786,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images\onrender.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\positionassignment.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

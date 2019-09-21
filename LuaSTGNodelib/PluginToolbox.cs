@@ -39,6 +39,8 @@ namespace LuaSTGEditorSharp
             data.Add(new ToolboxItemData(true), null);
             data.Add(new ToolboxItemData("recordpos", "/LuaSTGNodeLib;component/images/positionVar.png", "Record Position")
                 ,  new AddNode(AddRecordPosNode));
+            data.Add(new ToolboxItemData("assignpos", "/LuaSTGNodeLib;component/images/positionassignment.png", "Position Assignment")
+                , new AddNode(AddPositionAssignmentNode));
             #endregion
             ToolInfo.Add("Data", data);
 
@@ -260,6 +262,11 @@ namespace LuaSTGEditorSharp
         private void AddRecordPosNode()
         {
             parent.Insert(new RecordPos(parent.ActivatedWorkSpaceData));
+        }
+
+        private void AddPositionAssignmentNode()
+        {
+            parent.Insert(new PositionAssignment(parent.ActivatedWorkSpaceData));
         }
         #endregion
         #region stage
