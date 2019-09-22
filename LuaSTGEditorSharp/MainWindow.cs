@@ -56,7 +56,7 @@ namespace LuaSTGEditorSharp
 
         private void ButtonAdd_Click(object sender, RoutedEventArgs e)
         {
-            toolbox.NFuncs[(sender as Button)?.Tag.ToString()]();
+            toolbox.NFuncs[(sender as Button)?.Tag?.ToString()]();
         }
 
         private void ComboDict_GotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)

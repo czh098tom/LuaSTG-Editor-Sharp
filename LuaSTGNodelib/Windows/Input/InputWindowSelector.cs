@@ -32,7 +32,7 @@ namespace LuaSTGEditorSharp.Windows.Input
                     return new string[] { "MODE_SET", "MODE_ADD", "MODE_MUL" };
                 case "group":
                     return new string[] { "GROUP_GHOST", "GROUP_ENEMY_BULLET", "GROUP_ENEMY", "GROUP_PLAYER_BULLET"
-                        , "GROUP_PLAYER", "GROUP_INDIES", "GROUP_ITEM", "GROUP_NONTJT" };
+                        , "GROUP_PLAYER", "GROUP_INDES", "GROUP_ITEM", "GROUP_NONTJT" };
                 case "layer":
                     return new string[] { "LAYER_BG-5", "LAYER_BG", "LAYER_BG+5", "LAYER_ENEMY-5", "LAYER_ENEMY"
                         , "LAYER_ENEMY+5", "LAYER_PLAYER_BULLET-5", "LAYER_PLAYER_BULLET", "LAYER_PLAYER_BULLET+5"

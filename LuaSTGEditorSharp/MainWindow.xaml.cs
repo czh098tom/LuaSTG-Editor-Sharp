@@ -552,7 +552,7 @@ namespace LuaSTGEditorSharp
         private void PackageProgressReport(object sender, ProgressChangedEventArgs args)
         {
             packagingLocked = true;
-            DebugString += args.UserState.ToString() + "\n";
+            DebugString += args.UserState?.ToString() + "\n";
             debugOutput.ScrollToEnd();
         }
 
@@ -733,7 +733,7 @@ namespace LuaSTGEditorSharp
         private void ComboBox_Loaded(object sender, RoutedEventArgs e)
         {
             ComboBox comboBox = sender as ComboBox;
-            foreach(string s in InputWindowSelector.SelectComboBox(comboBox.Tag.ToString()))
+            foreach(string s in InputWindowSelector.SelectComboBox(comboBox.Tag?.ToString()))
             {
                 ComboBoxItem item = new ComboBoxItem() { Content = s };
                 comboBox.Items.Add(item);
@@ -772,7 +772,7 @@ namespace LuaSTGEditorSharp
         {
             propData.CommitEdit();
             Button btn = sender as Button;
-            int btnHash = Convert.ToInt32(btn.Tag.ToString());
+            int btnHash = Convert.ToInt32(btn.Tag?.ToString());
             var toRemove = new List<DocumentData>();
             foreach (DocumentData wsd in Documents)
             {
@@ -1008,13 +1008,13 @@ namespace LuaSTGEditorSharp
 
         private void GoToLineXCommandExecuted(object sender, ExecutedRoutedEventArgs e)
         {
-            int.TryParse(e.Parameter.ToString(), out int line);
+            int.TryParse(e.Parameter?.ToString(), out int line);
             GotoLine(line);
         }
 
         private void GoToLineXCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            e.CanExecute = ActivatedWorkSpaceData != null && int.TryParse(e.Parameter.ToString(), out int i);
+            e.CanExecute = ActivatedWorkSpaceData != null && int.TryParse(e.Parameter?.ToString(), out int i);
         }
 
         private void ViewCodeCommandExecuted(object sender, ExecutedRoutedEventArgs e)
@@ -1107,7 +1107,7 @@ namespace LuaSTGEditorSharp
 
         private async void InsertPresetCommandExecuted(object sender, ExecutedRoutedEventArgs e)
         {
-            string s = e.Parameter.ToString();
+            string s = e.Parameter?.ToString();
             await InsertPreset(s);
         }
 
@@ -1214,7 +1214,7 @@ namespace LuaSTGEditorSharp
 
         private void SettingsCommandExecuted(object sender, ExecutedRoutedEventArgs e)
         {
-            if(int.TryParse(e.Parameter.ToString(), out int i))
+            if(int.TryParse(e.Parameter?.ToString(), out int i))
             {
                 new SettingsWindow(i).ShowDialog();
             }
@@ -1237,7 +1237,7 @@ namespace LuaSTGEditorSharp
             AttrItem ai = button.Tag as AttrItem;
             //try
             {
-                InputWindow iw = InputWindowSelector.SelectInputWindow(ai, e.Parameter.ToString(), ai.AttrInput, this);
+                InputWindow iw = InputWindowSelector.SelectInputWindow(ai, e.Parameter?.ToString(), ai.AttrInput, this);
                 if (iw.ShowDialog() == true)
                 {
                     ActivatedWorkSpaceData.AddAndExecuteCommand(new EditAttrCommand(ai, ai.AttrInput, iw.Result));

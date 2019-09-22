@@ -14,7 +14,7 @@ namespace LuaSTGEditorSharp.Toolbox
         //Bool2Strike
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if(bool.TryParse(value.ToString(), out bool b))
+            if(bool.TryParse(value?.ToString(), out bool b))
             {
                 if (b)
                 {
@@ -39,7 +39,7 @@ namespace LuaSTGEditorSharp.Toolbox
         //Bool2Opacity
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (bool.TryParse(value.ToString(), out bool b))
+            if (bool.TryParse(value?.ToString(), out bool b))
             {
                 if (b)
                 {
@@ -55,7 +55,7 @@ namespace LuaSTGEditorSharp.Toolbox
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (float.TryParse(value.ToString(), out float f)) 
+            if (float.TryParse(value?.ToString(), out float f)) 
             {
                 return f > 0.4;
             }

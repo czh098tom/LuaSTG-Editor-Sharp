@@ -331,10 +331,10 @@ namespace LuaSTGEditorSharp.Windows.Input
                     prevFocus.Select(prevFocusedSelBeg, prevFocusedSelLength);
                     string sbeg = prevFocus.Text.Substring(0, prevFocusedSelBeg);
                     string send = prevFocus.Text.Substring(prevFocusedSelBeg + prevFocusedSelLength);
-                    prevFocus.Text = sbeg + b.Tag.ToString() + send;
+                    prevFocus.Text = sbeg + (b.Tag?.ToString() ?? "") + send;
                     prevFocus.GetBindingExpression(TextBox.TextProperty)?.UpdateSource();
                     prevFocus.Focus();
-                    prevFocus.Select(pfb + b.Tag.ToString().Length, 0);
+                    prevFocus.Select(pfb + (b.Tag?.ToString().Length ?? 0), 0);
                 }
             }
         }
@@ -374,7 +374,7 @@ namespace LuaSTGEditorSharp.Windows.Input
                 }
                 else
                 {
-                    return prevFocused.Tag.ToString() == "Y";
+                    return prevFocused.Tag?.ToString() == "Y";
                 }
             }
         }

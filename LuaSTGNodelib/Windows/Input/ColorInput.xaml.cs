@@ -27,7 +27,7 @@ namespace LuaSTGEditorSharp.Windows.Input
 
         private void Color_Click(object sender, RoutedEventArgs e)
         {
-            if (sender is Button a) Result = a.Tag.ToString();
+            if (sender is Button a) Result = a.Tag?.ToString();
             DialogResult = true;
             this.Close();
         }
