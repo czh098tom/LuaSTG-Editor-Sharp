@@ -128,7 +128,7 @@
     <Compile Include="EditorData\Node\Laser\LaserTurnOff.cs" />
     <Compile Include="EditorData\Node\Laser\LaserTurnOn.cs" />
     <Compile Include="EditorData\Node\NodeTypeCache.cs" />
-    <Compile Include="EditorData\Node\Object\CreateBullet.cs" />
+    <Compile Include="EditorData\Node\Object\CreateObject.cs" />
     <Compile Include="EditorData\Node\Object\ObjectDefine.cs" />
     <Compile Include="EditorData\Node\Object\ObjectInit.cs" />
     <Compile Include="EditorData\Node\Object\CallBackFunc.cs" />

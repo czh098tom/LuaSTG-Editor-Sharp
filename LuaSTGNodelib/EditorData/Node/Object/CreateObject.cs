@@ -28,7 +28,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Object
         {
             attributes.Add(new AttrItem("Name", name, this, "objectDef"));
             attributes.Add(new AttrItem("Position", pos, this, "position"));
-            attributes.Add(new AttrItem("Parameters", param, this, "bulletParam"));
+            attributes.Add(new AttrItem("Parameters", param, this, "objectParam"));
         }
 
         public override IEnumerable<string> ToLua(int spacing)

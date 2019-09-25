@@ -211,6 +211,9 @@ namespace LuaSTGEditorSharp.Windows.Input
                 case "bulletParam":
                     window = new EditorObjParamInput(source, MetaType.Bullet, toEdit, owner);
                     break;
+                case "objectParam":
+                    window = new EditorObjParamInput(source, MetaType.Object, toEdit, owner);
+                    break;
                 case "laserParam":
                     window = new EditorObjParamInput(source, MetaType.Laser, toEdit, owner);
                     break;
