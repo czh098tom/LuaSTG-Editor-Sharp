@@ -24,7 +24,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Task
             : this(workSpaceData, "60") { }
 
         public TaskWait(DocumentData workSpaceData, string code)
-            : base(workSpaceData) { attributes.Add(new AttrItem("Time", this) { AttrInput = code }); }
+            : base(workSpaceData) { attributes.Add(new AttrItem("Time", this, "yield") { AttrInput = code }); }
 
         public override IEnumerable<string> ToLua(int spacing)
         {

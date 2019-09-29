@@ -38,19 +38,22 @@ namespace LuaSTGEditorSharp
         {
             try
             {
+                if (selectedNode == null || selectedNode.Parent == null) return;
                 bool move = (Application.Current as App).AutoMoveToNew;
                 node.IsSelected = move;
-                if (ActivatedWorkSpaceData.AddAndExecuteCommand(
-                    insertState.ValidateAndNewInsert(
-                        selectedNode, node)) && isInvoke)
+                Command c = insertState.ValidateAndNewInsert(selectedNode, node);
+                if (c != null)
                 {
-                    node.CheckMessage(null, new System.ComponentModel.PropertyChangedEventArgs(""));
-                    CreateInvoke(node);
+                    if (ActivatedWorkSpaceData.AddAndExecuteCommand(c) && isInvoke)
+                    {
+                        node.CheckMessage(null, new System.ComponentModel.PropertyChangedEventArgs(""));
+                        CreateInvoke(node);
+                    }
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                //MessageBox.Show(e.ToString());
+                MessageBox.Show(e.ToString());
             }
         }
 

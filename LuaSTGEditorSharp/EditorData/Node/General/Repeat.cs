@@ -13,7 +13,7 @@ using Newtonsoft.Json;
 namespace LuaSTGEditorSharp.EditorData.Node.General
 {
     [Serializable, NodeIcon("images/16x16/repeat.png")]
-    [RCInvoke(0)]
+    [CreateInvoke(0), RCInvoke(0)]
     public class Repeat : TreeNode
     {
         [JsonConstructor]
@@ -22,7 +22,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.General
         public Repeat(DocumentData workSpaceData)
             : base(workSpaceData)
         {
-            attributes.Add(new AttrItem("Times", this));
+            attributes.Add(new AttrItem("Times", this, "yield"));
             attributes.Add(new DependencyAttrItem("Number of Var", "1", this));
             attributes.Add(new AttrItem("Var 1 name", this));
             attributes.Add(new AttrItem("Var 1 init value", this));
@@ -32,7 +32,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.General
         public Repeat(DocumentData workSpaceData, string code)
             : base(workSpaceData)
         {
-            attributes.Add(new AttrItem("Times", this) { AttrInput = code });
+            attributes.Add(new AttrItem("Times", this, "yield") { AttrInput = code });
             attributes.Add(new DependencyAttrItem("Number of Var", "1", this));
             attributes.Add(new AttrItem("Var 1 name", this));
             attributes.Add(new AttrItem("Var 1 init value", this));
@@ -43,8 +43,8 @@ namespace LuaSTGEditorSharp.EditorData.Node.General
         //[DefaultValue("_infinity")]
         public string RepeatTimes
         {
-            get => DoubleCheckAttr(0, name: "Times").attrInput;
-            set => DoubleCheckAttr(0, name: "Times").attrInput = value;
+            get => DoubleCheckAttr(0, "yield", "Times").attrInput;
+            set => DoubleCheckAttr(0, "yield", "Times").attrInput = value;
         }
 
         [JsonIgnore, XmlAttribute("NumOfVar")]

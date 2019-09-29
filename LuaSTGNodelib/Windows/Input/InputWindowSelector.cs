@@ -19,6 +19,8 @@ namespace LuaSTGEditorSharp.Windows.Input
                     return new string[] { "true", "false" };
                 case "target":
                     return new string[] { "self", "last", "unit", "player", "_boss" };
+                case "yield":
+                    return new string[] { "_infinite" };
                 case "nullabletarget":
                     return new string[] { "", "self", "last", "unit", "player", "_boss" };
                 case "blend":

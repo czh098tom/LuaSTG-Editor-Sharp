@@ -300,9 +300,7 @@ namespace LuaSTGEditorSharp
                 TreeNode node = (TreeNode)clipBoard.Clone();
                 node.FixParentDoc(ActivatedWorkSpaceData);
                 node.IsSelected = (Application.Current as App).AutoMoveToNew;
-                ActivatedWorkSpaceData.AddAndExecuteCommand(
-                    insertState.ValidateAndNewInsert(
-                        selectedNode, node));
+                Insert(node, false);
             }
             catch { }
         }

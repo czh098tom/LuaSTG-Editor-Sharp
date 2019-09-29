@@ -82,6 +82,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Advanced
             {
                 string[,] props = GetProperties(target);
                 int n = props.GetLength(0);
+                n = n > attributes.Count - 1 ? attributes.Count - 1 : n;
                 string s = "";
                 bool first = true;
                 for (int i = 0; i < n; i++)

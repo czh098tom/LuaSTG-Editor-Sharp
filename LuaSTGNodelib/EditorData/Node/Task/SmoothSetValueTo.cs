@@ -30,7 +30,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Task
             attributes.Add(new AttrItem("Value 1 name", "_speed", this, "prop"));
             attributes.Add(new AttrItem("Target value 1", "1", this));
             attributes.Add(new AttrItem("Interpolation mode 1", "MOVE_NORMAL", this, "interpolation"));
-            attributes.Add(new AttrItem("Modification mode 1", "MODE_SET", this, "."));
+            attributes.Add(new AttrItem("Modification mode 1", "MODE_SET", this, "modification"));
         }
 
         public override IEnumerable<string> ToLua(int spacing)
