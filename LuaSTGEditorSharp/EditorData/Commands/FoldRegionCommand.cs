@@ -54,15 +54,15 @@ namespace LuaSTGEditorSharp.EditorData.Commands
             bool folderPNotExist = folderP == null;
             if (folderPNotExist)
                 folderP = new Folder(parent.parentWorkSpace, regionBegin.attributes[0].AttrInput);
+            int index = parent.Children.IndexOf(regionBegin);
+            parent.InsertChild(folderP, index);
             foreach (TreeNode t in toAggregate) 
             {
                 if (folderPNotExist) folderP.AddChild(t);
                 parent.RemoveChild(t);
             }
-            int index = parent.Children.IndexOf(regionBegin);
             parent.RemoveChild(regionBegin);
             if (regionEnd != null) parent.RemoveChild(regionEnd);
-            parent.InsertChild(folderP, index);
         }
 
         /// <summary>

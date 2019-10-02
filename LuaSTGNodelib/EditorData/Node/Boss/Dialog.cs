@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 
 using LuaSTGEditorSharp.EditorData;
 using LuaSTGEditorSharp.EditorData.Document;
-using LuaSTGEditorSharp.EditorData.Document.Meta;
+using LuaSTGEditorSharp.EditorData.Message;
 using LuaSTGEditorSharp.EditorData.Node.NodeAttributes;
 
 namespace LuaSTGEditorSharp.EditorData.Node.Boss
@@ -44,7 +44,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Boss
         public override IEnumerable<string> ToLua(int spacing)
         {
             string sp = "".PadLeft(spacing * 4);
-            TreeNode Parent = this.Parent;
+            TreeNode Parent = GetLogicalParent();
             string parentName = "";
             if (Parent?.attributes != null && Parent.AttributeCount >= 2)
             {
@@ -84,6 +84,17 @@ namespace LuaSTGEditorSharp.EditorData.Node.Boss
                 yield return t;
             }
             yield return new Tuple<int, TreeNode>(2, this);
+        }
+
+        public override List<MessageBase> GetMessage()
+        {
+            var a = new List<MessageBase>();
+            TreeNode p = GetLogicalParent();
+            if (p?.attributes == null || p.AttributeCount < 2)
+            {
+                a.Add(new CannotFindAttributeInParent(2, this));
+            }
+            return a;
         }
     }
 }

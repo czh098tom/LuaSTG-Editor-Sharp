@@ -38,7 +38,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Laser
         public override IEnumerable<string> ToLua(int spacing)
         {
             string sp = "".PadLeft(4);
-            TreeNode Parent = this.Parent;
+            TreeNode Parent = GetLogicalParent();
             string parentName = "";
             if (Parent?.attributes != null && Parent.AttributeCount >= 2)
             {
@@ -81,7 +81,8 @@ namespace LuaSTGEditorSharp.EditorData.Node.Laser
         public override List<MessageBase> GetMessage()
         {
             var a = new List<MessageBase>();
-            if (Parent?.attributes == null || Parent.AttributeCount < 2)
+            TreeNode p = GetLogicalParent();
+            if (p?.attributes == null || p.AttributeCount < 2)
             {
                 a.Add(new CannotFindAttributeInParent(2, this));
             }

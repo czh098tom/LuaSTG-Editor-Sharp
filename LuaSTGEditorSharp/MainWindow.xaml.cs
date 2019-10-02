@@ -966,7 +966,7 @@ namespace LuaSTGEditorSharp
 
         private void FoldRegionCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            e.CanExecute = selectedNode as Region != null && selectedNode.Parent.ValidateChildType(new Folder(ActivatedWorkSpaceData));
+            e.CanExecute = selectedNode as Region != null && selectedNode.Parent.ValidateChild(new Folder(ActivatedWorkSpaceData));
         }
 
         private void UnfoldAsRegionCommandExecuted(object sender, ExecutedRoutedEventArgs e)
@@ -989,7 +989,7 @@ namespace LuaSTGEditorSharp
             bool canE = true;
             foreach(TreeNode t in selectedNode.Children)
             {
-                canE &= selectedNode.Parent.ValidateChildType(t);
+                canE &= selectedNode.Parent.ValidateChild(t);
             }
             e.CanExecute = canE;
         }

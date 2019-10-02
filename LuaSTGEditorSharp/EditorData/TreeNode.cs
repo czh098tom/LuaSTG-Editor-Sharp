@@ -118,11 +118,11 @@ namespace LuaSTGEditorSharp.EditorData
                 parentWorkSpace.AddAndExecuteCommand(new SwitchBanCommand(this, value));
                 if (isBanned)
                 {
-                    RaiseVirtuallyRemove(new OnRemoveEventArgs() { parent = Parent });
+                    RaiseVirtuallyRemove(new OnRemoveEventArgs() { parent = _parent });
                 }
                 else
                 {
-                    RaiseVirtuallyCreate(new OnCreateEventArgs() { parent = Parent });
+                    RaiseVirtuallyCreate(new OnCreateEventArgs() { parent = _parent });
                 }
             }
         }
@@ -174,7 +174,7 @@ namespace LuaSTGEditorSharp.EditorData
         public bool IgnoreValidation { get => PluginHandler.Plugin.NodeTypeCache.NodeTypeInfo[GetType()].ignoreValidation; }
 
         [JsonIgnore, XmlIgnore]
-        protected TreeNode _parent = null;
+        private TreeNode _parent = null;
         /// <summary>
         /// Store the <see cref="DocumentData"/> containing it. 
         /// Only change it when it is created from file or be moved to other documents.
@@ -512,14 +512,14 @@ namespace LuaSTGEditorSharp.EditorData
             TreeNode temp = GlobalCompileData.StageDebugger;
             if (GlobalCompileData.StageDebugger != null && PluginHandler.Plugin.MatchStageNodeTypes(Parent?.GetType()))
             {
-                while (temp.Parent != null)
+                while (temp._parent != null)
                 {
-                    if (temp.Parent == this)
+                    if (temp._parent == this)
                     {
                         childof = true;
                         break;
                     }
-                    temp = temp.Parent;
+                    temp = temp._parent;
                 }
             }
 
@@ -770,7 +770,7 @@ namespace LuaSTGEditorSharp.EditorData
         /// <returns> A string of difficulty. <code>null</code> if parent is <code>null</code></returns>
         public virtual string GetDifficulty()
         {
-            return Parent?.GetDifficulty();
+            return _parent?.GetDifficulty();
         }
 
         /// <summary>
@@ -782,14 +782,14 @@ namespace LuaSTGEditorSharp.EditorData
         /// <returns>
         /// A boolean, true for can.
         /// </returns>
-        public bool ValidateChildType(TreeNode toV)
+        public bool ValidateChild(TreeNode toV)
         {
             if (PluginHandler.Plugin.NodeTypeCache.NodeTypeInfo[GetType()].leaf) return false;
             if (PluginHandler.Plugin.NodeTypeCache.NodeTypeInfo[toV.GetType()].uniqueness)
             {
-                if (!toV.MatchUniqueness(this)) return false;
+                if (!toV.MatchUniqueness(this is Folder ? GetLogicalParent() : this)) return false;
             }
-            if (!toV.MatchParents(this)) return false;
+            if (!toV.MatchParents(this is Folder ? GetLogicalParent() : this)) return false;
             Stack<TreeNode> stack = new Stack<TreeNode>();
             stack.Push(toV);
             TreeNode cur;
@@ -826,7 +826,7 @@ namespace LuaSTGEditorSharp.EditorData
             if (MatchType(toV.GetType(), new Type[] { typeof(IfThen), typeof(IfElse) })) return false;
             foreach (TreeNode t in toV.Children)
             {
-                if (Parent != null) if (!Parent.ValidateChildType(t)) return false;
+                if (Parent != null) if (!Parent.ValidateChild(t)) return false;
             }
             return true;
         }
@@ -1153,7 +1153,8 @@ namespace LuaSTGEditorSharp.EditorData
         /// <param name="toMatch">The given <see cref="TreeNode"/> as parent.</param>
         private bool MatchUniqueness(TreeNode toMatch)
         {
-            foreach(TreeNode t in toMatch.Children)
+            if (toMatch == null) return false;
+            foreach(TreeNode t in toMatch.GetLogicalChildren())
             {
                 if (t.GetType().Equals(GetType())) return false;
             }
@@ -1168,6 +1169,7 @@ namespace LuaSTGEditorSharp.EditorData
         private bool MatchParents(TreeNode toMatch)
         {
             Type[] ts = PluginHandler.Plugin.NodeTypeCache.NodeTypeInfo[GetType()].requireParent;
+            if (toMatch == null) return false;
             if (ts == null) return true;
             if (toMatch.IgnoreValidation) return true;
             foreach(Type t in ts)
@@ -1431,8 +1433,8 @@ namespace LuaSTGEditorSharp.EditorData
         /// <returns>parent of original <paramref name="parent"/></returns>
         public static TreeNode TryLink(TreeNode parent, TreeNode child)
         {
-            TreeNode toInsP = parent.Parent;
-            parent._parent = child.Parent;
+            TreeNode toInsP = parent._parent;
+            parent._parent = child._parent;
             child._parent = null;
             return toInsP;
         }
@@ -1445,7 +1447,7 @@ namespace LuaSTGEditorSharp.EditorData
         /// <param name="originalpp">parent of original <paramref name="parent"/></param>
         public static void TryUnlink(TreeNode parent, TreeNode child, TreeNode originalpp)
         {
-            child._parent = parent.Parent;
+            child._parent = parent._parent;
             parent._parent = originalpp;
         }
 
@@ -1510,6 +1512,42 @@ namespace LuaSTGEditorSharp.EditorData
         public static string NullOrDefault(string source, string def = "")
         {
             return string.IsNullOrEmpty(source) ? def : source;
+        }
+
+        /// <summary>
+        /// Get the indirect parent of the current node, that is, folder means piercing.
+        /// </summary>
+        /// <returns>A <see cref="TreeNode"/>, null if not found.</returns>
+        public TreeNode GetLogicalParent()
+        {
+            TreeNode p = _parent;
+            while ((p is Folder) && p != null)
+            {
+                p = p._parent;
+            }
+            return p;
+        }
+
+        /// <summary>
+        /// Get the indirect child of the current node, that is, folder means piercing.
+        /// </summary>
+        /// <returns>A <see cref="IEnumerable{TreeNode}"/> that enumerates its logical children.</returns>
+        public IEnumerable<TreeNode> GetLogicalChildren()
+        {
+            foreach(TreeNode n in children)
+            {
+                if(n is Folder)
+                {
+                    foreach(TreeNode t in n.GetLogicalChildren())
+                    {
+                        yield return t;
+                    }
+                }
+                else
+                {
+                    yield return n;
+                }
+            }
         }
     }
 }
