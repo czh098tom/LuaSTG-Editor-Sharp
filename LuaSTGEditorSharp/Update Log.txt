@@ -1,4 +1,24 @@
-﻿-- Update Log（最近更新 2019-09-22）
+﻿-- Update Log（最近更新 2019-10-02）
+
+0.0.6.1 ~ 0.0.7.0
+实现节点：
+Data
+	PositionAssignment
+修复bug：
+Editor层：
+修复EXE路径是否设定的判定错误
+修复运行判定bug
+关闭属性栏的自动检索
+自定义节点定义数目更改时导致使用自定义节点的节点崩溃的bug
+Lib层：
+ARGB输入界面值不准确
+GROUP名文本错误
+修复部分节点不能插入到TaskDefine中的错误
+CreateBullet节点无法正确查找定义的错误
+
+改进：
+加入大量空值检测减少发生错误的几率
+ARGB输入界面值可以键入非数字内容
 
 0.0.6.0
 常用节点版本
@@ -11,7 +31,6 @@ General
 Lib层：
 Data
 	Function
-	PositionAssignment
 Task
 	TaskRepeat（伪
 	Tasker
@@ -59,10 +78,6 @@ Editor层：
 修复If-Else中Else子节点行数计数错误的bug
 修复LuaSTG运行中再启动LuaSTG后退出报错产生的bug
 修复设置界面无法取消的bug
-修复运行判定bug
-关闭属性栏的自动检索
-Lib层：
-ARGB输入界面值不准确
 
 改进：
 Editor层：
