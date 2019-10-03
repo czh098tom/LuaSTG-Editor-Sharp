@@ -1435,7 +1435,7 @@ namespace LuaSTGEditorSharp.EditorData
         {
             TreeNode toInsP = parent._parent;
             parent._parent = child._parent;
-            child._parent = null;
+            child._parent = parent;
             return toInsP;
         }
 
@@ -1536,16 +1536,20 @@ namespace LuaSTGEditorSharp.EditorData
         {
             foreach(TreeNode n in children)
             {
-                if(n is Folder)
+                //Ensure not in TryLink
+                if (n._parent == this)
                 {
-                    foreach(TreeNode t in n.GetLogicalChildren())
+                    if (n is Folder)
                     {
-                        yield return t;
+                        foreach (TreeNode t in n.GetLogicalChildren())
+                        {
+                            yield return t;
+                        }
                     }
-                }
-                else
-                {
-                    yield return n;
+                    else
+                    {
+                        yield return n;
+                    }
                 }
             }
         }
