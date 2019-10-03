@@ -900,7 +900,7 @@ namespace LuaSTGEditorSharp
         {
             if (selectedNode != null)
             {
-                e.CanExecute = selectedNode.CanDelete;
+                e.CanExecute = selectedNode.CanLogicallyDelete();
             }
             else e.CanExecute = false;
         }
@@ -934,7 +934,7 @@ namespace LuaSTGEditorSharp
         {
             if (selectedNode != null)
             {
-                e.CanExecute = selectedNode.CanDelete;
+                e.CanExecute = selectedNode.CanLogicallyDelete();
             }
             else e.CanExecute = false;
         }
@@ -966,7 +966,8 @@ namespace LuaSTGEditorSharp
 
         private void FoldRegionCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            e.CanExecute = selectedNode as Region != null && selectedNode.Parent.ValidateChild(new Folder(ActivatedWorkSpaceData));
+            e.CanExecute = selectedNode as Region != null;
+            // && selectedNode.Parent.ValidateChild(new Folder(ActivatedWorkSpaceData));
         }
 
         private void UnfoldAsRegionCommandExecuted(object sender, ExecutedRoutedEventArgs e)
@@ -976,6 +977,7 @@ namespace LuaSTGEditorSharp
 
         private void UnfoldAsRegionCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
+            /*
             if (selectedNode == null) 
             {
                 e.CanExecute = false;
@@ -992,6 +994,8 @@ namespace LuaSTGEditorSharp
                 canE &= selectedNode.Parent.ValidateChild(t);
             }
             e.CanExecute = canE;
+            */
+            e.CanExecute = selectedNode != null && selectedNode is Folder;
         }
 
         private void SwitchBanCommandExecuted(object sender, ExecutedRoutedEventArgs e)
@@ -1001,7 +1005,7 @@ namespace LuaSTGEditorSharp
 
         private void SwitchBanCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            e.CanExecute = selectedNode != null && selectedNode.CanBeBanned;
+            e.CanExecute = selectedNode != null && selectedNode.CanLogicallyBeBanned();
         }
 
         private void GoToLineXCommandExecuted(object sender, ExecutedRoutedEventArgs e)

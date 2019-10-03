@@ -31,7 +31,7 @@ namespace LuaSTGEditorSharp.EditorData.Commands.Factory
         public override bool ValidateType(TreeNode toOp, TreeNode toIns)
         {
             TreeNode toInsP = TreeNode.TryLink(toIns, toOp);
-            bool a = toIns.ValidateChild(toOp);
+            bool a = toIns.ValidateChild(toOp) && toIns.Parent.ValidateChild(toIns);
             TreeNode.TryUnlink(toIns, toOp, toInsP);
             return a;
         }

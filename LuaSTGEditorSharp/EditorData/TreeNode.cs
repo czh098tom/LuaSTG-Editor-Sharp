@@ -32,7 +32,7 @@ namespace LuaSTGEditorSharp.EditorData
     /// The Standard Nodes can be identified by <code>_parent==null</code>
     /// </remarks>
     [Serializable]
-    public abstract class TreeNode : INotifyPropertyChanged , ICloneable, IMessageThrowable
+    public abstract class TreeNode : INotifyPropertyChanged, ICloneable, IMessageThrowable
     {
         /// <summary>
         /// Store attributes in <see cref="TreeNode"/>.
@@ -82,7 +82,8 @@ namespace LuaSTGEditorSharp.EditorData
         /// <summary>
         /// Store whether a <see cref="TreeNode"/> is expanded in view. Using this will refresh the view.
         /// </summary>
-        [JsonProperty, DefaultValue(true)][XmlAttribute("expanded")]
+        [JsonProperty, DefaultValue(true)]
+        [XmlAttribute("expanded")]
         public bool IsExpanded
         {
             get => isExpanded;
@@ -95,7 +96,8 @@ namespace LuaSTGEditorSharp.EditorData
         /// <summary>
         /// Store whether a <see cref="TreeNode"/> is selected in view. Using this will refresh the view.
         /// </summary>
-        [JsonProperty, DefaultValue(false)][XmlAttribute("selected")]
+        [JsonProperty, DefaultValue(false)]
+        [XmlAttribute("selected")]
         public bool IsSelected
         {
             get => isSelected;
@@ -398,7 +400,7 @@ namespace LuaSTGEditorSharp.EditorData
             }
             if (e.NewItems != null)
             {
-                for (int index = 0; index < e.NewItems.Count; index++) 
+                for (int index = 0; index < e.NewItems.Count; index++)
                 {
                     t = (TreeNode)e.NewItems[index];
                     t.RaiseCreate(new OnCreateEventArgs() { parent = this });
@@ -426,7 +428,7 @@ namespace LuaSTGEditorSharp.EditorData
                 }
             }
         }
-        
+
         private void AttributesChanged(object o, NotifyCollectionChangedEventArgs e)
         {
             AttrItem ai;
@@ -452,7 +454,7 @@ namespace LuaSTGEditorSharp.EditorData
             var attrs = from AttrItem a in source.attributes select (AttrItem)a.Clone();
             var childrens = from TreeNode t in source.Children select (TreeNode)t.Clone();
             Attributes = null;
-            foreach(AttrItem ai in attrs)
+            foreach (AttrItem ai in attrs)
             {
                 attributes.Add(ai);
             }
@@ -587,7 +589,7 @@ namespace LuaSTGEditorSharp.EditorData
         private List<MessageBase> GetMismatchedAttributeMessage()
         {
             var a = new List<MessageBase>();
-            if(PluginHandler.Plugin.NodeTypeCache.StandardNode.ContainsKey(GetType()))
+            if (PluginHandler.Plugin.NodeTypeCache.StandardNode.ContainsKey(GetType()))
             {
                 if (parentWorkSpace == null) return a;
                 TreeNode t = PluginHandler.Plugin.NodeTypeCache.StandardNode[GetType()].Clone() as TreeNode;
@@ -697,14 +699,14 @@ namespace LuaSTGEditorSharp.EditorData
         {
             if (e?.PropertyName != "Selected" && e?.PropertyName != "Expanded"
                 && parentWorkSpace != null && !parentWorkSpace.SupressMessage
-                && (GetType() == typeof(RootFolder) || GetType() == typeof(ProjectRoot) || _parent != null))  
+                && (GetType() == typeof(RootFolder) || GetType() == typeof(ProjectRoot) || _parent != null))
             {
                 List<MessageBase> a = new List<MessageBase>();
-                if(!isBanned)
+                if (!isBanned)
                 {
                     a = GetMessage();
                 }
-                if(EnableParityCheck) a.AddRange(GetMismatchedAttributeMessage());
+                if (EnableParityCheck) a.AddRange(GetMismatchedAttributeMessage());
                 Messages.Clear();
                 foreach (MessageBase mb in a)
                 {
@@ -725,7 +727,7 @@ namespace LuaSTGEditorSharp.EditorData
         /// <param name="relatedAttrItem"> The <see cref="DependencyAttrItem"/> who call this. </param>
         /// <param name="originalvalue"> The original <see cref="DependencyAttrItem.AttrInput"/> value before it was changed. </param>
         public virtual void ReflectAttr(DependencyAttrItem relatedAttrItem, DependencyAttributeChangedEventArgs e) { }
-        
+
         protected virtual void AddCompileSettings() { }
 
         /// <summary>
@@ -754,7 +756,7 @@ namespace LuaSTGEditorSharp.EditorData
         {
             foreach (TreeNode t in Children)
             {
-                if(!t.isBanned)
+                if (!t.isBanned)
                 {
                     foreach (Tuple<int, TreeNode> ti in t.GetLines())
                     {
@@ -784,12 +786,39 @@ namespace LuaSTGEditorSharp.EditorData
         /// </returns>
         public bool ValidateChild(TreeNode toV)
         {
+            return ValidateChild(toV, this);
+        }
+
+        /// <summary>
+        /// Validate whether the given node can be the child of this node.
+        /// </summary>
+        /// <param name="toV">
+        /// The given node.
+        /// </param>
+        /// <returns>
+        /// A boolean, true for can.
+        /// </returns>
+        private bool ValidateChild(TreeNode toV, TreeNode originalParent)
+        {
+            if (this is Folder) return GetLogicalParent()?.ValidateChild(toV, originalParent) ?? true;
+            if (toV is Folder)
+            {
+                foreach (TreeNode t in toV.GetLogicalChildren())
+                {
+                    if (!ValidateChild(t, originalParent)) return false;
+                }
+                return true;
+            }
             if (PluginHandler.Plugin.NodeTypeCache.NodeTypeInfo[GetType()].leaf) return false;
+            var e = this != originalParent 
+                ? this.GetLogicalChildren().Concat(originalParent.GetLogicalChildren()).Distinct()
+                : GetLogicalChildren();
             if (PluginHandler.Plugin.NodeTypeCache.NodeTypeInfo[toV.GetType()].uniqueness)
             {
-                if (!toV.MatchUniqueness(this is Folder ? GetLogicalParent() : this)) return false;
+                e = e.Concat(new TreeNode[] { toV }.AsEnumerable());
             }
-            if (!toV.MatchParents(this is Folder ? GetLogicalParent() : this)) return false;
+            if (!MatchUniqueness(e)) return false;
+            if (!toV.MatchParents(this)) return false;
             Stack<TreeNode> stack = new Stack<TreeNode>();
             stack.Push(toV);
             TreeNode cur;
@@ -840,7 +869,7 @@ namespace LuaSTGEditorSharp.EditorData
         public string Serialize(int level)
         {
             string s = "" + level + "," + EditorSerializer.SerializeTreeNode(this) + "\n";
-            foreach(TreeNode t in Children)
+            foreach (TreeNode t in Children)
             {
                 s += t.Serialize(level + 1);
             }
@@ -952,7 +981,7 @@ namespace LuaSTGEditorSharp.EditorData
         {
             if (id > attributes.Count)
             {
-                for(int i = attributes.Count; i < id; i++)
+                for (int i = attributes.Count; i < id; i++)
                 {
                     attributes.Add(null);
                 }
@@ -1083,7 +1112,7 @@ namespace LuaSTGEditorSharp.EditorData
         /// </summary>
         public void FixAttrParent()
         {
-            foreach(AttrItem ai in attributes)
+            foreach (AttrItem ai in attributes)
             {
                 ai.Parent = this;
             }
@@ -1147,16 +1176,18 @@ namespace LuaSTGEditorSharp.EditorData
         }
 
         /// <summary>
-        /// This method tests whether this <see cref="TreeNode"/> can be unique one 
-        /// in a given <see cref="TreeNode"/>'s children. 
+        /// This method tests whether a group of nodes <see cref="TreeNode"/> can be unique one if marked as uniqueness.
         /// </summary>
-        /// <param name="toMatch">The given <see cref="TreeNode"/> as parent.</param>
-        private bool MatchUniqueness(TreeNode toMatch)
+        /// <param name="logicalChildren">The group of nodes.</param>
+        private static bool MatchUniqueness(IEnumerable<TreeNode> logicalChildren)
         {
-            if (toMatch == null) return false;
-            foreach(TreeNode t in toMatch.GetLogicalChildren())
+            if (logicalChildren == null) return false;
+            var info = PluginHandler.Plugin.NodeTypeCache.NodeTypeInfo;
+            HashSet<Type> foundTypes = new HashSet<Type>();
+            foreach (TreeNode t in logicalChildren)
             {
-                if (t.GetType().Equals(GetType())) return false;
+                if (info[t.GetType()].uniqueness && foundTypes.Contains(t.GetType())) return false;
+                foundTypes.Add(t.GetType());
             }
             return true;
         }
@@ -1172,7 +1203,7 @@ namespace LuaSTGEditorSharp.EditorData
             if (toMatch == null) return false;
             if (ts == null) return true;
             if (toMatch.IgnoreValidation) return true;
-            foreach(Type t in ts)
+            foreach (Type t in ts)
             {
                 if (toMatch.GetType().Equals(t)) return true;
             }
@@ -1223,7 +1254,7 @@ namespace LuaSTGEditorSharp.EditorData
                 {
                     foreach (Type t2 in t1)
                     {
-                        foreach(Type t3 in Satisfied)
+                        foreach (Type t3 in Satisfied)
                         {
                             if (t2 == t3 && !toRemove.Contains(t1)) toRemove.Add(t1);
                         }
@@ -1300,7 +1331,7 @@ namespace LuaSTGEditorSharp.EditorData
         protected string Macrolize(AttrItem attrItem)
         {
             string s = attrItem.AttrInput;
-            foreach(Compile.DefineMarcoSettings m in parentWorkSpace.CompileProcess.marcoDefinition)
+            foreach (Compile.DefineMarcoSettings m in parentWorkSpace.CompileProcess.marcoDefinition)
             {
                 s = ExecuteMarco(m, s);
             }
@@ -1327,7 +1358,7 @@ namespace LuaSTGEditorSharp.EditorData
                 return Macrolize(attributes[i + 1]);
             }
         }
-        
+
         /// <summary>
         /// This method gets the directly contents of inputs in a <see cref="AttrItem"/>.
         /// </summary>
@@ -1399,7 +1430,7 @@ namespace LuaSTGEditorSharp.EditorData
             TreeNode Standard = PluginHandler.Plugin.NodeTypeCache.StandardNode[GetType()];
             while (j <= Standard.attributes.Count)
             {
-                if(attributes[i].AttrCap==Standard.attributes[j].AttrCap)
+                if (attributes[i].AttrCap == Standard.attributes[j].AttrCap)
                 {
                     attributes[i].EditWindow = Standard.attributes[i].EditWindow;
                     i++;
@@ -1457,7 +1488,7 @@ namespace LuaSTGEditorSharp.EditorData
         public void ExpandTree()
         {
             this.IsExpanded = true;
-            foreach(TreeNode t in children)
+            foreach (TreeNode t in children)
             {
                 t.ExpandTree();
             }
@@ -1534,7 +1565,7 @@ namespace LuaSTGEditorSharp.EditorData
         /// <returns>A <see cref="IEnumerable{TreeNode}"/> that enumerates its logical children.</returns>
         public IEnumerable<TreeNode> GetLogicalChildren()
         {
-            foreach(TreeNode n in children)
+            foreach (TreeNode n in children)
             {
                 //Ensure not in TryLink
                 if (n._parent == this)
@@ -1551,6 +1582,46 @@ namespace LuaSTGEditorSharp.EditorData
                         yield return n;
                     }
                 }
+            }
+        }
+
+        /// <summary>
+        /// Get whether a node can be removed logically.
+        /// </summary>
+        /// <returns>A bool value, true for can.</returns>
+        public bool CanLogicallyDelete()
+        {
+            if(this is Folder)
+            {
+                foreach(TreeNode t in GetLogicalChildren())
+                {
+                    if (!t.CanDelete) return false;
+                }
+                return true;
+            }
+            else
+            {
+                return CanDelete;
+            }
+        }
+
+        /// <summary>
+        /// Get whether a node can be banned logically.
+        /// </summary>
+        /// <returns>A bool value, true for can.</returns>
+        public bool CanLogicallyBeBanned()
+        {
+            if (this is Folder)
+            {
+                foreach (TreeNode t in GetLogicalChildren())
+                {
+                    if (!t.CanBeBanned) return false;
+                }
+                return true;
+            }
+            else
+            {
+                return CanBeBanned;
             }
         }
     }
