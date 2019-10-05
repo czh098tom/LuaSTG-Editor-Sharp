@@ -53,13 +53,13 @@ namespace LuaSTGEditorSharp.EditorData.Node.Object
         public override IEnumerable<string> ToLua(int spacing)
         {
             string sp = "".PadLeft(spacing * 4);
-            yield return "_set_rel_pos(self," + Macrolize(0) + "," + Macrolize(1) + "," + Macrolize(2) + ")\n";
+            yield return sp + "_set_rel_pos(self," + Macrolize(0) + "," + Macrolize(1) + "," + Macrolize(2) + ")\n";
         }
 
         public override string ToString()
         {
             return "Set position to (" + NonMacrolize(0) + ") relatively to its master and set its rotation to "
-                + NonMacrolize(1) + (NonMacrolize(2) == "true" ? ". (Follow master's rotation)" : ".");
+                + NonMacrolize(1) + (NonMacrolize(2) == "true" ? " (Follow master's rotation)" : "");
         }
 
         public override void ReflectAttr(DependencyAttrItem relatedAttrItem, DependencyAttributeChangedEventArgs e)

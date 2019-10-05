@@ -15,6 +15,24 @@
     {
         "Entry"
         {
+        "MsmKey" = "8:_2B212CDDB0F4CECAB91F032FBB586C4F"
+        "OwnerKey" = "8:_A0E718B38D5E4A87A945BE032EE50551"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_2B212CDDB0F4CECAB91F032FBB586C4F"
+        "OwnerKey" = "8:_475E8F00AB7C6294E8F69301170BC300"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_2B212CDDB0F4CECAB91F032FBB586C4F"
+        "OwnerKey" = "8:_A474968698A94356A6AB0A5912337B28"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_327F73F86A660C19544BD42FACB90D2B"
         "OwnerKey" = "8:_A0E718B38D5E4A87A945BE032EE50551"
         "MsmSig" = "8:_UNDEFINED"
@@ -22,12 +40,6 @@
         "Entry"
         {
         "MsmKey" = "8:_327F73F86A660C19544BD42FACB90D2B"
-        "OwnerKey" = "8:_A474968698A94356A6AB0A5912337B28"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_3DAE0CDA94C349D73161C9C9E30C033B"
         "OwnerKey" = "8:_A474968698A94356A6AB0A5912337B28"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -39,20 +51,8 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_5F3ACA37F1DC128AFEDA8771326BF3A8"
-        "OwnerKey" = "8:_A0E718B38D5E4A87A945BE032EE50551"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_5F3ACA37F1DC128AFEDA8771326BF3A8"
+        "MsmKey" = "8:_475E8F00AB7C6294E8F69301170BC300"
         "OwnerKey" = "8:_A474968698A94356A6AB0A5912337B28"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_5F3ACA37F1DC128AFEDA8771326BF3A8"
-        "OwnerKey" = "8:_3DAE0CDA94C349D73161C9C9E30C033B"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -75,6 +75,54 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_A82E0B9E0026088E48D86EBBF18E5D45"
+        "OwnerKey" = "8:_A474968698A94356A6AB0A5912337B28"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_D3707F01B4E3EBCDEFB957E087E0CA41"
+        "OwnerKey" = "8:_A0E718B38D5E4A87A945BE032EE50551"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_D3707F01B4E3EBCDEFB957E087E0CA41"
+        "OwnerKey" = "8:_A474968698A94356A6AB0A5912337B28"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_D3707F01B4E3EBCDEFB957E087E0CA41"
+        "OwnerKey" = "8:_475E8F00AB7C6294E8F69301170BC300"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_D8483669831BAAF3DE73B8106E68C471"
+        "OwnerKey" = "8:_A474968698A94356A6AB0A5912337B28"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_DDE06F3FA3806F30100E37575F432061"
+        "OwnerKey" = "8:_A0E718B38D5E4A87A945BE032EE50551"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_DDE06F3FA3806F30100E37575F432061"
+        "OwnerKey" = "8:_475E8F00AB7C6294E8F69301170BC300"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_DDE06F3FA3806F30100E37575F432061"
+        "OwnerKey" = "8:_A474968698A94356A6AB0A5912337B28"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_A0E718B38D5E4A87A945BE032EE50551"
         "MsmSig" = "8:_UNDEFINED"
@@ -88,19 +136,43 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_3DAE0CDA94C349D73161C9C9E30C033B"
+        "OwnerKey" = "8:_A82E0B9E0026088E48D86EBBF18E5D45"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_5F3ACA37F1DC128AFEDA8771326BF3A8"
+        "OwnerKey" = "8:_D8483669831BAAF3DE73B8106E68C471"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_475E8F00AB7C6294E8F69301170BC300"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_DDE06F3FA3806F30100E37575F432061"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_D3707F01B4E3EBCDEFB957E087E0CA41"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_414B0A6CF938736D8D0D6237B0806941"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_2B212CDDB0F4CECAB91F032FBB586C4F"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -204,6 +276,37 @@
         }
         "File"
         {
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_2B212CDDB0F4CECAB91F032FBB586C4F"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:ICSharpCode.AvalonEdit, Version=5.0.3.0, Culture=neutral, PublicKeyToken=9cc39be672370310, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_2B212CDDB0F4CECAB91F032FBB586C4F"
+                    {
+                    "Name" = "8:ICSharpCode.AvalonEdit.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:ICSharpCode.AvalonEdit.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_EDC8F32652E94DEFB9CD9D8D213E38FE"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_327F73F86A660C19544BD42FACB90D2B"
             {
             "AssemblyRegister" = "3:1"
@@ -232,37 +335,6 @@
             "PackageAs" = "3:1"
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_3DAE0CDA94C349D73161C9C9E30C033B"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:LuaSTGEditorSharp, Version=0.0.3.0, Culture=neutral, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_3DAE0CDA94C349D73161C9C9E30C033B"
-                    {
-                    "Name" = "8:LuaSTGEditorSharp.exe"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:LuaSTGEditorSharp.exe"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_EDC8F32652E94DEFB9CD9D8D213E38FE"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:TRUE"
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
@@ -297,14 +369,96 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_5F3ACA37F1DC128AFEDA8771326BF3A8"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_475E8F00AB7C6294E8F69301170BC300"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:LuaSTGEditorSharp, Version=0.0.4.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_5F3ACA37F1DC128AFEDA8771326BF3A8"
+                    "_475E8F00AB7C6294E8F69301170BC300"
+                    {
+                    "Name" = "8:LuaSTGEditorSharp.exe"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:LuaSTGEditorSharp.exe"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_EDC8F32652E94DEFB9CD9D8D213E38FE"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:TRUE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_931C73393BB945FF9DC1E8D63450211E"
+            {
+            "SourcePath" = "8:..\\LuaSTGEditorSharp\\File.ico"
+            "TargetName" = "8:File.ico"
+            "Tag" = "8:"
+            "Folder" = "8:_EDC8F32652E94DEFB9CD9D8D213E38FE"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_A82E0B9E0026088E48D86EBBF18E5D45"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:NVorbis, Version=0.8.6.0, Culture=neutral, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_A82E0B9E0026088E48D86EBBF18E5D45"
+                    {
+                    "Name" = "8:NVorbis.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:NVorbis.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_EDC8F32652E94DEFB9CD9D8D213E38FE"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_D3707F01B4E3EBCDEFB957E087E0CA41"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_D3707F01B4E3EBCDEFB957E087E0CA41"
                     {
                     "Name" = "8:Newtonsoft.Json.dll"
                     "Attributes" = "3:512"
@@ -328,10 +482,21 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_931C73393BB945FF9DC1E8D63450211E"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_D8483669831BAAF3DE73B8106E68C471"
             {
-            "SourcePath" = "8:..\\LuaSTGEditorSharp\\File.ico"
-            "TargetName" = "8:File.ico"
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:CSCore, Version=1.2.1.2, Culture=neutral, PublicKeyToken=5a08f2b6f4415dea, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_D8483669831BAAF3DE73B8106E68C471"
+                    {
+                    "Name" = "8:CSCore.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:CSCore.dll"
+            "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_EDC8F32652E94DEFB9CD9D8D213E38FE"
             "Condition" = "8:"
@@ -345,7 +510,38 @@
             "PackageAs" = "3:1"
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_DDE06F3FA3806F30100E37575F432061"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:ICSharpCode.SharpZipLib, Version=1.1.0.145, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_DDE06F3FA3806F30100E37575F432061"
+                    {
+                    "Name" = "8:ICSharpCode.SharpZipLib.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:ICSharpCode.SharpZipLib.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_EDC8F32652E94DEFB9CD9D8D213E38FE"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
         }
@@ -473,7 +669,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:LuaSTG Editor Sharp"
         "ProductCode" = "8:{F952CAC0-9193-4F87-A886-93C8629D334B}"
-        "PackageCode" = "8:{3E877CFC-A753-408F-8FB0-FE8FAD1B6433}"
+        "PackageCode" = "8:{78B6B420-34F7-41CA-A24B-903E230C4B05}"
         "UpgradeCode" = "8:{93CEE5DE-6B6D-4397-8130-3CD29D44F2F7}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
@@ -1022,7 +1218,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_A0E718B38D5E4A87A945BE032EE50551"
             {
-            "SourcePath" = "8:..\\LuaSTGEditorSharp\\obj\\Debug\\LuaSTGEditorSharp.exe"
+            "SourcePath" = "8:..\\LuaSTGEditorSharp\\obj\\Release\\LuaSTGEditorSharp.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_EDC8F32652E94DEFB9CD9D8D213E38FE"
@@ -1050,7 +1246,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_A474968698A94356A6AB0A5912337B28"
             {
-            "SourcePath" = "8:..\\LuaSTGNodelib\\obj\\Debug\\LuaSTGNodelib.dll"
+            "SourcePath" = "8:..\\LuaSTGNodelib\\obj\\Release\\LuaSTGNodelib.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_EDC8F32652E94DEFB9CD9D8D213E38FE"

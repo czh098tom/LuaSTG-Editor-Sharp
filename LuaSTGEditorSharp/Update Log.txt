@@ -1,4 +1,4 @@
-﻿-- Update Log（最近更新 2019-10-02）
+﻿-- Update Log（最近更新 2019-10-05）
 
 0.0.6.1 ~ 0.0.7.0
 实现节点：
@@ -10,12 +10,15 @@ Editor层：
 修复运行判定bug
 关闭属性栏的自动检索
 自定义节点定义数目更改时导致使用自定义节点的节点崩溃的bug
+Insert as parent节点可插入性判定有误问题
+修复某些情况下插入节点无法正确移动的bug
 Lib层：
 ARGB输入界面值不准确
 GROUP名文本错误
 修复部分节点不能插入到TaskDefine中的错误
 CreateBullet节点无法正确查找定义的错误
-Insert as parent节点可插入性判定有误问题
+LaserGrow翻译内容有误和它与LaserTurnOn，LaserTurnOff，LaserTurnHalfOn的文本描述不一致的bug
+SetBinding和SetRelativePosition翻译丢失缩进的错误
 
 改进：
 加入大量空值检测减少发生错误的几率

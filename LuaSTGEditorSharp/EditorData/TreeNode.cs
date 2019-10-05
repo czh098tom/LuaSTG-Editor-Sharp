@@ -795,6 +795,9 @@ namespace LuaSTGEditorSharp.EditorData
         /// <param name="toV">
         /// The given node.
         /// </param>
+        /// <param name="toV">
+        /// The orginal parent for searching.
+        /// </param>
         /// <returns>
         /// A boolean, true for can.
         /// </returns>
@@ -1560,7 +1563,7 @@ namespace LuaSTGEditorSharp.EditorData
         }
 
         /// <summary>
-        /// Get the indirect child of the current node, that is, folder means piercing.
+        /// Get the indirect children of the current node, that is, folder means piercing.
         /// </summary>
         /// <returns>A <see cref="IEnumerable{TreeNode}"/> that enumerates its logical children.</returns>
         public IEnumerable<TreeNode> GetLogicalChildren()
@@ -1622,6 +1625,18 @@ namespace LuaSTGEditorSharp.EditorData
             else
             {
                 return CanBeBanned;
+            }
+        }
+
+        /// <summary>
+        /// Clear isSelected in all children.
+        /// </summary>
+        public void ClearChildSelection()
+        {
+            this.isSelected = false;
+            foreach(TreeNode t in children)
+            {
+                t.ClearChildSelection();
             }
         }
     }

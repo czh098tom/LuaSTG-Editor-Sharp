@@ -45,7 +45,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Laser
 
         public override string ToString()
         {
-            return "\"" + NonMacrolize(0) + "\"turn off in " + NonMacrolize(1) + " frame(s)"
+            return "\"" + NonMacrolize(0) + "\" turn off in " + NonMacrolize(1) + " frame(s)"
                 + (NonMacrolize(2) == "true" ? ", wait" : "");
         }
 

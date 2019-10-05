@@ -39,12 +39,13 @@ namespace LuaSTGEditorSharp
             try
             {
                 if (selectedNode == null || selectedNode.Parent == null) return;
+                TreeNode oldSelection = selectedNode;
                 bool move = (Application.Current as App).AutoMoveToNew;
-                node.IsSelected = move;
                 Command c = insertState.ValidateAndNewInsert(selectedNode, node);
-                if (c != null)
+                if (ActivatedWorkSpaceData.AddAndExecuteCommand(c))
                 {
-                    if (ActivatedWorkSpaceData.AddAndExecuteCommand(c) && isInvoke)
+                    if (move) Reveal(node);
+                    if (isInvoke)
                     {
                         node.CheckMessage(null, new System.ComponentModel.PropertyChangedEventArgs(""));
                         CreateInvoke(node);

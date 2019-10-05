@@ -21,13 +21,13 @@ namespace LuaSTGEditorSharp.EditorData.Node.Laser
         private LaserGrow() : base() { }
 
         public LaserGrow(DocumentData workSpaceData)
-            : this(workSpaceData, "30", "true", "true")
+            : this(workSpaceData, "self", "30", "true", "true")
         { }
 
-        public LaserGrow(DocumentData workSpaceData, string time, string se, string wait)
+        public LaserGrow(DocumentData workSpaceData, string target, string time, string se, string wait)
             : base(workSpaceData)
         {
-            attributes.Add(new AttrItem("Target", "self", this, "target"));
+            attributes.Add(new AttrItem("Target", target, this, "target"));
             attributes.Add(new AttrItem("Time", time, this, "time"));
             attributes.Add(new AttrItem("Play Sound Effect", se, this, "bool"));
             attributes.Add(new AttrItem("Wait in this Task", wait, this, "bool"));
@@ -36,7 +36,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Laser
         public override IEnumerable<string> ToLua(int spacing)
         {
             string sp = "".PadLeft(spacing * 4);
-            yield return sp + "laser._Grow(" + Macrolize(0) + "," + Macrolize(1) + "," + Macrolize(2)
+            yield return sp + "laser.grow(" + Macrolize(0) + "," + Macrolize(1) + "," + Macrolize(2)
                 + "," + Macrolize(3) + ")\n";
         }
 
