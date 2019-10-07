@@ -114,11 +114,6 @@
                 <Image Source="../../images/bullet/drip.png" Style="{StaticResource SelectionImg}"/>
             </Button.Content>
         </Button>
-        <Button Click="Style_Click" Tag="kite">
-            <Button.Content>
-                <Image Source="../../images/bullet/drip.png" Style="{StaticResource SelectionImg}"/>
-            </Button.Content>
-        </Button>
         <Button Click="Style_Click" Tag="knife">
             <Button.Content>
                 <Image Source="../../images/bullet/sword.png" Style="{StaticResource SelectionImg}"/>
