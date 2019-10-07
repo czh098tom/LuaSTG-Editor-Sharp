@@ -510,6 +510,18 @@ namespace LuaSTGEditorSharp.EditorData
         /// <returns> The <see cref="string"/> of lua code. </returns>
         public virtual IEnumerable<string> ToLua(int spacing)
         {
+            return ToLua(spacing, children);
+        }
+
+        /// <summary>
+        /// This method gets the lua code of current node and its childs. 
+        /// It is a Compile Method.
+        /// </summary>
+        /// <param name="spacing"> The spacing before each line of lua code. must be unsigned. </param>
+        /// <param name="children"> The children enumerable of child of this node. </param>
+        /// <returns> The <see cref="string"/> of lua code. </returns>
+        protected IEnumerable<string> ToLua(int spacing, IEnumerable<TreeNode> children)
+        {
             bool childof = false;
             TreeNode temp = GlobalCompileData.StageDebugger;
             if (GlobalCompileData.StageDebugger != null && PluginHandler.Plugin.MatchStageNodeTypes(Parent?.GetType()))
@@ -526,7 +538,7 @@ namespace LuaSTGEditorSharp.EditorData
             }
 
             bool firstC = false;
-            foreach (TreeNode t in Children)
+            foreach (TreeNode t in children)
             {
                 if (!t.isBanned)
                 {

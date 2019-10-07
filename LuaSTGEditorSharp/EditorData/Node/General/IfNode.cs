@@ -37,25 +37,19 @@ namespace LuaSTGEditorSharp.EditorData.Node.General
             set => DoubleCheckAttr(0).attrInput = value;
         }
 
-        public IEnumerable<string> BaseToLua(int spacing)
+        public IEnumerable<string> BaseToLua(int spacing, IEnumerable<TreeNode> children)
         {
-            return base.ToLua(spacing);
+            return base.ToLua(spacing, children);
         }
 
         public override IEnumerable<string> ToLua(int spacing)
         {
             string sp = "".PadLeft(spacing * 4);
-
-            IfNode dup = Clone() as IfNode;
-            var i = dup.GetLogicalChildren().OrderBy((s) => (s as IIfChild)?.Priority ?? 0);
+            var i = GetLogicalChildren().OrderBy((s) => (s as IIfChild)?.Priority ?? 0);
             List<TreeNode> t = new List<TreeNode>(i);
-            dup.Children.Clear();
-            foreach (var n in t)
-            {
-                dup.AddChild(n);
-            }
+
             yield return sp + "if " + Macrolize(0);
-            foreach (var a in dup.BaseToLua(spacing + 1))
+            foreach (var a in BaseToLua(spacing + 1, i))
             {
                 yield return a;
             }

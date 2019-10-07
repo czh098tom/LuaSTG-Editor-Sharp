@@ -167,9 +167,12 @@ namespace LuaSTGEditorSharp.EditorData
             try
             {
                 savedCommand = commandFlow.Peek();
-                RaiseProertyChanged("DocName");
             }
-            catch (InvalidOperationException) { }
+            catch (InvalidOperationException)
+            {
+                savedCommand = null;
+            }
+            RaiseProertyChanged("DocName");
         }
 
         /// <summary>
