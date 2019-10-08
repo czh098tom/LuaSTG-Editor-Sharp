@@ -401,7 +401,7 @@ namespace LuaSTGEditorSharp
         public void Reveal(TreeNode node)
         {
             if (node == null) return;
-            TreeNode temp = node;
+            TreeNode temp = node.Parent;
             node.parentWorkSpace.IsSelected = true;
             node.parentWorkSpace.TreeNodes[0].ClearChildSelection();
             Stack<TreeNode> sta = new Stack<TreeNode>();
@@ -415,7 +415,6 @@ namespace LuaSTGEditorSharp
             {
                 sta.Pop().IsExpanded = true;
             }
-            
             node.IsSelected = true;
         }
 
