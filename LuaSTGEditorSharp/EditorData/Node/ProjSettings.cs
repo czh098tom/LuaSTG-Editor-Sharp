@@ -41,7 +41,7 @@ namespace LuaSTGEditorSharp.EditorData.Node
             Author = auth;
         }
 
-        [JsonIgnore, XmlAttribute("OutputName")]
+        [JsonIgnore, NodeAttribute, XmlAttribute("OutputName")]
         //[DefaultValue("")]
         public string OutputName
         {
@@ -49,7 +49,7 @@ namespace LuaSTGEditorSharp.EditorData.Node
             set => DoubleCheckAttr(0, name: "Output Name").attrInput = value;
         }
 
-        [JsonIgnore, XmlAttribute("Author")]
+        [JsonIgnore, NodeAttribute, XmlAttribute("Author")]
         //[DefaultValue("")]
         public string Author
         {
@@ -57,7 +57,7 @@ namespace LuaSTGEditorSharp.EditorData.Node
             set => DoubleCheckAttr(1).attrInput = value;
         }
 
-        [JsonIgnore, XmlAttribute("AllowPractice")]
+        [JsonIgnore, NodeAttribute, XmlAttribute("AllowPractice")]
         //[DefaultValue("true")]
         public string AllowPractice
         {
@@ -65,7 +65,7 @@ namespace LuaSTGEditorSharp.EditorData.Node
             set => DoubleCheckAttr(2, "bool", "Allow practice").attrInput = value;
         }
 
-        [JsonIgnore, XmlAttribute("AllowSCPractice")]
+        [JsonIgnore, NodeAttribute, XmlAttribute("AllowSCPractice")]
         //[DefaultValue("true")]
         public string AllowSCPractice
         {

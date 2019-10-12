@@ -29,7 +29,7 @@ namespace LuaSTGEditorSharp.EditorData.Node
             attributes.Add(new AttrItem("Editor version", PluginHandler.Plugin.NodeTypeCache.Version, this));
         }
 
-        [JsonIgnore, XmlAttribute("EditorVersion")]
+        [JsonIgnore, NodeAttribute, XmlAttribute("EditorVersion")]
         //[DefaultValue("")]
         public string Version
         {

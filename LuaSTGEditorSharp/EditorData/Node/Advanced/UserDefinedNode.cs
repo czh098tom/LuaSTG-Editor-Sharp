@@ -16,6 +16,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Advanced
     [ClassNode]
     [LeafNode]
     [CreateInvoke(0), RCInvoke(1)]
+    [IgnoreAttributesParityCheck]
     public class UserDefinedNode : TreeNode
     {
         [JsonConstructor]

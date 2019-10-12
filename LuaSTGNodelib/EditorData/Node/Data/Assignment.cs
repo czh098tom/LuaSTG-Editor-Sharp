@@ -14,6 +14,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Data
     [Serializable, NodeIcon("/LuaSTGNodeLib;component/images/16x16/assignment.png")]
     [LeafNode]
     [CreateInvoke(1), RCInvoke(2)]
+    [IgnoreAttributesParityCheck]
     public class Assignment : TreeNode
     {
         [JsonConstructor]

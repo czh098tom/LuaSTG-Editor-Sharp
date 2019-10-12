@@ -26,9 +26,35 @@ namespace LuaSTGEditorSharp.EditorData.Node.Laser
         public CreateBentLaser(DocumentData workSpaceData, string name, string pos, string param)
             : base(workSpaceData)
         {
+            Name = name;
+            Position = pos;
+            Parameters = param;
+            /*
             attributes.Add(new AttrItem("Name", name, this, "bentLaserDef"));
             attributes.Add(new AttrItem("Position", pos, this, "position"));
             attributes.Add(new AttrItem("Parameters", param, this, "bentLaserParam"));
+            */
+        }
+
+        [JsonIgnore, NodeAttribute]
+        public string Name
+        {
+            get => DoubleCheckAttr(0, "bentLaserDef").attrInput;
+            set => DoubleCheckAttr(0, "bentLaserDef").attrInput = value;
+        }
+
+        [JsonIgnore, NodeAttribute]
+        public string Position
+        {
+            get => DoubleCheckAttr(1, "position").attrInput;
+            set => DoubleCheckAttr(1, "position").attrInput = value;
+        }
+
+        [JsonIgnore, NodeAttribute]
+        public string Parameters
+        {
+            get => DoubleCheckAttr(2, "bentLaserParam").attrInput;
+            set => DoubleCheckAttr(2, "bentLaserParam").attrInput = value;
         }
 
         public override IEnumerable<string> ToLua(int spacing)

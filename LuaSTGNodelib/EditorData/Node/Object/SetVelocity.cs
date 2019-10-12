@@ -26,11 +26,53 @@ namespace LuaSTGEditorSharp.EditorData.Node.Object
         public SetVelocity(DocumentData workSpaceData, string tar, string v, string r, string aim, string setR)
             : base(workSpaceData)
         {
+            Target = tar;
+            Velocity = v;
+            Rotation = r;
+            AimToPlayer = aim;
+            SetRotation = setR;
+            /*
             attributes.Add(new AttrItem("Target", tar, this, "target"));
             attributes.Add(new AttrItem("Velocity", v, this, "velocity"));
             attributes.Add(new AttrItem("Rotation", r, this, "rotation"));
             attributes.Add(new AttrItem("Aim to Player", aim, this, "bool"));
             attributes.Add(new AttrItem("Set Rotation", setR, this, "bool"));
+            */
+        }
+
+        [JsonIgnore, NodeAttribute]
+        public string Target
+        {
+            get => DoubleCheckAttr(0, "target").attrInput;
+            set => DoubleCheckAttr(0, "target").attrInput = value;
+        }
+
+        [JsonIgnore, NodeAttribute]
+        public string Velocity
+        {
+            get => DoubleCheckAttr(1, "velocity").attrInput;
+            set => DoubleCheckAttr(1, "velocity").attrInput = value;
+        }
+
+        [JsonIgnore, NodeAttribute]
+        public string Rotation
+        {
+            get => DoubleCheckAttr(2, "rotation").attrInput;
+            set => DoubleCheckAttr(2, "rotation").attrInput = value;
+        }
+
+        [JsonIgnore, NodeAttribute]
+        public string AimToPlayer
+        {
+            get => DoubleCheckAttr(3, "bool", "Aim to Player").attrInput;
+            set => DoubleCheckAttr(3, "bool", "Aim to Player").attrInput = value;
+        }
+
+        [JsonIgnore, NodeAttribute]
+        public string SetRotation
+        {
+            get => DoubleCheckAttr(4, "bool", "Set Rotation").attrInput;
+            set => DoubleCheckAttr(4, "bool", "Set Rotation").attrInput = value;
         }
 
         public override IEnumerable<string> ToLua(int spacing)

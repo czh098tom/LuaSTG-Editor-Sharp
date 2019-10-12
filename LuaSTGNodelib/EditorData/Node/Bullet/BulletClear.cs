@@ -29,14 +29,14 @@ namespace LuaSTGEditorSharp.EditorData.Node.Bullet
             ClearIndest = clrIndes;
         }
 
-        [JsonIgnore]
+        [JsonIgnore, NodeAttribute]
         public string ConvToFaith
         {
             get => DoubleCheckAttr(0, "bool", "Convert to faith").attrInput;
             set => DoubleCheckAttr(0, "bool", "Convert to faith").attrInput = value;
         }
 
-        [JsonIgnore]
+        [JsonIgnore, NodeAttribute]
         public string ClearIndest
         {
             get => DoubleCheckAttr(1, "bool", "Clear indestructible").attrInput;
@@ -56,8 +56,8 @@ namespace LuaSTGEditorSharp.EditorData.Node.Bullet
 
         public override string ToString()
         {
-            return "Clear bullets" + (NonMacrolize(0) == "true" ? " (including indestructible)" : "") 
-                + (NonMacrolize(1) == "true" ? " and convert them to faith" : "");
+            return "Clear bullets" + (NonMacrolize(1) == "true" ? " (including indestructible)" : "") 
+                + (NonMacrolize(0) == "true" ? " and convert them to faith" : "");
         }
 
         public override object Clone()

@@ -26,7 +26,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.General
             Condition = cond;
         }
 
-        [JsonIgnore]
+        [JsonIgnore, NodeAttribute]
         public string Condition
         {
             get => DoubleCheckAttr(0).attrInput;

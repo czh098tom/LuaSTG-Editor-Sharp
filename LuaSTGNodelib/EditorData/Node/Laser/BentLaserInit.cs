@@ -27,12 +27,62 @@ namespace LuaSTGEditorSharp.EditorData.Node.Laser
             , string sampling, string node)
             : base(workSpaceData)
         {
+            ParameterList = para;
+            Color = color;
+            LengthInFrames = length;
+            Width = width;
+            Sampling = sampling;
+            Node = node;
+            /*
             attributes.Add(new AttrItem("Parameter List", para, this));
             attributes.Add(new AttrItem("Color", color, this, "color"));
             attributes.Add(new AttrItem("Length (in frames)", length, this, "time"));
             attributes.Add(new AttrItem("Width", width, this, "length"));
             attributes.Add(new AttrItem("Sampling", sampling, this));
             attributes.Add(new AttrItem("Node", node, this, "length"));
+            */
+        }
+
+        [JsonIgnore, NodeAttribute]
+        public string ParameterList
+        {
+            get => DoubleCheckAttr(0, name: "Parameter List").attrInput;
+            set => DoubleCheckAttr(0, name: "Parameter List").attrInput = value;
+        }
+
+        [JsonIgnore, NodeAttribute]
+        public string Color
+        {
+            get => DoubleCheckAttr(1, "color").attrInput;
+            set => DoubleCheckAttr(1, "color").attrInput = value;
+        }
+
+        [JsonIgnore, NodeAttribute]
+        public string LengthInFrames
+        {
+            get => DoubleCheckAttr(2, "time", "Length (in frames)").attrInput;
+            set => DoubleCheckAttr(2, "time", "Length (in frames)").attrInput = value;
+        }
+
+        [JsonIgnore, NodeAttribute]
+        public string Width
+        {
+            get => DoubleCheckAttr(3, "length").attrInput;
+            set => DoubleCheckAttr(3, "length").attrInput = value;
+        }
+
+        [JsonIgnore, NodeAttribute]
+        public string Sampling
+        {
+            get => DoubleCheckAttr(4).attrInput;
+            set => DoubleCheckAttr(4).attrInput = value;
+        }
+
+        [JsonIgnore, NodeAttribute]
+        public string Node
+        {
+            get => DoubleCheckAttr(5, "length").attrInput;
+            set => DoubleCheckAttr(5, "length").attrInput = value;
         }
 
         public override IEnumerable<string> ToLua(int spacing)

@@ -32,28 +32,28 @@ namespace LuaSTGEditorSharp.EditorData.Node.Object
             MaxVY = maxvy;
         }
 
-        [JsonIgnore]
+        [JsonIgnore, NodeAttribute]
         public string Target
         {
             get => DoubleCheckAttr(0, "target").attrInput;
             set => DoubleCheckAttr(0, "target").attrInput = value;
         }
 
-        [JsonIgnore]
+        [JsonIgnore, NodeAttribute]
         public string MaxV
         {
             get => DoubleCheckAttr(1, name:"Max velocity").attrInput;
             set => DoubleCheckAttr(1, name:"Max velocity").attrInput = value;
         }
 
-        [JsonIgnore]
+        [JsonIgnore, NodeAttribute]
         public string MaxVX
         {
             get => DoubleCheckAttr(2, name: "Max X-velocity").attrInput;
             set => DoubleCheckAttr(2, name: "Max X-velocity").attrInput = value;
         }
 
-        [JsonIgnore]
+        [JsonIgnore, NodeAttribute]
         public string MaxVY
         {
             get => DoubleCheckAttr(3, name: "Max Y-velocity").attrInput;

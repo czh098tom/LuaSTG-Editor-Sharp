@@ -25,15 +25,27 @@ namespace LuaSTGEditorSharp.EditorData.Node.Project
         private ProjectFile() : base() { }
 
         public ProjectFile(DocumentData workSpaceData) 
-            : base(workSpaceData) { attributes.Add(new AttrItem("Path", this, "lstgesFile")); }
+            : this(workSpaceData, "") { }
 
         public ProjectFile(DocumentData workSpaceData, string code) 
-            : base(workSpaceData) { attributes.Add(new AttrItem("Path", this, "lstgesFile") { AttrInput = code }); }
+            : base(workSpaceData)
+        {
+            Path = code;
+            //attributes.Add(new AttrItem("Path", code, this, "lstgesFile"));
+        }
+
+        [JsonIgnore, NodeAttribute]
+        public string Path
+        {
+            get => DoubleCheckAttr(0, "lstgesFile").attrInput;
+            set => DoubleCheckAttr(0, "lstgesFile").attrInput = value;
+        }
 
         public override IEnumerable<string> ToLua(int spacing)
         {
             string sp = "".PadLeft(spacing * 4);
-            yield return sp + "Include\'" + StringParser.ParseLua(Path.GetFileNameWithoutExtension(NonMacrolize(0)) + ".lua") + "\'\n";
+            yield return sp + "Include\'"
+                + StringParser.ParseLua(System.IO.Path.GetFileNameWithoutExtension(NonMacrolize(0)) + ".lua") + "\'\n";
         }
 
         public override IEnumerable<Tuple<int,TreeNode>> GetLines()

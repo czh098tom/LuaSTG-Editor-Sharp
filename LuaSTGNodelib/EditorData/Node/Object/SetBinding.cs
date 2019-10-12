@@ -30,28 +30,28 @@ namespace LuaSTGEditorSharp.EditorData.Node.Object
             ConnectDeath = conndeath;
         }
 
-        [JsonIgnore]
+        [JsonIgnore, NodeAttribute]
         public string Master
         {
             get => DoubleCheckAttr(0, "target").attrInput;
             set => DoubleCheckAttr(0, "target").attrInput = value;
         }
 
-        [JsonIgnore]
+        [JsonIgnore, NodeAttribute]
         public string Servant
         {
             get => DoubleCheckAttr(1, "target").attrInput;
             set => DoubleCheckAttr(1, "target").attrInput = value;
         }
 
-        [JsonIgnore]
+        [JsonIgnore, NodeAttribute]
         public string DMGTransRate
         {
             get => DoubleCheckAttr(2, name: "Damage transfer rate").attrInput;
             set => DoubleCheckAttr(2, name: "Damage transfer rate").attrInput = value;
         }
 
-        [JsonIgnore]
+        [JsonIgnore, NodeAttribute]
         public string ConnectDeath
         {
             get => DoubleCheckAttr(3, "bool", "Connect death").attrInput;

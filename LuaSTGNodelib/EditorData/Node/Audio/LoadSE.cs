@@ -24,13 +24,31 @@ namespace LuaSTGEditorSharp.EditorData.Node.Audio
         private LoadSE() : base() { }
 
         public LoadSE(DocumentData workSpaceData)
-            : this(workSpaceData, "", "", "", "") { }
+            : this(workSpaceData, "", "") { }
 
-        public LoadSE(DocumentData workSpaceData, string path, string name, string lend, string llen)
+        public LoadSE(DocumentData workSpaceData, string path, string name)
             : base(workSpaceData)
         {
+            /*
             attributes.Add(new DependencyAttrItem("Path", path, this, "seFile"));
             attributes.Add(new AttrItem("Resource name", name, this));
+            */
+            FilePath = path;
+            ResName = name;
+        }
+
+        [JsonIgnore, NodeAttribute]
+        public string FilePath
+        {
+            get => DoubleCheckAttr(0, "seFile", "Path", true).attrInput;
+            set => DoubleCheckAttr(0, "seFile", "Path", true).attrInput = value;
+        }
+
+        [JsonIgnore, NodeAttribute]
+        public string ResName
+        {
+            get => DoubleCheckAttr(1, name: "Resource name").attrInput;
+            set => DoubleCheckAttr(1, name: "Resource name").attrInput = value;
         }
 
         public override IEnumerable<string> ToLua(int spacing)

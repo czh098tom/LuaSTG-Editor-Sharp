@@ -55,6 +55,11 @@ namespace LuaSTGEditorSharp.EditorData
             }
         }
 
+        public abstract string Extension { get; }
+
+        /// <summary>
+        /// Store the extension info in saving.
+        /// </summary>
         public virtual string ExtensionInfo
         {
             get

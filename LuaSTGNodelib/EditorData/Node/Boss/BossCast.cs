@@ -27,7 +27,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Boss
             Time = time;
         }
 
-        [JsonIgnore]
+        [JsonIgnore, NodeAttribute]
         public string Time
         {
             get => DoubleCheckAttr(0).attrInput;

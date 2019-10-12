@@ -22,6 +22,8 @@ namespace LuaSTGEditorSharp.EditorData.Document
             meta = new MetaDataEntity(this, supressMessage);
         }
 
+        public override string Extension => ".lstges";
+
         private readonly MetaDataEntity meta;
 
         public override MetaDataEntity OriginalMeta

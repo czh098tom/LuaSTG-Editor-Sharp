@@ -32,16 +32,14 @@ namespace LuaSTGEditorSharp.EditorData.Node.Advanced
             By = "";
         }
 
-        [JsonIgnore, XmlAttribute("Replace")]
-        //[DefaultValue("")]
+        [JsonIgnore, NodeAttribute, XmlAttribute("Replace")]
         public string Replace
         {
             get => DoubleCheckAttr(0).attrInput;
             set => DoubleCheckAttr(0).attrInput = value;
         }
 
-        [JsonIgnore, XmlAttribute("By")]
-        //[DefaultValue("")]
+        [JsonIgnore, NodeAttribute, XmlAttribute("By")]
         public string By
         {
             get => DoubleCheckAttr(1).attrInput;

@@ -29,8 +29,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.General
             Condition = code;
         }
 
-        [JsonIgnore, XmlAttribute("Condition")]
-        //[DefaultValue("")]
+        [JsonIgnore, NodeAttribute, XmlAttribute("Condition")]
         public string Condition
         {
             get => DoubleCheckAttr(0).attrInput;

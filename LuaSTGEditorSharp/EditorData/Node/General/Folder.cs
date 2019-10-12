@@ -25,8 +25,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.General
             Name = name;
         }
 
-        [JsonIgnore, XmlAttribute("Name")]
-        //[DefaultValue("")]
+        [JsonIgnore, NodeAttribute, XmlAttribute("Name")]
         public string Name
         {
             get => DoubleCheckAttr(0).attrInput;

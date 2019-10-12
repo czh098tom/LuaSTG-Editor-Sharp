@@ -28,6 +28,22 @@ namespace LuaSTGEditorSharp.EditorData.Node.Bullet
             , string vb, string ve, string r, string rs, string aim, string rotv, string stay, string destroyable, string time, string rebound)
             : base(workSpaceData)
         {
+            Style = style;
+            Color = color;
+            Position = pos;
+            Number = num;
+            Interval = intv;
+            VelocityBegin = vb;
+            VelocityEnd = ve;
+            Angle = r;
+            AngleSpread = rs;
+            AimToPlayer = aim;
+            RotationVelocity = rotv;
+            StayOnCreate = stay;
+            Destroyable = destroyable;
+            Time = time;
+            Rebound = rebound;
+            /*
             attributes.Add(new AttrItem("Style", style, this, "bulletStyle"));
             attributes.Add(new AttrItem("Color", color, this, "color"));
             attributes.Add(new AttrItem("Position", pos, this, "position"));
@@ -43,6 +59,112 @@ namespace LuaSTGEditorSharp.EditorData.Node.Bullet
             attributes.Add(new AttrItem("Destroyable", destroyable, this, "bool"));
             attributes.Add(new AttrItem("Time", time, this));
             attributes.Add(new AttrItem("Rebound", rebound, this, "bool"));
+            */
+        }
+
+        [JsonIgnore, NodeAttribute]
+        public string Style
+        {
+            get => DoubleCheckAttr(0, "bulletStyle").attrInput;
+            set => DoubleCheckAttr(0, "bulletStyle").attrInput = value;
+        }
+
+        [JsonIgnore, NodeAttribute]
+        public string Color
+        {
+            get => DoubleCheckAttr(1, "color").attrInput;
+            set => DoubleCheckAttr(1, "color").attrInput = value;
+        }
+
+        [JsonIgnore, NodeAttribute]
+        public string Position
+        {
+            get => DoubleCheckAttr(2, "position").attrInput;
+            set => DoubleCheckAttr(2, "position").attrInput = value;
+        }
+
+        [JsonIgnore, NodeAttribute]
+        public string Number
+        {
+            get => DoubleCheckAttr(3).attrInput;
+            set => DoubleCheckAttr(3).attrInput = value;
+        }
+
+        [JsonIgnore, NodeAttribute]
+        public string Interval
+        {
+            get => DoubleCheckAttr(4).attrInput;
+            set => DoubleCheckAttr(4).attrInput = value;
+        }
+
+        [JsonIgnore, NodeAttribute]
+        public string VelocityBegin
+        {
+            get => DoubleCheckAttr(5, "velocity", "Velocity begin").attrInput;
+            set => DoubleCheckAttr(5, "velocity", "Velocity begin").attrInput = value;
+        }
+
+        [JsonIgnore, NodeAttribute]
+        public string VelocityEnd
+        {
+            get => DoubleCheckAttr(6, "velocity", "Velocity end").attrInput;
+            set => DoubleCheckAttr(6, "velocity", "Velocity end").attrInput = value;
+        }
+
+        [JsonIgnore, NodeAttribute]
+        public string Angle
+        {
+            get => DoubleCheckAttr(7, "rotation").attrInput;
+            set => DoubleCheckAttr(7, "rotation").attrInput = value;
+        }
+
+        [JsonIgnore, NodeAttribute]
+        public string AngleSpread
+        {
+            get => DoubleCheckAttr(8, name: "Angle spread").attrInput;
+            set => DoubleCheckAttr(8, name: "Angle spread").attrInput = value;
+        }
+
+        [JsonIgnore, NodeAttribute]
+        public string AimToPlayer
+        {
+            get => DoubleCheckAttr(9, "bool", "Aim to player").attrInput;
+            set => DoubleCheckAttr(9, "bool", "Aim to player").attrInput = value;
+        }
+
+        [JsonIgnore, NodeAttribute]
+        public string RotationVelocity
+        {
+            get => DoubleCheckAttr(10, "omega", "Rotation velocity").attrInput;
+            set => DoubleCheckAttr(10, "omega", "Rotation velocity").attrInput = value;
+        }
+
+        [JsonIgnore, NodeAttribute]
+        public string StayOnCreate
+        {
+            get => DoubleCheckAttr(11, "bool", "Stay on create").attrInput;
+            set => DoubleCheckAttr(11, "bool", "Stay on create").attrInput = value;
+        }
+
+        [JsonIgnore, NodeAttribute]
+        public string Destroyable
+        {
+            get => DoubleCheckAttr(12, "bool").attrInput;
+            set => DoubleCheckAttr(12, "bool").attrInput = value;
+        }
+
+        [JsonIgnore, NodeAttribute]
+        public string Time
+        {
+            get => DoubleCheckAttr(13).attrInput;
+            set => DoubleCheckAttr(13).attrInput = value;
+        }
+
+        [JsonIgnore, NodeAttribute]
+        public string Rebound
+        {
+            get => DoubleCheckAttr(14, "bool").attrInput;
+            set => DoubleCheckAttr(14, "bool").attrInput = value;
         }
 
         public override IEnumerable<string> ToLua(int spacing)

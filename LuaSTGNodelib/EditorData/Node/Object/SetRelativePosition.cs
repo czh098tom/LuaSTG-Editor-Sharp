@@ -29,21 +29,21 @@ namespace LuaSTGEditorSharp.EditorData.Node.Object
             Follow = follow;
         }
 
-        [JsonIgnore]
+        [JsonIgnore, NodeAttribute]
         public string Position
         {
             get => DoubleCheckAttr(0, "position").attrInput;
             set => DoubleCheckAttr(0, "position").attrInput = value;
         }
 
-        [JsonIgnore]
+        [JsonIgnore, NodeAttribute]
         public string Rotation
         {
             get => DoubleCheckAttr(1, "rotation").attrInput;
             set => DoubleCheckAttr(1, "rotation").attrInput = value;
         }
 
-        [JsonIgnore]
+        [JsonIgnore, NodeAttribute]
         public string Follow
         {
             get => DoubleCheckAttr(2, "bool", "Follow master's rotation", true).attrInput;

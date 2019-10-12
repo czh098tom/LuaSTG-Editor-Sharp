@@ -37,7 +37,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Bullet
             Difficulty = difficulty;
         }
 
-        [JsonIgnore, XmlAttribute("Name")]
+        [JsonIgnore, NodeAttribute, XmlAttribute("Name")]
         //[DefaultValue("")]
         public string Name
         {
@@ -45,7 +45,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Bullet
             set => DoubleCheckAttr(0).attrInput = value;
         }
 
-        [JsonIgnore, XmlAttribute("Difficulty")]
+        [JsonIgnore, NodeAttribute, XmlAttribute("Difficulty")]
         //[DefaultValue("All")]
         public string Difficulty
         {

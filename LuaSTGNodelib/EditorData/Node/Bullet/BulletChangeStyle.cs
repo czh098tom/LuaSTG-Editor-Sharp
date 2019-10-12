@@ -30,21 +30,21 @@ namespace LuaSTGEditorSharp.EditorData.Node.Bullet
             Color = color;
         }
 
-        [JsonIgnore]
+        [JsonIgnore, NodeAttribute]
         public string Target
         {
             get => DoubleCheckAttr(0, "target").attrInput;
             set => DoubleCheckAttr(0, "target").attrInput = value;
         }
 
-        [JsonIgnore]
+        [JsonIgnore, NodeAttribute]
         public string Style
         {
             get => DoubleCheckAttr(1, "bulletStyle").attrInput;
             set => DoubleCheckAttr(1, "bulletStyle").attrInput = value;
         }
 
-        [JsonIgnore]
+        [JsonIgnore, NodeAttribute]
         public string Color
         {
             get => DoubleCheckAttr(2, "color").attrInput;

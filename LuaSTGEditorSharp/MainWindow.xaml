@@ -30,6 +30,9 @@
         <CommandBinding Command="local:EditorRoutedCommands.UnfoldAsRegion" Executed="UnfoldAsRegionCommandExecuted" CanExecute="UnfoldAsRegionCommand_CanExecute"/>
         <CommandBinding Command="local:EditorRoutedCommands.SwitchBan" Executed="SwitchBanCommandExecuted" CanExecute="SwitchBanCommand_CanExecute"/>
         <!--#endregion-->
+        <!--#region Tools-->
+        <CommandBinding Command="local:EditorRoutedCommands.FixNodeAttributes" Executed="FixAttributeCommandExecuted"/>
+        <!--#endregion-->
         <!--#region Export-->
         <CommandBinding Command="local:EditorRoutedCommands.ViewCode" Executed="ViewCodeCommandExecuted" CanExecute="ViewCodeCommand_CanExecute"/>
         <CommandBinding Command="local:EditorRoutedCommands.ExportCode" Executed="ExportCodeCommandExecuted" CanExecute="ExportCodeCommand_CanExecute"/>
@@ -376,7 +379,7 @@
                 <MenuItem Header="_Tools">
                     <MenuItem Header="_Refactor..."/>
                     <Separator/>
-                    <MenuItem Header="_Fix node attributes"/>
+                    <MenuItem Header="_Fix node attributes" Command="local:EditorRoutedCommands.FixNodeAttributes"/>
                     <Separator/>
                     <MenuItem Header="_Library tools..."/>
                 </MenuItem>

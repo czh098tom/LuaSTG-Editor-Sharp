@@ -29,21 +29,21 @@ namespace LuaSTGEditorSharp.EditorData.Node.Data
             Localized = localized;
         }
 
-        [JsonIgnore, XmlAttribute("Name")]
+        [JsonIgnore, NodeAttribute, XmlAttribute("Name")]
         public string FuncName
         {
             get => DoubleCheckAttr(0, name: "Name").attrInput;
             set => DoubleCheckAttr(0, name: "Name").attrInput = value;
         }
 
-        [JsonIgnore, XmlAttribute("Parameters")]
+        [JsonIgnore, NodeAttribute, XmlAttribute("Parameters")]
         public string Parameters
         {
             get => DoubleCheckAttr(1, name: "Parameter List").attrInput;
             set => DoubleCheckAttr(1, name: "Parameter List").attrInput = value;
         }
 
-        [JsonIgnore, XmlAttribute("Localized")]
+        [JsonIgnore, NodeAttribute, XmlAttribute("Localized")]
         public string Localized
         {
             get => DoubleCheckAttr(2, "bool").attrInput;

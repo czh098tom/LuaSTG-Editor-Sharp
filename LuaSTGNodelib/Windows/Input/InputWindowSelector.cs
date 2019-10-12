@@ -244,12 +244,15 @@ namespace LuaSTGEditorSharp.Windows.Input
                 case "bossBG":
                     window = new BossBGDefInput(toEdit, owner, source);
                     break;
+                //GUGUGU
                 case "colrow":
                 case "velocity":
+                case "velocityPos":
                 case "rotation":
                 case "animinterval":
                 case "rect":
                 case "rectNonNegative":
+                case "omega":
                 default:
                     window = new SingleLineInput(toEdit, owner);
                     break;

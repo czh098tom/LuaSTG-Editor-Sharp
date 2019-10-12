@@ -30,8 +30,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.General
             CodeContent = code;
         }
 
-        [JsonIgnore, XmlAttribute("Code")]
-        //[DefaultValue("")]
+        [JsonIgnore, NodeAttribute, XmlAttribute("Code")]
         public string CodeContent
         {
             get => DoubleCheckAttr(0, "code", "Code").attrInput;

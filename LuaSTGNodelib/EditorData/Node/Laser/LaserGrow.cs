@@ -27,10 +27,44 @@ namespace LuaSTGEditorSharp.EditorData.Node.Laser
         public LaserGrow(DocumentData workSpaceData, string target, string time, string se, string wait)
             : base(workSpaceData)
         {
+            Target = target;
+            Time = time;
+            PlaySoundEffect = se;
+            WaitInThisTask = wait;
+            /*
             attributes.Add(new AttrItem("Target", target, this, "target"));
             attributes.Add(new AttrItem("Time", time, this, "time"));
             attributes.Add(new AttrItem("Play Sound Effect", se, this, "bool"));
             attributes.Add(new AttrItem("Wait in this Task", wait, this, "bool"));
+            */
+        }
+
+        [JsonIgnore, NodeAttribute]
+        public string Target
+        {
+            get => DoubleCheckAttr(0, "target").attrInput;
+            set => DoubleCheckAttr(0, "target").attrInput = value;
+        }
+
+        [JsonIgnore, NodeAttribute]
+        public string Time
+        {
+            get => DoubleCheckAttr(1, "time").attrInput;
+            set => DoubleCheckAttr(1, "time").attrInput = value;
+        }
+
+        [JsonIgnore, NodeAttribute]
+        public string PlaySoundEffect
+        {
+            get => DoubleCheckAttr(2, "bool", "Play Sound Effect").attrInput;
+            set => DoubleCheckAttr(2, "bool", "Play Sound Effect").attrInput = value;
+        }
+
+        [JsonIgnore, NodeAttribute]
+        public string WaitInThisTask
+        {
+            get => DoubleCheckAttr(3, "bool", "Wait in this Task").attrInput;
+            set => DoubleCheckAttr(3, "bool", "Wait in this Task").attrInput = value;
         }
 
         public override IEnumerable<string> ToLua(int spacing)

@@ -30,14 +30,14 @@ namespace LuaSTGEditorSharp.EditorData.Node.Object
             Gravity = g;
         }
 
-        [JsonIgnore]
+        [JsonIgnore, NodeAttribute]
         public string Target
         {
             get => DoubleCheckAttr(0, "target").attrInput;
             set => DoubleCheckAttr(0, "target").attrInput = value;
         }
 
-        [JsonIgnore]
+        [JsonIgnore, NodeAttribute]
         public string Gravity
         {
             get => DoubleCheckAttr(1).attrInput;

@@ -35,49 +35,49 @@ namespace LuaSTGEditorSharp.EditorData.Node.Bullet
             Y_Velocity = vy;
         }
 
-        [JsonIgnore]
+        [JsonIgnore, NodeAttribute]
         public string Position
         {
             get => DoubleCheckAttr(0, "position").attrInput;
             set => DoubleCheckAttr(0, "position").attrInput = value;
         }
 
-        [JsonIgnore]
+        [JsonIgnore, NodeAttribute]
         public string RangeRadius
         {
             get => DoubleCheckAttr(1, name: "Radius of range").attrInput;
             set => DoubleCheckAttr(1, name: "Radius of range").attrInput = value;
         }
 
-        [JsonIgnore]
+        [JsonIgnore, NodeAttribute]
         public string ExpandingTime
         {
             get => DoubleCheckAttr(2, name: "Time of expanding").attrInput;
             set => DoubleCheckAttr(2, name: "Time of expanding").attrInput = value;
         }
 
-        [JsonIgnore]
+        [JsonIgnore, NodeAttribute]
         public string Duration
         {
             get => DoubleCheckAttr(3).attrInput;
             set => DoubleCheckAttr(3).attrInput = value;
         }
 
-        [JsonIgnore]
+        [JsonIgnore, NodeAttribute]
         public string ConvToFaith
         {
             get => DoubleCheckAttr(4, "bool", "Convert to faith").attrInput;
             set => DoubleCheckAttr(4, "bool", "Convert to faith").attrInput = value;
         }
 
-        [JsonIgnore]
+        [JsonIgnore, NodeAttribute]
         public string ClearIndest
         {
             get => DoubleCheckAttr(5, "bool", "Clear indestructible").attrInput;
             set => DoubleCheckAttr(5, "bool", "Clear indestructible").attrInput = value;
         }
 
-        [JsonIgnore]
+        [JsonIgnore, NodeAttribute]
         public string Y_Velocity
         {
             get => DoubleCheckAttr(6, name: "Y-velocity").attrInput;

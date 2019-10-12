@@ -29,14 +29,14 @@ namespace LuaSTGEditorSharp.EditorData.Node.Boss
             SCBG = scbg;
         }
 
-        [JsonIgnore]
+        [JsonIgnore, NodeAttribute]
         public string Position
         {
             get => DoubleCheckAttr(0, "position").attrInput;
             set => DoubleCheckAttr(0, "position").attrInput = value;
         }
 
-        [JsonIgnore]
+        [JsonIgnore, NodeAttribute]
         public string SCBG
         {
             get => DoubleCheckAttr(1, "bossBG", "Spell Card Background").attrInput;

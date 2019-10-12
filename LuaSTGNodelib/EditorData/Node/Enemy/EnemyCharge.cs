@@ -26,7 +26,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Enemy
             Position = pos;
         }
 
-        [JsonIgnore]
+        [JsonIgnore, NodeAttribute]
         public string Position
         {
             get => DoubleCheckAttr(0, "position").attrInput;

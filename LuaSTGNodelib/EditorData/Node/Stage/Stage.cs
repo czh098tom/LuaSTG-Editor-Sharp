@@ -25,12 +25,62 @@ namespace LuaSTGEditorSharp.EditorData.Node.Stage
         public Stage(DocumentData workSpaceData, string name)
             : base(workSpaceData)
         {
+            Name = name;
+            StartLifePractice = "7";
+            StartPowerPractice = "400";
+            StartFaithPractice = "50000";
+            StartBombPractice = "3";
+            AllowPractice = "true";
+            /*
             attributes.Add(new AttrItem("Name", name, this));
             attributes.Add(new AttrItem("Start life (practice)", "7", this));
             attributes.Add(new AttrItem("Start power (practice)", "400", this));
             attributes.Add(new AttrItem("Start faith (practice)", "50000", this));
             attributes.Add(new AttrItem("Start bomb (practice)", "3", this));
             attributes.Add(new AttrItem("Allow practice", "true", this, "bool"));
+            */
+        }
+
+        [JsonIgnore, NodeAttribute]
+        public string Name
+        {
+            get => DoubleCheckAttr(0).attrInput;
+            set => DoubleCheckAttr(0).attrInput = value;
+        }
+
+        [JsonIgnore, NodeAttribute]
+        public string StartLifePractice
+        {
+            get => DoubleCheckAttr(1, name: "Start life (practice)").attrInput;
+            set => DoubleCheckAttr(1, name: "Start life (practice)").attrInput = value;
+        }
+
+        [JsonIgnore, NodeAttribute]
+        public string StartPowerPractice
+        {
+            get => DoubleCheckAttr(2, name: "Start power (practice)").attrInput;
+            set => DoubleCheckAttr(2, name: "Start power (practice)").attrInput = value;
+        }
+
+        [JsonIgnore, NodeAttribute]
+        public string StartFaithPractice
+        {
+            get => DoubleCheckAttr(3, name: "Start faith (practice)").attrInput;
+            set => DoubleCheckAttr(3, name: "Start faith (practice)").attrInput = value;
+        }
+
+        [JsonIgnore, NodeAttribute]
+        public string StartBombPractice
+        {
+            get => DoubleCheckAttr(4, name: "Start bomb (practice)").attrInput;
+            set => DoubleCheckAttr(4, name: "Start bomb (practice)").attrInput = value;
+        }
+
+        [JsonIgnore, NodeAttribute]
+        public string AllowPractice
+        {
+            get => DoubleCheckAttr(5, "bool", "Allow practice").attrInput;
+            set => DoubleCheckAttr(5, "bool", "Allow practice").attrInput = value;
         }
 
         public override string ToString()

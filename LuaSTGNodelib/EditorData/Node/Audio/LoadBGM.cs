@@ -29,10 +29,44 @@ namespace LuaSTGEditorSharp.EditorData.Node.Audio
         public LoadBGM(DocumentData workSpaceData, string path, string name, string lend, string llen)
             : base(workSpaceData)
         {
+            /*
             attributes.Add(new DependencyAttrItem("Path", path, this, "audioFile"));
             attributes.Add(new AttrItem("Resource name", name, this));
             attributes.Add(new AttrItem("Loop end (sec)", lend, this));
             attributes.Add(new AttrItem("Loop length (sec)", llen, this));
+            */
+            FilePath = path;
+            ResName = name;
+            LoopEnd = lend;
+            LoopLength = llen;
+        }
+
+        [JsonIgnore, NodeAttribute]
+        public string FilePath
+        {
+            get => DoubleCheckAttr(0, "audioFile", "Path", true).attrInput;
+            set => DoubleCheckAttr(0, "audioFile", "Path", true).attrInput = value;
+        }
+
+        [JsonIgnore, NodeAttribute]
+        public string ResName
+        {
+            get => DoubleCheckAttr(1, name: "Resource name").attrInput;
+            set => DoubleCheckAttr(1, name: "Resource name").attrInput = value;
+        }
+
+        [JsonIgnore, NodeAttribute]
+        public string LoopEnd
+        {
+            get => DoubleCheckAttr(2, name: "Loop end (sec)").attrInput;
+            set => DoubleCheckAttr(2, name: "Loop end (sec)").attrInput = value;
+        }
+
+        [JsonIgnore, NodeAttribute]
+        public string LoopLength
+        {
+            get => DoubleCheckAttr(3, name: "Loop length (sec)").attrInput;
+            set => DoubleCheckAttr(3, name: "Loop length (sec)").attrInput = value;
         }
 
         public override IEnumerable<string> ToLua(int spacing)

@@ -17,6 +17,9 @@ namespace LuaSTGEditorSharp
         public static RoutedUICommand GoToLineX { get; }
         public static RoutedUICommand SwitchBan { get; }
         #endregion
+        #region tools
+        public static RoutedUICommand FixNodeAttributes { get; }
+        #endregion
         #region export
         public static RoutedUICommand ViewCode { get; }
         public static RoutedUICommand ExportCode { get; }
@@ -72,6 +75,7 @@ namespace LuaSTGEditorSharp
             };
             UnfoldAsRegion = new RoutedUICommand("Unfold as Region", "UnfoldAsRegion", typeof(EditorRoutedCommands), inputs);
             GoToLineX = new RoutedUICommand("Go to line X", "GoToLineX", typeof(EditorRoutedCommands));
+            FixNodeAttributes = new RoutedUICommand("Fix Node Attribute", "FixNodeAttribute", typeof(EditorRoutedCommands));
             inputs = new InputGestureCollection
             {
                 new KeyGesture(Key.F4)

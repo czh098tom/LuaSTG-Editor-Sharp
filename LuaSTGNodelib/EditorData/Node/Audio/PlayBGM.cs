@@ -28,16 +28,42 @@ namespace LuaSTGEditorSharp.EditorData.Node.Audio
         public PlayBGM(DocumentData workSpaceData, string name, string time, string setstime)
             : base(workSpaceData)
         {
+            /*
             attributes.Add(new AttrItem("Name", name, this, "BGM"));
             attributes.Add(new AttrItem("Time", time, this));
             attributes.Add(new AttrItem("Set stage time", setstime, this, "bool"));
+            */
+            Name = name;
+            Time = time;
+            SetStageTime = setstime;
+        }
+
+        [JsonIgnore, NodeAttribute]
+        public string Name
+        {
+            get => DoubleCheckAttr(0, "BGM").attrInput;
+            set => DoubleCheckAttr(0, "BGM").attrInput = value;
+        }
+
+        [JsonIgnore, NodeAttribute]
+        public string Time
+        {
+            get => DoubleCheckAttr(1).attrInput;
+            set => DoubleCheckAttr(1).attrInput = value;
+        }
+
+        [JsonIgnore, NodeAttribute]
+        public string SetStageTime
+        {
+            get => DoubleCheckAttr(2, "bool", "Set stage time").attrInput;
+            set => DoubleCheckAttr(2, "bool", "Set stage time").attrInput = value;
         }
 
         public override IEnumerable<string> ToLua(int spacing)
         {
             string sp = "".PadLeft(spacing * 4);
             string s = "";
-            if(string.IsNullOrEmpty(Macrolize(1)))
+            if (string.IsNullOrEmpty(Macrolize(1)))
             {
                 yield return sp + "LoadMusicRecord(" + Macrolize(0) + ")\n" + sp + "_play_music(" + Macrolize(0) + ")\n";
             }
@@ -52,7 +78,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Audio
             }
         }
 
-        public override IEnumerable<Tuple<int,TreeNode>> GetLines()
+        public override IEnumerable<Tuple<int, TreeNode>> GetLines()
         {
             if ((!string.IsNullOrEmpty(Macrolize(1))) && (!string.IsNullOrEmpty(Macrolize(2))))
             {
@@ -67,7 +93,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Audio
         public override string ToString()
         {
             string s = "";
-            if(!string.IsNullOrEmpty(NonMacrolize(1)))
+            if (!string.IsNullOrEmpty(NonMacrolize(1)))
             {
                 s = ", start from " + Macrolize(1) + " frame(s)";
             }

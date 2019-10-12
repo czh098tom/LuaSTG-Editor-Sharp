@@ -27,9 +27,35 @@ namespace LuaSTGEditorSharp.EditorData.Node.Laser
         public LaserTurnOff(DocumentData workSpaceData, string time, string wait)
             : base(workSpaceData)
         {
+            Target = "self";
+            Time = time;
+            WaitInThisTask = wait;
+            /*
             attributes.Add(new AttrItem("Target", "self", this, "target"));
             attributes.Add(new AttrItem("Time", time, this, "time"));
             attributes.Add(new AttrItem("Wait in this Task", wait, this, "bool"));
+            */
+        }
+
+        [JsonIgnore, NodeAttribute]
+        public string Target
+        {
+            get => DoubleCheckAttr(0, "target").attrInput;
+            set => DoubleCheckAttr(0, "target").attrInput = value;
+        }
+
+        [JsonIgnore, NodeAttribute]
+        public string Time
+        {
+            get => DoubleCheckAttr(1, "time").attrInput;
+            set => DoubleCheckAttr(1, "time").attrInput = value;
+        }
+
+        [JsonIgnore, NodeAttribute]
+        public string WaitInThisTask
+        {
+            get => DoubleCheckAttr(2, "bool", "Wait in this Task").attrInput;
+            set => DoubleCheckAttr(2, "bool", "Wait in this Task").attrInput = value;
         }
 
         public override IEnumerable<string> ToLua(int spacing)

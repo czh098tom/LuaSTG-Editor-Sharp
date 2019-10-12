@@ -33,35 +33,35 @@ namespace LuaSTGEditorSharp.EditorData.Node.Enemy
             DirMode = dirm;
         }
 
-        [JsonIgnore]
+        [JsonIgnore, NodeAttribute]
         public string Time
         {
             get => DoubleCheckAttr(0).attrInput;
             set => DoubleCheckAttr(0).attrInput = value;
         }
 
-        [JsonIgnore]
+        [JsonIgnore, NodeAttribute]
         public string Range
         {
             get => DoubleCheckAttr(1, "rect").attrInput;
             set => DoubleCheckAttr(1, "rect").attrInput = value;
         }
 
-        [JsonIgnore]
+        [JsonIgnore, NodeAttribute]
         public string Amplitude
         {
             get => DoubleCheckAttr(2, "rectNonNegative").attrInput;
             set => DoubleCheckAttr(2, "rectNonNegative").attrInput = value;
         }
 
-        [JsonIgnore]
+        [JsonIgnore, NodeAttribute]
         public string MoveMode
         {
             get => DoubleCheckAttr(3, "interpolation", "Move mode").attrInput;
             set => DoubleCheckAttr(3, "interpolation", "Move mode").attrInput = value;
         }
 
-        [JsonIgnore]
+        [JsonIgnore, NodeAttribute]
         public string DirMode
         {
             get => DoubleCheckAttr(4, "directionMode", "Direction mode").attrInput;

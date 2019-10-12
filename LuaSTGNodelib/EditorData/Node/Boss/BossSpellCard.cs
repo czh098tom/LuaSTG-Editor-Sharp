@@ -26,6 +26,18 @@ namespace LuaSTGEditorSharp.EditorData.Node.Boss
             , string HP, string power, string faith, string point, string bombImmune, string perform, string OID)
             : base(workSpaceData)
         {
+            Name = name;
+            ProtTime = protectT;
+            ReduTime = reductT;
+            TotalTime = totalT;
+            HitPoint = HP;
+            DropPower = power;
+            DropFaith = faith;
+            DropPoint = point;
+            ImmToBomb = bombImmune;
+            Perform = perform;
+            OptID = OID;
+            /*
             attributes.Add(new AttrItem("Name", name, this, "SCName"));
             attributes.Add(new AttrItem("Protect time (sec)", protectT, this));
             attributes.Add(new AttrItem("DMG redu. time (sec)", reductT, this));
@@ -37,6 +49,84 @@ namespace LuaSTGEditorSharp.EditorData.Node.Boss
             attributes.Add(new AttrItem("Immune to bomb", bombImmune, this, "bool"));
             attributes.Add(new AttrItem("Performing action", perform, this, "bool"));
             attributes.Add(new AttrItem("Optional ID", OID, this));
+            */
+        }
+
+        [JsonIgnore, NodeAttribute]
+        public string Name
+        {
+            get => DoubleCheckAttr(0, "SCName").attrInput;
+            set => DoubleCheckAttr(0, "SCName").attrInput = value;
+        }
+
+        [JsonIgnore, NodeAttribute]
+        public string ProtTime
+        {
+            get => DoubleCheckAttr(1, name: "Protect time (sec)").attrInput;
+            set => DoubleCheckAttr(1, name: "Protect time (sec)").attrInput = value;
+        }
+
+        [JsonIgnore, NodeAttribute]
+        public string ReduTime
+        {
+            get => DoubleCheckAttr(2, name: "DMG redu. time (sec)").attrInput;
+            set => DoubleCheckAttr(2, name: "DMG redu. time (sec)").attrInput = value;
+        }
+
+        [JsonIgnore, NodeAttribute]
+        public string TotalTime
+        {
+            get => DoubleCheckAttr(3, name: "Total time (sec)").attrInput;
+            set => DoubleCheckAttr(3, name: "Total time (sec)").attrInput = value;
+        }
+
+        [JsonIgnore, NodeAttribute]
+        public string HitPoint
+        {
+            get => DoubleCheckAttr(4, name: "Hit point").attrInput;
+            set => DoubleCheckAttr(4, name: "Hit point").attrInput = value;
+        }
+
+        [JsonIgnore, NodeAttribute]
+        public string DropPower
+        {
+            get => DoubleCheckAttr(5, name: "Drop power").attrInput;
+            set => DoubleCheckAttr(5, name: "Drop power").attrInput = value;
+        }
+
+        [JsonIgnore, NodeAttribute]
+        public string DropFaith
+        {
+            get => DoubleCheckAttr(6, name: "Drop faith").attrInput;
+            set => DoubleCheckAttr(6, name: "Drop faith").attrInput = value;
+        }
+
+        [JsonIgnore, NodeAttribute]
+        public string DropPoint
+        {
+            get => DoubleCheckAttr(7, name: "Drop point").attrInput;
+            set => DoubleCheckAttr(7, name: "Drop point").attrInput = value;
+        }
+
+        [JsonIgnore, NodeAttribute]
+        public string ImmToBomb
+        {
+            get => DoubleCheckAttr(8, "bool", "Immune to bomb").attrInput;
+            set => DoubleCheckAttr(8, "bool", "Immune to bomb").attrInput = value;
+        }
+
+        [JsonIgnore, NodeAttribute]
+        public string Perform
+        {
+            get => DoubleCheckAttr(9, "bool", "Performing action").attrInput;
+            set => DoubleCheckAttr(9, "bool", "Performing action").attrInput = value;
+        }
+
+        [JsonIgnore, NodeAttribute]
+        public string OptID
+        {
+            get => DoubleCheckAttr(10, name: "Optional ID").attrInput;
+            set => DoubleCheckAttr(10, name: "Optional ID").attrInput = value;
         }
 
         public override IEnumerable<string> ToLua(int spacing)

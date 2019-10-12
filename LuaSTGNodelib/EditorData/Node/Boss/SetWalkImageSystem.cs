@@ -34,42 +34,42 @@ namespace LuaSTGEditorSharp.EditorData.Node.Boss
             CollisionSize = collisize;
         }
 
-        [JsonIgnore]
+        [JsonIgnore, NodeAttribute]
         public string ImagePath
         {
             get => DoubleCheckAttr(0, "imageFile", "Image path").attrInput;
             set => DoubleCheckAttr(0, "imageFile", "Image path").attrInput = value;
         }
 
-        [JsonIgnore]
+        [JsonIgnore, NodeAttribute]
         public string ColRow
         {
             get => DoubleCheckAttr(1, "colrow", "Cols and rows").attrInput;
             set => DoubleCheckAttr(1, "colrow", "Cols and rows").attrInput = value;
         }
 
-        [JsonIgnore]
+        [JsonIgnore, NodeAttribute]
         public string NumOfImages
         {
             get => DoubleCheckAttr(2, "numofimg", "Number of images").attrInput;
             set => DoubleCheckAttr(2, "numofimg", "Number of images").attrInput = value;
         }
 
-        [JsonIgnore]
+        [JsonIgnore, NodeAttribute]
         public string NumOfAnims
         {
             get => DoubleCheckAttr(3, "numofani", "Number of repetend").attrInput;
             set => DoubleCheckAttr(3, "numofani", "Number of repetend").attrInput = value;
         }
 
-        [JsonIgnore]
+        [JsonIgnore, NodeAttribute]
         public string AnimInterval
         {
             get => DoubleCheckAttr(4, "animinterval", "Animation interval").attrInput;
             set => DoubleCheckAttr(4, "animinterval", "Animation interval").attrInput = value;
         }
 
-        [JsonIgnore]
+        [JsonIgnore, NodeAttribute]
         public string CollisionSize
         {
             get => DoubleCheckAttr(5, "size", "Collision size").attrInput;

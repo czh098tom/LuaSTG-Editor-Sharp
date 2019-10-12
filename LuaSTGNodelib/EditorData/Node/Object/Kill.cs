@@ -26,8 +26,26 @@ namespace LuaSTGEditorSharp.EditorData.Node.Object
         public Kill(DocumentData workSpaceData, string tar, string trigger)
             : base(workSpaceData)
         {
+            Target = tar;
+            TriggerEvent = trigger;
+            /*
             attributes.Add(new AttrItem("Target", tar, this, "target"));
             attributes.Add(new AttrItem("Trigger event", trigger, this, "bool"));
+            */
+        }
+
+        [JsonIgnore, NodeAttribute]
+        public string Target
+        {
+            get => DoubleCheckAttr(0, "target").attrInput;
+            set => DoubleCheckAttr(0, "target").attrInput = value;
+        }
+
+        [JsonIgnore, NodeAttribute]
+        public string TriggerEvent
+        {
+            get => DoubleCheckAttr(1, "bool", "Trigger event").attrInput;
+            set => DoubleCheckAttr(1, "bool", "Trigger event").attrInput = value;
         }
 
         public override IEnumerable<string> ToLua(int spacing)

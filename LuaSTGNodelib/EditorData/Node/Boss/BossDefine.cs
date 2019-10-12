@@ -27,6 +27,12 @@ namespace LuaSTGEditorSharp.EditorData.Node.Boss
         public BossDefine(DocumentData workSpaceData, string name, string difficulty, string display, string bg, string bgm)
             : base(workSpaceData)
         {
+            Name = name;
+            Difficulty = difficulty;
+            DisplayedName = display;
+            Background = bg;
+            BackgroundMusic = bgm;
+            /*
             attributes.Add(new AttrItem("Name", name, this));
             attributes.Add(new AttrItem("Difficulty", difficulty, this, "objDifficulty"));
             attributes.Add(new AttrItem("Displayed name", display, this));
@@ -41,6 +47,42 @@ namespace LuaSTGEditorSharp.EditorData.Node.Boss
             attributes.Add(new AttrItem("Background Music", bgm, this, "BGM"));
             //attributes.Add(new AttrItem("Num of images", imgColNum, this));
             //attributes.Add(new AttrItem("Num of animations", imgRowNum, this));
+            */
+        }
+
+        [JsonIgnore, NodeAttribute]
+        public string Name
+        {
+            get => DoubleCheckAttr(0).attrInput;
+            set => DoubleCheckAttr(0).attrInput = value;
+        }
+
+        [JsonIgnore, NodeAttribute]
+        public string Difficulty
+        {
+            get => DoubleCheckAttr(1, "objDifficulty").attrInput;
+            set => DoubleCheckAttr(1, "objDifficulty").attrInput = value;
+        }
+
+        [JsonIgnore, NodeAttribute]
+        public string DisplayedName
+        {
+            get => DoubleCheckAttr(2, name: "Displayed name").attrInput;
+            set => DoubleCheckAttr(2, name: "Displayed name").attrInput = value;
+        }
+
+        [JsonIgnore, NodeAttribute]
+        public string Background
+        {
+            get => DoubleCheckAttr(3, "BG").attrInput;
+            set => DoubleCheckAttr(3, "BG").attrInput = value;
+        }
+
+        [JsonIgnore, NodeAttribute]
+        public string BackgroundMusic
+        {
+            get => DoubleCheckAttr(4, "BGM", "Background Music").attrInput;
+            set => DoubleCheckAttr(4, "BGM", "Background Music").attrInput = value;
         }
 
         public override IEnumerable<string> ToLua(int spacing)

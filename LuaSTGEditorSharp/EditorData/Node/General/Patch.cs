@@ -32,8 +32,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.General
             PathContent = code;
         }
 
-        [JsonIgnore, XmlAttribute("Path")]
-        //[DefaultValue("")]
+        [JsonIgnore, NodeAttribute, XmlAttribute("Path")]
         public string PathContent
         {
             get => DoubleCheckAttr(0, "luaFile", "Path").attrInput;

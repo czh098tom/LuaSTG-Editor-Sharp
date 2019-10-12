@@ -28,14 +28,14 @@ namespace LuaSTGEditorSharp.EditorData.Node.Data
             Position = pos;
         }
 
-        [JsonIgnore]
+        [JsonIgnore, NodeAttribute]
         public string Target
         {
             get => DoubleCheckAttr(0, "target").attrInput;
             set => DoubleCheckAttr(0, "target").attrInput = value;
         }
 
-        [JsonIgnore]
+        [JsonIgnore, NodeAttribute]
         public string Position
         {
             get => DoubleCheckAttr(1, "position").attrInput;

@@ -21,11 +21,19 @@ namespace LuaSTGEditorSharp.EditorData.Node.Stage
         private StageGroup() : base() { }
 
         public StageGroup(DocumentData workSpaceData)
-            : this(workSpaceData, "Spell Card", 7) { }
+            : this(workSpaceData, "Spell Card", "7") { }
 
-        public StageGroup(DocumentData workSpaceData, string name, int life)
+        public StageGroup(DocumentData workSpaceData, string name, string life)
             : base(workSpaceData)
         {
+            Name = name;
+            StartLife = life;
+            StartPower = "400";
+            StartFaith = "50000";
+            StartBomb = "3";
+            AllowPractice = "true";
+            DifficultyValue = "1";
+            /*
             attributes.Add(new AttrItem("Name", name, this, "stageGroup"));
             attributes.Add(new AttrItem("Start life", life.ToString(), this));
             attributes.Add(new AttrItem("Start power", "400", this));
@@ -33,6 +41,56 @@ namespace LuaSTGEditorSharp.EditorData.Node.Stage
             attributes.Add(new AttrItem("Start bomb", "3", this));
             attributes.Add(new AttrItem("Allow practice", "true", this, "bool"));
             attributes.Add(new AttrItem("Difficulty value", "1", this, "difficulty"));
+            */
+        }
+
+        [JsonIgnore, NodeAttribute]
+        public string Name
+        {
+            get => DoubleCheckAttr(0, "stageGroup").attrInput;
+            set => DoubleCheckAttr(0, "stageGroup").attrInput = value;
+        }
+
+        [JsonIgnore, NodeAttribute]
+        public string StartLife
+        {
+            get => DoubleCheckAttr(1, name: "Start life").attrInput;
+            set => DoubleCheckAttr(1, name: "Start life").attrInput = value;
+        }
+
+        [JsonIgnore, NodeAttribute]
+        public string StartPower
+        {
+            get => DoubleCheckAttr(2, name: "Start power").attrInput;
+            set => DoubleCheckAttr(2, name: "Start power").attrInput = value;
+        }
+
+        [JsonIgnore, NodeAttribute]
+        public string StartFaith
+        {
+            get => DoubleCheckAttr(3, name: "Start faith").attrInput;
+            set => DoubleCheckAttr(3, name: "Start faith").attrInput = value;
+        }
+
+        [JsonIgnore, NodeAttribute]
+        public string StartBomb
+        {
+            get => DoubleCheckAttr(4, name: "Start bomb").attrInput;
+            set => DoubleCheckAttr(4, name: "Start bomb").attrInput = value;
+        }
+
+        [JsonIgnore, NodeAttribute]
+        public string AllowPractice
+        {
+            get => DoubleCheckAttr(5, "bool", "Allow practice").attrInput;
+            set => DoubleCheckAttr(5, "bool", "Allow practice").attrInput = value;
+        }
+
+        [JsonIgnore, NodeAttribute]
+        public string DifficultyValue
+        {
+            get => DoubleCheckAttr(6, "difficulty", "Difficulty value").attrInput;
+            set => DoubleCheckAttr(6, "difficulty", "Difficulty value").attrInput = value;
         }
 
         public override string ToString()

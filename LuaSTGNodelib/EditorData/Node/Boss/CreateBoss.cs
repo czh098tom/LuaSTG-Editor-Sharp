@@ -26,8 +26,26 @@ namespace LuaSTGEditorSharp.EditorData.Node.Boss
         public CreateBoss(DocumentData workSpaceData, string name, string wait)
             : base(workSpaceData)
         {
+            Name = name;
+            Wait = wait;
+            /*
             attributes.Add(new AttrItem("Name", name, this, "bossDef"));
             attributes.Add(new AttrItem("Wait", wait, this, "bool"));
+            */
+        }
+
+        [JsonIgnore, NodeAttribute]
+        public string Name
+        {
+            get => DoubleCheckAttr(0, "bossDef").attrInput;
+            set => DoubleCheckAttr(0, "bossDef").attrInput = value;
+        }
+
+        [JsonIgnore, NodeAttribute]
+        public string Wait
+        {
+            get => DoubleCheckAttr(1, "bool").attrInput;
+            set => DoubleCheckAttr(1, "bool").attrInput = value;
         }
 
         public override IEnumerable<string> ToLua(int spacing)

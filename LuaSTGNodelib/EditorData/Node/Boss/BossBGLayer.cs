@@ -26,6 +26,15 @@ namespace LuaSTGEditorSharp.EditorData.Node.Boss
             , string omega, string blend, string scale)
             : base(workSpaceData)
         {
+            Image = img;
+            IsTile = tile;
+            Position = pos;
+            Rotation = rot;
+            Velocity = v;
+            Omega = omega;
+            Blend = blend;
+            Scale = scale;
+            /*
             attributes.Add(new AttrItem("Image", img, this, "image"));
             attributes.Add(new AttrItem("Is tile", tile, this, "bool"));
             attributes.Add(new AttrItem("Position", pos, this, "position"));
@@ -34,6 +43,63 @@ namespace LuaSTGEditorSharp.EditorData.Node.Boss
             attributes.Add(new AttrItem("Omiga", omega, this, "omega"));
             attributes.Add(new AttrItem("Blend mode", blend, this, "blend"));
             attributes.Add(new AttrItem("scale", scale, this));
+            */
+        }
+
+        [JsonIgnore, NodeAttribute]
+        public string Image
+        {
+            get => DoubleCheckAttr(0, "image").attrInput;
+            set => DoubleCheckAttr(0, "image").attrInput = value;
+        }
+
+        [JsonIgnore, NodeAttribute]
+        public string IsTile
+        {
+            get => DoubleCheckAttr(1, "bool", "Is tile").attrInput;
+            set => DoubleCheckAttr(1, "bool", "Is tile").attrInput = value;
+        }
+
+        [JsonIgnore, NodeAttribute]
+        public string Position
+        {
+            get => DoubleCheckAttr(2, "position").attrInput;
+            set => DoubleCheckAttr(2, "position").attrInput = value;
+        }
+
+        [JsonIgnore, NodeAttribute]
+        public string Rotation
+        {
+            get => DoubleCheckAttr(3, "rotation").attrInput;
+            set => DoubleCheckAttr(3, "rotation").attrInput = value;
+        }
+
+        [JsonIgnore, NodeAttribute]
+        public string Velocity
+        {
+            get => DoubleCheckAttr(4, "velocityPos", "Velocity(x,y)").attrInput;
+            set => DoubleCheckAttr(4, "velocityPos", "Velocity(x,y)").attrInput = value;
+        }
+
+        [JsonIgnore, NodeAttribute]
+        public string Omega
+        {
+            get => DoubleCheckAttr(5, "omega", "Omiga").attrInput;
+            set => DoubleCheckAttr(5, "omega", "Omiga").attrInput = value;
+        }
+
+        [JsonIgnore, NodeAttribute]
+        public string Blend
+        {
+            get => DoubleCheckAttr(6, "blend", "Blend mode").attrInput;
+            set => DoubleCheckAttr(6, "blend", "Blend mode").attrInput = value;
+        }
+
+        [JsonIgnore, NodeAttribute]
+        public string Scale
+        {
+            get => DoubleCheckAttr(7).attrInput;
+            set => DoubleCheckAttr(7).attrInput = value;
         }
 
         public override IEnumerable<string> ToLua(int spacing)

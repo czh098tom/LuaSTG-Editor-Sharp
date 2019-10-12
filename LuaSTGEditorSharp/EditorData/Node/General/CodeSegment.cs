@@ -35,16 +35,14 @@ namespace LuaSTGEditorSharp.EditorData.Node.General
             Tail = tail;
         }
 
-        [JsonIgnore, XmlAttribute("Head")]
-        //[DefaultValue("do")]
+        [JsonIgnore, NodeAttribute("do"), XmlAttribute("Head")]
         public string Head
         {
             get => DoubleCheckAttr(0, "code").attrInput;
             set => DoubleCheckAttr(0, "code").attrInput = value;
         }
 
-        [JsonIgnore, XmlAttribute("Tail")]
-        //[DefaultValue("end")]
+        [JsonIgnore, NodeAttribute("end"), XmlAttribute("Tail")]
         public string Tail
         {
             get => DoubleCheckAttr(1, "code").attrInput;

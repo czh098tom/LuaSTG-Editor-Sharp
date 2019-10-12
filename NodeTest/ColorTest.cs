@@ -5,10 +5,10 @@ using LuaSTGEditorSharp.Windows.Input;
 
 namespace NodeTest
 {
-    [TestClass]
+    //[TestClass]
     public class ColorTest
     {
-        [TestMethod]
+        //[TestMethod]
         public void HSVToRGB()
         {
             ARGBInput.HSVColor hsv = new ARGBInput.HSVColor(306, .69f, .71f);
@@ -18,7 +18,7 @@ namespace NodeTest
             Assert.AreEqual(169, rgb.B);
         }
 
-        [TestMethod]
+        //[TestMethod]
         public void RGBToHSV()
         {
             Color rgb = Color.FromArgb(255, 255, 255, 255);

@@ -32,7 +32,7 @@ namespace LuaSTGEditorSharp.EditorData.Node
             //activated = true;
         }
 
-        [JsonIgnore, XmlAttribute("Name")]
+        [JsonIgnore, NodeAttribute, XmlAttribute("Name")]
         //[DefaultValue("File")]
         public string Name
         {

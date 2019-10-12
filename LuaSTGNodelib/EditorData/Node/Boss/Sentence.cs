@@ -35,35 +35,35 @@ namespace LuaSTGEditorSharp.EditorData.Node.Boss
             Scale = scale;
         }
 
-        [JsonIgnore]
+        [JsonIgnore, NodeAttribute]
         public string Image
         {
             get => DoubleCheckAttr(0, "image").attrInput;
             set => DoubleCheckAttr(0, "image").attrInput = value;
         }
 
-        [JsonIgnore]
+        [JsonIgnore, NodeAttribute]
         public string ImagePosition
         {
             get => DoubleCheckAttr(1, "lrstr", "Image position").attrInput;
             set => DoubleCheckAttr(1, "lrstr", "Image position").attrInput = value;
         }
 
-        [JsonIgnore]
+        [JsonIgnore, NodeAttribute]
         public string Text
         {
             get => DoubleCheckAttr(2, "multilineText").attrInput;
             set => DoubleCheckAttr(2, "multilineText").attrInput = value;
         }
 
-        [JsonIgnore]
+        [JsonIgnore, NodeAttribute]
         public string Time
         {
             get => DoubleCheckAttr(3).attrInput;
             set => DoubleCheckAttr(3).attrInput = value;
         }
 
-        [JsonIgnore]
+        [JsonIgnore, NodeAttribute]
         public string Scale
         {
             get => DoubleCheckAttr(4, "scale").attrInput;

@@ -27,6 +27,16 @@ namespace LuaSTGEditorSharp.EditorData.Node.Laser
             , string blength, string tlength, string width, string nsize, string hsize)
             : base(workSpaceData)
         {
+            ParameterList = para;
+            Color = color;
+            Style = style;
+            HeadLength = hlength;
+            BodyLength = blength;
+            TailLength = tlength;
+            Width = width;
+            NodeSize = nsize;
+            HeadSize = hsize;
+            /*
             attributes.Add(new AttrItem("Parameter List", para, this));
             attributes.Add(new AttrItem("Color", color, this, "color"));
             attributes.Add(new AttrItem("Style", style, this, "laserStyle"));
@@ -36,6 +46,70 @@ namespace LuaSTGEditorSharp.EditorData.Node.Laser
             attributes.Add(new AttrItem("Width", width, this, "length"));
             attributes.Add(new AttrItem("Node size", nsize, this));
             attributes.Add(new AttrItem("Head size", hsize, this));
+            */
+        }
+
+        [JsonIgnore, NodeAttribute]
+        public string ParameterList
+        {
+            get => DoubleCheckAttr(0, name: "Parameter List").attrInput;
+            set => DoubleCheckAttr(0, name: "Parameter List").attrInput = value;
+        }
+
+        [JsonIgnore, NodeAttribute]
+        public string Color
+        {
+            get => DoubleCheckAttr(1, "color").attrInput;
+            set => DoubleCheckAttr(1, "color").attrInput = value;
+        }
+
+        [JsonIgnore, NodeAttribute]
+        public string Style
+        {
+            get => DoubleCheckAttr(2, "laserStyle").attrInput;
+            set => DoubleCheckAttr(2, "laserStyle").attrInput = value;
+        }
+
+        [JsonIgnore, NodeAttribute]
+        public string HeadLength
+        {
+            get => DoubleCheckAttr(3, "length", "Head Length").attrInput;
+            set => DoubleCheckAttr(3, "length", "Head Length").attrInput = value;
+        }
+
+        [JsonIgnore, NodeAttribute]
+        public string BodyLength
+        {
+            get => DoubleCheckAttr(4, "length", "Body Length").attrInput;
+            set => DoubleCheckAttr(4, "length", "Body Length").attrInput = value;
+        }
+
+        [JsonIgnore, NodeAttribute]
+        public string TailLength
+        {
+            get => DoubleCheckAttr(5, "length", "Tail Length").attrInput;
+            set => DoubleCheckAttr(5, "length", "Tail Length").attrInput = value;
+        }
+
+        [JsonIgnore, NodeAttribute]
+        public string Width
+        {
+            get => DoubleCheckAttr(6, "length").attrInput;
+            set => DoubleCheckAttr(6, "length").attrInput = value;
+        }
+
+        [JsonIgnore, NodeAttribute]
+        public string NodeSize
+        {
+            get => DoubleCheckAttr(7, name: "Node size").attrInput;
+            set => DoubleCheckAttr(7, name: "Node size").attrInput = value;
+        }
+
+        [JsonIgnore, NodeAttribute]
+        public string HeadSize
+        {
+            get => DoubleCheckAttr(8, name: "Head size").attrInput;
+            set => DoubleCheckAttr(8, name: "Head size").attrInput = value;
         }
 
         public override IEnumerable<string> ToLua(int spacing)

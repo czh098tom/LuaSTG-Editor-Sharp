@@ -25,7 +25,15 @@ namespace LuaSTGEditorSharp.EditorData.Node.Stage
         public StageBG(DocumentData workSpaceData, string name)
             : base(workSpaceData)
         {
-            attributes.Add(new AttrItem("Background", name, this, "BG"));
+            Background = name;
+            //attributes.Add(new AttrItem("Background", name, this, "BG"));
+        }
+
+        [JsonIgnore, NodeAttribute]
+        public string Background
+        {
+            get => DoubleCheckAttr(0, "BG").attrInput;
+            set => DoubleCheckAttr(0, "BG").attrInput = value;
         }
 
         public override string ToString()

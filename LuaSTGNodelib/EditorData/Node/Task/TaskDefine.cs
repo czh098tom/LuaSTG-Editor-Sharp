@@ -28,14 +28,14 @@ namespace LuaSTGEditorSharp.EditorData.Node.Task
             Parameter = parameter;
         }
 
-        [JsonIgnore]
+        [JsonIgnore, NodeAttribute]
         public string Name
         {
             get => DoubleCheckAttr(0).attrInput;
             set => DoubleCheckAttr(0).attrInput = value;
         }
 
-        [JsonIgnore]
+        [JsonIgnore, NodeAttribute]
         public string Parameter
         {
             get => DoubleCheckAttr(1).attrInput;

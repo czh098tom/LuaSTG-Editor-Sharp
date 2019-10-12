@@ -230,6 +230,56 @@ namespace LuaSTGEditorSharp
             }
         }
 
+        public void OpenAndFixNodeAttributes()
+        {
+            var loadFileDialog = new System.Windows.Forms.OpenFileDialog()
+            {
+                InitialDirectory = (App.Current as App).SLDir,
+                Filter = "LuaSTG Sharp Editor File (*.lstges, *.lstgproj)|*.lstges;*.lstgproj",
+                Multiselect = true
+            };
+            if (loadFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.Cancel) return;
+            for (int i = 0; i < loadFileDialog.FileNames.Length; i++)
+            {
+                FixNodeAttributes(loadFileDialog.SafeFileNames[i], loadFileDialog.FileNames[i]);
+                (App.Current as App).SLDir = Path.GetDirectoryName(loadFileDialog.FileNames[i]);
+            }
+        }
+
+        public async void FixNodeAttributes(string name, string path)
+        {
+            try
+            {
+                DocumentData newDoc = DocumentData.GetNewByExtension(Path.GetExtension(path), Documents.MaxHash, name, path);
+                Documents.AddAndAllocHash(newDoc);
+                TreeNode t = await DocumentData.CreateNodeFromFileAsync(path, newDoc);
+                newDoc.TreeNodes.Add(t);
+                t.RaiseCreate(new OnCreateEventArgs() { parent = null });
+                newDoc.OnOpening();
+                //newDoc.TreeNodes[0].FixBan();
+                newDoc.OriginalMeta.PropertyChanged += newDoc.OnEditing;
+
+                newDoc.DocPath = "";
+                Queue<TreeNode> nodes = new Queue<TreeNode>();
+                nodes.Enqueue(newDoc.TreeNodes[0]);
+                while (nodes.Count > 0)
+                {
+                    TreeNode n = nodes.Dequeue();
+                    n.FixAttributesList();
+                    foreach(TreeNode tn in n.Children)
+                    {
+                        nodes.Enqueue(tn);
+                    }
+                }
+            }
+            catch (JsonException e)
+            {
+                MessageBox.Show("Failed to open document or fix attribute. Please check whether the targeted file is in current version.\n"
+                    + "Error Message: " + e.ToString()
+                    , "LuaSTG Editor Sharp", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
         public async void CloneDocFromPath(string name, string path, ProjSettings settings)
         {
             try
@@ -1046,6 +1096,11 @@ namespace LuaSTGEditorSharp
         private void ExportZipCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
             e.CanExecute = ActivatedWorkSpaceData != null && !packagingLocked && (App.Current as App).IsEXEPathSet;
+        }
+
+        private void FixAttributeCommandExecuted(object sender, ExecutedRoutedEventArgs e)
+        {
+            OpenAndFixNodeAttributes();
         }
 
         private void RunProjectCommandExecuted(object sender, ExecutedRoutedEventArgs e)

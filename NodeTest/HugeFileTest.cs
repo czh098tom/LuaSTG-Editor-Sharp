@@ -7,13 +7,13 @@ using SevenZip;
 
 namespace NodeTest
 {
-    [TestClass]
+    //[TestClass]
     public class HugeFileTest
     {
         /// <summary>
         /// Create a huge random file at D:\Huge_rnd.lstges.
         /// </summary>
-        [TestMethod]
+        //[TestMethod]
         public void CreateHugeFile()
         {
             FileStream fs = new FileStream("D:\\Huge_rnd.lstges", FileMode.Create);
@@ -32,7 +32,7 @@ namespace NodeTest
             fs.Close();
         }
 
-        [TestMethod]
+        //[TestMethod]
         public void SevenZip2Folder()
         {
             /*

@@ -16,7 +16,7 @@ using LuaSTGEditorSharp.EditorData.Node.Advanced;
 
 namespace NodeTest
 {
-    [TestClass]
+    //[TestClass]
     public class CodeTest : NodeTestBase<Code>
     {
         public override Code NewT(DocumentData d)
@@ -24,14 +24,14 @@ namespace NodeTest
             return new Code(d);
         }
 
-        [TestMethod]
+        //[TestMethod]
         public override void ToLuaTest()
         {
             AssetToLua("    a\n\n", 1, "a\n");
             ReassetToLua("    a\n    aa\n    aaa\n    aaaa\n\n", 1, "a\naa\naaa\naaaa\n");
         }
 
-        [TestMethod]
+        //[TestMethod]
         public override void RowCountTest()
         {
             AssetRowCount(1, "a");

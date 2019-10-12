@@ -26,7 +26,15 @@ namespace LuaSTGEditorSharp.EditorData.Node.Object
         public CallBackFunc(DocumentData workSpaceData, string ev)
             : base(workSpaceData)
         {
-            attributes.Add(new AttrItem("Event type", ev, this, "event"));
+            EventType = ev;
+            //attributes.Add(new AttrItem("Event type", ev, this, "event"));
+        }
+
+        [JsonIgnore, NodeAttribute]
+        public string EventType
+        {
+            get => DoubleCheckAttr(0, "event", "Event type").attrInput;
+            set => DoubleCheckAttr(0, "event", "Event type").attrInput = value;
         }
 
         public override IEnumerable<string> ToLua(int spacing)

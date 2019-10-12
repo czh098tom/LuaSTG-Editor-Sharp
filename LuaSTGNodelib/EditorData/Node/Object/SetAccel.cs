@@ -26,10 +26,44 @@ namespace LuaSTGEditorSharp.EditorData.Node.Object
         public SetAccel(DocumentData workSpaceData, string tar, string v, string r, string aim)
             : base(workSpaceData)
         {
+            Target = tar;
+            Acceleration = v;
+            Rotation = r;
+            AimToPlayer = aim;
+            /*
             attributes.Add(new AttrItem("Target", tar, this, "target"));
             attributes.Add(new AttrItem("Acceleration", v, this));
             attributes.Add(new AttrItem("Rotation", r, this));
             attributes.Add(new AttrItem("Aim to Player", aim, this, "bool"));
+            */
+        }
+
+        [JsonIgnore, NodeAttribute]
+        public string Target
+        {
+            get => DoubleCheckAttr(0, "target").attrInput;
+            set => DoubleCheckAttr(0, "target").attrInput = value;
+        }
+
+        [JsonIgnore, NodeAttribute]
+        public string Acceleration
+        {
+            get => DoubleCheckAttr(1).attrInput;
+            set => DoubleCheckAttr(1).attrInput = value;
+        }
+
+        [JsonIgnore, NodeAttribute]
+        public string Rotation
+        {
+            get => DoubleCheckAttr(2).attrInput;
+            set => DoubleCheckAttr(2).attrInput = value;
+        }
+
+        [JsonIgnore, NodeAttribute]
+        public string AimToPlayer
+        {
+            get => DoubleCheckAttr(3, "bool", "Aim to Player").attrInput;
+            set => DoubleCheckAttr(3, "bool", "Aim to Player").attrInput = value;
         }
 
         public override IEnumerable<string> ToLua(int spacing)

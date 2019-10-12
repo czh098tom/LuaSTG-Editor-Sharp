@@ -26,11 +26,53 @@ namespace LuaSTGEditorSharp.EditorData.Node.Bullet
         public BulletInit(DocumentData workSpaceData, string para, string style, string color)
             : base(workSpaceData)
         {
+            Parameters = para;
+            Style = style;
+            Color = color;
+            Stay = "true";
+            Destroyable = "true";
+            /*
             attributes.Add(new AttrItem("Parameter List", para, this));
             attributes.Add(new AttrItem("Style", style, this, "bulletStyle"));
             attributes.Add(new AttrItem("Color", color, this, "color"));
             attributes.Add(new AttrItem("Stay on create", "true", this, "bool"));
             attributes.Add(new AttrItem("Destroyable", "true", this, "bool"));
+            */
+        }
+
+        [JsonIgnore, NodeAttribute]
+        public string Parameters
+        {
+            get => DoubleCheckAttr(0, name: "Parameter List").attrInput;
+            set => DoubleCheckAttr(0, name: "Parameter List").attrInput = value;
+        }
+
+        [JsonIgnore, NodeAttribute]
+        public string Style
+        {
+            get => DoubleCheckAttr(1, "bulletStyle").attrInput;
+            set => DoubleCheckAttr(1, "bulletStyle").attrInput = value;
+        }
+
+        [JsonIgnore, NodeAttribute]
+        public string Color
+        {
+            get => DoubleCheckAttr(2, "color").attrInput;
+            set => DoubleCheckAttr(2, "color").attrInput = value;
+        }
+
+        [JsonIgnore, NodeAttribute]
+        public string Stay
+        {
+            get => DoubleCheckAttr(3, "bool", "Stay on create").attrInput;
+            set => DoubleCheckAttr(3, "bool", "Stay on create").attrInput = value;
+        }
+
+        [JsonIgnore, NodeAttribute]
+        public string Destroyable
+        { 
+            get => DoubleCheckAttr(4, "bool").attrInput;
+            set => DoubleCheckAttr(4, "bool").attrInput = value;
         }
 
         public override IEnumerable<string> ToLua(int spacing)

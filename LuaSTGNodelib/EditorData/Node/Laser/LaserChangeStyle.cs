@@ -27,9 +27,35 @@ namespace LuaSTGEditorSharp.EditorData.Node.Laser
         public LaserChangeStyle(DocumentData workSpaceData, string color, string style)
             : base(workSpaceData)
         {
+            Target = "self";
+            Color = color;
+            Style = style;
+            /*
             attributes.Add(new AttrItem("Target", "self", this, "target"));
             attributes.Add(new AttrItem("Color", color, this, "nullableColor"));
             attributes.Add(new AttrItem("Style", style, this, "laserStyle"));
+            */
+        }
+
+        [JsonIgnore, NodeAttribute]
+        public string Target
+        {
+            get => DoubleCheckAttr(0, "target").attrInput;
+            set => DoubleCheckAttr(0, "target").attrInput = value;
+        }
+
+        [JsonIgnore, NodeAttribute]
+        public string Color
+        {
+            get => DoubleCheckAttr(1, "nullableColor").attrInput;
+            set => DoubleCheckAttr(1, "nullableColor").attrInput = value;
+        }
+
+        [JsonIgnore, NodeAttribute]
+        public string Style
+        {
+            get => DoubleCheckAttr(2, "laserStyle").attrInput;
+            set => DoubleCheckAttr(2, "laserStyle").attrInput = value;
         }
 
         public override IEnumerable<string> ToLua(int spacing)

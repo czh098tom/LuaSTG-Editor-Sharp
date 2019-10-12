@@ -22,12 +22,21 @@ namespace LuaSTGEditorSharp.EditorData.Node.Project
         }
 
         public ProjectRoot(DocumentData workSpaceData)
-            : this(workSpaceData, "") { attributes.Add(new AttrItem("Name", this)); }
+            : this(workSpaceData, "") { }
+
         public ProjectRoot(DocumentData workSpaceData, string name) 
             : base(workSpaceData)
         {
-            attributes.Add(new AttrItem("Name", this) { AttrInput = name });
+            Name = name;
+            //attributes.Add(new AttrItem("Name", name, this));
             //activated = true;
+        }
+
+        [JsonIgnore, NodeAttribute]
+        public string Name
+        {
+            get => DoubleCheckAttr(0).attrInput;
+            set => DoubleCheckAttr(0).attrInput = value;
         }
 
         public override IEnumerable<Tuple<int, TreeNode>> GetLines()

@@ -26,9 +26,35 @@ namespace LuaSTGEditorSharp.EditorData.Node.Object
         public SetBlend(DocumentData workSpaceData, string tar, string blend, string color)
             : base(workSpaceData)
         {
+            Target = tar;
+            BlendMode = blend;
+            ARGB = color;
+            /*
             attributes.Add(new AttrItem("Target", tar, this, "target"));
             attributes.Add(new AttrItem("Blend Mode", blend, this, "blend"));
             attributes.Add(new AttrItem("ARGB", color, this, "ARGB"));
+            */
+        }
+
+        [JsonIgnore, NodeAttribute]
+        public string Target
+        {
+            get => DoubleCheckAttr(0, "target").attrInput;
+            set => DoubleCheckAttr(0, "target").attrInput = value;
+        }
+
+        [JsonIgnore, NodeAttribute]
+        public string BlendMode
+        {
+            get => DoubleCheckAttr(1, "blend", "Blend Mode").attrInput;
+            set => DoubleCheckAttr(1, "blend", "Blend Mode").attrInput = value;
+        }
+
+        [JsonIgnore, NodeAttribute]
+        public string ARGB
+        {
+            get => DoubleCheckAttr(2, "ARGB").attrInput;
+            set => DoubleCheckAttr(2, "ARGB").attrInput = value;
         }
 
         public override IEnumerable<string> ToLua(int spacing)

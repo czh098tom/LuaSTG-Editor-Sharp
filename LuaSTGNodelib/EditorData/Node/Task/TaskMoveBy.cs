@@ -26,9 +26,35 @@ namespace LuaSTGEditorSharp.EditorData.Node.Task
         public TaskMoveBy(DocumentData workSpaceData, string dest, string frame, string mode)
             : base(workSpaceData)
         {
+            Destination = dest;
+            Frame = frame;
+            Mode = mode;
+            /*
             attributes.Add(new AttrItem("Destination", dest, this, "position"));
             attributes.Add(new AttrItem("Frame", frame, this));
             attributes.Add(new AttrItem("Mode", mode, this, "interpolation"));
+            */
+        }
+
+        [JsonIgnore, NodeAttribute]
+        public string Destination
+        {
+            get => DoubleCheckAttr(0, "position").attrInput;
+            set => DoubleCheckAttr(0, "position").attrInput = value;
+        }
+
+        [JsonIgnore, NodeAttribute]
+        public string Frame
+        {
+            get => DoubleCheckAttr(1).attrInput;
+            set => DoubleCheckAttr(1).attrInput = value;
+        }
+
+        [JsonIgnore, NodeAttribute]
+        public string Mode
+        {
+            get => DoubleCheckAttr(2, "interpolation").attrInput;
+            set => DoubleCheckAttr(2, "interpolation").attrInput = value;
         }
 
         public override IEnumerable<string> ToLua(int spacing)

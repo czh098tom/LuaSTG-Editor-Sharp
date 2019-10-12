@@ -14,6 +14,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Advanced
     [Serializable, NodeIcon("images/16x16/unidentifiednode.png")]
     [IgnoreValidation]
     [CreateInvoke(0)]
+    [IgnoreAttributesParityCheck]
     public class UnidentifiedNode : TreeNode
     {
         [JsonConstructor]

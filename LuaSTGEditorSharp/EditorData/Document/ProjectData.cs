@@ -20,6 +20,8 @@ namespace LuaSTGEditorSharp.EditorData.Document
         public ObservableCollection<IDocumentWithMeta> referencedDoc = new ObservableCollection<IDocumentWithMeta>();
         private readonly MetaDataEntity meta;
 
+        public override string Extension => ".lstgproj";
+
         public override string ExtensionInfo
         {
             get

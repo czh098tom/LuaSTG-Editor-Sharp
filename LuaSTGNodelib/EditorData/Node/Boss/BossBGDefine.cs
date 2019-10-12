@@ -26,7 +26,15 @@ namespace LuaSTGEditorSharp.EditorData.Node.Boss
         public BossBGDefine(DocumentData workSpaceData, string name)
             : base(workSpaceData)
         {
-            attributes.Add(new AttrItem("Name", name, this));
+            //attributes.Add(new AttrItem("Name", name, this));
+            Name = name;
+        }
+
+        [JsonIgnore, NodeAttribute]
+        public string Name
+        {
+            get => DoubleCheckAttr(0).attrInput;
+            set => DoubleCheckAttr(0).attrInput = value;
         }
 
         public override string ToString()

@@ -27,21 +27,21 @@ namespace LuaSTGEditorSharp.EditorData.Node.Task
             Target = target;
         }
 
-        [JsonIgnore]
+        [JsonIgnore, NodeAttribute]
         public string Name
         {
             get => DoubleCheckAttr(0, "taskDef").attrInput;
             set => DoubleCheckAttr(0, "taskDef").attrInput = value;
         }
 
-        [JsonIgnore]
+        [JsonIgnore, NodeAttribute]
         public string Parameters
         {
             get => DoubleCheckAttr(1, "taskParam").attrInput;
             set => DoubleCheckAttr(1, "taskParam").attrInput = value;
         }
 
-        [JsonIgnore]
+        [JsonIgnore, NodeAttribute]
         public string Target
         {
             get => DoubleCheckAttr(2, "target").attrInput;

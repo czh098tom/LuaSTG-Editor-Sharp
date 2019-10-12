@@ -262,6 +262,12 @@ namespace LuaSTGEditorSharp.EditorData
         protected bool activated = false;
 
         /// <summary>
+        /// Indicates used attributes when checking.
+        /// </summary>
+        [JsonIgnore, XmlIgnore]
+        private HashSet<AttrItem> usedAttributes = null;
+
+        /// <summary>
         /// Event when node is created.
         /// </summary>
         private event OnCreateNodeHandler OnCreate;
@@ -994,7 +1000,7 @@ namespace LuaSTGEditorSharp.EditorData
         /// <param name="target">The <see cref="AttrItem"/></param>
         private void InsertAttrAt(int id, AttrItem target)
         {
-            if (id > attributes.Count)
+            if (id >= attributes.Count)
             {
                 for (int i = attributes.Count; i < id; i++)
                 {
@@ -1004,14 +1010,8 @@ namespace LuaSTGEditorSharp.EditorData
             }
             else
             {
-                if (id < attributes.Count && attributes[id] == null)
-                {
-                    attributes[id] = target;
-                }
-                else
-                {
-                    attributes.Insert(id, target);
-                }
+                target.attrInput = attributes[id]?.attrInput ?? "";
+                attributes[id] = target;
             }
         }
 
@@ -1027,24 +1027,54 @@ namespace LuaSTGEditorSharp.EditorData
         /// <param name="isDependency">Indicate whether a default <see cref="AttrItem"/> 
         /// is <see cref="DependencyAttrItem"/>.</param>
         /// <returns>The targeted <see cref="AttrItem"/> if found, otherwise a default <see cref="AttrItem"/>.</returns>
-        public AttrItem DoubleCheckAttr(int id, string defaultEditWindow = "", [CallerMemberName] string name = "", bool isDependency = false)
+        public AttrItem DoubleCheckAttr(int id, string defaultEditWindow = ""
+            , [CallerMemberName] string name = "", bool isDependency = false)
         {
             AttrItem ai = GetAttr(id);
-            if (ai == null || string.IsNullOrEmpty(ai.AttrCap) || ai.AttrCap != name) ai = GetAttr(name);
-            if (ai == null)
+            if (ai == null || string.IsNullOrEmpty(ai.AttrCap) || ai.AttrCap != name)
             {
-                if (isDependency)
+                ai = GetAttr(name);
+                if (ai != null)
                 {
-                    ai = new DependencyAttrItem(name, "", defaultEditWindow);
+                    SwapAttr(id, ai);
                 }
                 else
                 {
-                    ai = new AttrItem(name, "", defaultEditWindow);
+                    if (isDependency)
+                    {
+                        ai = new DependencyAttrItem(name, "", defaultEditWindow);
+                    }
+                    else
+                    {
+                        ai = new AttrItem(name, "", defaultEditWindow);
+                    }
+                    InsertAttrAt(id, ai);
                 }
-                InsertAttrAt(id, ai);
             }
-            if (!string.IsNullOrEmpty(defaultEditWindow)) ai.EditWindow = defaultEditWindow;
+            ai.EditWindow = defaultEditWindow;
+            usedAttributes?.Remove(ai);
             return ai;
+        }
+
+        /// <summary>
+        /// Place an <see cref="AttrItem"/> to a place of a given id, then put the <see cref="AttrItem"/> replaced to the place 
+        /// that <see cref="AttrItem"/> located before.
+        /// </summary>
+        /// <param name="id">The ID of the target place.</param>
+        /// <param name="ai">The <see cref="AttrItem"/> to place.</param>
+        private void SwapAttr(int id, AttrItem ai)
+        {
+            if (id >= attributes.Count)
+            {
+                for (int i = attributes.Count; i <= id; i++)
+                {
+                    attributes.Add(null);
+                }
+            }
+            int id2 = attributes.IndexOf(ai);
+            AttrItem ai2 = attributes[id];
+            attributes[id2] = ai2;
+            attributes[id] = ai;
         }
 
         #endregion
@@ -1649,6 +1679,36 @@ namespace LuaSTGEditorSharp.EditorData
             foreach(TreeNode t in children)
             {
                 t.ClearChildSelection();
+            }
+        }
+
+        /// <summary>
+        /// Check the current attributes in this <see cref="TreeNode"/> with definition, rearrange it to definition.
+        /// </summary>
+        public void FixAttributesList()
+        {
+            bool ignore = GetType()
+                .GetCustomAttributes(false)
+                .Count((j) => j is Node.NodeAttributes.IgnoreAttributesParityCheckAttribute) > 0;
+            if (!ignore)
+            {
+                usedAttributes = new HashSet<AttrItem>(attributes);
+                var infos = GetType()
+                    .GetProperties()
+                    .Where(
+                        (i) => i
+                            .GetCustomAttributes(false)
+                            .Count((j) => j is Node.NodeAttributes.NodeAttributeAttribute) > 0
+                    );
+                foreach(var i in infos)
+                {
+                    i.GetGetMethod().Invoke(this, null);
+                }
+                foreach(var i in usedAttributes)
+                {
+                    attributes.Remove(i);
+                }
+                usedAttributes = null;
             }
         }
     }

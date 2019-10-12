@@ -26,8 +26,26 @@ namespace LuaSTGEditorSharp.EditorData.Node.Laser
         public LaserDefine(DocumentData workSpaceData, string name, string difficulty)
             : base(workSpaceData)
         {
+            Name = name;
+            Difficulty = difficulty;
+            /*
             attributes.Add(new AttrItem("Name", name, this));
             attributes.Add(new AttrItem("Difficulty", difficulty, this, "objDifficulty"));
+            */
+        }
+
+        [JsonIgnore, NodeAttribute]
+        public string Name
+        {
+            get => DoubleCheckAttr(0).attrInput;
+            set => DoubleCheckAttr(0).attrInput = value;
+        }
+
+        [JsonIgnore, NodeAttribute]
+        public string Difficulty
+        {
+            get => DoubleCheckAttr(1, "objDifficulty").attrInput;
+            set => DoubleCheckAttr(1, "objDifficulty").attrInput = value;
         }
 
         public override IEnumerable<string> ToLua(int spacing)

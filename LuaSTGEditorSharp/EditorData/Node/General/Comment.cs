@@ -34,16 +34,14 @@ namespace LuaSTGEditorSharp.EditorData.Node.General
             CommentOnChild = "true";
         }
 
-        [JsonIgnore, XmlAttribute("Comment")]
-        //[DefaultValue("")]
+        [JsonIgnore, NodeAttribute, XmlAttribute("Comment")]
         public string CommentContent
         {
             get => DoubleCheckAttr(0, name: "Comment").attrInput;
             set => DoubleCheckAttr(0, name: "Comment").attrInput = value;
         }
 
-        [JsonIgnore, XmlAttribute("CommentOnChild")]
-        //[DefaultValue("true")]
+        [JsonIgnore, NodeAttribute("true"), XmlAttribute("CommentOnChild")]
         public string CommentOnChild
         {
             get => DoubleCheckAttr(1, "bool", "Comment on child").attrInput;

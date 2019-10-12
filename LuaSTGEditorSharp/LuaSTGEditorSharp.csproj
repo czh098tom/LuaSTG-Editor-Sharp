@@ -123,6 +123,8 @@
     </ApplicationDefinition>
     <Compile Include="EditorData\Node\General\IfElseIf.cs" />
     <Compile Include="EditorData\Node\IIfChild.cs" />
+    <Compile Include="EditorData\Node\NodeAttributes\IgnoreParityCheckAttribute.cs" />
+    <Compile Include="EditorData\Node\NodeAttributes\NodeAttributeAttribute.cs" />
     <Compile Include="Execution\ExecutionConfig.cs" />
     <Compile Include="Execution\Execution.cs" />
     <Compile Include="Execution\ExecutionType.cs" />

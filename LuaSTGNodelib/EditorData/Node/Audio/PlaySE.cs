@@ -32,28 +32,28 @@ namespace LuaSTGEditorSharp.EditorData.Node.Audio
             IgnoreDefault = ignoredef;
         }
 
-        [JsonIgnore]
+        [JsonIgnore, NodeAttribute]
         public string Name
         {
             get => DoubleCheckAttr(0, "se").attrInput;
             set => DoubleCheckAttr(0, "se").attrInput = value;
         }
 
-        [JsonIgnore]
+        [JsonIgnore, NodeAttribute]
         public string Volume
         {
             get => DoubleCheckAttr(1).attrInput;
             set => DoubleCheckAttr(1).attrInput = value;
         }
 
-        [JsonIgnore]
+        [JsonIgnore, NodeAttribute]
         public string Pan
         {
             get => DoubleCheckAttr(2).attrInput;
             set => DoubleCheckAttr(2).attrInput = value;
         }
 
-        [JsonIgnore]
+        [JsonIgnore, NodeAttribute]
         public string IgnoreDefault
         {
             get => DoubleCheckAttr(3, name: "Ignore default volume").attrInput;

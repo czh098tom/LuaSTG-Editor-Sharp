@@ -27,14 +27,14 @@ namespace LuaSTGEditorSharp.EditorData.Node.Boss
             SuspendGameplay = suspend;
         }
 
-        [JsonIgnore]
+        [JsonIgnore, NodeAttribute]
         public string CanSkip
         {
             get => DoubleCheckAttr(0, "bool", "Can skip").attrInput;
             set => DoubleCheckAttr(0, "bool", "Can skip").attrInput = value;
         }
 
-        [JsonIgnore]
+        [JsonIgnore, NodeAttribute]
         public string SuspendGameplay
         {
             get => DoubleCheckAttr(1, "bool", "Suspend gameplay").attrInput;
