@@ -38,7 +38,7 @@ namespace LuaSTGEditorSharp.EditorData.Document.Meta
         public string[] GetLayer()
         {
             return (from TreeNode t
-                    in target.Children
+                    in target.GetLogicalChildren()
                     where t is BossBGLayer
                     select t.attributes[0].AttrInput).ToArray();
         }

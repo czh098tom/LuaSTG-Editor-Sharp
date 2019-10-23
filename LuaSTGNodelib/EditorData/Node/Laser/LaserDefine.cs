@@ -70,7 +70,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Laser
         public override string ToString()
         {
             string difficultyS = NonMacrolize(1) == "All" ? "" : ":" + NonMacrolize(1);
-            return "Define laser type\"" + NonMacrolize(0) + difficultyS + "\"";
+            return "Define laser type \"" + NonMacrolize(0) + difficultyS + "\"";
         }
 
         public override object Clone()

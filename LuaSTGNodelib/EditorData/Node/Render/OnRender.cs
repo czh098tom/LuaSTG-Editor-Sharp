@@ -13,7 +13,7 @@ using LuaSTGEditorSharp.EditorData.Node.NodeAttributes;
 namespace LuaSTGEditorSharp.EditorData.Node.Render
 {
     [Serializable, NodeIcon("/LuaSTGNodeLib;component/images/16x16/onrender.png")]
-    [RequireParent(typeof(Bullet.BulletDefine), typeof(Laser.BentLaserDefine), typeof(Object.ObjectDefine))]
+    [RequireParent(typeof(ObjectPoolTypeAlikeTypes))]
     public class OnRender : TreeNode, ICallBackFunc
     {
         [JsonConstructor]

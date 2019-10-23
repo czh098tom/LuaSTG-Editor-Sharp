@@ -62,6 +62,7 @@
   <ItemGroup>
     <Compile Include="EditorData\Document\MetaData.cs" />
     <Compile Include="EditorData\Document\Meta\BentLaserDefineMetaInfo.cs" />
+    <Compile Include="EditorData\Document\Meta\EnemyDefineMetaInfo.cs" />
     <Compile Include="EditorData\Document\Meta\SELoadMetaInfo.cs" />
     <Compile Include="EditorData\Document\Meta\BGMLoadMetaInfo.cs" />
     <Compile Include="EditorData\Document\Meta\BossBGDefineMetaInfo.cs" />
@@ -76,6 +77,9 @@
     <Compile Include="EditorData\Node\Boss\Dialog.cs" />
     <Compile Include="EditorData\Node\Boss\Sentence.cs" />
     <Compile Include="EditorData\Node\Data\PositionAssignment.cs" />
+    <Compile Include="EditorData\Node\Enemy\CreateEnemy.cs" />
+    <Compile Include="EditorData\Node\Enemy\EnemyDefine.cs" />
+    <Compile Include="EditorData\Node\Enemy\EnemyInit.cs" />
     <Compile Include="EditorData\Node\Enemy\EnemyWander.cs" />
     <Compile Include="EditorData\Node\ICallBackFunc.cs" />
     <Compile Include="EditorData\Message\ArgCountInfo.cs" />
@@ -128,6 +132,7 @@
     <Compile Include="EditorData\Node\Laser\LaserTurnOff.cs" />
     <Compile Include="EditorData\Node\Laser\LaserTurnOn.cs" />
     <Compile Include="EditorData\Node\NodeTypeCache.cs" />
+    <Compile Include="EditorData\Node\ObjectPoolTypeAlikeTypes.cs" />
     <Compile Include="EditorData\Node\Object\CreateObject.cs" />
     <Compile Include="EditorData\Node\Object\ObjectDefine.cs" />
     <Compile Include="EditorData\Node\Object\ObjectInit.cs" />
@@ -170,6 +175,9 @@
     <Compile Include="Windows\Input\BossDefInput.xaml.cs">
       <DependentUpon>BossDefInput.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\Input\BulletInput.xaml.cs">
+      <DependentUpon>BulletInput.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\Input\Canvas\DrawingCanvas.cs" />
     <Compile Include="Windows\Input\Canvas\VectorEditor.xaml.cs">
       <DependentUpon>VectorEditor.xaml</DependentUpon>
@@ -195,8 +203,8 @@
     <Compile Include="Windows\Input\EditorObjDefInput.xaml.cs">
       <DependentUpon>EditorObjDefInput.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\Input\BulletInput.xaml.cs">
-      <DependentUpon>BulletInput.xaml</DependentUpon>
+    <Compile Include="Windows\Input\EnemyInput.xaml.cs">
+      <DependentUpon>EnemyInput.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\Input\EditorObjParamInput.xaml.cs">
       <DependentUpon>EditorObjParamInput.xaml</DependentUpon>
@@ -231,6 +239,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Windows\Input\BulletInput.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Windows\Input\Canvas\DrawingGrid.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -275,7 +287,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Windows\Input\BulletInput.xaml">
+    <Page Include="Windows\Input\EnemyInput.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

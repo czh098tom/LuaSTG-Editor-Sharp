@@ -134,6 +134,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Object
                          + sp + "self.navi=" + Macrolize(6) + "\n"
                          + sp + "self.hp=" + Macrolize(7) + "\n"
                          + sp + "self.maxhp=" + Macrolize(7) + "\n"
+                         + sp + "self.colli=" + Macrolize(8) + "\n"
                          + sp + "self._servants={}\n"
                          + sp + "self._blend,self._a,self._r,self._g,self._b='',255,255,255,255\n";
             foreach (var a in base.ToLua(spacing + 1))
@@ -145,7 +146,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Object
 
         public override IEnumerable<Tuple<int,TreeNode>> GetLines()
         {
-            yield return new Tuple<int, TreeNode>(12, this);
+            yield return new Tuple<int, TreeNode>(13, this);
             foreach(Tuple<int,TreeNode> t in GetChildLines())
             {
                 yield return t;

@@ -177,11 +177,17 @@ namespace LuaSTGEditorSharp.Windows.Input
                 case "laserStyle":
                     window = new LaserInput(toEdit, owner);
                     break;
+                case "enemyStyle":
+                    window = new EnemyInput(toEdit, owner);
+                    break;
                 case "userDefinedNode":
                     window = new NodeDefInput(toEdit, owner, source);
                     break;
                 case "bulletDef":
                     window = new EditorObjDefInput(toEdit, MetaType.Bullet, owner, source);
+                    break;
+                case "objectDef":
+                    window = new EditorObjDefInput(toEdit, MetaType.Object, owner, source);
                     break;
                 case "laserDef":
                     window = new EditorObjDefInput(toEdit, MetaType.Laser, owner, source);
@@ -189,8 +195,8 @@ namespace LuaSTGEditorSharp.Windows.Input
                 case "bentLaserDef":
                     window = new EditorObjDefInput(toEdit, MetaType.BentLaser, owner, source);
                     break;
-                case "objectDef":
-                    window = new EditorObjDefInput(toEdit, MetaType.Object, owner, source);
+                case "enemyDef":
+                    window = new EditorObjDefInput(toEdit, MetaType.Enemy, owner, source);
                     break;
                 case "taskDef":
                     window = new EditorObjDefInput(toEdit, MetaType.Task, owner, source);
@@ -221,6 +227,9 @@ namespace LuaSTGEditorSharp.Windows.Input
                     break;
                 case "bentLaserParam":
                     window = new EditorObjParamInput(source, MetaType.BentLaser, toEdit, owner);
+                    break;
+                case "enemyParam":
+                    window = new EditorObjParamInput(source, MetaType.Enemy, toEdit, owner);
                     break;
                 case "taskParam":
                     window = new EditorObjParamInput(source, MetaType.Task, toEdit, owner);

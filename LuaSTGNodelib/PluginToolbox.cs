@@ -84,6 +84,11 @@ namespace LuaSTGEditorSharp
             
             var enemy = new Dictionary<ToolboxItemData, AddNode>();
             #region enemy
+            enemy.Add(new ToolboxItemData("defenemy", "/LuaSTGNodeLib;component/images/enemydefine.png", "Define Enemy")
+                , new AddNode(AddEnemyDefineNode));
+            enemy.Add(new ToolboxItemData("createenemy", "/LuaSTGNodeLib;component/images/enemycreate.png", "Create Enemy")
+                , new AddNode(AddEnemyCreateNode));
+            enemy.Add(new ToolboxItemData(true), null);
             enemy.Add(new ToolboxItemData("enemycharge", "/LuaSTGNodeLib;component/images/pactrometer.png", "Enemy Charge")
                 , new AddNode(AddEnemyChargeNode));
             enemy.Add(new ToolboxItemData("enemywander", "/LuaSTGNodeLib;component/images/taskbosswander.png", "Enemy Wander")
@@ -359,6 +364,18 @@ namespace LuaSTGEditorSharp
         }
         #endregion
         #region enemy
+        private void AddEnemyDefineNode()
+        {
+            TreeNode newDef = new EnemyDefine(parent.ActivatedWorkSpaceData);
+            newDef.AddChild(new EnemyInit(parent.ActivatedWorkSpaceData));
+            parent.Insert(newDef);
+        }
+
+        private void AddEnemyCreateNode()
+        {
+            parent.Insert(new CreateEnemy(parent.ActivatedWorkSpaceData));
+        }
+
         private void AddEnemyChargeNode()
         {
             parent.Insert(new EnemyCharge(parent.ActivatedWorkSpaceData));

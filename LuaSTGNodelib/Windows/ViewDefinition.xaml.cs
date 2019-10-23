@@ -30,6 +30,7 @@ namespace LuaSTGEditorSharp.Windows
             Tree.Add(GetEditorObjMeta(MetaType.Laser, "Laser", "laserdefine.png"));
             Tree.Add(GetEditorObjMeta(MetaType.BentLaser, "Bent Laser", "laserbentdefine.png"));
             Tree.Add(GetEditorObjMeta(MetaType.Object, "Object", "objectdefine.png"));
+            Tree.Add(GetEditorObjMeta(MetaType.Enemy, "Enemy", "enemydefine.png"));
             Tree.Add(GetTaskMeta());
             Tree.Add(GetBossMeta());
             Tree.Add(GetImageMeta());
@@ -44,7 +45,7 @@ namespace LuaSTGEditorSharp.Windows
             MetaModel stageGroup = new MetaModel
             {
                 Icon = "/LuaSTGNodeLib;component/images/16x16/stagegroup.png",
-                Text = "Stage Groups"
+                Text = "Stage Group"
             };
             var a = data.Meta.aggregatableMetas[(int)MetaType.StageGroup].GetAllFullWithDifficulty("");
             foreach (MetaModel info in a)
@@ -318,7 +319,7 @@ namespace LuaSTGEditorSharp.Windows
             MetaModel boss = new MetaModel
             {
                 Icon = "/LuaSTGNodeLib;component/images/16x16/bossdefine.png",
-                Text = "Bosses"
+                Text = "Boss"
             };
 
             var bossEMeta = data.Meta.aggregatableMetas[(int)MetaType.Boss].GetAllFullWithDifficulty("Easy");
@@ -404,7 +405,7 @@ namespace LuaSTGEditorSharp.Windows
             MetaModel images = new MetaModel
             {
                 Icon = "/LuaSTGNodeLib;component/images/16x16/loadimage.png",
-                Text = "Images"
+                Text = "Image"
             };
             var a = data.Meta.aggregatableMetas[(int)MetaType.ImageLoad].GetAllFullWithDifficulty();
             foreach (MetaModel info in a)
@@ -452,7 +453,7 @@ namespace LuaSTGEditorSharp.Windows
             MetaModel bgms = new MetaModel
             {
                 Icon = "/LuaSTGNodeLib;component/images/16x16/loadbgm.png",
-                Text = "Musics"
+                Text = "Music"
             };
             var a = data.Meta.aggregatableMetas[(int)MetaType.BGMLoad].GetAllFullWithDifficulty();
             foreach (MetaModel info in a)

@@ -18,7 +18,7 @@ namespace LuaSTGEditorSharp.EditorData.Document.Meta
 
         private void TryChild()
         {
-            foreach (TreeNode t in this.target.Children)
+            foreach (TreeNode t in this.target.GetLogicalChildren())
             {
                 if (t is ObjectInit) Init = t as ObjectInit;
             }
@@ -60,7 +60,7 @@ namespace LuaSTGEditorSharp.EditorData.Document.Meta
         public string[] GetCallBackFunc()
         {
             return (from TreeNode t 
-                    in target.Children
+                    in target.GetLogicalChildren()
                     where t is CallBackFunc
                     select t.attributes[0].AttrInput).ToArray();
         }

@@ -75,7 +75,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Object
         public override string ToString()
         {
             string difficultyS = NonMacrolize(1) == "All" ? "" : ":" + NonMacrolize(1);
-            return "Define object type\"" + NonMacrolize(0) + difficultyS + "\"";
+            return "Define object type \"" + NonMacrolize(0) + difficultyS + "\"";
         }
 
         public override object Clone()

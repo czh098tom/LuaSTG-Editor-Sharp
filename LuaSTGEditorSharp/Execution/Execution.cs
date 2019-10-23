@@ -64,7 +64,13 @@ namespace LuaSTGEditorSharp.Execution
                         fs = new FileStream(Path.GetFullPath(Path.Combine(
                             Path.GetDirectoryName(LuaSTGPath), "log.txt")), FileMode.Open);
                         sr = new StreamReader(fs);
-                        logger(sr.ReadToEnd());
+                        int i = 0;
+                        while (!sr.EndOfStream && i < 8192)
+                        {
+                            logger(sr.ReadLine());
+                            i++;
+                        }
+                        //logger(sr.ReadToEnd());
                         //debugOutput.ScrollToEnd();
                     }
                     catch (System.Exception exc)

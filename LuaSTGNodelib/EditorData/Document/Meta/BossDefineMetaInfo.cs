@@ -27,7 +27,7 @@ namespace LuaSTGEditorSharp.EditorData.Document.Meta
         public string[] GetSC()
         {
             return (from TreeNode t 
-                    in target.Children
+                    in target.GetLogicalChildren()
                     where t is BossSpellCard && !string.IsNullOrEmpty(t.attributes[0]?.AttrInput)
                     select t.attributes[0].AttrInput).ToArray();
         }

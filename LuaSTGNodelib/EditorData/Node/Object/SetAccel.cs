@@ -28,7 +28,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Object
         {
             Target = tar;
             Acceleration = v;
-            Rotation = r;
+            Angle = r;
             AimToPlayer = aim;
             /*
             attributes.Add(new AttrItem("Target", tar, this, "target"));
@@ -53,7 +53,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Object
         }
 
         [JsonIgnore, NodeAttribute]
-        public string Rotation
+        public string Angle
         {
             get => DoubleCheckAttr(2).attrInput;
             set => DoubleCheckAttr(2).attrInput = value;

@@ -4,23 +4,23 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using LuaSTGEditorSharp.EditorData.Interfaces;
-using LuaSTGEditorSharp.EditorData.Node.Bullet;
+using LuaSTGEditorSharp.EditorData.Node.Enemy;
 using LuaSTGEditorSharp.EditorData.Node.Object;
 using LuaSTGEditorSharp.Windows;
 
 namespace LuaSTGEditorSharp.EditorData.Document.Meta
 {
-    public class BulletDefineMetaInfo : MetaInfo, IComparable<BulletDefineMetaInfo>
+    public class EnemyDefineMetaInfo : MetaInfo, IComparable<EnemyDefineMetaInfo>
     {
-        BulletInit Init { get; set; }
+        EnemyInit Init { get; set; }
 
-        public BulletDefineMetaInfo(BulletDefine target) : base(target) { }
+        public EnemyDefineMetaInfo(EnemyDefine target) : base(target) { }
 
         private void TryChild()
         {
             foreach (TreeNode t in this.target.GetLogicalChildren())
             {
-                if (t is BulletInit) Init = t as BulletInit;
+                if (t is EnemyInit) Init = t as EnemyInit;
             }
         }
 
@@ -65,19 +65,19 @@ namespace LuaSTGEditorSharp.EditorData.Document.Meta
                     select t.attributes[0].AttrInput).ToArray();
         }
 
-        public int CompareTo(BulletDefineMetaInfo other)
+        public int CompareTo(EnemyDefineMetaInfo other)
         {
             return Name.CompareTo(other.Name);
         }
 
         public override void Create(IAggregatableMeta meta, MetaDataEntity documentMetaData)
         {
-            documentMetaData.aggregatableMetas[(int)MetaType.Bullet].Add(meta);
+            documentMetaData.aggregatableMetas[(int)MetaType.Enemy].Add(meta);
         }
 
         public override void Remove(IAggregatableMeta meta, MetaDataEntity documentMetaData)
         {
-            documentMetaData.aggregatableMetas[(int)MetaType.Bullet].Remove(meta);
+            documentMetaData.aggregatableMetas[(int)MetaType.Enemy].Remove(meta);
         }
 
         public override string FullName
@@ -99,7 +99,7 @@ namespace LuaSTGEditorSharp.EditorData.Document.Meta
         {
             MetaModel parent = new MetaModel
             {
-                Icon = "/LuaSTGNodeLib;component/images/16x16/bulletdefine.png",
+                Icon = "/LuaSTGNodeLib;component/images/16x16/enemydefine.png",
                 Text = Name
             };
             MetaModel child = new MetaModel()
@@ -141,7 +141,7 @@ namespace LuaSTGEditorSharp.EditorData.Document.Meta
                 Difficulty = Difficulty,
                 FullName = FullName,
                 Param = Params,
-                Icon = "/LuaSTGNodeLib;component/images/16x16/bulletdefine.png"
+                Icon = "/LuaSTGNodeLib;component/images/16x16/enemydefine.png"
             };
         }
 

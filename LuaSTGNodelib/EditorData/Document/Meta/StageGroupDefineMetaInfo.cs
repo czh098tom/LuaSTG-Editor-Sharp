@@ -41,7 +41,7 @@ namespace LuaSTGEditorSharp.EditorData.Document.Meta
         public string[] GetStages()
         {
             return (from TreeNode t
-                    in target.Children
+                    in target.GetLogicalChildren()
                     where (t is Stage)
                     select t.attributes[0].AttrInput).ToArray();
         }
