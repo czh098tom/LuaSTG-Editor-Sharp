@@ -206,6 +206,9 @@ namespace LuaSTGEditorSharp
                 , new AddNode(AddSetBindingNode));
             obj.Add(new ToolboxItemData("setrelativepos", "/LuaSTGNodeLib;component/images/setrelpos.png", "Set Relative Position")
                 , new AddNode(AddSetRelativePositionNode));
+            obj.Add(new ToolboxItemData(true), null);
+            obj.Add(new ToolboxItemData("groupforeach", "/LuaSTGNodeLib;component/images/unitforeach.png", "For Each Unit in Group")
+                , new AddNode(AddGroupForEachNode));
             #endregion
             ToolInfo.Add("Object", obj);
 
@@ -622,6 +625,11 @@ namespace LuaSTGEditorSharp
         private void AddSetRelativePositionNode()
         {
             parent.Insert(new SetRelativePosition(parent.ActivatedWorkSpaceData));
+        }
+
+        private void AddGroupForEachNode()
+        {
+            parent.Insert(new GroupForEach(parent.ActivatedWorkSpaceData));
         }
         #endregion
         #region graphics
