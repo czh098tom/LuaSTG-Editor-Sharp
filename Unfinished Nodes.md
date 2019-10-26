@@ -75,7 +75,6 @@ Names below are desired class names for the unfinished nodes.
 	--
 	PreserveUnit
 	CreateSmear (From old "Effect")
-	GroupForEach
 	--
 	DropItem (From old "Effect")
 

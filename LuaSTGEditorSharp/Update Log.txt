@@ -1,4 +1,4 @@
-﻿-- Update Log（最近更新 2019-10-05）
+﻿-- Update Log（最近更新 2019-10-26）
 
 0.0.6.1 ~ 0.0.7.0
 实现功能：修复节点定义
@@ -9,6 +9,8 @@ Enemy
 	EnemyDefine
 		EnemyInit
 	CreateEnemy
+Object
+	GroupForEach
 修复bug：
 Editor层：
 修复EXE路径是否设定的判定错误
