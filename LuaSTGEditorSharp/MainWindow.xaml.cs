@@ -334,8 +334,9 @@ namespace LuaSTGEditorSharp
 
         private void CutNode()
         {
-            clipBoard = (TreeNode)selectedNode.Clone();
+            TreeNode prev = selectedNode.GetNearestEdited();
             ActivatedWorkSpaceData.AddAndExecuteCommand(new DeleteCommand(selectedNode));
+            if (prev != null) Reveal(prev);
         }
 
         private void CopyNode()
@@ -366,7 +367,9 @@ namespace LuaSTGEditorSharp
 
         private void DeleteNode()
         {
+            TreeNode prev = selectedNode.GetNearestEdited();
             ActivatedWorkSpaceData.AddAndExecuteCommand(new DeleteCommand(selectedNode));
+            if (prev != null) Reveal(prev);
         }
 
         private void SavePreset()

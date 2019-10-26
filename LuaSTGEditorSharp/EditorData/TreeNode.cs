@@ -1711,5 +1711,23 @@ namespace LuaSTGEditorSharp.EditorData
                 usedAttributes = null;
             }
         }
+
+        public TreeNode GetNearestEdited()
+        {
+            TreeNode ne = _parent;
+            if (ne != null)
+            {
+                int id = ne.children.IndexOf(this) - 1;
+                if (id >= 0)
+                {
+                    ne = ne.children[id];
+                }
+                return ne;
+            }
+            else
+            {
+                return this;
+            }
+        }
     }
 }
