@@ -204,7 +204,7 @@
                             </Grid.RowDefinitions>
 
                             <!-- Connecting Lines -->
-                            <Rectangle x:Name="HorLn" Height="1" Stroke="#8888"  Margin="10,8,0,0" SnapsToDevicePixels="False" ClipToBounds="True" VerticalAlignment="Top"/>
+                            <Rectangle x:Name="HorLn" Height="1" Stroke="#8888" Margin="10,8,0,0" SnapsToDevicePixels="False" ClipToBounds="True" VerticalAlignment="Top"/>
                             <Rectangle x:Name="VerLn" Width="1" Stroke="#8888" Grid.RowSpan="2" SnapsToDevicePixels="False" ClipToBounds="True"/>
                             <ToggleButton x:Name="Expander"
                                           Style="{StaticResource ExpandCollapseToggleStyle}"
