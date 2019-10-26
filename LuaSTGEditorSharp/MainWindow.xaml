@@ -203,9 +203,10 @@
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
 
-                            <!-- Connecting Lines -->
+                            <!-- Connecting Lines 
                             <Rectangle x:Name="HorLn" Height="1" Stroke="#8888" Margin="10,8,0,0" SnapsToDevicePixels="False" ClipToBounds="True" VerticalAlignment="Top"/>
-                            <Rectangle x:Name="VerLn" Width="1" Stroke="#8888" Grid.RowSpan="2" SnapsToDevicePixels="False" ClipToBounds="True"/>
+                            -->
+                            <Rectangle x:Name="VerLn" Width="1" StrokeDashArray="3" Stroke="#8888" Grid.RowSpan="2" SnapsToDevicePixels="False" ClipToBounds="True" VerticalAlignment="Stretch"/>
                             <ToggleButton x:Name="Expander"
                                           Style="{StaticResource ExpandCollapseToggleStyle}"
                                           IsChecked="{Binding Path=IsExpanded, RelativeSource={RelativeSource TemplatedParent}}"
@@ -228,10 +229,24 @@
                         <ControlTemplate.Triggers>
 
                             <!-- This trigger changes the connecting lines if the item is the last in the list 
-                            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Converter={StaticResource TreeViewLineConverter}}" Value="true">
+                            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorLevel=1
+                                , AncestorType={x:Type Grid}}, Path=DataContext, Converter={StaticResource TreeViewLineConverter}}" 
+                                         Value="true">
+                                <Setter TargetName="VerLn"
+                                        Property="VerticalAlignment"
+                                        Value="Top"/>
+                                <Setter TargetName="VerLn"
+                                        Property="Height"
+                                        Value="9"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Converter={StaticResource TreeViewLineConverter}}" 
+                                         Value="false">
                                 <Setter TargetName="VerLn"
                                         Property="VerticalAlignment"
                                         Value="Stretch"/>
+                                <Setter TargetName="VerLn"
+                                        Property="Height"
+                                        Value="Auto"/>
                             </DataTrigger>
                             -->
                             <Trigger Property="IsExpanded"
