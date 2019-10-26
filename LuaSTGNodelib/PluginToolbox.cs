@@ -285,10 +285,10 @@ namespace LuaSTGEditorSharp
                     TreeNode newTask = new TaskNode(parent.ActivatedWorkSpaceData);
                         TreeNode newFolder = new Folder(parent.ActivatedWorkSpaceData, "Initialize");
                             newFolder.AddChild(new StageBG(parent.ActivatedWorkSpaceData));
-                       newTask.AddChild(newFolder);
-                    newTask.AddChild(new TaskWait(parent.ActivatedWorkSpaceData, "240"));
-                newSt.AddChild(newTask);
-            newStG.AddChild(newSt);
+                        newTask.AddChild(newFolder);
+                        newTask.AddChild(new TaskWait(parent.ActivatedWorkSpaceData, "240"));
+                    newSt.AddChild(newTask);
+                newStG.AddChild(newSt);
             parent.Insert(newStG);
         }
 
@@ -299,8 +299,8 @@ namespace LuaSTGEditorSharp
                     TreeNode newFolder = new Folder(parent.ActivatedWorkSpaceData, "Initialize");
                         newFolder.AddChild(new StageBG(parent.ActivatedWorkSpaceData));
                     newTask.AddChild(newFolder);
-                newTask.AddChild(new TaskWait(parent.ActivatedWorkSpaceData, "240"));
-            newSt.AddChild(newTask);
+                    newTask.AddChild(new TaskWait(parent.ActivatedWorkSpaceData, "240"));
+                newSt.AddChild(newTask);
             parent.Insert(newSt);
         }
 
