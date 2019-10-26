@@ -26,10 +26,10 @@ namespace LuaSTGEditorSharp.EditorData.Node.Stage
             : base(workSpaceData)
         {
             Name = name;
-            StartLifePractice = "7";
+            StartLifePractice = "8";
             StartPowerPractice = "400";
             StartFaithPractice = "50000";
-            StartBombPractice = "3";
+            StartBombPractice = "8";
             AllowPractice = "true";
             /*
             attributes.Add(new AttrItem("Name", name, this));

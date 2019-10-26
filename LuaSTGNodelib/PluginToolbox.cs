@@ -25,7 +25,7 @@ namespace LuaSTGEditorSharp
     public class PluginToolbox : AbstractToolbox
     {
         public PluginToolbox(MainWindow mw) : base(mw) { }
-
+        
         public override void InitFunc()
         {
             var data = new Dictionary<ToolboxItemData, AddNode>();
@@ -251,7 +251,7 @@ namespace LuaSTGEditorSharp
             var player = new Dictionary<ToolboxItemData, AddNode>();
             ToolInfo.Add("Player", player);
         }
-
+        
         #region data
         private void AddLocalVarNode()
         {
@@ -281,17 +281,13 @@ namespace LuaSTGEditorSharp
         private void AddStageGroupNode()
         {
             TreeNode newStG = new StageGroup(parent.ActivatedWorkSpaceData);
-            TreeNode newSt = new Stage(parent.ActivatedWorkSpaceData);
-            TreeNode newTask = new TaskNode(parent.ActivatedWorkSpaceData);
-            TreeNode newFolder = new Folder(parent.ActivatedWorkSpaceData, "Initialize");
-            newFolder.AddChild(new Code(parent.ActivatedWorkSpaceData,
-                "LoadMusic(\'spellcard\',\'THlib\\\\music\\\\spellcard.ogg\',75,0xc36e80/44100/4)"));
-            newFolder.AddChild(new StageBG(parent.ActivatedWorkSpaceData, "bamboo_background"));
-            newTask.AddChild(newFolder);
-            newTask.AddChild(new TaskWait(parent.ActivatedWorkSpaceData, "60"));
-            newTask.AddChild(new PlayBGM(parent.ActivatedWorkSpaceData, "\"spellcard\"", "", "false"));
-            newTask.AddChild(new TaskWait(parent.ActivatedWorkSpaceData, "180"));
-            newSt.AddChild(newTask);
+                TreeNode newSt = new Stage(parent.ActivatedWorkSpaceData);
+                    TreeNode newTask = new TaskNode(parent.ActivatedWorkSpaceData);
+                        TreeNode newFolder = new Folder(parent.ActivatedWorkSpaceData, "Initialize");
+                            newFolder.AddChild(new StageBG(parent.ActivatedWorkSpaceData));
+                       newTask.AddChild(newFolder);
+                    newTask.AddChild(new TaskWait(parent.ActivatedWorkSpaceData, "240"));
+                newSt.AddChild(newTask);
             newStG.AddChild(newSt);
             parent.Insert(newStG);
         }
@@ -299,15 +295,11 @@ namespace LuaSTGEditorSharp
         private void AddStageNode()
         {
             TreeNode newSt = new Stage(parent.ActivatedWorkSpaceData);
-            TreeNode newTask = new TaskNode(parent.ActivatedWorkSpaceData);
-            TreeNode newFolder = new Folder(parent.ActivatedWorkSpaceData, "Initialize");
-            newFolder.AddChild(new Code(parent.ActivatedWorkSpaceData,
-                "LoadMusic(\'spellcard\',\'THlib\\\\music\\\\spellcard.ogg\',75,0xc36e80/44100/4)"));
-            newFolder.AddChild(new StageBG(parent.ActivatedWorkSpaceData, "bamboo_background"));
-            newTask.AddChild(newFolder);
-            newTask.AddChild(new TaskWait(parent.ActivatedWorkSpaceData, "60"));
-            newTask.AddChild(new PlayBGM(parent.ActivatedWorkSpaceData, "\"spellcard\"", "", "false"));
-            newTask.AddChild(new TaskWait(parent.ActivatedWorkSpaceData, "180"));
+                TreeNode newTask = new TaskNode(parent.ActivatedWorkSpaceData);
+                    TreeNode newFolder = new Folder(parent.ActivatedWorkSpaceData, "Initialize");
+                        newFolder.AddChild(new StageBG(parent.ActivatedWorkSpaceData));
+                    newTask.AddChild(newFolder);
+                newTask.AddChild(new TaskWait(parent.ActivatedWorkSpaceData, "240"));
             newSt.AddChild(newTask);
             parent.Insert(newSt);
         }

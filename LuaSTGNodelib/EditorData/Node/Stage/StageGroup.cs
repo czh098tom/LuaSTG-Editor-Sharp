@@ -21,7 +21,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Stage
         private StageGroup() : base() { }
 
         public StageGroup(DocumentData workSpaceData)
-            : this(workSpaceData, "Spell Card", "7") { }
+            : this(workSpaceData, "Spell Card", "2") { }
 
         public StageGroup(DocumentData workSpaceData, string name, string life)
             : base(workSpaceData)
@@ -30,7 +30,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Stage
             StartLife = life;
             StartPower = "400";
             StartFaith = "50000";
-            StartBomb = "3";
+            StartBomb = "2";
             AllowPractice = "true";
             DifficultyValue = "1";
             /*
