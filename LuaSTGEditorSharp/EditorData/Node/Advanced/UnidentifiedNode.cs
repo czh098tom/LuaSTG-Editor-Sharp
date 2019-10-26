@@ -8,6 +8,7 @@ using LuaSTGEditorSharp.EditorData.Node.NodeAttributes;
 using LuaSTGEditorSharp.EditorData.Document;
 using LuaSTGEditorSharp.EditorData.Document.Meta;
 using Newtonsoft.Json;
+using System.Text.RegularExpressions;
 
 namespace LuaSTGEditorSharp.EditorData.Node.Advanced
 {
@@ -52,8 +53,13 @@ namespace LuaSTGEditorSharp.EditorData.Node.Advanced
                 object[] s = list.ToArray();
                 try
                 {
-                    head = string.Format(target.ExInfo1, s) + "\n";
-                    tail = string.Format(target.ExInfo2, s) + "\n";
+                    Regex r = new Regex("\\n");
+                    string sp = "".PadLeft(spacing * 4);
+                    string nsp = "\n" + sp;
+                    head = sp + r.Replace(string.Format(target.ExInfo1, s), nsp) + "\n";
+                    tail = sp + r.Replace(string.Format(target.ExInfo2, s), nsp) + "\n";
+                    //head = string.Format(target.ExInfo1, s) + "\n";
+                    //tail = string.Format(target.ExInfo2, s) + "\n";
                 }
                 catch
                 {

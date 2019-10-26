@@ -39,7 +39,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.General
 
         public override IEnumerable<string> ToLua(int spacing)
         {
-            Regex r = new Regex("\\n\\b");
+            Regex r = new Regex("\\n");
             string sp = "".PadLeft(spacing * 4);
             string nsp = "\n" + sp;
             yield return sp + r.Replace(Macrolize(0), nsp) + "\n";
