@@ -27,16 +27,16 @@ Names below are desired class names for the unfinished nodes.
 	StageFinish
 	StageGroupFinish
 	--
-	SetWorlds
-	AddWorld
+	[x]SetWorlds
+	[x]AddWorld
 
 ## Task
 	FinishTask
 	ClearTasks
 	--
-	SetSignal
-	WaitForSignal
-	WaitTo(*)
+	[x]SetSignal
+	[x]WaitForSignal
+	[x]WaitTo(*)
 	--
 	MoveToBezier &
 	MoveByBezier &
@@ -54,7 +54,7 @@ Names below are desired class names for the unfinished nodes.
 	BossAura
 	BossUI
 	--
-	BossEX(?)
+	[x]BossEX(?)
 
 ## Bullet
 	Finished.
@@ -66,12 +66,12 @@ Names below are desired class names for the unfinished nodes.
 
 ## Object (Merged Old "Unit")
 	ObjectChangeImage
-	Properties
+	[x]Properties
 	--
-	ObjectList
-	ObjectListAdd
-	ObjectListRemove
-	ObjectListForEach
+	[x]ObjectList
+	[x]ObjectListAdd
+	[x]ObjectListRemove
+	[x]ObjectListForEach
 	--
 	PreserveUnit
 	CreateSmear (From old "Effect")
@@ -90,4 +90,4 @@ Names below are desired class names for the unfinished nodes.
 	PauseBGM
 	ResumeBGM
 	StopBGM
-	SetPace(?)
+	[x]SetPace(?)
