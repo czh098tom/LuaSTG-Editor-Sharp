@@ -197,7 +197,7 @@
                         </DockPanel>
                     </Grid>
                 </TabItem>
-                <TabItem Header="Animation">
+                <TabItem Header="Animation" Visibility="Hidden">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
