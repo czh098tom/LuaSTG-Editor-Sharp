@@ -27,11 +27,15 @@ namespace LuaSTGEditorSharp.Windows.Input
         public ObservableCollection<MetaModel> ImageInfo { get => imageInfo; }
         public ObservableCollection<MetaModel> imageGroupInfo;
         public ObservableCollection<MetaModel> ImageGroupInfo { get => imageGroupInfo; }
+        public ObservableCollection<MetaModel> animationInfo;
+        public ObservableCollection<MetaModel> AnimationInfo { get => animationInfo; }
 
         public ObservableCollection<MetaModel> imageInfoSys;
         public ObservableCollection<MetaModel> ImageInfoSys { get => imageInfoSys; }
         public ObservableCollection<MetaModel> imageGroupInfoSys;
         public ObservableCollection<MetaModel> ImageGroupInfoSys { get => imageGroupInfoSys; }
+        public ObservableCollection<MetaModel> animationInfoSys;
+        public ObservableCollection<MetaModel> AnimationInfoSys { get => animationInfoSys; }
 
         int cols = 1, rows = 1;
 
@@ -69,6 +73,7 @@ namespace LuaSTGEditorSharp.Windows.Input
         {
             imageInfo = item.Parent.parentWorkSpace.Meta.aggregatableMetas[(int)MetaType.ImageLoad].GetAllSimpleWithDifficulty();
             imageGroupInfo = item.Parent.parentWorkSpace.Meta.aggregatableMetas[(int)MetaType.ImageGroupLoad].GetAllSimpleWithDifficulty();
+            animationInfo = item.Parent.parentWorkSpace.Meta.aggregatableMetas[(int)MetaType.AnimationLoad].GetAllSimpleWithDifficulty();
 
             AddInternalMetas();
 
@@ -86,6 +91,8 @@ namespace LuaSTGEditorSharp.Windows.Input
             imageInfoSys = new ObservableCollection<MetaModel>(PluginEntry.SysImage);
 
             imageGroupInfoSys = new ObservableCollection<MetaModel>(PluginEntry.SysImageGroup);
+
+            animationInfoSys = new ObservableCollection<MetaModel>();
         }
 
         private void ButtonOK_Click(object sender, RoutedEventArgs e)
@@ -113,6 +120,11 @@ namespace LuaSTGEditorSharp.Windows.Input
         private void BoxImageGroupData_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             RefreshAsImageGroup();
+        }
+
+        private void BoxAnimationData_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            RefreshAsAnimation();
         }
 
         private void BoxImageData_GotFocus(object sender, RoutedEventArgs e)
@@ -158,6 +170,18 @@ namespace LuaSTGEditorSharp.Windows.Input
             catch { }
             SelectedIndex = 1;
             SplitGrid.RemoveVisual(hint);
+            codeText.Focus();
+        }
+
+        private void RefreshAsAnimation()
+        {
+            MetaModel m = (BoxAnimationData.SelectedItem as MetaModel);
+            if (!string.IsNullOrEmpty(m?.Result)) Result = m?.Result;
+            try
+            {
+                AnimationExample.Source = new BitmapImage(new Uri(m?.ExInfo1));
+            }
+            catch { }
             codeText.Focus();
         }
 
@@ -265,9 +289,13 @@ namespace LuaSTGEditorSharp.Windows.Input
             {
                 RefreshAsImage();
             }
-            else
+            else if (tabControl.SelectedIndex == 1)
             {
                 RefreshAsImageGroup();
+            }
+            else
+            {
+                RefreshAsAnimation();
             }
         }
     }

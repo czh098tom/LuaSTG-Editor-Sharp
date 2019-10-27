@@ -197,6 +197,51 @@
                         </DockPanel>
                     </Grid>
                 </TabItem>
+                <TabItem Header="Animation">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="2*"/>
+                        </Grid.ColumnDefinitions>
+                        <ListBox x:Name="BoxAnimationData" Grid.Column="0" SelectionChanged="BoxAnimationData_SelectionChanged">
+                            <ListBox.Resources>
+                                <CollectionViewSource x:Key="AnimationInfoSys" Source="{Binding AnimationInfoSys, ElementName=inputWindow}"/>
+                                <CollectionViewSource x:Key="AnimationInfo" Source="{Binding AnimationInfo, ElementName=inputWindow}"/>
+                            </ListBox.Resources>
+                            <ListBox.ItemsSource>
+                                <CompositeCollection>
+                                    <CollectionContainer Collection="{Binding Source={StaticResource AnimationInfoSys}}"/>
+                                    <CollectionContainer Collection="{Binding Source={StaticResource AnimationInfo}}"/>
+                                </CompositeCollection>
+                            </ListBox.ItemsSource>
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image VerticalAlignment="Center" Source="{Binding Icon}"
+                                                Stretch="UniformToFill" Width="16" Height="16" Margin="0,0,2,2"/>
+                                        <TextBlock VerticalAlignment="Center" Text="{Binding Text}"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                        <DockPanel Grid.Column="1">
+                            <TextBox DockPanel.Dock="Bottom" Text="{Binding SelectedIndex, ElementName=inputWindow
+                                , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                            <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                                <Grid>
+                                    <Canvas Height="{Binding ActualHeight, ElementName=AnimationExample}"
+                                            Width="{Binding ActualWidth, ElementName=AnimationExample}" 
+                                            HorizontalAlignment="Center" VerticalAlignment="Center"
+                                            Background="{Binding SelectedItem.Tag, ElementName=comboPicBG}"/>
+                                    <Image x:Name="AnimationExample"
+                                           HorizontalAlignment="Center" VerticalAlignment="Center"
+                                           Stretch="{Binding Text, ElementName=comboPicStrech, 
+                                                     Converter={StaticResource StrToPicStrechConverter}}" />
+                                </Grid>
+                            </ScrollViewer>
+                        </DockPanel>
+                    </Grid>
+                </TabItem>
             </TabControl>
         </DockPanel>
     </Grid>

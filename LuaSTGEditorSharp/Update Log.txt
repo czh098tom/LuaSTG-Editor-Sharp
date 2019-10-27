@@ -11,6 +11,8 @@ Enemy
 	CreateEnemy
 Object
 	GroupForEach
+Graphics
+	LoadAnimation
 修复bug：
 Editor层：
 修复EXE路径是否设定的判定错误

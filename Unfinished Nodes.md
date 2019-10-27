@@ -79,7 +79,6 @@ Names below are desired class names for the unfinished nodes.
 	DropItem (From old "Effect")
 
 ## Graphics
-	LoadAnimation *
 	LoadParticle *
 	LoadTexture *
 	LoadFX *

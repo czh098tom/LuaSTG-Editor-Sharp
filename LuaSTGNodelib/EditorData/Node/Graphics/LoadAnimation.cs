@@ -1,47 +1,39 @@
 ﻿using System;
-using System.IO;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
+
 using LuaSTGEditorSharp.EditorData;
 using LuaSTGEditorSharp.EditorData.Document;
 using LuaSTGEditorSharp.EditorData.Document.Meta;
 using LuaSTGEditorSharp.EditorData.Node.NodeAttributes;
-using Newtonsoft.Json;
 
 namespace LuaSTGEditorSharp.EditorData.Node.Graphics
 {
-    [Serializable, NodeIcon("/LuaSTGNodeLib;component/images/16x16/loadimage.png")]
+    [Serializable, NodeIcon("/LuaSTGNodeLib;component/images/16x16/loadani.png")]
     [ClassNode]
     [LeafNode]
     [CreateInvoke(0), RCInvoke(3)]
-    public class LoadImage : TreeNode
+    public class LoadAnimation : TreeNode
     {
         [JsonConstructor]
-        private LoadImage() : base() { }
+        public LoadAnimation() : base() { }
 
-        public LoadImage(DocumentData workSpaceData)
-            : this(workSpaceData, "", "", "true", "0,0", "false", "0") { }
+        public LoadAnimation(DocumentData workSpaceData)
+            : this(workSpaceData, "", "", "true", "1,1", "4", "0,0", "false") { }
 
-        public LoadImage(DocumentData workSpaceData, string path, string name, string mipmap, string collis, string rect, string edge)
-            : base(workSpaceData)
+        public LoadAnimation(DocumentData workSpaceData, string path, string resName, string mipMap
+            , string colRow, string animI, string colliSize, string rect) : base(workSpaceData)
         {
             Path = path;
-            ResourceName = name;
-            Mipmap = mipmap;
-            CollisionSize = collis;
+            ResourceName = resName;
+            Mipmap = mipMap;
+            ColRow = colRow;
+            AnimInterval = animI;
+            CollisionSize = colliSize;
             RectangleCollision = rect;
-            CutEdge = edge;
-            /*
-            attributes.Add(new DependencyAttrItem("Path", path, this, "imageFile"));
-            attributes.Add(new AttrItem("Resource name", name, this));
-            attributes.Add(new AttrItem("Mipmap", mipmap, this, "bool"));
-            attributes.Add(new AttrItem("Collision size", collis, this, "size"));
-            attributes.Add(new AttrItem("Rectangle collision", rect, this, "bool"));
-            attributes.Add(new AttrItem("Cut edge", edge, this));
-            */
         }
 
         [JsonIgnore, NodeAttribute]
@@ -66,48 +58,55 @@ namespace LuaSTGEditorSharp.EditorData.Node.Graphics
         }
 
         [JsonIgnore, NodeAttribute]
+        public string ColRow
+        {
+            get => DoubleCheckAttr(3, "colrow", "Cols and rows").attrInput;
+            set => DoubleCheckAttr(3, "colrow", "Cols and rows").attrInput = value;
+        }
+
+        [JsonIgnore, NodeAttribute]
+        public string AnimInterval
+        {
+            get => DoubleCheckAttr(4, "animinterval", "Animation interval").attrInput;
+            set => DoubleCheckAttr(4, "animinterval", "Animation interval").attrInput = value;
+        }
+
+        [JsonIgnore, NodeAttribute]
         public string CollisionSize
         {
-            get => DoubleCheckAttr(3, "size", "Collision size").attrInput;
-            set => DoubleCheckAttr(3, "size", "Collision size").attrInput = value;
+            get => DoubleCheckAttr(5, "size", "Collision size").attrInput;
+            set => DoubleCheckAttr(5, "size", "Collision size").attrInput = value;
         }
 
         [JsonIgnore, NodeAttribute]
         public string RectangleCollision
         {
-            get => DoubleCheckAttr(4, "bool", "Rectangle collision").attrInput;
-            set => DoubleCheckAttr(4, "bool", "Rectangle collision").attrInput = value;
-        }
-
-        [JsonIgnore, NodeAttribute]
-        public string CutEdge
-        {
-            get => DoubleCheckAttr(5, name: "Cut edge").attrInput;
-            set => DoubleCheckAttr(5, name: "Cut edge").attrInput = value;
+            get => DoubleCheckAttr(6, "bool", "Rectangle collision").attrInput;
+            set => DoubleCheckAttr(6, "bool", "Rectangle collision").attrInput = value;
         }
 
         public override IEnumerable<string> ToLua(int spacing)
         {
             string sk = GetPath(0);
             string sp = "".PadLeft(spacing * 4);
-            yield return sp + "_LoadImageFromFile(\'image:\'..\'" + Lua.StringParser.ParseLua(NonMacrolize(1))
+            yield return sp + "LoadAniFromFile(\'ani:\'..\'" + Lua.StringParser.ParseLua(NonMacrolize(1))
                 + "\',\'" + sk
-                + "\'," + Macrolize(2) + "," + Macrolize(3) + "," + Macrolize(4) + "," + Macrolize(5) + ")\n";
-        }
-
-        public override IEnumerable<Tuple<int,TreeNode>> GetLines()
-        {
-            yield return new Tuple<int, TreeNode>(1, this);
+                + "\'," + Macrolize(2) + "," + Macrolize(3) + "," + Macrolize(4) + "," + Macrolize(5) + "," + Macrolize(6) + ")\n";
         }
 
         public override string ToString()
         {
-            return "Load image \"" + NonMacrolize(1) + "\" from \"" + NonMacrolize(0) + "\"";
+            return "Load animation \"" + NonMacrolize(1) + "\" from \"" + NonMacrolize(0) + "\"";
+        }
+
+        public override MetaInfo GetMeta()
+        {
+            return new AnimationLoadMetaInfo(this);
         }
 
         public override void ReflectAttr(DependencyAttrItem relatedAttrItem, DependencyAttributeChangedEventArgs args)
         {
-            if (relatedAttrItem.AttrInput != args.originalValue) 
+            if (relatedAttrItem.AttrInput != args.originalValue)
             {
                 attributes[1].AttrInput = System.IO.Path.GetFileNameWithoutExtension(attributes[0].AttrInput);
             }
@@ -122,16 +121,16 @@ namespace LuaSTGEditorSharp.EditorData.Node.Graphics
             }
         }
 
-        public override MetaInfo GetMeta()
-        {
-            return new ImageLoadMetaInfo(this);
-        }
-
         public override object Clone()
         {
-            var n = new LoadImage(parentWorkSpace);
+            var n = new LoadAnimation(parentWorkSpace);
             n.DeepCopyFrom(this);
             return n;
+        }
+
+        public override IEnumerable<Tuple<int, TreeNode>> GetLines()
+        {
+            yield return new Tuple<int, TreeNode>(1, this);
         }
     }
 }

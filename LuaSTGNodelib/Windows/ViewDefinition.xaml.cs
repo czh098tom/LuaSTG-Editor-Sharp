@@ -35,6 +35,7 @@ namespace LuaSTGEditorSharp.Windows
             Tree.Add(GetBossMeta());
             Tree.Add(GetImageMeta());
             Tree.Add(GetImageGroupMeta());
+            Tree.Add(GetAnimationMeta());
             Tree.Add(GetBGMMeta());
             Tree.Add(GetSEMeta());
             Tree.Add(GetBossBGDefineMeta());
@@ -440,6 +441,22 @@ namespace LuaSTGEditorSharp.Windows
                 Text = "Image Group"
             };
             var a = data.Meta.aggregatableMetas[(int)MetaType.ImageGroupLoad].GetAllFullWithDifficulty();
+            foreach (MetaModel info in a)
+            {
+                images.Children.Add(info);
+            }
+
+            return images;
+        }
+
+        private MetaModel GetAnimationMeta()
+        {
+            MetaModel images = new MetaModel
+            {
+                Icon = "/LuaSTGNodeLib;component/images/16x16/loadani.png",
+                Text = "Animation"
+            };
+            var a = data.Meta.aggregatableMetas[(int)MetaType.AnimationLoad].GetAllFullWithDifficulty();
             foreach (MetaModel info in a)
             {
                 images.Children.Add(info);
