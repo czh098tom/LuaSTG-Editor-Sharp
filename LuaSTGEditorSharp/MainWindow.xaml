@@ -206,7 +206,15 @@
                             <!-- Connecting Lines 
                             <Rectangle x:Name="HorLn" Height="1" Stroke="#8888" Margin="10,8,0,0" SnapsToDevicePixels="False" ClipToBounds="True" VerticalAlignment="Top"/>
                             -->
+                            <Line x:Name="Ver" Width="5" X1="2.5" Y1="0" X2="2.5" Y2="{Binding ActualHeight, RelativeSource={RelativeSource Self}}"
+                                  StrokeDashArray="3" Stroke="#8888" 
+                                  Grid.RowSpan="2" SnapsToDevicePixels="False" 
+                                  ClipToBounds="True" 
+                                  VerticalAlignment="Stretch"/>
+                            <!--
                             <Rectangle x:Name="VerLn" Width="1" StrokeDashArray="3" Stroke="#8888" Grid.RowSpan="2" SnapsToDevicePixels="False" ClipToBounds="True" VerticalAlignment="Stretch"/>
+                            -->
+                            
                             <ToggleButton x:Name="Expander"
                                           Style="{StaticResource ExpandCollapseToggleStyle}"
                                           IsChecked="{Binding Path=IsExpanded, RelativeSource={RelativeSource TemplatedParent}}"
