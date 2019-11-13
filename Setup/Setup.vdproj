@@ -22,13 +22,13 @@
         "Entry"
         {
         "MsmKey" = "8:_2B212CDDB0F4CECAB91F032FBB586C4F"
-        "OwnerKey" = "8:_475E8F00AB7C6294E8F69301170BC300"
+        "OwnerKey" = "8:_A474968698A94356A6AB0A5912337B28"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_2B212CDDB0F4CECAB91F032FBB586C4F"
-        "OwnerKey" = "8:_A474968698A94356A6AB0A5912337B28"
+        "OwnerKey" = "8:_475E8F00AB7C6294E8F69301170BC300"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -88,13 +88,13 @@
         "Entry"
         {
         "MsmKey" = "8:_D3707F01B4E3EBCDEFB957E087E0CA41"
-        "OwnerKey" = "8:_A474968698A94356A6AB0A5912337B28"
+        "OwnerKey" = "8:_475E8F00AB7C6294E8F69301170BC300"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_D3707F01B4E3EBCDEFB957E087E0CA41"
-        "OwnerKey" = "8:_475E8F00AB7C6294E8F69301170BC300"
+        "OwnerKey" = "8:_A474968698A94356A6AB0A5912337B28"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -112,13 +112,13 @@
         "Entry"
         {
         "MsmKey" = "8:_DDE06F3FA3806F30100E37575F432061"
-        "OwnerKey" = "8:_475E8F00AB7C6294E8F69301170BC300"
+        "OwnerKey" = "8:_A474968698A94356A6AB0A5912337B28"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_DDE06F3FA3806F30100E37575F432061"
-        "OwnerKey" = "8:_A474968698A94356A6AB0A5912337B28"
+        "OwnerKey" = "8:_475E8F00AB7C6294E8F69301170BC300"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -130,43 +130,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_A474968698A94356A6AB0A5912337B28"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_A82E0B9E0026088E48D86EBBF18E5D45"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_D8483669831BAAF3DE73B8106E68C471"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_475E8F00AB7C6294E8F69301170BC300"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_DDE06F3FA3806F30100E37575F432061"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_D3707F01B4E3EBCDEFB957E087E0CA41"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_414B0A6CF938736D8D0D6237B0806941"
+        "OwnerKey" = "8:_327F73F86A660C19544BD42FACB90D2B"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -178,7 +142,43 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_327F73F86A660C19544BD42FACB90D2B"
+        "OwnerKey" = "8:_414B0A6CF938736D8D0D6237B0806941"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_D3707F01B4E3EBCDEFB957E087E0CA41"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_DDE06F3FA3806F30100E37575F432061"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_475E8F00AB7C6294E8F69301170BC300"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_D8483669831BAAF3DE73B8106E68C471"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_A82E0B9E0026088E48D86EBBF18E5D45"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_A474968698A94356A6AB0A5912337B28"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -283,11 +283,6 @@
             "AssemblyAsmDisplayName" = "8:ICSharpCode.AvalonEdit, Version=5.0.3.0, Culture=neutral, PublicKeyToken=9cc39be672370310, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_2B212CDDB0F4CECAB91F032FBB586C4F"
-                    {
-                    "Name" = "8:ICSharpCode.AvalonEdit.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:ICSharpCode.AvalonEdit.dll"
             "TargetName" = "8:"
@@ -314,11 +309,6 @@
             "AssemblyAsmDisplayName" = "8:System.Net.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                 "ScatterAssemblies"
                 {
-                    "_327F73F86A660C19544BD42FACB90D2B"
-                    {
-                    "Name" = "8:System.Net.Http.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:System.Net.Http.dll"
             "TargetName" = "8:"
@@ -345,11 +335,6 @@
             "AssemblyAsmDisplayName" = "8:Irony, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ca48ace7223ead47, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_414B0A6CF938736D8D0D6237B0806941"
-                    {
-                    "Name" = "8:Irony.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:Irony.dll"
             "TargetName" = "8:"
@@ -376,11 +361,6 @@
             "AssemblyAsmDisplayName" = "8:LuaSTGEditorSharp, Version=0.0.4.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_475E8F00AB7C6294E8F69301170BC300"
-                    {
-                    "Name" = "8:LuaSTGEditorSharp.exe"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:LuaSTGEditorSharp.exe"
             "TargetName" = "8:"
@@ -427,11 +407,6 @@
             "AssemblyAsmDisplayName" = "8:NVorbis, Version=0.8.6.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_A82E0B9E0026088E48D86EBBF18E5D45"
-                    {
-                    "Name" = "8:NVorbis.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:NVorbis.dll"
             "TargetName" = "8:"
@@ -458,11 +433,6 @@
             "AssemblyAsmDisplayName" = "8:Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_D3707F01B4E3EBCDEFB957E087E0CA41"
-                    {
-                    "Name" = "8:Newtonsoft.Json.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:Newtonsoft.Json.dll"
             "TargetName" = "8:"
@@ -489,11 +459,6 @@
             "AssemblyAsmDisplayName" = "8:CSCore, Version=1.2.1.2, Culture=neutral, PublicKeyToken=5a08f2b6f4415dea, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_D8483669831BAAF3DE73B8106E68C471"
-                    {
-                    "Name" = "8:CSCore.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:CSCore.dll"
             "TargetName" = "8:"
@@ -520,11 +485,6 @@
             "AssemblyAsmDisplayName" = "8:ICSharpCode.SharpZipLib, Version=1.1.0.145, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_DDE06F3FA3806F30100E37575F432061"
-                    {
-                    "Name" = "8:ICSharpCode.SharpZipLib.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:ICSharpCode.SharpZipLib.dll"
             "TargetName" = "8:"
@@ -668,15 +628,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:LuaSTG Editor Sharp"
-        "ProductCode" = "8:{619E9032-4795-4C43-A1FF-AADA856D8535}"
-        "PackageCode" = "8:{26C7E8A8-3F3A-4AA5-9393-CB3FDD90C449}"
+        "ProductCode" = "8:{F9D6852D-D25D-4143-BF69-4CF9822F59D8}"
+        "PackageCode" = "8:{37C297DF-1787-4574-875F-AF894B1F17E5}"
         "UpgradeCode" = "8:{93CEE5DE-6B6D-4397-8130-3CD29D44F2F7}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:FALSE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:0.6.7"
+        "ProductVersion" = "8:0.6.8"
         "Manufacturer" = "8:LuaSTG"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
