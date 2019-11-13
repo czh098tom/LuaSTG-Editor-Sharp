@@ -9,6 +9,14 @@ using LuaSTGEditorSharp.Plugin;
 
 namespace LuaSTGEditorSharp.Windows.Input
 {
+    public enum ImageClassType 
+    {
+        None = 0,
+        Animation = 1,
+        Particle = 2,
+        All = 3
+    }
+
     public class InputWindowSelector : IInputWindowSelector
     {
         public string[] SelectComboBox(string name)
@@ -68,6 +76,7 @@ namespace LuaSTGEditorSharp.Windows.Input
                         , "COLOR_BLUE", "COLOR_DEEP_BLUE", "COLOR_ROYAL_BLUE", "COLOR_CYAN", "COLOR_DEEP_GREEN"
                         , "COLOR_GREEN", "COLOR_CHARTREUSE", "COLOR_YELLOW", "COLOR_GOLDEN_YELLOW", "COLOR_ORANGE"
                         , "COLOR_DEEP_GRAY", "COLOR_GRAY"};
+                case "objimage":
                 case "image":
                     return new string[] { "\"img_void\"", "\"white\"", "\"leaf\"" };
                 case "BG":
@@ -203,6 +212,9 @@ namespace LuaSTGEditorSharp.Windows.Input
                     break;
                 case "bossDef":
                     window = new EditorObjDefInput(toEdit, MetaType.Boss, owner, source);//new BossDefInput(toEdit, owner, source);
+                    break;
+                case "objimage":
+                    window = new ImageInput(toEdit, owner, source, ImageClassType.Animation);
                     break;
                 case "image":
                     window = new ImageInput(toEdit, owner, source);

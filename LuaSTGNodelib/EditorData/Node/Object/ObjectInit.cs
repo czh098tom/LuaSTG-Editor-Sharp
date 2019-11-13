@@ -60,8 +60,8 @@ namespace LuaSTGEditorSharp.EditorData.Node.Object
         [JsonIgnore, NodeAttribute]
         public string Image
         {
-            get => DoubleCheckAttr(1, "image").attrInput;
-            set => DoubleCheckAttr(1, "image").attrInput = value;
+            get => DoubleCheckAttr(1, "objimage").attrInput;
+            set => DoubleCheckAttr(1, "objimage").attrInput = value;
         }
 
         [JsonIgnore, NodeAttribute]

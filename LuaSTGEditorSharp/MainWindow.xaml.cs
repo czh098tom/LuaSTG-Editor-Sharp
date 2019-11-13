@@ -334,6 +334,7 @@ namespace LuaSTGEditorSharp
 
         private void CutNode()
         {
+            clipBoard = (TreeNode)selectedNode.Clone();
             TreeNode prev = selectedNode.GetNearestEdited();
             ActivatedWorkSpaceData.AddAndExecuteCommand(new DeleteCommand(selectedNode));
             if (prev != null) Reveal(prev);

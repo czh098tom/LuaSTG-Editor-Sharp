@@ -197,7 +197,7 @@
                         </DockPanel>
                     </Grid>
                 </TabItem>
-                <TabItem Header="Animation" Visibility="Hidden">
+                <TabItem Name="tabAnimation" Header="Animation" Visibility="Collapsed">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
@@ -225,8 +225,6 @@
                             </ListBox.ItemTemplate>
                         </ListBox>
                         <DockPanel Grid.Column="1">
-                            <TextBox DockPanel.Dock="Bottom" Text="{Binding SelectedIndex, ElementName=inputWindow
-                                , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                             <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
                                 <Grid>
                                     <Canvas Height="{Binding ActualHeight, ElementName=AnimationExample}"
