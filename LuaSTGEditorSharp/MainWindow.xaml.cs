@@ -750,6 +750,23 @@ namespace LuaSTGEditorSharp
             }
         }
 
+        private void ShowEditWindow()
+        {
+            propData.CommitEdit();
+            AttrItem ai = selectedNode?.GetRCInvoke();
+            if (ai != null)
+            {
+                InputWindow iw = InputWindowSelector.SelectInputWindow(ai, ai.EditWindow, ai.AttrInput, this);
+                if (iw.ShowDialog() == true)
+                {
+                    ActivatedWorkSpaceData.AddAndExecuteCommand(new EditAttrCommand(ai, ai.AttrInput, iw.Result));
+                    var a = propData.ItemsSource;
+                    propData.ItemsSource = null;
+                    propData.ItemsSource = a;
+                }
+            }
+        }
+
         #endregion
         #region events
 
@@ -1309,6 +1326,16 @@ namespace LuaSTGEditorSharp
             //catch { }
         }
 
+        private void EditNodeCommandExecuted(object sender, ExecutedRoutedEventArgs e)
+        {
+            ShowEditWindow();
+        }
+
+        private void EditNodeCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = selectedNode != null;
+        }
+
         #endregion
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -1345,19 +1372,7 @@ namespace LuaSTGEditorSharp
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
-            propData.CommitEdit();
-            AttrItem ai = selectedNode?.GetRCInvoke();
-            if (ai != null)
-            {
-                InputWindow iw = InputWindowSelector.SelectInputWindow(ai, ai.EditWindow, ai.AttrInput, this);
-                if (iw.ShowDialog() == true)
-                {
-                    ActivatedWorkSpaceData.AddAndExecuteCommand(new EditAttrCommand(ai, ai.AttrInput, iw.Result));
-                    var a = propData.ItemsSource;
-                    propData.ItemsSource = null;
-                    propData.ItemsSource = a;
-                }
-            }
+            ShowEditWindow();
         }
     }
 }

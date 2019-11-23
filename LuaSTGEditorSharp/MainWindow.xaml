@@ -24,6 +24,7 @@
         <CommandBinding Command="ApplicationCommands.Copy" Executed="CopyCommandExecuted" CanExecute="CopyCommand_CanExecute"/>
         <CommandBinding Command="ApplicationCommands.Paste" Executed="PasteCommandExecuted" CanExecute="PasteCommand_CanExecute"/>
         <CommandBinding Command="ApplicationCommands.Delete" Executed="DeleteCommandExecuted" CanExecute="DeleteCommand_CanExecute"/>
+        <CommandBinding Command="local:EditorRoutedCommands.EditNode" Executed="EditNodeCommandExecuted" CanExecute="EditNodeCommand_CanExecute"/>
         <CommandBinding Command="local:EditorRoutedCommands.FoldTree" Executed="FoldTreeCommandExecuted" CanExecute="FoldTreeCommand_CanExecute"/>
         <CommandBinding Command="local:EditorRoutedCommands.UnfoldTree" Executed="UnfoldTreeCommandExecuted" CanExecute="UnfoldTreeCommand_CanExecute"/>
         <CommandBinding Command="local:EditorRoutedCommands.FoldRegion" Executed="FoldRegionCommandExecuted" CanExecute="FoldRegionCommand_CanExecute"/>
@@ -350,6 +351,8 @@
                     <MenuItem Header="_Close" Command="ApplicationCommands.Close"/>
                 </MenuItem>
                 <MenuItem Header="_Edit">
+                    <MenuItem Header="_Edit..." Command="local:EditorRoutedCommands.EditNode"/>
+                    <Separator/>
                     <MenuItem Header="_Undo" Command="ApplicationCommands.Undo">
                         <MenuItem.Icon>
                             <Image Source="images/undo.png"/>
@@ -923,7 +926,7 @@
                                                 <ContextMenu DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}">
                                                     <ContextMenu.ItemsSource>
                                                         <CompositeCollection>
-                                                            <MenuItem Header="_Edit.." Click="MenuItem_Click"/>
+                                                            <MenuItem Header="_Edit.." Command="local:EditorRoutedCommands.EditNode"/>
                                                             <Separator/>
                                                             <MenuItem Header="_Cut" Command="ApplicationCommands.Cut"/>
                                                             <MenuItem Header="_Copy" Command="ApplicationCommands.Copy"/>

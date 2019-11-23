@@ -10,6 +10,7 @@ namespace LuaSTGEditorSharp
     public class EditorRoutedCommands
     {
         #region Extra edit commands
+        public static RoutedUICommand EditNode { get; }
         public static RoutedUICommand FoldTree { get; }
         public static RoutedUICommand UnfoldTree { get; }
         public static RoutedUICommand FoldRegion { get; }
@@ -54,6 +55,11 @@ namespace LuaSTGEditorSharp
         static EditorRoutedCommands()
         {
             InputGestureCollection inputs;
+            inputs = new InputGestureCollection
+            {
+                new KeyGesture(Key.Space)
+            };
+            EditNode = new RoutedUICommand("Edit Node", "EditNode", typeof(EditorRoutedCommands), inputs);
             inputs = new InputGestureCollection
             {
                 new KeyGesture(Key.A, ModifierKeys.Control | ModifierKeys.Alt, "Ctrl+Alt+A")

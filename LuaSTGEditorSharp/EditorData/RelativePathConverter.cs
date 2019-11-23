@@ -57,7 +57,8 @@ namespace LuaSTGEditorSharp.EditorData
         private static string AppendDirectorySeparatorChar(string path)
         {
             // Append a slash only if the path is a directory and does not have a slash.
-            if (!Path.HasExtension(path) &&
+            if (
+                //!Path.HasExtension(path) &&
                 !path.EndsWith(Path.DirectorySeparatorChar.ToString()))
             {
                 return path + Path.DirectorySeparatorChar;
