@@ -67,6 +67,24 @@
                     <Label Content="Default Author Name" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="150"/>
                     <TextBox HorizontalAlignment="Left" Height="26" Margin="178,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="470" Text="{Binding AuthorName, ElementName=window}"/>
                     <CheckBox Content="Move to new nodes Automatically" HorizontalAlignment="Left" Height="26" VerticalAlignment="Top" Width="275" IsChecked="{Binding AutoMoveToNew, ElementName=window}" Margin="10,50,0,0"/>
+                    <GroupBox Header="Indentation" Margin="10,81,10,228">
+                        <StackPanel Orientation="Vertical" Margin="10,10,10,10">
+                            <RadioButton Height="26" IsChecked="{Binding SpaceIndentation,ElementName=window}">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="2*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Grid.Column="0" Text="Space"/>
+                                    <TextBlock Grid.Column="1" Margin="10,0,10,0" Text="Count:"/>
+                                    <TextBox Grid.Column="2" Margin="0,0,-148,-10.8" Text="{Binding IndentationSpaceLength,ElementName=window}"
+                                             IsEnabled="{Binding IsChecked, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type RadioButton}}}"/>
+                                </Grid>
+                            </RadioButton>
+                            <RadioButton Content="Tab" IsChecked="{Binding TabIndentation,ElementName=window}"/>
+                        </StackPanel>
+                    </GroupBox>
                 </Grid>
             </TabItem>
         </TabControl>

@@ -275,6 +275,34 @@ namespace LuaSTGEditorSharp
             }
         }
 
+        public bool SpaceIndentation
+        {
+            get => Settings.Default.SpaceIndentation;
+            set
+            {
+                if (value)
+                {
+                    Lua.IndentationGenerator.Current = new Lua.SpaceIndentation() { NumOfSpaces = IndentationSpaceLength };
+                }
+                else
+                {
+                    Lua.IndentationGenerator.Current = new Lua.TabIndentation();
+                }
+                Settings.Default["SpaceIndentation"] = value;
+            }
+        }
+
+        public int IndentationSpaceLength
+        {
+            get => Settings.Default.IndentationSpaceLength;
+            set
+            {
+                if (Lua.IndentationGenerator.Current is Lua.SpaceIndentation) 
+                    (Lua.IndentationGenerator.Current as Lua.SpaceIndentation).NumOfSpaces = value;
+                Settings.Default["IndentationSpaceLength"] = value;
+            }
+        }
+
         public bool IsEXEPathSet
         {
             get => !(BatchPacking && string.IsNullOrEmpty(ZipExecutablePath)) && !string.IsNullOrEmpty(LuaSTGExecutablePath);

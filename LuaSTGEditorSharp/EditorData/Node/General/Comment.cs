@@ -50,7 +50,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.General
 
         public override IEnumerable<string> ToLua(int spacing)
         {
-            string sp = "".PadLeft(spacing * 4);
+            string sp = Indent(spacing);
             bool incomm = false;
             TreeNode t = Parent;
             while (t != null)

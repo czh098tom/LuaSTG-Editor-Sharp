@@ -54,7 +54,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Advanced
                 try
                 {
                     Regex r = new Regex("\\n");
-                    string sp = "".PadLeft(spacing * 4);
+                    string sp = Indent(spacing);
                     string nsp = "\n" + sp;
                     head = sp + r.Replace(string.Format(target.ExInfo1, s), nsp) + "\n";
                     tail = sp + r.Replace(string.Format(target.ExInfo2, s), nsp) + "\n";

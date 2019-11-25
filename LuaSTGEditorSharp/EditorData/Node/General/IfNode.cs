@@ -43,12 +43,12 @@ namespace LuaSTGEditorSharp.EditorData.Node.General
 
         public override IEnumerable<string> ToLua(int spacing)
         {
-            string sp = "".PadLeft(spacing * 4);
+            string sp = Indent(spacing);
             var i = GetLogicalChildren().OrderBy((s) => (s as IIfChild)?.Priority ?? 0);
             List<TreeNode> t = new List<TreeNode>(i);
 
             yield return sp + "if " + Macrolize(0);
-            foreach (var a in BaseToLua(spacing + 1, i))
+            foreach (var a in BaseToLua(spacing, i))
             {
                 yield return a;
             }

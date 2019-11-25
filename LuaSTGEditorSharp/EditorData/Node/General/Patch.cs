@@ -42,7 +42,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.General
         public override IEnumerable<string> ToLua(int spacing)
         {
             string sk = GetPath(0);
-            string sp = "".PadLeft(spacing * 4);
+            string sp = Indent(spacing);
             yield return sp + "Include\'" + sk + "\'\n";
         }
 

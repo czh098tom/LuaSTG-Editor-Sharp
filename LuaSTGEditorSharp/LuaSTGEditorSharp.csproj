@@ -128,7 +128,10 @@
     <Compile Include="Execution\ExecutionConfig.cs" />
     <Compile Include="Execution\Execution.cs" />
     <Compile Include="Execution\ExecutionType.cs" />
+    <Compile Include="Lua\IndentionGenerator.cs" />
+    <Compile Include="Lua\SpaceIndention.cs" />
     <Compile Include="Lua\StaticAnalysis.cs" />
+    <Compile Include="Lua\TabIndentation.cs" />
     <Compile Include="Plugin\DefaultNullPlugin\DefaultExecution.cs" />
     <Compile Include="Plugin\SystemMetaLoader.cs" />
     <Compile Include="Toolbox\TreeViewLineConverter.cs" />

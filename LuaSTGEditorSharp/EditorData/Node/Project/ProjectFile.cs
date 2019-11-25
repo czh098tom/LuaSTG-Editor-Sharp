@@ -43,7 +43,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Project
 
         public override IEnumerable<string> ToLua(int spacing)
         {
-            string sp = "".PadLeft(spacing * 4);
+            string sp = Indent(spacing);
             yield return sp + "Include\'"
                 + StringParser.ParseLua(System.IO.Path.GetFileNameWithoutExtension(NonMacrolize(0)) + ".lua") + "\'\n";
         }

@@ -243,6 +243,40 @@ namespace LuaSTGEditorSharp.Windows
             }
         }
 
+        private bool spaceIndentation;
+        public bool SpaceIndentation
+        {
+            get => spaceIndentation;
+            set
+            {
+                spaceIndentation = value;
+                RaiseProertyChanged("SpaceIndentation");
+                RaiseProertyChanged("TabIndentation");
+            }
+        }
+
+        public bool TabIndentation
+        {
+            get => !spaceIndentation;
+            set
+            {
+                spaceIndentation = !value;
+                RaiseProertyChanged("TabIndentation");
+                RaiseProertyChanged("SpaceIndentation");
+            }
+        }
+
+        private int indentationSpaceLength;
+        public int IndentationSpaceLength
+        {
+            get => indentationSpaceLength;
+            set
+            {
+                indentationSpaceLength = value;
+                RaiseProertyChanged("IndentationSpaceLength");
+            }
+        }
+
         #region InSettings
         public string ZipExecutablePathSettings
         {
@@ -333,6 +367,18 @@ namespace LuaSTGEditorSharp.Windows
             get => mainApp.PluginPath;
             set => mainApp.PluginPath = value;
         }
+
+        public bool SpaceIndentationSettings
+        {
+            get => mainApp.SpaceIndentation;
+            set => mainApp.SpaceIndentation = value;
+        }
+
+        public int IndentationSpaceLengthSettings
+        {
+            get => mainApp.IndentationSpaceLength;
+            set => mainApp.IndentationSpaceLength = value;
+        }
         #endregion
 
         public string TargetVersion
@@ -357,6 +403,8 @@ namespace LuaSTGEditorSharp.Windows
             PluginPathSettings = PluginPath;
             TempPathSettings = TempPath;
             ZipExecutablePathSettings = ZipExecutablePath;
+            SpaceIndentationSettings = SpaceIndentation;
+            IndentationSpaceLengthSettings = IndentationSpaceLength;
         }
 
         private void ReadSettings()
@@ -376,6 +424,8 @@ namespace LuaSTGEditorSharp.Windows
             PluginPath = PluginPathSettings;
             TempPath = TempPathSettings;
             ZipExecutablePath = ZipExecutablePathSettings;
+            SpaceIndentation = SpaceIndentationSettings;
+            IndentationSpaceLength = IndentationSpaceLengthSettings;
         }
 
         public SettingsWindow()

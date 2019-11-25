@@ -36,7 +36,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.General
 
         public override IEnumerable<string> ToLua(int spacing)
         {
-            string sp = "".PadLeft(spacing * 4);
+            string sp = Indent(spacing);
             string s = Macrolize(0);
             yield return string.IsNullOrEmpty(s) ? sp + "break\n" : sp + "if " + s + " then break end\n";
         }

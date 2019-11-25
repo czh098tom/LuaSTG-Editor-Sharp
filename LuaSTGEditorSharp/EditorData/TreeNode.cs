@@ -1712,6 +1712,10 @@ namespace LuaSTGEditorSharp.EditorData
             }
         }
 
+        /// <summary>
+        /// Get the nearest node in editing sequence.
+        /// </summary>
+        /// <returns></returns>
         public TreeNode GetNearestEdited()
         {
             TreeNode ne = _parent;
@@ -1728,6 +1732,11 @@ namespace LuaSTGEditorSharp.EditorData
             {
                 return this;
             }
+        }
+
+        public static string Indent(int count)
+        {
+            return Lua.IndentationGenerator.Current.CreateIndentation(count);
         }
     }
 }
