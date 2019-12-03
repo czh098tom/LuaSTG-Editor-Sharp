@@ -70,7 +70,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Enemy
 
         public override IEnumerable<string> ToLua(int spacing)
         {
-            string sp = "".PadLeft(spacing * 4);
+            string sp = Indent(spacing);
             yield return sp + "task.MoveToPlayer(" + NullOrDefault(Macrolize(0), "1") + ","
                 + NullOrDefault(Macrolize(1), "-96,96,112,144") + ","
                 + NullOrDefault(Macrolize(2), "16,32,8,16") + ","

@@ -59,7 +59,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Bullet
 
         public override IEnumerable<string> ToLua(int spacing)
         {
-            string sp = "".PadLeft(spacing * 4);
+            string sp = Indent(spacing);
             string p = Macrolize(2);
             if (string.IsNullOrEmpty(p)) p = "_";
             yield return sp + "last=New(_editor_class[" + Macrolize(0) + "]," + Macrolize(1) + "," + p + ")\n";

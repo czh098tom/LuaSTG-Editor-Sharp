@@ -77,7 +77,8 @@ namespace LuaSTGEditorSharp.EditorData.Node.Bullet
 
         public override IEnumerable<string> ToLua(int spacing)
         {
-            string sp = "".PadLeft(4);
+            string sp = Indent(spacing);
+            string s1 = Indent(spacing);
             TreeNode Parent = GetLogicalParent();
             string parentName = "";
             if (Parent?.attributes != null && Parent.AttributeCount >= 2)
@@ -86,14 +87,14 @@ namespace LuaSTGEditorSharp.EditorData.Node.Bullet
                     (Parent.NonMacrolize(1) == "All" ? "" : ":" + Parent.NonMacrolize(1)));
             }
             string p = (!string.IsNullOrEmpty(NonMacrolize(0)) ? NonMacrolize(0) : "_");
-            yield return "_editor_class[\"" + parentName + "\"].init=function(self,_x,_y," + p + ")\n"
-                         + sp + "bullet.init(self," + Macrolize(1) + "," + Macrolize(2) + "," + Macrolize(3) + "," + Macrolize(4) + ")\n"
-                         + sp + "self.x,self.y=_x,_y\n";
+            yield return sp + "_editor_class[\"" + parentName + "\"].init=function(self,_x,_y," + p + ")\n"
+                         + sp + s1 + "bullet.init(self," + Macrolize(1) + "," + Macrolize(2) + "," + Macrolize(3) + "," + Macrolize(4) + ")\n"
+                         + sp + s1 + "self.x,self.y=_x,_y\n";
             foreach (var a in base.ToLua(spacing + 1))
             {
                 yield return a;
             }
-            yield return "end\n";
+            yield return sp + "end\n";
         }
 
         public override IEnumerable<Tuple<int,TreeNode>> GetLines()

@@ -50,7 +50,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Boss
 
         public override IEnumerable<string> ToLua(int spacing)
         {
-            string sp = "".PadLeft(spacing * 4);
+            string sp = Indent(spacing);
             yield return sp + "local _boss_wait=" + Macrolize(1) + "\n"
                        + sp + "local _ref=New(_editor_class[" + Macrolize(0) + "],_editor_class[" + Macrolize(0) + "].cards)\n"
                        + sp + "last=_ref\n"

@@ -54,7 +54,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Audio
         public override IEnumerable<string> ToLua(int spacing)
         {
             string sk = GetPath(0);
-            string sp = "".PadLeft(spacing * 4);
+            string sp = Indent(spacing);
             yield return sp + "LoadSound(\'se:\'..\'" + StringParser.ParseLua(NonMacrolize(1)) + "\',\'" 
                 + sk + "\')\n";
         }

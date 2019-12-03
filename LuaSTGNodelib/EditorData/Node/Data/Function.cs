@@ -52,7 +52,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Data
 
         public override IEnumerable<string> ToLua(int spacing)
         {
-            string sp = "".PadLeft(spacing * 4);
+            string sp = Indent(spacing);
             yield return sp;
             if(bool.TryParse(NonMacrolize(2), out bool local))
             {

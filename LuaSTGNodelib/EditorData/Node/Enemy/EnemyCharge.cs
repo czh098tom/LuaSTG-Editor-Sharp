@@ -35,8 +35,8 @@ namespace LuaSTGEditorSharp.EditorData.Node.Enemy
 
         public override IEnumerable<string> ToLua(int spacing)
         {
-            string sp = "".PadLeft(spacing * 4);
-            yield return "New(boss_cast_ef," + Macrolize(0) + ")\n";
+            string sp = Indent(spacing);
+            yield return sp + "New(boss_cast_ef," + Macrolize(0) + ")\n";
         }
 
         public override string ToString()

@@ -50,7 +50,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Task
 
         public override IEnumerable<string> ToLua(int spacing)
         {
-            string sp = "".PadLeft(spacing * 4);
+            string sp = Indent(spacing);
             yield return sp + "lasttask=task.New(" + Macrolize(2) + ",_editor_tasks[" + Macrolize(0) + "](" + Macrolize(1) + "))\n";
         }
 

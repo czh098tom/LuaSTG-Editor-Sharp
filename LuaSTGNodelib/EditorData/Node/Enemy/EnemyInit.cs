@@ -112,7 +112,8 @@ namespace LuaSTGEditorSharp.EditorData.Node.Enemy
 
         public override IEnumerable<string> ToLua(int spacing)
         {
-            string sp = "".PadLeft(4);
+            string sp = Indent(spacing);
+            string s1 = Indent(1);
             TreeNode Parent = GetLogicalParent();
             string parentName = "";
             if (Parent?.attributes != null && Parent.AttributeCount >= 2)
@@ -121,17 +122,17 @@ namespace LuaSTGEditorSharp.EditorData.Node.Enemy
                     (Parent.NonMacrolize(1) == "All" ? "" : ":" + Parent.NonMacrolize(1)));
             }
             string p = (!string.IsNullOrEmpty(NonMacrolize(0)) ? NonMacrolize(0) : "_");
-            yield return "_editor_class[\"" + parentName + "\"].init=function(self,_x,_y," + p + ")\n"
-                         + sp + "enemy.init(self," + Macrolize(1) + "," + Macrolize(2) + "," + Macrolize(7) 
+            yield return sp + "_editor_class[\"" + parentName + "\"].init=function(self,_x,_y," + p + ")\n"
+                         + sp + s1 + "enemy.init(self," + Macrolize(1) + "," + Macrolize(2) + "," + Macrolize(7) 
                             + "," + Macrolize(8) + "," + Macrolize(9) + ")\n"
-                         + sp + "self.x,self.y=_x,_y\n"
-                         + sp + "self.drop={" + Macrolize(3) + "," + Macrolize(4) + "," + Macrolize(5) + "}\n"
-                         + sp + "task.New(self,function() self.protect=true task.Wait(" + Macrolize(6) + ") self.protect=false end)\n";
+                         + sp + s1 + "self.x,self.y=_x,_y\n"
+                         + sp + s1 + "self.drop={" + Macrolize(3) + "," + Macrolize(4) + "," + Macrolize(5) + "}\n"
+                         + sp + s1 + "task.New(self,function() self.protect=true task.Wait(" + Macrolize(6) + ") self.protect=false end)\n";
             foreach (var a in base.ToLua(spacing + 1))
             {
                 yield return a;
             }
-            yield return "end\n";
+            yield return sp + "end\n";
         }
 
         public override object Clone()

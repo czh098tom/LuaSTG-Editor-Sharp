@@ -23,13 +23,13 @@ namespace LuaSTGEditorSharp.EditorData.Node.Boss
 
         public override IEnumerable<string> ToLua(int spacing)
         {
-            string sp = "".PadLeft(spacing * 4);
+            string sp = Indent(spacing);
             yield return sp + "function _tmp_sc:del()\n";
             foreach (var a in base.ToLua(spacing + 1))
             {
                 yield return a;
             }
-            yield return "end\n";
+            yield return sp + "end\n";
         }
 
         public override IEnumerable<Tuple<int, TreeNode>> GetLines()

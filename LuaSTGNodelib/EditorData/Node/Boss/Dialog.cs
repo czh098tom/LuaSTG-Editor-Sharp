@@ -43,7 +43,8 @@ namespace LuaSTGEditorSharp.EditorData.Node.Boss
 
         public override IEnumerable<string> ToLua(int spacing)
         {
-            string sp = "".PadLeft(spacing * 4);
+            string sp = Indent(spacing);
+            string s1 = Indent(1);
             TreeNode Parent = GetLogicalParent();
             string parentName = "";
             if (Parent?.attributes != null && Parent.AttributeCount >= 2)
@@ -51,17 +52,17 @@ namespace LuaSTGEditorSharp.EditorData.Node.Boss
                 parentName = Lua.StringParser.ParseLua(Parent.NonMacrolize(0) +
                     (Parent.NonMacrolize(1) == "All" ? "" : ":" + Parent.NonMacrolize(1)));
             }
-            yield return "_tmp_sc=boss.dialog.New(" + Macrolize(0) + ")\n";
-            yield return "function _tmp_sc:init()\n";
-            yield return "    lstg.player.dialog=" + Macrolize(1) + "\n";
-            yield return "    _dialog_can_skip=" + Macrolize(0) + "\n";
-            yield return "    self.dialog_displayer=New(dialog_displayer)\n";
+            yield return sp + "_tmp_sc=boss.dialog.New(" + Macrolize(0) + ")\n";
+            yield return sp + "function _tmp_sc:init()\n";
+            yield return sp + s1 + "lstg.player.dialog=" + Macrolize(1) + "\n";
+            yield return sp + s1 + "_dialog_can_skip=" + Macrolize(0) + "\n";
+            yield return sp + s1 + "self.dialog_displayer=New(dialog_displayer)\n";
             foreach (string s in base.ToLua(spacing + 1))
             {
                 yield return s;
             }
-            yield return "end\n";
-            yield return "table.insert(_editor_class[\"" + parentName + "\"].cards,_tmp_sc)\n";
+            yield return sp + "end\n";
+            yield return sp + "table.insert(_editor_class[\"" + parentName + "\"].cards,_tmp_sc)\n";
         }
 
         public override string ToString()

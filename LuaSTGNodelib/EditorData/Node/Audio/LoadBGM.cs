@@ -72,7 +72,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Audio
         public override IEnumerable<string> ToLua(int spacing)
         {
             string sk = GetPath(0);
-            string sp = "".PadLeft(spacing * 4);
+            string sp = Indent(spacing);
             yield return sp + "MusicRecord(\'bgm:\'..\'" + StringParser.ParseLua(NonMacrolize(1)) + "\',\'" 
                 + sk
                 + "\'," + Macrolize(2) + "," + Macrolize(3) + ")\n";

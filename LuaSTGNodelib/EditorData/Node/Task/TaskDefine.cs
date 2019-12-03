@@ -44,15 +44,16 @@ namespace LuaSTGEditorSharp.EditorData.Node.Task
 
         public override IEnumerable<string> ToLua(int spacing)
         {
-            string sp = "".PadLeft(4);
-            yield return "_editor_tasks[\"" + Lua.StringParser.ParseLua(NonMacrolize(0)) + "\"]=function(" + Macrolize(1) + ")\n" +
-                sp + "return function()\n" +
-                sp + sp + "local self=task.GetSelf()\n";
+            string sp = Indent(spacing);
+            string s1 = Indent(1);
+            yield return sp + "_editor_tasks[\"" + Lua.StringParser.ParseLua(NonMacrolize(0)) + "\"]=function(" + Macrolize(1) + ")\n" 
+                + sp + s1 + "return function()\n" 
+                + sp + s1 + s1 + "local self=task.GetSelf()\n";
             foreach(string s in base.ToLua(spacing + 1))
             {
                 yield return s;
             }
-            yield return sp + "end\n" + "end\n";
+            yield return sp + s1 + "end\n" + sp + "end\n";
         }
 
         public override IEnumerable<Tuple<int, TreeNode>> GetLines()

@@ -36,7 +36,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Object
 
         public override IEnumerable<string> ToLua(int spacing)
         {
-            string sp = "".PadLeft(spacing * 4);
+            string sp = Indent(spacing);
             yield return sp + "for _,unit in ObjList(" + Macrolize(0) + ") do\n";
             foreach(var i in base.ToLua(spacing + 1))
             {

@@ -44,14 +44,17 @@ namespace LuaSTGEditorSharp.EditorData.Node.Boss
 
         public override IEnumerable<string> ToLua(int spacing)
         {
+            string sp = Indent(spacing);
+            string s1 = Indent(1);
             string luaStrName = Lua.StringParser.ParseLua(NonMacrolize(0));
-            yield return "_editor_class[\"" + luaStrName + "\"]=Class(_spellcard_background)\n_editor_class[\""
-                + luaStrName + "\"].init=function(self)\n    _spellcard_background.init(self)\n";
+            yield return sp + "_editor_class[\"" + luaStrName + "\"]=Class(_spellcard_background)\n" 
+                + sp + "_editor_class[\"" + luaStrName + "\"].init=function(self)\n"
+                + sp + s1 + "_spellcard_background.init(self)\n";
             foreach (var a in base.ToLua(spacing + 1))
             {
                 yield return a;
             }
-            yield return "end\n";
+            yield return sp + "end\n";
         }
 
         public override IEnumerable<Tuple<int, TreeNode>> GetLines()

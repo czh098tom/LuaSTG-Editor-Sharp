@@ -89,7 +89,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Graphics
         public override IEnumerable<string> ToLua(int spacing)
         {
             string sk = GetPath(0);
-            string sp = "".PadLeft(spacing * 4);
+            string sp = Indent(spacing);
             yield return sp + "_LoadImageFromFile(\'image:\'..\'" + Lua.StringParser.ParseLua(NonMacrolize(1))
                 + "\',\'" + sk
                 + "\'," + Macrolize(2) + "," + Macrolize(3) + "," + Macrolize(4) + "," + Macrolize(5) + ")\n";

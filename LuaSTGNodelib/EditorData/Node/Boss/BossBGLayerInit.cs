@@ -23,8 +23,10 @@ namespace LuaSTGEditorSharp.EditorData.Node.Boss
 
         public override IEnumerable<string> ToLua(int spacing)
         {
-            string sp = "".PadLeft(spacing * 4);
-            yield return sp + "function(self)\n" + sp + "    self.task={}\n";
+            string sp = Indent(spacing);
+            string s1 = Indent(1);
+            yield return sp + "function(self)\n" 
+                + sp + s1 + "self.task={}\n";
             foreach (var a in base.ToLua(spacing + 1))
             {
                 yield return a;

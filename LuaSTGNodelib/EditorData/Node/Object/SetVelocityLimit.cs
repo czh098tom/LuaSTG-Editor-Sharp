@@ -64,7 +64,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Object
 
         public override IEnumerable<string> ToLua(int spacing)
         {
-            string sp = "".PadLeft(spacing * 4);
+            string sp = Indent(spacing);
             string def = "\'original\'";
             yield return sp + "_forbid_v(" + Macrolize(0) + "," + NullToDefault(Macrolize(1),def) 
                 + "," + NullToDefault(Macrolize(2), def) + "," + NullToDefault(Macrolize(3), def) + ")\n";

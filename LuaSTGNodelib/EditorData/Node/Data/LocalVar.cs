@@ -30,7 +30,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Data
 
         public override IEnumerable<string> ToLua(int spacing)
         {
-            string sp = "".PadLeft(spacing * 4);
+            string sp = Indent(spacing);
             if (!int.TryParse(attributes[0].AttrInput, out int nAttr)) nAttr = 0;
             nAttr = nAttr > App.mxUAttr ? App.mxUAttr : nAttr;
             nAttr = nAttr < 0 ? 0 : nAttr;

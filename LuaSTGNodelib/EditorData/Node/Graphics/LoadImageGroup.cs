@@ -90,7 +90,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Graphics
         public override IEnumerable<string> ToLua(int spacing)
         {
             string sk = GetPath(0);
-            string sp = "".PadLeft(spacing * 4);
+            string sp = Indent(spacing);
             //Data Layer: Please add an additional character before numbers so that file name ended with numbers can be splitted correctly
             yield return sp + "_LoadImageGroupFromFile(\'image:\'..\'" + Lua.StringParser.ParseLua(NonMacrolize(1))
                 + "\',\'" + sk

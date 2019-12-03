@@ -104,14 +104,14 @@ namespace LuaSTGEditorSharp.EditorData.Node.Boss
 
         public override IEnumerable<string> ToLua(int spacing)
         {
-            string sp = "".PadLeft(spacing * 4);
+            string sp = Indent(spacing);
             string s = sp + "_spellcard_background.AddLayer(self,";
             foreach(AttrItem item in attributes)
             {
                 s += Macrolize(item) + ",";
             }
             yield return s + "\n";
-            foreach (var a in base.ToLua(spacing))
+            foreach (var a in base.ToLua(spacing + 1))
             {
                 yield return a;
             }

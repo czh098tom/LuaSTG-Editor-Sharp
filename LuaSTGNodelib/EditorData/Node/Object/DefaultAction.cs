@@ -25,7 +25,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Object
 
         public override IEnumerable<string> ToLua(int spacing)
         {
-            string sp = "".PadLeft(spacing * 4);
+            string sp = Indent(spacing);
             TreeNode callBackFunc = this;
             while(!(callBackFunc is ICallBackFunc) && callBackFunc != null)
             {

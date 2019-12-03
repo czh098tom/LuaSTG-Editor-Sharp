@@ -87,18 +87,19 @@ namespace LuaSTGEditorSharp.EditorData.Node.Boss
 
         public override IEnumerable<string> ToLua(int spacing)
         {
+            string sp = Indent(spacing);
             string difficultyS = (NonMacrolize(1) == "All" ? "" : ":" + NonMacrolize(1));
             string fullName = "\"" + Lua.StringParser.ParseLua(NonMacrolize(0) + difficultyS) + "\"";
             string displayedName = Lua.StringParser.ParseLua(NonMacrolize(2));
             string difficultyString = Lua.StringParser.ParseLua(NonMacrolize(1));
             string bg = Macrolize(3);
             bg = string.IsNullOrEmpty(bg) ? "nil" : bg;
-            yield return "_editor_class[" + fullName + "]=Class(boss)\n"
-                + "_editor_class[" + fullName + "].cards={}\n"
-                + "_editor_class[" + fullName + "].name=\"" + displayedName + "\"\n"
-                + "_editor_class[" + fullName + "].bgm=" + Macrolize(4) + "\n"
-                + "_editor_class[" + fullName + "]._bg=" + bg + "\n"
-                + "_editor_class[" + fullName + "].difficulty=\"" + difficultyString + "\"\n";
+            yield return sp + "_editor_class[" + fullName + "]=Class(boss)\n"
+                + sp + "_editor_class[" + fullName + "].cards={}\n"
+                + sp + "_editor_class[" + fullName + "].name=\"" + displayedName + "\"\n"
+                + sp + "_editor_class[" + fullName + "].bgm=" + Macrolize(4) + "\n"
+                + sp + "_editor_class[" + fullName + "]._bg=" + bg + "\n"
+                + sp + "_editor_class[" + fullName + "].difficulty=\"" + difficultyString + "\"\n";
             foreach (var a in base.ToLua(spacing))
             {
                 yield return a;

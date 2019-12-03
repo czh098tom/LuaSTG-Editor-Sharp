@@ -23,6 +23,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Render
 
         public override IEnumerable<string> ToLua(int spacing)
         {
+            string sp = Indent(spacing);
             TreeNode Parent = GetLogicalParent();
             string parentName = "";
             if (Parent?.attributes != null && Parent.AttributeCount >= 2)
@@ -30,12 +31,12 @@ namespace LuaSTGEditorSharp.EditorData.Node.Render
                 parentName = Lua.StringParser.ParseLua(Parent.NonMacrolize(0) +
                    (Parent.NonMacrolize(1) == "All" ? "" : ":" + Parent.NonMacrolize(1)));
             }
-            yield return "_editor_class[\"" + parentName + "\"].render=function(self)\n";
+            yield return sp + "_editor_class[\"" + parentName + "\"].render=function(self)\n";
             foreach (var a in base.ToLua(spacing + 1))
             {
                 yield return a;
             }
-            yield return "end\n";
+            yield return sp + "end\n";
         }
 
         public override string ToString()

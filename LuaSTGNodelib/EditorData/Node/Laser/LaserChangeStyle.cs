@@ -60,7 +60,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Laser
 
         public override IEnumerable<string> ToLua(int spacing)
         {
-            string sp = "".PadLeft(spacing * 4);
+            string sp = Indent(spacing);
             string target;
             if (string.IsNullOrEmpty(NonMacrolize(1)))
             {

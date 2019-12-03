@@ -45,7 +45,8 @@ namespace LuaSTGEditorSharp.EditorData.Node.Boss
 
         public override IEnumerable<string> ToLua(int spacing)
         {
-            string sp = "".PadLeft(4);
+            string sp = Indent(spacing);
+            string s1 = Indent(spacing);
             TreeNode Parent = GetLogicalParent();
             string parentName = "";
             if (Parent?.attributes != null && Parent.AttributeCount >= 2)
@@ -56,8 +57,8 @@ namespace LuaSTGEditorSharp.EditorData.Node.Boss
             string parentStr = "_editor_class[\"" + parentName + "\"]";
             string scbg = Macrolize(1);
             scbg = string.IsNullOrEmpty(scbg) || scbg == "\"\"" ? "spellcard_background" : "_editor_class[" + scbg + "]";
-            yield return parentStr + ".init=function(self,cards)\n"
-                         + sp + "boss.init(self," + Macrolize(0) + "," + parentStr + ".name,cards,New(" + scbg + ")," 
+            yield return sp + parentStr + ".init=function(self,cards)\n"
+                         + sp + s1 + "boss.init(self," + Macrolize(0) + "," + parentStr + ".name,cards,New(" + scbg + ")," 
                          + parentStr + ".difficulty)\n";
             foreach (var a in base.ToLua(spacing + 1))
             {

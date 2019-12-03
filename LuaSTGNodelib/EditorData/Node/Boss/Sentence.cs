@@ -72,7 +72,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Boss
 
         public override IEnumerable<string> ToLua(int spacing)
         {
-            string sp = "".PadLeft(spacing * 4);
+            string sp = Indent(spacing);
             string attr3 = Macrolize(3);
             attr3 = string.IsNullOrEmpty(attr3) ? "nil" : attr3;
             string attr4 = Macrolize(4);

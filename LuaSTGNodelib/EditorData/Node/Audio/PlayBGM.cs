@@ -61,7 +61,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Audio
 
         public override IEnumerable<string> ToLua(int spacing)
         {
-            string sp = "".PadLeft(spacing * 4);
+            string sp = Indent(spacing);
             string s = "";
             if (string.IsNullOrEmpty(Macrolize(1)))
             {

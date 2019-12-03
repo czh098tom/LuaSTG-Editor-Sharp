@@ -83,7 +83,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Boss
 
         public override IEnumerable<string> ToLua(int spacing)
         {
-            string sp = "".PadLeft(spacing * 4);
+            string sp = Indent(spacing);
             yield return sp + "self._wisys = BossWalkImageSystem(self)\n"
                 + sp + "self._wisys:SetImage(\"" + GetPath(0) + "\"," + InverseFromColRow(Macrolize(1))
                 + ",{" + Macrolize(2) + "},{" + Macrolize(3) + "}," + Macrolize(4) + "," + Macrolize(5) + ")\n";

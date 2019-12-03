@@ -29,7 +29,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Data
 
         public override IEnumerable<string> ToLua(int spacing)
         {
-            string sp = "".PadLeft(spacing * 4);
+            string sp = Indent(spacing);
             string bres = "";
             string mres = "";
             bool first = true;

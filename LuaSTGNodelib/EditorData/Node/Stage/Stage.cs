@@ -90,7 +90,8 @@ namespace LuaSTGEditorSharp.EditorData.Node.Stage
 
         public override IEnumerable<string> ToLua(int spacing)
         {
-            string sp = "".PadLeft(4);
+            string sp = Indent(spacing);
+            string s1 = Indent(1);
             TreeNode Parent = GetLogicalParent();
             string parentStageGroupName = "";
             if (Parent?.attributes != null && Parent.AttributeCount >= 1)
@@ -98,40 +99,40 @@ namespace LuaSTGEditorSharp.EditorData.Node.Stage
                 parentStageGroupName = Lua.StringParser.ParseLua(Parent.NonMacrolize(0));
             }
             string stageName = Lua.StringParser.ParseLua(NonMacrolize(0));
-            yield return "stage.group.AddStage(\'" + parentStageGroupName + "\',\'" 
+            yield return sp + "stage.group.AddStage(\'" + parentStageGroupName + "\',\'" 
                        + stageName
                        + "@" + parentStageGroupName + "\',{lifeleft=" + Macrolize(1) + ",power="
                        + Macrolize(2) + ",faith=" + Macrolize(3) + ",bomb=" + Macrolize(4) + "},"
                        + Macrolize(5) + ")\n"
-                       + "stage.group.DefStageFunc(\'" + stageName + "@" + parentStageGroupName
+                       + sp + "stage.group.DefStageFunc(\'" + stageName + "@" + parentStageGroupName
                        + "\',\'init\',function(self)\n"
-                       + sp + "_init_item(self)\n"
-                       + sp + "difficulty=self.group.difficulty\n"
-                       + sp + "New(mask_fader,'open')\n"
-                       + sp + "jstg.CreatePlayers()\n";
+                       + sp + s1 + "_init_item(self)\n"
+                       + sp + s1 + "difficulty=self.group.difficulty\n"
+                       + sp + s1 + "New(mask_fader,'open')\n"
+                       + sp + s1 + "jstg.CreatePlayers()\n";
             foreach (var a in base.ToLua(spacing + 1))
             {
                 yield return a;
             }
-            yield return sp + "task.New(self,function()\n"
-                       + sp + sp + "while coroutine.status(self.task[1])~=\'dead\' do task.Wait() end\n"
-                       + sp + sp + "stage.group.FinishReplay()\n"
-                       + sp + sp + "New(mask_fader,\'close\')\n"
-                       + sp + sp + "task.New(self,function()\n"
-                       + sp + sp + sp + "local _,bgm=EnumRes(\'bgm\')\n"
-                       + sp + sp + sp + "for i=1,30 do\n"
-                       + sp + sp + sp + sp + "for _,v in pairs(bgm) do\n"
-                       + sp + sp + sp + sp + sp + "if GetMusicState(v)=='playing' then\n"
-                       + sp + sp + sp + sp + sp + sp + "SetBGMVolume(v,1-i/30)\n"
-                       + sp + sp + sp + sp + sp + "end\n"
-                       + sp + sp + sp + sp + "end\n"
-                       + sp + sp + sp + sp + "task.Wait()\n"
-                       + sp + sp + sp + "end\n"
-                       + sp + sp + "end)\n"
-                       + sp + sp + "task.Wait(30)\n"
-                       + sp + sp + "stage.group.FinishStage()\n"
-                       + sp + "end)\n"
-                       + "end)\n";
+            yield return sp + s1 + "task.New(self,function()\n"
+                       + sp + s1 + s1 + "while coroutine.status(self.task[1])~=\'dead\' do task.Wait() end\n"
+                       + sp + s1 + s1 + "stage.group.FinishReplay()\n"
+                       + sp + s1 + s1 + "New(mask_fader,\'close\')\n"
+                       + sp + s1 + s1 + "task.New(self,function()\n"
+                       + sp + s1 + s1 + s1 + "local _,bgm=EnumRes(\'bgm\')\n"
+                       + sp + s1 + s1 + s1 + "for i=1,30 do\n"
+                       + sp + s1 + s1 + s1 + s1 + "for _,v in pairs(bgm) do\n"
+                       + sp + s1 + s1 + s1 + s1 + s1 + "if GetMusicState(v)=='playing' then\n"
+                       + sp + s1 + s1 + s1 + s1 + s1 + s1 + "SetBGMVolume(v,1-i/30)\n"
+                       + sp + s1 + s1 + s1 + s1 + s1 + "end\n"
+                       + sp + s1 + s1 + s1 + s1 + "end\n"
+                       + sp + s1 + s1 + s1 + s1 + "task.Wait()\n"
+                       + sp + s1 + s1 + s1 + "end\n"
+                       + sp + s1 + s1 + "end)\n"
+                       + sp + s1 + s1 + "task.Wait(30)\n"
+                       + sp + s1 + s1 + "stage.group.FinishStage()\n"
+                       + sp + s1 + "end)\n"
+                       + sp + "end)\n";
         }
 
         public override IEnumerable<Tuple<int,TreeNode>> GetLines()

@@ -86,7 +86,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Bullet
 
         public override IEnumerable<string> ToLua(int spacing)
         {
-            string sp = "".PadLeft(spacing * 4);
+            string sp = Indent(spacing);
             string s = "";
             foreach (AttrItem ai in attributes)
             {
