@@ -3,6 +3,8 @@
 0.6.1 ~ 0.7.0
 实现功能：修复节点定义、定制缩进
 实现节点：
+General
+	CodeBlock
 Data
 	PositionAssignment
 Enemy

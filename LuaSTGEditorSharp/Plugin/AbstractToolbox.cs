@@ -51,6 +51,7 @@ namespace LuaSTGEditorSharp.Plugin
             gen.Add(new ToolboxItemData("elseif", "images/elseif.png", "Else If"), new AddNode(AddElseIfNode));
             gen.Add(new ToolboxItemData("repeat", "images/repeat.png", "Repeat"), new AddNode(AddRepeatNode));
             gen.Add(new ToolboxItemData("break", "images/break.png", "Break"), new AddNode(AddBreakNode));
+            gen.Add(new ToolboxItemData("codeblock", "images/codeblock.png", "Break"), new AddNode(AddCodeBlockNode));
             gen.Add(new ToolboxItemData(true), null);
             gen.Add(new ToolboxItemData("patch", "images/patch.png", "Patch"), new AddNode(AddPatchNode));
             #endregion
@@ -159,6 +160,11 @@ namespace LuaSTGEditorSharp.Plugin
         private void AddPatchNode()
         {
             parent.Insert(new Patch(parent.ActivatedWorkSpaceData));
+        }
+
+        private void AddCodeBlockNode()
+        {
+            parent.Insert(new CodeBlock(parent.ActivatedWorkSpaceData));
         }
         #endregion
         #region advanced

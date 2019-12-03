@@ -121,6 +121,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="EditorData\Node\General\CodeBlock.cs" />
     <Compile Include="EditorData\Node\General\IfElseIf.cs" />
     <Compile Include="EditorData\Node\IIfChild.cs" />
     <Compile Include="EditorData\Node\NodeAttributes\IgnoreParityCheckAttribute.cs" />
