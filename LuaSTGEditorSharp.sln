@@ -13,6 +13,7 @@ Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup", "Setup\Setup.vdproj
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8572669B-65DA-442E-9EC1-63BF18B13390}"
 	ProjectSection(SolutionItems) = preProject
+		Advanced Repeat Design.md = Advanced Repeat Design.md
 		README.md = README.md
 		Unfinished Nodes.md = Unfinished Nodes.md
 		User Manual.md = User Manual.md

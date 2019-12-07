@@ -155,7 +155,9 @@
     <Compile Include="EditorData\Node\Stage\StageBG.cs" />
     <Compile Include="EditorData\Node\Stage\StageGroup.cs" />
     <Compile Include="EditorData\Node\LaserAlikeTypes.cs" />
+    <Compile Include="EditorData\Node\TaskTypes.cs" />
     <Compile Include="EditorData\Node\TaskAlikeTypes.cs" />
+    <Compile Include="EditorData\Node\Task\TaskFinish.cs" />
     <Compile Include="EditorData\Node\Task\SmoothSetValueTo.cs" />
     <Compile Include="EditorData\Node\Task\TaskCreate.cs" />
     <Compile Include="EditorData\Node\Task\TaskDefine.cs" />
