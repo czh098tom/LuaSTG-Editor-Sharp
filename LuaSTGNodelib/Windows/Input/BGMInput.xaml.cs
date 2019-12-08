@@ -27,7 +27,7 @@ namespace LuaSTGEditorSharp.Windows.Input
     {
         ObservableCollection<MetaModel> BGMInfo { get; set; }
 
-        public BGMInput(string s, MainWindow owner, AttrItem item)
+        public BGMInput(string s, AttrItem item)
         {
             BGMInfo = item.Parent.parentWorkSpace.Meta.aggregatableMetas[(int)MetaType.BGMLoad].GetAllSimpleWithDifficulty("");
 

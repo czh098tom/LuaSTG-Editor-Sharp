@@ -39,7 +39,7 @@ namespace LuaSTGEditorSharp.Windows.Input
             }
         }
 
-        public SEInput(string s, MainWindow owner, AttrItem item)
+        public SEInput(string s, AttrItem item)
         {
             seInfo = item.Parent.parentWorkSpace.Meta.aggregatableMetas[(int)MetaType.SELoad].GetAllSimpleWithDifficulty();
 

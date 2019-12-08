@@ -89,7 +89,7 @@ namespace LuaSTGEditorSharp
 
         public ObservableCollection<MessageBase> Messages { get; } = new ObservableCollection<MessageBase>();
 
-        public IInputWindowSelector InputWindowSelector { get; set; }
+        public IInputWindowSelectorRegister InputWindowSelector { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
 

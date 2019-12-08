@@ -19,7 +19,7 @@ namespace LuaSTGEditorSharp.Windows.Input
     /// </summary>
     public partial class BulletInput : InputWindow
     {
-        public BulletInput(string s, MainWindow owner)
+        public BulletInput(string s)
         {
             InitializeComponent();
             Result = s;

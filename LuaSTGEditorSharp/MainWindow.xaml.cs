@@ -44,7 +44,6 @@ namespace LuaSTGEditorSharp
     /// </summary>
     public partial class MainWindow : Window, INotifyPropertyChanged
     {
-        IInputWindowSelector InputWindowSelector { get; set; }
         DocumentCollection Documents { get; } = new DocumentCollection();
 
         private string debugString = "";
@@ -111,7 +110,6 @@ namespace LuaSTGEditorSharp
             toolboxData = toolbox.ToolboxTabs;
             InitDict();
             InitializeComponent();
-            InputWindowSelector = PluginHandler.Plugin.GetInputWindowSelector();
             comboDict.ItemsSource = toolbox.nodeNameList;
             this.docTabs.ItemsSource = Documents;
             EditorConsole.ItemsSource = Messages;
@@ -415,7 +413,7 @@ namespace LuaSTGEditorSharp
         {
             if (Directory.Exists(s))
             {
-                var dialog = new SingleLineInput("", this) { Title = "Input Directory Name" };
+                var dialog = new SingleLineInput("") { Title = "Input Directory Name" };
                 if (dialog.ShowDialog() == true)
                 {
                     Directory.CreateDirectory(Path.GetFullPath(Path.Combine(s, dialog.Result)));
@@ -739,7 +737,7 @@ namespace LuaSTGEditorSharp
             AttrItem ai = newNode.GetCreateInvoke();
             if (ai != null)
             {
-                InputWindow iw = InputWindowSelector.SelectInputWindow(ai, ai.EditWindow, ai.AttrInput, this);
+                InputWindow iw = InputWindowSelector.SelectInputWindow(ai, ai.EditWindow, ai.AttrInput);
                 if (iw.ShowDialog() == true)
                 {
                     ActivatedWorkSpaceData.AddAndExecuteCommand(new EditAttrCommand(ai, ai.AttrInput, iw.Result));
@@ -756,7 +754,7 @@ namespace LuaSTGEditorSharp
             AttrItem ai = selectedNode?.GetRCInvoke();
             if (ai != null)
             {
-                InputWindow iw = InputWindowSelector.SelectInputWindow(ai, ai.EditWindow, ai.AttrInput, this);
+                InputWindow iw = InputWindowSelector.SelectInputWindow(ai, ai.EditWindow, ai.AttrInput);
                 if (iw.ShowDialog() == true)
                 {
                     ActivatedWorkSpaceData.AddAndExecuteCommand(new EditAttrCommand(ai, ai.AttrInput, iw.Result));
@@ -868,7 +866,7 @@ namespace LuaSTGEditorSharp
                 AttrItem ai = selectedNode.GetRCInvoke();
                 if (ai != null)
                 {
-                    InputWindow iw = InputWindowSelector.SelectInputWindow(ai, ai.EditWindow, ai.AttrInput, this);
+                    InputWindow iw = InputWindowSelector.SelectInputWindow(ai, ai.EditWindow, ai.AttrInput);
                     if (iw.ShowDialog() == true)
                     {
                         ActivatedWorkSpaceData.AddAndExecuteCommand(new EditAttrCommand(ai, ai.AttrInput, iw.Result));
@@ -1314,7 +1312,7 @@ namespace LuaSTGEditorSharp
             AttrItem ai = button.Tag as AttrItem;
             //try
             {
-                InputWindow iw = InputWindowSelector.SelectInputWindow(ai, e.Parameter?.ToString(), ai.AttrInput, this);
+                InputWindow iw = InputWindowSelector.SelectInputWindow(ai, e.Parameter?.ToString(), ai.AttrInput);
                 if (iw.ShowDialog() == true)
                 {
                     ActivatedWorkSpaceData.AddAndExecuteCommand(new EditAttrCommand(ai, ai.AttrInput, iw.Result));

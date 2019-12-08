@@ -14,7 +14,7 @@ namespace LuaSTGEditorSharp.Plugin
 {
     public abstract class AbstractPluginEntry
     {
-        public abstract IInputWindowSelector GetInputWindowSelector();
+        public abstract IInputWindowSelectorRegister GetInputWindowSelectorRegister();
         public abstract AbstractMetaData GetMetaData();
         public abstract AbstractMetaData GetMetaData(IMetaInfoCollection[] meta);
         public abstract AbstractToolbox GetToolbox(MainWindow mw);

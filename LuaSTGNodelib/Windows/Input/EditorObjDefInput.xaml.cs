@@ -27,7 +27,7 @@ namespace LuaSTGEditorSharp.Windows.Input
 
         ObservableCollection<MetaModel> EditorObjInfo { get; set; }
 
-        public EditorObjDefInput(string s, MetaType type, MainWindow owner, AttrItem item)
+        public EditorObjDefInput(string s, MetaType type, AttrItem item)
         {
             difficulty = item.Parent.GetDifficulty();
 

@@ -274,7 +274,7 @@ namespace LuaSTGEditorSharp.Windows.Input
             decomposedY = decomposedY.Trim(trimType);
         }
 
-        public PositionInput(string s, MainWindow owner)
+        public PositionInput(string s)
         {
             Result = s;
             ReCalcDecompostion();

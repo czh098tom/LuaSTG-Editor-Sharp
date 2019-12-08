@@ -23,17 +23,20 @@ namespace LuaSTGEditorSharp.Plugin
                 Plugin = (AbstractPluginEntry)pluginAssembly.CreateInstance("LuaSTGEditorSharp.PluginEntry");
             }
             catch { }
+            bool isSuccess;
             if (pluginAssembly == null)
             {
                 if (Plugin == null) Plugin = new DefaultNullPlugin.DefaultPluginEntry();
                 Plugin.NodeTypeCache.Initialize(Assembly.GetExecutingAssembly());
-                return false;
+                isSuccess = false;
             }
             else
             {
                 Plugin.NodeTypeCache.Initialize(Assembly.GetExecutingAssembly(), pluginAssembly);
-                return true;
+                isSuccess = true;
             }
+            EditorData.InputWindowSelector.Register(Plugin.GetInputWindowSelectorRegister());
+            return isSuccess;
         }
     }
 }

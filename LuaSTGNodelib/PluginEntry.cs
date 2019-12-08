@@ -21,9 +21,9 @@ namespace LuaSTGEditorSharp
             execution = new LSTGEXPlusExecution();
         }
 
-        public override IInputWindowSelector GetInputWindowSelector()
+        public override IInputWindowSelectorRegister GetInputWindowSelectorRegister()
         {
-            return new Windows.Input.InputWindowSelector();
+            return new Windows.Input.InputWindowSelectorRegister();
         }
 
         public override AbstractToolbox GetToolbox(MainWindow mw)

@@ -19,7 +19,7 @@ namespace LuaSTGEditorSharp.Windows.Input
     /// </summary>
     public partial class EnemyInput : InputWindow
     {
-        public EnemyInput(string s, MainWindow owner)
+        public EnemyInput(string s)
         {
             InitializeComponent();
             Result = s;

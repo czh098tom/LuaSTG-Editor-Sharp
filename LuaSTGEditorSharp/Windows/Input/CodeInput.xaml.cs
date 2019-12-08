@@ -19,7 +19,7 @@ namespace LuaSTGEditorSharp.Windows.Input
     /// </summary>
     public partial class CodeInput : InputWindow
     {
-        public CodeInput(string s, MainWindow owner)
+        public CodeInput(string s)
         {
             InitializeComponent();
             codeText.Text = s;

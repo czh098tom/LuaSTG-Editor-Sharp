@@ -220,7 +220,7 @@
     <Compile Include="Windows\Input\ImageInput.xaml.cs">
       <DependentUpon>ImageInput.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\Input\InputWindowSelector.cs" />
+    <Compile Include="Windows\Input\InputWindowSelectorRegister.cs" />
     <Compile Include="Windows\Input\PathInput.xaml.cs">
       <DependentUpon>PathInput.xaml</DependentUpon>
     </Compile>

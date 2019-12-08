@@ -27,7 +27,7 @@ namespace LuaSTGEditorSharp.Windows.Input
 
         ObservableCollection<MetaModel> NodeDefModel { get; set; }
 
-        public NodeDefInput(string s, MainWindow owner, AttrItem item)
+        public NodeDefInput(string s, AttrItem item)
         {
             difficulty = item.Parent.GetDifficulty();
 

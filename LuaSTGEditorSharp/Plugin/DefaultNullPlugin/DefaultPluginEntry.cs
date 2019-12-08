@@ -27,9 +27,9 @@ namespace LuaSTGEditorSharp.Plugin.DefaultNullPlugin
 
         public override string TargetLSTGVersion => "Unknown Version";
 
-        public override IInputWindowSelector GetInputWindowSelector()
+        public override IInputWindowSelectorRegister GetInputWindowSelectorRegister()
         {
-            return new DefaultInputWindowSelector();
+            return new DefaultInputWindowSelectorRegister();
         }
 
         public override AbstractMetaData GetMetaData()

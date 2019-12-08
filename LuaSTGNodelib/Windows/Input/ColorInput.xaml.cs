@@ -19,7 +19,7 @@ namespace LuaSTGEditorSharp.Windows.Input
     /// </summary>
     public partial class ColorInput : InputWindow
     {
-        public ColorInput(string s, MainWindow owner)
+        public ColorInput(string s)
         {
             InitializeComponent();
             Result = s;

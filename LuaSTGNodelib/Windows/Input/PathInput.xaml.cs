@@ -23,7 +23,7 @@ namespace LuaSTGEditorSharp.Windows.Input
     {
         string CurrentFilePath { get; }
         string Extension { get; }
-        public PathInput(string s, string ext, MainWindow owner)
+        public PathInput(string s, string ext, AttrItem owner)
         {
             InitializeComponent();
             Result = s;
@@ -31,7 +31,7 @@ namespace LuaSTGEditorSharp.Windows.Input
             Extension = ext;
             try
             {
-                CurrentFilePath = System.IO.Path.GetDirectoryName(owner.ActivatedWorkSpaceData.DocPath);
+                CurrentFilePath = System.IO.Path.GetDirectoryName(owner?.Parent?.parentWorkSpace?.DocPath);
             }
             catch (ArgumentException)
             {

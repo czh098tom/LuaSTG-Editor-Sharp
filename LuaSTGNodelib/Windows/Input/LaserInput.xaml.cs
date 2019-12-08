@@ -19,7 +19,7 @@ namespace LuaSTGEditorSharp.Windows.Input
     /// </summary>
     public partial class LaserInput : InputWindow
     {
-        public LaserInput(string s, MainWindow owner)
+        public LaserInput(string s)
         {
             InitializeComponent();
             Result = s;

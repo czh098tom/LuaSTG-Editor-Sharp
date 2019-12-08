@@ -36,7 +36,7 @@ namespace LuaSTGEditorSharp.EditorData
             }
 
             Uri fromUri = new Uri(AppendDirectorySeparatorChar(fromPath));
-            Uri toUri = new Uri(AppendDirectorySeparatorChar(toPath));
+            Uri toUri = new Uri(toPath);
 
             if (fromUri.Scheme != toUri.Scheme)
             {

@@ -167,7 +167,7 @@ namespace LuaSTGEditorSharp.Windows.Input
             Result = s;
         }
 
-        public EditorObjParamInput(AttrItem original, MetaType type, string s, MainWindow owner)
+        public EditorObjParamInput(AttrItem original, MetaType type, string s)
         {
             AbstractMetaData metaData = original.Parent.parentWorkSpace.Meta;
             paramName = Separate(metaData.aggregatableMetas[(int)type]

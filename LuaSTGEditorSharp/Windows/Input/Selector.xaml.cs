@@ -19,7 +19,7 @@ namespace LuaSTGEditorSharp.Windows.Input
     /// </summary>
     public partial class Selector : InputWindow
     {
-        public Selector(string s, MainWindow owner, string[] items, string title)
+        public Selector(string s, string[] items, string title)
         {
             InitializeComponent();
             Result = s;

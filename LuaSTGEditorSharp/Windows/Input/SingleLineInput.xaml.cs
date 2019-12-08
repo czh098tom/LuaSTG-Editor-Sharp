@@ -19,7 +19,7 @@ namespace LuaSTGEditorSharp.Windows.Input
     /// </summary>
     public partial class SingleLineInput : InputWindow
     {
-        public SingleLineInput(string s, MainWindow owner)
+        public SingleLineInput(string s)
         {
             InitializeComponent();
             Result = s;

@@ -25,7 +25,7 @@ namespace LuaSTGEditorSharp.Windows.Input
     {
         ObservableCollection<MetaModel> BossBGInfo { get; set; }
 
-        public BossBGDefInput(string s, MainWindow owner, AttrItem item)
+        public BossBGDefInput(string s, AttrItem item)
         {
             BossBGInfo = item.Parent.parentWorkSpace.Meta.aggregatableMetas[(int)MetaType.BossBG].GetAllSimpleWithDifficulty();
 

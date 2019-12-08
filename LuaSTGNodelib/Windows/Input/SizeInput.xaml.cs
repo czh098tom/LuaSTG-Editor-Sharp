@@ -71,7 +71,7 @@ namespace LuaSTGEditorSharp.Windows.Input
             }
         }
 
-        public SizeInput(string s, MainWindow owner)
+        public SizeInput(string s)
         {
             //DialogResult = false;
             InitializeComponent();

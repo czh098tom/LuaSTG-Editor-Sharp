@@ -69,7 +69,7 @@ namespace LuaSTGEditorSharp.Windows.Input
 
         private bool mouseDown = false;
 
-        public ImageInput(string s, MainWindow owner, AttrItem item, ImageClassType imageClassType = ImageClassType.None)
+        public ImageInput(string s, AttrItem item, ImageClassType imageClassType = ImageClassType.None)
         {
             imageInfo = item.Parent.parentWorkSpace.Meta.aggregatableMetas[(int)MetaType.ImageLoad].GetAllSimpleWithDifficulty();
             imageGroupInfo = item.Parent.parentWorkSpace.Meta.aggregatableMetas[(int)MetaType.ImageGroupLoad].GetAllSimpleWithDifficulty();

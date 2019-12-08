@@ -121,6 +121,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="EditorData\InputWindowSelector.cs" />
     <Compile Include="EditorData\Node\General\CodeBlock.cs" />
     <Compile Include="EditorData\Node\General\IfElseIf.cs" />
     <Compile Include="EditorData\Node\IIfChild.cs" />
@@ -237,7 +238,7 @@
     <Compile Include="Lua\SyntaxHighlightLoader.cs" />
     <Compile Include="Plugin\AbstractPluginEntry.cs" />
     <Compile Include="Plugin\AbstractToolbox.cs" />
-    <Compile Include="Plugin\DefaultNullPlugin\DefaultInputWindowSelector.cs" />
+    <Compile Include="Plugin\DefaultNullPlugin\DefaultInputWindowSelectorRegister.cs" />
     <Compile Include="Plugin\DefaultNullPlugin\DefaultMetaData.cs" />
     <Compile Include="Plugin\DefaultNullPlugin\DefaultNodeTypeCache.cs" />
     <Compile Include="Plugin\DefaultNullPlugin\DefaultPluginEntry.cs" />
@@ -245,7 +246,7 @@
     <Compile Include="Plugin\DefaultNullPlugin\DefaultViewDefinition.xaml.cs">
       <DependentUpon>DefaultViewDefinition.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Plugin\IInputWindowSelector.cs" />
+    <Compile Include="Plugin\IInputWindowSelectorRegister.cs" />
     <Compile Include="Plugin\IViewDefinition.cs" />
     <Compile Include="Plugin\PluginHandler.cs" />
     <Compile Include="Settings.cs" />
@@ -260,6 +261,7 @@
     <Compile Include="Toolbox\ToolboxItemData.cs" />
     <Compile Include="Toolbox\ToolboxTab.cs" />
     <Compile Include="Toolbox\ToolboxTemplateSelector.cs" />
+    <Compile Include="Util\DictionaryExtension.cs" />
     <Compile Include="Window1.xaml.cs">
       <DependentUpon>Window1.xaml</DependentUpon>
     </Compile>

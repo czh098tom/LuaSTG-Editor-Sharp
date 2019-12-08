@@ -393,7 +393,7 @@ namespace LuaSTGEditorSharp.Windows.Input
             return brush;
         }
 
-        public ARGBInput(string s, MainWindow owner)
+        public ARGBInput(string s)
         {
             InitializeComponent();
             Result = s;
