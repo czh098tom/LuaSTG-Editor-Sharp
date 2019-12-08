@@ -206,15 +206,30 @@
 
                             <!-- Connecting Lines 
                             <Rectangle x:Name="HorLn" Height="1" Stroke="#8888" Margin="10,8,0,0" SnapsToDevicePixels="False" ClipToBounds="True" VerticalAlignment="Top"/>
-                            -->
+                            
                             <Line x:Name="Ver" Width="5" X1="2.5" Y1="0" X2="2.5" Y2="{Binding ActualHeight, RelativeSource={RelativeSource Self}}"
-                                  StrokeDashArray="3" Stroke="#8888" 
+                                  StrokeDashArray="3" Stroke="#8888"
                                   Grid.RowSpan="2" SnapsToDevicePixels="False" 
                                   ClipToBounds="True" 
                                   VerticalAlignment="Stretch"/>
-                            <!--
-                            <Rectangle x:Name="VerLn" Width="1" StrokeDashArray="3" Stroke="#8888" Grid.RowSpan="2" SnapsToDevicePixels="False" ClipToBounds="True" VerticalAlignment="Stretch"/>
                             -->
+                            <Rectangle x:Name="VerLn" Width="1" Grid.RowSpan="2" SnapsToDevicePixels="False" ClipToBounds="True" VerticalAlignment="Stretch">
+                                <Rectangle.Fill>
+                                    <DrawingBrush Viewport="0,0,3,6" ViewportUnits="Absolute" TileMode="Tile" Stretch="None">
+                                        <DrawingBrush.Drawing>
+                                            <GeometryDrawing>
+                                                <GeometryDrawing.Brush>
+                                                    <SolidColorBrush Color="#FF888888"/>
+                                                </GeometryDrawing.Brush>
+                                                <GeometryDrawing.Geometry>
+                                                    <RectangleGeometry Rect="0,0,3,3"/>
+                                                </GeometryDrawing.Geometry>
+                                            </GeometryDrawing>
+                                        </DrawingBrush.Drawing>
+                                    </DrawingBrush>
+                                </Rectangle.Fill>
+                            </Rectangle>
+                            
                             
                             <ToggleButton x:Name="Expander"
                                           Style="{StaticResource ExpandCollapseToggleStyle}"
