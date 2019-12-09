@@ -75,6 +75,9 @@
     <Compile Include="EditorData\Document\Meta\LaserDefineMetaInfo.cs" />
     <Compile Include="EditorData\Document\Meta\StageGroupDefineMetaInfo.cs" />
     <Compile Include="EditorData\Document\Meta\TaskDefineMetaInfo.cs" />
+    <Compile Include="EditorData\Node\Audio\PauseBGM.cs" />
+    <Compile Include="EditorData\Node\Audio\ResumeBGM.cs" />
+    <Compile Include="EditorData\Node\Audio\StopBGM.cs" />
     <Compile Include="EditorData\Node\Boss\Dialog.cs" />
     <Compile Include="EditorData\Node\Boss\Sentence.cs" />
     <Compile Include="EditorData\Node\Data\PositionAssignment.cs" />

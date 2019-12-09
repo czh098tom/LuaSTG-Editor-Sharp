@@ -86,7 +86,4 @@ Names below are desired class names for the unfinished nodes.
 	ShakeScreen (From old "Effect")
 
 ## Audio
-	PauseBGM
-	ResumeBGM
-	StopBGM
-	[x]SetPace(?)
+	Finished.

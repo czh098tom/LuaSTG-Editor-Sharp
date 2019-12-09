@@ -236,6 +236,12 @@ namespace LuaSTGEditorSharp
                 , new AddNode(AddLoadBGMNode));
             audio.Add(new ToolboxItemData("playbgm", "/LuaSTGNodeLib;component/images/playbgm.png", "Play Background Music")
                 , new AddNode(AddPlayBGMNode));
+            audio.Add(new ToolboxItemData("pausebgm", "/LuaSTGNodeLib;component/images/pausebgm.png", "Pause Background Music")
+                , new AddNode(AddPauseBGMNode));
+            audio.Add(new ToolboxItemData("resumebgm", "/LuaSTGNodeLib;component/images/resumebgm.png", "Resume Background Music")
+                , new AddNode(AddResumeBGMNode));
+            audio.Add(new ToolboxItemData("stopbgm", "/LuaSTGNodeLib;component/images/stopbgm.png", "Stop Background Music")
+                , new AddNode(AddStopBGMNode));
             #endregion
             ToolInfo.Add("Audio", audio);
 
@@ -668,6 +674,21 @@ namespace LuaSTGEditorSharp
         private void AddPlayBGMNode()
         {
             parent.Insert(new PlayBGM(parent.ActivatedWorkSpaceData));
+        }
+
+        private void AddPauseBGMNode()
+        {
+            parent.Insert(new PauseBGM(parent.ActivatedWorkSpaceData));
+        }
+
+        private void AddResumeBGMNode()
+        {
+            parent.Insert(new ResumeBGM(parent.ActivatedWorkSpaceData));
+        }
+
+        private void AddStopBGMNode()
+        {
+            parent.Insert(new StopBGM(parent.ActivatedWorkSpaceData));
         }
         #endregion
         #region render
