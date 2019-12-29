@@ -171,7 +171,7 @@ namespace LuaSTGEditorSharp.Windows.Input
         {
             AbstractMetaData metaData = original.Parent.parentWorkSpace.Meta;
             paramName = Separate(metaData.aggregatableMetas[(int)type]
-                .FindOfName(original.Parent.attributes[0].AttrInput.Trim('\"'))?.GetParam());
+                .FindOfName(original.Parent.NonMacrolize(0).Trim('\"'))?.GetParam());
             Result = s;
             DecomposeParams();
             InitializeComponent();

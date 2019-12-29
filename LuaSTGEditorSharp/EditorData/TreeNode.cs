@@ -544,6 +544,8 @@ namespace LuaSTGEditorSharp.EditorData
             }
 
             bool firstC = false;
+            bool folderFound = false;
+            bool equalFound = false;
             foreach (TreeNode t in children)
             {
                 if (!t.isBanned)
@@ -556,19 +558,30 @@ namespace LuaSTGEditorSharp.EditorData
                         }
                         string difficultyS = (NonMacrolize(1) == "All" ? "" : ":" + NonMacrolize(1));
                         string fullName = "\"" + NonMacrolize(0) + difficultyS + "\"";
-                        yield return "_boss_class_name=" + fullName + "\n";
-                        yield return "_editor_class[" + fullName + "].cards={boss.move.New(0,144,60,MOVE_NORMAL),_tmp_sc}\n";
+                        yield return "_boss_class_name=" + fullName;
+                        yield return " _editor_class[" + fullName + "].cards={boss.move.New(0,144,60,MOVE_NORMAL),_tmp_sc} ";
                     }
                     else if (GlobalCompileData.StageDebugger != null)
                     {
-                        if (childof && !firstC && (!(t is Folder) || temp == t))
+                        if (childof)
                         {
-                            firstC = true;
-                            yield return "if false then\n";
-                        }
-                        if (GlobalCompileData.StageDebugger == t)
-                        {
-                            yield return "end\n";
+                            if(!firstC && folderFound && !equalFound)
+                            {
+                                firstC = true;
+                                yield return "if false then ";
+                            }
+                            if (!folderFound && t is Folder)
+                            {
+                                folderFound = true;
+                            }
+                            if (GlobalCompileData.StageDebugger == t)
+                            {
+                                equalFound = true;
+                                if (firstC)
+                                {
+                                    yield return "end ";
+                                }
+                            }
                         }
                         foreach (var a in t.ToLua(spacing))
                         {

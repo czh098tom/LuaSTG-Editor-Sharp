@@ -160,6 +160,7 @@
     <Compile Include="EditorData\Node\LaserAlikeTypes.cs" />
     <Compile Include="EditorData\Node\TaskTypes.cs" />
     <Compile Include="EditorData\Node\TaskAlikeTypes.cs" />
+    <Compile Include="EditorData\Node\Task\TaskClear.cs" />
     <Compile Include="EditorData\Node\Task\TaskFinish.cs" />
     <Compile Include="EditorData\Node\Task\SmoothSetValueTo.cs" />
     <Compile Include="EditorData\Node\Task\TaskCreate.cs" />

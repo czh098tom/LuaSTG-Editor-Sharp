@@ -36,6 +36,7 @@ namespace LuaSTGEditorSharp.Plugin
                 isSuccess = true;
             }
             EditorData.InputWindowSelector.Register(Plugin.GetInputWindowSelectorRegister());
+            EditorData.InputWindowSelector.AfterRegister();
             return isSuccess;
         }
     }

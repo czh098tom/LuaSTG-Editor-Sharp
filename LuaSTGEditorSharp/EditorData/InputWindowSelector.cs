@@ -25,6 +25,16 @@ namespace LuaSTGEditorSharp.EditorData
             register.RegisterInputWindow(windowGenerator);
         }
 
+        public static void AfterRegister()
+        {
+            List<string> vs = new List<string>(windowGenerator.Keys);
+            vs.Add("");
+            vs.Sort();
+            comboBox.Add("editWindow", vs.ToArray());
+            windowGenerator.Add("editWindow", (src, tar) => new Selector(tar
+                 , SelectComboBox("editWindow"), "Input Edit Window"));
+        }
+
         public static string[] SelectComboBox(string name)
         {
             return comboBox.GetOrDefault(name, nullSelection);
