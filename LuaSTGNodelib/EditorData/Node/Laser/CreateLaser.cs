@@ -81,5 +81,13 @@ namespace LuaSTGEditorSharp.EditorData.Node.Laser
             n.DeepCopyFrom(this);
             return n;
         }
+
+        public override MetaInfo GetReferredMeta()
+        {
+            AttrItem original = attributes[0];
+            AbstractMetaData metaData = original.Parent.parentWorkSpace.Meta;
+            return (metaData.aggregatableMetas[(int)MetaType.Laser]
+                .FindOfName(original.Parent.NonMacrolize(0).Trim('\"'))) as MetaInfo;
+        }
     }
 }

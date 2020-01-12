@@ -81,5 +81,13 @@ namespace LuaSTGEditorSharp.EditorData.Node.Enemy
             n.DeepCopyFrom(this);
             return n;
         }
+
+        public override MetaInfo GetReferredMeta()
+        {
+            AttrItem original = attributes[0];
+            AbstractMetaData metaData = original.Parent.parentWorkSpace.Meta;
+            return (metaData.aggregatableMetas[(int)MetaType.Enemy]
+                .FindOfName(original.Parent.NonMacrolize(0).Trim('\"'))) as MetaInfo;
+        }
     }
 }

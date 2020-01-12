@@ -30,6 +30,7 @@
         <CommandBinding Command="local:EditorRoutedCommands.FoldRegion" Executed="FoldRegionCommandExecuted" CanExecute="FoldRegionCommand_CanExecute"/>
         <CommandBinding Command="local:EditorRoutedCommands.UnfoldAsRegion" Executed="UnfoldAsRegionCommandExecuted" CanExecute="UnfoldAsRegionCommand_CanExecute"/>
         <CommandBinding Command="local:EditorRoutedCommands.SwitchBan" Executed="SwitchBanCommandExecuted" CanExecute="SwitchBanCommand_CanExecute"/>
+        <CommandBinding Command="local:EditorRoutedCommands.GoToDef" Executed="GoToDefCommandExecuted" CanExecute="GoToDefCommand_CanExecute"/>
         <!--#endregion-->
         <!--#region Tools-->
         <CommandBinding Command="local:EditorRoutedCommands.FixNodeAttributes" Executed="FixAttributeCommandExecuted"/>
@@ -416,6 +417,8 @@
                             <Image Source="images/unfoldasregion.png"/>
                         </MenuItem.Icon>
                     </MenuItem>
+                    <Separator/>
+                    <MenuItem Header="_Go to Definition" Command="local:EditorRoutedCommands.GoToDef"/>
                 </MenuItem>
                 <MenuItem Header="_Tools">
                     <MenuItem Header="_Refactor..."/>
@@ -951,6 +954,8 @@
                                                             <Separator/>
                                                             <MenuItem Header="_Fold Tree" Command="local:EditorRoutedCommands.FoldTree"/>
                                                             <MenuItem Header="_Unfold Tree" Command="local:EditorRoutedCommands.UnfoldTree"/>
+                                                            <Separator/>
+                                                            <MenuItem Header="_Go to Definition" Command="local:EditorRoutedCommands.GoToDef"/>
                                                             <Separator/>
                                                             <MenuItem Header="_Replace...">
                                                                 <CollectionContainer x:Name="contextMenuCollectionContainer"/>

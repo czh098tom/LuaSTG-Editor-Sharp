@@ -1087,6 +1087,17 @@ namespace LuaSTGEditorSharp
             e.CanExecute = ActivatedWorkSpaceData != null && int.TryParse(e.Parameter?.ToString(), out int i);
         }
 
+        private void GoToDefCommandExecuted(object sender, ExecutedRoutedEventArgs e)
+        {
+            TreeNode t = selectedNode?.GetReferredTreeNode();
+            if (t != null) Reveal(t);
+        }
+
+        private void GoToDefCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = selectedNode?.GetReferredTreeNode() != null;
+        }
+
         private void ViewCodeCommandExecuted(object sender, ExecutedRoutedEventArgs e)
         {
             ViewCode();

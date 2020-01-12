@@ -771,6 +771,24 @@ namespace LuaSTGEditorSharp.EditorData
         }
 
         /// <summary>
+        /// This method gets the <see cref="MetaInfo"> referred by this node.
+        /// </summary>
+        /// <returns></returns>
+        public virtual MetaInfo GetReferredMeta()
+        {
+            return null;
+        }
+
+        /// <summary>
+        /// This method gets the <see cref="TreeNode"> referred by this node.
+        /// </summary>
+        /// <returns></returns>
+        public TreeNode GetReferredTreeNode()
+        {
+            return GetReferredMeta()?.target;
+        }
+
+        /// <summary>
         /// This item gets lua line information of <see cref="TreeNode"/>. Must be synced with <see cref="ToLua(int)"/>.
         /// </summary>
         /// <returns>
@@ -1747,6 +1765,11 @@ namespace LuaSTGEditorSharp.EditorData
             }
         }
 
+        /// <summary>
+        /// Create Indentation.
+        /// </summary>
+        /// <param name="count">Indentation level. Must be nonegative.</param>
+        /// <returns></returns>
         public static string Indent(int count)
         {
             return Lua.IndentationGenerator.Current.CreateIndentation(count);
