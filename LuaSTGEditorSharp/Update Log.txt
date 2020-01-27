@@ -6,6 +6,9 @@
 Editor层：
 General
 	CodeBlock
+Advanced
+	AdvancedRepeat
+	LinearVariable
 Lib层：
 Data
 	PositionAssignment

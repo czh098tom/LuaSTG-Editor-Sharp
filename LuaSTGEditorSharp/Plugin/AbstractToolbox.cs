@@ -9,6 +9,7 @@ using LuaSTGEditorSharp.Toolbox;
 using LuaSTGEditorSharp.EditorData;
 using LuaSTGEditorSharp.EditorData.Node.General;
 using LuaSTGEditorSharp.EditorData.Node.Advanced;
+using LuaSTGEditorSharp.EditorData.Node.Advanced.AdvancedRepeat;
 using LuaSTGEditorSharp.EditorData.Node.Project;
 
 namespace LuaSTGEditorSharp.Plugin
@@ -66,6 +67,12 @@ namespace LuaSTGEditorSharp.Plugin
             gen.Add(new ToolboxItemData("unidentified", "images/unidentifiednode.png", "Unidentified Node"), new AddNode(AddUnidentifiedNode));
             #endregion
             ToolInfo.Add("General", gen);
+
+            var ar = new Dictionary<ToolboxItemData, AddNode>();
+            ar.Add(new ToolboxItemData("advrepeat", "images/repeat.png", "Advanced Repeat"), new AddNode(AddAdvancedRepeatNode));
+            ar.Add(new ToolboxItemData(true), null);
+            ar.Add(new ToolboxItemData("linearvar", "images/LinearVariable.png", "Linear Variable"), new AddNode(AddLinearVariableNode));
+            ToolInfo.Add("Advanced", ar);
         }
 
         private void InitData()
@@ -196,6 +203,19 @@ namespace LuaSTGEditorSharp.Plugin
         private void AddUnidentifiedNode()
         {
             parent.Insert(new UnidentifiedNode(parent.ActivatedWorkSpaceData));
+        }
+        #endregion
+        #region AdvancedRepeat
+        private void AddAdvancedRepeatNode()
+        {
+            TreeNode newAR = new AdvancedRepeat(parent.ActivatedWorkSpaceData);
+            newAR.AddChild(new VariableCollection(parent.ActivatedWorkSpaceData));
+            parent.Insert(newAR);
+        }
+
+        private void AddLinearVariableNode()
+        {
+            parent.Insert(new LinearVariable(parent.ActivatedWorkSpaceData));
         }
         #endregion
         #region project

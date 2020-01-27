@@ -24,7 +24,7 @@ namespace LuaSTGEditorSharp.EditorData.Node
             foreach (Assembly assembly in a)
             {
                 NodeTypes.AddRange(from Type t in assembly.GetTypes()
-                                   where t.IsSubclassOf(typeof(TreeNode))
+                                   where t.IsSubclassOf(typeof(TreeNode)) && !t.IsAbstract
                                    select t);
             }
             foreach (Type t in NodeTypes)
