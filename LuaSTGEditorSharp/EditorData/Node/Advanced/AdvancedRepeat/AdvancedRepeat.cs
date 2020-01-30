@@ -19,7 +19,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Advanced.AdvancedRepeat
         [JsonConstructor]
         public AdvancedRepeat() : base() { }
 
-        public AdvancedRepeat(DocumentData workSpaceData) : this(workSpaceData, "_infinity") { }
+        public AdvancedRepeat(DocumentData workSpaceData) : this(workSpaceData, "_infinite") { }
 
         public AdvancedRepeat(DocumentData workSpaceData, string times) : base(workSpaceData) 
         {

@@ -123,6 +123,8 @@
     </ApplicationDefinition>
     <Compile Include="EditorData\InputWindowSelector.cs" />
     <Compile Include="EditorData\Node\Advanced\AdvancedRepeat\AdvancedRepeat.cs" />
+    <Compile Include="EditorData\Node\Advanced\AdvancedRepeat\ReboundingVariable.cs" />
+    <Compile Include="EditorData\Node\Advanced\AdvancedRepeat\IncrementVariable.cs" />
     <Compile Include="EditorData\Node\Advanced\AdvancedRepeat\VariableTransformation.cs" />
     <Compile Include="EditorData\Node\Advanced\AdvancedRepeat\LinearVariable.cs" />
     <Compile Include="EditorData\Node\Advanced\AdvancedRepeat\VariableCollection.cs" />
@@ -392,6 +394,8 @@
     <Resource Include="images\16x16\elseif.png" />
     <Resource Include="images\LinearVariable.png" />
     <Resource Include="images\16x16\LinearVariable.png" />
+    <Resource Include="images\ReboundingVariable.png" />
+    <Resource Include="images\16x16\ReboundingVariable.png" />
     <Content Include="Templates\Empty Project.lstgproj">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

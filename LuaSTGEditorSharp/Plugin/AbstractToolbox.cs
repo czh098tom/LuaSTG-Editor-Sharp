@@ -71,7 +71,9 @@ namespace LuaSTGEditorSharp.Plugin
             var ar = new Dictionary<ToolboxItemData, AddNode>();
             ar.Add(new ToolboxItemData("advrepeat", "images/repeat.png", "Advanced Repeat"), new AddNode(AddAdvancedRepeatNode));
             ar.Add(new ToolboxItemData(true), null);
-            ar.Add(new ToolboxItemData("linearvar", "images/LinearVariable.png", "Linear Variable"), new AddNode(AddLinearVariableNode));
+            ar.Add(new ToolboxItemData("rvarincrement", "images/LinearVariable.png", "Increment Variable"), new AddNode(AddIncrementVariableNode));
+            ar.Add(new ToolboxItemData("rvarlinear", "images/LinearVariable.png", "Linear Variable"), new AddNode(AddLinearVariableNode));
+            ar.Add(new ToolboxItemData("rvarrebound", "images/ReboundingVariable.png", "Rebounding Variable"), new AddNode(AddReboundingVariableNode));
             ToolInfo.Add("Advanced", ar);
         }
 
@@ -216,6 +218,16 @@ namespace LuaSTGEditorSharp.Plugin
         private void AddLinearVariableNode()
         {
             parent.Insert(new LinearVariable(parent.ActivatedWorkSpaceData));
+        }
+
+        private void AddIncrementVariableNode()
+        {
+            parent.Insert(new IncrementVariable(parent.ActivatedWorkSpaceData));
+        }
+
+        private void AddReboundingVariableNode()
+        {
+            parent.Insert(new ReboundingVariable(parent.ActivatedWorkSpaceData));
         }
         #endregion
         #region project

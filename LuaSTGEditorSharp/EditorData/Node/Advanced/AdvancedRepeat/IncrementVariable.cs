@@ -16,20 +16,19 @@ namespace LuaSTGEditorSharp.EditorData.Node.Advanced.AdvancedRepeat
     [RequireParent(typeof(VariableCollection))]
     [LeafNode]
     [CreateInvoke(0)]
-    public class LinearVariable : VariableTransformation
+    public class IncrementVariable : VariableTransformation
     {
         [JsonConstructor]
-        public LinearVariable() : base() { }
+        public IncrementVariable() : base() { }
 
-        public LinearVariable(DocumentData workSpaceData) : this(workSpaceData, "", "0", "0", "false") { }
+        public IncrementVariable(DocumentData workSpaceData) : this(workSpaceData, "", "0", "0") { }
 
-        public LinearVariable(DocumentData workSpaceData, string name, string from, string to, string precisely)
+        public IncrementVariable(DocumentData workSpaceData, string name, string init, string inc)
             : base(workSpaceData)
         {
             Name = name;
-            From = from;
-            To = to;
-            Precisely = precisely;
+            Init = init;
+            Increment = inc;
         }
 
         [JsonIgnore, NodeAttribute]
@@ -40,44 +39,35 @@ namespace LuaSTGEditorSharp.EditorData.Node.Advanced.AdvancedRepeat
         }
 
         [JsonIgnore, NodeAttribute]
-        public string From
+        public string Init
         {
-            get => DoubleCheckAttr(1).attrInput;
-            set => DoubleCheckAttr(1).attrInput = value;
+            get => DoubleCheckAttr(1, name: "Initial value").attrInput;
+            set => DoubleCheckAttr(1, name: "Initial value").attrInput = value;
         }
 
         [JsonIgnore, NodeAttribute]
-        public string To
+        public string Increment
         {
             get => DoubleCheckAttr(2).attrInput;
             set => DoubleCheckAttr(2).attrInput = value;
         }
 
-        [JsonIgnore, NodeAttribute("false")]
-        public string Precisely
-        {
-            get => DoubleCheckAttr(3, "bool").attrInput;
-            set => DoubleCheckAttr(3, "bool").attrInput = value;
-        }
-
         public override object Clone()
         {
-            var n = new LinearVariable(parentWorkSpace);
+            var n = new IncrementVariable(parentWorkSpace);
             n.DeepCopyFrom(this);
             return n;
         }
 
         public override string ToString()
         {
-            string offchar = Precisely == "true" ? "(Precisely)" : "(Expect next value IS)";
-            return $"{NonMacrolize(0)} : {NonMacrolize(1)} => {NonMacrolize(2)} {offchar}";
+            return $"{NonMacrolize(0)} : {NonMacrolize(1)} , +({NonMacrolize(2)}) each loop";
         }
 
         public override Tuple<string, string> GetInformation(string times)
         {
-            string offchar = Precisely == "true" ? "-1" : "";
             string begin = $"local {NonMacrolize(0)}={NonMacrolize(1)}"
-                + $" local _d_{NonMacrolize(0)}=({Macrolize(2)}-({Macrolize(1)}))/({times}{offchar})\n";
+                + $" local _d_{NonMacrolize(0)}=({Macrolize(2)})\n";
             string repeat = $"{NonMacrolize(0)}={NonMacrolize(0)}+_d_{NonMacrolize(0)}\n";
             return new Tuple<string, string>(begin, repeat);
         }

@@ -12,24 +12,23 @@ using LuaSTGEditorSharp.EditorData.Node.NodeAttributes;
 
 namespace LuaSTGEditorSharp.EditorData.Node.Advanced.AdvancedRepeat
 {
-    [Serializable, NodeIcon("images/16x16/LinearVariable.png")]
+    [Serializable, NodeIcon("images/16x16/ReboundingVariable.png")]
     [RequireParent(typeof(VariableCollection))]
     [LeafNode]
     [CreateInvoke(0)]
-    public class LinearVariable : VariableTransformation
+    public class ReboundingVariable : VariableTransformation
     {
         [JsonConstructor]
-        public LinearVariable() : base() { }
+        public ReboundingVariable() : base() { }
 
-        public LinearVariable(DocumentData workSpaceData) : this(workSpaceData, "", "0", "0", "false") { }
+        public ReboundingVariable(DocumentData workSpaceData) : this(workSpaceData, "", "1", "-1") { }
 
-        public LinearVariable(DocumentData workSpaceData, string name, string from, string to, string precisely)
+        public ReboundingVariable(DocumentData workSpaceData, string name, string init, string inc)
             : base(workSpaceData)
         {
             Name = name;
-            From = from;
-            To = to;
-            Precisely = precisely;
+            Init = init;
+            Another = inc;
         }
 
         [JsonIgnore, NodeAttribute]
@@ -40,45 +39,36 @@ namespace LuaSTGEditorSharp.EditorData.Node.Advanced.AdvancedRepeat
         }
 
         [JsonIgnore, NodeAttribute]
-        public string From
+        public string Init
         {
-            get => DoubleCheckAttr(1).attrInput;
-            set => DoubleCheckAttr(1).attrInput = value;
+            get => DoubleCheckAttr(1, name: "Initial value").attrInput;
+            set => DoubleCheckAttr(1, name: "Initial value").attrInput = value;
         }
 
         [JsonIgnore, NodeAttribute]
-        public string To
+        public string Another
         {
-            get => DoubleCheckAttr(2).attrInput;
-            set => DoubleCheckAttr(2).attrInput = value;
-        }
-
-        [JsonIgnore, NodeAttribute("false")]
-        public string Precisely
-        {
-            get => DoubleCheckAttr(3, "bool").attrInput;
-            set => DoubleCheckAttr(3, "bool").attrInput = value;
+            get => DoubleCheckAttr(2, name: "Another value").attrInput;
+            set => DoubleCheckAttr(2, name: "Another value").attrInput = value;
         }
 
         public override object Clone()
         {
-            var n = new LinearVariable(parentWorkSpace);
+            var n = new ReboundingVariable(parentWorkSpace);
             n.DeepCopyFrom(this);
             return n;
         }
 
         public override string ToString()
         {
-            string offchar = Precisely == "true" ? "(Precisely)" : "(Expect next value IS)";
-            return $"{NonMacrolize(0)} : {NonMacrolize(1)} => {NonMacrolize(2)} {offchar}";
+            return $"{NonMacrolize(0)} : {NonMacrolize(1)}(Initial) <=> {NonMacrolize(2)}";
         }
 
         public override Tuple<string, string> GetInformation(string times)
         {
-            string offchar = Precisely == "true" ? "-1" : "";
             string begin = $"local {NonMacrolize(0)}={NonMacrolize(1)}"
-                + $" local _d_{NonMacrolize(0)}=({Macrolize(2)}-({Macrolize(1)}))/({times}{offchar})\n";
-            string repeat = $"{NonMacrolize(0)}={NonMacrolize(0)}+_d_{NonMacrolize(0)}\n";
+                + $" local _n_{NonMacrolize(0)}=({Macrolize(1)})+({Macrolize(2)})\n";
+            string repeat = $"{NonMacrolize(0)}=-({NonMacrolize(0)})+_n_{NonMacrolize(0)}\n";
             return new Tuple<string, string>(begin, repeat);
         }
 
