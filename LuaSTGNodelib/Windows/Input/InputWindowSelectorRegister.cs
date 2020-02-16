@@ -171,6 +171,7 @@ namespace LuaSTGEditorSharp.Windows.Input
             target.Add("color", (src, tar) => new ColorInput(tar));
             target.Add("nullableColor", (src, tar) => new ColorInput(tar));
             target.Add("ARGB", (src, tar) => new ARGBInput(tar));
+            target.Add("RGB", (src, tar) => new ARGBInput(tar, false));
             target.Add("vector", (src, tar) => new VectorInput(tar));
             target.Add("size", (src, tar) => new SizeInput(tar));
             target.Add("scale", (src, tar) => new BossBGDefInput(tar, src));

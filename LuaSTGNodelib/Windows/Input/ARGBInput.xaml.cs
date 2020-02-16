@@ -38,6 +38,17 @@ namespace LuaSTGEditorSharp.Windows.Input
 
         private string aStr, rStr, gStr, bStr;
 
+        private bool alphaUsed;
+        public bool AlphaUsed 
+        {
+            get => alphaUsed;
+            set
+            {
+                alphaUsed = value;
+                RaisePropertyChanged("AlphaUsed");
+            }
+        }
+
         public string AStr
         {
             get
@@ -269,24 +280,40 @@ namespace LuaSTGEditorSharp.Windows.Input
             {
                 base.Result = value;
                 List<string> cs = Separate(Result);
-                if (cs.Count >= 1) AStr = cs[0];
-                if (cs.Count >= 2) RStr = cs[1];
-                if (cs.Count >= 3) GStr = cs[2];
-                if (cs.Count >= 4) BStr = cs[3];
+                if (AlphaUsed)
+                {
+                    if (cs.Count >= 1) AStr = cs[0];
+                    if (cs.Count >= 2) RStr = cs[1];
+                    if (cs.Count >= 3) GStr = cs[2];
+                    if (cs.Count >= 4) BStr = cs[3];
+                }
+                else
+                {
+                    if (cs.Count >= 1) RStr = cs[0];
+                    if (cs.Count >= 2) GStr = cs[1];
+                    if (cs.Count >= 3) BStr = cs[2];
+                }
             }
         }
 
         public void CombineResult()
         {
-            result = AStr + "," + RStr + "," + GStr + "," + BStr;
+            if (AlphaUsed)
+            {
+                result = AStr + "," + RStr + "," + GStr + "," + BStr;
+            }
+            else
+            {
+                result = RStr + "," + GStr + "," + BStr;
+            }
             RaisePropertyChanged("Result");
         }
 
-        public void CombineResult(string a, string r, string g, string b)
-        {
-            result = a + "," + r + "," + g + "," + b;
-            RaisePropertyChanged("Result");
-        }
+        //public void CombineResult(string a, string r, string g, string b)
+        //{
+        //    result = a + "," + r + "," + g + "," + b;
+        //    RaisePropertyChanged("Result");
+        //}
 
         public static Color HSVToRGB(HSVColor HSV)
         {
@@ -393,9 +420,10 @@ namespace LuaSTGEditorSharp.Windows.Input
             return brush;
         }
 
-        public ARGBInput(string s)
+        public ARGBInput(string s, bool alpha = true)
         {
             InitializeComponent();
+            AlphaUsed = alpha;
             Result = s;
             //codeText.Text = Result;
             UpdateState();

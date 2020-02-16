@@ -58,8 +58,8 @@ namespace LuaSTGEditorSharp.EditorData.Commands
             parent.InsertChild(folderP, index);
             foreach (TreeNode t in toAggregate) 
             {
-                if (folderPNotExist) folderP.AddChild(t);
                 parent.RemoveChild(t);
+                if (folderPNotExist) folderP.AddChild(t);
             }
             parent.RemoveChild(regionBegin);
             if (regionEnd != null) parent.RemoveChild(regionEnd);

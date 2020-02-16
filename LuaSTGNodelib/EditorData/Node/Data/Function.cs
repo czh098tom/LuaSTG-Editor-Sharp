@@ -58,8 +58,9 @@ namespace LuaSTGEditorSharp.EditorData.Node.Data
             {
                 if(local) yield return "local ";
             }
+            yield return "function ";
             yield return NonMacrolize(0);
-            yield return " = function(";
+            yield return "(";
             yield return NonMacrolize(1);
             yield return ")\n";
             yield return sp;

@@ -9,6 +9,8 @@ General
 Advanced
 	AdvancedRepeat
 	LinearVariable
+	IncrementVariable
+	ReboundingVariable
 Lib层：
 Data
 	PositionAssignment
@@ -37,6 +39,7 @@ Insert as parent节点可插入性判定有误问题
 修复If节点编译中重排序时触发消息导致线程冲突的bug
 修复文档不能正确识别撤销到初始状态下保存的bug
 修复转到节点功能过度展开的bug
+fold region命令导致元数据丢失的bug
 Lib层：
 ARGB输入界面值不准确
 GROUP名文本错误
@@ -55,6 +58,7 @@ ARGB输入界面值现在可以键入非数字内容
 删除节点改为移动到选中前一个的位置
 移除Stage和Stage节点的默认音乐
 加入空格作为默认编辑的快捷键
+增加RGB输入界面
 
 扩展功能说明：
 逻辑树功能：Folder现在会不存在于逻辑树上，意味着它被插入校验和节点定义中的寻找父节点忽略

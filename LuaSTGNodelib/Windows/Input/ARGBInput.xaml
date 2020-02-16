@@ -236,7 +236,8 @@
                         IsMoveToPointEnabled="True"
                         Style="{StaticResource SliderAlpha}" Maximum="255" Minimum="0" IsSnapToTickEnabled="False"
                         Value="{Binding A,ElementName=inputWindow,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                        RenderTransformOrigin="0.5,0.5">
+                        RenderTransformOrigin="0.5,0.5"
+                        IsEnabled="{Binding AlphaUsed, ElementName=inputWindow}">
                     <Slider.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform/>
@@ -281,10 +282,10 @@
                     <TextBox Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="2" 
                              Text="{Binding BStr, ElementName=inputWindow, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                              Margin="2,2"/>
-                    <Label Grid.Column="0" Grid.Row="3" Content="Alpha" Margin="0,2"/>
+                    <Label Grid.Column="0" Grid.Row="3" Content="Alpha" Margin="0,2" IsEnabled="{Binding AlphaUsed, ElementName=inputWindow}"/>
                     <TextBox Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="3" 
                              Text="{Binding AStr, ElementName=inputWindow, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                             Margin="2,2"/>
+                             Margin="2,2" IsEnabled="{Binding AlphaUsed, ElementName=inputWindow}"/>
                     <Label Grid.Column="0" Grid.Row="4" Content="H" Margin="0,2"/>
                     <TextBox Grid.Column="1" Grid.ColumnSpan="2"  Grid.Row="4" 
                              Text="{Binding H, ElementName=inputWindow, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
