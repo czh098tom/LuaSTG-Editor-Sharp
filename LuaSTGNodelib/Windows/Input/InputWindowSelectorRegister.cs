@@ -23,6 +23,8 @@ namespace LuaSTGEditorSharp.Windows.Input
         {
             target.Add("bool"
                 , new string[] { "true", "false" });
+            target.Add("sineinterpolation"
+                , new string[] { "SINE_ACCEL", "SINE_DECEL", "SINE_ACC_DEC" });
             target.Add("target"
                 , new string[] { "self", "last", "unit", "player", "_boss" });
             target.Add("yield"
@@ -114,6 +116,8 @@ namespace LuaSTGEditorSharp.Windows.Input
         public void RegisterInputWindow(Dictionary<string, Func<AttrItem, string, InputWindow>> target)
         {
             target.Add("bool", (src, tar) => new Selector(tar, InputWindowSelector.SelectComboBox("bool"), "Input Bool"));
+            target.Add("sineinterpolation", (source, toEdit) => new Selector(toEdit
+                , InputWindowSelector.SelectComboBox("sineinterpolation"), "Input Sine Interpolation Mode"));
             target.Add("code", (src, tar) => new CodeInput(tar));
             target.Add("position", (src, tar) => new PositionInput(tar));
             target.Add("target", (src, tar) => new Selector(tar, InputWindowSelector.SelectComboBox("target"), "Input Target Object"));
@@ -174,9 +178,9 @@ namespace LuaSTGEditorSharp.Windows.Input
             target.Add("RGB", (src, tar) => new ARGBInput(tar, false));
             target.Add("vector", (src, tar) => new VectorInput(tar));
             target.Add("size", (src, tar) => new SizeInput(tar));
-            target.Add("scale", (src, tar) => new BossBGDefInput(tar, src));
             target.Add("bossBG", (src, tar) => new BossBGDefInput(tar, src));
             //GUGUGU
+            target.Add("scale", InputWindowSelector.nullWindow);
             target.Add("colrow", InputWindowSelector.nullWindow);
             target.Add("velocity", InputWindowSelector.nullWindow);
             target.Add("velocityPos", InputWindowSelector.nullWindow);

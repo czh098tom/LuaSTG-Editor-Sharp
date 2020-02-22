@@ -72,8 +72,14 @@ namespace LuaSTGEditorSharp.Plugin
             ar.Add(new ToolboxItemData("advrepeat", "images/repeat.png", "Advanced Repeat"), new AddNode(AddAdvancedRepeatNode));
             ar.Add(new ToolboxItemData(true), null);
             ar.Add(new ToolboxItemData("rvarincrement", "images/LinearVariable.png", "Increment Variable"), new AddNode(AddIncrementVariableNode));
+            ar.Add(new ToolboxItemData(true), null);
             ar.Add(new ToolboxItemData("rvarlinear", "images/LinearVariable.png", "Linear Variable"), new AddNode(AddLinearVariableNode));
+            ar.Add(new ToolboxItemData("rvarsineinterp", "images/SinusoidalInterpolationVariable.png", "Sinusoidal Interpolation Variable")
+                , new AddNode(AddSinusoidalInterpolationVariableNode));
+            ar.Add(new ToolboxItemData(true), null);
             ar.Add(new ToolboxItemData("rvarrebound", "images/ReboundingVariable.png", "Rebounding Variable"), new AddNode(AddReboundingVariableNode));
+            ar.Add(new ToolboxItemData("rvarsineosc", "images/SinusoidalOscillationVariable.png", "Sinusoidal Oscillation Variable")
+                , new AddNode(AddSinusoidalOscillationVariableNode));
             ToolInfo.Add("Advanced", ar);
         }
 
@@ -215,19 +221,29 @@ namespace LuaSTGEditorSharp.Plugin
             parent.Insert(newAR);
         }
 
-        private void AddLinearVariableNode()
-        {
-            parent.Insert(new LinearVariable(parent.ActivatedWorkSpaceData));
-        }
-
         private void AddIncrementVariableNode()
         {
             parent.Insert(new IncrementVariable(parent.ActivatedWorkSpaceData));
         }
 
+        private void AddLinearVariableNode()
+        {
+            parent.Insert(new LinearVariable(parent.ActivatedWorkSpaceData));
+        }
+
+        private void AddSinusoidalInterpolationVariableNode()
+        {
+            parent.Insert(new SinusoidalInterpolationVariable(parent.ActivatedWorkSpaceData));
+        }
+
         private void AddReboundingVariableNode()
         {
             parent.Insert(new ReboundingVariable(parent.ActivatedWorkSpaceData));
+        }
+
+        private void AddSinusoidalOscillationVariableNode()
+        {
+            parent.Insert(new SinusoidalOscillationVariable(parent.ActivatedWorkSpaceData));
         }
         #endregion
         #region project

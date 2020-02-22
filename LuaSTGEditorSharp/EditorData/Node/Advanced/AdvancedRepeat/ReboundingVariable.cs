@@ -66,7 +66,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Advanced.AdvancedRepeat
 
         public override Tuple<string, string> GetInformation(string times)
         {
-            string begin = $"local {NonMacrolize(0)}={NonMacrolize(1)}"
+            string begin = $"local {NonMacrolize(0)}={Macrolize(1)}"
                 + $" local _n_{NonMacrolize(0)}=({Macrolize(1)})+({Macrolize(2)})\n";
             string repeat = $"{NonMacrolize(0)}=-({NonMacrolize(0)})+_n_{NonMacrolize(0)}\n";
             return new Tuple<string, string>(begin, repeat);

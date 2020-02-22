@@ -96,7 +96,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Boss
 
         public override IEnumerable<Tuple<int, TreeNode>> GetLines()
         {
-            string s = Macrolize(0);
+            string s = Macrolize(2);
             int i = 1;
             foreach (char c in s)
             {

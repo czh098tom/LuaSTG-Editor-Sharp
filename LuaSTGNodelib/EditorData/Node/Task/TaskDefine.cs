@@ -49,7 +49,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Task
             yield return sp + "_editor_tasks[\"" + Lua.StringParser.ParseLua(NonMacrolize(0)) + "\"]=function(" + Macrolize(1) + ")\n" 
                 + sp + s1 + "return function()\n" 
                 + sp + s1 + s1 + "local self=task.GetSelf()\n";
-            foreach(string s in base.ToLua(spacing + 1))
+            foreach(string s in base.ToLua(spacing + 2))
             {
                 yield return s;
             }

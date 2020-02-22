@@ -13,11 +13,16 @@ namespace LuaSTGEditorSharp.Plugin.DefaultNullPlugin
         public void RegisterComboBoxText(Dictionary<string, string[]> target)
         {
             target.Add("bool", new string[] { "true", "false" });
+            target.Add("sineinterpolation"
+                , new string[] { "SINE_ACCEL", "SINE_DECEL", "SINE_ACC_DEC" });
         }
 
         public void RegisterInputWindow(Dictionary<string, Func<AttrItem, string, InputWindow>> target)
         {
-            target.Add("bool", (source, toEdit) => new Selector(toEdit, InputWindowSelector.SelectComboBox("bool"), "Input Bool"));
+            target.Add("bool", (source, toEdit) => new Selector(toEdit
+                , InputWindowSelector.SelectComboBox("bool"), "Input Bool"));
+            target.Add("sineinterpolation", (source, toEdit) => new Selector(toEdit
+                , InputWindowSelector.SelectComboBox("sineinterpolation"), "Input Sine Interpolation Mode"));
             target.Add("code", (source, toEdit) => new CodeInput(toEdit));
             target.Add("userDefinedNode", (source, toEdit) => new NodeDefInput(toEdit, source));
         }

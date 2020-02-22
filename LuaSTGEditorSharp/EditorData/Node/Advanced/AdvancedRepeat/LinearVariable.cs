@@ -76,8 +76,10 @@ namespace LuaSTGEditorSharp.EditorData.Node.Advanced.AdvancedRepeat
         public override Tuple<string, string> GetInformation(string times)
         {
             string offchar = Precisely == "true" ? "-1" : "";
-            string begin = $"local {NonMacrolize(0)}={NonMacrolize(1)}"
-                + $" local _d_{NonMacrolize(0)}=({Macrolize(2)}-({Macrolize(1)}))/({times}{offchar})\n";
+            string beg = Macrolize(1);
+            string end = Macrolize(2);
+            string begin = $"local {NonMacrolize(0)}={beg}"
+                + $" local _d_{NonMacrolize(0)}=({end}-({beg}))/({times}{offchar})\n";
             string repeat = $"{NonMacrolize(0)}={NonMacrolize(0)}+_d_{NonMacrolize(0)}\n";
             return new Tuple<string, string>(begin, repeat);
         }

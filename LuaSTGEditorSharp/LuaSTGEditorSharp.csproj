@@ -123,6 +123,8 @@
     </ApplicationDefinition>
     <Compile Include="EditorData\InputWindowSelector.cs" />
     <Compile Include="EditorData\Node\Advanced\AdvancedRepeat\AdvancedRepeat.cs" />
+    <Compile Include="EditorData\Node\Advanced\AdvancedRepeat\SinusoidalOscillationVariable.cs" />
+    <Compile Include="EditorData\Node\Advanced\AdvancedRepeat\SinusoidalInterpolationVariable.cs" />
     <Compile Include="EditorData\Node\Advanced\AdvancedRepeat\ReboundingVariable.cs" />
     <Compile Include="EditorData\Node\Advanced\AdvancedRepeat\IncrementVariable.cs" />
     <Compile Include="EditorData\Node\Advanced\AdvancedRepeat\VariableTransformation.cs" />
@@ -396,6 +398,10 @@
     <Resource Include="images\16x16\LinearVariable.png" />
     <Resource Include="images\ReboundingVariable.png" />
     <Resource Include="images\16x16\ReboundingVariable.png" />
+    <Resource Include="images\SinusoidalInterpolationVariable.png" />
+    <Resource Include="images\16x16\SinusoidalInterpolationVariable.png" />
+    <Resource Include="images\SinusoidalOscillationVariable.png" />
+    <Resource Include="images\16x16\SinusoidalOscillationVariable.png" />
     <Content Include="Templates\Empty Project.lstgproj">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
