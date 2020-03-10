@@ -12,7 +12,7 @@ using LuaSTGEditorSharp.EditorData.Node.NodeAttributes;
 
 namespace LuaSTGEditorSharp.EditorData.Node.Advanced.AdvancedRepeat
 {
-    [Serializable, NodeIcon("images/16x16/repeat.png")]
+    [Serializable, NodeIcon("images/16x16/advancedrepeat.png")]
     [CreateInvoke(0), RCInvoke(0)]
     public class AdvancedRepeat : TreeNode
     {

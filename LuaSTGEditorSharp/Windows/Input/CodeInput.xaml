@@ -14,7 +14,8 @@
                 <Button Content="OK" Margin="10,10,2,10" Padding="3" Click="ButtonOK_Click"/>
                 <Button Content="Cancel" Margin="2,10,10,10" Padding="3" Click="ButtonCancel_Click"/>
             </StackPanel>
-            <avalon:TextEditor x:Name="codeText" FontFamily="Courier New" FontSize="14" SyntaxHighlighting="Lua" ShowLineNumbers="True"/>
+            <avalon:TextEditor x:Name="codeText" FontFamily="Courier New" FontSize="14" SyntaxHighlighting="Lua" ShowLineNumbers="True"
+                               KeyDown="CodeText_KeyDown" KeyUp="CodeText_KeyUp"/>
         </DockPanel>
     </Grid>
 </local:InputWindow>

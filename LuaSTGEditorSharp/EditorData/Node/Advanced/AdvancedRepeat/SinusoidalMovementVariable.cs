@@ -16,22 +16,23 @@ namespace LuaSTGEditorSharp.EditorData.Node.Advanced.AdvancedRepeat
     [RequireParent(typeof(VariableCollection))]
     [LeafNode]
     [CreateInvoke(0)]
-    public class SinusoidalOscillationVariable : VariableTransformation
+    public class SinusoidalMovementVariable : VariableTransformation
     {
         [JsonConstructor]
-        public SinusoidalOscillationVariable() : base() { }
+        public SinusoidalMovementVariable() : base() { }
 
-        public SinusoidalOscillationVariable(DocumentData workSpaceData) : this(workSpaceData, "", "0", "-1", "1", "1.5") { }
+        public SinusoidalMovementVariable(DocumentData workSpaceData) : this(workSpaceData, "", "-90", "0", "1", "1", "false") { }
 
-        public SinusoidalOscillationVariable(DocumentData workSpaceData, string name, string init, string min
-            , string max, string omega)
+        public SinusoidalMovementVariable(DocumentData workSpaceData, string name, string init, string min
+            , string max, string period, string precise)
             : base(workSpaceData)
         {
             Name = name;
             InitPhase = init;
             Min = min;
             Max = max;
-            Omega = omega;
+            Period = period;
+            Precisely = precise;
         }
 
         [JsonIgnore, NodeAttribute]
@@ -63,34 +64,43 @@ namespace LuaSTGEditorSharp.EditorData.Node.Advanced.AdvancedRepeat
         }
 
         [JsonIgnore, NodeAttribute]
-        public string Omega
+        public string Period
         {
-            get => DoubleCheckAttr(4).attrInput;
-            set => DoubleCheckAttr(4).attrInput = value;
+            get => DoubleCheckAttr(4, name: "Num of period").attrInput;
+            set => DoubleCheckAttr(4, name: "Num of period").attrInput = value;
+        }
+
+        [JsonIgnore, NodeAttribute("false")]
+        public string Precisely
+        {
+            get => DoubleCheckAttr(5, "bool").attrInput;
+            set => DoubleCheckAttr(5, "bool").attrInput = value;
         }
 
         public override object Clone()
         {
-            var n = new SinusoidalOscillationVariable(parentWorkSpace);
+            var n = new SinusoidalMovementVariable(parentWorkSpace);
             n.DeepCopyFrom(this);
             return n;
         }
 
         public override string ToString()
         {
-            return $"{NonMacrolize(0)} : sinusoidal oscillation between {NonMacrolize(2)} <=> {NonMacrolize(3)}"
-                + $" with initial phase {NonMacrolize(1)} and omega {NonMacrolize(4)}";
+            string offchar = Precisely == "true" ? "(Precisely)" : "(Expect next value IS)";
+            return $"{NonMacrolize(0)} : sinusoidal movement between {NonMacrolize(2)} <=> {NonMacrolize(3)}"
+                + $" with initial phase {NonMacrolize(1)}, for {NonMacrolize(4)} period(s) {offchar}";
         }
 
         public override Tuple<string, string> GetInformation(string times)
         {
+            string offchar = Precisely == "true" ? "-1" : "";
             string sineTokenHead = $"_h_{NonMacrolize(0)}*sin";
             string sineTokenTail = $"+_t_{NonMacrolize(0)}";
             string begin = $"local _h_{NonMacrolize(0)}=({Macrolize(3)}-({Macrolize(2)}))/2"
                 + $" local _t_{NonMacrolize(0)}=({Macrolize(3)}+({Macrolize(2)}))/2"
                 + $" local {NonMacrolize(0)}={sineTokenHead}({Macrolize(1)}){sineTokenTail}"
                 + $" local _w_{NonMacrolize(0)}={Macrolize(1)}"
-                + $" local _d_w_{NonMacrolize(0)}={Macrolize(4)}\n";
+                + $" local _d_w_{NonMacrolize(0)}={Macrolize(4)}*360/({times}{offchar})\n";
             string repeat = $"_w_{NonMacrolize(0)}=_w_{NonMacrolize(0)}+_d_w_{NonMacrolize(0)}"
                 + $" {NonMacrolize(0)}={sineTokenHead}(_w_{NonMacrolize(0)}){sineTokenTail}\n";
             return new Tuple<string, string>(begin, repeat);

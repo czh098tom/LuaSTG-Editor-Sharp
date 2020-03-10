@@ -53,6 +53,9 @@ namespace LuaSTGEditorSharp
             stage.Add(new ToolboxItemData(true), null);
             stage.Add(new ToolboxItemData("setstagebg", "/LuaSTGNodeLib;component/images/bgstage.png", "Set Stage Background")
                 , new AddNode(AddSetStageBGNode));
+            stage.Add(new ToolboxItemData(true), null);
+            stage.Add(new ToolboxItemData("shakescreen", "/LuaSTGNodeLib;component/images/shakescreen.png", "Shake Screen")
+                , new AddNode(AddShakeScreenNode));
             #endregion
             ToolInfo.Add("Stage", stage);
 
@@ -252,6 +255,8 @@ namespace LuaSTGEditorSharp
             #region render
             render.Add(new ToolboxItemData("onrender", "/LuaSTGNodeLib;component/images/onrender.png", "On Render")
                 , new AddNode(AddOnRenderNode));
+            render.Add(new ToolboxItemData("r4v", "/LuaSTGNodeLib;component/images/render4v.png", "Render4V")
+                , new AddNode(AddR4VNode));
             #endregion
             ToolInfo.Add("Render", render);
 
@@ -319,6 +324,12 @@ namespace LuaSTGEditorSharp
             TreeNode newStBG = new StageBG(parent.ActivatedWorkSpaceData);
             parent.Insert(newStBG);
         }
+
+        private void AddShakeScreenNode()
+        {
+            parent.Insert(new ShakeScreen(parent.ActivatedWorkSpaceData));
+        }
+
         #endregion
         #region task
         private void AddTaskNode()
@@ -697,6 +708,11 @@ namespace LuaSTGEditorSharp
             var o = new OnRender(parent.ActivatedWorkSpaceData);
             o.AddChild(new DefaultAction(parent.ActivatedWorkSpaceData));
             parent.Insert(o);
+        }
+
+        private void AddR4VNode()
+        {
+            parent.Insert(new Render4V(parent.ActivatedWorkSpaceData));
         }
         #endregion
     }

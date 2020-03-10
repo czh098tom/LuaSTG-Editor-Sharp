@@ -153,7 +153,10 @@
     <Compile Include="EditorData\Node\Object\SetRelativePosition.cs" />
     <Compile Include="EditorData\Node\Object\SetVelocityLimit.cs" />
     <Compile Include="EditorData\Node\Object\SetVelocity.cs" />
+    <Compile Include="EditorData\Node\RenderAlikeTypes.cs" />
     <Compile Include="EditorData\Node\Render\OnRender.cs" />
+    <Compile Include="EditorData\Node\Render\Render4V.cs" />
+    <Compile Include="EditorData\Node\Stage\ShakeScreen.cs" />
     <Compile Include="EditorData\Node\Stage\Stage.cs" />
     <Compile Include="EditorData\Node\Stage\StageBG.cs" />
     <Compile Include="EditorData\Node\Stage\StageGroup.cs" />
@@ -1810,6 +1813,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images\positionassignment.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\render4v.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\render4v.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

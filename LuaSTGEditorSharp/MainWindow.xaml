@@ -553,7 +553,7 @@
                     <Separator/>
                     <Button Command="local:EditorRoutedCommands.ViewCode">
                         <Button.Content>
-                            <Image Source="images/Code.png" Stretch="Fill" Width="24" Height="24"/>
+                            <Image Source="images/viewcode.png" Stretch="Fill" Width="24" Height="24"/>
                         </Button.Content>
                         <Button.ToolTip>
                             <ToolTip>
@@ -563,7 +563,7 @@
                     </Button>
                     <Button Command="local:EditorRoutedCommands.ExportCode">
                         <Button.Content>
-                            <Image Source="images/Code.png" Stretch="Fill" Width="24" Height="24"/>
+                            <Image Source="images/savecode.png" Stretch="Fill" Width="24" Height="24"/>
                         </Button.Content>
                         <Button.ToolTip>
                             <ToolTip>
@@ -697,7 +697,7 @@
                         </Button.ToolTip>
                     </Button>
                     <Separator/>
-                    <TextBox x:Name="TxtLine" Width="40"/>
+                    <TextBox x:Name="TxtLine" Width="40" KeyDown="TxtLine_KeyDown"/>
                     <Button Command="local:EditorRoutedCommands.GoToLineX" 
                             CommandParameter="{Binding Text, ElementName=TxtLine, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                         <Button.Content>

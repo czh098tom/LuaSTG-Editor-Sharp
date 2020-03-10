@@ -70,7 +70,7 @@ namespace LuaSTGEditorSharp
 
         public override int MetaInfoCollectionTypeCount { get => (int)MetaType.__max; }
 
-        public override string TargetLSTGVersion => "LuaSTG ex+ 0.81b";
+        public override string TargetLSTGVersion => "LuaSTG ex+ 0.81b/c, OLC ver 5 and 0.82a";
 
         public static MetaModel[] SysImage = 
             SystemMetaLoader.FromResource("pack://application:,,,/LuaSTGNodeLib;component/ResourceList/SysImage.json");

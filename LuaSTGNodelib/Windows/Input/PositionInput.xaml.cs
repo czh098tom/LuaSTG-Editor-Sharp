@@ -405,16 +405,16 @@ namespace LuaSTGEditorSharp.Windows.Input
             {
                 if (syncType == true)
                 {
-                    string tempx = Regex.Replace(CurrentY, ".x\\b", ".____TEMPy___");
-                    tempx = Regex.Replace(tempx, ".y\\b", ".x");
-                    tempx = Regex.Replace(tempx, ".____TEMPy___\\b", ".y");
+                    string tempx = Regex.Replace(CurrentY, @"(?<![a-zA-Z])x\b", "____TEMPy___");
+                    tempx = Regex.Replace(tempx, @"(?<![a-zA-Z])y\b", "x");
+                    tempx = Regex.Replace(tempx, @"(?<![a-zA-Z])____TEMPy___\b", "y");
                     CurrentX = tempx;
                 }
                 else
                 {
-                    string tempy = Regex.Replace(CurrentX, ".x\\b", ".____TEMPy___");
-                    tempy = Regex.Replace(tempy, ".y\\b", ".x");
-                    tempy = Regex.Replace(tempy, ".____TEMPy___\\b", ".y");
+                    string tempy = Regex.Replace(CurrentX, @"(?<![a-zA-Z])x\b", "____TEMPy___");
+                    tempy = Regex.Replace(tempy, @"(?<![a-zA-Z])y\b", "x");
+                    tempy = Regex.Replace(tempy, @"(?<![a-zA-Z])____TEMPy___\b", "y");
                     CurrentY = tempy;
                 }
             }

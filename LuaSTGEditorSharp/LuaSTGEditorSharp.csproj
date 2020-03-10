@@ -30,7 +30,7 @@
     <WebPage>Setup Info.html</WebPage>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
     <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>0.6.8.%2a</ApplicationVersion>
+    <ApplicationVersion>0.6.10.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
@@ -123,6 +123,7 @@
     </ApplicationDefinition>
     <Compile Include="EditorData\InputWindowSelector.cs" />
     <Compile Include="EditorData\Node\Advanced\AdvancedRepeat\AdvancedRepeat.cs" />
+    <Compile Include="EditorData\Node\Advanced\AdvancedRepeat\SinusoidalMovementVariable.cs" />
     <Compile Include="EditorData\Node\Advanced\AdvancedRepeat\SinusoidalOscillationVariable.cs" />
     <Compile Include="EditorData\Node\Advanced\AdvancedRepeat\SinusoidalInterpolationVariable.cs" />
     <Compile Include="EditorData\Node\Advanced\AdvancedRepeat\ReboundingVariable.cs" />
@@ -402,6 +403,12 @@
     <Resource Include="images\16x16\SinusoidalInterpolationVariable.png" />
     <Resource Include="images\SinusoidalOscillationVariable.png" />
     <Resource Include="images\16x16\SinusoidalOscillationVariable.png" />
+    <Resource Include="images\advancedrepeat.png" />
+    <Resource Include="images\16x16\advancedrepeat.png" />
+    <Resource Include="images\savecode.png" />
+    <Resource Include="images\viewcode.png" />
+    <Resource Include="images\SinusoidalMovementVariable.png" />
+    <Resource Include="images\16x16\SinusoidalMovementVariable.png" />
     <Content Include="Templates\Empty Project.lstgproj">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

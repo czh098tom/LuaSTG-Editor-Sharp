@@ -98,8 +98,8 @@ namespace LuaSTGEditorSharp.EditorData.Node.Advanced.AdvancedRepeat
         public override Tuple<string, string> GetInformation(string times)
         {
             string offchar = Precisely == "true" ? "-1" : "";
-            string beg = Macrolize(1);
-            string end = Macrolize(2);
+            string beg = $"_beg_{NonMacrolize(0)}";
+            string end = $"_end_{NonMacrolize(0)}";
             string begPhase, phaseDiff, ampChar, center;
             switch (NonMacrolize(4))
             {
@@ -122,11 +122,11 @@ namespace LuaSTGEditorSharp.EditorData.Node.Advanced.AdvancedRepeat
                     center = $"({end}+{beg})/2";
                     break;
             }
-            string begin = $"local {NonMacrolize(0)}={beg}"
-                + $" local _w_{NonMacrolize(0)}={begPhase}"
+            string begin = $"local _beg_{NonMacrolize(0)}={Macrolize(1)} local {NonMacrolize(0)}={beg} "
+                + $" local _w_{NonMacrolize(0)}={begPhase} local _end_{NonMacrolize(0)}={Macrolize(2)}"
                 + $" local _d_w_{NonMacrolize(0)}={phaseDiff}/({times}{offchar})\n";
             string repeat = $"_w_{NonMacrolize(0)}=_w_{NonMacrolize(0)}+_d_w_{NonMacrolize(0)}"
-                + $" {NonMacrolize(0)}=({end}-({beg})){ampChar}*sin(_w_{NonMacrolize(0)})+({center})\n";
+                + $" {NonMacrolize(0)}=({end}-{beg}){ampChar}*sin(_w_{NonMacrolize(0)})+({center})\n";
             return new Tuple<string, string>(begin, repeat);
         }
 

@@ -52,7 +52,7 @@ namespace LuaSTGEditorSharp.Plugin
             gen.Add(new ToolboxItemData("elseif", "images/elseif.png", "Else If"), new AddNode(AddElseIfNode));
             gen.Add(new ToolboxItemData("repeat", "images/repeat.png", "Repeat"), new AddNode(AddRepeatNode));
             gen.Add(new ToolboxItemData("break", "images/break.png", "Break"), new AddNode(AddBreakNode));
-            gen.Add(new ToolboxItemData("codeblock", "images/codeblock.png", "Break"), new AddNode(AddCodeBlockNode));
+            gen.Add(new ToolboxItemData("codeblock", "images/codeblock.png", "Code Block"), new AddNode(AddCodeBlockNode));
             gen.Add(new ToolboxItemData(true), null);
             gen.Add(new ToolboxItemData("patch", "images/patch.png", "Patch"), new AddNode(AddPatchNode));
             #endregion
@@ -69,13 +69,15 @@ namespace LuaSTGEditorSharp.Plugin
             ToolInfo.Add("General", gen);
 
             var ar = new Dictionary<ToolboxItemData, AddNode>();
-            ar.Add(new ToolboxItemData("advrepeat", "images/repeat.png", "Advanced Repeat"), new AddNode(AddAdvancedRepeatNode));
+            ar.Add(new ToolboxItemData("advrepeat", "images/advancedrepeat.png", "Advanced Repeat"), new AddNode(AddAdvancedRepeatNode));
             ar.Add(new ToolboxItemData(true), null);
             ar.Add(new ToolboxItemData("rvarincrement", "images/LinearVariable.png", "Increment Variable"), new AddNode(AddIncrementVariableNode));
             ar.Add(new ToolboxItemData(true), null);
             ar.Add(new ToolboxItemData("rvarlinear", "images/LinearVariable.png", "Linear Variable"), new AddNode(AddLinearVariableNode));
             ar.Add(new ToolboxItemData("rvarsineinterp", "images/SinusoidalInterpolationVariable.png", "Sinusoidal Interpolation Variable")
                 , new AddNode(AddSinusoidalInterpolationVariableNode));
+            ar.Add(new ToolboxItemData("rvarsinemov", "images/SinusoidalMovementVariable.png", "Sinusoidal Movement Variable")
+                , new AddNode(AddSinusoidalMovementVariableNode));
             ar.Add(new ToolboxItemData(true), null);
             ar.Add(new ToolboxItemData("rvarrebound", "images/ReboundingVariable.png", "Rebounding Variable"), new AddNode(AddReboundingVariableNode));
             ar.Add(new ToolboxItemData("rvarsineosc", "images/SinusoidalOscillationVariable.png", "Sinusoidal Oscillation Variable")
@@ -234,6 +236,11 @@ namespace LuaSTGEditorSharp.Plugin
         private void AddSinusoidalInterpolationVariableNode()
         {
             parent.Insert(new SinusoidalInterpolationVariable(parent.ActivatedWorkSpaceData));
+        }
+
+        private void AddSinusoidalMovementVariableNode()
+        {
+            parent.Insert(new SinusoidalMovementVariable(parent.ActivatedWorkSpaceData));
         }
 
         private void AddReboundingVariableNode()

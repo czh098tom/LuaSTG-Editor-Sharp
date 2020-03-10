@@ -1073,11 +1073,11 @@ namespace LuaSTGEditorSharp.EditorData
                 {
                     if (isDependency)
                     {
-                        ai = new DependencyAttrItem(name, "", defaultEditWindow);
+                        ai = new DependencyAttrItem(name, (string)null, defaultEditWindow);
                     }
                     else
                     {
-                        ai = new AttrItem(name, "", defaultEditWindow);
+                        ai = new AttrItem(name, (string)null, defaultEditWindow);
                     }
                     InsertAttrAt(id, ai);
                 }
@@ -1733,7 +1733,10 @@ namespace LuaSTGEditorSharp.EditorData
                     );
                 foreach(var i in infos)
                 {
-                    i.GetGetMethod().Invoke(this, null);
+                    var attr = i.GetCustomAttributes(false).First(o => o is Node.NodeAttributes.NodeAttributeAttribute)
+                        as Node.NodeAttributes.NodeAttributeAttribute;
+                    string s = i.GetGetMethod().Invoke(this, null) as string;
+                    i.SetValue(this, s ?? attr.Default, null);
                 }
                 foreach(var i in usedAttributes)
                 {

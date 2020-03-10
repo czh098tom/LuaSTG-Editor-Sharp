@@ -199,12 +199,17 @@ namespace LuaSTGEditorSharp
         {
             foreach (DocumentData doc in Documents)
             {
-                if (doc.DocPath == path)
+                if (Path.GetFullPath(doc.DocPath) == Path.GetFullPath(path))
                 {
                     return true;
                 }
             }
             return false;
+        }
+
+        public void OpenDocByFile(string arg)
+        {
+            if (!IsOpened(arg)) OpenDocFromPath(Path.GetFileName(arg), arg);
         }
 
         public async void OpenDocFromPath(string name, string path)
@@ -1382,6 +1387,15 @@ namespace LuaSTGEditorSharp
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
             ShowEditWindow();
+        }
+
+        private void TxtLine_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key != Key.Enter) return;
+            if(ActivatedWorkSpaceData != null && int.TryParse(TxtLine.Text?.ToString(), out int i))
+            {
+                GotoLine(i);
+            }
         }
     }
 }

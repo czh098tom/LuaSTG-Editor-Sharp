@@ -109,7 +109,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Stage
                        + sp + s1 + "_init_item(self)\n"
                        + sp + s1 + "difficulty=self.group.difficulty\n"
                        + sp + s1 + "New(mask_fader,'open')\n"
-                       + sp + s1 + "jstg.CreatePlayers()\n";
+                       + sp + s1 + "if jstg then jstg.CreatePlayers() else New(_G[lstg.var.player_name]) end\n";
             foreach (var a in base.ToLua(spacing + 1))
             {
                 yield return a;

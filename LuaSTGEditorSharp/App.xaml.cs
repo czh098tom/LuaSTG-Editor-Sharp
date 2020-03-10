@@ -125,7 +125,7 @@ namespace LuaSTGEditorSharp
 
         public void LoadDoc(string arg)
         {
-            (MainWindow as MainWindow).OpenDocFromPath(Path.GetFileName(arg), arg);
+            (MainWindow as MainWindow).OpenDocByFile(arg);
         }
 
         public string ZipExecutablePath

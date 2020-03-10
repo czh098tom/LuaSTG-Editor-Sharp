@@ -29,9 +29,10 @@ Names below are desired class names for the unfinished nodes.
 	--
 	[x]SetWorlds
 	[x]AddWorld
+	--
+	ShakeScreen (From old "Effect")
 
 ## Task
-	FinishTask
 	ClearTasks
 	--
 	[x]SetSignal
@@ -82,8 +83,6 @@ Names below are desired class names for the unfinished nodes.
 	LoadParticle *
 	LoadTexture *
 	LoadFX *
-	--
-	ShakeScreen (From old "Effect")
 
 ## Audio
 	Finished.

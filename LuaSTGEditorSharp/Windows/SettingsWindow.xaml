@@ -29,23 +29,25 @@
                               IsChecked="{Binding BatchPacking, ElementName=window}"/>
                     <Label Content="Zip Executable Path" HorizontalAlignment="Left" Margin="10,34,0,0" VerticalAlignment="Top" Width="150"/>
                     <Label Content="LuaSTG Executable Path" HorizontalAlignment="Left" Margin="10,65,0,0" VerticalAlignment="Top" Width="150"/>
-                    <Label Content="Temp Path" HorizontalAlignment="Left" Margin="10,96,0,0" VerticalAlignment="Top" Width="150"/>
+                    <Label Content="Temp Path" HorizontalAlignment="Left" Margin="10,127,0,0" VerticalAlignment="Top" Width="150"/>
                     <TextBox HorizontalAlignment="Left" Height="26" Margin="178,33,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="470" 
                              Text="{Binding ZipExecutablePath, ElementName=window}" IsEnabled="{Binding IsChecked, ElementName=BatchPackingCheck}"/>
                     <TextBox HorizontalAlignment="Left" Height="26" Margin="178,64,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="470" 
                              Text="{Binding LuaSTGExecutablePath, ElementName=window}"/>
-                    <TextBox HorizontalAlignment="Left" Height="26" Margin="178,96,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="470" 
+                    <TextBox HorizontalAlignment="Left" Height="26" Margin="178,127,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="470" 
                              Text="{Binding TempPath, ElementName=window}"/>
+                    <Label Content="Target Version:" HorizontalAlignment="Left" Margin="10,96,0,0" VerticalAlignment="Top" Width="150" Height="26"/>
+                    <Label Content="{Binding TargetVersion, ElementName=window}" HorizontalAlignment="Left" Margin="178,96,0,0" VerticalAlignment="Top" Width="501" Height="26"/>
                     <Button Content="..." HorizontalAlignment="Left" Height="26" Margin="653,34,0,0" VerticalAlignment="Top" Width="26" Click="ButtonZipExecutablePath_Click" 
                             IsEnabled="{Binding IsChecked, ElementName=BatchPackingCheck}"/>
                     <Button Content="..." HorizontalAlignment="Left" Height="26" Margin="653,65,0,0" VerticalAlignment="Top" Width="26" Click="ButtonLuaSTGExecutablePath_Click"/>
-                    <CheckBox Content="Update Thlib before running" HorizontalAlignment="Left" Height="26" Margin="10,131,0,0" VerticalAlignment="Top" Width="250" 
+                    <CheckBox Content="Update Thlib before running" HorizontalAlignment="Left" Height="26" Margin="10,158,0,0" VerticalAlignment="Top" Width="250" 
                               IsChecked="{Binding DebugUpdateLib, ElementName=window}"/>
-                    <CheckBox Content="Save project before running" HorizontalAlignment="Left" Height="26" Margin="10,162,0,0" VerticalAlignment="Top" Width="250" 
+                    <CheckBox Content="Save project before running" HorizontalAlignment="Left" Height="26" Margin="10,189,0,0" VerticalAlignment="Top" Width="250" 
                               IsChecked="{Binding DebugSaveProj, ElementName=window}"/>
-                    <CheckBox Content="Pack project" HorizontalAlignment="Left" Height="26" Margin="10,193,0,0" VerticalAlignment="Top" Width="205" 
+                    <CheckBox Content="Pack project" HorizontalAlignment="Left" Height="26" Margin="10,220,0,0" VerticalAlignment="Top" Width="205" 
                               IsChecked="{Binding PackProj, ElementName=window}"/>
-                    <CheckBox Content="Use MD5 resource check in packing" HorizontalAlignment="Left" Height="26" Margin="10,224,0,0" VerticalAlignment="Top" Width="250" 
+                    <CheckBox Content="Use MD5 resource check in packing" HorizontalAlignment="Left" Height="26" Margin="10,251,0,0" VerticalAlignment="Top" Width="250" 
                               IsChecked="{Binding MD5Check, ElementName=window}"/>
                 </Grid>
             </TabItem>
