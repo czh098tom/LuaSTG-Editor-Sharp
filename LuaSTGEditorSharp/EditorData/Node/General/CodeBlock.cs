@@ -12,7 +12,7 @@ using LuaSTGEditorSharp.EditorData.Node.NodeAttributes;
 
 namespace LuaSTGEditorSharp.EditorData.Node.General
 {
-    [Serializable, NodeIcon("images/16x16/codeblock.png")]
+    [Serializable, NodeIcon("codeblock.png")]
     public class CodeBlock : TreeNode
     {
         [JsonConstructor]

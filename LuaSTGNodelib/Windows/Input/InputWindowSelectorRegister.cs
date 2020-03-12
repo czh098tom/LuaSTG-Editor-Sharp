@@ -111,6 +111,8 @@ namespace LuaSTGEditorSharp.Windows.Input
                 , new string[] { "\"left\"", "\"right\"" });
             target.Add("directionMode"
                 , new string[] { "MOVE_X_TOWARDS_PLAYER", "MOVE_Y_TOWARDS_PLAYER", "MOVE_TOWARDS_PLAYER", "MOVE_RANDOM" });
+            target.Add("renderOp"
+                , new string[] { "Push", "Pop" });
         }
 
         public void RegisterInputWindow(Dictionary<string, Func<AttrItem, string, InputWindow>> target)
@@ -122,6 +124,7 @@ namespace LuaSTGEditorSharp.Windows.Input
             target.Add("position", (src, tar) => new PositionInput(tar));
             target.Add("target", (src, tar) => new Selector(tar, InputWindowSelector.SelectComboBox("target"), "Input Target Object"));
             target.Add("imageFile", (src, tar) => new PathInput(tar, "Image File (*.png;*.jpg;*.bmp)|*.png;*.jpg;*.bmp", src));
+            target.Add("fxFile", (src, tar) => new PathInput(tar, "Shader File (*.fx)|*.fx", src));
             target.Add("audioFile", (src, tar) => new PathInput(tar, "Audio File (*.wav;*.ogg)|*.wav;*.ogg", src));
             target.Add("seFile", (src, tar) => new PathInput(tar, "Sound Effect File (*.wav;*.ogg)|*.wav;*.ogg", src));
             target.Add("luaFile", (src, tar) => new PathInput(tar, "Lua File (*.lua)|*.lua", src));
@@ -165,6 +168,7 @@ namespace LuaSTGEditorSharp.Windows.Input
             target.Add("image", (src, tar) => new ImageInput(tar, src));
             target.Add("BGM", (src, tar) => new BGMInput(tar, src));
             target.Add("se", (src, tar) => new SEInput(tar, src));
+            target.Add("fx", (src, tar) => new FXInput(tar, src));
             target.Add("multilineText", (src, tar) => new MultilineInput(tar));
             target.Add("bulletParam", (src, tar) => new EditorObjParamInput(src, MetaType.Bullet, tar));
             target.Add("objectParam", (src, tar) => new EditorObjParamInput(src, MetaType.Object, tar));

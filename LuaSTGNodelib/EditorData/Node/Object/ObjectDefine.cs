@@ -14,7 +14,7 @@ using Newtonsoft.Json;
 
 namespace LuaSTGEditorSharp.EditorData.Node.Object
 {
-    [Serializable, NodeIcon("/LuaSTGNodeLib;component/images/16x16/objectdefine.png")]
+    [Serializable, NodeIcon("objectdefine.png")]
     [ClassNode]
     [CreateInvoke(0), RCInvoke(0)]
     //[XmlType(TypeName = "BulletDefine")]

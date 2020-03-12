@@ -12,7 +12,7 @@ using Newtonsoft.Json;
 
 namespace LuaSTGEditorSharp.EditorData.Node.Laser
 {
-    [Serializable, NodeIcon("/LuaSTGNodeLib;component/images/16x16/laserdefine.png")]
+    [Serializable, NodeIcon("laserdefine.png")]
     [ClassNode]
     [CreateInvoke(0), RCInvoke(0)]
     public class LaserDefine : TreeNode

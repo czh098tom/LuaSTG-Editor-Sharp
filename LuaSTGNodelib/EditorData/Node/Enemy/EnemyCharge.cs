@@ -10,7 +10,7 @@ using LuaSTGEditorSharp.EditorData.Node.NodeAttributes;
 
 namespace LuaSTGEditorSharp.EditorData.Node.Enemy
 {
-    [Serializable, NodeIcon("/LuaSTGNodeLib;component/images/16x16/pactrometer.png")]
+    [Serializable, NodeIcon("pactrometer.png")]
     [RequireAncestor(typeof(CodeAlikeTypes))]
     [LeafNode]
     [RCInvoke(0)]

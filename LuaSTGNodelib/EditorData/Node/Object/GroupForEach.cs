@@ -12,7 +12,7 @@ using LuaSTGEditorSharp.EditorData.Node.NodeAttributes;
 
 namespace LuaSTGEditorSharp.EditorData.Node.Object
 {
-    [Serializable, NodeIcon("/LuaSTGNodeLib;component/images/16x16/unitforeach.png")]
+    [Serializable, NodeIcon("unitforeach.png")]
     [RequireAncestor(typeof(CodeAlikeTypes))]
     [RCInvoke(0)]
     public class GroupForEach : TreeNode

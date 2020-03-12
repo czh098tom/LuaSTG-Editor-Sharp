@@ -12,7 +12,7 @@ using LuaSTGEditorSharp.EditorData.Node.NodeAttributes;
 
 namespace LuaSTGEditorSharp.EditorData.Node.Stage
 {
-    [Serializable, NodeIcon("/LuaSTGNodeLib;component/images/16x16/shakescreen.png")]
+    [Serializable, NodeIcon("shakescreen.png")]
     [RequireAncestor(typeof(CodeAlikeTypes))]
     [LeafNode]
     public class ShakeScreen : TreeNode

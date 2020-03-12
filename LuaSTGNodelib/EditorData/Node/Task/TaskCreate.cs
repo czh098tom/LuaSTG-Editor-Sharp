@@ -9,7 +9,7 @@ using LuaSTGEditorSharp.EditorData.Node.NodeAttributes;
 
 namespace LuaSTGEditorSharp.EditorData.Node.Task
 {
-    [Serializable, NodeIcon("/LuaSTGNodeLib;component/images/16x16/taskattach.png")]
+    [Serializable, NodeIcon("taskattach.png")]
     [RequireAncestor(typeof(CodeAlikeTypes))]
     [LeafNode]
     [CreateInvoke(0), RCInvoke(1)]

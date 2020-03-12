@@ -12,7 +12,7 @@ using LuaSTGEditorSharp.EditorData.Document;
 
 namespace LuaSTGEditorSharp.EditorData.Node.Task
 {
-    [Serializable, NodeIcon("/LuaSTGNodeLib;component/images/16x16/taskdefine.png")]
+    [Serializable, NodeIcon("taskdefine.png")]
     [ClassNode]
     [CreateInvoke(0), RCInvoke(1)]
     public class TaskDefine : TreeNode

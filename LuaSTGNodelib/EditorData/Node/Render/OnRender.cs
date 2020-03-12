@@ -12,7 +12,7 @@ using LuaSTGEditorSharp.EditorData.Node.NodeAttributes;
 
 namespace LuaSTGEditorSharp.EditorData.Node.Render
 {
-    [Serializable, NodeIcon("/LuaSTGNodeLib;component/images/16x16/onrender.png")]
+    [Serializable, NodeIcon("onrender.png")]
     [RequireParent(typeof(ObjectPoolTypeAlikeTypes))]
     public class OnRender : TreeNode, ICallBackFunc
     {

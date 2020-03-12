@@ -11,7 +11,7 @@ using Newtonsoft.Json;
 
 namespace LuaSTGEditorSharp.EditorData.Node.Object
 {
-    [Serializable, NodeIcon("/LuaSTGNodeLib;component/images/16x16/setaccel.png")]
+    [Serializable, NodeIcon("setaccel.png")]
     [RequireAncestor(typeof(CodeAlikeTypes))]
     [LeafNode]
     [RCInvoke(1)]

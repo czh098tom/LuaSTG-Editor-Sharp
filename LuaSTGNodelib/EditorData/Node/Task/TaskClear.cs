@@ -12,7 +12,7 @@ using LuaSTGEditorSharp.EditorData.Node.NodeAttributes;
 
 namespace LuaSTGEditorSharp.EditorData.Node.Task
 {
-    [Serializable, NodeIcon("/LuaSTGNodeLib;component/images/16x16/playsound.png")]
+    [Serializable, NodeIcon("playsound.png")]
     public class TaskClear : TreeNode
     {
         [JsonConstructor]

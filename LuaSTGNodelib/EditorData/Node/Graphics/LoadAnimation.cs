@@ -12,7 +12,7 @@ using LuaSTGEditorSharp.EditorData.Node.NodeAttributes;
 
 namespace LuaSTGEditorSharp.EditorData.Node.Graphics
 {
-    [Serializable, NodeIcon("/LuaSTGNodeLib;component/images/16x16/loadani.png")]
+    [Serializable, NodeIcon("loadani.png")]
     [ClassNode]
     [LeafNode]
     [CreateInvoke(0), RCInvoke(3)]

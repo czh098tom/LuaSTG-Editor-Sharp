@@ -14,7 +14,7 @@ using Newtonsoft.Json;
 
 namespace LuaSTGEditorSharp.EditorData.Node.Advanced
 {
-    [Serializable, NodeIcon("images/16x16/definemacro.png")]
+    [Serializable, NodeIcon("definemacro.png")]
     [LeafNode]
     [CreateInvoke(0), RCInvoke(1)]
     public class DefineMacro : TreeNode

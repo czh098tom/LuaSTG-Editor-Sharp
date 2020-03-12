@@ -10,7 +10,7 @@ using Newtonsoft.Json;
 
 namespace LuaSTGEditorSharp.EditorData.Node.Boss
 {
-    [Serializable, NodeIcon("/LuaSTGNodeLib;component/images/16x16/bosscreate.png")]
+    [Serializable, NodeIcon("bosscreate.png")]
     [RequireAncestor(typeof(Stage.Stage), typeof(Data.Function))]
     [LeafNode]
     [CreateInvoke(0), RCInvoke(0)]

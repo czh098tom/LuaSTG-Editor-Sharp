@@ -12,7 +12,7 @@ using LuaSTGEditorSharp.EditorData.Node.NodeAttributes;
 
 namespace LuaSTGEditorSharp.EditorData.Node.Advanced.AdvancedRepeat
 {
-    [Serializable, NodeIcon("images/16x16/SinusoidalOscillationVariable.png")]
+    [Serializable, NodeIcon("SinusoidalMovementVariable.png")]
     [RequireParent(typeof(VariableCollection))]
     [LeafNode]
     [CreateInvoke(0)]

@@ -11,7 +11,7 @@ using Newtonsoft.Json;
 
 namespace LuaSTGEditorSharp.EditorData.Node.Stage
 {
-    [Serializable, NodeIcon("/LuaSTGNodeLib;component/images/16x16/stage.png")]
+    [Serializable, NodeIcon("stage.png")]
     [RequireParent(typeof(StageGroup))]
     [RCInvoke(0)]
     public class Stage : TreeNode

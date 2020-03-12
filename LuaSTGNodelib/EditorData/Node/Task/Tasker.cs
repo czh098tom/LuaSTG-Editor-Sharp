@@ -10,7 +10,7 @@ using Newtonsoft.Json;
 
 namespace LuaSTGEditorSharp.EditorData.Node.Task
 {
-    [Serializable, NodeIcon("/LuaSTGNodeLib;component/images/16x16/tasker.png")]
+    [Serializable, NodeIcon("tasker.png")]
     [RequireAncestor(typeof(CodeAlikeTypes))]
     public class Tasker : TreeNode
     {

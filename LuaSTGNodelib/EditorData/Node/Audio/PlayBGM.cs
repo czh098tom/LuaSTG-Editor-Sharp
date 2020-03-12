@@ -13,7 +13,7 @@ using Newtonsoft.Json;
 
 namespace LuaSTGEditorSharp.EditorData.Node.Audio
 {
-    [Serializable, NodeIcon("/LuaSTGNodeLib;component/images/16x16/playbgm.png")]
+    [Serializable, NodeIcon("playbgm.png")]
     [RequireAncestor(typeof(CodeAlikeTypes))]
     [LeafNode]
     [CreateInvoke(0), RCInvoke(1)]

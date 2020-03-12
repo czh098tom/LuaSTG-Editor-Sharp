@@ -19,7 +19,7 @@ Names below are desired class names for the unfinished nodes.
 	Finished.
 
 ## Data
-    InverseVar(!)(Inverse a given variable)
+	Finished.
 
 ## Stage
 	StageGroupInfo
@@ -29,8 +29,6 @@ Names below are desired class names for the unfinished nodes.
 	--
 	[x]SetWorlds
 	[x]AddWorld
-	--
-	ShakeScreen (From old "Effect")
 
 ## Task
 	ClearTasks
@@ -82,7 +80,6 @@ Names below are desired class names for the unfinished nodes.
 ## Graphics
 	LoadParticle *
 	LoadTexture *
-	LoadFX *
 
 ## Audio
 	Finished.

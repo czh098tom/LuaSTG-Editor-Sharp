@@ -12,7 +12,7 @@ using LuaSTGEditorSharp.EditorData.Node.NodeAttributes;
 
 namespace LuaSTGEditorSharp.EditorData.Node.Task
 {
-    [Serializable, NodeIcon("/LuaSTGNodeLib;component/images/16x16/taskreturn.png")]
+    [Serializable, NodeIcon("taskreturn.png")]
     [RequireAncestor(typeof(TaskTypes))]
     [LeafNode]
     public class TaskFinish : TreeNode

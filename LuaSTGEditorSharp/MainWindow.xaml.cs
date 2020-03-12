@@ -702,7 +702,11 @@ namespace LuaSTGEditorSharp
             {
                 ModName = process.projName
             });
-            PluginHandler.Plugin.Execution.Run((s) => DebugString += s + "\n");
+            PluginHandler.Plugin.Execution.Run((s) =>
+            {
+                DebugString += s + "\n";
+                App.Current.Dispatcher.Invoke(() => debugOutput.ScrollToEnd());
+            });
         }
 
         private void FoldRegion()

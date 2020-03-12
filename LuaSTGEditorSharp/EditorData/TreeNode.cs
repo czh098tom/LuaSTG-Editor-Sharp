@@ -1407,10 +1407,23 @@ namespace LuaSTGEditorSharp.EditorData
         protected string Macrolize(AttrItem attrItem)
         {
             string s = attrItem.AttrInput;
+            s = Macrolize(s);
+            return s;
+        }
+
+        /// <summary>
+        /// This method executes all macros currently in the <see cref="CompileProcess"/> to a <see cref="string"/>.
+        /// Can only be called in Compile Methods.
+        /// </summary>
+        /// <param name="s">The target <see cref="string"/></param>
+        /// <returns>The <see cref="string"/> after applying macros.</returns>
+        protected string Macrolize(string s)
+        {
             foreach (Compile.DefineMarcoSettings m in parentWorkSpace.CompileProcess.marcoDefinition)
             {
                 s = ExecuteMarco(m, s);
             }
+
             return s;
         }
 

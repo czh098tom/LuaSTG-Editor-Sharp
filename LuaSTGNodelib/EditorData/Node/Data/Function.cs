@@ -12,7 +12,7 @@ using Newtonsoft.Json;
 
 namespace LuaSTGEditorSharp.EditorData.Node.Data
 {
-    [Serializable, NodeIcon("/LuaSTGNodeLib;component/images/16x16/func.png")]
+    [Serializable, NodeIcon("func.png")]
     [CreateInvoke(0), RCInvoke(1)]
     public class Function : TreeNode
     {

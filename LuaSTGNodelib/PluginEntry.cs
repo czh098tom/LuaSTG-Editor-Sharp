@@ -65,7 +65,8 @@ namespace LuaSTGEditorSharp
                 new int[]{ (int)MetaType.Task },
                 new int[]{ (int)MetaType.ImageLoad },
                 new int[]{ (int)MetaType.ImageGroupLoad },
-                new int[]{ (int)MetaType.BGMLoad }
+                new int[]{ (int)MetaType.BGMLoad },
+                new int[]{ (int)MetaType.FXLoad }
             };
 
         public override int MetaInfoCollectionTypeCount { get => (int)MetaType.__max; }

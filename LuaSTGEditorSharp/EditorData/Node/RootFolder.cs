@@ -13,7 +13,7 @@ using Newtonsoft.Json;
 
 namespace LuaSTGEditorSharp.EditorData.Node
 {
-    [Serializable, NodeIcon("images/16x16/folder.png")]
+    [Serializable, NodeIcon("folder.png")]
     [CannotDelete, CannotBan]
     //[XmlRoot("Root")]
     public class RootFolder : TreeNode

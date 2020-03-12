@@ -10,7 +10,7 @@ using Newtonsoft.Json;
 
 namespace LuaSTGEditorSharp.EditorData.Node.Laser
 {
-    [Serializable, NodeIcon("/LuaSTGNodeLib;component/images/16x16/laserturnhalfon.png")]
+    [Serializable, NodeIcon("laserturnhalfon.png")]
     [RequireAncestor(typeof(LaserAlikeTypes), typeof(Laser.BentLaserInit))]
     [RequireAncestor(typeof(TaskAlikeTypes))]
     [LeafNode]

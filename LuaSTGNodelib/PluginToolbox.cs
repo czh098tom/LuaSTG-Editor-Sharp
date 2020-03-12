@@ -225,6 +225,8 @@ namespace LuaSTGEditorSharp
                 , new AddNode(AddLoadImageGroupNode));
             graphics.Add(new ToolboxItemData("loadani", "/LuaSTGNodeLib;component/images/loadani.png", "Load Animation")
                 , new AddNode(AddLoadAnimationNode));
+            graphics.Add(new ToolboxItemData("loadfx", "/LuaSTGNodeLib;component/images/loadFX.png", "Load FX")
+                , new AddNode(AddLoadFXNode));
             #endregion
             ToolInfo.Add("Graphics", graphics);
 
@@ -255,8 +257,18 @@ namespace LuaSTGEditorSharp
             #region render
             render.Add(new ToolboxItemData("onrender", "/LuaSTGNodeLib;component/images/onrender.png", "On Render")
                 , new AddNode(AddOnRenderNode));
+            render.Add(new ToolboxItemData(true), null);
             render.Add(new ToolboxItemData("r4v", "/LuaSTGNodeLib;component/images/render4v.png", "Render4V")
                 , new AddNode(AddR4VNode));
+            render.Add(new ToolboxItemData(true), null);
+            render.Add(new ToolboxItemData("creatertar", "/LuaSTGNodeLib;component/images/CreateRenderTarget.png", "Create Render Target")
+                , new AddNode(AddCreateRenderTargetNode));
+            render.Add(new ToolboxItemData("rtarop", "/LuaSTGNodeLib;component/images/RenderTarget.png", "Push/Pop Render Target")
+                , new AddNode(AddRenderTargetNode));
+            //render.Add(new ToolboxItemData("cap", "/LuaSTGNodeLib;component/images/PostEffectCapture.png", "Begin Texture Capturing")
+            //    , new AddNode(AddPostEffectCaptureNode));
+            render.Add(new ToolboxItemData("posteff", "/LuaSTGNodeLib;component/images/PostEffect.png", "Post Effect")
+                , new AddNode(AddPostEffectNode));
             #endregion
             ToolInfo.Add("Render", render);
 
@@ -665,6 +677,11 @@ namespace LuaSTGEditorSharp
         {
             parent.Insert(new LoadAnimation(parent.ActivatedWorkSpaceData));
         }
+
+        private void AddLoadFXNode()
+        {
+            parent.Insert(new LoadFX(parent.ActivatedWorkSpaceData));
+        }
         #endregion
         #region audio
         private void AddLoadSENode()
@@ -713,6 +730,26 @@ namespace LuaSTGEditorSharp
         private void AddR4VNode()
         {
             parent.Insert(new Render4V(parent.ActivatedWorkSpaceData));
+        }
+
+        private void AddCreateRenderTargetNode()
+        {
+            parent.Insert(new CreateRenderTarget(parent.ActivatedWorkSpaceData));
+        }
+
+        private void AddRenderTargetNode()
+        {
+            parent.Insert(new RenderTarget(parent.ActivatedWorkSpaceData));
+        }
+
+        private void AddPostEffectCaptureNode()
+        {
+            parent.Insert(new PostEffectCapture(parent.ActivatedWorkSpaceData));
+        }
+
+        private void AddPostEffectNode()
+        {
+            parent.Insert(new PostEffect(parent.ActivatedWorkSpaceData));
         }
         #endregion
     }

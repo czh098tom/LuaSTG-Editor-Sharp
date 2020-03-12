@@ -29,12 +29,16 @@ Object
 	GroupForEach
 Graphics
 	LoadAnimation
+	LoadFX
 Audio
 	PauseBGM
 	ResumeBGM
 	StopBGM
 Render
 	Render4V
+	CreateRenderTarget
+	RenderTarget
+	PostEffect
 修复bug：
 Editor层：
 修复EXE路径是否设定的判定错误
@@ -72,6 +76,8 @@ ARGB输入界面值现在可以键入非数字内容
 跳转行文本框回车可以跳转到指定行
 代码输入界面使用Ctrl+Enter可以确认输入
 高级循环节点可以正确使用随机数
+优化节点库制作难度
+优化工程文件体积
 
 扩展功能说明：
 逻辑树功能：Folder现在会不存在于逻辑树上，意味着它被插入校验和节点定义中的寻找父节点忽略

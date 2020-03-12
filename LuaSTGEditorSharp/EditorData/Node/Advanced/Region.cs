@@ -12,7 +12,7 @@ using Newtonsoft.Json;
 
 namespace LuaSTGEditorSharp.EditorData.Node.Advanced
 {
-    [Serializable, NodeIcon("images/16x16/region.png")]
+    [Serializable, NodeIcon("region.png")]
     [LeafNode]
     [RCInvoke(0)]
     public class Region : TreeNode

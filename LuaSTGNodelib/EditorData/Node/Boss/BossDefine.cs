@@ -13,7 +13,7 @@ using Newtonsoft.Json;
 
 namespace LuaSTGEditorSharp.EditorData.Node.Boss
 {
-    [Serializable, NodeIcon("/LuaSTGNodeLib;component/images/16x16/bossdefine.png")]
+    [Serializable, NodeIcon("bossdefine.png")]
     [ClassNode]
     [CreateInvoke(0), RCInvoke(0)]
     public class BossDefine : TreeNode

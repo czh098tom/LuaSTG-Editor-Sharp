@@ -11,7 +11,7 @@ using Newtonsoft.Json;
 
 namespace LuaSTGEditorSharp.EditorData.Node.Boss
 {
-    [Serializable, NodeIcon("/LuaSTGNodeLib;component/images/16x16/bginit.png")]
+    [Serializable, NodeIcon("bginit.png")]
     [CannotDelete, CannotBan]
     [RequireParent(typeof(BossBGLayer)), Uniqueness]
     public class BossBGLayerInit : TreeNode

@@ -12,7 +12,7 @@ using System.Text.RegularExpressions;
 
 namespace LuaSTGEditorSharp.EditorData.Node.Advanced
 {
-    [Serializable, NodeIcon("images/16x16/unidentifiednode.png")]
+    [Serializable, NodeIcon("unidentifiednode.png")]
     [IgnoreValidation]
     [CreateInvoke(0)]
     [IgnoreAttributesParityCheck]
@@ -51,13 +51,15 @@ namespace LuaSTGEditorSharp.EditorData.Node.Advanced
                     }
                 }
                 object[] s = list.ToArray();
+                string hstr = Macrolize(target.ExInfo1);
+                string tstr = Macrolize(target.ExInfo2);
                 try
                 {
                     Regex r = new Regex("\\n");
                     string sp = Indent(spacing);
                     string nsp = "\n" + sp;
-                    head = sp + r.Replace(string.Format(target.ExInfo1, s), nsp) + "\n";
-                    tail = sp + r.Replace(string.Format(target.ExInfo2, s), nsp) + "\n";
+                    head = sp + r.Replace(string.Format(hstr, s), nsp) + "\n";
+                    tail = sp + r.Replace(string.Format(tstr, s), nsp) + "\n";
                     //head = string.Format(target.ExInfo1, s) + "\n";
                     //tail = string.Format(target.ExInfo2, s) + "\n";
                 }

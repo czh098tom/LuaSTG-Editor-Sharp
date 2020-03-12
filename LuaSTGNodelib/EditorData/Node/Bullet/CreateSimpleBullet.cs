@@ -10,7 +10,7 @@ using Newtonsoft.Json;
 
 namespace LuaSTGEditorSharp.EditorData.Node.Bullet
 {
-    [Serializable, NodeIcon("/LuaSTGNodeLib;component/images/16x16/bulletcreatestraight.png")]
+    [Serializable, NodeIcon("bulletcreatestraight.png")]
     [RequireAncestor(typeof(CodeAlikeTypes))]
     [LeafNode]
     [CreateInvoke(0), RCInvoke(3)]

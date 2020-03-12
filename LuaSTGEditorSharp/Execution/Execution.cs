@@ -29,6 +29,9 @@ namespace LuaSTGEditorSharp.Execution
 
         protected virtual string LuaSTGPath { get => (App.Current as App)?.LuaSTGExecutablePath; }
 
+        protected abstract string LogFileName { get; }
+        public abstract string ExecutableName { get; }
+
         public abstract void BeforeRun(ExecutionConfig config);
 
         public virtual void Run(Logger logger)
@@ -62,7 +65,7 @@ namespace LuaSTGEditorSharp.Execution
                     try
                     {
                         fs = new FileStream(Path.GetFullPath(Path.Combine(
-                            Path.GetDirectoryName(LuaSTGPath), "log.txt")), FileMode.Open);
+                            Path.GetDirectoryName(LuaSTGPath), LogFileName)), FileMode.Open);
                         sr = new StreamReader(fs);
                         int i = 0;
                         while (!sr.EndOfStream && i < 8192)

@@ -12,7 +12,7 @@ using LuaSTGEditorSharp.EditorData.Node.NodeAttributes;
 
 namespace LuaSTGEditorSharp.EditorData.Node.Object
 {
-    [Serializable, NodeIcon("/LuaSTGNodeLib;component/images/16x16/setrelpos.png")]
+    [Serializable, NodeIcon("setrelpos.png")]
     [RequireAncestor(typeof(CodeAlikeTypes))]
     [LeafNode]
     public class SetRelativePosition : TreeNode

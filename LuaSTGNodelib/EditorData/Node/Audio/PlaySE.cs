@@ -12,7 +12,7 @@ using LuaSTGEditorSharp.EditorData.Node.NodeAttributes;
 
 namespace LuaSTGEditorSharp.EditorData.Node.Audio
 {
-    [Serializable, NodeIcon("/LuaSTGNodeLib;component/images/16x16/playsound.png")]
+    [Serializable, NodeIcon("playsound.png")]
     [RequireAncestor(typeof(CodeAlikeTypes))]
     [LeafNode]
     [CreateInvoke(0),RCInvoke(0)]

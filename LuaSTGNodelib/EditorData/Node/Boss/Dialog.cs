@@ -12,7 +12,7 @@ using LuaSTGEditorSharp.EditorData.Node.NodeAttributes;
 
 namespace LuaSTGEditorSharp.EditorData.Node.Boss
 {
-    [Serializable, NodeIcon("/LuaSTGNodeLib;component/images/16x16/dialog.png")]
+    [Serializable, NodeIcon("dialog.png")]
     [RequireParent(typeof(BossDefine))]
     public class Dialog : TreeNode
     {

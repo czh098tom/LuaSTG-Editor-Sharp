@@ -11,7 +11,7 @@ using LuaSTGEditorSharp.EditorData.Message;
 
 namespace LuaSTGEditorSharp.EditorData.Node.Boss
 {
-    [Serializable, NodeIcon("/LuaSTGNodeLib;component/images/16x16/bossexplode.png")]
+    [Serializable, NodeIcon("bossexplode.png")]
     [RequireAncestor(typeof(BossAlikeTypes))]
     [LeafNode]
     [RCInvoke(0)]

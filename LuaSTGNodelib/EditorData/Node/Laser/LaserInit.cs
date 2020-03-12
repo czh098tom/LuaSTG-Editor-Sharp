@@ -11,7 +11,7 @@ using Newtonsoft.Json;
 
 namespace LuaSTGEditorSharp.EditorData.Node.Laser
 {
-    [Serializable, NodeIcon("/LuaSTGNodeLib;component/images/16x16/laserinit.png")]
+    [Serializable, NodeIcon("laserinit.png")]
     [CannotDelete, CannotBan]
     [RequireParent(typeof(LaserDefine)), Uniqueness]
     [RCInvoke(0)]

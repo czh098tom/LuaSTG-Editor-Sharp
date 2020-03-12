@@ -12,7 +12,7 @@ using LuaSTGEditorSharp.EditorData.Node.NodeAttributes;
 
 namespace LuaSTGEditorSharp.EditorData.Node.Advanced.AdvancedRepeat
 {
-    [Serializable, NodeIcon("images/16x16/callbackfunc.png")]
+    [Serializable, NodeIcon("callbackfunc.png")]
     [RequireParent(typeof(AdvancedRepeat))]
     [Uniqueness]
     [CannotDelete, CannotBan]

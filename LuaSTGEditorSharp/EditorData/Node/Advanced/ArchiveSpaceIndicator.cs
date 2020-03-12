@@ -15,7 +15,7 @@ using Newtonsoft.Json;
 
 namespace LuaSTGEditorSharp.EditorData.Node.Advanced
 {
-    [Serializable, NodeIcon("images/16x16/archispace.png")]
+    [Serializable, NodeIcon("archispace.png")]
     [LeafNode]
     [CreateInvoke(0), RCInvoke(0)]
     public class ArchiveSpaceIndicator : TreeNode

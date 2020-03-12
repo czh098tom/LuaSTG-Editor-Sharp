@@ -12,7 +12,7 @@ using Newtonsoft.Json;
 
 namespace LuaSTGEditorSharp.EditorData.Node.General
 {
-    [Serializable, NodeIcon("images/16x16/if.png")]
+    [Serializable, NodeIcon("if.png")]
     [RCInvoke(0)]
     public class IfNode : TreeNode
     {

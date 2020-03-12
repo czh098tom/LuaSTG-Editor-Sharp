@@ -13,7 +13,7 @@ using Newtonsoft.Json;
 
 namespace LuaSTGEditorSharp.EditorData.Node.Graphics
 {
-    [Serializable, NodeIcon("/LuaSTGNodeLib;component/images/16x16/loadimage.png")]
+    [Serializable, NodeIcon("loadimage.png")]
     [ClassNode]
     [LeafNode]
     [CreateInvoke(0), RCInvoke(3)]

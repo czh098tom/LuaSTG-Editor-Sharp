@@ -13,7 +13,7 @@ using LuaSTGEditorSharp.EditorData.Node.NodeAttributes;
 
 namespace LuaSTGEditorSharp.EditorData.Node.Enemy
 {
-    [Serializable, NodeIcon("/LuaSTGNodeLib;component/images/16x16/enemydefine.png")]
+    [Serializable, NodeIcon("enemydefine.png")]
     [ClassNode]
     [CreateInvoke(0), RCInvoke(0)]
     public class EnemyDefine : TreeNode

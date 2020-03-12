@@ -12,7 +12,7 @@ using LuaSTGEditorSharp.EditorData.Node.NodeAttributes;
 
 namespace LuaSTGEditorSharp.EditorData.Node.Enemy
 {
-    [Serializable, NodeIcon("/LuaSTGNodeLib;component/images/16x16/enemyinit.png")]
+    [Serializable, NodeIcon("enemyinit.png")]
     [CannotDelete, CannotBan]
     [RequireParent(typeof(EnemyDefine)), Uniqueness]
     [RCInvoke(0)]

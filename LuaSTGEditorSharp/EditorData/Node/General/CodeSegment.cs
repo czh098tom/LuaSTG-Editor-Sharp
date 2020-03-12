@@ -13,7 +13,7 @@ using Newtonsoft.Json;
 
 namespace LuaSTGEditorSharp.EditorData.Node.General
 {
-    [Serializable, NodeIcon("images/16x16/codesegment.png")]
+    [Serializable, NodeIcon("codesegment.png")]
     [IgnoreValidation]
     [RCInvoke(0)]
     public class CodeSegment : TreeNode

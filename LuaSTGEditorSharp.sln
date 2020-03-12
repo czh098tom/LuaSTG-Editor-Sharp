@@ -9,8 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NodeTest", "NodeTest\NodeTe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LuaSTGNodelib", "LuaSTGNodelib\LuaSTGNodelib.csproj", "{06F198EA-762C-4B34-84DA-B58A6C3E6A79}"
 EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup", "Setup\Setup.vdproj", "{BE946F66-829A-4D02-B258-9920FF812223}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8572669B-65DA-442E-9EC1-63BF18B13390}"
 	ProjectSection(SolutionItems) = preProject
 		Advanced Repeat Design.md = Advanced Repeat Design.md
@@ -18,6 +16,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		Unfinished Nodes.md = Unfinished Nodes.md
 		User Manual.md = User Manual.md
 	EndProjectSection
+EndProject
+Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "WiXSetup", "WiXSetup\WiXSetup.wixproj", "{7F925F14-260A-4000-A17F-7617B36012FF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -65,12 +65,14 @@ Global
 		{06F198EA-762C-4B34-84DA-B58A6C3E6A79}.Release|x64.Build.0 = Release|Any CPU
 		{06F198EA-762C-4B34-84DA-B58A6C3E6A79}.Release|x86.ActiveCfg = Release|Any CPU
 		{06F198EA-762C-4B34-84DA-B58A6C3E6A79}.Release|x86.Build.0 = Release|Any CPU
-		{BE946F66-829A-4D02-B258-9920FF812223}.Debug|Any CPU.ActiveCfg = Debug
-		{BE946F66-829A-4D02-B258-9920FF812223}.Debug|x64.ActiveCfg = Debug
-		{BE946F66-829A-4D02-B258-9920FF812223}.Debug|x86.ActiveCfg = Debug
-		{BE946F66-829A-4D02-B258-9920FF812223}.Release|Any CPU.ActiveCfg = Release
-		{BE946F66-829A-4D02-B258-9920FF812223}.Release|x64.ActiveCfg = Release
-		{BE946F66-829A-4D02-B258-9920FF812223}.Release|x86.ActiveCfg = Release
+		{7F925F14-260A-4000-A17F-7617B36012FF}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{7F925F14-260A-4000-A17F-7617B36012FF}.Debug|x64.ActiveCfg = Debug|x86
+		{7F925F14-260A-4000-A17F-7617B36012FF}.Debug|x86.ActiveCfg = Debug|x86
+		{7F925F14-260A-4000-A17F-7617B36012FF}.Debug|x86.Build.0 = Debug|x86
+		{7F925F14-260A-4000-A17F-7617B36012FF}.Release|Any CPU.ActiveCfg = Release|x86
+		{7F925F14-260A-4000-A17F-7617B36012FF}.Release|x64.ActiveCfg = Release|x86
+		{7F925F14-260A-4000-A17F-7617B36012FF}.Release|x86.ActiveCfg = Release|x86
+		{7F925F14-260A-4000-A17F-7617B36012FF}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

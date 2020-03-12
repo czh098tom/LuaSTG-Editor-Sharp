@@ -10,7 +10,7 @@ using Newtonsoft.Json;
 
 namespace LuaSTGEditorSharp.EditorData.Node.Data
 {
-    [Serializable, NodeIcon("/LuaSTGNodeLib;component/images/16x16/positionVar.png")]
+    [Serializable, NodeIcon("positionVar.png")]
     [LeafNode]
     [CreateInvoke(1), RCInvoke(2)]
     [IgnoreAttributesParityCheck]

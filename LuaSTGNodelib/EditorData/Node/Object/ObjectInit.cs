@@ -11,7 +11,7 @@ using Newtonsoft.Json;
 
 namespace LuaSTGEditorSharp.EditorData.Node.Object
 {
-    [Serializable, NodeIcon("/LuaSTGNodeLib;component/images/16x16/objectinit.png")]
+    [Serializable, NodeIcon("objectinit.png")]
     [CannotDelete, CannotBan]
     [RequireParent(typeof(ObjectDefine)), Uniqueness]
     [RCInvoke(0)]

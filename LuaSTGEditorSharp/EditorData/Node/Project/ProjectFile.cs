@@ -14,7 +14,7 @@ using Newtonsoft.Json;
 
 namespace LuaSTGEditorSharp.EditorData.Node.Project
 {
-    [Serializable, NodeIcon("images/16x16/patch.png")]
+    [Serializable, NodeIcon("patch.png")]
     [RequireAncestor(typeof(ProjectRoot))]
     [ClassNode]
     [LeafNode]

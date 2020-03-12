@@ -12,7 +12,7 @@ using LuaSTGEditorSharp.EditorData.Node.NodeAttributes;
 
 namespace LuaSTGEditorSharp.EditorData.Node.Audio
 {
-    [Serializable, NodeIcon("/LuaSTGNodeLib;component/images/16x16/resumebgm.png")]
+    [Serializable, NodeIcon("resumebgm.png")]
     [RequireAncestor(typeof(CodeAlikeTypes))]
     [LeafNode]
     public class ResumeBGM : TreeNode

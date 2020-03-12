@@ -35,6 +35,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <AutoGenerateBindingRedirects>false</AutoGenerateBindingRedirects>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="CSCore, Version=1.2.1.2, Culture=neutral, PublicKeyToken=5a08f2b6f4415dea, processorArchitecture=MSIL">
       <HintPath>..\packages\CSCore.1.2.1.2\lib\net35-client\CSCore.dll</HintPath>
@@ -64,6 +67,7 @@
     <Compile Include="EditorData\Document\Meta\BentLaserDefineMetaInfo.cs" />
     <Compile Include="EditorData\Document\Meta\EnemyDefineMetaInfo.cs" />
     <Compile Include="EditorData\Document\Meta\AnimationLoadMetaInfo.cs" />
+    <Compile Include="EditorData\Document\Meta\FXLoadMetaInfo.cs" />
     <Compile Include="EditorData\Document\Meta\SELoadMetaInfo.cs" />
     <Compile Include="EditorData\Document\Meta\BGMLoadMetaInfo.cs" />
     <Compile Include="EditorData\Document\Meta\BossBGDefineMetaInfo.cs" />
@@ -86,6 +90,7 @@
     <Compile Include="EditorData\Node\Enemy\EnemyInit.cs" />
     <Compile Include="EditorData\Node\Enemy\EnemyWander.cs" />
     <Compile Include="EditorData\Node\Graphics\LoadAnimation.cs" />
+    <Compile Include="EditorData\Node\Graphics\LoadFX.cs" />
     <Compile Include="EditorData\Node\ICallBackFunc.cs" />
     <Compile Include="EditorData\Message\ArgCountInfo.cs" />
     <Compile Include="EditorData\Message\CannotFindAncestorTypeOf.cs" />
@@ -154,8 +159,12 @@
     <Compile Include="EditorData\Node\Object\SetVelocityLimit.cs" />
     <Compile Include="EditorData\Node\Object\SetVelocity.cs" />
     <Compile Include="EditorData\Node\RenderAlikeTypes.cs" />
+    <Compile Include="EditorData\Node\Render\CreateRenderTarget.cs" />
     <Compile Include="EditorData\Node\Render\OnRender.cs" />
+    <Compile Include="EditorData\Node\Render\PostEffect.cs" />
+    <Compile Include="EditorData\Node\Render\PostEffectCapture.cs" />
     <Compile Include="EditorData\Node\Render\Render4V.cs" />
+    <Compile Include="EditorData\Node\Render\RenderTarget.cs" />
     <Compile Include="EditorData\Node\Stage\ShakeScreen.cs" />
     <Compile Include="EditorData\Node\Stage\Stage.cs" />
     <Compile Include="EditorData\Node\Stage\StageBG.cs" />
@@ -205,6 +214,9 @@
     <Compile Include="Windows\Input\MediaPlayer\OggSource.cs" />
     <Compile Include="Windows\Input\MultilineInput.xaml.cs">
       <DependentUpon>MultilineInput.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Input\FXInput.xaml.cs">
+      <DependentUpon>FXInput.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\Input\SEInput.xaml.cs">
       <DependentUpon>SEInput.xaml</DependentUpon>
@@ -284,6 +296,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\Input\MultilineInput.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\Input\FXInput.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -1819,6 +1835,22 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images\render4v.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\PostEffect.png" />
+    <Resource Include="images\RenderTarget.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\PostEffect.png" />
+    <Resource Include="images\16x16\RenderTarget.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\CreateRenderTarget.png" />
+    <Resource Include="images\PostEffectCapture.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\CreateRenderTarget.png" />
+    <Resource Include="images\16x16\PostEffectCapture.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -12,7 +12,7 @@ using LuaSTGEditorSharp.EditorData.Node.NodeAttributes;
 
 namespace LuaSTGEditorSharp.EditorData.Node.General
 {
-    [Serializable, NodeIcon("images/16x16/elseif.png")]
+    [Serializable, NodeIcon("elseif.png")]
     [RequireParent(typeof(IfNode))]
     public class IfElseIf : TreeNode, IIfChild
     {

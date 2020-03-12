@@ -10,7 +10,7 @@ using Newtonsoft.Json;
 
 namespace LuaSTGEditorSharp.EditorData.Node.Enemy
 {
-    [Serializable, NodeIcon("/LuaSTGNodeLib;component/images/16x16/enemycreate.png")]
+    [Serializable, NodeIcon("enemycreate.png")]
     [RequireAncestor(typeof(CodeAlikeTypes))]
     [LeafNode]
     [CreateInvoke(0), RCInvoke(2)]

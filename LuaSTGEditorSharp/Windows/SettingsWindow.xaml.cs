@@ -490,7 +490,7 @@ namespace LuaSTGEditorSharp.Windows
         {
             var chooseExc = new OpenFileDialog()
             {
-                Filter = "LuaSTG Executable|LuaSTGPlus.dev.exe"
+                Filter = "LuaSTG Executable|" + Plugin.PluginHandler.Plugin.Execution.ExecutableName
             };
             if (chooseExc.ShowDialog() != System.Windows.Forms.DialogResult.Cancel)
             {

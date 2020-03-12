@@ -11,7 +11,7 @@ using Newtonsoft.Json;
 
 namespace LuaSTGEditorSharp.EditorData.Node.Task
 {
-    [Serializable, NodeIcon("/LuaSTGNodeLib;component/images/16x16/taskmovetoex.png")]
+    [Serializable, NodeIcon("taskmovetoex.png")]
     [RequireAncestor(typeof(TaskAlikeTypes))]
     [LeafNode]
     [RCInvoke(1)]

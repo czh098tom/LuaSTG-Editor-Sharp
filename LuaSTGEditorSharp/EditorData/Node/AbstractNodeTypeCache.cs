@@ -31,7 +31,7 @@ namespace LuaSTGEditorSharp.EditorData.Node
             {
                 TypeCacheData data = new TypeCacheData
                 {
-                    icon = t.GetCustomAttribute<NodeIconAttribute>().Path,
+                    icon = $"/{t.Assembly.GetName().Name};component/images/16x16/{t.GetCustomAttribute<NodeIconAttribute>().Path}",
                     canDelete = !t.IsDefined(typeof(CannotDeleteAttribute), false),
                     canBeBanned = !t.IsDefined(typeof(CannotBanAttribute), false),
                     classNode = t.IsDefined(typeof(ClassNodeAttribute), false),
