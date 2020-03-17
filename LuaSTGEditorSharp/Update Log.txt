@@ -28,6 +28,8 @@ Enemy
 		EnemyInit
 	CreateEnemy
 	CreateSimpleEnemy (by Xiliusha)
+Boss
+	BossMoveTo (by Kasa)
 Object
 	GroupForEach
 	DropItem (by Airo)

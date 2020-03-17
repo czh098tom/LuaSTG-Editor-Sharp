@@ -54,7 +54,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Object
 
         public override string ToString()
         {
-            return "Drop " + NonMacrolize(1) + NonMacrolize(0) + "(s) in (" + NonMacrolize(2) + ")";
+            return "Drop " + NonMacrolize(1) + " " + NonMacrolize(0) + "(s) in (" + NonMacrolize(2) + ")";
         }
 
         public override IEnumerable<string> ToLua(int spacing)

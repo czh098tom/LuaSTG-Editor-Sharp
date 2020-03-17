@@ -122,6 +122,8 @@ namespace LuaSTGEditorSharp
             boss.Add(new ToolboxItemData("bosssetwisys", "/LuaSTGNodeLib;component/images/bosswalkimg.png", "Set Walk Image of an Object")
                 , new AddNode(AddSetBossWISysNode));
             boss.Add(new ToolboxItemData(true), null);
+            boss.Add(new ToolboxItemData("bossmoveto", "/LuaSTGNodeLib;component/images/bossmoveto.png", "Boss Move To")
+                , new AddNode(AddBossMoveToNode));
             boss.Add(new ToolboxItemData("dialog", "/LuaSTGNodeLib;component/images/dialog.png", "Dialog")
                 , new AddNode(AddDialogNode));
             boss.Add(new ToolboxItemData("sentence", "/LuaSTGNodeLib;component/images/sentence.png", "Sentence")
@@ -477,6 +479,11 @@ namespace LuaSTGEditorSharp
         private void AddCreateBossNode()
         {
             parent.Insert(new CreateBoss(parent.ActivatedWorkSpaceData));
+        }
+
+        private void AddBossMoveToNode()
+        {
+            parent.Insert(new BossMoveTo(parent.ActivatedWorkSpaceData));
         }
 
         private void AddDialogNode()

@@ -38,7 +38,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Stage
 
         public override string ToString()
         {
-            return "Go to Stage " + NonMacrolize(0);
+            return "Go to stage " + NonMacrolize(0);
         }
 
         public override IEnumerable<string> ToLua(int spacing)

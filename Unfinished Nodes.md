@@ -16,7 +16,7 @@ Names below are desired class names for the unfinished nodes.
 "--" means a group separation.
 
 ## General
-	Finished.
+	AddFile
 
 ## Data
 	Finished.
@@ -26,10 +26,6 @@ Names below are desired class names for the unfinished nodes.
 
 ## Task
 	ClearTasks
-	--
-	[x]SetSignal
-	[x]WaitForSignal
-	[x]WaitTo(*)
 	--
 	MoveToBezier &
 	MoveByBezier &
@@ -42,12 +38,8 @@ Names below are desired class names for the unfinished nodes.
 	Finished.
 
 ## Boss
-	BossMoveTo(?)
-	--
 	BossAura
 	BossUI
-	--
-	[x]BossEX(?)
 
 ## Bullet
 	Finished.
@@ -59,17 +51,9 @@ Names below are desired class names for the unfinished nodes.
 
 ## Object (Merged Old "Unit")
 	ObjectChangeImage
-	[x]Properties
-	--
-	[x]ObjectList
-	[x]ObjectListAdd
-	[x]ObjectListRemove
-	[x]ObjectListForEach
 	--
 	PreserveUnit
 	CreateSmear (From old "Effect")
-	--
-	DropItem (From old "Effect")
 
 ## Graphics
 	LoadParticle *
