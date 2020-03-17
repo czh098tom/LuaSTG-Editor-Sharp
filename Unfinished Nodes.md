@@ -45,7 +45,7 @@ Names below are desired class names for the unfinished nodes.
 	MoveByBasis2 &
 
 ## Enemy
-	CreateSimpleEnemy(*)
+	Finished.
 
 ## Boss
 	BossMoveTo(?)

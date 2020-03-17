@@ -85,6 +85,7 @@
     <Compile Include="EditorData\Node\Boss\Dialog.cs" />
     <Compile Include="EditorData\Node\Boss\Sentence.cs" />
     <Compile Include="EditorData\Node\Data\PositionAssignment.cs" />
+    <Compile Include="EditorData\Node\Enemy\CreateSimpleEnemy.cs" />
     <Compile Include="EditorData\Node\Enemy\CreateEnemy.cs" />
     <Compile Include="EditorData\Node\Enemy\EnemyDefine.cs" />
     <Compile Include="EditorData\Node\Enemy\EnemyInit.cs" />
