@@ -22,13 +22,7 @@ Names below are desired class names for the unfinished nodes.
 	Finished.
 
 ## Stage
-	StageGroupInfo
-	StageGoTo
-	StageFinish
-	StageGroupFinish
-	--
-	[x]SetWorlds
-	[x]AddWorld
+    Finished.
 
 ## Task
 	ClearTasks

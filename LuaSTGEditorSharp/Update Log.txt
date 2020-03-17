@@ -20,11 +20,14 @@ Data
 Task
 	TaskFinish
 Stage
+	StageGoto (by Airo)
+	StageGroupFinish (by Airo)
 	ShakeScreen
 Enemy
 	EnemyDefine
 		EnemyInit
 	CreateEnemy
+	CreateSimpleEnemy (by Xiliusha)
 Object
 	GroupForEach
 Graphics

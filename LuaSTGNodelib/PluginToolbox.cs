@@ -51,6 +51,11 @@ namespace LuaSTGEditorSharp
             stage.Add(new ToolboxItemData("stage", "/LuaSTGNodeLib;component/images/stage.png", "Stage")
                 , new AddNode(AddStageNode));
             stage.Add(new ToolboxItemData(true), null);
+            stage.Add(new ToolboxItemData("stagegoto", "/LuaSTGNodeLib;component/images/stagegoto.png", "Go to Stage")
+                , new AddNode(AddStageGoToNode));
+            stage.Add(new ToolboxItemData("stagegroupfinish", "/LuaSTGNodeLib;component/images/stagefinishgroup.png", "Finish Stage Group")
+                , new AddNode(AddStageGroupFinishNode));
+            stage.Add(new ToolboxItemData(true), null);
             stage.Add(new ToolboxItemData("setstagebg", "/LuaSTGNodeLib;component/images/bgstage.png", "Set Stage Background")
                 , new AddNode(AddSetStageBGNode));
             stage.Add(new ToolboxItemData(true), null);
@@ -343,6 +348,16 @@ namespace LuaSTGEditorSharp
         private void AddShakeScreenNode()
         {
             parent.Insert(new ShakeScreen(parent.ActivatedWorkSpaceData));
+        }
+
+        private void AddStageGoToNode()
+        {
+            parent.Insert(new StageGoto(parent.ActivatedWorkSpaceData));
+        }
+
+        private void AddStageGroupFinishNode()
+        {
+            parent.Insert(new StageGroupFinish(parent.ActivatedWorkSpaceData));
         }
 
         #endregion
