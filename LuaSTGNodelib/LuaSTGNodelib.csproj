@@ -145,6 +145,7 @@
     <Compile Include="EditorData\Node\NodeTypeCache.cs" />
     <Compile Include="EditorData\Node\ObjectPoolTypeAlikeTypes.cs" />
     <Compile Include="EditorData\Node\Object\CreateObject.cs" />
+    <Compile Include="EditorData\Node\Object\DropItem.cs" />
     <Compile Include="EditorData\Node\Object\GroupForEach.cs" />
     <Compile Include="EditorData\Node\Object\ObjectDefine.cs" />
     <Compile Include="EditorData\Node\Object\ObjectInit.cs" />

@@ -30,6 +30,7 @@ Enemy
 	CreateSimpleEnemy (by Xiliusha)
 Object
 	GroupForEach
+	DropItem (by Airo)
 Graphics
 	LoadAnimation
 	LoadFX

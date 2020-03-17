@@ -107,6 +107,9 @@ namespace LuaSTGEditorSharp.Windows.Input
                         , "hyz_chargeup", "hyz_eterase", "hyz_exattack", "hyz_gosp", "hyz_life1", "hyz_playerdead"
                         , "hyz_timestop0", "hyz_warning", "bonus3", "border", "changeitem", "down", "extend2"
                         , "focusfix", "focusfix2", "focusin", "heal", "ice", "ice2", "item01", "ophide", "opshow" });
+            target.Add("item"
+                , new string[] { "item_power","item_faith","item_point","item_power_large","item_power_full"
+                        ,"item_faith_minor", "item_extend","item_chip","item_bomb","item_bombchip"});
             target.Add("lrstr"
                 , new string[] { "\"left\"", "\"right\"" });
             target.Add("directionMode"
