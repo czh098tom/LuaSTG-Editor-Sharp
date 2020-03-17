@@ -30,6 +30,7 @@ Enemy
 	CreateSimpleEnemy (by Xiliusha)
 Boss
 	BossAura (by Kasa)
+	BossUI (by Kasa)
 	BossMoveTo (by Kasa)
 Object
 	GroupForEach

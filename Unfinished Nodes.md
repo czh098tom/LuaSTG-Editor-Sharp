@@ -38,7 +38,7 @@ Names below are desired class names for the unfinished nodes.
 	Finished.
 
 ## Boss
-	BossUI
+	Finished.
 
 ## Bullet
 	Finished.

@@ -135,6 +135,8 @@ namespace LuaSTGEditorSharp
                 , new AddNode(AddBossExplodeNode));
             boss.Add(new ToolboxItemData("bossaura", "/LuaSTGNodeLib;component/images/bossshowaura.png", "Boss Aura")
                 , new AddNode(AddBossAuraNode));
+            boss.Add(new ToolboxItemData("bossui", "/LuaSTGNodeLib;component/images/bosssetui.png", "Set Boss UI")
+                , new AddNode(AddBossUINode));
             boss.Add(new ToolboxItemData(true), null);
             boss.Add(new ToolboxItemData("defbossbg", "/LuaSTGNodeLib;component/images/bgdefine.png", "Define Boss Background")
                 , new AddNode(AddBossBGDefineNode));
@@ -518,6 +520,11 @@ namespace LuaSTGEditorSharp
         private void AddBossAuraNode()
         {
             parent.Insert(new BossAura(parent.ActivatedWorkSpaceData));
+        }
+
+        private void AddBossUINode()
+        {
+            parent.Insert(new BossUI(parent.ActivatedWorkSpaceData));
         }
 
         private void AddBossBGDefineNode()
