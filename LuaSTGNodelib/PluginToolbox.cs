@@ -98,6 +98,9 @@ namespace LuaSTGEditorSharp
                 , new AddNode(AddEnemyChargeNode));
             enemy.Add(new ToolboxItemData("enemywander", "/LuaSTGNodeLib;component/images/taskbosswander.png", "Enemy Wander")
                 , new AddNode(AddEnemyWanderNode));
+            enemy.Add(new ToolboxItemData(true), null);
+            enemy.Add(new ToolboxItemData("enemysimple", "/LuaSTGNodeLib;component/images/enemysimple.png", "Create Simple Enemy with Task")
+                , new AddNode(AddCreateSimpleEnemyNode));
             #endregion
             ToolInfo.Add("Enemy", enemy);
 
@@ -417,6 +420,11 @@ namespace LuaSTGEditorSharp
         private void AddEnemyWanderNode()
         {
             parent.Insert(new EnemyWander(parent.ActivatedWorkSpaceData));
+        }
+
+        private void AddCreateSimpleEnemyNode()
+        {
+            parent.Insert(new CreateSimpleEnemy(parent.ActivatedWorkSpaceData));
         }
         #endregion
         #region boss
