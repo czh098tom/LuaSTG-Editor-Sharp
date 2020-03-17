@@ -36,7 +36,7 @@ namespace LuaSTGEditorSharp.Windows.Input
         private float s = 100f;
         private float v = 100f;
 
-        private string aStr, rStr, gStr, bStr;
+        private string aStr = "", rStr = "", gStr = "", bStr = "";
 
         private bool alphaUsed;
         public bool AlphaUsed 
@@ -296,6 +296,12 @@ namespace LuaSTGEditorSharp.Windows.Input
             }
         }
 
+        public bool IsVariable()
+        {
+            return !byte.TryParse(aStr, out byte _) || !byte.TryParse(rStr, out byte _)
+                || !byte.TryParse(gStr, out byte _) || !byte.TryParse(bStr, out byte _);
+        }
+
         public void CombineResult()
         {
             if (AlphaUsed)
@@ -431,18 +437,22 @@ namespace LuaSTGEditorSharp.Windows.Input
 
         public void UpdateState()
         {
-            HSVColor hsv = new HSVColor(h, s, v);
-            Color current = HSVToRGB(hsv);
-            current.A = a;
-            //update rgb (overwrite RGB text)
-            rStr = current.R.ToString();
-            gStr = current.G.ToString();
-            bStr = current.B.ToString();
-            Color maxHue = HSVToRGB(new HSVColor(hsv.hue, 100f, 100f));
-            ColorCanvas.Background = GetWCBrush(maxHue.R, maxHue.G, maxHue.B);
-            ScrollAlpha.Background = GetCTBrush(maxHue.R, maxHue.G, maxHue.B);
-            ColorCurrent.Background = new SolidColorBrush(current);
-            DrawCursorAtPoint(new Point(hsv.saturation * 255 / 100, 255 - hsv.value * 255 / 100));
+            if (!IsVariable())
+            {
+                //MessageBox.Show($"r:{rStr} g:{gStr} b:{bStr} a:{aStr}");
+                HSVColor hsv = new HSVColor(h, s, v);
+                Color current = HSVToRGB(hsv);
+                current.A = a;
+                //update rgb (overwrite RGB text)
+                rStr = current.R.ToString();
+                gStr = current.G.ToString();
+                bStr = current.B.ToString();
+                Color maxHue = HSVToRGB(new HSVColor(hsv.hue, 100f, 100f));
+                ColorCanvas.Background = GetWCBrush(maxHue.R, maxHue.G, maxHue.B);
+                ScrollAlpha.Background = GetCTBrush(maxHue.R, maxHue.G, maxHue.B);
+                ColorCurrent.Background = new SolidColorBrush(current);
+                DrawCursorAtPoint(new Point(hsv.saturation * 255 / 100, 255 - hsv.value * 255 / 100));
+            }
         }
 
         private readonly Pen drawingPen = new Pen(Brushes.AliceBlue, 2);

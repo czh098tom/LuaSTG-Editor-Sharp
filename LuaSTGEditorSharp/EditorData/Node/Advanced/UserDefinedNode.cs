@@ -71,7 +71,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Advanced
             }
             if (first)
             {
-                return "Define node " + attributes[0].AttrInput;
+                return "Define node \"" + attributes[0].AttrInput + "\"";
             }
             else
             {

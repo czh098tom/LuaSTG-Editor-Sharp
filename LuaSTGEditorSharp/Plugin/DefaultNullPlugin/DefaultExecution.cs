@@ -11,7 +11,7 @@ namespace LuaSTGEditorSharp.Plugin.DefaultNullPlugin
     class DefaultExecution : LSTGExecution
     {
         public override void BeforeRun(ExecutionConfig config) { }
-        public override void Run(Logger logger) { logger("You cannot run without a target LuaSTG version."); }
+        public override void Run(Logger logger, Action end) { logger("You cannot run without a target LuaSTG version."); }
         protected override string LogFileName => "log.txt";
         public override string ExecutableName => "LuaSTGPlus.dev.exe";
     }

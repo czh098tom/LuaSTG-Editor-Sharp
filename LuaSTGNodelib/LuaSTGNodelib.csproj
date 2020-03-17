@@ -168,8 +168,10 @@
     <Compile Include="EditorData\Node\Stage\ShakeScreen.cs" />
     <Compile Include="EditorData\Node\Stage\Stage.cs" />
     <Compile Include="EditorData\Node\Stage\StageBG.cs" />
+    <Compile Include="EditorData\Node\Stage\StageGoto.cs" />
     <Compile Include="EditorData\Node\Stage\StageGroup.cs" />
     <Compile Include="EditorData\Node\LaserAlikeTypes.cs" />
+    <Compile Include="EditorData\Node\Stage\StageGroupFinish.cs" />
     <Compile Include="EditorData\Node\TaskTypes.cs" />
     <Compile Include="EditorData\Node\TaskAlikeTypes.cs" />
     <Compile Include="EditorData\Node\Task\TaskClear.cs" />

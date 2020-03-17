@@ -546,26 +546,37 @@ namespace LuaSTGEditorSharp.EditorData
             bool firstC = false;
             bool folderFound = false;
             bool equalFound = false;
-            foreach (TreeNode t in children)
+
+            if (GlobalCompileData.SCDebugger != null)
             {
-                if (!t.isBanned)
+                foreach (TreeNode t in GetLogicalChildren())
                 {
-                    if (GlobalCompileData.SCDebugger == t)
+                    if (!t.isBanned)
                     {
                         foreach (var a in t.ToLua(spacing))
                         {
                             yield return a;
                         }
-                        string difficultyS = (NonMacrolize(1) == "All" ? "" : ":" + NonMacrolize(1));
-                        string fullName = "\"" + NonMacrolize(0) + difficultyS + "\"";
-                        yield return "_boss_class_name=" + fullName;
-                        yield return " _editor_class[" + fullName + "].cards={boss.move.New(0,144,60,MOVE_NORMAL),_tmp_sc} ";
+                        if (GlobalCompileData.SCDebugger == t)
+                        {
+                            string difficultyS = (NonMacrolize(1) == "All" ? "" : ":" + NonMacrolize(1));
+                            string fullName = "\"" + NonMacrolize(0) + difficultyS + "\"";
+                            yield return "_boss_class_name=" + fullName;
+                            yield return " _editor_class[" + fullName + "].cards={boss.move.New(0,144,60,MOVE_NORMAL),_tmp_sc} ";
+                        }
+                        t.AddCompileSettings();
                     }
-                    else if (GlobalCompileData.StageDebugger != null)
+                }
+            } 
+            else if (GlobalCompileData.StageDebugger != null)
+            {
+                foreach (TreeNode t in children)
+                {
+                    if (!t.isBanned)
                     {
                         if (childof)
                         {
-                            if(!firstC && folderFound && !equalFound)
+                            if (!firstC && folderFound && !equalFound)
                             {
                                 firstC = true;
                                 yield return "if false then ";
@@ -587,15 +598,22 @@ namespace LuaSTGEditorSharp.EditorData
                         {
                             yield return a;
                         }
+                        t.AddCompileSettings();
                     }
-                    else
+                }
+            }
+            else
+            {
+                foreach (TreeNode t in children)
+                {
+                    if (!t.isBanned)
                     {
                         foreach (var a in t.ToLua(spacing))
                         {
                             yield return a;
                         }
+                        t.AddCompileSettings();
                     }
-                    t.AddCompileSettings();
                 }
             }
         }

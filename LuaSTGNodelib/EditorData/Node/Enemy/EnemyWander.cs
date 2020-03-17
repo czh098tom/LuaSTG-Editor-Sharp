@@ -83,7 +83,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Enemy
             return "Wander in " + NullOrDefault(NonMacrolize(0), "1")
                 + " frame(s), in range (" + NullOrDefault(NonMacrolize(1), "-96,96,112,144")
                 + ") and amplitude (" + NullOrDefault(NonMacrolize(2), "16,32,8,16")
-                + ", " + NullOrDefault(NonMacrolize(4), "MOVE_X_TOWARDS_PLAYER");
+                + "), " + NullOrDefault(NonMacrolize(4), "MOVE_X_TOWARDS_PLAYER");
         }
 
         public override object Clone()

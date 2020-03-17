@@ -34,7 +34,7 @@ namespace LuaSTGEditorSharp.Execution
 
         public abstract void BeforeRun(ExecutionConfig config);
 
-        public virtual void Run(Logger logger)
+        public virtual void Run(Logger logger, Action end)
         {
             if (LSTGInstance == null || LSTGInstance.HasExited)
             {
@@ -74,7 +74,7 @@ namespace LuaSTGEditorSharp.Execution
                             i++;
                         }
                         //logger(sr.ReadToEnd());
-                        //debugOutput.ScrollToEnd();
+                        end();
                     }
                     catch (System.Exception exc)
                     {

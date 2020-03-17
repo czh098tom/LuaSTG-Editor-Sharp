@@ -199,7 +199,7 @@ namespace LuaSTGEditorSharp
         {
             foreach (DocumentData doc in Documents)
             {
-                if (Path.GetFullPath(doc.DocPath) == Path.GetFullPath(path))
+                if (!string.IsNullOrEmpty(doc.DocPath) && Path.GetFullPath(doc.DocPath) == Path.GetFullPath(path))
                 {
                     return true;
                 }
@@ -702,11 +702,8 @@ namespace LuaSTGEditorSharp
             {
                 ModName = process.projName
             });
-            PluginHandler.Plugin.Execution.Run((s) =>
-            {
-                DebugString += s + "\n";
-                App.Current.Dispatcher.Invoke(() => debugOutput.ScrollToEnd());
-            });
+            PluginHandler.Plugin.Execution.Run((s) => DebugString += s + "\n"
+            , () => App.Current.Dispatcher.Invoke(() => debugOutput.ScrollToEnd()));
         }
 
         private void FoldRegion()
