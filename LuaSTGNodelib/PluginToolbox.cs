@@ -99,13 +99,13 @@ namespace LuaSTGEditorSharp
             enemy.Add(new ToolboxItemData("createenemy", "/LuaSTGNodeLib;component/images/enemycreate.png", "Create Enemy")
                 , new AddNode(AddEnemyCreateNode));
             enemy.Add(new ToolboxItemData(true), null);
+            enemy.Add(new ToolboxItemData("enemysimple", "/LuaSTGNodeLib;component/images/enemysimple.png", "Create Simple Enemy with Task")
+                , new AddNode(AddCreateSimpleEnemyNode));
+            enemy.Add(new ToolboxItemData(true), null);
             enemy.Add(new ToolboxItemData("enemycharge", "/LuaSTGNodeLib;component/images/pactrometer.png", "Enemy Charge")
                 , new AddNode(AddEnemyChargeNode));
             enemy.Add(new ToolboxItemData("enemywander", "/LuaSTGNodeLib;component/images/taskbosswander.png", "Enemy Wander")
                 , new AddNode(AddEnemyWanderNode));
-            enemy.Add(new ToolboxItemData(true), null);
-            enemy.Add(new ToolboxItemData("enemysimple", "/LuaSTGNodeLib;component/images/enemysimple.png", "Create Simple Enemy with Task")
-                , new AddNode(AddCreateSimpleEnemyNode));
             #endregion
             ToolInfo.Add("Enemy", enemy);
 
@@ -133,6 +133,8 @@ namespace LuaSTGEditorSharp
                 , new AddNode(AddBossCastNode));
             boss.Add(new ToolboxItemData("bossexplode", "/LuaSTGNodeLib;component/images/bossexplode.png", "Boss Explode")
                 , new AddNode(AddBossExplodeNode));
+            boss.Add(new ToolboxItemData("bossaura", "/LuaSTGNodeLib;component/images/bossshowaura.png", "Boss Aura")
+                , new AddNode(AddBossAuraNode));
             boss.Add(new ToolboxItemData(true), null);
             boss.Add(new ToolboxItemData("defbossbg", "/LuaSTGNodeLib;component/images/bgdefine.png", "Define Boss Background")
                 , new AddNode(AddBossBGDefineNode));
@@ -432,6 +434,11 @@ namespace LuaSTGEditorSharp
             parent.Insert(new CreateEnemy(parent.ActivatedWorkSpaceData));
         }
 
+        private void AddCreateSimpleEnemyNode()
+        {
+            parent.Insert(new CreateSimpleEnemy(parent.ActivatedWorkSpaceData));
+        }
+
         private void AddEnemyChargeNode()
         {
             parent.Insert(new EnemyCharge(parent.ActivatedWorkSpaceData));
@@ -440,11 +447,6 @@ namespace LuaSTGEditorSharp
         private void AddEnemyWanderNode()
         {
             parent.Insert(new EnemyWander(parent.ActivatedWorkSpaceData));
-        }
-
-        private void AddCreateSimpleEnemyNode()
-        {
-            parent.Insert(new CreateSimpleEnemy(parent.ActivatedWorkSpaceData));
         }
         #endregion
         #region boss
@@ -511,6 +513,11 @@ namespace LuaSTGEditorSharp
         private void AddBossExplodeNode()
         {
             parent.Insert(new BossExplode(parent.ActivatedWorkSpaceData));
+        }
+
+        private void AddBossAuraNode()
+        {
+            parent.Insert(new BossAura(parent.ActivatedWorkSpaceData));
         }
 
         private void AddBossBGDefineNode()

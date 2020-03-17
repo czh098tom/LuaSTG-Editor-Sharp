@@ -82,6 +82,7 @@
     <Compile Include="EditorData\Node\Audio\PauseBGM.cs" />
     <Compile Include="EditorData\Node\Audio\ResumeBGM.cs" />
     <Compile Include="EditorData\Node\Audio\StopBGM.cs" />
+    <Compile Include="EditorData\Node\Boss\BossAura.cs" />
     <Compile Include="EditorData\Node\Boss\BossMoveTo.cs" />
     <Compile Include="EditorData\Node\Boss\Dialog.cs" />
     <Compile Include="EditorData\Node\Boss\Sentence.cs" />
