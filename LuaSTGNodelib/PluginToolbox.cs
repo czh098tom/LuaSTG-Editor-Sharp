@@ -76,6 +76,8 @@ namespace LuaSTGEditorSharp
                 , new AddNode(AddTaskCreateNode));
             task.Add(new ToolboxItemData("taskfinish", "/LuaSTGNodeLib;component/images/taskreturn.png", "Finish Task")
                 , new AddNode(AddTaskFinishNode));
+            task.Add(new ToolboxItemData("taskclear", "/LuaSTGNodeLib;component/images/taskclear.png", "Clear Task")
+                , new AddNode(AddTaskClearNode));
             task.Add(new ToolboxItemData(true), null);
             task.Add(new ToolboxItemData("wait", "/LuaSTGNodeLib;component/images/taskwait.png", "Wait")
                 , new AddNode(AddTaskWaitNode));
@@ -400,6 +402,11 @@ namespace LuaSTGEditorSharp
         private void AddTaskFinishNode()
         {
             parent.Insert(new TaskFinish(parent.ActivatedWorkSpaceData));
+        }
+
+        private void AddTaskClearNode()
+        {
+            parent.Insert(new TaskClear(parent.ActivatedWorkSpaceData));
         }
 
         private void AddTaskWaitNode()

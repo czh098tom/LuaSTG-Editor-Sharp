@@ -20,6 +20,7 @@ Data
 	PositionAssignment
 Task
 	TaskFinish
+	TaskClear (by Kasa)
 Stage
 	StageGoto (by Airo)
 	StageGroupFinish (by Airo)

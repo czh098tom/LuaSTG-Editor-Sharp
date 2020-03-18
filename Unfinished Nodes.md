@@ -16,7 +16,7 @@ Names below are desired class names for the unfinished nodes.
 "--" means a group separation.
 
 ## General
-	AddFile
+	Finished.
 
 ## Data
 	Finished.
@@ -25,8 +25,6 @@ Names below are desired class names for the unfinished nodes.
     Finished.
 
 ## Task
-	ClearTasks
-	--
 	MoveToCurve &
 	MoveByCurve &
 
