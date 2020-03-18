@@ -49,10 +49,7 @@ Names below are desired class names for the unfinished nodes.
 	Finished.
 
 ## Object (Merged Old "Unit")
-	ObjectChangeImage
-	--
-	PreserveUnit
-	CreateSmear (From old "Effect")
+    Finished.
 
 ## Graphics
 	LoadParticle *
