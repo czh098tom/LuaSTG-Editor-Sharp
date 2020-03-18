@@ -877,7 +877,7 @@
                     <RowDefinition Height="1.2*" MinHeight="50"/>
                 </Grid.RowDefinitions>
                 <TabControl Grid.Row="2" Margin="0.6,4,9.6,10">
-                    <TabItem Header="Message">
+                    <TabItem x:Name="tabMessage" Header="Message">
                         <DataGrid x:Name="EditorConsole" VerticalScrollBarVisibility="Visible" AutoGenerateColumns="False"
                               IsReadOnly="True" CanUserAddRows="False" Style="{StaticResource ResourceKey=DataGridStyle}">
                             <DataGrid.Columns>

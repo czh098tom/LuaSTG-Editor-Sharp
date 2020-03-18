@@ -475,11 +475,24 @@ namespace LuaSTGEditorSharp
             node.IsSelected = true;
         }
 
+        private bool TestError()
+        {
+            if (!MessageContainer.IsNoError())
+            {
+                tabMessage.IsSelected = true;
+                MessageBox.Show("Errors are found in the editor. The project cannot be compiled if any error is present."
+                    , "LuaSTG Editor Sharp", MessageBoxButton.OK, MessageBoxImage.Error);
+                return true;
+            }
+            return false;
+        }
+
         private void ViewCode()
         {
             try
             {
                 propData.CommitEdit();
+                if (TestError()) return;
                 ActivatedWorkSpaceData.GatherCompileInfo(App.Current as App);
                 var w = new CodePreviewWindow(string.Concat(selectedNode.ToLua(0)));
                 w.ShowDialog();
@@ -520,6 +533,7 @@ namespace LuaSTGEditorSharp
             try
             {
                 propData.CommitEdit();
+                if (TestError()) return;
                 var saveFileDialog = new System.Windows.Forms.SaveFileDialog()
                 {
                     InitialDirectory = (App.Current as App).SLDir,
@@ -540,6 +554,7 @@ namespace LuaSTGEditorSharp
             {
                 bool saveMeta=false;
                 propData.CommitEdit();
+                if (TestError()) return;
                 GlobalCompileData.SCDebugger = SCDebugger;
                 GlobalCompileData.StageDebugger = StageDebugger;
 

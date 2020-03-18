@@ -29,5 +29,14 @@ namespace LuaSTGEditorSharp.EditorData
                 Messages.Add(mb);
             }
         }
+
+        public static bool IsNoError()
+        {
+            foreach(MessageBase mb in Messages)
+            {
+                if (mb.WarningLevel < 1) return false;
+            }
+            return true;
+        }
     }
 }

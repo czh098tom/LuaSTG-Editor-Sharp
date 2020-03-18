@@ -567,7 +567,7 @@ namespace LuaSTGEditorSharp.EditorData
                         t.AddCompileSettings();
                     }
                 }
-            } 
+            }
             else if (GlobalCompileData.StageDebugger != null)
             {
                 foreach (TreeNode t in children)
@@ -880,7 +880,7 @@ namespace LuaSTGEditorSharp.EditorData
                 return true;
             }
             if (PluginHandler.Plugin.NodeTypeCache.NodeTypeInfo[GetType()].leaf) return false;
-            var e = this != originalParent 
+            var e = this != originalParent
                 ? this.GetLogicalChildren().Concat(originalParent.GetLogicalChildren()).Distinct()
                 : GetLogicalChildren();
             if (PluginHandler.Plugin.NodeTypeCache.NodeTypeInfo[toV.GetType()].uniqueness)
@@ -1458,11 +1458,13 @@ namespace LuaSTGEditorSharp.EditorData
         {
             if (GetType() != typeof(UnidentifiedNode))
             {
-                return Macrolize(attributes[i]);
+                if (i < attributes.Count) return Macrolize(attributes[i]);
+                return "";
             }
             else
             {
-                return Macrolize(attributes[i + 1]);
+                if (i + 1 < attributes.Count) return Macrolize(attributes[i + 1]);
+                return "";
             }
         }
 
@@ -1488,11 +1490,13 @@ namespace LuaSTGEditorSharp.EditorData
         {
             if (GetType() != typeof(UnidentifiedNode))
             {
-                return NonMacrolize(attributes[i]);
+                if (i < attributes.Count) return NonMacrolize(attributes[i]);
+                return "";
             }
             else
             {
-                return NonMacrolize(attributes[i + 1]);
+                if (i + 1 < attributes.Count) return NonMacrolize(attributes[i + 1]);
+                return "";
             }
         }
 
@@ -1698,9 +1702,9 @@ namespace LuaSTGEditorSharp.EditorData
         /// <returns>A bool value, true for can.</returns>
         public bool CanLogicallyDelete()
         {
-            if(this is Folder)
+            if (this is Folder)
             {
-                foreach(TreeNode t in GetLogicalChildren())
+                foreach (TreeNode t in GetLogicalChildren())
                 {
                     if (!t.CanDelete) return false;
                 }
@@ -1738,7 +1742,7 @@ namespace LuaSTGEditorSharp.EditorData
         public void ClearChildSelection()
         {
             this.isSelected = false;
-            foreach(TreeNode t in children)
+            foreach (TreeNode t in children)
             {
                 t.ClearChildSelection();
             }
@@ -1762,14 +1766,14 @@ namespace LuaSTGEditorSharp.EditorData
                             .GetCustomAttributes(false)
                             .Count((j) => j is Node.NodeAttributes.NodeAttributeAttribute) > 0
                     );
-                foreach(var i in infos)
+                foreach (var i in infos)
                 {
                     var attr = i.GetCustomAttributes(false).First(o => o is Node.NodeAttributes.NodeAttributeAttribute)
                         as Node.NodeAttributes.NodeAttributeAttribute;
                     string s = i.GetGetMethod().Invoke(this, null) as string;
                     i.SetValue(this, s ?? attr.Default, null);
                 }
-                foreach(var i in usedAttributes)
+                foreach (var i in usedAttributes)
                 {
                     attributes.Remove(i);
                 }
