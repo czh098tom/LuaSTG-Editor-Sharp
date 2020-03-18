@@ -150,6 +150,7 @@
     <Compile Include="EditorData\Node\Object\CreateObject.cs" />
     <Compile Include="EditorData\Node\Object\DropItem.cs" />
     <Compile Include="EditorData\Node\Object\GroupForEach.cs" />
+    <Compile Include="EditorData\Node\Object\MakeSmear.cs" />
     <Compile Include="EditorData\Node\Object\ObjectDefine.cs" />
     <Compile Include="EditorData\Node\Object\ObjectInit.cs" />
     <Compile Include="EditorData\Node\Object\CallBackFunc.cs" />
@@ -160,6 +161,7 @@
     <Compile Include="EditorData\Node\Object\SetBlend.cs" />
     <Compile Include="EditorData\Node\Object\SetGravity.cs" />
     <Compile Include="EditorData\Node\Object\SetBinding.cs" />
+    <Compile Include="EditorData\Node\Object\SetObjectImage.cs" />
     <Compile Include="EditorData\Node\Object\SetRelativePosition.cs" />
     <Compile Include="EditorData\Node\Object\SetVelocityLimit.cs" />
     <Compile Include="EditorData\Node\Object\SetVelocity.cs" />

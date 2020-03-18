@@ -35,6 +35,8 @@ Boss
 Object
 	GroupForEach
 	DropItem (by Airo)
+	MakeSmear (by Airo)
+	SetObjectImage (by Airo)
 Graphics
 	LoadAnimation
 	LoadFX

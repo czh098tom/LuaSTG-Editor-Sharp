@@ -218,6 +218,9 @@ namespace LuaSTGEditorSharp
             obj.Add(new ToolboxItemData("kill", "/LuaSTGNodeLib;component/images/unitkill.png", "Kill Unit")
                 , new AddNode(AddKillNode));
             obj.Add(new ToolboxItemData(true), null);
+            obj.Add(new ToolboxItemData("setimage", "/LuaSTGNodeLib;component/images/objectsetimg.png", "Set Image")
+                , new AddNode(AddSetObjectImageNode));
+            obj.Add(new ToolboxItemData(true), null);
             obj.Add(new ToolboxItemData("setblend", "/LuaSTGNodeLib;component/images/setcolor.png", "Set Color and Blend Mode")
                 , new AddNode(AddSetBlendNode));
             obj.Add(new ToolboxItemData(true), null);
@@ -225,6 +228,9 @@ namespace LuaSTGEditorSharp
                 , new AddNode(AddSetBindingNode));
             obj.Add(new ToolboxItemData("setrelativepos", "/LuaSTGNodeLib;component/images/setrelpos.png", "Set Relative Position")
                 , new AddNode(AddSetRelativePositionNode));
+            obj.Add(new ToolboxItemData(true), null);
+            obj.Add(new ToolboxItemData("smear", "/LuaSTGNodeLib;component/images/smear.png", "Create Smear")
+                , new AddNode(AddMakeSmearNode));
             obj.Add(new ToolboxItemData(true), null);
             obj.Add(new ToolboxItemData("dropitem", "/LuaSTGNodeLib;component/images/dropitem.png", "Drop Item")
                 , new AddNode(AddDropItemNode));
@@ -689,6 +695,11 @@ namespace LuaSTGEditorSharp
             parent.Insert(new Kill(parent.ActivatedWorkSpaceData));
         }
 
+        private void AddSetObjectImageNode()
+        {
+            parent.Insert(new SetObjectImage(parent.ActivatedWorkSpaceData));
+        }
+
         private void AddSetBlendNode()
         {
             parent.Insert(new SetBlend(parent.ActivatedWorkSpaceData));
@@ -707,6 +718,11 @@ namespace LuaSTGEditorSharp
         private void AddDropItemNode()
         {
             parent.Insert(new DropItem(parent.ActivatedWorkSpaceData));
+        }
+
+        private void AddMakeSmearNode()
+        {
+            parent.Insert(new MakeSmear(parent.ActivatedWorkSpaceData));
         }
 
         private void AddGroupForEachNode()
