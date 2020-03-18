@@ -132,6 +132,7 @@
     <Compile Include="EditorData\Node\Advanced\AdvancedRepeat\VariableTransformation.cs" />
     <Compile Include="EditorData\Node\Advanced\AdvancedRepeat\LinearVariable.cs" />
     <Compile Include="EditorData\Node\Advanced\AdvancedRepeat\VariableCollection.cs" />
+    <Compile Include="EditorData\Node\General\AddFile.cs" />
     <Compile Include="EditorData\Node\General\CodeBlock.cs" />
     <Compile Include="EditorData\Node\General\IfElseIf.cs" />
     <Compile Include="EditorData\Node\IIfChild.cs" />
@@ -285,6 +286,9 @@
     <Compile Include="Windows\Input\NodeDefInput.xaml.cs">
       <DependentUpon>NodeDefInput.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\Input\PathInput.xaml.cs">
+      <DependentUpon>PathInput.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\Input\Selector.xaml.cs">
       <DependentUpon>Selector.xaml</DependentUpon>
     </Compile>
@@ -343,6 +347,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Windows\Input\NodeDefInput.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\Input\PathInput.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -410,6 +418,7 @@
     <Resource Include="images\viewcode.png" />
     <Resource Include="images\SinusoidalMovementVariable.png" />
     <Resource Include="images\16x16\SinusoidalMovementVariable.png" />
+    <Resource Include="images\16x16\pack.png" />
     <Content Include="Templates\Empty Project.lstgproj">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

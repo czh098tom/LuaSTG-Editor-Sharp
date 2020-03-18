@@ -6,6 +6,7 @@
 Editor层：
 General
 	CodeBlock
+	AddFile (by Airo)
 Advanced
 	AdvancedRepeat
 	LinearVariable

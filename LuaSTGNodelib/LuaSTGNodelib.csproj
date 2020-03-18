@@ -249,9 +249,6 @@
       <DependentUpon>ImageInput.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\Input\InputWindowSelectorRegister.cs" />
-    <Compile Include="Windows\Input\PathInput.xaml.cs">
-      <DependentUpon>PathInput.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Windows\Input\SizeInput.xaml.cs">
       <DependentUpon>SizeInput.xaml</DependentUpon>
     </Compile>
@@ -337,10 +334,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Windows\Input\ImageInput.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Windows\Input\PathInput.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

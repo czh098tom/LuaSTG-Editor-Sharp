@@ -132,6 +132,7 @@ namespace LuaSTGEditorSharp.Windows.Input
             target.Add("seFile", (src, tar) => new PathInput(tar, "Sound Effect File (*.wav;*.ogg)|*.wav;*.ogg", src));
             target.Add("luaFile", (src, tar) => new PathInput(tar, "Lua File (*.lua)|*.lua", src));
             target.Add("lstgesFile", (src, tar) => new PathInput(tar, "LuaSTG Sharp File (*.lstges)|*.lstges", src));
+            target.Add("plainFile", (src, tar) => new PathInput(tar, "File (*.*)|*.*", src));
             target.Add("SCName", (src, tar) => new Selector(tar
                 , InputWindowSelector.SelectComboBox("SCName"), "Input Spell Card Name"));
             target.Add("blend", (src, tar) => new Selector(tar

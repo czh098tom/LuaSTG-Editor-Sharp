@@ -55,6 +55,7 @@ namespace LuaSTGEditorSharp.Plugin
             gen.Add(new ToolboxItemData("codeblock", "images/codeblock.png", "Code Block"), new AddNode(AddCodeBlockNode));
             gen.Add(new ToolboxItemData(true), null);
             gen.Add(new ToolboxItemData("patch", "images/patch.png", "Patch"), new AddNode(AddPatchNode));
+            gen.Add(new ToolboxItemData("file", "images/pack.png", "Add File"), new AddNode(AddAddFileNode));
             #endregion
             gen.Add(new ToolboxItemData(true), null);
             #region advanced
@@ -177,6 +178,11 @@ namespace LuaSTGEditorSharp.Plugin
         private void AddPatchNode()
         {
             parent.Insert(new Patch(parent.ActivatedWorkSpaceData));
+        }
+
+        private void AddAddFileNode()
+        {
+            parent.Insert(new AddFile(parent.ActivatedWorkSpaceData));
         }
 
         private void AddCodeBlockNode()

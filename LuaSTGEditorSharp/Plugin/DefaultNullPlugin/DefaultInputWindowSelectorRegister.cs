@@ -25,6 +25,7 @@ namespace LuaSTGEditorSharp.Plugin.DefaultNullPlugin
                 , InputWindowSelector.SelectComboBox("sineinterpolation"), "Input Sine Interpolation Mode"));
             target.Add("code", (source, toEdit) => new CodeInput(toEdit));
             target.Add("userDefinedNode", (source, toEdit) => new NodeDefInput(toEdit, source));
+            target.Add("plainFile", (src, tar) => new PathInput(tar, "File (*.*)|*.*", src));
         }
     }
 }

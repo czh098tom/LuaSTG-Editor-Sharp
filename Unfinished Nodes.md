@@ -27,12 +27,8 @@ Names below are desired class names for the unfinished nodes.
 ## Task
 	ClearTasks
 	--
-	MoveToBezier &
-	MoveByBezier &
-	MoveToCR &
-	MoveByCR &
-	MoveToBasis2 &
-	MoveByBasis2 &
+	MoveToCurve &
+	MoveByCurve &
 
 ## Enemy
 	Finished.
