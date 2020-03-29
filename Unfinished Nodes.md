@@ -45,8 +45,7 @@ Names below are desired class names for the unfinished nodes.
     Finished.
 
 ## Graphics
-	LoadParticle *
-	LoadTexture *
+    Finished.
 
 ## Audio
 	Finished.
