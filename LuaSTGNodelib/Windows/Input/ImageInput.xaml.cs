@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
+using System.Windows.Resources;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -27,6 +27,8 @@ namespace LuaSTGEditorSharp.Windows.Input
         public ObservableCollection<MetaModel> ImageInfo { get => imageInfo; }
         public ObservableCollection<MetaModel> imageGroupInfo;
         public ObservableCollection<MetaModel> ImageGroupInfo { get => imageGroupInfo; }
+        public ObservableCollection<MetaModel> particleInfo;
+        public ObservableCollection<MetaModel> ParticleInfo { get => particleInfo; }
         public ObservableCollection<MetaModel> animationInfo;
         public ObservableCollection<MetaModel> AnimationInfo { get => animationInfo; }
 
@@ -34,12 +36,18 @@ namespace LuaSTGEditorSharp.Windows.Input
         public ObservableCollection<MetaModel> ImageInfoSys { get => imageInfoSys; }
         public ObservableCollection<MetaModel> imageGroupInfoSys;
         public ObservableCollection<MetaModel> ImageGroupInfoSys { get => imageGroupInfoSys; }
+        public ObservableCollection<MetaModel> particleInfoSys;
+        public ObservableCollection<MetaModel> ParticleInfoSys { get => particleInfoSys; }
         public ObservableCollection<MetaModel> animationInfoSys;
         public ObservableCollection<MetaModel> AnimationInfoSys { get => animationInfoSys; }
 
         int cols = 1, rows = 1;
 
         DrawingVisual hint;
+
+        private struct HGEParticleInformation
+        {
+        }
 
         public override string Result
         {
@@ -73,6 +81,7 @@ namespace LuaSTGEditorSharp.Windows.Input
         {
             imageInfo = item.Parent.parentWorkSpace.Meta.aggregatableMetas[(int)MetaType.ImageLoad].GetAllSimpleWithDifficulty();
             imageGroupInfo = item.Parent.parentWorkSpace.Meta.aggregatableMetas[(int)MetaType.ImageGroupLoad].GetAllSimpleWithDifficulty();
+            particleInfo = item.Parent.parentWorkSpace.Meta.aggregatableMetas[(int)MetaType.ParticleLoad].GetAllSimpleWithDifficulty();
             animationInfo = item.Parent.parentWorkSpace.Meta.aggregatableMetas[(int)MetaType.AnimationLoad].GetAllSimpleWithDifficulty();
 
             AddInternalMetas();
@@ -83,6 +92,7 @@ namespace LuaSTGEditorSharp.Windows.Input
             //BoxImageGroupData.ItemsSource = ImageGroupInfo;
 
             tabAnimation.Visibility = (imageClassType & ImageClassType.Animation) != 0 ? Visibility.Visible : Visibility.Collapsed;
+            tabParticle.Visibility = (imageClassType & ImageClassType.Particle) != 0 ? Visibility.Visible : Visibility.Collapsed;
 
             Result = s;
             codeText.Text = Result;
@@ -95,6 +105,49 @@ namespace LuaSTGEditorSharp.Windows.Input
             imageGroupInfoSys = new ObservableCollection<MetaModel>(PluginEntry.SysImageGroup);
 
             animationInfoSys = new ObservableCollection<MetaModel>();
+        }
+
+        private IEnumerable<MetaModel> EnumerateImageInfo()
+        {
+            foreach (MetaModel mm in imageInfo) yield return mm;
+            foreach (MetaModel mm in imageInfoSys) yield return mm;
+        }
+
+        private IEnumerable<MetaModel> EnumerateImageGroupInfo()
+        {
+            foreach (MetaModel mm in imageGroupInfo) yield return mm;
+            foreach (MetaModel mm in imageGroupInfoSys) yield return mm;
+        }
+
+        private ImageSource GetImage(string s)
+        {
+            char[] trimarr = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '"' };
+            foreach (MetaModel mm in EnumerateImageInfo())
+            {
+                if (mm.Result == s) try { return new BitmapImage(new Uri(mm.ExInfo1)); } catch { }
+            }
+            foreach (MetaModel mm in EnumerateImageGroupInfo())
+            {
+                if (mm.Result.Trim('"') == s.Trim(trimarr))
+                {
+                    try
+                    {
+                        string data = s.Remove(0, mm.Result.Length - 1).Trim('"');
+                        int id = int.Parse(data);
+                        id--;
+                        string[] colrow = mm.ExInfo2.Split(',');
+                        int cols = 1, rows = 1;
+                        if (colrow != null && colrow.Length > 1)
+                        {
+                            if (int.TryParse(colrow[0], out int colsX) && colsX > 0) cols = colsX;
+                            if (int.TryParse(colrow[1], out int rowsX) && rowsX > 0) rows = rowsX;
+                        }
+                        return Util.BitmapUtil.CutImageByXY(new BitmapImage(new Uri(mm.ExInfo1)), id % cols, id / cols, cols, rows);
+                    }
+                    catch { }
+                }
+            }
+            return null;
         }
 
         private void ButtonOK_Click(object sender, RoutedEventArgs e)
@@ -139,6 +192,11 @@ namespace LuaSTGEditorSharp.Windows.Input
             RefreshAsImageGroup();
         }
 
+        private void BoxParticleData_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            RefreshAsParticle();
+        }
+
         private void RefreshAsImage()
         {
             MetaModel m = (BoxImageData.SelectedItem as MetaModel);
@@ -172,6 +230,48 @@ namespace LuaSTGEditorSharp.Windows.Input
             catch { }
             SelectedIndex = 1;
             SplitGrid.RemoveVisual(hint);
+            codeText.Focus();
+        }
+
+        private void RefreshAsParticle()
+        {
+            MetaModel m = (BoxParticleData.SelectedItem as MetaModel);
+            if (m != null)
+            {
+                if (!string.IsNullOrEmpty(m?.Result)) Result = m?.Result;
+                try
+                {
+                    string s = m?.ExInfo2;
+                    if (!string.IsNullOrEmpty(s))
+                    {
+                        ParticleExample.Source = GetImage(s);
+                    }
+                }
+                catch { }
+
+                BinaryReader sr = null;
+                try
+                {
+                    Uri uri = new Uri(m?.ExInfo1);
+                    if (uri.Scheme == "file")
+                    {
+                        sr = new BinaryReader(new FileStream(m?.ExInfo1, FileMode.Open));
+                    }
+                    else
+                    {
+                        StreamResourceInfo info = Application.GetResourceStream(uri);
+                        sr = new BinaryReader(info.Stream);
+                    }
+                    StringBuilder sb = new StringBuilder();
+                    ReadHGEFormat(sr, sb);
+                    txtParticle.Text = sb.ToString();
+                }
+                finally
+                {
+                    if (sr != null) sr.Close();
+                }
+            }
+
             codeText.Focus();
         }
 
@@ -295,10 +395,86 @@ namespace LuaSTGEditorSharp.Windows.Input
             {
                 RefreshAsImageGroup();
             }
+            else if (tabControl.SelectedIndex == 2)
+            {
+                RefreshAsParticle();
+            }
             else
             {
                 RefreshAsAnimation();
             }
+        }
+
+        private static void ReadHGEFormat(BinaryReader sr, StringBuilder sb)
+        {
+            sb.Append("Default index: ");
+            sb.Append(sr.ReadByte());
+            sr.ReadByte();
+            sb.Append("\nBlend mode: ");
+            sb.Append(sr.ReadByte());
+            sr.ReadByte();
+            sb.Append("\nEmission: ");
+            sb.Append(sr.ReadInt32());
+            sb.Append(" p/sec\nSystem life time: ");
+            float f = sr.ReadSingle();
+            sb.Append(f == -1 ? "infinite" : f.ToString());
+            sb.Append(" sec\n\nParticle life time: ");
+            sb.Append(sr.ReadSingle());
+            sb.Append(" ~ ");
+            sb.Append(sr.ReadSingle());
+            sb.Append(" sec\n\nDirection: ");
+            sb.Append(sr.ReadSingle());
+            sb.Append(" deg\nSpread: ");
+            sb.Append(sr.ReadSingle());
+            sb.Append(" deg\nIs relative: ");
+            sb.Append(sr.ReadBoolean());
+            sr.ReadByte();
+            sr.ReadByte();
+            sr.ReadByte();
+            sb.Append("\n\nSpeed Range: ");
+            sb.Append(sr.ReadSingle());
+            sb.Append(" ~ ");
+            sb.Append(sr.ReadSingle());
+            sb.Append("\nGravity Range: ");
+            sb.Append(sr.ReadSingle());
+            sb.Append(" ~ ");
+            sb.Append(sr.ReadSingle());
+            sb.Append("\nRadial Acceleration Range: ");
+            sb.Append(sr.ReadSingle());
+            sb.Append(" ~ ");
+            sb.Append(sr.ReadSingle());
+            sb.Append("\nTangential Acceleration Range: ");
+            sb.Append(sr.ReadSingle());
+            sb.Append(" ~ ");
+            sb.Append(sr.ReadSingle());
+            sb.Append("\n\nSize: ");
+            sb.Append(sr.ReadSingle());
+            sb.Append(" -> ");
+            sb.Append(sr.ReadSingle());
+            sb.Append(" variation: ");
+            sb.Append(sr.ReadSingle());
+            sb.Append("\nSpin: ");
+            sb.Append(sr.ReadSingle());
+            sb.Append(" -> ");
+            sb.Append(sr.ReadSingle());
+            sb.Append(" variation: ");
+            sb.Append(sr.ReadSingle());
+            sb.Append("\nColor: ");
+            sb.Append(Convert.ToInt32(sr.ReadSingle() * 255));
+            sb.Append(" ");
+            sb.Append(Convert.ToInt32(sr.ReadSingle() * 255));
+            sb.Append(" ");
+            sb.Append(Convert.ToInt32(sr.ReadSingle() * 255));
+            sb.Append(" -> ");
+            sb.Append(Convert.ToInt32(sr.ReadSingle() * 255));
+            sb.Append(" ");
+            sb.Append(Convert.ToInt32(sr.ReadSingle() * 255));
+            sb.Append(" ");
+            sb.Append(Convert.ToInt32(sr.ReadSingle() * 255));
+            sb.Append("\ncolor variation: ");
+            sb.Append(sr.ReadSingle());
+            sb.Append("\nalpha variation: ");
+            sb.Append(sr.ReadSingle());
         }
     }
 }

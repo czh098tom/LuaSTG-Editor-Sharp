@@ -273,6 +273,7 @@
     <Compile Include="Toolbox\ToolboxItemData.cs" />
     <Compile Include="Toolbox\ToolboxTab.cs" />
     <Compile Include="Toolbox\ToolboxTemplateSelector.cs" />
+    <Compile Include="Util\BitmapUtil.cs" />
     <Compile Include="Util\DictionaryExtension.cs" />
     <Compile Include="Window1.xaml.cs">
       <DependentUpon>Window1.xaml</DependentUpon>

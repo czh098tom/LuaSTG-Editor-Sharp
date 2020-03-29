@@ -130,6 +130,7 @@ namespace LuaSTGEditorSharp.Windows.Input
             target.Add("pointSet", (src, tar) => new PointSetInput(tar));
             target.Add("target", (src, tar) => new Selector(tar, InputWindowSelector.SelectComboBox("target"), "Input Target Object"));
             target.Add("imageFile", (src, tar) => new PathInput(tar, "Image File (*.png;*.jpg;*.bmp)|*.png;*.jpg;*.bmp", src));
+            target.Add("particleFile", (src, tar) => new PathInput(tar, "HGE Particle File (*.psi)|*.psi", src));
             target.Add("fxFile", (src, tar) => new PathInput(tar, "Shader File (*.fx)|*.fx", src));
             target.Add("audioFile", (src, tar) => new PathInput(tar, "Audio File (*.wav;*.ogg)|*.wav;*.ogg", src));
             target.Add("seFile", (src, tar) => new PathInput(tar, "Sound Effect File (*.wav;*.ogg)|*.wav;*.ogg", src));
@@ -175,7 +176,7 @@ namespace LuaSTGEditorSharp.Windows.Input
             target.Add("enemyDef", (src, tar) => new EditorObjDefInput(tar, MetaType.Enemy, src));
             target.Add("taskDef", (src, tar) => new EditorObjDefInput(tar, MetaType.Task, src));
             target.Add("bossDef", (src, tar) => new EditorObjDefInput(tar, MetaType.Boss, src));
-            target.Add("objimage", (src, tar) => new ImageInput(tar, src, ImageClassType.Animation));
+            target.Add("objimage", (src, tar) => new ImageInput(tar, src, ImageClassType.Animation | ImageClassType.Particle));
             target.Add("image", (src, tar) => new ImageInput(tar, src));
             target.Add("BGM", (src, tar) => new BGMInput(tar, src));
             target.Add("se", (src, tar) => new SEInput(tar, src));

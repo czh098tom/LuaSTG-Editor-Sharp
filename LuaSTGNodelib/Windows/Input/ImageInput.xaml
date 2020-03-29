@@ -197,6 +197,55 @@
                         </DockPanel>
                     </Grid>
                 </TabItem>
+                <TabItem Name="tabParticle" Header="Particle">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="2*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="5*"/>
+                        </Grid.RowDefinitions>
+                        <ListBox x:Name="BoxParticleData" Grid.Column="0" Grid.RowSpan="2" 
+                                 SelectionChanged="BoxParticleData_SelectionChanged">
+                            <ListBox.Resources>
+                                <CollectionViewSource x:Key="ParticleInfoSys" Source="{Binding ParticleInfoSys, ElementName=inputWindow}"/>
+                                <CollectionViewSource x:Key="ParticleInfo" Source="{Binding ParticleInfo, ElementName=inputWindow}"/>
+                            </ListBox.Resources>
+                            <ListBox.ItemsSource>
+                                <CompositeCollection>
+                                    <CollectionContainer Collection="{Binding Source={StaticResource ParticleInfoSys}}"/>
+                                    <CollectionContainer Collection="{Binding Source={StaticResource ParticleInfo}}"/>
+                                </CompositeCollection>
+                            </ListBox.ItemsSource>
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image VerticalAlignment="Center" Source="{Binding Icon}"
+                                                Stretch="UniformToFill" Width="16" Height="16" Margin="0,0,2,2"/>
+                                        <TextBlock VerticalAlignment="Center" Text="{Binding Text}"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                        <DockPanel Grid.Column="1" Grid.Row="0">
+                            <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                                <Grid>
+                                    <Canvas Height="{Binding ActualHeight, ElementName=ParticleExample}"
+                                            Width="{Binding ActualWidth, ElementName=ParticleExample}" 
+                                            HorizontalAlignment="Center" VerticalAlignment="Center"
+                                            Background="{Binding SelectedItem.Tag, ElementName=comboPicBG}"/>
+                                    <Image x:Name="ParticleExample"
+                                           HorizontalAlignment="Center" VerticalAlignment="Center"
+                                           Stretch="{Binding Text, ElementName=comboPicStrech, 
+                                                     Converter={StaticResource StrToPicStrechConverter}}" />
+                                </Grid>
+                            </ScrollViewer>
+                        </DockPanel>
+                        <TextBox Grid.Column="1" Grid.Row="1" x:Name="txtParticle" IsReadOnly="True"/>
+                    </Grid>
+                </TabItem>
                 <TabItem Name="tabAnimation" Header="Animation" Visibility="Collapsed">
                     <Grid>
                         <Grid.ColumnDefinitions>

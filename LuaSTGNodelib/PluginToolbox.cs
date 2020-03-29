@@ -252,6 +252,8 @@ namespace LuaSTGEditorSharp
                 , new AddNode(AddLoadImageNode));
             graphics.Add(new ToolboxItemData("loadimagegroup", "/LuaSTGNodeLib;component/images/loadimagegroup.png", "Load Image Group")
                 , new AddNode(AddLoadImageGroupNode));
+            graphics.Add(new ToolboxItemData("loadparticle", "/LuaSTGNodeLib;component/images/loadparticle.png", "Load Particle")
+                , new AddNode(AddLoadParticleNode));
             graphics.Add(new ToolboxItemData("loadani", "/LuaSTGNodeLib;component/images/loadani.png", "Load Animation")
                 , new AddNode(AddLoadAnimationNode));
             graphics.Add(new ToolboxItemData("loadfx", "/LuaSTGNodeLib;component/images/loadFX.png", "Load FX")
@@ -760,6 +762,11 @@ namespace LuaSTGEditorSharp
         private void AddLoadImageGroupNode()
         {
             parent.Insert(new LoadImageGroup(parent.ActivatedWorkSpaceData));
+        }
+
+        private void AddLoadParticleNode()
+        {
+            parent.Insert(new LoadParticle(parent.ActivatedWorkSpaceData));
         }
 
         private void AddLoadAnimationNode()

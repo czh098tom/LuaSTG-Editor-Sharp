@@ -67,6 +67,7 @@
     <Compile Include="EditorData\Document\Meta\BentLaserDefineMetaInfo.cs" />
     <Compile Include="EditorData\Document\Meta\EnemyDefineMetaInfo.cs" />
     <Compile Include="EditorData\Document\Meta\AnimationLoadMetaInfo.cs" />
+    <Compile Include="EditorData\Document\Meta\ParticleLoadMetaInfo.cs" />
     <Compile Include="EditorData\Document\Meta\FXLoadMetaInfo.cs" />
     <Compile Include="EditorData\Document\Meta\SELoadMetaInfo.cs" />
     <Compile Include="EditorData\Document\Meta\BGMLoadMetaInfo.cs" />
@@ -95,6 +96,7 @@
     <Compile Include="EditorData\Node\Enemy\EnemyWander.cs" />
     <Compile Include="EditorData\Node\Graphics\LoadAnimation.cs" />
     <Compile Include="EditorData\Node\Graphics\LoadFX.cs" />
+    <Compile Include="EditorData\Node\Graphics\LoadParticle.cs" />
     <Compile Include="EditorData\Node\ICallBackFunc.cs" />
     <Compile Include="EditorData\Message\ArgCountInfo.cs" />
     <Compile Include="EditorData\Message\CannotFindAncestorTypeOf.cs" />

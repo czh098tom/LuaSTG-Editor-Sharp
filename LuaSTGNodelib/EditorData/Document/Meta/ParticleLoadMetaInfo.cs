@@ -9,7 +9,7 @@ using LuaSTGEditorSharp.Windows;
 
 namespace LuaSTGEditorSharp.EditorData.Document.Meta
 {
-    public class FXLoadMetaInfo : MetaInfo, IComparable<FXLoadMetaInfo>
+    public class ParticleLoadMetaInfo : MetaInfo, IComparable<ParticleLoadMetaInfo>
     {
         public override string Name
         {
@@ -20,7 +20,7 @@ namespace LuaSTGEditorSharp.EditorData.Document.Meta
 
         public override string FullName
         {
-            get => "fx:" + Name;
+            get => "particle:" + Name;
         }
 
         public string Path
@@ -30,35 +30,35 @@ namespace LuaSTGEditorSharp.EditorData.Document.Meta
 
         public override string ScrString => Name;
 
-        public FXLoadMetaInfo(LoadFX target) : base(target) { }
+        public ParticleLoadMetaInfo(LoadParticle target) : base(target) { }
 
         public override void Create(IAggregatableMeta meta, MetaDataEntity documentMetaData)
         {
-            documentMetaData.aggregatableMetas[(int)MetaType.FXLoad].Add(meta);
+            documentMetaData.aggregatableMetas[(int)MetaType.ParticleLoad].Add(meta);
         }
 
         public override void Remove(IAggregatableMeta meta, MetaDataEntity documentMetaData)
         {
-            documentMetaData.aggregatableMetas[(int)MetaType.FXLoad].Remove(meta);
+            documentMetaData.aggregatableMetas[(int)MetaType.ParticleLoad].Remove(meta);
         }
 
         public override MetaModel GetFullMetaModel()
         {
             MetaModel metaModel = new MetaModel
             {
-                Icon = "/LuaSTGNodeLib;component/images/16x16/loadFX.png",
+                Icon = "/LuaSTGNodeLib;component/images/16x16/loadparticle.png",
                 Text = Name
             };
             MetaModel path = new MetaModel
             {
-                Icon = "/LuaSTGNodeLib;component/images/16x16/loadFX.png",
+                Icon = "/LuaSTGNodeLib;component/images/16x16/loadparticle.png",
                 Text = target.attributes[0].AttrInput
             };
             metaModel.Children.Add(path);
             return metaModel;
         }
 
-        public int CompareTo(FXLoadMetaInfo other)
+        public int CompareTo(ParticleLoadMetaInfo other)
         {
             return Name.CompareTo(other.Name);
         }
@@ -88,8 +88,9 @@ namespace LuaSTGEditorSharp.EditorData.Document.Meta
                 Result = "\"" + FullName + "\"",
                 Text = FullName,
                 FullName = FullName,
-                Icon = "/LuaSTGNodeLib;component/images/16x16/loadFX.png",
-                ExInfo1 = ppath
+                Icon = "/LuaSTGNodeLib;component/images/16x16/loadparticle.png",
+                ExInfo1 = ppath,
+                ExInfo2 = target.attributes[2].attrInput
             };
         }
     }
