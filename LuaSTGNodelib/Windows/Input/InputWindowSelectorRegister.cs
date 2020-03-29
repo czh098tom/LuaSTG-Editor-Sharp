@@ -114,6 +114,8 @@ namespace LuaSTGEditorSharp.Windows.Input
                 , new string[] { "\"left\"", "\"right\"" });
             target.Add("directionMode"
                 , new string[] { "MOVE_X_TOWARDS_PLAYER", "MOVE_Y_TOWARDS_PLAYER", "MOVE_TOWARDS_PLAYER", "MOVE_RANDOM" });
+            target.Add("curve"
+                , new string[] { "Bezier", "CR", "Basis2" });
             target.Add("renderOp"
                 , new string[] { "Push", "Pop" });
         }
@@ -125,6 +127,7 @@ namespace LuaSTGEditorSharp.Windows.Input
                 , InputWindowSelector.SelectComboBox("sineinterpolation"), "Input Sine Interpolation Mode"));
             target.Add("code", (src, tar) => new CodeInput(tar));
             target.Add("position", (src, tar) => new PositionInput(tar));
+            target.Add("pointSet", (src, tar) => new PointSetInput(tar));
             target.Add("target", (src, tar) => new Selector(tar, InputWindowSelector.SelectComboBox("target"), "Input Target Object"));
             target.Add("imageFile", (src, tar) => new PathInput(tar, "Image File (*.png;*.jpg;*.bmp)|*.png;*.jpg;*.bmp", src));
             target.Add("fxFile", (src, tar) => new PathInput(tar, "Shader File (*.fx)|*.fx", src));
@@ -157,6 +160,10 @@ namespace LuaSTGEditorSharp.Windows.Input
                 , InputWindowSelector.SelectComboBox("prop"), "Input Properties"));
             target.Add("directionMode", (src, tar) => new Selector(tar
                 , InputWindowSelector.SelectComboBox("directionMode"), "Input Direction Mode"));
+            target.Add("curve", (src, tar) => new Selector(tar
+                , InputWindowSelector.SelectComboBox("curve"), "Input Curve Type"));
+            target.Add("renderOp", (src, tar) => new Selector(tar
+                , InputWindowSelector.SelectComboBox("renderOp"), "Input Render Target Operation"));
             target.Add("bulletStyle", (src, tar) => new BulletInput(tar));
             target.Add("laserStyle", (src, tar) => new LaserInput(tar));
             target.Add("enemyStyle", (src, tar) => new EnemyInput(tar));

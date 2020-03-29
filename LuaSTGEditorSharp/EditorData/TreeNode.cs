@@ -1771,7 +1771,7 @@ namespace LuaSTGEditorSharp.EditorData
                     var attr = i.GetCustomAttributes(false).First(o => o is Node.NodeAttributes.NodeAttributeAttribute)
                         as Node.NodeAttributes.NodeAttributeAttribute;
                     string s = i.GetGetMethod().Invoke(this, null) as string;
-                    i.SetValue(this, s ?? attr.Default, null);
+                    i.SetValue(this, string.IsNullOrEmpty(s) ? attr.Default : s, null);
                 }
                 foreach (var i in usedAttributes)
                 {

@@ -238,5 +238,17 @@ namespace LuaSTGEditorSharp.Properties {
                 this["IndentationSpaceLength"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool DynamicDebugReporting {
+            get {
+                return ((bool)(this["DynamicDebugReporting"]));
+            }
+            set {
+                this["DynamicDebugReporting"] = value;
+            }
+        }
     }
 }

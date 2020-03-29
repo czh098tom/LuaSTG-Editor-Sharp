@@ -277,6 +277,17 @@ namespace LuaSTGEditorSharp.Windows
             }
         }
 
+        private bool dynamicDebugReporting;
+        public bool DynamicDebugReporting
+        {
+            get => dynamicDebugReporting;
+            set
+            {
+                dynamicDebugReporting = value;
+                RaiseProertyChanged("DynamicDebugReporting");
+            }
+        }
+
         #region InSettings
         public string ZipExecutablePathSettings
         {
@@ -366,6 +377,12 @@ namespace LuaSTGEditorSharp.Windows
         {
             get => mainApp.PluginPath;
             set => mainApp.PluginPath = value;
+        }
+
+        public bool DynamicDebugReportingSettings
+        {
+            get => mainApp.DynamicDebugReporting;
+            set => mainApp.DynamicDebugReporting = value;
         }
 
         public bool SpaceIndentationSettings

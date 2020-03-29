@@ -30,7 +30,7 @@
     <WebPage>Setup Info.html</WebPage>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
     <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>0.6.10.%2a</ApplicationVersion>
+    <ApplicationVersion>0.6.11.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
@@ -138,6 +138,7 @@
     <Compile Include="EditorData\Node\IIfChild.cs" />
     <Compile Include="EditorData\Node\NodeAttributes\IgnoreParityCheckAttribute.cs" />
     <Compile Include="EditorData\Node\NodeAttributes\NodeAttributeAttribute.cs" />
+    <Compile Include="Execution\DebugView.cs" />
     <Compile Include="Execution\ExecutionConfig.cs" />
     <Compile Include="Execution\Execution.cs" />
     <Compile Include="Execution\ExecutionType.cs" />

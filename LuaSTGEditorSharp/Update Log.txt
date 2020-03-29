@@ -1,4 +1,4 @@
-﻿-- Update Log（最近更新 2020-03-09）
+﻿-- Update Log（最近更新 2020-03-19）
 
 0.6.1 ~ 0.7.0
 实现功能：修复节点定义、定制缩进、转到节点定义
@@ -21,6 +21,8 @@ Data
 Task
 	TaskFinish
 	TaskClear (by Kasa)
+	TaskMoveToCurve
+	TaskMoveByCurve
 Stage
 	StageGoto (by Airo)
 	StageGroupFinish (by Airo)
@@ -65,6 +67,7 @@ Insert as parent节点可插入性判定有误问题
 fold region命令导致元数据丢失的bug
 从扩展名绑定打开文件时会重复打开的bug
 从扩展名绑定打开文件后可以从编辑器再次打开，反之亦然的bug
+去除ArchiveSpaceIndicator的空值检测
 Lib层：
 ARGB输入界面值不准确
 GROUP名文本错误

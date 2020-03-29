@@ -69,12 +69,13 @@ namespace LuaSTGEditorSharp.Zip
             foreach (KeyValuePair<string, string> kvp in path)
             {
                 targetArchive.BeginUpdate();
+                yield return $"Adding file \"{kvp.Value}\" in to zip.";
                 if (targetArchive.FindEntry(kvp.Key, true) > 0)
                 {
                     targetArchive.Delete(kvp.Key);
                 }
                 targetArchive.Add(kvp.Value, kvp.Key);
-                yield return $"Add file \"{kvp.Value}\" in to zip.";
+                yield return $"Added file \"{kvp.Value}\" in to zip.";
                 targetArchive.CommitUpdate();
             }
             ((IDisposable)targetArchive).Dispose();

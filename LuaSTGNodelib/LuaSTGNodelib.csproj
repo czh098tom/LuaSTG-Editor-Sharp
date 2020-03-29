@@ -189,6 +189,8 @@
     <Compile Include="EditorData\Node\Task\TaskMoveBy.cs" />
     <Compile Include="EditorData\Node\Task\TaskMoveTo.cs" />
     <Compile Include="EditorData\Node\Task\Tasker.cs" />
+    <Compile Include="EditorData\Node\Task\TaskMoveByCurve.cs" />
+    <Compile Include="EditorData\Node\Task\TaskMoveToCurve.cs" />
     <Compile Include="EditorData\Node\Task\TaskNode.cs" />
     <Compile Include="EditorData\Node\Task\TaskWait.cs" />
     <Compile Include="EditorData\Node\CodeAlikeTypes.cs" />
@@ -226,6 +228,9 @@
     </Compile>
     <Compile Include="Windows\Input\FXInput.xaml.cs">
       <DependentUpon>FXInput.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Input\PointSetInput.xaml.cs">
+      <DependentUpon>PointSetInput.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\Input\SEInput.xaml.cs">
       <DependentUpon>SEInput.xaml</DependentUpon>
@@ -306,6 +311,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Windows\Input\FXInput.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\Input\PointSetInput.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

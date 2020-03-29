@@ -275,6 +275,15 @@ namespace LuaSTGEditorSharp
             }
         }
 
+        public bool DynamicDebugReporting
+        {
+            get => Settings.Default.DynamicDebugReporting;
+            set
+            {
+                Settings.Default["DynamicDebugReporting"] = value;
+            }
+        }
+
         public bool SpaceIndentation
         {
             get => Settings.Default.SpaceIndentation;

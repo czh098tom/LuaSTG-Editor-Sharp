@@ -56,8 +56,8 @@ namespace LuaSTGEditorSharp.EditorData.Node.Audio
         [JsonIgnore, NodeAttribute]
         public string IgnoreDefault
         {
-            get => DoubleCheckAttr(3, name: "Ignore default volume").attrInput;
-            set => DoubleCheckAttr(3, name: "Ignore default volume").attrInput = value;
+            get => DoubleCheckAttr(3, "bool", "Ignore default volume").attrInput;
+            set => DoubleCheckAttr(3, "bool", "Ignore default volume").attrInput = value;
         }
 
         public override IEnumerable<string> ToLua(int spacing)

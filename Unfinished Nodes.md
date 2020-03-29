@@ -25,8 +25,7 @@ Names below are desired class names for the unfinished nodes.
     Finished.
 
 ## Task
-	MoveToCurve &
-	MoveByCurve &
+    Finished.
 
 ## Enemy
 	Finished.

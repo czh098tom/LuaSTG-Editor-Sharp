@@ -66,8 +66,6 @@ namespace LuaSTGEditorSharp.EditorData.Node.Advanced
         public override List<MessageBase> GetMessage()
         {
             List<MessageBase> messages = new List<MessageBase>();
-            if (string.IsNullOrEmpty(NonMacrolize(0)))
-                messages.Add(new ArgNotNullMessage(attributes[0].AttrCap, 0, this));
             string s = NonMacrolize(0);
             if (s != "")
             {

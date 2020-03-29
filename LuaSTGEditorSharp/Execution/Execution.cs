@@ -49,19 +49,18 @@ namespace LuaSTGEditorSharp.Execution
                         RedirectStandardOutput = RedirectStandardOutput
                     }
                 };
+                LSTGInstance.EnableRaisingEvents = true;
                 LSTGInstance.Start();
+                DebugView debugView = new DebugView(logger, LSTGInstance.Id);
+#if !DEBUG
+                if((App.Current as App).DynamicDebugReporting) debugView.Start();
+#endif
                 logger("LuaSTG is Running.\n\n");
-                /* 
-                 * what it should be like:
-                 * 
-                lstg.OutputDataReceived += (s, e) => DebugString += e.Data;
-                lstg.ErrorDataReceived += (s, e) => DebugString += e.Data;
-                 *
-                 * what it actually is:
-                 */
+
                 LSTGInstance.Exited += (s, e) => {
                     FileStream fs = null;
                     StreamReader sr = null;
+                    StringBuilder sb = new StringBuilder();
                     try
                     {
                         fs = new FileStream(Path.GetFullPath(Path.Combine(
@@ -70,10 +69,11 @@ namespace LuaSTGEditorSharp.Execution
                         int i = 0;
                         while (!sr.EndOfStream && i < 8192)
                         {
-                            logger(sr.ReadLine());
+                            sb.Append(sr.ReadLine());
+                            sb.Append("\n");
                             i++;
                         }
-                        //logger(sr.ReadToEnd());
+                        logger(sb.ToString());
                         end();
                     }
                     catch (System.Exception exc)
@@ -84,13 +84,14 @@ namespace LuaSTGEditorSharp.Execution
                     {
                         if (fs != null) fs.Close();
                         if (sr != null) sr.Close();
+#if !DEBUG
+                        if ((App.Current as App).DynamicDebugReporting) debugView.Dispose();
+#endif
                     }
-                    logger("\nExited with code " + LSTGInstance.ExitCode + ".");
+                    sb.Append("\nExited with code " + LSTGInstance.ExitCode + ".");
+                    logger(sb.ToString());
                 };
-                LSTGInstance.EnableRaisingEvents = true;
-                LSTGInstance.BeginOutputReadLine();
-                LSTGInstance.BeginErrorReadLine();
-                //lstg.WaitForExit();
+                
             }
             else
             {

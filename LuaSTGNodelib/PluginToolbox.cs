@@ -88,6 +88,10 @@ namespace LuaSTGEditorSharp
                 , new AddNode(AddTaskMoveToNode));
             task.Add(new ToolboxItemData("moveby", "/LuaSTGNodeLib;component/images/taskmovetoex.png", "Move By")
                 , new AddNode(AddTaskMoveByNode));
+            task.Add(new ToolboxItemData("movetocurve", "/LuaSTGNodeLib;component/images/taskBeziermoveto.png", "Move To (Curve)")
+                , new AddNode(AddTaskMoveToCurveNode));
+            task.Add(new ToolboxItemData("movebycurve", "/LuaSTGNodeLib;component/images/taskBeziermovetoex.png", "Move By (Curve)")
+                , new AddNode(AddTaskMoveByCurveNode));
             task.Add(new ToolboxItemData(true), null);
             task.Add(new ToolboxItemData("smoothset", "/LuaSTGNodeLib;component/images/tasksetvalue.png", "Smooth set value to")
                 , new AddNode(AddSmoothSetValueNode));
@@ -429,6 +433,16 @@ namespace LuaSTGEditorSharp
         private void AddTaskMoveByNode()
         {
             parent.Insert(new TaskMoveBy(parent.ActivatedWorkSpaceData));
+        }
+
+        private void AddTaskMoveToCurveNode()
+        {
+            parent.Insert(new TaskMoveToCurve(parent.ActivatedWorkSpaceData));
+        }
+
+        private void AddTaskMoveByCurveNode()
+        {
+            parent.Insert(new TaskMoveByCurve(parent.ActivatedWorkSpaceData));
         }
 
         private void AddSmoothSetValueNode()

@@ -144,7 +144,7 @@ namespace LuaSTGEditorSharp.EditorData
                 }
                 return sb.ToString();
             }
-            catch(System.Exception e)
+            catch (System.Exception e)
             {
                 MessageBox.Show(e.ToString());
                 return "";
@@ -253,7 +253,7 @@ namespace LuaSTGEditorSharp.EditorData
                         if (string.IsNullOrEmpty(projPath)) throw new InvalidRelativeResPathException(resPath.Value);
                         resFullPath = Path.GetFullPath(Path.Combine(projPath, resPath.Value));
                     }
-                    else if(undcPath == false)
+                    else if (undcPath == false)
                     {
                         resFullPath = resPath.Value;
                     }
@@ -273,7 +273,7 @@ namespace LuaSTGEditorSharp.EditorData
                     }
                 }
             }
-            catch(System.Exception e)
+            catch (System.Exception e)
             {
                 MessageBox.Show(e.ToString());
             }
@@ -317,7 +317,7 @@ namespace LuaSTGEditorSharp.EditorData
                         string sp = Path.GetFullPath(Path.Combine(projPath, resPath.Value));
                         swMeta.WriteLine(GetMD5HashFromFile(sp) + "|" + sp + "|" + resPath.Key);
                     }
-                    else if(undcPath == false)
+                    else if (undcPath == false)
                     {
                         swMeta.WriteLine(GetMD5HashFromFile(resPath.Value) + "|" + resPath.Value + "|" + resPath.Key);
                     }
@@ -330,7 +330,7 @@ namespace LuaSTGEditorSharp.EditorData
             }
             finally
             {
-                if(swMeta!=null) swMeta.Close();
+                if (swMeta != null) swMeta.Close();
             }
         }
 
@@ -341,7 +341,7 @@ namespace LuaSTGEditorSharp.EditorData
         protected void GatherAllRes(Dictionary<string, string> resNeedToPack)
         {
             if (File.Exists(projMetaPath)) File.Delete(projMetaPath);
-            foreach (KeyValuePair<string,string> resPath in resourceFilePath)
+            foreach (KeyValuePair<string, string> resPath in resourceFilePath)
             {
                 bool? undcPath = RelativePathConverter.IsRelativePath(resPath.Value);
                 if (undcPath == true)
@@ -431,9 +431,9 @@ namespace LuaSTGEditorSharp.EditorData
                     currentCount += 1.0f / entryCount;
                 }
             }
-            catch(System.Exception e)
+            catch (System.Exception e)
             {
-                MessageBox.Show("Pack process failed.\n"+e.ToString());
+                MessageBox.Show("Pack process failed.\n" + e.ToString());
             }
             finally
             {
@@ -572,7 +572,7 @@ namespace LuaSTGEditorSharp.EditorData
                             packBat.WriteLine(zipExePath + " u -tzip -mcu=on \"" + targetZipPath + "\" \""
                                 + Path.GetFullPath(Path.Combine(projPath, resPath.Value)) + "\"");
                         }
-                        else if(undcPath == false)
+                        else if (undcPath == false)
                         {
                             packBat.WriteLine(zipExePath + " u -tzip -mcu=on \"" + targetZipPath + "\" \""
                                 + resPath + "\"");

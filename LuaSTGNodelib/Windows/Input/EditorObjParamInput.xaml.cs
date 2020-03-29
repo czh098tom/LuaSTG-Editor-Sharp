@@ -106,7 +106,7 @@ namespace LuaSTGEditorSharp.Windows.Input
                         {
                             par = "Parameter";
                             if (lastparam < paramName.Count) par = paramName[lastparam];
-                            vs.Add(new ParamItem(this) { Name = par, Value = new string(c, lastlocptr, i - lastlocptr) });
+                            vs.Add(new ParamItem(this) { Name = par, Value = (new string(c, lastlocptr, i - lastlocptr)).Trim() });
                             lastlocptr = i + 1;
                             lastparam++;
                         }
@@ -114,7 +114,7 @@ namespace LuaSTGEditorSharp.Windows.Input
                 }
                 par = "Parameter";
                 if (lastparam < paramName.Count) par = paramName[lastparam];
-                vs.Add(new ParamItem(this) { Name = par, Value = new string(c, lastlocptr, c.Length - lastlocptr) });
+                vs.Add(new ParamItem(this) { Name = par, Value = (new string(c, lastlocptr, c.Length - lastlocptr)).Trim() });
                 lastparam++;
                 for (int i = lastparam; i < paramName.Count; i++)
                 {
@@ -161,7 +161,7 @@ namespace LuaSTGEditorSharp.Windows.Input
                 }
                 else
                 {
-                    s += "," + item.Value;
+                    s += ", " + item.Value;
                 }
             }
             Result = s;
