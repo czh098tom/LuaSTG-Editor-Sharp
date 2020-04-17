@@ -28,6 +28,10 @@ namespace LuaSTGEditorSharp
         
         public override void InitFunc()
         {
+            ToolInfo["Advanced"].Add(new ToolboxItemData(true), null);
+            ToolInfo["Advanced"].Add(new ToolboxItemData("taskrepeatadv", "/LuaSTGNodeLib;component/images/taskadvancedrepeat.png", "Task Advanced Repeat")
+                , new AddNode(AddAdvancedRepeatWithWait));
+
             var data = new Dictionary<ToolboxItemData, AddNode>();
             #region data
             data.Add(new ToolboxItemData("localvar", "/LuaSTGNodeLib;component/images/variable.png", "Local Variable")
@@ -452,6 +456,15 @@ namespace LuaSTGEditorSharp
             parent.Insert(new SmoothSetValueTo(parent.ActivatedWorkSpaceData));
         }
         #endregion
+
+        private void AddAdvancedRepeatWithWait()
+        {
+            TreeNode repeat = new EditorData.Node.Advanced.AdvancedRepeat.AdvancedRepeat(parent.ActivatedWorkSpaceData, "_infinite");
+            repeat.AddChild(new EditorData.Node.Advanced.AdvancedRepeat.VariableCollection(parent.ActivatedWorkSpaceData));
+            repeat.AddChild(new TaskWait(parent.ActivatedWorkSpaceData));
+            parent.Insert(repeat);
+        }
+
         #region enemy
         private void AddEnemyDefineNode()
         {

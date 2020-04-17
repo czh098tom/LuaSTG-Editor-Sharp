@@ -11,7 +11,7 @@ namespace LuaSTGEditorSharp.EditorData.Node
     {
         private static readonly Type[] types =
             { typeof(Boss.BossSCStart), typeof(Boss.BossSCFinish), typeof(Boss.BossInit)
-                , typeof(Data.Function), typeof(Task.TaskDefine) };
+                , typeof(Data.Function), typeof(Task.TaskDefine), typeof(Boss.Dialog) };
 
         public IEnumerator<Type> GetEnumerator()
         {

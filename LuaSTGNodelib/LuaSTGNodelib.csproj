@@ -1865,5 +1865,11 @@
     <Resource Include="images\16x16\CreateRenderTarget.png" />
     <Resource Include="images\16x16\PostEffectCapture.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\taskadvancedrepeat.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\taskadvancedrepeat.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
