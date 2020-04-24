@@ -449,14 +449,51 @@ namespace LuaSTGEditorSharp.Windows
         {
             ReadSettings();
             InitializeComponent();
+
+            HashSet<string> pathIgnorance = new HashSet<string>();
+
+            try
+            {
+                pathIgnorance.Add("LuaSTGEditorSharp.Core.dll");
+                var dependencyFiles =
+                    from string s
+                    in Directory.GetFiles(AppDomain.CurrentDomain.BaseDirectory)
+                    where Path.GetExtension(s) == ".dependencies"
+                    select s;
+                foreach (string s in dependencyFiles)
+                {
+                    FileStream fs = null;
+                    StreamReader sr = null;
+                    try
+                    {
+                        fs = new FileStream(s, FileMode.Open, FileAccess.Read);
+                        sr = new StreamReader(fs);
+                        while (!sr.EndOfStream)
+                        {
+                            string ig = sr.ReadLine().Trim('\r', '\n', ' ');
+                            if (!pathIgnorance.Contains(ig)) pathIgnorance.Add(ig);
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        System.Windows.MessageBox.Show(e.ToString());
+                    }
+                    finally
+                    {
+                        sr?.Close();
+                        fs?.Close();
+                    }
+                }
+            }
+            catch(Exception e)
+            {
+                System.Windows.MessageBox.Show(e.ToString());
+            }
+
             pluginPaths = new ObservableCollection<string>(
                 from string s
                 in Directory.GetFiles(AppDomain.CurrentDomain.BaseDirectory)
-                where Path.GetExtension(s) == ".dll"
-                && Path.GetFileName(s) != "Irony.dll" && Path.GetFileName(s) != "ICSharpCode.SharpZipLib.dll" 
-                && Path.GetFileName(s) != "Newtonsoft.Json.dll" && Path.GetFileName(s) != "ICSharpCode.AvalonEdit.dll"
-                && Path.GetFileName(s) != "CSCore.dll" && Path.GetFileName(s) != "NVorbis.dll"
-                && Path.GetFileName(s) != "System.Net.Http.dll"
+                where Path.GetExtension(s) == ".dll" && !pathIgnorance.Contains(Path.GetFileName(s))
                 select Path.GetFileName(s)
                 );
             PluginList.ItemsSource = pluginPaths;

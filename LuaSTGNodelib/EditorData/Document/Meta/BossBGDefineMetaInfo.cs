@@ -47,7 +47,7 @@ namespace LuaSTGEditorSharp.EditorData.Document.Meta
         {
             MetaModel bossBG = new MetaModel
             {
-                Icon = "/LuaSTGNodeLib;component/images/16x16/bgdefine.png",
+                Icon = "/LuaSTGPlusNodeLib;component/images/16x16/bgdefine.png",
                 Text = Name
             };
             MetaModel bossLayer;
@@ -55,7 +55,7 @@ namespace LuaSTGEditorSharp.EditorData.Document.Meta
             {
                 bossLayer = new MetaModel
                 {
-                    Icon = "/LuaSTGNodeLib;component/images/16x16/bglayer.png",
+                    Icon = "/LuaSTGPlusNodeLib;component/images/16x16/bglayer.png",
                     Text = s
                 };
                 bossBG.Children.Add(bossLayer);
@@ -70,7 +70,7 @@ namespace LuaSTGEditorSharp.EditorData.Document.Meta
                 Result = "\"" + Name + "\"",
                 Text = ScrString,
                 FullName = FullName,
-                Icon = "/LuaSTGNodeLib;component/images/16x16/bgdefine.png"
+                Icon = "/LuaSTGPlusNodeLib;component/images/16x16/bgdefine.png"
             };
         }
     }

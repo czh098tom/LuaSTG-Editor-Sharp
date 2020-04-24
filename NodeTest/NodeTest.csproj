@@ -39,8 +39,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ICSharpCode.SharpZipLib, Version=1.1.0.145, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
-      <HintPath>..\packages\SharpZipLib.1.1.0\lib\net45\ICSharpCode.SharpZipLib.dll</HintPath>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=1.2.0.246, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpZipLib.1.2.0\lib\net45\ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.VisualStudio.TestPlatform.TestFramework, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\MSTest.TestFramework.1.4.0\lib\net45\Microsoft.VisualStudio.TestPlatform.TestFramework.dll</HintPath>
@@ -126,13 +126,13 @@
     <Compile Include="NodeParityCheckTest.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\LuaSTGEditorSharp\LuaSTGEditorSharp.csproj">
-      <Project>{658393f3-c67a-4abc-9114-48d39ed7e675}</Project>
-      <Name>LuaSTGEditorSharp</Name>
+    <ProjectReference Include="..\LuaSTGEditorSharp.Core\LuaSTGEditorSharp.Core.csproj">
+      <Project>{bd1ca1e6-9e34-4098-ae65-922f23670f75}</Project>
+      <Name>LuaSTGEditorSharp.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\LuaSTGNodelib\LuaSTGNodelib.csproj">
+    <ProjectReference Include="..\LuaSTGNodelib\LuaSTGPlusNodeLib.csproj">
       <Project>{06f198ea-762c-4b34-84da-b58a6c3e6a79}</Project>
-      <Name>LuaSTGNodelib</Name>
+      <Name>LuaSTGPlusNodeLib</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

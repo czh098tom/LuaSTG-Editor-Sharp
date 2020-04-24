@@ -5,7 +5,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using LuaSTGEditorSharp.Plugin;
-using LuaSTGEditorSharp.Toolbox;
 using LuaSTGEditorSharp.EditorData;
 using LuaSTGEditorSharp.EditorData.Node.General;
 using LuaSTGEditorSharp.EditorData.Node.Data;
@@ -24,263 +23,263 @@ namespace LuaSTGEditorSharp
 {
     public class PluginToolbox : AbstractToolbox
     {
-        public PluginToolbox(MainWindow mw) : base(mw) { }
+        public PluginToolbox(IMainWindow mw) : base(mw) { }
         
         public override void InitFunc()
         {
             ToolInfo["Advanced"].Add(new ToolboxItemData(true), null);
-            ToolInfo["Advanced"].Add(new ToolboxItemData("taskrepeatadv", "/LuaSTGNodeLib;component/images/taskadvancedrepeat.png", "Task Advanced Repeat")
+            ToolInfo["Advanced"].Add(new ToolboxItemData("taskrepeatadv", "/LuaSTGPlusNodeLib;component/images/taskadvancedrepeat.png", "Task Advanced Repeat")
                 , new AddNode(AddAdvancedRepeatWithWait));
 
             var data = new Dictionary<ToolboxItemData, AddNode>();
             #region data
-            data.Add(new ToolboxItemData("localvar", "/LuaSTGNodeLib;component/images/variable.png", "Local Variable")
+            data.Add(new ToolboxItemData("localvar", "/LuaSTGPlusNodeLib;component/images/variable.png", "Local Variable")
                 , new AddNode(AddLocalVarNode));
-            data.Add(new ToolboxItemData("assign", "/LuaSTGNodeLib;component/images/assignment.png", "Assignment")
+            data.Add(new ToolboxItemData("assign", "/LuaSTGPlusNodeLib;component/images/assignment.png", "Assignment")
                 , new AddNode(AddAssignmentNode));
-            data.Add(new ToolboxItemData("function", "/LuaSTGNodeLib;component/images/func.png", "Function")
+            data.Add(new ToolboxItemData("function", "/LuaSTGPlusNodeLib;component/images/func.png", "Function")
                 , new AddNode(AddFunctionNode));
             data.Add(new ToolboxItemData(true), null);
-            data.Add(new ToolboxItemData("recordpos", "/LuaSTGNodeLib;component/images/positionVar.png", "Record Position")
+            data.Add(new ToolboxItemData("recordpos", "/LuaSTGPlusNodeLib;component/images/positionVar.png", "Record Position")
                 ,  new AddNode(AddRecordPosNode));
-            data.Add(new ToolboxItemData("assignpos", "/LuaSTGNodeLib;component/images/positionassignment.png", "Position Assignment")
+            data.Add(new ToolboxItemData("assignpos", "/LuaSTGPlusNodeLib;component/images/positionassignment.png", "Position Assignment")
                 , new AddNode(AddPositionAssignmentNode));
             #endregion
             ToolInfo.Add("Data", data);
 
             var stage = new Dictionary<ToolboxItemData, AddNode>();
             #region stage
-            stage.Add(new ToolboxItemData("stagegroup", "/LuaSTGNodeLib;component/images/stagegroup.png", "Stage Group")
+            stage.Add(new ToolboxItemData("stagegroup", "/LuaSTGPlusNodeLib;component/images/stagegroup.png", "Stage Group")
                 , new AddNode(AddStageGroupNode));
-            stage.Add(new ToolboxItemData("stage", "/LuaSTGNodeLib;component/images/stage.png", "Stage")
+            stage.Add(new ToolboxItemData("stage", "/LuaSTGPlusNodeLib;component/images/stage.png", "Stage")
                 , new AddNode(AddStageNode));
             stage.Add(new ToolboxItemData(true), null);
-            stage.Add(new ToolboxItemData("stagegoto", "/LuaSTGNodeLib;component/images/stagegoto.png", "Go to Stage")
+            stage.Add(new ToolboxItemData("stagegoto", "/LuaSTGPlusNodeLib;component/images/stagegoto.png", "Go to Stage")
                 , new AddNode(AddStageGoToNode));
-            stage.Add(new ToolboxItemData("stagegroupfinish", "/LuaSTGNodeLib;component/images/stagefinishgroup.png", "Finish Stage Group")
+            stage.Add(new ToolboxItemData("stagegroupfinish", "/LuaSTGPlusNodeLib;component/images/stagefinishgroup.png", "Finish Stage Group")
                 , new AddNode(AddStageGroupFinishNode));
             stage.Add(new ToolboxItemData(true), null);
-            stage.Add(new ToolboxItemData("setstagebg", "/LuaSTGNodeLib;component/images/bgstage.png", "Set Stage Background")
+            stage.Add(new ToolboxItemData("setstagebg", "/LuaSTGPlusNodeLib;component/images/bgstage.png", "Set Stage Background")
                 , new AddNode(AddSetStageBGNode));
             stage.Add(new ToolboxItemData(true), null);
-            stage.Add(new ToolboxItemData("shakescreen", "/LuaSTGNodeLib;component/images/shakescreen.png", "Shake Screen")
+            stage.Add(new ToolboxItemData("shakescreen", "/LuaSTGPlusNodeLib;component/images/shakescreen.png", "Shake Screen")
                 , new AddNode(AddShakeScreenNode));
             #endregion
             ToolInfo.Add("Stage", stage);
 
             var task = new Dictionary<ToolboxItemData, AddNode>();
             #region task
-            task.Add(new ToolboxItemData("task", "/LuaSTGNodeLib;component/images/task.png", "Task")
+            task.Add(new ToolboxItemData("task", "/LuaSTGPlusNodeLib;component/images/task.png", "Task")
                 , new AddNode(AddTaskNode));
-            task.Add(new ToolboxItemData("tasker", "/LuaSTGNodeLib;component/images/tasker.png", "Tasker")
+            task.Add(new ToolboxItemData("tasker", "/LuaSTGPlusNodeLib;component/images/tasker.png", "Tasker")
                 , new AddNode(AddTaskerNode));
-            task.Add(new ToolboxItemData("taskdefine", "/LuaSTGNodeLib;component/images/taskdefine.png", "Define Task")
+            task.Add(new ToolboxItemData("taskdefine", "/LuaSTGPlusNodeLib;component/images/taskdefine.png", "Define Task")
                 , new AddNode(AddTaskDefineNode));
-            task.Add(new ToolboxItemData("taskcreate", "/LuaSTGNodeLib;component/images/taskattach.png", "Create Task")
+            task.Add(new ToolboxItemData("taskcreate", "/LuaSTGPlusNodeLib;component/images/taskattach.png", "Create Task")
                 , new AddNode(AddTaskCreateNode));
-            task.Add(new ToolboxItemData("taskfinish", "/LuaSTGNodeLib;component/images/taskreturn.png", "Finish Task")
+            task.Add(new ToolboxItemData("taskfinish", "/LuaSTGPlusNodeLib;component/images/taskreturn.png", "Finish Task")
                 , new AddNode(AddTaskFinishNode));
-            task.Add(new ToolboxItemData("taskclear", "/LuaSTGNodeLib;component/images/taskclear.png", "Clear Task")
+            task.Add(new ToolboxItemData("taskclear", "/LuaSTGPlusNodeLib;component/images/taskclear.png", "Clear Task")
                 , new AddNode(AddTaskClearNode));
             task.Add(new ToolboxItemData(true), null);
-            task.Add(new ToolboxItemData("wait", "/LuaSTGNodeLib;component/images/taskwait.png", "Wait")
+            task.Add(new ToolboxItemData("wait", "/LuaSTGPlusNodeLib;component/images/taskwait.png", "Wait")
                 , new AddNode(AddTaskWaitNode));
-            task.Add(new ToolboxItemData("taskrepeat", "/LuaSTGNodeLib;component/images/taskrepeat.png", "Task Repeat")
+            task.Add(new ToolboxItemData("taskrepeat", "/LuaSTGPlusNodeLib;component/images/taskrepeat.png", "Task Repeat")
                 , new AddNode(AddTaskRepeatNode));
             task.Add(new ToolboxItemData(true), null);
-            task.Add(new ToolboxItemData("moveto", "/LuaSTGNodeLib;component/images/taskmoveto.png", "Move To")
+            task.Add(new ToolboxItemData("moveto", "/LuaSTGPlusNodeLib;component/images/taskmoveto.png", "Move To")
                 , new AddNode(AddTaskMoveToNode));
-            task.Add(new ToolboxItemData("moveby", "/LuaSTGNodeLib;component/images/taskmovetoex.png", "Move By")
+            task.Add(new ToolboxItemData("moveby", "/LuaSTGPlusNodeLib;component/images/taskmovetoex.png", "Move By")
                 , new AddNode(AddTaskMoveByNode));
-            task.Add(new ToolboxItemData("movetocurve", "/LuaSTGNodeLib;component/images/taskBeziermoveto.png", "Move To (Curve)")
+            task.Add(new ToolboxItemData("movetocurve", "/LuaSTGPlusNodeLib;component/images/taskBeziermoveto.png", "Move To (Curve)")
                 , new AddNode(AddTaskMoveToCurveNode));
-            task.Add(new ToolboxItemData("movebycurve", "/LuaSTGNodeLib;component/images/taskBeziermovetoex.png", "Move By (Curve)")
+            task.Add(new ToolboxItemData("movebycurve", "/LuaSTGPlusNodeLib;component/images/taskBeziermovetoex.png", "Move By (Curve)")
                 , new AddNode(AddTaskMoveByCurveNode));
             task.Add(new ToolboxItemData(true), null);
-            task.Add(new ToolboxItemData("smoothset", "/LuaSTGNodeLib;component/images/tasksetvalue.png", "Smooth set value to")
+            task.Add(new ToolboxItemData("smoothset", "/LuaSTGPlusNodeLib;component/images/tasksetvalue.png", "Smooth set value to")
                 , new AddNode(AddSmoothSetValueNode));
             #endregion
             ToolInfo.Add("Task", task);
             
             var enemy = new Dictionary<ToolboxItemData, AddNode>();
             #region enemy
-            enemy.Add(new ToolboxItemData("defenemy", "/LuaSTGNodeLib;component/images/enemydefine.png", "Define Enemy")
+            enemy.Add(new ToolboxItemData("defenemy", "/LuaSTGPlusNodeLib;component/images/enemydefine.png", "Define Enemy")
                 , new AddNode(AddEnemyDefineNode));
-            enemy.Add(new ToolboxItemData("createenemy", "/LuaSTGNodeLib;component/images/enemycreate.png", "Create Enemy")
+            enemy.Add(new ToolboxItemData("createenemy", "/LuaSTGPlusNodeLib;component/images/enemycreate.png", "Create Enemy")
                 , new AddNode(AddEnemyCreateNode));
             enemy.Add(new ToolboxItemData(true), null);
-            enemy.Add(new ToolboxItemData("enemysimple", "/LuaSTGNodeLib;component/images/enemysimple.png", "Create Simple Enemy with Task")
+            enemy.Add(new ToolboxItemData("enemysimple", "/LuaSTGPlusNodeLib;component/images/enemysimple.png", "Create Simple Enemy with Task")
                 , new AddNode(AddCreateSimpleEnemyNode));
             enemy.Add(new ToolboxItemData(true), null);
-            enemy.Add(new ToolboxItemData("enemycharge", "/LuaSTGNodeLib;component/images/pactrometer.png", "Enemy Charge")
+            enemy.Add(new ToolboxItemData("enemycharge", "/LuaSTGPlusNodeLib;component/images/pactrometer.png", "Enemy Charge")
                 , new AddNode(AddEnemyChargeNode));
-            enemy.Add(new ToolboxItemData("enemywander", "/LuaSTGNodeLib;component/images/taskbosswander.png", "Enemy Wander")
+            enemy.Add(new ToolboxItemData("enemywander", "/LuaSTGPlusNodeLib;component/images/taskbosswander.png", "Enemy Wander")
                 , new AddNode(AddEnemyWanderNode));
             #endregion
             ToolInfo.Add("Enemy", enemy);
 
             var boss = new Dictionary<ToolboxItemData, AddNode>();
             #region boss
-            boss.Add(new ToolboxItemData("defboss", "/LuaSTGNodeLib;component/images/bossdefine.png", "Define Boss")
+            boss.Add(new ToolboxItemData("defboss", "/LuaSTGPlusNodeLib;component/images/bossdefine.png", "Define Boss")
                 , new AddNode(AddDefineBossNode));
-            boss.Add(new ToolboxItemData("bosssc", "/LuaSTGNodeLib;component/images/bossspellcard.png", "Define Spell Card")
+            boss.Add(new ToolboxItemData("bosssc", "/LuaSTGPlusNodeLib;component/images/bossspellcard.png", "Define Spell Card")
                 , new AddNode(AddBossSCNode));
             boss.Add(new ToolboxItemData(true), null);
-            boss.Add(new ToolboxItemData("createboss", "/LuaSTGNodeLib;component/images/bosscreate.png", "Create Boss")
+            boss.Add(new ToolboxItemData("createboss", "/LuaSTGPlusNodeLib;component/images/bosscreate.png", "Create Boss")
                 , new AddNode(AddCreateBossNode));
             boss.Add(new ToolboxItemData(true), null);
-            boss.Add(new ToolboxItemData("bosssetwisys", "/LuaSTGNodeLib;component/images/bosswalkimg.png", "Set Walk Image of an Object")
+            boss.Add(new ToolboxItemData("bosssetwisys", "/LuaSTGPlusNodeLib;component/images/bosswalkimg.png", "Set Walk Image of an Object")
                 , new AddNode(AddSetBossWISysNode));
             boss.Add(new ToolboxItemData(true), null);
-            boss.Add(new ToolboxItemData("bossmoveto", "/LuaSTGNodeLib;component/images/bossmoveto.png", "Boss Move To")
+            boss.Add(new ToolboxItemData("bossmoveto", "/LuaSTGPlusNodeLib;component/images/bossmoveto.png", "Boss Move To")
                 , new AddNode(AddBossMoveToNode));
-            boss.Add(new ToolboxItemData("dialog", "/LuaSTGNodeLib;component/images/dialog.png", "Dialog")
+            boss.Add(new ToolboxItemData("dialog", "/LuaSTGPlusNodeLib;component/images/dialog.png", "Dialog")
                 , new AddNode(AddDialogNode));
-            boss.Add(new ToolboxItemData("sentence", "/LuaSTGNodeLib;component/images/sentence.png", "Sentence")
+            boss.Add(new ToolboxItemData("sentence", "/LuaSTGPlusNodeLib;component/images/sentence.png", "Sentence")
                 , new AddNode(AddSentenceNode));
             boss.Add(new ToolboxItemData(true), null);
-            boss.Add(new ToolboxItemData("bosscast", "/LuaSTGNodeLib;component/images/bosscast.png", "Play cast animation")
+            boss.Add(new ToolboxItemData("bosscast", "/LuaSTGPlusNodeLib;component/images/bosscast.png", "Play cast animation")
                 , new AddNode(AddBossCastNode));
-            boss.Add(new ToolboxItemData("bossexplode", "/LuaSTGNodeLib;component/images/bossexplode.png", "Boss Explode")
+            boss.Add(new ToolboxItemData("bossexplode", "/LuaSTGPlusNodeLib;component/images/bossexplode.png", "Boss Explode")
                 , new AddNode(AddBossExplodeNode));
-            boss.Add(new ToolboxItemData("bossaura", "/LuaSTGNodeLib;component/images/bossshowaura.png", "Boss Aura")
+            boss.Add(new ToolboxItemData("bossaura", "/LuaSTGPlusNodeLib;component/images/bossshowaura.png", "Boss Aura")
                 , new AddNode(AddBossAuraNode));
-            boss.Add(new ToolboxItemData("bossui", "/LuaSTGNodeLib;component/images/bosssetui.png", "Set Boss UI")
+            boss.Add(new ToolboxItemData("bossui", "/LuaSTGPlusNodeLib;component/images/bosssetui.png", "Set Boss UI")
                 , new AddNode(AddBossUINode));
             boss.Add(new ToolboxItemData(true), null);
-            boss.Add(new ToolboxItemData("defbossbg", "/LuaSTGNodeLib;component/images/bgdefine.png", "Define Boss Background")
+            boss.Add(new ToolboxItemData("defbossbg", "/LuaSTGPlusNodeLib;component/images/bgdefine.png", "Define Boss Background")
                 , new AddNode(AddBossBGDefineNode));
-            boss.Add(new ToolboxItemData("bossbglayer", "/LuaSTGNodeLib;component/images/bglayer.png", "Define Boss Background Layer")
+            boss.Add(new ToolboxItemData("bossbglayer", "/LuaSTGPlusNodeLib;component/images/bglayer.png", "Define Boss Background Layer")
                 , new AddNode(AddBossBGLayerNode));
             #endregion
             ToolInfo.Add("Boss", boss);
 
             var bullet = new Dictionary<ToolboxItemData, AddNode>();
             #region bullet
-            bullet.Add(new ToolboxItemData("defbullet", "/LuaSTGNodeLib;component/images/bulletdefine.png", "Define Bullet")
+            bullet.Add(new ToolboxItemData("defbullet", "/LuaSTGPlusNodeLib;component/images/bulletdefine.png", "Define Bullet")
                 , new AddNode(AddDefineBulletNode));
-            bullet.Add(new ToolboxItemData("createbullet", "/LuaSTGNodeLib;component/images/bulletcreate.png", "Create Bullet")
+            bullet.Add(new ToolboxItemData("createbullet", "/LuaSTGPlusNodeLib;component/images/bulletcreate.png", "Create Bullet")
                 , new AddNode(AddCreateBulletNode));
             bullet.Add(new ToolboxItemData(true), null);
-            bullet.Add(new ToolboxItemData("simplebullet", "/LuaSTGNodeLib;component/images/bulletcreatestraight.png", "Create Simple Bullet")
+            bullet.Add(new ToolboxItemData("simplebullet", "/LuaSTGPlusNodeLib;component/images/bulletcreatestraight.png", "Create Simple Bullet")
                 , new AddNode(AddCreateSimpleBulletNode));
-            bullet.Add(new ToolboxItemData("bulletgroup", "/LuaSTGNodeLib;component/images/bulletcreatestraightex.png", "Create Simple Bullet Group")
+            bullet.Add(new ToolboxItemData("bulletgroup", "/LuaSTGPlusNodeLib;component/images/bulletcreatestraightex.png", "Create Simple Bullet Group")
                 , new AddNode(AddCreateBulletGroupNode));
             bullet.Add(new ToolboxItemData(true), null);
-            bullet.Add(new ToolboxItemData("bulletstyle", "/LuaSTGNodeLib;component/images/bulletchangestyle.png", "Change Bullet Style")
+            bullet.Add(new ToolboxItemData("bulletstyle", "/LuaSTGPlusNodeLib;component/images/bulletchangestyle.png", "Change Bullet Style")
                 , new AddNode(AddBulletChangeStyleNode));
             bullet.Add(new ToolboxItemData(true), null);
-            bullet.Add(new ToolboxItemData("bulletclear", "/LuaSTGNodeLib;component/images/bulletclear.png", "Clear Bullets")
+            bullet.Add(new ToolboxItemData("bulletclear", "/LuaSTGPlusNodeLib;component/images/bulletclear.png", "Clear Bullets")
                 , new AddNode(AddBulletClearNode));
-            bullet.Add(new ToolboxItemData("bulletclearrange", "/LuaSTGNodeLib;component/images/bulletcleanrange.png", "Clear Bullets in range")
+            bullet.Add(new ToolboxItemData("bulletclearrange", "/LuaSTGPlusNodeLib;component/images/bulletcleanrange.png", "Clear Bullets in range")
                 , new AddNode(AddBulletClearRangeNode));
             #endregion
             ToolInfo.Add("Bullet", bullet);
 
             var laser = new Dictionary<ToolboxItemData, AddNode>();
             #region laser
-            laser.Add(new ToolboxItemData("deflaser", "/LuaSTGNodeLib;component/images/laserdefine.png", "Define Laser")
+            laser.Add(new ToolboxItemData("deflaser", "/LuaSTGPlusNodeLib;component/images/laserdefine.png", "Define Laser")
                 , new AddNode(AddDefineLaserNode));
-            laser.Add(new ToolboxItemData("createlaser", "/LuaSTGNodeLib;component/images/lasercreate.png", "Create Laser")
+            laser.Add(new ToolboxItemData("createlaser", "/LuaSTGPlusNodeLib;component/images/lasercreate.png", "Create Laser")
                 , new AddNode(AddCreateLaserNode));
             laser.Add(new ToolboxItemData(true), null);
-            laser.Add(new ToolboxItemData("defbentlaser", "/LuaSTGNodeLib;component/images/laserbentdefine.png", "Define Bent Laser")
+            laser.Add(new ToolboxItemData("defbentlaser", "/LuaSTGPlusNodeLib;component/images/laserbentdefine.png", "Define Bent Laser")
                 , new AddNode(AddDefineBentLaserNode));
-            laser.Add(new ToolboxItemData("createbentlaser", "/LuaSTGNodeLib;component/images/laserbentcreate.png", "Create Bent Laser")
+            laser.Add(new ToolboxItemData("createbentlaser", "/LuaSTGPlusNodeLib;component/images/laserbentcreate.png", "Create Bent Laser")
                 , new AddNode(AddCreateBentLaserNode));
             laser.Add(new ToolboxItemData(true), null);
-            laser.Add(new ToolboxItemData("laserturnhalfon", "/LuaSTGNodeLib;component/images/laserturnhalfon.png", "Turn Half On Laser")
+            laser.Add(new ToolboxItemData("laserturnhalfon", "/LuaSTGPlusNodeLib;component/images/laserturnhalfon.png", "Turn Half On Laser")
                 , new AddNode(AddLaserTurnHalfOnNode));
-            laser.Add(new ToolboxItemData("laserturnon", "/LuaSTGNodeLib;component/images/laserturnon.png", "Turn On Laser")
+            laser.Add(new ToolboxItemData("laserturnon", "/LuaSTGPlusNodeLib;component/images/laserturnon.png", "Turn On Laser")
                 , new AddNode(AddLaserTurnOnNode));
-            laser.Add(new ToolboxItemData("laserturnoff", "/LuaSTGNodeLib;component/images/laserturnoff.png", "Turn Off Laser")
+            laser.Add(new ToolboxItemData("laserturnoff", "/LuaSTGPlusNodeLib;component/images/laserturnoff.png", "Turn Off Laser")
                 , new AddNode(AddLaserTurnOffNode));
             laser.Add(new ToolboxItemData(true), null);
-            laser.Add(new ToolboxItemData("lasergrow", "/LuaSTGNodeLib;component/images/lasergrow.png", "Grow Laser")
+            laser.Add(new ToolboxItemData("lasergrow", "/LuaSTGPlusNodeLib;component/images/lasergrow.png", "Grow Laser")
                 , new AddNode(AddLaserGrowNode));
-            laser.Add(new ToolboxItemData("laserchangestyle", "/LuaSTGNodeLib;component/images/laserchangestyle.png", "Change Laser Style")
+            laser.Add(new ToolboxItemData("laserchangestyle", "/LuaSTGPlusNodeLib;component/images/laserchangestyle.png", "Change Laser Style")
                 , new AddNode(AddLaserChangeStyleNode));
             #endregion
             ToolInfo.Add("Laser", laser);
 
             var obj = new Dictionary<ToolboxItemData, AddNode>();
             #region object
-            obj.Add(new ToolboxItemData("defobject", "/LuaSTGNodeLib;component/images/objectdefine.png", "Define Object")
+            obj.Add(new ToolboxItemData("defobject", "/LuaSTGPlusNodeLib;component/images/objectdefine.png", "Define Object")
                 , new AddNode(AddDefineObjectNode));
-            obj.Add(new ToolboxItemData("createobject", "/LuaSTGNodeLib;component/images/objectcreate.png", "Create Object")
+            obj.Add(new ToolboxItemData("createobject", "/LuaSTGPlusNodeLib;component/images/objectcreate.png", "Create Object")
                 , new AddNode(AddCreateObjectNode));
             obj.Add(new ToolboxItemData(true), null);
-            obj.Add(new ToolboxItemData("callbackfunc", "/LuaSTGNodeLib;component/images/callbackfunc.png", "Call Back Functions")
+            obj.Add(new ToolboxItemData("callbackfunc", "/LuaSTGPlusNodeLib;component/images/callbackfunc.png", "Call Back Functions")
                 , new AddNode(AddCallBackFuncNode));
-            obj.Add(new ToolboxItemData("defaultaction", "/LuaSTGNodeLib;component/images/defaultaction.png", "Default Action")
+            obj.Add(new ToolboxItemData("defaultaction", "/LuaSTGPlusNodeLib;component/images/defaultaction.png", "Default Action")
                 , new AddNode(AddDefaultActionNode));
             obj.Add(new ToolboxItemData(true), null);
-            obj.Add(new ToolboxItemData("setv", "/LuaSTGNodeLib;component/images/setv.png", "Set Velocity")
+            obj.Add(new ToolboxItemData("setv", "/LuaSTGPlusNodeLib;component/images/setv.png", "Set Velocity")
                 , new AddNode(AddSetVNode));
-            obj.Add(new ToolboxItemData("seta", "/LuaSTGNodeLib;component/images/setaccel.png", "Set Acceleration")
+            obj.Add(new ToolboxItemData("seta", "/LuaSTGPlusNodeLib;component/images/setaccel.png", "Set Acceleration")
                 , new AddNode(AddSetANode));
-            obj.Add(new ToolboxItemData("setg", "/LuaSTGNodeLib;component/images/setgravity.png", "Set Gravity")
+            obj.Add(new ToolboxItemData("setg", "/LuaSTGPlusNodeLib;component/images/setgravity.png", "Set Gravity")
                 , new AddNode(AddSetGNode));
-            obj.Add(new ToolboxItemData("setvlim", "/LuaSTGNodeLib;component/images/setfv.png", "Set Velocity Limit")
+            obj.Add(new ToolboxItemData("setvlim", "/LuaSTGPlusNodeLib;component/images/setfv.png", "Set Velocity Limit")
                 , new AddNode(AddSetVLimitNode));
-            obj.Add(new ToolboxItemData("delete", "/LuaSTGNodeLib;component/images/unitdel.png", "Delete Unit")
+            obj.Add(new ToolboxItemData("delete", "/LuaSTGPlusNodeLib;component/images/unitdel.png", "Delete Unit")
                 , new AddNode(AddDelNode));
-            obj.Add(new ToolboxItemData("kill", "/LuaSTGNodeLib;component/images/unitkill.png", "Kill Unit")
+            obj.Add(new ToolboxItemData("kill", "/LuaSTGPlusNodeLib;component/images/unitkill.png", "Kill Unit")
                 , new AddNode(AddKillNode));
             obj.Add(new ToolboxItemData(true), null);
-            obj.Add(new ToolboxItemData("setimage", "/LuaSTGNodeLib;component/images/objectsetimg.png", "Set Image")
+            obj.Add(new ToolboxItemData("setimage", "/LuaSTGPlusNodeLib;component/images/objectsetimg.png", "Set Image")
                 , new AddNode(AddSetObjectImageNode));
             obj.Add(new ToolboxItemData(true), null);
-            obj.Add(new ToolboxItemData("setblend", "/LuaSTGNodeLib;component/images/setcolor.png", "Set Color and Blend Mode")
+            obj.Add(new ToolboxItemData("setblend", "/LuaSTGPlusNodeLib;component/images/setcolor.png", "Set Color and Blend Mode")
                 , new AddNode(AddSetBlendNode));
             obj.Add(new ToolboxItemData(true), null);
-            obj.Add(new ToolboxItemData("setbinding", "/LuaSTGNodeLib;component/images/connect.png", "Set Parent")
+            obj.Add(new ToolboxItemData("setbinding", "/LuaSTGPlusNodeLib;component/images/connect.png", "Set Parent")
                 , new AddNode(AddSetBindingNode));
-            obj.Add(new ToolboxItemData("setrelativepos", "/LuaSTGNodeLib;component/images/setrelpos.png", "Set Relative Position")
+            obj.Add(new ToolboxItemData("setrelativepos", "/LuaSTGPlusNodeLib;component/images/setrelpos.png", "Set Relative Position")
                 , new AddNode(AddSetRelativePositionNode));
             obj.Add(new ToolboxItemData(true), null);
-            obj.Add(new ToolboxItemData("smear", "/LuaSTGNodeLib;component/images/smear.png", "Create Smear")
+            obj.Add(new ToolboxItemData("smear", "/LuaSTGPlusNodeLib;component/images/smear.png", "Create Smear")
                 , new AddNode(AddMakeSmearNode));
             obj.Add(new ToolboxItemData(true), null);
-            obj.Add(new ToolboxItemData("dropitem", "/LuaSTGNodeLib;component/images/dropitem.png", "Drop Item")
+            obj.Add(new ToolboxItemData("dropitem", "/LuaSTGPlusNodeLib;component/images/dropitem.png", "Drop Item")
                 , new AddNode(AddDropItemNode));
             obj.Add(new ToolboxItemData(true), null);
-            obj.Add(new ToolboxItemData("groupforeach", "/LuaSTGNodeLib;component/images/unitforeach.png", "For Each Unit in Group")
+            obj.Add(new ToolboxItemData("groupforeach", "/LuaSTGPlusNodeLib;component/images/unitforeach.png", "For Each Unit in Group")
                 , new AddNode(AddGroupForEachNode));
             #endregion
             ToolInfo.Add("Object", obj);
 
             var graphics = new Dictionary<ToolboxItemData, AddNode>();
             #region graphics
-            graphics.Add(new ToolboxItemData("loadimage", "/LuaSTGNodeLib;component/images/loadimage.png", "Load Image")
+            graphics.Add(new ToolboxItemData("loadimage", "/LuaSTGPlusNodeLib;component/images/loadimage.png", "Load Image")
                 , new AddNode(AddLoadImageNode));
-            graphics.Add(new ToolboxItemData("loadimagegroup", "/LuaSTGNodeLib;component/images/loadimagegroup.png", "Load Image Group")
+            graphics.Add(new ToolboxItemData("loadimagegroup", "/LuaSTGPlusNodeLib;component/images/loadimagegroup.png", "Load Image Group")
                 , new AddNode(AddLoadImageGroupNode));
-            graphics.Add(new ToolboxItemData("loadparticle", "/LuaSTGNodeLib;component/images/loadparticle.png", "Load Particle")
+            graphics.Add(new ToolboxItemData("loadparticle", "/LuaSTGPlusNodeLib;component/images/loadparticle.png", "Load Particle")
                 , new AddNode(AddLoadParticleNode));
-            graphics.Add(new ToolboxItemData("loadani", "/LuaSTGNodeLib;component/images/loadani.png", "Load Animation")
+            graphics.Add(new ToolboxItemData("loadani", "/LuaSTGPlusNodeLib;component/images/loadani.png", "Load Animation")
                 , new AddNode(AddLoadAnimationNode));
-            graphics.Add(new ToolboxItemData("loadfx", "/LuaSTGNodeLib;component/images/loadFX.png", "Load FX")
+            graphics.Add(new ToolboxItemData("loadfx", "/LuaSTGPlusNodeLib;component/images/loadFX.png", "Load FX")
                 , new AddNode(AddLoadFXNode));
             #endregion
             ToolInfo.Add("Graphics", graphics);
 
             var audio = new Dictionary<ToolboxItemData, AddNode>();
             #region audio
-            audio.Add(new ToolboxItemData("loadse", "/LuaSTGNodeLib;component/images/loadsound.png", "Load Sound Effect")
+            audio.Add(new ToolboxItemData("loadse", "/LuaSTGPlusNodeLib;component/images/loadsound.png", "Load Sound Effect")
                 , new AddNode(AddLoadSENode));
-            audio.Add(new ToolboxItemData("playse", "/LuaSTGNodeLib;component/images/playsound.png", "Play Sound Effect")
+            audio.Add(new ToolboxItemData("playse", "/LuaSTGPlusNodeLib;component/images/playsound.png", "Play Sound Effect")
                 , new AddNode(AddPlaySENode));
             audio.Add(new ToolboxItemData(true), null);
-            audio.Add(new ToolboxItemData("loadbgm", "/LuaSTGNodeLib;component/images/loadbgm.png", "Load Background Music")
+            audio.Add(new ToolboxItemData("loadbgm", "/LuaSTGPlusNodeLib;component/images/loadbgm.png", "Load Background Music")
                 , new AddNode(AddLoadBGMNode));
-            audio.Add(new ToolboxItemData("playbgm", "/LuaSTGNodeLib;component/images/playbgm.png", "Play Background Music")
+            audio.Add(new ToolboxItemData("playbgm", "/LuaSTGPlusNodeLib;component/images/playbgm.png", "Play Background Music")
                 , new AddNode(AddPlayBGMNode));
-            audio.Add(new ToolboxItemData("pausebgm", "/LuaSTGNodeLib;component/images/pausebgm.png", "Pause Background Music")
+            audio.Add(new ToolboxItemData("pausebgm", "/LuaSTGPlusNodeLib;component/images/pausebgm.png", "Pause Background Music")
                 , new AddNode(AddPauseBGMNode));
-            audio.Add(new ToolboxItemData("resumebgm", "/LuaSTGNodeLib;component/images/resumebgm.png", "Resume Background Music")
+            audio.Add(new ToolboxItemData("resumebgm", "/LuaSTGPlusNodeLib;component/images/resumebgm.png", "Resume Background Music")
                 , new AddNode(AddResumeBGMNode));
-            audio.Add(new ToolboxItemData("stopbgm", "/LuaSTGNodeLib;component/images/stopbgm.png", "Stop Background Music")
+            audio.Add(new ToolboxItemData("stopbgm", "/LuaSTGPlusNodeLib;component/images/stopbgm.png", "Stop Background Music")
                 , new AddNode(AddStopBGMNode));
             #endregion
             ToolInfo.Add("Audio", audio);
@@ -290,19 +289,19 @@ namespace LuaSTGEditorSharp
 
             var render = new Dictionary<ToolboxItemData, AddNode>();
             #region render
-            render.Add(new ToolboxItemData("onrender", "/LuaSTGNodeLib;component/images/onrender.png", "On Render")
+            render.Add(new ToolboxItemData("onrender", "/LuaSTGPlusNodeLib;component/images/onrender.png", "On Render")
                 , new AddNode(AddOnRenderNode));
             render.Add(new ToolboxItemData(true), null);
-            render.Add(new ToolboxItemData("r4v", "/LuaSTGNodeLib;component/images/render4v.png", "Render4V")
+            render.Add(new ToolboxItemData("r4v", "/LuaSTGPlusNodeLib;component/images/render4v.png", "Render4V")
                 , new AddNode(AddR4VNode));
             render.Add(new ToolboxItemData(true), null);
-            render.Add(new ToolboxItemData("creatertar", "/LuaSTGNodeLib;component/images/CreateRenderTarget.png", "Create Render Target")
+            render.Add(new ToolboxItemData("creatertar", "/LuaSTGPlusNodeLib;component/images/CreateRenderTarget.png", "Create Render Target")
                 , new AddNode(AddCreateRenderTargetNode));
-            render.Add(new ToolboxItemData("rtarop", "/LuaSTGNodeLib;component/images/RenderTarget.png", "Push/Pop Render Target")
+            render.Add(new ToolboxItemData("rtarop", "/LuaSTGPlusNodeLib;component/images/RenderTarget.png", "Push/Pop Render Target")
                 , new AddNode(AddRenderTargetNode));
-            //render.Add(new ToolboxItemData("cap", "/LuaSTGNodeLib;component/images/PostEffectCapture.png", "Begin Texture Capturing")
+            //render.Add(new ToolboxItemData("cap", "/LuaSTGPlusNodeLib;component/images/PostEffectCapture.png", "Begin Texture Capturing")
             //    , new AddNode(AddPostEffectCaptureNode));
-            render.Add(new ToolboxItemData("posteff", "/LuaSTGNodeLib;component/images/PostEffect.png", "Post Effect")
+            render.Add(new ToolboxItemData("posteff", "/LuaSTGPlusNodeLib;component/images/PostEffect.png", "Post Effect")
                 , new AddNode(AddPostEffectNode));
             #endregion
             ToolInfo.Add("Render", render);

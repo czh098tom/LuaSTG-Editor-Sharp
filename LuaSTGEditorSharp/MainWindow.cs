@@ -18,7 +18,7 @@ using LuaSTGEditorSharp.EditorData.Node.Project;
 
 namespace LuaSTGEditorSharp
 {
-    partial class MainWindow : Window
+    partial class MainWindow : Window, IMainWindow
     {
         public AbstractToolbox toolbox;
 

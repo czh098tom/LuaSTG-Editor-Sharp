@@ -1,0 +1,669 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{BD1CA1E6-9E34-4098-AE65-922F23670F75}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>LuaSTGEditorSharp</RootNamespace>
+    <AssemblyName>LuaSTGEditorSharp.Core</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ICSharpCode.AvalonEdit, Version=6.0.1.278, Culture=neutral, PublicKeyToken=9cc39be672370310, processorArchitecture=MSIL">
+      <HintPath>..\packages\AvalonEdit.6.0.1\lib\net45\ICSharpCode.AvalonEdit.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=1.2.0.246, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpZipLib.1.2.0\lib\net45\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AppConstants.cs" />
+    <Compile Include="EditorData\AttrItem.cs" />
+    <Compile Include="EditorData\Command.cs" />
+    <Compile Include="EditorData\Commands\DeleteCommand.cs" />
+    <Compile Include="EditorData\Commands\EditAttrCommand.cs" />
+    <Compile Include="EditorData\Commands\FoldRegionCommand.cs" />
+    <Compile Include="EditorData\Commands\InsertAfterCommand.cs" />
+    <Compile Include="EditorData\Commands\InsertAsChildCommand.cs" />
+    <Compile Include="EditorData\Commands\InsertAsParentCommand.cs" />
+    <Compile Include="EditorData\Commands\InsertBeforeCommand.cs" />
+    <Compile Include="EditorData\Commands\InsertCommand.cs" />
+    <Compile Include="EditorData\Commands\MoveCommand.cs" />
+    <Compile Include="EditorData\Commands\SwitchBanCommand.cs" />
+    <Compile Include="EditorData\Commands\UnfoldAsRegionCommand.cs" />
+    <Compile Include="EditorData\CompileProcess.cs" />
+    <Compile Include="EditorData\Compile\DefineMarcoSettings.cs" />
+    <Compile Include="EditorData\Compile\PartialProjectProcess.cs" />
+    <Compile Include="EditorData\Compile\ProjectProcess.cs" />
+    <Compile Include="EditorData\Compile\SingleFileProcess.cs" />
+    <Compile Include="EditorData\DependencyAttrItem.cs" />
+    <Compile Include="EditorData\DocumentData.cs" />
+    <Compile Include="EditorData\Document\AbstractMetaData.cs" />
+    <Compile Include="EditorData\Document\DocumentCollection.cs" />
+    <Compile Include="EditorData\Document\MetaDataEntity.cs" />
+    <Compile Include="EditorData\Document\MetaInfo.cs" />
+    <Compile Include="EditorData\Document\MetaInfoCollection.cs" />
+    <Compile Include="EditorData\Document\MetaInfoCollectionTypeCountAttribute.cs" />
+    <Compile Include="EditorData\Document\MetaInfoDict.cs" />
+    <Compile Include="EditorData\Document\Meta\MetaModel.cs" />
+    <Compile Include="EditorData\Document\Meta\ProjectFileMetaInfo.cs" />
+    <Compile Include="EditorData\Document\Meta\UserDefinedNodeMetaInfo.cs" />
+    <Compile Include="EditorData\Document\PlainDocumentData.cs" />
+    <Compile Include="EditorData\Document\ProjectData.cs" />
+    <Compile Include="EditorData\Document\VirtualDoc.cs" />
+    <Compile Include="EditorData\DummyDoc.cs" />
+    <Compile Include="EditorData\EditorSerializer.cs" />
+    <Compile Include="EditorData\EditorTypeBinder.cs" />
+    <Compile Include="EditorData\Exception\EXEPathNotSetException.cs" />
+    <Compile Include="EditorData\Exception\InvalidRelativeResPathException.cs" />
+    <Compile Include="EditorData\GlobalCompileData.cs" />
+    <Compile Include="EditorData\InputWindowSelector.cs" />
+    <Compile Include="EditorData\Interfaces\IAggregatableMeta.cs" />
+    <Compile Include="EditorData\Interfaces\IDocumentWithMeta.cs" />
+    <Compile Include="EditorData\Interfaces\IMessageThrowable.cs" />
+    <Compile Include="EditorData\Interfaces\IMetaInfoCollection.cs" />
+    <Compile Include="EditorData\ITypeEnumerable.cs" />
+    <Compile Include="EditorData\MessageBase.cs" />
+    <Compile Include="EditorData\MessageContainer.cs" />
+    <Compile Include="EditorData\Message\ArgNotNullMessage.cs" />
+    <Compile Include="EditorData\Message\AttributeMismatchMessage.cs" />
+    <Compile Include="EditorData\Message\InvalidArchiveSpaceMessage.cs" />
+    <Compile Include="EditorData\Message\RepeatedNameMessage.cs" />
+    <Compile Include="EditorData\Message\VarNameInvalidMessage.cs" />
+    <Compile Include="EditorData\Node\AbstractNodeTypeCache.cs" />
+    <Compile Include="EditorData\Node\Advanced\AdvancedRepeat\AdvancedRepeat.cs" />
+    <Compile Include="EditorData\Node\Advanced\AdvancedRepeat\IncrementVariable.cs" />
+    <Compile Include="EditorData\Node\Advanced\AdvancedRepeat\LinearVariable.cs" />
+    <Compile Include="EditorData\Node\Advanced\AdvancedRepeat\ReboundingVariable.cs" />
+    <Compile Include="EditorData\Node\Advanced\AdvancedRepeat\SinusoidalInterpolationVariable.cs" />
+    <Compile Include="EditorData\Node\Advanced\AdvancedRepeat\SinusoidalMovementVariable.cs" />
+    <Compile Include="EditorData\Node\Advanced\AdvancedRepeat\SinusoidalOscillationVariable.cs" />
+    <Compile Include="EditorData\Node\Advanced\AdvancedRepeat\VariableCollection.cs" />
+    <Compile Include="EditorData\Node\Advanced\AdvancedRepeat\VariableTransformation.cs" />
+    <Compile Include="EditorData\Node\Advanced\ArchiveSpaceIndicator.cs" />
+    <Compile Include="EditorData\Node\Advanced\DefineMacro.cs" />
+    <Compile Include="EditorData\Node\Advanced\Region.cs" />
+    <Compile Include="EditorData\Node\Advanced\UnidentifiedNode.cs" />
+    <Compile Include="EditorData\Node\Advanced\UserDefinedNode.cs" />
+    <Compile Include="EditorData\Node\AttrItemListHelper.cs" />
+    <Compile Include="EditorData\Node\EditorVersion.cs" />
+    <Compile Include="EditorData\Node\General\AddFile.cs" />
+    <Compile Include="EditorData\Node\General\Break.cs" />
+    <Compile Include="EditorData\Node\General\Code.cs" />
+    <Compile Include="EditorData\Node\General\CodeBlock.cs" />
+    <Compile Include="EditorData\Node\General\CodeSegment.cs" />
+    <Compile Include="EditorData\Node\General\Comment.cs" />
+    <Compile Include="EditorData\Node\General\Folder.cs" />
+    <Compile Include="EditorData\Node\General\IfElse.cs" />
+    <Compile Include="EditorData\Node\General\IfElseIf.cs" />
+    <Compile Include="EditorData\Node\General\IfNode.cs" />
+    <Compile Include="EditorData\Node\General\IfThen.cs" />
+    <Compile Include="EditorData\Node\General\Patch.cs" />
+    <Compile Include="EditorData\Node\General\Repeat.cs" />
+    <Compile Include="EditorData\Node\GroupableAttrItemHelper.cs" />
+    <Compile Include="EditorData\Node\IIfChild.cs" />
+    <Compile Include="EditorData\Node\NodeAttributes\CannotBanAttribute.cs" />
+    <Compile Include="EditorData\Node\NodeAttributes\CannotDeleteAttribute.cs" />
+    <Compile Include="EditorData\Node\NodeAttributes\ClassNodeAttribute.cs" />
+    <Compile Include="EditorData\Node\NodeAttributes\CreateInvokeAttribute.cs" />
+    <Compile Include="EditorData\Node\NodeAttributes\DCInvokeAttributeAttribute.cs" />
+    <Compile Include="EditorData\Node\NodeAttributes\IgnoreParityCheckAttribute.cs" />
+    <Compile Include="EditorData\Node\NodeAttributes\IgnoreValidationAttribute.cs" />
+    <Compile Include="EditorData\Node\NodeAttributes\LeafNodeAttribute.cs" />
+    <Compile Include="EditorData\Node\NodeAttributes\NodeAttributeAttribute.cs" />
+    <Compile Include="EditorData\Node\NodeAttributes\NodeIconAttribute.cs" />
+    <Compile Include="EditorData\Node\NodeAttributes\RequireAncestorAttribute.cs" />
+    <Compile Include="EditorData\Node\NodeAttributes\RequireParentAttribute.cs" />
+    <Compile Include="EditorData\Node\NodeAttributes\RootNodeAttribute.cs" />
+    <Compile Include="EditorData\Node\NodeAttributes\UniquenessAttribute.cs" />
+    <Compile Include="EditorData\Node\Project\ProjectFile.cs" />
+    <Compile Include="EditorData\Node\Project\ProjectRoot.cs" />
+    <Compile Include="EditorData\Node\ProjSettings.cs" />
+    <Compile Include="EditorData\Node\RootFolder.cs" />
+    <Compile Include="EditorData\Node\TypeCacheData.cs" />
+    <Compile Include="EditorData\RelativePathConverter.cs" />
+    <Compile Include="EditorData\TreeNode.cs" />
+    <Compile Include="EditorData\TreeNodeEventHandlers.cs" />
+    <Compile Include="EditorData\WorkTree.cs" />
+    <Compile Include="Execution\DebugView.cs" />
+    <Compile Include="Execution\Execution.cs" />
+    <Compile Include="Execution\ExecutionConfig.cs" />
+    <Compile Include="Execution\ExecutionType.cs" />
+    <Compile Include="IAppDebugSettings.cs" />
+    <Compile Include="IAppSettings.cs" />
+    <Compile Include="IMainWindow.cs" />
+    <Compile Include="Lua\IndentionGenerator.cs" />
+    <Compile Include="Lua\SpaceIndention.cs" />
+    <Compile Include="Lua\StaticAnalysis.cs" />
+    <Compile Include="Lua\StringParser.cs" />
+    <Compile Include="Lua\SyntaxHighlightLoader.cs" />
+    <Compile Include="Lua\TabIndentation.cs" />
+    <Compile Include="Plugin\AbstractPluginEntry.cs" />
+    <Compile Include="Plugin\AbstractToolbox.cs" />
+    <Compile Include="Plugin\DefaultNullPlugin\DefaultExecution.cs" />
+    <Compile Include="Plugin\DefaultNullPlugin\DefaultInputWindowSelectorRegister.cs" />
+    <Compile Include="Plugin\DefaultNullPlugin\DefaultMetaData.cs" />
+    <Compile Include="Plugin\DefaultNullPlugin\DefaultNodeTypeCache.cs" />
+    <Compile Include="Plugin\DefaultNullPlugin\DefaultPluginEntry.cs" />
+    <Compile Include="Plugin\DefaultNullPlugin\DefaultToolBox.cs" />
+    <Compile Include="Plugin\DefaultNullPlugin\DefaultViewDefinition.xaml.cs">
+      <DependentUpon>DefaultViewDefinition.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Plugin\IInputWindowSelectorRegister.cs" />
+    <Compile Include="Plugin\IViewDefinition.cs" />
+    <Compile Include="Plugin\PluginHandler.cs" />
+    <Compile Include="Plugin\PluginToolDefinition.cs" />
+    <Compile Include="Plugin\PluginToolParameter.cs" />
+    <Compile Include="Plugin\PluginToolResult.cs" />
+    <Compile Include="Plugin\SystemMetaLoader.cs" />
+    <Compile Include="Plugin\ToolboxItemData.cs" />
+    <Compile Include="Plugin\ToolboxTab.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Toolbox\SearchModel.cs" />
+    <Compile Include="Util\BitmapUtil.cs" />
+    <Compile Include="Util\DictionaryExtension.cs" />
+    <Compile Include="Windows\AboutNode.xaml.cs">
+      <DependentUpon>AboutNode.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\CodePreviewWindow.xaml.cs">
+      <DependentUpon>CodePreviewWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Input\CodeInput.xaml.cs">
+      <DependentUpon>CodeInput.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Input\InputWindow.cs" />
+    <Compile Include="Windows\Input\NodeDefInput.xaml.cs">
+      <DependentUpon>NodeDefInput.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Input\PathInput.xaml.cs">
+      <DependentUpon>PathInput.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Input\Selector.xaml.cs">
+      <DependentUpon>Selector.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Input\SingleLineInput.xaml.cs">
+      <DependentUpon>SingleLineInput.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\ViewDefinitionBase.cs" />
+    <Compile Include="Zip\ZipCompressor.cs" />
+    <Compile Include="Zip\ZipCompressorBatch.cs" />
+    <Compile Include="Zip\ZipCompressorInternal.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Plugin\DefaultNullPlugin\DefaultViewDefinition.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\AboutNode.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\CodePreviewWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\Input\CodeInput.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\Input\NodeDefInput.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\Input\PathInput.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\Input\Selector.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\Input\SingleLineInput.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\advancedrepeat.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\break.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\callbackfunc.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\code.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\codeblock.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\codesegment.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\comment.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\definemacro.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\else.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\elseif.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\folder.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\if.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\LinearVariable.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\pack.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\patch.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\ReboundingVariable.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\region.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\repeat.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\SinusoidalInterpolationVariable.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\SinusoidalMovementVariable.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\SinusoidalOscillationVariable.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\then.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\unidentifiedNode.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\userdefinednode.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\advancedrepeat.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\archispace.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\break.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\bullet\arrow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\bullet\bigball.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\bullet\bigball_dark.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\bullet\bigstar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\bullet\blackgrain.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\bullet\bullet.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\bullet\butterfly.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\bullet\chain.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\bullet\circle.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\bullet\drip.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\bullet\ellipse.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\bullet\fire.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\bullet\fire_dark.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\bullet\grain.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\bullet\heart.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\bullet\knife.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\bullet\lightball.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\bullet\lightball_dark.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\bullet\middleball.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\bullet\mildew.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\bullet\money.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\bullet\music.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\bullet\needle.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\bullet\ofuda.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\bullet\point.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\bullet\scale.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\bullet\silence.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\bullet\smallball.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\bullet\smallstar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\bullet\sword.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\code.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\codeblock.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\codesegment.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\color\COLOR_BLUE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\color\COLOR_CHARTREUSE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\color\COLOR_CYAN.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\color\COLOR_DEEP_BLUE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\color\COLOR_DEEP_GRAY.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\color\COLOR_DEEP_GREEN.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\color\COLOR_DEEP_PURPLE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\color\COLOR_DEEP_RED.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\color\COLOR_GOLDEN_YELLOW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\color\COLOR_GRAY.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\color\COLOR_GREEN.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\color\COLOR_ORANGE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\color\COLOR_PURPLE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\color\COLOR_RED.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\color\COLOR_ROYAL_BLUE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\color\COLOR_YELLOW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\comment.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\definemacro.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\elseif.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\enemy\enemy1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\enemy\enemy10.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\enemy\enemy11.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\enemy\enemy12.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\enemy\enemy13.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\enemy\enemy14.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\enemy\enemy15.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\enemy\enemy16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\enemy\enemy17.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\enemy\enemy18.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\enemy\enemy19.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\enemy\enemy2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\enemy\enemy20.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\enemy\enemy21.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\enemy\enemy22.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\enemy\enemy23.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\enemy\enemy24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\enemy\enemy25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\enemy\enemy26.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\enemy\enemy27.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\enemy\enemy28.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\enemy\enemy29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\enemy\enemy3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\enemy\enemy30.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\enemy\enemy31.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\enemy\enemy32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\enemy\enemy33.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\enemy\enemy34.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\enemy\enemy4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\enemy\enemy5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\enemy\enemy6.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\enemy\enemy7.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\enemy\enemy8.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\enemy\enemy9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\Error.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\folder.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\if.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\Info.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\LinearVariable.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\pack.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\patch.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\ReboundingVariable.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\region.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\repeat.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\SinusoidalInterpolationVariable.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\SinusoidalMovementVariable.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\SinusoidalOscillationVariable.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\unidentifiedNode.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\userdefinednode.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\Warning.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Lua\LuaSyntax.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="LuaSTGEditorSharp.Core.dependencies">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\setting.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\archispace.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

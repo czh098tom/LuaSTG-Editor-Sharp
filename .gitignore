@@ -264,3 +264,4 @@ __pycache__/
 #Setup
 Setup/
 WiXSetup/
+WixSetupBootstrapper/

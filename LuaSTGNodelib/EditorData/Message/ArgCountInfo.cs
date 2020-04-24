@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using LuaSTGEditorSharp.EditorData.Interfaces;
 using LuaSTGEditorSharp.EditorData.Document;
 
@@ -33,7 +34,7 @@ namespace LuaSTGEditorSharp.EditorData.Message
 
         public override void Invoke()
         {
-            (App.Current.MainWindow as MainWindow).Reveal(Source as TreeNode);
+            (Application.Current.MainWindow as IMainWindow).Reveal(Source as TreeNode);
         }
     }
 }

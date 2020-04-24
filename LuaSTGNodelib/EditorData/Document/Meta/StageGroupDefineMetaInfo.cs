@@ -60,7 +60,7 @@ namespace LuaSTGEditorSharp.EditorData.Document.Meta
         {
             MetaModel parent = new MetaModel
             {
-                Icon = "/LuaSTGNodeLib;component/images/16x16/stagegroup.png",
+                Icon = "/LuaSTGPlusNodeLib;component/images/16x16/stagegroup.png",
                 Text = Name
             };
             MetaModel child;
@@ -69,7 +69,7 @@ namespace LuaSTGEditorSharp.EditorData.Document.Meta
             {
                 child = new MetaModel()
                 {
-                    Icon = "/LuaSTGNodeLib;component/images/16x16/stage.png",
+                    Icon = "/LuaSTGPlusNodeLib;component/images/16x16/stage.png",
                     Text = s
                 };
                 parent.Children.Add(child);
@@ -84,7 +84,7 @@ namespace LuaSTGEditorSharp.EditorData.Document.Meta
                 Result = "\"" + FullName + "\"",
                 Text = FullName,
                 FullName = FullName,
-                Icon = "/LuaSTGNodeLib;component/images/16x16/stagegroup.png"
+                Icon = "/LuaSTGPlusNodeLib;component/images/16x16/stagegroup.png"
             };
         }
     }

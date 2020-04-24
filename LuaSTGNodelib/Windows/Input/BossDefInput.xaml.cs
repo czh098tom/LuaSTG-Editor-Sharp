@@ -27,7 +27,7 @@ namespace LuaSTGEditorSharp.Windows.Input
 
         ObservableCollection<MetaModel> BulletInfo { get; set; }
 
-        public BossDefInput(string s, MainWindow owner, AttrItem item)
+        public BossDefInput(string s, IMainWindow owner, AttrItem item)
         {
             difficulty = item.Parent.GetDifficulty();
 

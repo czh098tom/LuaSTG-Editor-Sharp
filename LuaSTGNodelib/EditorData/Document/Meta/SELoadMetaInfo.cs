@@ -47,12 +47,12 @@ namespace LuaSTGEditorSharp.EditorData.Document.Meta
         {
             MetaModel metaModel = new MetaModel
             {
-                Icon = "/LuaSTGNodeLib;component/images/16x16/loadsound.png",
+                Icon = "/LuaSTGPlusNodeLib;component/images/16x16/loadsound.png",
                 Text = Name
             };
             MetaModel path = new MetaModel
             {
-                Icon = "/LuaSTGNodeLib;component/images/16x16/properties.png",
+                Icon = "/LuaSTGPlusNodeLib;component/images/16x16/properties.png",
                 Text = StringParser.ParseLua(target.attributes[0].AttrInput)
             };
             metaModel.Children.Add(path);
@@ -89,7 +89,7 @@ namespace LuaSTGEditorSharp.EditorData.Document.Meta
                 Result = "\"" + FullName + "\"",
                 Text = FullName,
                 FullName = FullName,
-                Icon = "/LuaSTGNodeLib;component/images/16x16/loadsound.png",
+                Icon = "/LuaSTGPlusNodeLib;component/images/16x16/loadsound.png",
                 ExInfo1 = ppath
             };
         }

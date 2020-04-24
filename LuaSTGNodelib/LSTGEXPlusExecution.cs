@@ -11,7 +11,7 @@ namespace LuaSTGEditorSharp
     {
         public override void BeforeRun(ExecutionConfig config)
         {
-            App currentApp = App.Current as App;
+            IAppDebugSettings currentApp = System.Windows.Application.Current as IAppDebugSettings;
             Parameter= "\"" 
                 + "start_game=true is_debug=true setting.nosplash=true setting.windowed="
                 + currentApp.DebugWindowed.ToString().ToLower() + " setting.resx=" + currentApp.DebugResolutionX

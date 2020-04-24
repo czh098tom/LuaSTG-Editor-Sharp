@@ -3,10 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:LuaSTGEditorSharp.Windows.Input;assembly=LuaSTGEditorSharp"
+        xmlns:local="clr-namespace:LuaSTGEditorSharp.Windows.Input;assembly=LuaSTGEditorSharp.Core"
         xmlns:cv="clr-namespace:LuaSTGEditorSharp.Windows.Input.Canvas"
         xmlns:conv="clr-namespace:LuaSTGEditorSharp.Windows.Input.Converter"
-        xmlns:tool="clr-namespace:LuaSTGEditorSharp.Toolbox;assembly=LuaSTGEditorSharp"
         mc:Ignorable="d"
         Title="Choose Image" Height="475.012" Width="840.879" MinHeight="100" MinWidth="200"
                    Loaded="InputWindow_Loaded">

@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:w="clr-namespace:LuaSTGEditorSharp.Windows;assembly=LuaSTGEditorSharp"
+        xmlns:w="clr-namespace:LuaSTGEditorSharp.Windows;assembly=LuaSTGEditorSharp.Core"
         xmlns:local="clr-namespace:LuaSTGEditorSharp.Windows"
         mc:Ignorable="d"
         Title="Definition" Height="450" Width="800">

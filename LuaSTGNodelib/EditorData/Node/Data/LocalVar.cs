@@ -32,7 +32,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Data
         {
             string sp = Indent(spacing);
             if (!int.TryParse(attributes[0].AttrInput, out int nAttr)) nAttr = 0;
-            nAttr = nAttr > App.mxUAttr ? App.mxUAttr : nAttr;
+            nAttr = nAttr > AppConstants.mxUAttr ? AppConstants.mxUAttr : nAttr;
             nAttr = nAttr < 0 ? 0 : nAttr;
             for (int i = 1; i <= nAttr * 2 - 1; i += 2)
             {
@@ -54,7 +54,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Data
         {
             int count = 0;
             if (!int.TryParse(attributes[0].AttrInput, out int nAttr)) nAttr = 0;
-            nAttr = nAttr > App.mxUAttr ? App.mxUAttr : nAttr;
+            nAttr = nAttr > AppConstants.mxUAttr ? AppConstants.mxUAttr : nAttr;
             nAttr = nAttr < 0 ? 0 : nAttr;
             for (int i = 1; i <= nAttr * 2 - 1; i += 2)
             {
@@ -70,7 +70,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Data
         {
             string bres = "local:";
             if (!int.TryParse(attributes[0].AttrInput, out int nAttr)) nAttr = 0;
-            nAttr = nAttr > App.mxUAttr ? App.mxUAttr : nAttr;
+            nAttr = nAttr > AppConstants.mxUAttr ? AppConstants.mxUAttr : nAttr;
             nAttr = nAttr < 0 ? 0 : nAttr;
             for (int i = 1; i <= nAttr * 2 - 1; i += 2)
             {
@@ -87,7 +87,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Data
         {
             int n = (attributes.Count - 1) / 2;
             if (!int.TryParse(NonMacrolize(0), out int nAttr)) nAttr = 0;
-            nAttr = nAttr > App.mxUAttr ? App.mxUAttr : nAttr;
+            nAttr = nAttr > AppConstants.mxUAttr ? AppConstants.mxUAttr : nAttr;
             nAttr = nAttr < 0 ? 0 : nAttr;
             if (n != nAttr)
             {
@@ -120,10 +120,10 @@ namespace LuaSTGEditorSharp.EditorData.Node.Data
         {
             List<MessageBase> messages = new List<MessageBase>();
             if (!int.TryParse(NonMacrolize(0), out int nAttr)) nAttr = 0;
-            if (nAttr > App.mxUAttr)
+            if (nAttr > AppConstants.mxUAttr)
             {
                 messages.Add(new ArgCountInfo(attributes[0].AttrCap, true, this));
-                nAttr = App.mxUAttr;
+                nAttr = AppConstants.mxUAttr;
             }
             if (nAttr <= 0) messages.Add(new ArgCountInfo(attributes[0].AttrCap, false, this));
             for(int i = 1; i < 2 * nAttr; i += 2)

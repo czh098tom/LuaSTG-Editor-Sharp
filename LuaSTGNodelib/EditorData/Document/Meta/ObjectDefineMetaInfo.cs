@@ -99,12 +99,12 @@ namespace LuaSTGEditorSharp.EditorData.Document.Meta
         {
             MetaModel parent = new MetaModel
             {
-                Icon = "/LuaSTGNodeLib;component/images/16x16/objectdefine.png",
+                Icon = "/LuaSTGPlusNodeLib;component/images/16x16/objectdefine.png",
                 Text = Name
             };
             MetaModel child = new MetaModel()
             {
-                Icon = "/LuaSTGNodeLib;component/images/16x16/callbackfunc.png",
+                Icon = "/LuaSTGPlusNodeLib;component/images/16x16/callbackfunc.png",
                 Text = "init"
             };
             parent.Children.Add(child);
@@ -114,7 +114,7 @@ namespace LuaSTGEditorSharp.EditorData.Document.Meta
             {
                 prop = new MetaModel
                 {
-                    Icon = "/LuaSTGNodeLib;component/images/16x16/properties.png",
+                    Icon = "/LuaSTGPlusNodeLib;component/images/16x16/properties.png",
                     Text = s
                 };
                 child.Children.Add(prop);
@@ -124,7 +124,7 @@ namespace LuaSTGEditorSharp.EditorData.Document.Meta
             {
                 child = new MetaModel
                 {
-                    Icon = "/LuaSTGNodeLib;component/images/16x16/callbackfunc.png",
+                    Icon = "/LuaSTGPlusNodeLib;component/images/16x16/callbackfunc.png",
                     Text = s
                 };
                 parent.Children.Add(child);
@@ -141,7 +141,7 @@ namespace LuaSTGEditorSharp.EditorData.Document.Meta
                 Difficulty = Difficulty,
                 FullName = FullName,
                 Param = Params,
-                Icon = "/LuaSTGNodeLib;component/images/16x16/objectdefine.png"
+                Icon = "/LuaSTGPlusNodeLib;component/images/16x16/objectdefine.png"
             };
         }
 

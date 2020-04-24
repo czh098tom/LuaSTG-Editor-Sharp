@@ -42,7 +42,7 @@ namespace LuaSTGEditorSharp
     /// <summary>
     /// MainWindow.xaml 的交互逻辑
     /// </summary>
-    public partial class MainWindow : Window, INotifyPropertyChanged
+    public partial class MainWindow : Window, INotifyPropertyChanged, IMainWindow
     {
         DocumentCollection Documents { get; } = new DocumentCollection();
 
@@ -326,13 +326,13 @@ namespace LuaSTGEditorSharp
         private bool SaveDoc(DocumentData doc)
         {
             propData.CommitEdit();
-            return doc.Save();
+            return doc.Save(App.Current as App);
         }
 
         private void SaveActiveFileAs()
         {
             propData.CommitEdit();
-            ActivatedWorkSpaceData.Save(true);
+            ActivatedWorkSpaceData.Save(App.Current as App, true);
         }
 
         private void CutNode()
@@ -604,7 +604,7 @@ namespace LuaSTGEditorSharp
                 current.GatherCompileInfo(currentApp);
                 current.CompileProcess.ProgressChanged += 
                     (o, e) => CompileWorker.ReportProgress(e.ProgressPercentage, e.UserState);
-                current.CompileProcess.ExecuteProcess(SCDebugger != null, StageDebugger != null);
+                current.CompileProcess.ExecuteProcess(SCDebugger != null, StageDebugger != null, App.Current as App);
                 process = current.CompileProcess;
             }
             else
@@ -612,7 +612,7 @@ namespace LuaSTGEditorSharp
                 pdd.parentProj.GatherCompileInfo(currentApp);
                 current.CompileProcess.ProgressChanged +=
                     (o, e) => CompileWorker.ReportProgress(e.ProgressPercentage, e.UserState);
-                pdd.parentProj.CompileProcess.ExecuteProcess(SCDebugger != null, StageDebugger != null);
+                pdd.parentProj.CompileProcess.ExecuteProcess(SCDebugger != null, StageDebugger != null, App.Current as App);
                 process = pdd.parentProj.CompileProcess;
             }
             args.Result = new object[] { process, arguments[3], arguments[4] };

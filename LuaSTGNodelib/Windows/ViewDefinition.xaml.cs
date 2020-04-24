@@ -47,7 +47,7 @@ namespace LuaSTGEditorSharp.Windows
         {
             MetaModel stageGroup = new MetaModel
             {
-                Icon = "/LuaSTGNodeLib;component/images/16x16/stagegroup.png",
+                Icon = "/LuaSTGPlusNodeLib;component/images/16x16/stagegroup.png",
                 Text = "Stage Group"
             };
             var a = data.Meta.aggregatableMetas[(int)MetaType.StageGroup].GetAllFullWithDifficulty("");
@@ -63,7 +63,7 @@ namespace LuaSTGEditorSharp.Windows
         {
             MetaModel bullet = new MetaModel
             {
-                Icon = "/LuaSTGNodeLib;component/images/16x16/bulletdefine.png",
+                Icon = "/LuaSTGPlusNodeLib;component/images/16x16/bulletdefine.png",
                 Text = "Bullets"
             };
 
@@ -72,7 +72,7 @@ namespace LuaSTGEditorSharp.Windows
             {
                 MetaModel bulletE = new MetaModel
                 {
-                    Icon = "/LuaSTGNodeLib;component/images/16x16/callbackfunc.png",
+                    Icon = "/LuaSTGPlusNodeLib;component/images/16x16/callbackfunc.png",
                     Text = "Easy"
                 };
                 foreach (MetaModel info in bulletEMeta)
@@ -87,7 +87,7 @@ namespace LuaSTGEditorSharp.Windows
             {
                 MetaModel bulletN = new MetaModel
                 {
-                    Icon = "/LuaSTGNodeLib;component/images/16x16/callbackfunc.png",
+                    Icon = "/LuaSTGPlusNodeLib;component/images/16x16/callbackfunc.png",
                     Text = "Normal"
                 };
                 foreach (MetaModel info in bulletNMeta)
@@ -102,7 +102,7 @@ namespace LuaSTGEditorSharp.Windows
             {
                 MetaModel bulletH = new MetaModel
                 {
-                    Icon = "/LuaSTGNodeLib;component/images/16x16/callbackfunc.png",
+                    Icon = "/LuaSTGPlusNodeLib;component/images/16x16/callbackfunc.png",
                     Text = "Hard"
                 };
                 foreach (MetaModel info in bulletHMeta)
@@ -117,7 +117,7 @@ namespace LuaSTGEditorSharp.Windows
             {
                 MetaModel bulletL = new MetaModel
                 {
-                    Icon = "/LuaSTGNodeLib;component/images/16x16/callbackfunc.png",
+                    Icon = "/LuaSTGPlusNodeLib;component/images/16x16/callbackfunc.png",
                     Text = "Lunatic"
                 };
                 foreach (MetaModel info in bulletLMeta)
@@ -132,7 +132,7 @@ namespace LuaSTGEditorSharp.Windows
             {
                 MetaModel bulletA = new MetaModel
                 {
-                    Icon = "/LuaSTGNodeLib;component/images/16x16/callbackfunc.png",
+                    Icon = "/LuaSTGPlusNodeLib;component/images/16x16/callbackfunc.png",
                     Text = "All"
                 };
                 foreach (MetaModel info in bulletAMeta)
@@ -149,7 +149,7 @@ namespace LuaSTGEditorSharp.Windows
         {
             MetaModel eobj = new MetaModel
             {
-                Icon = "/LuaSTGNodeLib;component/images/16x16/" + imgName,
+                Icon = "/LuaSTGPlusNodeLib;component/images/16x16/" + imgName,
                 Text = displayedName
             };
 
@@ -158,7 +158,7 @@ namespace LuaSTGEditorSharp.Windows
             {
                 MetaModel eobjE = new MetaModel
                 {
-                    Icon = "/LuaSTGNodeLib;component/images/16x16/callbackfunc.png",
+                    Icon = "/LuaSTGPlusNodeLib;component/images/16x16/callbackfunc.png",
                     Text = "Easy"
                 };
                 foreach (MetaModel info in eobjEMeta)
@@ -173,7 +173,7 @@ namespace LuaSTGEditorSharp.Windows
             {
                 MetaModel eobjN = new MetaModel
                 {
-                    Icon = "/LuaSTGNodeLib;component/images/16x16/callbackfunc.png",
+                    Icon = "/LuaSTGPlusNodeLib;component/images/16x16/callbackfunc.png",
                     Text = "Normal"
                 };
                 foreach (MetaModel info in eobjNMeta)
@@ -188,7 +188,7 @@ namespace LuaSTGEditorSharp.Windows
             {
                 MetaModel eobjH = new MetaModel
                 {
-                    Icon = "/LuaSTGNodeLib;component/images/16x16/callbackfunc.png",
+                    Icon = "/LuaSTGPlusNodeLib;component/images/16x16/callbackfunc.png",
                     Text = "Hard"
                 };
                 foreach (MetaModel info in eobjHMeta)
@@ -203,7 +203,7 @@ namespace LuaSTGEditorSharp.Windows
             {
                 MetaModel eobjL = new MetaModel
                 {
-                    Icon = "/LuaSTGNodeLib;component/images/16x16/callbackfunc.png",
+                    Icon = "/LuaSTGPlusNodeLib;component/images/16x16/callbackfunc.png",
                     Text = "Lunatic"
                 };
                 foreach (MetaModel info in eobjLMeta)
@@ -218,7 +218,7 @@ namespace LuaSTGEditorSharp.Windows
             {
                 MetaModel eobjA = new MetaModel
                 {
-                    Icon = "/LuaSTGNodeLib;component/images/16x16/callbackfunc.png",
+                    Icon = "/LuaSTGPlusNodeLib;component/images/16x16/callbackfunc.png",
                     Text = "All"
                 };
                 foreach (MetaModel info in eobjAMeta)
@@ -235,7 +235,7 @@ namespace LuaSTGEditorSharp.Windows
         {
             MetaModel bentlaser = new MetaModel
             {
-                Icon = "/LuaSTGNodeLib;component/images/16x16/laserbentdefine.png",
+                Icon = "/LuaSTGPlusNodeLib;component/images/16x16/laserbentdefine.png",
                 Text = "Bent Laser"
             };
 
@@ -244,7 +244,7 @@ namespace LuaSTGEditorSharp.Windows
             {
                 MetaModel bulletE = new MetaModel
                 {
-                    Icon = "/LuaSTGNodeLib;component/images/16x16/callbackfunc.png",
+                    Icon = "/LuaSTGPlusNodeLib;component/images/16x16/callbackfunc.png",
                     Text = "Easy"
                 };
                 foreach (MetaModel info in bentlaserEMeta)
@@ -259,7 +259,7 @@ namespace LuaSTGEditorSharp.Windows
             {
                 MetaModel bulletN = new MetaModel
                 {
-                    Icon = "/LuaSTGNodeLib;component/images/16x16/callbackfunc.png",
+                    Icon = "/LuaSTGPlusNodeLib;component/images/16x16/callbackfunc.png",
                     Text = "Normal"
                 };
                 foreach (MetaModel info in bentlaserNMeta)
@@ -274,7 +274,7 @@ namespace LuaSTGEditorSharp.Windows
             {
                 MetaModel bulletH = new MetaModel
                 {
-                    Icon = "/LuaSTGNodeLib;component/images/16x16/callbackfunc.png",
+                    Icon = "/LuaSTGPlusNodeLib;component/images/16x16/callbackfunc.png",
                     Text = "Hard"
                 };
                 foreach (MetaModel info in bentlaserHMeta)
@@ -289,7 +289,7 @@ namespace LuaSTGEditorSharp.Windows
             {
                 MetaModel bulletL = new MetaModel
                 {
-                    Icon = "/LuaSTGNodeLib;component/images/16x16/callbackfunc.png",
+                    Icon = "/LuaSTGPlusNodeLib;component/images/16x16/callbackfunc.png",
                     Text = "Lunatic"
                 };
                 foreach (MetaModel info in bentlaserLMeta)
@@ -304,7 +304,7 @@ namespace LuaSTGEditorSharp.Windows
             {
                 MetaModel bulletA = new MetaModel
                 {
-                    Icon = "/LuaSTGNodeLib;component/images/16x16/callbackfunc.png",
+                    Icon = "/LuaSTGPlusNodeLib;component/images/16x16/callbackfunc.png",
                     Text = "All"
                 };
                 foreach (MetaModel info in bentlaserAMeta)
@@ -321,7 +321,7 @@ namespace LuaSTGEditorSharp.Windows
         {
             MetaModel boss = new MetaModel
             {
-                Icon = "/LuaSTGNodeLib;component/images/16x16/bossdefine.png",
+                Icon = "/LuaSTGPlusNodeLib;component/images/16x16/bossdefine.png",
                 Text = "Boss"
             };
 
@@ -330,7 +330,7 @@ namespace LuaSTGEditorSharp.Windows
             {
                 MetaModel bossE = new MetaModel
                 {
-                    Icon = "/LuaSTGNodeLib;component/images/16x16/callbackfunc.png",
+                    Icon = "/LuaSTGPlusNodeLib;component/images/16x16/callbackfunc.png",
                     Text = "Easy"
                 };
                 foreach (MetaModel info in bossEMeta)
@@ -345,7 +345,7 @@ namespace LuaSTGEditorSharp.Windows
             {
                 MetaModel bossN = new MetaModel
                 {
-                    Icon = "/LuaSTGNodeLib;component/images/16x16/callbackfunc.png",
+                    Icon = "/LuaSTGPlusNodeLib;component/images/16x16/callbackfunc.png",
                     Text = "Normal"
                 };
                 foreach (MetaModel info in bossNMeta)
@@ -360,7 +360,7 @@ namespace LuaSTGEditorSharp.Windows
             {
                 MetaModel bossH = new MetaModel
                 {
-                    Icon = "/LuaSTGNodeLib;component/images/16x16/callbackfunc.png",
+                    Icon = "/LuaSTGPlusNodeLib;component/images/16x16/callbackfunc.png",
                     Text = "Hard"
                 };
                 foreach (MetaModel info in bossHMeta)
@@ -375,7 +375,7 @@ namespace LuaSTGEditorSharp.Windows
             {
                 MetaModel BossL = new MetaModel
                 {
-                    Icon = "/LuaSTGNodeLib;component/images/16x16/callbackfunc.png",
+                    Icon = "/LuaSTGPlusNodeLib;component/images/16x16/callbackfunc.png",
                     Text = "Lunatic"
                 };
                 foreach (MetaModel info in bossLMeta)
@@ -390,7 +390,7 @@ namespace LuaSTGEditorSharp.Windows
             {
                 MetaModel bossA = new MetaModel
                 {
-                    Icon = "/LuaSTGNodeLib;component/images/16x16/callbackfunc.png",
+                    Icon = "/LuaSTGPlusNodeLib;component/images/16x16/callbackfunc.png",
                     Text = "All"
                 };
                 foreach (MetaModel info in bossAMeta)
@@ -407,7 +407,7 @@ namespace LuaSTGEditorSharp.Windows
         {
             MetaModel images = new MetaModel
             {
-                Icon = "/LuaSTGNodeLib;component/images/16x16/loadimage.png",
+                Icon = "/LuaSTGPlusNodeLib;component/images/16x16/loadimage.png",
                 Text = "Image"
             };
             var a = data.Meta.aggregatableMetas[(int)MetaType.ImageLoad].GetAllFullWithDifficulty();
@@ -423,7 +423,7 @@ namespace LuaSTGEditorSharp.Windows
         {
             MetaModel tasks = new MetaModel
             {
-                Icon = "/LuaSTGNodeLib;component/images/16x16/taskdefine.png",
+                Icon = "/LuaSTGPlusNodeLib;component/images/16x16/taskdefine.png",
                 Text = "Task"
             };
             var a = data.Meta.aggregatableMetas[(int)MetaType.Task].GetAllFullWithDifficulty();
@@ -439,7 +439,7 @@ namespace LuaSTGEditorSharp.Windows
         {
             MetaModel images = new MetaModel
             {
-                Icon = "/LuaSTGNodeLib;component/images/16x16/loadimagegroup.png",
+                Icon = "/LuaSTGPlusNodeLib;component/images/16x16/loadimagegroup.png",
                 Text = "Image Group"
             };
             var a = data.Meta.aggregatableMetas[(int)MetaType.ImageGroupLoad].GetAllFullWithDifficulty();
@@ -455,7 +455,7 @@ namespace LuaSTGEditorSharp.Windows
         {
             MetaModel fx = new MetaModel
             {
-                Icon = "/LuaSTGNodeLib;component/images/16x16/loadfx.png",
+                Icon = "/LuaSTGPlusNodeLib;component/images/16x16/loadfx.png",
                 Text = "FX"
             };
             var a = data.Meta.aggregatableMetas[(int)MetaType.FXLoad].GetAllFullWithDifficulty();
@@ -471,7 +471,7 @@ namespace LuaSTGEditorSharp.Windows
         {
             MetaModel fx = new MetaModel
             {
-                Icon = "/LuaSTGNodeLib;component/images/16x16/loadparticle.png",
+                Icon = "/LuaSTGPlusNodeLib;component/images/16x16/loadparticle.png",
                 Text = "Particle"
             };
             var a = data.Meta.aggregatableMetas[(int)MetaType.ParticleLoad].GetAllFullWithDifficulty();
@@ -487,7 +487,7 @@ namespace LuaSTGEditorSharp.Windows
         {
             MetaModel images = new MetaModel
             {
-                Icon = "/LuaSTGNodeLib;component/images/16x16/loadani.png",
+                Icon = "/LuaSTGPlusNodeLib;component/images/16x16/loadani.png",
                 Text = "Animation"
             };
             var a = data.Meta.aggregatableMetas[(int)MetaType.AnimationLoad].GetAllFullWithDifficulty();
@@ -503,7 +503,7 @@ namespace LuaSTGEditorSharp.Windows
         {
             MetaModel bgms = new MetaModel
             {
-                Icon = "/LuaSTGNodeLib;component/images/16x16/loadbgm.png",
+                Icon = "/LuaSTGPlusNodeLib;component/images/16x16/loadbgm.png",
                 Text = "Music"
             };
             var a = data.Meta.aggregatableMetas[(int)MetaType.BGMLoad].GetAllFullWithDifficulty();
@@ -519,7 +519,7 @@ namespace LuaSTGEditorSharp.Windows
         {
             MetaModel ses = new MetaModel
             {
-                Icon = "/LuaSTGNodeLib;component/images/16x16/loadsound.png",
+                Icon = "/LuaSTGPlusNodeLib;component/images/16x16/loadsound.png",
                 Text = "SE"
             };
             var a = data.Meta.aggregatableMetas[(int)MetaType.SELoad].GetAllFullWithDifficulty();
@@ -535,7 +535,7 @@ namespace LuaSTGEditorSharp.Windows
         {
             MetaModel bossBG = new MetaModel
             {
-                Icon = "/LuaSTGNodeLib;component/images/16x16/bgdefine.png",
+                Icon = "/LuaSTGPlusNodeLib;component/images/16x16/bgdefine.png",
                 Text = "Boss Backgrounds"
             };
             var a = data.Meta.aggregatableMetas[(int)MetaType.BossBG].GetAllFullWithDifficulty();

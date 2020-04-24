@@ -86,18 +86,12 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ICSharpCode.AvalonEdit, Version=5.0.3.0, Culture=neutral, PublicKeyToken=9cc39be672370310, processorArchitecture=MSIL">
-      <HintPath>..\packages\AvalonEdit.5.0.4\lib\Net40\ICSharpCode.AvalonEdit.dll</HintPath>
-    </Reference>
-    <Reference Include="ICSharpCode.SharpZipLib, Version=1.1.0.145, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
-      <HintPath>..\packages\SharpZipLib.1.1.0\lib\net45\ICSharpCode.SharpZipLib.dll</HintPath>
-    </Reference>
     <Reference Include="Irony, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ca48ace7223ead47, processorArchitecture=MSIL">
       <HintPath>..\packages\Irony.0.9.1\lib\net40\Irony.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -121,149 +115,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="EditorData\EditorTypeBinder.cs" />
-    <Compile Include="EditorData\InputWindowSelector.cs" />
-    <Compile Include="EditorData\Node\Advanced\AdvancedRepeat\AdvancedRepeat.cs" />
-    <Compile Include="EditorData\Node\Advanced\AdvancedRepeat\SinusoidalMovementVariable.cs" />
-    <Compile Include="EditorData\Node\Advanced\AdvancedRepeat\SinusoidalOscillationVariable.cs" />
-    <Compile Include="EditorData\Node\Advanced\AdvancedRepeat\SinusoidalInterpolationVariable.cs" />
-    <Compile Include="EditorData\Node\Advanced\AdvancedRepeat\ReboundingVariable.cs" />
-    <Compile Include="EditorData\Node\Advanced\AdvancedRepeat\IncrementVariable.cs" />
-    <Compile Include="EditorData\Node\Advanced\AdvancedRepeat\VariableTransformation.cs" />
-    <Compile Include="EditorData\Node\Advanced\AdvancedRepeat\LinearVariable.cs" />
-    <Compile Include="EditorData\Node\Advanced\AdvancedRepeat\VariableCollection.cs" />
-    <Compile Include="EditorData\Node\General\AddFile.cs" />
-    <Compile Include="EditorData\Node\General\CodeBlock.cs" />
-    <Compile Include="EditorData\Node\General\IfElseIf.cs" />
-    <Compile Include="EditorData\Node\IIfChild.cs" />
-    <Compile Include="EditorData\Node\NodeAttributes\IgnoreParityCheckAttribute.cs" />
-    <Compile Include="EditorData\Node\NodeAttributes\NodeAttributeAttribute.cs" />
-    <Compile Include="Execution\DebugView.cs" />
-    <Compile Include="Execution\ExecutionConfig.cs" />
-    <Compile Include="Execution\Execution.cs" />
-    <Compile Include="Execution\ExecutionType.cs" />
-    <Compile Include="Lua\IndentionGenerator.cs" />
-    <Compile Include="Lua\SpaceIndention.cs" />
-    <Compile Include="Lua\StaticAnalysis.cs" />
-    <Compile Include="Lua\TabIndentation.cs" />
-    <Compile Include="Plugin\DefaultNullPlugin\DefaultExecution.cs" />
-    <Compile Include="Plugin\PluginToolDefinition.cs" />
-    <Compile Include="Plugin\PluginToolParameter.cs" />
-    <Compile Include="Plugin\PluginToolResult.cs" />
-    <Compile Include="Plugin\SystemMetaLoader.cs" />
-    <Compile Include="Toolbox\TreeViewLineConverter.cs" />
-    <Compile Include="EditorData\AttrItem.cs" />
-    <Compile Include="EditorData\Command.cs" />
-    <Compile Include="EditorData\Commands\DeleteCommand.cs" />
-    <Compile Include="EditorData\Commands\EditAttrCommand.cs" />
     <Compile Include="EditorData\Commands\Factory\AfterFac.cs" />
     <Compile Include="EditorData\Commands\Factory\BeforeFac.cs" />
     <Compile Include="EditorData\Commands\Factory\ChildFac.cs" />
     <Compile Include="EditorData\Commands\Factory\CommandTypeFac.cs" />
     <Compile Include="EditorData\Commands\Factory\ParentFac.cs" />
-    <Compile Include="EditorData\Commands\FoldRegionCommand.cs" />
-    <Compile Include="EditorData\Commands\InsertAfterCommand.cs" />
-    <Compile Include="EditorData\Commands\InsertAsChildCommand.cs" />
-    <Compile Include="EditorData\Commands\InsertAsParentCommand.cs" />
-    <Compile Include="EditorData\Commands\InsertBeforeCommand.cs" />
-    <Compile Include="EditorData\Commands\InsertCommand.cs" />
-    <Compile Include="EditorData\Commands\MoveCommand.cs" />
-    <Compile Include="EditorData\Commands\SwitchBanCommand.cs" />
-    <Compile Include="EditorData\Commands\UnfoldAsRegionCommand.cs" />
-    <Compile Include="EditorData\CompileProcess.cs" />
-    <Compile Include="EditorData\Compile\DefineMarcoSettings.cs" />
-    <Compile Include="EditorData\Compile\PartialProjectProcess.cs" />
-    <Compile Include="EditorData\Compile\ProjectProcess.cs" />
-    <Compile Include="EditorData\Compile\SingleFileProcess.cs" />
-    <Compile Include="EditorData\DependencyAttrItem.cs" />
-    <Compile Include="EditorData\Document\AbstractMetaData.cs" />
-    <Compile Include="EditorData\Document\DocumentCollection.cs" />
-    <Compile Include="EditorData\DocumentData.cs" />
-    <Compile Include="EditorData\Document\MetaDataEntity.cs" />
-    <Compile Include="EditorData\Document\MetaInfoCollection.cs" />
-    <Compile Include="EditorData\Document\MetaInfoCollectionTypeCountAttribute.cs" />
-    <Compile Include="EditorData\Document\MetaInfoDict.cs" />
-    <Compile Include="EditorData\Document\Meta\ProjectFileMetaInfo.cs" />
-    <Compile Include="EditorData\Document\Meta\UserDefinedNodeMetaInfo.cs" />
-    <Compile Include="EditorData\Document\PlainDocumentData.cs" />
-    <Compile Include="EditorData\Document\ProjectData.cs" />
-    <Compile Include="EditorData\Document\VirtualDoc.cs" />
-    <Compile Include="EditorData\DummyDoc.cs" />
-    <Compile Include="EditorData\EditorSerializer.cs" />
-    <Compile Include="EditorData\Exception\EXEPathNotSetException.cs" />
-    <Compile Include="EditorData\Exception\InvalidRelativeResPathException.cs" />
-    <Compile Include="EditorData\GlobalCompileData.cs" />
-    <Compile Include="EditorData\Interfaces\IAggregatableMeta.cs" />
-    <Compile Include="EditorData\Interfaces\IDocumentWithMeta.cs" />
-    <Compile Include="EditorData\Interfaces\IMessageThrowable.cs" />
-    <Compile Include="EditorData\Interfaces\IMetaInfoCollection.cs" />
-    <Compile Include="EditorData\Document\MetaInfo.cs" />
-    <Compile Include="EditorData\ITypeEnumerable.cs" />
-    <Compile Include="EditorData\MessageBase.cs" />
-    <Compile Include="EditorData\MessageContainer.cs" />
-    <Compile Include="EditorData\Message\ArgNotNullMessage.cs" />
-    <Compile Include="EditorData\Message\AttributeMismatchMessage.cs" />
     <Compile Include="EditorData\Message\EXEPathNotSetMessage.cs" />
-    <Compile Include="EditorData\Message\InvalidArchiveSpaceMessage.cs" />
-    <Compile Include="EditorData\Message\RepeatedNameMessage.cs" />
-    <Compile Include="EditorData\Message\VarNameInvalidMessage.cs" />
-    <Compile Include="EditorData\NodeType.cs" />
-    <Compile Include="EditorData\Node\AbstractNodeTypeCache.cs" />
-    <Compile Include="EditorData\Node\Advanced\ArchiveSpaceIndicator.cs" />
-    <Compile Include="EditorData\Node\Advanced\DefineMacro.cs" />
-    <Compile Include="EditorData\Node\Advanced\Region.cs" />
-    <Compile Include="EditorData\Node\Advanced\UnidentifiedNode.cs" />
-    <Compile Include="EditorData\Node\Advanced\UserDefinedNode.cs" />
-    <Compile Include="EditorData\Node\AttrItemListHelper.cs" />
-    <Compile Include="EditorData\Node\EditorVersion.cs" />
-    <Compile Include="EditorData\Node\General\Break.cs" />
-    <Compile Include="EditorData\Node\General\Code.cs" />
-    <Compile Include="EditorData\Node\General\CodeSegment.cs" />
-    <Compile Include="EditorData\Node\General\Comment.cs" />
-    <Compile Include="EditorData\Node\General\Folder.cs" />
-    <Compile Include="EditorData\Node\General\IfElse.cs" />
-    <Compile Include="EditorData\Node\General\IfNode.cs" />
-    <Compile Include="EditorData\Node\General\IfThen.cs" />
-    <Compile Include="EditorData\Node\General\Patch.cs" />
-    <Compile Include="EditorData\Node\General\Repeat.cs" />
-    <Compile Include="EditorData\Node\GroupableAttrItemHelper.cs" />
-    <Compile Include="EditorData\Node\NodeAttributes\CannotBanAttribute.cs" />
-    <Compile Include="EditorData\Node\NodeAttributes\CannotDeleteAttribute.cs" />
-    <Compile Include="EditorData\Node\NodeAttributes\ClassNodeAttribute.cs" />
-    <Compile Include="EditorData\Node\NodeAttributes\CreateInvokeAttribute.cs" />
-    <Compile Include="EditorData\Node\NodeAttributes\DCInvokeAttributeAttribute.cs" />
-    <Compile Include="EditorData\Node\NodeAttributes\IgnoreValidationAttribute.cs" />
-    <Compile Include="EditorData\Node\NodeAttributes\LeafNodeAttribute.cs" />
-    <Compile Include="EditorData\Node\NodeAttributes\NodeIconAttribute.cs" />
-    <Compile Include="EditorData\Node\NodeAttributes\RequireAncestorAttribute.cs" />
-    <Compile Include="EditorData\Node\NodeAttributes\RequireParentAttribute.cs" />
-    <Compile Include="EditorData\Node\NodeAttributes\RootNodeAttribute.cs" />
-    <Compile Include="EditorData\Node\NodeAttributes\UniquenessAttribute.cs" />
-    <Compile Include="EditorData\Node\Project\ProjectFile.cs" />
-    <Compile Include="EditorData\Node\Project\ProjectRoot.cs" />
-    <Compile Include="EditorData\Node\ProjSettings.cs" />
-    <Compile Include="EditorData\Node\RootFolder.cs" />
-    <Compile Include="EditorData\Node\TypeCacheData.cs" />
-    <Compile Include="EditorData\RelativePathConverter.cs" />
-    <Compile Include="EditorData\TreeNode.cs" />
-    <Compile Include="EditorData\TreeNodeEventHandlers.cs" />
-    <Compile Include="EditorData\WorkTree.cs" />
     <Compile Include="EditorRoutedCommands.cs" />
-    <Compile Include="Lua\StringParser.cs" />
-    <Compile Include="Lua\SyntaxHighlightLoader.cs" />
-    <Compile Include="Plugin\AbstractPluginEntry.cs" />
-    <Compile Include="Plugin\AbstractToolbox.cs" />
-    <Compile Include="Plugin\DefaultNullPlugin\DefaultInputWindowSelectorRegister.cs" />
-    <Compile Include="Plugin\DefaultNullPlugin\DefaultMetaData.cs" />
-    <Compile Include="Plugin\DefaultNullPlugin\DefaultNodeTypeCache.cs" />
-    <Compile Include="Plugin\DefaultNullPlugin\DefaultPluginEntry.cs" />
-    <Compile Include="Plugin\DefaultNullPlugin\DefaultToolBox.cs" />
-    <Compile Include="Plugin\DefaultNullPlugin\DefaultViewDefinition.xaml.cs">
-      <DependentUpon>DefaultViewDefinition.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Plugin\IInputWindowSelectorRegister.cs" />
-    <Compile Include="Plugin\IViewDefinition.cs" />
-    <Compile Include="Plugin\PluginHandler.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="SingleInstanceWrapper.cs" />
     <Compile Include="Startup.cs" />
@@ -272,50 +130,18 @@
     <Compile Include="Toolbox\ComboBoxItemTemplateSelector.cs" />
     <Compile Include="Toolbox\DependencyObjectExtensions.cs" />
     <Compile Include="Toolbox\FileDirectoryModel.cs" />
-    <Compile Include="Toolbox\SearchModel.cs" />
-    <Compile Include="Toolbox\ToolboxItemData.cs" />
-    <Compile Include="Toolbox\ToolboxTab.cs" />
     <Compile Include="Toolbox\ToolboxTemplateSelector.cs" />
-    <Compile Include="Util\BitmapUtil.cs" />
-    <Compile Include="Util\DictionaryExtension.cs" />
+    <Compile Include="Toolbox\TreeViewLineConverter.cs" />
     <Compile Include="Window1.xaml.cs">
       <DependentUpon>Window1.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\AboutNode.xaml.cs">
-      <DependentUpon>AboutNode.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="EditorData\Document\Meta\MetaModel.cs" />
-    <Compile Include="Windows\Input\CodeInput.xaml.cs">
-      <DependentUpon>CodeInput.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Windows\Input\NodeDefInput.xaml.cs">
-      <DependentUpon>NodeDefInput.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Windows\Input\PathInput.xaml.cs">
-      <DependentUpon>PathInput.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Windows\Input\Selector.xaml.cs">
-      <DependentUpon>Selector.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Windows\Input\SingleLineInput.xaml.cs">
-      <DependentUpon>SingleLineInput.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Windows\ViewDefinitionBase.cs" />
     <Compile Include="Windows\NewWindow.xaml.cs">
       <DependentUpon>NewWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\Input\InputWindow.cs" />
     <Compile Include="Windows\SettingsWindow.xaml.cs">
       <DependentUpon>SettingsWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Zip\ZipCompressor.cs" />
-    <Compile Include="Zip\ZipCompressorBatch.cs" />
-    <Compile Include="Zip\ZipCompressorInternal.cs" />
     <Page Include="Fonts.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Plugin\DefaultNullPlugin\DefaultViewDefinition.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -323,21 +149,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\AboutNode.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Windows\CodePreviewWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Compile Include="Windows\CodePreviewWindow.xaml.cs">
-      <DependentUpon>CodePreviewWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -347,33 +162,13 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Windows\Input\CodeInput.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Windows\Input\NodeDefInput.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Windows\Input\PathInput.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Windows\Input\Selector.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Windows\Input\SingleLineInput.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Windows\NewWindow.xaml">
-      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Windows\SettingsWindow.xaml">
-      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>
@@ -397,33 +192,34 @@
     <None Include="exeIcoLib.icl" />
     <None Include="LuaSTGEditorSharp_1_TemporaryKey.pfx" />
     <None Include="Resources\File.ico" />
-    <Resource Include="images\codesegment.png" />
-    <Resource Include="images\16x16\codesegment.png" />
-    <Resource Include="images\search.png" />
-    <Resource Include="images\userdefinednode.png" />
-    <Resource Include="images\16x16\userdefinednode.png" />
-    <Resource Include="images\unidentifiedNode.png" />
-    <Resource Include="images\16x16\unidentifiedNode.png" />
-    <Resource Include="images\archispace.png" />
-    <Resource Include="images\16x16\archispace.png" />
-    <EmbeddedResource Include="Lua\LuaSyntax.xml" />
-    <Resource Include="images\elseif.png" />
-    <Resource Include="images\16x16\elseif.png" />
-    <Resource Include="images\LinearVariable.png" />
-    <Resource Include="images\16x16\LinearVariable.png" />
-    <Resource Include="images\ReboundingVariable.png" />
-    <Resource Include="images\16x16\ReboundingVariable.png" />
-    <Resource Include="images\SinusoidalInterpolationVariable.png" />
-    <Resource Include="images\16x16\SinusoidalInterpolationVariable.png" />
-    <Resource Include="images\SinusoidalOscillationVariable.png" />
-    <Resource Include="images\16x16\SinusoidalOscillationVariable.png" />
-    <Resource Include="images\advancedrepeat.png" />
-    <Resource Include="images\16x16\advancedrepeat.png" />
+    <Resource Include="images\child.png" />
+    <Resource Include="images\copy.png" />
+    <Resource Include="images\cut.png" />
+    <Resource Include="images\debugsc.png" />
+    <Resource Include="images\debugstage.png" />
+    <Resource Include="images\delete.png" />
+    <Resource Include="images\down.png" />
+    <Resource Include="images\Error.png" />
+    <Resource Include="images\find.png" />
+    <Resource Include="images\foldregion.png" />
+    <Resource Include="images\Icon.png" />
+    <Resource Include="images\Info.png" />
+    <Resource Include="images\new.png" />
+    <Resource Include="images\open.png" />
+    <Resource Include="images\pack.png" />
+    <Resource Include="images\parent.png" />
+    <Resource Include="images\paste.png" />
+    <Resource Include="images\redo.png" />
+    <Resource Include="images\run.png" />
+    <Resource Include="images\save.png" />
     <Resource Include="images\savecode.png" />
+    <Resource Include="images\search.png" />
+    <Resource Include="images\undo.png" />
+    <Resource Include="images\unfoldasregion.png" />
+    <Resource Include="images\up.png" />
     <Resource Include="images\viewcode.png" />
-    <Resource Include="images\SinusoidalMovementVariable.png" />
-    <Resource Include="images\16x16\SinusoidalMovementVariable.png" />
-    <Resource Include="images\16x16\pack.png" />
+    <Resource Include="images\Warning.png" />
+    <Resource Include="images\setting.png" />
     <Content Include="Templates\Empty Project.lstgproj">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -434,8 +230,6 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <Resource Include="images\16x16\assignment.png" />
-    <Resource Include="images\assignment.png" />
     <Content Include="Templates\Empty File.lstges">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -448,7 +242,6 @@
     <Content Include="Templates\Spell Card.lstges">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Resource Include="images\Icon.png" />
     <Content Include="Templates\Empty File.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -478,455 +271,15 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="images\addworld.png" />
-    <Resource Include="images\archiexpand.png" />
-    <Resource Include="images\archirotate.png" />
-    <Resource Include="images\bentlasershooter.png" />
-    <Resource Include="images\bgdefine.png" />
-    <Resource Include="images\bgframe.png" />
-    <Resource Include="images\bginit.png" />
-    <Resource Include="images\bglayer.png" />
-    <Resource Include="images\bgstage.png" />
-    <Resource Include="images\bosscast.png" />
-    <Resource Include="images\bosscastcard.png" />
-    <Resource Include="images\bosscoopcard.png" />
-    <Resource Include="images\bosscreate.png" />
-    <Resource Include="images\bossdefine.png" />
-    <Resource Include="images\bossexplode.png" />
-    <Resource Include="images\bossmoveto.png" />
-    <Resource Include="images\bosspreparecards.png" />
-    <Resource Include="images\bossscfinish.png" />
-    <Resource Include="images\bossscstart.png" />
-    <Resource Include="images\bosssetui.png" />
-    <Resource Include="images\bossshowaura.png" />
-    <Resource Include="images\bossspellcard.png" />
-    <Resource Include="images\bossspellcardex.png" />
-    <Resource Include="images\break.png" />
-    <Resource Include="images\bulletchangestyle.png" />
-    <Resource Include="images\bulletcleanrange.png" />
-    <Resource Include="images\bulletclear.png" />
-    <Resource Include="images\bulletcreate.png" />
-    <Resource Include="images\bulletcreatestraight.png" />
-    <Resource Include="images\bulletcreatestraightex.png" />
-    <Resource Include="images\bulletdefine.png" />
-    <Resource Include="images\bulletinit.png" />
-    <Resource Include="images\callbackfunc.png" />
-    <Resource Include="images\child.png" />
-    <Resource Include="images\code.png" />
-    <Resource Include="images\codeblock.png" />
-    <Resource Include="images\comment.png" />
-    <Resource Include="images\connect.png" />
-    <Resource Include="images\copy.png" />
-    <Resource Include="images\cut.png" />
-    <Resource Include="images\debugsc.png" />
-    <Resource Include="images\debugstage.png" />
-    <Resource Include="images\defaultaction.png" />
-    <Resource Include="images\delete.png" />
-    <Resource Include="images\dialog.png" />
-    <Resource Include="images\dialogtask.png" />
-    <Resource Include="images\down.png" />
-    <Resource Include="images\dropitem.png" />
-    <Resource Include="images\enemycreate.png" />
-    <Resource Include="images\enemydefine.png" />
-    <Resource Include="images\enemyinit.png" />
-    <Resource Include="images\enemysimple.png" />
-    <Resource Include="images\Error.png" />
-    <Resource Include="images\explode.png" />
-    <Resource Include="images\find.png" />
-    <Resource Include="images\folder.png" />
-    <Resource Include="images\highlight.png" />
-    <Resource Include="images\if.png" />
-    <Resource Include="images\imagebackground.png" />
-    <Resource Include="images\Info.png" />
-    <Resource Include="images\iteration.png" />
-    <Resource Include="images\kill.png" />
-    <Resource Include="images\laserbentcreate.png" />
-    <Resource Include="images\laserbentdefine.png" />
-    <Resource Include="images\laserbentinit.png" />
-    <Resource Include="images\laserchange.png" />
-    <Resource Include="images\lasercreate.png" />
-    <Resource Include="images\laserdefine.png" />
-    <Resource Include="images\lasergrow.png" />
-    <Resource Include="images\laserinit.png" />
-    <Resource Include="images\lasershooter.png" />
-    <Resource Include="images\laserturnhalfon.png" />
-    <Resource Include="images\laserturnoff.png" />
-    <Resource Include="images\laserturnon.png" />
-    <Resource Include="images\left image.png" />
-    <Resource Include="images\listadd.png" />
-    <Resource Include="images\listcreate.png" />
-    <Resource Include="images\listforeach.png" />
-    <Resource Include="images\loadani.png" />
-    <Resource Include="images\loadbgm.png" />
-    <Resource Include="images\loadFX.png" />
-    <Resource Include="images\loadimage.png" />
-    <Resource Include="images\loadimagegroup.png" />
-    <Resource Include="images\loadmodel.png" />
-    <Resource Include="images\loadparticle.png" />
-    <Resource Include="images\loadsound.png" />
-    <Resource Include="images\loadtexture.png" />
-    <Resource Include="images\merge.png" />
-    <Resource Include="images\new.png" />
-    <Resource Include="images\objectcreate.png" />
-    <Resource Include="images\objectdefine.png" />
-    <Resource Include="images\objectinit.png" />
-    <Resource Include="images\objectsetimg.png" />
-    <Resource Include="images\open.png" />
-    <Resource Include="images\pack.png" />
-    <Resource Include="images\pactrometer.png" />
-    <Resource Include="images\paste.png" />
-    <Resource Include="images\patch.png" />
-    <Resource Include="images\pausebgm.png" />
-    <Resource Include="images\playbgm.png" />
-    <Resource Include="images\playerdefine.png" />
-    <Resource Include="images\playsound.png" />
-    <Resource Include="images\plus.png" />
-    <Resource Include="images\properties.png" />
-    <Resource Include="images\propertycontroller.png" />
-    <Resource Include="images\reboundercreate.png" />
-    <Resource Include="images\rebounderdefine.png" />
-    <Resource Include="images\rebounderinit.png" />
-    <Resource Include="images\redo.png" />
-    <Resource Include="images\renderimage.png" />
-    <Resource Include="images\repeat.png" />
-    <Resource Include="images\resumebgm.png" />
-    <Resource Include="images\run.png" />
-    <Resource Include="images\save.png" />
-    <Resource Include="images\sentence.png" />
-    <Resource Include="images\setaccel.png" />
-    <Resource Include="images\setcolor.png" />
-    <Resource Include="images\setfps.png" />
-    <Resource Include="images\setfv.png" />
-    <Resource Include="images\setgravity.png" />
-    <Resource Include="images\setpace.png" />
-    <Resource Include="images\setrelpos.png" />
-    <Resource Include="images\setting.png" />
-    <Resource Include="images\setv.png" />
-    <Resource Include="images\setworlds.png" />
-    <Resource Include="images\shakescreen.png" />
-    <Resource Include="images\shoot.png" />
-    <Resource Include="images\shooter.png" />
-    <Resource Include="images\shootiterator.png" />
-    <Resource Include="images\signal.png" />
-    <Resource Include="images\simplerebounder.png" />
-    <Resource Include="images\smear.png" />
-    <Resource Include="images\stage.png" />
-    <Resource Include="images\stagefinish.png" />
-    <Resource Include="images\stagefinishgroup.png" />
-    <Resource Include="images\stagegoto.png" />
-    <Resource Include="images\stagegroup.png" />
-    <Resource Include="images\stagegroupinfo.png" />
-    <Resource Include="images\stagetask.png" />
-    <Resource Include="images\stopbgm.png" />
-    <Resource Include="images\task.png" />
-    <Resource Include="images\taskattach.png" />
-    <Resource Include="images\taskBeziermoveto.png" />
-    <Resource Include="images\taskBeziermovetoex.png" />
-    <Resource Include="images\taskbosswander.png" />
-    <Resource Include="images\taskbreak.png" />
-    <Resource Include="images\taskclear.png" />
-    <Resource Include="images\taskdefine.png" />
-    <Resource Include="images\tasker.png" />
-    <Resource Include="images\taskmoveto.png" />
-    <Resource Include="images\taskmovetoex.png" />
-    <Resource Include="images\taskrepeat.png" />
-    <Resource Include="images\taskreturn.png" />
-    <Resource Include="images\tasksetvalue.png" />
-    <Resource Include="images\taskwait.png" />
-    <Resource Include="images\taskwaitfor.png" />
-    <Resource Include="images\taskwaitto.png" />
-    <Resource Include="images\undo.png" />
-    <Resource Include="images\unitdel.png" />
-    <Resource Include="images\unitforeach.png" />
-    <Resource Include="images\unitkill.png" />
-    <Resource Include="images\up.png" />
-    <Resource Include="images\variable.png" />
-    <Resource Include="images\Warning.png" />
-    <Resource Include="images\_node_aa.png" />
-    <Resource Include="images\_node_accel.png" />
-    <Resource Include="images\_node_atp.png" />
-    <Resource Include="images\_node_dir.png" />
-    <Resource Include="images\_node_g.png" />
-    <Resource Include="images\_node_moveto.png" />
-    <Resource Include="images\_node_pe.png" />
-    <Resource Include="images\_node_pro.png" />
-    <Resource Include="images\_node_rot.png" />
-    <Resource Include="images\_node_stay.png" />
-    <Resource Include="images\_node_toc.png" />
-    <Resource Include="images\_node_tof.png" />
-    <Resource Include="images\_node_vf.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\16x16\addworld.png" />
-    <Resource Include="images\16x16\archiexpand.png" />
-    <Resource Include="images\16x16\archirotate.png" />
-    <Resource Include="images\16x16\bentlasershooter.png" />
-    <Resource Include="images\16x16\bgdefine.png" />
-    <Resource Include="images\16x16\bgframe.png" />
-    <Resource Include="images\16x16\bginit.png" />
-    <Resource Include="images\16x16\bglayer.png" />
-    <Resource Include="images\16x16\bgrender.png" />
-    <Resource Include="images\16x16\bgstage.png" />
-    <Resource Include="images\16x16\bosscast.png" />
-    <Resource Include="images\16x16\bosscastcard.png" />
-    <Resource Include="images\16x16\bosscoopcard.png" />
-    <Resource Include="images\16x16\bosscreate.png" />
-    <Resource Include="images\16x16\bossdefine.png" />
-    <Resource Include="images\16x16\bossexdefine.png" />
-    <Resource Include="images\16x16\bossexplode.png" />
-    <Resource Include="images\16x16\bossmoveto.png" />
-    <Resource Include="images\16x16\bosspreparecards.png" />
-    <Resource Include="images\16x16\bossscfinish.png" />
-    <Resource Include="images\16x16\bossscstart.png" />
-    <Resource Include="images\16x16\bosssetui.png" />
-    <Resource Include="images\16x16\bossshowaura.png" />
-    <Resource Include="images\16x16\bossspellcard.png" />
-    <Resource Include="images\16x16\bossspellcardex.png" />
-    <Resource Include="images\16x16\break.png" />
-    <Resource Include="images\16x16\bulletchangestyle.png" />
-    <Resource Include="images\16x16\bulletcleanrange.png" />
-    <Resource Include="images\16x16\bulletclear.png" />
-    <Resource Include="images\16x16\bulletcreate.png" />
-    <Resource Include="images\16x16\bulletcreatestraight.png" />
-    <Resource Include="images\16x16\bulletcreatestraightex.png" />
-    <Resource Include="images\16x16\bulletdefine.png" />
-    <Resource Include="images\16x16\bulletinit.png" />
-    <Resource Include="images\16x16\callbackfunc.png" />
-    <Resource Include="images\16x16\code.png" />
-    <Resource Include="images\16x16\codeblock.png" />
-    <Resource Include="images\16x16\comment.png" />
-    <Resource Include="images\16x16\connect.png" />
-    <Resource Include="images\16x16\defaultaction.png" />
-    <Resource Include="images\16x16\dialog.png" />
-    <Resource Include="images\16x16\dialogtask.png" />
-    <Resource Include="images\16x16\dropitem.png" />
-    <Resource Include="images\16x16\else.png" />
-    <Resource Include="images\16x16\enemycreate.png" />
-    <Resource Include="images\16x16\enemydefine.png" />
-    <Resource Include="images\16x16\enemyinit.png" />
-    <Resource Include="images\16x16\enemysimple.png" />
-    <Resource Include="images\16x16\explode.png" />
-    <Resource Include="images\16x16\folder.png" />
-    <Resource Include="images\16x16\highlight.png" />
-    <Resource Include="images\16x16\if.png" />
-    <Resource Include="images\16x16\iteration.png" />
-    <Resource Include="images\16x16\laserbentcreate.png" />
-    <Resource Include="images\16x16\laserbentdefine.png" />
-    <Resource Include="images\16x16\laserbentinit.png" />
-    <Resource Include="images\16x16\laserchange.png" />
-    <Resource Include="images\16x16\lasercreate.png" />
-    <Resource Include="images\16x16\laserdefine.png" />
-    <Resource Include="images\16x16\lasergrow.png" />
-    <Resource Include="images\16x16\laserinit.png" />
-    <Resource Include="images\16x16\lasershooter.png" />
-    <Resource Include="images\16x16\laserturnhalfon.png" />
-    <Resource Include="images\16x16\laserturnoff.png" />
-    <Resource Include="images\16x16\laserturnon.png" />
-    <Resource Include="images\16x16\listadd.png" />
-    <Resource Include="images\16x16\listcreate.png" />
-    <Resource Include="images\16x16\listforeach.png" />
-    <Resource Include="images\16x16\loadani.png" />
-    <Resource Include="images\16x16\loadbgm.png" />
-    <Resource Include="images\16x16\loadFX.png" />
-    <Resource Include="images\16x16\loadimage.png" />
-    <Resource Include="images\16x16\loadimagegroup.png" />
-    <Resource Include="images\16x16\loadmodel.png" />
-    <Resource Include="images\16x16\loadparticle.png" />
-    <Resource Include="images\16x16\loadsound.png" />
-    <Resource Include="images\16x16\loadtexture.png" />
-    <Resource Include="images\16x16\objectcreate.png" />
-    <Resource Include="images\16x16\objectdefine.png" />
-    <Resource Include="images\16x16\objectinit.png" />
-    <Resource Include="images\16x16\objectsetimg.png" />
-    <Resource Include="images\16x16\oncolli.png" />
-    <Resource Include="images\16x16\ondel.png" />
-    <Resource Include="images\16x16\onframe.png" />
-    <Resource Include="images\16x16\onkill.png" />
-    <Resource Include="images\16x16\pactrometer.png" />
-    <Resource Include="images\16x16\patch.png" />
-    <Resource Include="images\16x16\pausebgm.png" />
-    <Resource Include="images\16x16\playbgm.png" />
-    <Resource Include="images\16x16\playsound.png" />
-    <Resource Include="images\16x16\properties.png" />
-    <Resource Include="images\16x16\propertycontroller.png" />
-    <Resource Include="images\16x16\reboundercreate.png" />
-    <Resource Include="images\16x16\rebounderdefine.png" />
-    <Resource Include="images\16x16\rebounderinit.png" />
-    <Resource Include="images\16x16\renderimage.png" />
-    <Resource Include="images\16x16\repeat.png" />
-    <Resource Include="images\16x16\resumebgm.png" />
-    <Resource Include="images\16x16\sentence.png" />
-    <Resource Include="images\16x16\setaccel.png" />
-    <Resource Include="images\16x16\setcolor.png" />
-    <Resource Include="images\16x16\setfps.png" />
-    <Resource Include="images\16x16\setfv.png" />
-    <Resource Include="images\16x16\setgravity.png" />
-    <Resource Include="images\16x16\setpace.png" />
-    <Resource Include="images\16x16\setrelpos.png" />
-    <Resource Include="images\16x16\setting.png" />
-    <Resource Include="images\16x16\setv.png" />
-    <Resource Include="images\16x16\setworlds.png" />
-    <Resource Include="images\16x16\shakescreen.png" />
-    <Resource Include="images\16x16\shoot.png" />
-    <Resource Include="images\16x16\shooter.png" />
-    <Resource Include="images\16x16\shootiterator.png" />
-    <Resource Include="images\16x16\signal.png" />
-    <Resource Include="images\16x16\simplerebounder.png" />
-    <Resource Include="images\16x16\smear.png" />
-    <Resource Include="images\16x16\stage.png" />
-    <Resource Include="images\16x16\stagefinish.png" />
-    <Resource Include="images\16x16\stagefinishgroup.png" />
-    <Resource Include="images\16x16\stagegoto.png" />
-    <Resource Include="images\16x16\stagegroup.png" />
-    <Resource Include="images\16x16\stagegroupinfo.png" />
-    <Resource Include="images\16x16\stagetask.png" />
-    <Resource Include="images\16x16\stopbgm.png" />
-    <Resource Include="images\16x16\task.png" />
-    <Resource Include="images\16x16\taskattach.png" />
-    <Resource Include="images\16x16\taskBeziermoveto.png" />
-    <Resource Include="images\16x16\taskBeziermovetoex.png" />
-    <Resource Include="images\16x16\taskbosswander.png" />
-    <Resource Include="images\16x16\taskbreak.png" />
-    <Resource Include="images\16x16\taskclear.png" />
-    <Resource Include="images\16x16\taskdefine.png" />
-    <Resource Include="images\16x16\tasker.png" />
-    <Resource Include="images\16x16\taskmoveto.png" />
-    <Resource Include="images\16x16\taskmovetoex.png" />
-    <Resource Include="images\16x16\taskrepeat.png" />
-    <Resource Include="images\16x16\taskreturn.png" />
-    <Resource Include="images\16x16\tasksetvalue.png" />
-    <Resource Include="images\16x16\taskwait.png" />
-    <Resource Include="images\16x16\taskwaitfor.png" />
-    <Resource Include="images\16x16\taskwaitto.png" />
-    <Resource Include="images\16x16\then.png" />
-    <Resource Include="images\16x16\unitdel.png" />
-    <Resource Include="images\16x16\unitforeach.png" />
-    <Resource Include="images\16x16\unitkill.png" />
-    <Resource Include="images\16x16\variable.png" />
-    <Resource Include="images\16x16\_node_aa.png" />
-    <Resource Include="images\16x16\_node_accel.png" />
-    <Resource Include="images\16x16\_node_atp.png" />
-    <Resource Include="images\16x16\_node_dir.png" />
-    <Resource Include="images\16x16\_node_g.png" />
-    <Resource Include="images\16x16\_node_moveto.png" />
-    <Resource Include="images\16x16\_node_pe.png" />
-    <Resource Include="images\16x16\_node_pro.png" />
-    <Resource Include="images\16x16\_node_rot.png" />
-    <Resource Include="images\16x16\_node_stay.png" />
-    <Resource Include="images\16x16\_node_toc.png" />
-    <Resource Include="images\16x16\_node_tof.png" />
-    <Resource Include="images\16x16\_node_vf.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\parent.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\definemacro.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\16x16\definemacro.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\16x16\region.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\region.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\foldregion.png" />
-    <Resource Include="images\unfoldasregion.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\color\COLOR_BLUE.png" />
-    <Resource Include="images\color\COLOR_CHARTREUSE.png" />
-    <Resource Include="images\color\COLOR_CYAN.png" />
-    <Resource Include="images\color\COLOR_DEEP_BLUE.png" />
-    <Resource Include="images\color\COLOR_DEEP_GRAY.png" />
-    <Resource Include="images\color\COLOR_DEEP_GREEN.png" />
-    <Resource Include="images\color\COLOR_DEEP_PURPLE.png" />
-    <Resource Include="images\color\COLOR_DEEP_RED.png" />
-    <Resource Include="images\color\COLOR_GOLDEN_YELLOW.png" />
-    <Resource Include="images\color\COLOR_GRAY.png" />
-    <Resource Include="images\color\COLOR_GREEN.png" />
-    <Resource Include="images\color\COLOR_ORANGE.png" />
-    <Resource Include="images\color\COLOR_PURPLE.png" />
-    <Resource Include="images\color\COLOR_RED.png" />
-    <Resource Include="images\color\COLOR_ROYAL_BLUE.png" />
-    <Resource Include="images\color\COLOR_YELLOW.png" />
-  </ItemGroup>
-  <ItemGroup>
     <SplashScreen Include="SplashScreen.png" />
     <Content Include="Icon.ico" />
-    <Resource Include="images\enemy\enemy1.png" />
-    <Resource Include="images\enemy\enemy10.png" />
-    <Resource Include="images\enemy\enemy11.png" />
-    <Resource Include="images\enemy\enemy12.png" />
-    <Resource Include="images\enemy\enemy13.png" />
-    <Resource Include="images\enemy\enemy14.png" />
-    <Resource Include="images\enemy\enemy15.png" />
-    <Resource Include="images\enemy\enemy16.png" />
-    <Resource Include="images\enemy\enemy17.png" />
-    <Resource Include="images\enemy\enemy18.png" />
-    <Resource Include="images\enemy\enemy19.png" />
-    <Resource Include="images\enemy\enemy2.png" />
-    <Resource Include="images\enemy\enemy20.png" />
-    <Resource Include="images\enemy\enemy21.png" />
-    <Resource Include="images\enemy\enemy22.png" />
-    <Resource Include="images\enemy\enemy23.png" />
-    <Resource Include="images\enemy\enemy24.png" />
-    <Resource Include="images\enemy\enemy25.png" />
-    <Resource Include="images\enemy\enemy26.png" />
-    <Resource Include="images\enemy\enemy27.png" />
-    <Resource Include="images\enemy\enemy28.png" />
-    <Resource Include="images\enemy\enemy29.png" />
-    <Resource Include="images\enemy\enemy3.png" />
-    <Resource Include="images\enemy\enemy30.png" />
-    <Resource Include="images\enemy\enemy31.png" />
-    <Resource Include="images\enemy\enemy32.png" />
-    <Resource Include="images\enemy\enemy33.png" />
-    <Resource Include="images\enemy\enemy34.png" />
-    <Resource Include="images\enemy\enemy4.png" />
-    <Resource Include="images\enemy\enemy5.png" />
-    <Resource Include="images\enemy\enemy6.png" />
-    <Resource Include="images\enemy\enemy7.png" />
-    <Resource Include="images\enemy\enemy8.png" />
-    <Resource Include="images\enemy\enemy9.png" />
-    <Resource Include="images\bullet\arrow.png" />
-    <Resource Include="images\bullet\bigball.png" />
-    <Resource Include="images\bullet\bigball_dark.png" />
-    <Resource Include="images\bullet\bigstar.png" />
-    <Resource Include="images\bullet\blackgrain.png" />
-    <Resource Include="images\bullet\bullet.png" />
-    <Resource Include="images\bullet\butterfly.png" />
-    <Resource Include="images\bullet\chain.png" />
-    <Resource Include="images\bullet\circle.png" />
-    <Resource Include="images\bullet\drip.png" />
-    <Resource Include="images\bullet\ellipse.png" />
-    <Resource Include="images\bullet\fire.png" />
-    <Resource Include="images\bullet\fire_dark.png" />
-    <Resource Include="images\bullet\grain.png" />
-    <Resource Include="images\bullet\heart.png" />
-    <Resource Include="images\bullet\knife.png" />
-    <Resource Include="images\bullet\lightball.png" />
-    <Resource Include="images\bullet\lightball_dark.png" />
-    <Resource Include="images\bullet\middleball.png" />
-    <Resource Include="images\bullet\mildew.png" />
-    <Resource Include="images\bullet\money.png" />
-    <Resource Include="images\bullet\music.png" />
-    <Resource Include="images\bullet\needle.png" />
-    <Resource Include="images\bullet\ofuda.png" />
-    <Resource Include="images\bullet\point.png" />
-    <Resource Include="images\bullet\scale.png" />
-    <Resource Include="images\bullet\silence.png" />
-    <Resource Include="images\bullet\smallball.png" />
-    <Resource Include="images\bullet\smallstar.png" />
-    <Resource Include="images\bullet\sword.png" />
-    <Resource Include="images\positionVar.png" />
-    <Resource Include="images\16x16\positionVar.png" />
     <Content Include="Templates\Raw Resources &amp; Classes.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Templates\Spell Card.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LuaSTGEditorSharp.dependencies">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Update Log.txt">
@@ -940,6 +293,12 @@
       <Progid>LuaSTGEditorSharp</Progid>
       <DefaultIcon>Icon.ico</DefaultIcon>
     </FileAssociation>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LuaSTGEditorSharp.Core\LuaSTGEditorSharp.Core.csproj">
+      <Project>{bd1ca1e6-9e34-4098-ae65-922f23670f75}</Project>
+      <Name>LuaSTGEditorSharp.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

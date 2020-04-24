@@ -22,10 +22,8 @@ namespace LuaSTGEditorSharp
     /// <summary>
     /// App.xaml 的交互逻辑
     /// </summary>
-    public partial class App : Application, IMessageThrowable
+    public partial class App : Application, IMessageThrowable, IAppSettings, IAppDebugSettings
     {
-        public static int mxUAttr = 100;
-
         public App()
         {
             PropertyChanged += new PropertyChangedEventHandler(CheckMessage);
@@ -50,6 +48,7 @@ namespace LuaSTGEditorSharp
                 Console.SetOut(sw);
                 base.OnStartup(e);
                 RaiseProertyChanged("m");
+
                 if (!PluginHandler.LoadPlugin(PluginPath))
                 {
                     MessageBox.Show("Load Plugin Failed.");

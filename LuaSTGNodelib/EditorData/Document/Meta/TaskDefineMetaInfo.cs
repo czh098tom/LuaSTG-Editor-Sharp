@@ -40,7 +40,7 @@ namespace LuaSTGEditorSharp.EditorData.Document.Meta
         {
             MetaModel parent = new MetaModel
             {
-                Icon = "/LuaSTGNodeLib;component/images/16x16/taskdefine.png",
+                Icon = "/LuaSTGPlusNodeLib;component/images/16x16/taskdefine.png",
                 Text = Name
             };
             string[] childs = GetParamList();
@@ -49,7 +49,7 @@ namespace LuaSTGEditorSharp.EditorData.Document.Meta
             {
                 prop = new MetaModel
                 {
-                    Icon = "/LuaSTGNodeLib;component/images/16x16/properties.png",
+                    Icon = "/LuaSTGPlusNodeLib;component/images/16x16/properties.png",
                     Text = s
                 };
                 parent.Children.Add(prop);
@@ -66,7 +66,7 @@ namespace LuaSTGEditorSharp.EditorData.Document.Meta
                 Difficulty = Difficulty,
                 FullName = FullName,
                 Param = GetParam(),
-                Icon = "/LuaSTGNodeLib;component/images/16x16/taskdefine.png"
+                Icon = "/LuaSTGPlusNodeLib;component/images/16x16/taskdefine.png"
             };
         }
 

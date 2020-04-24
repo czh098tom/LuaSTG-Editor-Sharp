@@ -26,7 +26,7 @@ namespace LuaSTGEditorSharp
             return new Windows.Input.InputWindowSelectorRegister();
         }
 
-        public override AbstractToolbox GetToolbox(MainWindow mw)
+        public override AbstractToolbox GetToolbox(IMainWindow mw)
         {
             return new PluginToolbox(mw);
         }
@@ -74,10 +74,10 @@ namespace LuaSTGEditorSharp
         public override string TargetLSTGVersion => "LuaSTG ex+ 0.81b/c, OLC ver 5 and 0.82a";
 
         public static MetaModel[] SysImage = 
-            SystemMetaLoader.FromResource("pack://application:,,,/LuaSTGNodeLib;component/ResourceList/SysImage.json");
+            SystemMetaLoader.FromResource("pack://application:,,,/LuaSTGPlusNodeLib;component/ResourceList/SysImage.json");
         public static MetaModel[] SysImageGroup =
-            SystemMetaLoader.FromResource("pack://application:,,,/LuaSTGNodeLib;component/ResourceList/SysImageGroup.json");
+            SystemMetaLoader.FromResource("pack://application:,,,/LuaSTGPlusNodeLib;component/ResourceList/SysImageGroup.json");
         public static MetaModel[] SysSE =
-            SystemMetaLoader.FromResource("pack://application:,,,/LuaSTGNodeLib;component/ResourceList/SysSE.json");
+            SystemMetaLoader.FromResource("pack://application:,,,/LuaSTGPlusNodeLib;component/ResourceList/SysSE.json");
     }
 }
