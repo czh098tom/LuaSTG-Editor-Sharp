@@ -27,6 +27,7 @@ namespace LuaSTGEditorSharp.Plugin
         public abstract Type[] BossSCNodeType { get; }
         public abstract int MetaInfoCollectionTypeCount { get; }
         public abstract int[][] MetaInfoCollectionWatchDict { get; }
+        public virtual PluginTool[] PluginTools { get => new PluginTool[] { }; }
 
         public abstract string TargetLSTGVersion { get; }
 

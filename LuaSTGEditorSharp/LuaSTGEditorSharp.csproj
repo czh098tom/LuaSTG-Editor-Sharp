@@ -147,6 +147,9 @@
     <Compile Include="Lua\StaticAnalysis.cs" />
     <Compile Include="Lua\TabIndentation.cs" />
     <Compile Include="Plugin\DefaultNullPlugin\DefaultExecution.cs" />
+    <Compile Include="Plugin\PluginToolDefinition.cs" />
+    <Compile Include="Plugin\PluginToolParameter.cs" />
+    <Compile Include="Plugin\PluginToolResult.cs" />
     <Compile Include="Plugin\SystemMetaLoader.cs" />
     <Compile Include="Toolbox\TreeViewLineConverter.cs" />
     <Compile Include="EditorData\AttrItem.cs" />
