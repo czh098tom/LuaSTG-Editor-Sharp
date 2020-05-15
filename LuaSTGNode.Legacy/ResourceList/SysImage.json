@@ -1,0 +1,23 @@
+﻿[
+  {
+    "Icon": "/LuaSTGNode.Legacy;component/images/16x16/loadimage_Sys.png",
+    "Text": "(Internal) img_void",
+    "Result": "\"img_void\"",
+    "FullName": "img_void",
+    "ExInfo1": "pack://application:,,,/LuaSTGNode.Legacy;component/images/picture/img_void.png"
+  },
+  {
+    "Icon": "/LuaSTGNode.Legacy;component/images/16x16/loadimage_Sys.png",
+    "Text": "(Internal) white",
+    "Result": "\"white\"",
+    "FullName": "white",
+    "ExInfo1": "pack://application:,,,/LuaSTGNode.Legacy;component/images/picture/white.png"
+  },
+  {
+    "Icon": "/LuaSTGNode.Legacy;component/images/16x16/loadimage_Sys.png",
+    "Text": "(Internal) leaf",
+    "Result": "\"leaf\"",
+    "FullName": "leaf",
+    "ExInfo1": "pack://application:,,,/LuaSTGNode.Legacy;component/images/picture/leaf.png"
+  }
+]

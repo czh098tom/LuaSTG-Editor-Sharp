@@ -714,16 +714,6 @@
                         </Button.ToolTip>
                     </Button>
                     <Separator/>
-                    <RadioButton Command="local:EditorRoutedCommands.SwitchBefore" IsChecked="{Binding IsBeforeState, ElementName=window, Mode=OneWay}">
-                        <RadioButton.Content>
-                            <Image Source="images/Up.png" Stretch="Fill" Width="24" Height="24"/>
-                        </RadioButton.Content>
-                        <RadioButton.ToolTip>
-                            <ToolTip>
-                                <TextBlock Text="Insert Before (Alt+Up)"/>
-                            </ToolTip>
-                        </RadioButton.ToolTip>
-                    </RadioButton>
                     <RadioButton Command="local:EditorRoutedCommands.SwitchAfter" IsChecked="{Binding IsAfterState, ElementName=window, Mode=OneWay}">
                         <RadioButton.Content>
                             <Image Source="images/down.png" Stretch="Fill" Width="24" Height="24"/>
@@ -731,6 +721,16 @@
                         <RadioButton.ToolTip>
                             <ToolTip>
                                 <TextBlock Text="Insert After (Alt+Down)"/>
+                            </ToolTip>
+                        </RadioButton.ToolTip>
+                    </RadioButton>
+                    <RadioButton Command="local:EditorRoutedCommands.SwitchBefore" IsChecked="{Binding IsBeforeState, ElementName=window, Mode=OneWay}">
+                        <RadioButton.Content>
+                            <Image Source="images/Up.png" Stretch="Fill" Width="24" Height="24"/>
+                        </RadioButton.Content>
+                        <RadioButton.ToolTip>
+                            <ToolTip>
+                                <TextBlock Text="Insert Before (Alt+Up)"/>
                             </ToolTip>
                         </RadioButton.ToolTip>
                     </RadioButton>

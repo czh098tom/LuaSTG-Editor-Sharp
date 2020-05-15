@@ -130,9 +130,9 @@
       <Project>{bd1ca1e6-9e34-4098-ae65-922f23670f75}</Project>
       <Name>LuaSTGEditorSharp.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\LuaSTGNodelib\LuaSTGPlusNodeLib.csproj">
+    <ProjectReference Include="..\LuaSTGNode.Legacy\LuaSTGNode.Legacy.csproj">
       <Project>{06f198ea-762c-4b34-84da-b58a6c3e6a79}</Project>
-      <Name>LuaSTGPlusNodeLib</Name>
+      <Name>LuaSTGNode.Legacy</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
