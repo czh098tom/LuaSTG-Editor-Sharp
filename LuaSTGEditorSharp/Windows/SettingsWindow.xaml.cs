@@ -14,6 +14,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Diagnostics;
 
 namespace LuaSTGEditorSharp.Windows
 {
@@ -573,6 +574,25 @@ namespace LuaSTGEditorSharp.Windows
         {
             WriteSettings();
             Properties.Settings.Default.Save();
+        }
+
+        private void ButtonRegisterExt_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Process p = new Process()
+                {
+                    StartInfo = new ProcessStartInfo()
+                    {
+                        FileName = "ExtensionRegister.exe",
+                        UseShellExecute = false,
+                        CreateNoWindow = true
+                    }
+                };
+                p.Start();
+                p.WaitForExit();
+            }
+            catch { }
         }
     }
 }
