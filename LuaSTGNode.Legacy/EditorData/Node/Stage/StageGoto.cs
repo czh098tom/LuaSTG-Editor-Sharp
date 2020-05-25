@@ -54,8 +54,8 @@ namespace LuaSTGEditorSharp.EditorData.Node.Stage
             + sp + s1 + s1 + s1 + "if GetMusicState(v) == 'playing' then" + "\n"
             + sp + s1 + s1 + s1 + s1 + "SetBGMVolume(v, 1 - i / 30)" + "\n"
             + sp + s1 + s1 + s1 + "end" + "\n"
-            + sp + s1 + s1 + s1 + "task.Wait()" + "\n"
             + sp + s1 + s1 + "end" + "\n"
+            + sp + s1 + s1 + "task.Wait()" + "\n"
             + sp + s1 + "end" + "\n"
             + sp + "end)" + "\n"
             + sp + "task.Wait(30) stage.group.GoToStage(" + Macrolize(0) + ")" + "\n";
