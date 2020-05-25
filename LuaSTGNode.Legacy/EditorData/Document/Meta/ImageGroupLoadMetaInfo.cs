@@ -55,13 +55,13 @@ namespace LuaSTGEditorSharp.EditorData.Document.Meta
             };
             MetaModel path = new MetaModel
             {
-                Icon = "/LuaSTGNode.Legacy;component/images/16x16/properties.png",
+                Icon = "/LuaSTGEditorSharp.Core;component/images/16x16/properties.png",
                 Text = target.attributes[0].AttrInput
             };
             metaModel.Children.Add(path);
             path = new MetaModel
             {
-                Icon = "/LuaSTGNode.Legacy;component/images/16x16/properties.png",
+                Icon = "/LuaSTGEditorSharp.Core;component/images/16x16/properties.png",
                 Text = ColsAndRows
             };
             metaModel.Children.Add(path);

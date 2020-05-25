@@ -17,7 +17,8 @@ namespace LuaSTGEditorSharp.EditorData
             {
                 if (asmFullName == null)
                 {
-                    asmFullName = Plugin.PluginHandler.Plugin.GetType().Assembly.FullName;
+                    asmFullName = Plugin.PluginHandler.Plugin.NodeAssemblyName;
+                    if (asmFullName == "") asmFullName = Plugin.PluginHandler.Plugin.GetType().Assembly.FullName;
                 }
                 return asmFullName;
             }

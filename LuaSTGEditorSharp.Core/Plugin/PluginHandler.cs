@@ -32,7 +32,7 @@ namespace LuaSTGEditorSharp.Plugin
             }
             else
             {
-                Plugin.NodeTypeCache.Initialize(Assembly.GetExecutingAssembly(), pluginAssembly);
+                Plugin.NodeTypeCache.Initialize(AppDomain.CurrentDomain.GetAssemblies());
                 isSuccess = true;
             }
             EditorData.InputWindowSelector.Register(Plugin.GetInputWindowSelectorRegister());

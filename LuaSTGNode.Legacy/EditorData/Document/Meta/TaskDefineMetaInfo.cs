@@ -49,7 +49,7 @@ namespace LuaSTGEditorSharp.EditorData.Document.Meta
             {
                 prop = new MetaModel
                 {
-                    Icon = "/LuaSTGNode.Legacy;component/images/16x16/properties.png",
+                    Icon = "/LuaSTGEditorSharp.Core;component/images/16x16/properties.png",
                     Text = s
                 };
                 parent.Children.Add(prop);

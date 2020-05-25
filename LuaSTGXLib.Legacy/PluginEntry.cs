@@ -21,6 +21,8 @@ namespace LuaSTGEditorSharp
             execution = new LSTGXExecution();
         }
 
+        public override string NodeAssemblyName => "LuaSTGNode.Legacy";
+
         public override IInputWindowSelectorRegister GetInputWindowSelectorRegister()
         {
             return new Windows.Input.InputWindowSelectorRegister();

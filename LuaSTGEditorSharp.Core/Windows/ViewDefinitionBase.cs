@@ -35,7 +35,7 @@ namespace LuaSTGEditorSharp.Windows
         {
             MetaModel userDefinedNode = new MetaModel
             {
-                Icon = "/LuaSTGEditorSharp;component/images/16x16/userdefinednode.png",
+                Icon = "/LuaSTGEditorSharp.Core;component/images/16x16/userdefinednode.png",
                 Text = "User Defined Nodes"
             };
             var a = data.Meta.aggregatableMetas[1].GetAllFullWithDifficulty("");

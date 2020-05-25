@@ -654,6 +654,7 @@
     <Resource Include="Lua\LuaSyntax.xml" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="images\16x16\properties.png" />
     <Content Include="LuaSTGEditorSharp.Core.dependencies">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

@@ -62,7 +62,7 @@ namespace LuaSTGEditorSharp.EditorData.Document.Meta
         {
             MetaModel metaModel = new MetaModel
             {
-                Icon = "/LuaSTGEditorSharp;component/images/16x16/userdefinednode.png",
+                Icon = "/LuaSTGEditorSharp.Core;component/images/16x16/userdefinednode.png",
                 Text = Name
             };
             MetaModel sub;
@@ -75,7 +75,7 @@ namespace LuaSTGEditorSharp.EditorData.Document.Meta
                 {
                     sub = new MetaModel
                     {
-                        Icon = "/LuaSTGEditorSharp;component/images/16x16/properties.png",
+                        Icon = "/LuaSTGEditorSharp.Core;component/images/16x16/properties.png",
                         Text = target.attributes[i].AttrInput
                     };
                     metaModel.Children.Add(sub);
@@ -107,7 +107,7 @@ namespace LuaSTGEditorSharp.EditorData.Document.Meta
                 Result = Name,
                 Text = Name + " (" + display + ")",
                 FullName = FullName,
-                Icon = "/LuaSTGEditorSharp;component/images/16x16/userdefinednode.png",
+                Icon = "/LuaSTGEditorSharp.Core;component/images/16x16/userdefinednode.png",
                 ExInfo1 = target.attributes[1].AttrInput,
                 ExInfo2 = target.attributes[2].AttrInput,
                 Param = s
