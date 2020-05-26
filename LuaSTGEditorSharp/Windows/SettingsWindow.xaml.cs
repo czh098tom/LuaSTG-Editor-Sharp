@@ -585,7 +585,6 @@ namespace LuaSTGEditorSharp.Windows
                     StartInfo = new ProcessStartInfo()
                     {
                         FileName = "ExtensionRegister.exe",
-                        UseShellExecute = false,
                         CreateNoWindow = true
                     }
                 };

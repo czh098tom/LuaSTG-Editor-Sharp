@@ -9,10 +9,10 @@ namespace DanmakuRandomizer.Model
 {
     class SimpleBullet : Node
     {
-        public string Velocity { get; set; }
-        public string Angle { get; set; }
-        public List<string> positionX = new List<string>();
-        public List<string> positionY = new List<string>();
+        public string Velocity { get; set; } = "4";
+        public string Angle { get; set; } = "0";
+        public List<string> PositionX { get; set; } = new List<string>() { "self.x" };
+        public List<string> PositionY { get; set; } = new List<string>() { "self.y" };
 
         public override string Text => throw new NotImplementedException();
     }

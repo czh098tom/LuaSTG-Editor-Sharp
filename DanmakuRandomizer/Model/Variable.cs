@@ -9,5 +9,8 @@ namespace DanmakuRandomizer.Model
     internal abstract class Variable
     {
         public string Name { get; set; }
+        public InterpolationType InterpolationType { get; set; }
+        public double Begin { get; set; }
+        public double End { get; set; }
     }
 }

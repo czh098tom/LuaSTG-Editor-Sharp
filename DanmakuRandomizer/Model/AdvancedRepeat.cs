@@ -9,8 +9,9 @@ namespace DanmakuRandomizer.Model
 {
     internal class AdvancedRepeat : Node
     {
-        public string Times { get; set; }
-        public string Wait { get; set; }
+        public string Times { get; set; } = "1";
+        public string Wait { get; set; } = "0";
+        public List<Variable> Variables { get; set; } = new List<Variable>();
         public override string Text => $"repeat {Times} times, wait {Wait} frames";
     }
 }

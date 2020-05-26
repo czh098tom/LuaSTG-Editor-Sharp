@@ -47,12 +47,12 @@ namespace LuaSTGEditorSharp
                 sw = new StreamWriter(fs);
                 Console.SetOut(sw);
                 base.OnStartup(e);
-                RaiseProertyChanged("m");
 
                 if (!PluginHandler.LoadPlugin(PluginPath))
                 {
                     MessageBox.Show("Load Plugin Failed.");
                 }
+                RaiseProertyChanged("m");
 
                 Lua.SyntaxHighlightLoader.LoadLuaDef();
 
@@ -74,7 +74,7 @@ namespace LuaSTGEditorSharp
                 MainWindow = mainWindow;
                 MainWindow.Show();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.ToString());
                 Current.Shutdown();
@@ -173,7 +173,7 @@ namespace LuaSTGEditorSharp
                 Settings.Default["DebugWindowed"] = value;
             }
         }
-        
+
         public bool DebugCheat
         {
             get => Settings.Default.DebugCheat;
@@ -305,7 +305,7 @@ namespace LuaSTGEditorSharp
             get => Settings.Default.IndentationSpaceLength;
             set
             {
-                if (Lua.IndentationGenerator.Current is Lua.SpaceIndentation) 
+                if (Lua.IndentationGenerator.Current is Lua.SpaceIndentation)
                     (Lua.IndentationGenerator.Current as Lua.SpaceIndentation).NumOfSpaces = value;
                 Settings.Default["IndentationSpaceLength"] = value;
             }

@@ -46,10 +46,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Model\AdvancedRepeat.cs" />
+    <Compile Include="Model\InterpolationType.cs" />
     <Compile Include="Model\Node.cs" />
+    <Compile Include="Model\RandomDanmaku.cs" />
+    <Compile Include="Model\RangeSettings.cs" />
     <Compile Include="Model\SimpleBullet.cs" />
     <Compile Include="Model\Variable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RandomExtension.cs" />
     <Compile Include="View\DanmakuRandomizer.xaml.cs">
       <DependentUpon>DanmakuRandomizer.xaml</DependentUpon>
     </Compile>
