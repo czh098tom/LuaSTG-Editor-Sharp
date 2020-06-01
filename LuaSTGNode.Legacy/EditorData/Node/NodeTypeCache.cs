@@ -12,6 +12,6 @@ namespace LuaSTGEditorSharp.EditorData.Node
 {
     public class NodeTypeCache : AbstractNodeTypeCache
     {
-        public override string Version { get => "0.0.4"; }
+        public override string Version { get => "0.7"; }
     }
 }

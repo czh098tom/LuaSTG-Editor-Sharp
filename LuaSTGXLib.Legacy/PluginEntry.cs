@@ -17,8 +17,8 @@ namespace LuaSTGEditorSharp
     {
         public PluginEntry() : base()
         {
-            nodeTypeCache = new NodeTypeCache();
-            execution = new LSTGXExecution();
+            NodeTypeCache = new NodeTypeCache();
+            Execution = new LSTGXExecution();
         }
 
         public override string NodeAssemblyName => "LuaSTGNode.Legacy";
@@ -73,6 +73,6 @@ namespace LuaSTGEditorSharp
 
         public override int MetaInfoCollectionTypeCount { get => (int)MetaType.__max; }
 
-        public override string TargetLSTGVersion => "LuaSTG -x TP v6.2 (Experimental, not fully supported)";
+        public override string TargetLSTGVersion => "LuaSTG -x TP v7.0 (Experimental, not fully supported)";
     }
 }

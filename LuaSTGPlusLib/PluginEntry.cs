@@ -17,8 +17,8 @@ namespace LuaSTGEditorSharp
     {
         public PluginEntry() : base()
         {
-            nodeTypeCache = new NodeTypeCache();
-            execution = new LSTGEXPlusExecution();
+            NodeTypeCache = new NodeTypeCache();
+            Execution = new LSTGEXPlusExecution();
         }
 
         public override string NodeAssemblyName => "LuaSTGNode.Legacy";

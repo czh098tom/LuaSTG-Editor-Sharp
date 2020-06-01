@@ -10,11 +10,13 @@ namespace DanmakuRandomizer.Model
     {
         List<Node> nodes;
         Random ran;
+        int varCount;
         public int Depth { get; set; }
 
         internal RandomDanmaku Randomize()
         {
             ran = new Random();
+            varCount = 0;
             nodes = new List<Node>();
             nodes.Add(new AdvancedRepeat() { Times = "1" });
             nodes.Add(new SimpleBullet());
@@ -81,6 +83,7 @@ namespace DanmakuRandomizer.Model
                 //v
                 double lb = Convert.ToUInt64(ran.NextReversedDecayedDouble(0.125, 1) * 1000) / 1000.0;
                 double ub = Convert.ToUInt64(ran.NextDecayedDouble(0.125, 1) * 1000) / 1000.0;
+                varCount++;
             }
             else
             {

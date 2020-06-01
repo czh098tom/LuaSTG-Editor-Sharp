@@ -13,8 +13,8 @@ namespace LuaSTGEditorSharp.Plugin.DefaultNullPlugin
     {
         public DefaultPluginEntry() : base()
         {
-            nodeTypeCache = new DefaultNodeTypeCache();
-            execution = new DefaultExecution();
+            NodeTypeCache = new DefaultNodeTypeCache();
+            Execution = new DefaultExecution();
         }
 
         public override Type[] StageNodeType => new Type[0];
