@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DanmakuRandomizer.Model
 {
-    internal abstract class Variable
+    internal class Variable
     {
         public string Name { get; set; }
         public InterpolationType InterpolationType { get; set; }

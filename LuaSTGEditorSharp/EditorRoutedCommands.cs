@@ -21,6 +21,7 @@ namespace LuaSTGEditorSharp
         #endregion
         #region tools
         public static RoutedUICommand FixNodeAttributes { get; }
+        public static RoutedUICommand LibraryTools { get; }
         #endregion
         #region export
         public static RoutedUICommand ViewCode { get; }
@@ -88,6 +89,7 @@ namespace LuaSTGEditorSharp
             };
             GoToDef = new RoutedUICommand("Go to Definition", "GoToDef", typeof(EditorRoutedCommands), inputs);
             FixNodeAttributes = new RoutedUICommand("Fix Node Attribute", "FixNodeAttribute", typeof(EditorRoutedCommands));
+            LibraryTools = new RoutedUICommand("Library Tools", "LibraryTools", typeof(EditorRoutedCommands));
             inputs = new InputGestureCollection
             {
                 new KeyGesture(Key.F4)

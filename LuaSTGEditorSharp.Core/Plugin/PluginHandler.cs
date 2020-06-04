@@ -15,15 +15,15 @@ namespace LuaSTGEditorSharp.Plugin
 
         public static bool LoadPlugin(string PluginPath)
         {
-            Assembly pluginAssembly = null;
+            bool isSuccess;
+            Assembly pluginAssembly;
             try
             {
                 string path = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, PluginPath));
                 pluginAssembly = Assembly.LoadFile(path);
                 Plugin = (AbstractPluginEntry)pluginAssembly.CreateInstance("LuaSTGEditorSharp.PluginEntry");
             }
-            catch { }
-            bool isSuccess;
+            catch { return false; }
             if (pluginAssembly == null)
             {
                 if (Plugin == null) Plugin = new DefaultNullPlugin.DefaultPluginEntry();

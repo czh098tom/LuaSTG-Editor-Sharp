@@ -17,7 +17,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>..\bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -50,6 +50,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DanmakuRandomizer\DanmakuRandomizer.csproj">
+      <Project>{a2eb4ba6-99d8-4ebe-a122-de9ed986aec5}</Project>
+      <Name>DanmakuRandomizer</Name>
+    </ProjectReference>
     <ProjectReference Include="..\LuaSTGEditorSharp.Core\LuaSTGEditorSharp.Core.csproj">
       <Project>{bd1ca1e6-9e34-4098-ae65-922f23670f75}</Project>
       <Name>LuaSTGEditorSharp.Core</Name>

@@ -491,6 +491,9 @@ namespace LuaSTGEditorSharp.Windows
                 System.Windows.MessageBox.Show(e.ToString());
             }
 
+            //new List<string>(pathIgnorance).ForEach((s)=>System.Windows.MessageBox.Show(s));
+            //System.Windows.MessageBox.Show(AppDomain.CurrentDomain.BaseDirectory);
+
             pluginPaths = new ObservableCollection<string>(
                 from string s
                 in Directory.GetFiles(AppDomain.CurrentDomain.BaseDirectory)

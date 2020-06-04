@@ -35,6 +35,7 @@
         <!--#endregion-->
         <!--#region Tools-->
         <CommandBinding Command="local:EditorRoutedCommands.FixNodeAttributes" Executed="FixAttributeCommandExecuted"/>
+        <CommandBinding Command="local:EditorRoutedCommands.LibraryTools" Executed="LibraryToolsCommandExecuted"/>
         <!--#endregion-->
         <!--#region Export-->
         <CommandBinding Command="local:EditorRoutedCommands.ViewCode" Executed="ViewCodeCommandExecuted" CanExecute="ViewCodeCommand_CanExecute"/>
@@ -426,7 +427,19 @@
                     <Separator/>
                     <MenuItem Header="_Fix node attributes" Command="local:EditorRoutedCommands.FixNodeAttributes"/>
                     <Separator/>
-                    <MenuItem Header="_Library tools..."/>
+                    <MenuItem x:Name="libTools" Header="_Library tools...">
+                        <MenuItem.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Name}"/>
+                            </DataTemplate>
+                        </MenuItem.ItemTemplate>
+                        <MenuItem.ItemContainerStyle>
+                            <Style TargetType="MenuItem">
+                                <Setter Property="Command" Value="local:EditorRoutedCommands.LibraryTools"/>
+                                <Setter Property="CommandParameter" Value="{Binding}"/>
+                            </Style>
+                        </MenuItem.ItemContainerStyle>
+                    </MenuItem>
                 </MenuItem>
                 <MenuItem Header="_Insert">
                     <MenuItem Header="_Before" Command="local:EditorRoutedCommands.SwitchBefore" 

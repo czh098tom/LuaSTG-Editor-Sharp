@@ -73,7 +73,7 @@ namespace LuaSTGEditorSharp.Plugin
         /// </summary>
         public abstract int[][] MetaInfoCollectionWatchDict { get; }
         /// <summary>
-        /// (Not implemented yet) get an array of tools used in menu.
+        /// Get an array of tools used in menu.
         /// </summary>
         public virtual PluginTool[] PluginTools { get => new PluginTool[] { }; }
         /// <summary>

@@ -8,6 +8,11 @@ namespace LuaSTGEditorSharp.Plugin
 {
     public sealed class PluginToolParameter
     {
-        public readonly EditorData.AttrItem selected;
+        public readonly EditorData.TreeNode selected;
+
+        public PluginToolParameter(EditorData.TreeNode selected = null)
+        {
+            this.selected = selected;
+        }
     }
 }

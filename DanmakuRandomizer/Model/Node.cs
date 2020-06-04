@@ -25,5 +25,7 @@ namespace DanmakuRandomizer.Model
             target = value;
             RaisePropertyChanged("Text");
         }
+
+        public abstract LuaSTGEditorSharp.EditorData.TreeNode GetTreeNode(LuaSTGEditorSharp.EditorData.DocumentData documentData);
     }
 }

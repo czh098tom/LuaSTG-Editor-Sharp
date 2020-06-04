@@ -73,6 +73,8 @@ namespace LuaSTGEditorSharp
 
         public override int MetaInfoCollectionTypeCount { get => (int)MetaType.__max; }
 
+        public override PluginTool[] PluginTools => new PluginTool[] { new DanmakuRandomizer.DanmakuRandomizerPluginTool() };
+
         public override string TargetLSTGVersion => "LuaSTG ex+ 0.81b/c, OLC ver 5 and 0.82a/b";
     }
 }

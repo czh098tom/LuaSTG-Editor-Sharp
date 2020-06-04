@@ -136,5 +136,14 @@ namespace LuaSTGEditorSharp
             temp = new FileDirectoryModel() { Name = "New folder...", FullPath = path.FullName };
             input.Add(temp);
         }
+
+        public void GetPluginTools()
+        {
+            foreach(PluginTool pt in PluginHandler.Plugin.PluginTools)
+            {
+                PluginTools.Add(pt);
+            }
+            libTools.ItemsSource = PluginTools;
+        }
     }
 }

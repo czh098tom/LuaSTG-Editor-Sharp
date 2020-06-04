@@ -18,7 +18,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>..\bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -192,7 +192,7 @@
     <Compile Include="Plugin\IInputWindowSelectorRegister.cs" />
     <Compile Include="Plugin\IViewDefinition.cs" />
     <Compile Include="Plugin\PluginHandler.cs" />
-    <Compile Include="Plugin\PluginToolDefinition.cs" />
+    <Compile Include="Plugin\PluginTool.cs" />
     <Compile Include="Plugin\PluginToolParameter.cs" />
     <Compile Include="Plugin\PluginToolResult.cs" />
     <Compile Include="Plugin\SystemMetaLoader.cs" />

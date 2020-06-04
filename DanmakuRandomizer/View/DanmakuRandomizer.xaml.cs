@@ -13,10 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+using DanmakuRandomizer.Model;
+
 namespace DanmakuRandomizer.View
 {
     public partial class DanmakuRandomizer : Window
     {
+        public LuaSTGEditorSharp.EditorData.DocumentData Document { get; set; }
+
+        public LuaSTGEditorSharp.EditorData.TreeNode Nodes { get; private set; }
+
         public DanmakuRandomizer()
         {
             InitializeComponent();
@@ -24,7 +30,8 @@ namespace DanmakuRandomizer.View
 
         private void OK_Click(object sender, RoutedEventArgs e)
         {
-
+            Nodes = new RandomDanmaku() { Depth = 10 }.Randomize().GetTreeNodes(null);
+            this.Close();
         }
     }
 }

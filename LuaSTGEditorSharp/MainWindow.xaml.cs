@@ -52,6 +52,7 @@ namespace LuaSTGEditorSharp
         public ObservableCollection<ToolboxTab> ToolboxData { get => toolboxData; }
 
         ObservableCollection<FileDirectoryModel> PresetsGetList { get; } = new ObservableCollection<FileDirectoryModel>();
+        ObservableCollection<PluginTool> PluginTools { get; } = new ObservableCollection<PluginTool>();
 
         private CommandTypeFac insertState = new AfterFac();
 
@@ -114,6 +115,7 @@ namespace LuaSTGEditorSharp
             this.docTabs.ItemsSource = Documents;
             EditorConsole.ItemsSource = Messages;
             GetPresets();
+            GetPluginTools();
             presetsMenu.ItemsSource = PresetsGetList;
             CompileWorker = this.FindResource("CompileWorker") as BackgroundWorker;
         }
@@ -1122,6 +1124,23 @@ namespace LuaSTGEditorSharp
             e.CanExecute = selectedNode?.GetReferredTreeNode() != null;
         }
 
+        private void FixAttributeCommandExecuted(object sender, ExecutedRoutedEventArgs e)
+        {
+            OpenAndFixNodeAttributes();
+        }
+
+        private void LibraryToolsCommandExecuted(object sender, ExecutedRoutedEventArgs e)
+        {
+            PluginTool pt = (e.Parameter as PluginTool);
+            PluginToolResult ptr = pt.ExecutePlugin(new PluginToolParameter(SelectedNode));
+            clipBoard = ptr.clipBoard;
+            if (ptr.newDocument != null) Documents.AddAndAllocHash(ptr.newDocument);
+            foreach(Command c in ptr.commands)
+            {
+                ActivatedWorkSpaceData.AddAndExecuteCommand(c);
+            }
+        }
+
         private void ViewCodeCommandExecuted(object sender, ExecutedRoutedEventArgs e)
         {
             ViewCode();
@@ -1150,11 +1169,6 @@ namespace LuaSTGEditorSharp
         private void ExportZipCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
             e.CanExecute = ActivatedWorkSpaceData != null && !packagingLocked && (App.Current as App).IsEXEPathSet;
-        }
-
-        private void FixAttributeCommandExecuted(object sender, ExecutedRoutedEventArgs e)
-        {
-            OpenAndFixNodeAttributes();
         }
 
         private void RunProjectCommandExecuted(object sender, ExecutedRoutedEventArgs e)
