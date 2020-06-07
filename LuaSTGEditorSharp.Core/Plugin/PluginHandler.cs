@@ -11,22 +11,22 @@ namespace LuaSTGEditorSharp.Plugin
 {
     public static class PluginHandler
     {
-        public static AbstractPluginEntry Plugin { get; private set; } = new DefaultNullPlugin.DefaultPluginEntry();
+        public static AbstractPluginEntry Plugin { get; private set; } = null;
 
         public static bool LoadPlugin(string PluginPath)
         {
             bool isSuccess;
-            Assembly pluginAssembly;
+            Assembly pluginAssembly = null;
             try
             {
                 string path = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, PluginPath));
                 pluginAssembly = Assembly.LoadFile(path);
                 Plugin = (AbstractPluginEntry)pluginAssembly.CreateInstance("LuaSTGEditorSharp.PluginEntry");
             }
-            catch { return false; }
-            if (pluginAssembly == null)
+            catch { }
+            if (Plugin == null)
             {
-                if (Plugin == null) Plugin = new DefaultNullPlugin.DefaultPluginEntry();
+                Plugin = new DefaultNullPlugin.DefaultPluginEntry();
                 Plugin.NodeTypeCache.Initialize(Assembly.GetExecutingAssembly());
                 isSuccess = false;
             }
