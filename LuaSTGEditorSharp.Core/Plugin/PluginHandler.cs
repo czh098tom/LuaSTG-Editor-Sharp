@@ -11,6 +11,7 @@ namespace LuaSTGEditorSharp.Plugin
 {
     public static class PluginHandler
     {
+        public static AbstractPluginEntry DefaultPlugin { get; set; }
         public static AbstractPluginEntry Plugin { get; private set; } = null;
 
         public static bool LoadPlugin(string PluginPath)
@@ -26,7 +27,7 @@ namespace LuaSTGEditorSharp.Plugin
             catch { }
             if (Plugin == null)
             {
-                Plugin = new DefaultNullPlugin.DefaultPluginEntry();
+                Plugin = DefaultPlugin;
                 Plugin.NodeTypeCache.Initialize(Assembly.GetExecutingAssembly());
                 isSuccess = false;
             }
@@ -35,8 +36,6 @@ namespace LuaSTGEditorSharp.Plugin
                 Plugin.NodeTypeCache.Initialize(AppDomain.CurrentDomain.GetAssemblies());
                 isSuccess = true;
             }
-            EditorData.InputWindowSelector.Register(Plugin.GetInputWindowSelectorRegister());
-            EditorData.InputWindowSelector.AfterRegister();
             return isSuccess;
         }
     }

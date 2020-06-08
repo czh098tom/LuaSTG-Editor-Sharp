@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 using LuaSTGEditorSharp.EditorData;
 using LuaSTGEditorSharp.EditorData.Node.Bullet;
+using LuaSTGEditorSharp.Windows;
 
 namespace DanmakuRandomizer.Model
 {

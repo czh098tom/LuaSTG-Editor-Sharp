@@ -17,7 +17,7 @@
                 <Grid>
                     <Label Content="Plugin" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="84"/>
                     <ComboBox x:Name="PluginList" Text="{Binding PluginPath,ElementName=window}" IsEditable="True" 
-                              HorizontalAlignment="Left" Height="26" Margin="99,10,0,0" VerticalAlignment="Top" Width="512"/>
+                              HorizontalAlignment="Left" Height="26" Margin="99,10,0,0" VerticalAlignment="Top" Width="512" IsReadOnly="True"/>
                     <Label Content="Note: The selection of plugin will only apply once you restart the application." HorizontalAlignment="Left" Height="34" Margin="10,41,0,0" VerticalAlignment="Top" Width="669"/>
                     <Label Content="Target Version:" HorizontalAlignment="Left" Margin="10,80,0,0" VerticalAlignment="Top" Width="103"/>
                     <Label Content="{Binding TargetVersion, ElementName=window}" HorizontalAlignment="Left" Margin="118,80,0,0" VerticalAlignment="Top" Width="561" Height="26"/>

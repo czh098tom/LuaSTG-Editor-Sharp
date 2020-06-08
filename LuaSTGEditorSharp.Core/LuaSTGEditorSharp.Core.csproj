@@ -46,6 +46,7 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
@@ -97,7 +98,6 @@
     <Compile Include="EditorData\Exception\EXEPathNotSetException.cs" />
     <Compile Include="EditorData\Exception\InvalidRelativeResPathException.cs" />
     <Compile Include="EditorData\GlobalCompileData.cs" />
-    <Compile Include="EditorData\InputWindowSelector.cs" />
     <Compile Include="EditorData\Interfaces\IAggregatableMeta.cs" />
     <Compile Include="EditorData\Interfaces\IDocumentWithMeta.cs" />
     <Compile Include="EditorData\Interfaces\IMessageThrowable.cs" />
@@ -180,16 +180,6 @@
     <Compile Include="Lua\TabIndentation.cs" />
     <Compile Include="Plugin\AbstractPluginEntry.cs" />
     <Compile Include="Plugin\AbstractToolbox.cs" />
-    <Compile Include="Plugin\DefaultNullPlugin\DefaultExecution.cs" />
-    <Compile Include="Plugin\DefaultNullPlugin\DefaultInputWindowSelectorRegister.cs" />
-    <Compile Include="Plugin\DefaultNullPlugin\DefaultMetaData.cs" />
-    <Compile Include="Plugin\DefaultNullPlugin\DefaultNodeTypeCache.cs" />
-    <Compile Include="Plugin\DefaultNullPlugin\DefaultPluginEntry.cs" />
-    <Compile Include="Plugin\DefaultNullPlugin\DefaultToolBox.cs" />
-    <Compile Include="Plugin\DefaultNullPlugin\DefaultViewDefinition.xaml.cs">
-      <DependentUpon>DefaultViewDefinition.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Plugin\IInputWindowSelectorRegister.cs" />
     <Compile Include="Plugin\IViewDefinition.cs" />
     <Compile Include="Plugin\PluginHandler.cs" />
     <Compile Include="Plugin\PluginTool.cs" />
@@ -202,66 +192,11 @@
     <Compile Include="Toolbox\SearchModel.cs" />
     <Compile Include="Util\BitmapUtil.cs" />
     <Compile Include="Util\DictionaryExtension.cs" />
-    <Compile Include="Windows\AboutNode.xaml.cs">
-      <DependentUpon>AboutNode.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Windows\CodePreviewWindow.xaml.cs">
-      <DependentUpon>CodePreviewWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Windows\Input\CodeInput.xaml.cs">
-      <DependentUpon>CodeInput.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Windows\Input\InputWindow.cs" />
-    <Compile Include="Windows\Input\NodeDefInput.xaml.cs">
-      <DependentUpon>NodeDefInput.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Windows\Input\PathInput.xaml.cs">
-      <DependentUpon>PathInput.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Windows\Input\Selector.xaml.cs">
-      <DependentUpon>Selector.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Windows\Input\SingleLineInput.xaml.cs">
-      <DependentUpon>SingleLineInput.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Windows\ViewDefinitionBase.cs" />
+    <Compile Include="Windows\IInputWindowSelectorRegister.cs" />
+    <Compile Include="Windows\Input\IInputWindow.cs" />
     <Compile Include="Zip\ZipCompressor.cs" />
     <Compile Include="Zip\ZipCompressorBatch.cs" />
     <Compile Include="Zip\ZipCompressorInternal.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Page Include="Plugin\DefaultNullPlugin\DefaultViewDefinition.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Windows\AboutNode.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Windows\CodePreviewWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Windows\Input\CodeInput.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Windows\Input\NodeDefInput.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Windows\Input\PathInput.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Windows\Input\Selector.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Windows\Input\SingleLineInput.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images\16x16\advancedrepeat.png" />
@@ -655,9 +590,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images\16x16\properties.png" />
-    <Content Include="LuaSTGEditorSharp.Core.dependencies">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

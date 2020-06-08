@@ -126,9 +126,17 @@
     <Compile Include="NodeParityCheckTest.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\LuaSTGEditorSharp.Core.Windows\LuaSTGEditorSharp.Core.Windows.csproj">
+      <Project>{bc414cfe-4741-4a84-ac6d-827327103217}</Project>
+      <Name>LuaSTGEditorSharp.Core.Windows</Name>
+    </ProjectReference>
     <ProjectReference Include="..\LuaSTGEditorSharp.Core\LuaSTGEditorSharp.Core.csproj">
       <Project>{bd1ca1e6-9e34-4098-ae65-922f23670f75}</Project>
       <Name>LuaSTGEditorSharp.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LuaSTGNode.Legacy.Windows\LuaSTGNode.Legacy.Windows.csproj">
+      <Project>{a1c31871-42cd-46fa-8274-0ef22ec32d63}</Project>
+      <Name>LuaSTGNode.Legacy.Windows</Name>
     </ProjectReference>
     <ProjectReference Include="..\LuaSTGNode.Legacy\LuaSTGNode.Legacy.csproj">
       <Project>{06f198ea-762c-4b34-84da-b58a6c3e6a79}</Project>

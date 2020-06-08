@@ -763,7 +763,7 @@ namespace LuaSTGEditorSharp
             AttrItem ai = newNode.GetCreateInvoke();
             if (ai != null)
             {
-                InputWindow iw = InputWindowSelector.SelectInputWindow(ai, ai.EditWindow, ai.AttrInput);
+                IInputWindow iw = InputWindowSelector.SelectInputWindow(ai, ai.EditWindow, ai.AttrInput);
                 if (iw.ShowDialog() == true)
                 {
                     ActivatedWorkSpaceData.AddAndExecuteCommand(new EditAttrCommand(ai, ai.AttrInput, iw.Result));
@@ -780,7 +780,7 @@ namespace LuaSTGEditorSharp
             AttrItem ai = selectedNode?.GetRCInvoke();
             if (ai != null)
             {
-                InputWindow iw = InputWindowSelector.SelectInputWindow(ai, ai.EditWindow, ai.AttrInput);
+                IInputWindow iw = InputWindowSelector.SelectInputWindow(ai, ai.EditWindow, ai.AttrInput);
                 if (iw.ShowDialog() == true)
                 {
                     ActivatedWorkSpaceData.AddAndExecuteCommand(new EditAttrCommand(ai, ai.AttrInput, iw.Result));
@@ -892,7 +892,7 @@ namespace LuaSTGEditorSharp
                 AttrItem ai = selectedNode.GetRCInvoke();
                 if (ai != null)
                 {
-                    InputWindow iw = InputWindowSelector.SelectInputWindow(ai, ai.EditWindow, ai.AttrInput);
+                    IInputWindow iw = InputWindowSelector.SelectInputWindow(ai, ai.EditWindow, ai.AttrInput);
                     if (iw.ShowDialog() == true)
                     {
                         ActivatedWorkSpaceData.AddAndExecuteCommand(new EditAttrCommand(ai, ai.AttrInput, iw.Result));
@@ -1361,7 +1361,7 @@ namespace LuaSTGEditorSharp
             AttrItem ai = button.Tag as AttrItem;
             //try
             {
-                InputWindow iw = InputWindowSelector.SelectInputWindow(ai, e.Parameter?.ToString(), ai.AttrInput);
+                IInputWindow iw = InputWindowSelector.SelectInputWindow(ai, e.Parameter?.ToString(), ai.AttrInput);
                 if (iw.ShowDialog() == true)
                 {
                     ActivatedWorkSpaceData.AddAndExecuteCommand(new EditAttrCommand(ai, ai.AttrInput, iw.Result));

@@ -22,14 +22,13 @@ namespace LuaSTGEditorSharp.Windows
     /// <summary>
     /// Settings.xaml 的交互逻辑
     /// </summary>
-    public partial class SettingsWindow : Window , INotifyPropertyChanged
+    public partial class SettingsWindow : Window, INotifyPropertyChanged
     {
         App mainApp = Application.Current as App;
 
         static readonly int[] resX = { 640, 960, 1280 };
         static readonly int[] resY = { 480, 720, 960 };
-
-        ObservableCollection<string> pluginPaths = new ObservableCollection<string>();
+        readonly ObservableCollection<string> pluginPaths = new ObservableCollection<string>();
 
         private string zipExecutablePath;
         public string ZipExecutablePath
@@ -92,9 +91,9 @@ namespace LuaSTGEditorSharp.Windows
             set
             {
                 string[] vs = value.Split('x');
-                if(vs!=null && vs.Count() > 1)
+                if (vs != null && vs.Count() > 1)
                 {
-                    if(int.TryParse(vs[0], out int x))
+                    if (int.TryParse(vs[0], out int x))
                     {
                         DebugResolutionX = x;
                     }
@@ -111,7 +110,7 @@ namespace LuaSTGEditorSharp.Windows
         {
             get
             {
-                switch(DebugResolutionX)
+                switch (DebugResolutionX)
                 {
                     case 640:
                         return 0;
@@ -451,44 +450,15 @@ namespace LuaSTGEditorSharp.Windows
             ReadSettings();
             InitializeComponent();
 
-            HashSet<string> pathIgnorance = new HashSet<string>();
-
-            try
+            HashSet<string> names = new HashSet<string>();
+            var dependencyFiles =
+                from string s
+                in Directory.GetFiles(AppDomain.CurrentDomain.BaseDirectory)
+                where Path.GetExtension(s) == ".dependencies"
+                select Path.GetFileNameWithoutExtension(s);
+            foreach(string s in dependencyFiles)
             {
-                pathIgnorance.Add("LuaSTGEditorSharp.Core.dll");
-                var dependencyFiles =
-                    from string s
-                    in Directory.GetFiles(AppDomain.CurrentDomain.BaseDirectory)
-                    where Path.GetExtension(s) == ".dependencies"
-                    select s;
-                foreach (string s in dependencyFiles)
-                {
-                    FileStream fs = null;
-                    StreamReader sr = null;
-                    try
-                    {
-                        fs = new FileStream(s, FileMode.Open, FileAccess.Read);
-                        sr = new StreamReader(fs);
-                        while (!sr.EndOfStream)
-                        {
-                            string ig = sr.ReadLine().Trim('\r', '\n', ' ');
-                            if (!pathIgnorance.Contains(ig)) pathIgnorance.Add(ig);
-                        }
-                    }
-                    catch (Exception e)
-                    {
-                        System.Windows.MessageBox.Show(e.ToString());
-                    }
-                    finally
-                    {
-                        sr?.Close();
-                        fs?.Close();
-                    }
-                }
-            }
-            catch(Exception e)
-            {
-                System.Windows.MessageBox.Show(e.ToString());
+                if (!names.Contains(s)) names.Add(s);
             }
 
             //new List<string>(pathIgnorance).ForEach((s)=>System.Windows.MessageBox.Show(s));
@@ -497,7 +467,7 @@ namespace LuaSTGEditorSharp.Windows
             pluginPaths = new ObservableCollection<string>(
                 from string s
                 in Directory.GetFiles(AppDomain.CurrentDomain.BaseDirectory)
-                where Path.GetExtension(s) == ".dll" && !pathIgnorance.Contains(Path.GetFileName(s))
+                where Path.GetExtension(s) == ".dll" && names.Contains(Path.GetFileNameWithoutExtension(s))
                 select Path.GetFileName(s)
                 );
             PluginList.ItemsSource = pluginPaths;
@@ -538,7 +508,7 @@ namespace LuaSTGEditorSharp.Windows
             {
                 Filter = "Zip Executable|7z.exe"
             };
-            if (chooseExc.ShowDialog() != System.Windows.Forms.DialogResult.Cancel) 
+            if (chooseExc.ShowDialog() != System.Windows.Forms.DialogResult.Cancel)
             {
                 ZipExecutablePath = chooseExc.FileName;
             }

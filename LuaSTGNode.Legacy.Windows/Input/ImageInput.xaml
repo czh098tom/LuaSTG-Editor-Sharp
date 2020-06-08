@@ -1,0 +1,294 @@
+﻿<local:InputWindow x:Name="inputWindow"  x:Class="LuaSTGEditorSharp.Windows.Input.ImageInput"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:LuaSTGEditorSharp.Windows.Input;assembly=LuaSTGEditorSharp.Core.Windows"
+        xmlns:cv="clr-namespace:LuaSTGEditorSharp.Windows.Input.Canvas"
+        xmlns:conv="clr-namespace:LuaSTGEditorSharp.Windows.Input.Converter"
+        mc:Ignorable="d"
+        Title="Choose Image" Height="475.012" Width="840.879" MinHeight="100" MinWidth="200"
+                   Loaded="InputWindow_Loaded">
+    <Window.Resources>
+        <DrawingBrush x:Key="TransparentBrushW" Viewport="0,0,16,16" ViewportUnits="Absolute" TileMode="Tile">
+            <DrawingBrush.Drawing>
+                <DrawingGroup>
+                    <GeometryDrawing>
+                        <GeometryDrawing.Geometry>
+                            <GeometryGroup>
+                                <RectangleGeometry Rect="0,0,16,16"/>
+                                <RectangleGeometry Rect="16,16,16,16"/>
+                            </GeometryGroup>
+                        </GeometryDrawing.Geometry>
+                        <GeometryDrawing.Brush>
+                            <SolidColorBrush Color="LightGray"/>
+                        </GeometryDrawing.Brush>
+                    </GeometryDrawing>
+                </DrawingGroup>
+            </DrawingBrush.Drawing>
+        </DrawingBrush>
+        <DrawingBrush x:Key="TransparentBrushB" Viewport="0,0,16,16" ViewportUnits="Absolute" TileMode="Tile">
+            <DrawingBrush.Drawing>
+                <DrawingGroup>
+                    <GeometryDrawing>
+                        <GeometryDrawing.Geometry>
+                            <GeometryGroup>
+                                <RectangleGeometry Rect="0,0,16,16"/>
+                                <RectangleGeometry Rect="16,16,16,16"/>
+                            </GeometryGroup>
+                        </GeometryDrawing.Geometry>
+                        <GeometryDrawing.Brush>
+                            <SolidColorBrush Color="DimGray"/>
+                        </GeometryDrawing.Brush>
+                    </GeometryDrawing>
+                    <GeometryDrawing>
+                        <GeometryDrawing.Geometry>
+                            <GeometryGroup>
+                                <RectangleGeometry Rect="0,16,16,16"/>
+                                <RectangleGeometry Rect="16,0,16,16"/>
+                            </GeometryGroup>
+                        </GeometryDrawing.Geometry>
+                        <GeometryDrawing.Brush>
+                            <SolidColorBrush Color="Black"/>
+                        </GeometryDrawing.Brush>
+                    </GeometryDrawing>
+                </DrawingGroup>
+            </DrawingBrush.Drawing>
+        </DrawingBrush>
+        <SolidColorBrush x:Key="ColorW" Color="White"/>
+        <SolidColorBrush x:Key="ColorB" Color="Black"/>
+        <conv:StrToPicStrechConverter x:Key="StrToPicStrechConverter"/>
+    </Window.Resources>
+    <Grid>
+        <DockPanel>
+            <StackPanel DockPanel.Dock="Bottom" HorizontalAlignment="Right" Orientation="Horizontal">
+                <ComboBox x:Name="comboPicStrech" Margin="10,10,2,10" IsEditable="False" SelectedIndex="0" Visibility="Hidden">
+                    <ComboBoxItem Content="Original"/>
+                    <ComboBoxItem Content="Fill"/>
+                </ComboBox>
+                <Label Margin="10,10,2,10" Content="Transparent background: "/>
+                <ComboBox x:Name="comboPicBG" Margin="10,10,2,10" Width="150" IsEditable="False" SelectedIndex="0">
+                    <ComboBoxItem Tag="{StaticResource TransparentBrushW}">
+                        <StackPanel Orientation="Horizontal">
+                            <Label BorderThickness="0.5" BorderBrush="Black" Height="12" Width="12"
+                                   Background="{StaticResource TransparentBrushW}" />
+                            <TextBlock Text="Grid (White)"/>
+                        </StackPanel>
+                    </ComboBoxItem>
+                    <ComboBoxItem Tag="{StaticResource TransparentBrushB}">
+                        <StackPanel Orientation="Horizontal">
+                            <Label BorderThickness="0.5" BorderBrush="Black" Height="12" Width="12"
+                                   Background="{StaticResource TransparentBrushB}" />
+                            <TextBlock Text="Grid (Black)"/>
+                        </StackPanel>
+                    </ComboBoxItem>
+                    <ComboBoxItem Tag="{StaticResource ColorW}">
+                        <StackPanel Orientation="Horizontal">
+                            <Label BorderThickness="0.5" BorderBrush="Black" Height="12" Width="12"
+                                   Background="{StaticResource ColorW}"/>
+                            <TextBlock Text="White"/>
+                        </StackPanel>
+                    </ComboBoxItem>
+                    <ComboBoxItem Tag="{StaticResource ColorB}">
+                        <StackPanel Orientation="Horizontal">
+                            <Label BorderThickness="0.5" BorderBrush="Black" Height="12" Width="12" 
+                                   Background="{StaticResource ColorB}" />
+                            <TextBlock Text="Black"/>
+                        </StackPanel>
+                    </ComboBoxItem>
+                </ComboBox>
+                <Button Content="OK" Margin="10,10,2,10" Padding="3" Click="ButtonOK_Click"/>
+                <Button Content="Cancel" Margin="2,10,10,10" Padding="3" Click="ButtonCancel_Click"/>
+            </StackPanel>
+            <TextBox DockPanel.Dock="Top" Height="24" x:Name="codeText" Text="{Binding Result, ElementName=inputWindow, Mode=TwoWay}" 
+                             AcceptsReturn="False" FontFamily="Courier New" KeyDown="Text_KeyDown"/>
+            <TabControl x:Name="tabControl" SelectionChanged="TabControl_SelectionChanged">
+                <TabItem Header="Images">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="2*"/>
+                        </Grid.ColumnDefinitions>
+                        <ListBox x:Name="BoxImageData" Grid.Column="0" SelectionChanged="BoxImageData_SelectionChanged">
+                            <ListBox.Resources>
+                                <CollectionViewSource x:Key="ImageInfoSys" Source="{Binding ImageInfoSys, ElementName=inputWindow}"/>
+                                <CollectionViewSource x:Key="ImageInfo" Source="{Binding ImageInfo, ElementName=inputWindow}"/>
+                            </ListBox.Resources>
+                            <ListBox.ItemsSource>
+                                <CompositeCollection>
+                                    <CollectionContainer Collection="{Binding Source={StaticResource ImageInfoSys}}"/>
+                                    <CollectionContainer Collection="{Binding Source={StaticResource ImageInfo}}"/>
+                                </CompositeCollection>
+                            </ListBox.ItemsSource>
+                            <ListBox.ItemTemplate>
+                                <DataTemplate DataType="MetaModel">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image VerticalAlignment="Center" Source="{Binding Icon}"
+                                                Stretch="Fill" Width="16" Height="16" Margin="0,0,2,2"/>
+                                        <TextBlock VerticalAlignment="Center" Text="{Binding Text}"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                        <ScrollViewer Grid.Column="1" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                            <Grid>
+                                <Canvas Height="{Binding ActualHeight, ElementName=ImageExample}"
+                                        Width="{Binding ActualWidth, ElementName=ImageExample}" 
+                                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                                        Background="{Binding SelectedItem.Tag, ElementName=comboPicBG}"/>
+                                <Image x:Name="ImageExample" 
+                                       Stretch="{Binding Text, ElementName=comboPicStrech, Converter={StaticResource StrToPicStrechConverter}}" 
+                                       HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Grid>
+                        </ScrollViewer>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Image Group">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="2*"/>
+                        </Grid.ColumnDefinitions>
+                        <ListBox x:Name="BoxImageGroupData" Grid.Column="0" SelectionChanged="BoxImageGroupData_SelectionChanged">
+                            <ListBox.Resources>
+                                <CollectionViewSource x:Key="ImageGroupInfoSys" Source="{Binding ImageGroupInfoSys, ElementName=inputWindow}"/>
+                                <CollectionViewSource x:Key="ImageGroupInfo" Source="{Binding ImageGroupInfo, ElementName=inputWindow}"/>
+                            </ListBox.Resources>
+                            <ListBox.ItemsSource>
+                                <CompositeCollection>
+                                    <CollectionContainer Collection="{Binding Source={StaticResource ImageGroupInfoSys}}"/>
+                                    <CollectionContainer Collection="{Binding Source={StaticResource ImageGroupInfo}}"/>
+                                </CompositeCollection>
+                            </ListBox.ItemsSource>
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image VerticalAlignment="Center" Source="{Binding Icon}"
+                                                Stretch="UniformToFill" Width="16" Height="16" Margin="0,0,2,2"/>
+                                        <TextBlock VerticalAlignment="Center" Text="{Binding Text}"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                        <DockPanel Grid.Column="1">
+                            <TextBox DockPanel.Dock="Bottom" Text="{Binding SelectedIndex, ElementName=inputWindow
+                                , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                            <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                                <Grid>
+                                    <Canvas Height="{Binding ActualHeight, ElementName=ImageGroupExample}"
+                                            Width="{Binding ActualWidth, ElementName=ImageGroupExample}" 
+                                            HorizontalAlignment="Center" VerticalAlignment="Center"
+                                            Background="{Binding SelectedItem.Tag, ElementName=comboPicBG}"/>
+                                    <Image x:Name="ImageGroupExample"
+                                           HorizontalAlignment="Center" VerticalAlignment="Center"
+                                           Stretch="{Binding Text, ElementName=comboPicStrech, 
+                                                     Converter={StaticResource StrToPicStrechConverter}}" />
+                                    <cv:DrawingCanvas x:Name="SplitGrid"
+                                                      Height="{Binding ActualHeight, ElementName=ImageGroupExample}"
+                                                      Width="{Binding ActualWidth, ElementName=ImageGroupExample}" 
+                                                      HorizontalAlignment="Center" VerticalAlignment="Center"
+                                                      MouseLeftButtonDown="SplitGrid_MouseLeftButtonDown"
+                                                      MouseMove="SplitGrid_MouseMove"
+                                                      MouseLeftButtonUp="SplitGrid_MouseLeftButtonUp">
+                                    </cv:DrawingCanvas>
+                                </Grid>
+                            </ScrollViewer>
+                        </DockPanel>
+                    </Grid>
+                </TabItem>
+                <TabItem Name="tabParticle" Header="Particle">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="2*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="5*"/>
+                        </Grid.RowDefinitions>
+                        <ListBox x:Name="BoxParticleData" Grid.Column="0" Grid.RowSpan="2" 
+                                 SelectionChanged="BoxParticleData_SelectionChanged">
+                            <ListBox.Resources>
+                                <CollectionViewSource x:Key="ParticleInfoSys" Source="{Binding ParticleInfoSys, ElementName=inputWindow}"/>
+                                <CollectionViewSource x:Key="ParticleInfo" Source="{Binding ParticleInfo, ElementName=inputWindow}"/>
+                            </ListBox.Resources>
+                            <ListBox.ItemsSource>
+                                <CompositeCollection>
+                                    <CollectionContainer Collection="{Binding Source={StaticResource ParticleInfoSys}}"/>
+                                    <CollectionContainer Collection="{Binding Source={StaticResource ParticleInfo}}"/>
+                                </CompositeCollection>
+                            </ListBox.ItemsSource>
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image VerticalAlignment="Center" Source="{Binding Icon}"
+                                                Stretch="UniformToFill" Width="16" Height="16" Margin="0,0,2,2"/>
+                                        <TextBlock VerticalAlignment="Center" Text="{Binding Text}"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                        <DockPanel Grid.Column="1" Grid.Row="0">
+                            <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                                <Grid>
+                                    <Canvas Height="{Binding ActualHeight, ElementName=ParticleExample}"
+                                            Width="{Binding ActualWidth, ElementName=ParticleExample}" 
+                                            HorizontalAlignment="Center" VerticalAlignment="Center"
+                                            Background="{Binding SelectedItem.Tag, ElementName=comboPicBG}"/>
+                                    <Image x:Name="ParticleExample"
+                                           HorizontalAlignment="Center" VerticalAlignment="Center"
+                                           Stretch="{Binding Text, ElementName=comboPicStrech, 
+                                                     Converter={StaticResource StrToPicStrechConverter}}" />
+                                </Grid>
+                            </ScrollViewer>
+                        </DockPanel>
+                        <TextBox Grid.Column="1" Grid.Row="1" x:Name="txtParticle" IsReadOnly="True"/>
+                    </Grid>
+                </TabItem>
+                <TabItem Name="tabAnimation" Header="Animation" Visibility="Collapsed">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="2*"/>
+                        </Grid.ColumnDefinitions>
+                        <ListBox x:Name="BoxAnimationData" Grid.Column="0" SelectionChanged="BoxAnimationData_SelectionChanged">
+                            <ListBox.Resources>
+                                <CollectionViewSource x:Key="AnimationInfoSys" Source="{Binding AnimationInfoSys, ElementName=inputWindow}"/>
+                                <CollectionViewSource x:Key="AnimationInfo" Source="{Binding AnimationInfo, ElementName=inputWindow}"/>
+                            </ListBox.Resources>
+                            <ListBox.ItemsSource>
+                                <CompositeCollection>
+                                    <CollectionContainer Collection="{Binding Source={StaticResource AnimationInfoSys}}"/>
+                                    <CollectionContainer Collection="{Binding Source={StaticResource AnimationInfo}}"/>
+                                </CompositeCollection>
+                            </ListBox.ItemsSource>
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image VerticalAlignment="Center" Source="{Binding Icon}"
+                                                Stretch="UniformToFill" Width="16" Height="16" Margin="0,0,2,2"/>
+                                        <TextBlock VerticalAlignment="Center" Text="{Binding Text}"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                        <DockPanel Grid.Column="1">
+                            <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                                <Grid>
+                                    <Canvas Height="{Binding ActualHeight, ElementName=AnimationExample}"
+                                            Width="{Binding ActualWidth, ElementName=AnimationExample}" 
+                                            HorizontalAlignment="Center" VerticalAlignment="Center"
+                                            Background="{Binding SelectedItem.Tag, ElementName=comboPicBG}"/>
+                                    <Image x:Name="AnimationExample"
+                                           HorizontalAlignment="Center" VerticalAlignment="Center"
+                                           Stretch="{Binding Text, ElementName=comboPicStrech, 
+                                                     Converter={StaticResource StrToPicStrechConverter}}" />
+                                </Grid>
+                            </ScrollViewer>
+                        </DockPanel>
+                    </Grid>
+                </TabItem>
+            </TabControl>
+        </DockPanel>
+    </Grid>
+</local:InputWindow>

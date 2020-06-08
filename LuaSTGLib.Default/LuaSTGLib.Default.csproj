@@ -4,12 +4,12 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{C68F8DBF-6CEF-4889-A6BB-1C4CA2F8876D}</ProjectGuid>
+    <ProjectGuid>{6E8C559F-E090-4A96-A195-6CD8B5EDD22E}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>LuaSTGEditorSharp</RootNamespace>
-    <AssemblyName>LuaSTGXLib.Legacy</AssemblyName>
-    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
+    <RootNamespace>LuaSTGEditorSharp.Plugin.Default</RootNamespace>
+    <AssemblyName>LuaSTGLib.Default</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
@@ -35,6 +35,7 @@
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Windows" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -45,14 +46,16 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="LSTGXExecution.cs" />
-    <Compile Include="PluginEntry.cs" />
+    <Compile Include="DefaultExecution.cs" />
+    <Compile Include="DefaultInputWindowSelectorRegister.cs" />
+    <Compile Include="DefaultMetaData.cs" />
+    <Compile Include="DefaultNodeTypeCache.cs" />
+    <Compile Include="DefaultPluginEntry.cs" />
+    <Compile Include="DefaultToolBox.cs" />
+    <Compile Include="DefaultViewDefinition.xaml.cs">
+      <DependentUpon>DefaultViewDefinition.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="LuaSTGXLib.Legacy.dependencies">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\LuaSTGEditorSharp.Core.Windows\LuaSTGEditorSharp.Core.Windows.csproj">
@@ -63,14 +66,12 @@
       <Project>{bd1ca1e6-9e34-4098-ae65-922f23670f75}</Project>
       <Name>LuaSTGEditorSharp.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\LuaSTGNode.Legacy.Windows\LuaSTGNode.Legacy.Windows.csproj">
-      <Project>{a1c31871-42cd-46fa-8274-0ef22ec32d63}</Project>
-      <Name>LuaSTGNode.Legacy.Windows</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\LuaSTGNode.Legacy\LuaSTGNode.Legacy.csproj">
-      <Project>{06f198ea-762c-4b34-84da-b58a6c3e6a79}</Project>
-      <Name>LuaSTGNode.Legacy</Name>
-    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="DefaultViewDefinition.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

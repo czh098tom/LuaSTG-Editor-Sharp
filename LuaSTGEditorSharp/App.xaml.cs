@@ -15,7 +15,9 @@ using LuaSTGEditorSharp.EditorData.Message;
 using LuaSTGEditorSharp.EditorData.Interfaces;
 using LuaSTGEditorSharp.Properties;
 using LuaSTGEditorSharp.Plugin;
+using LuaSTGEditorSharp.Plugin.Default;
 using LuaSTGEditorSharp.EditorData;
+using LuaSTGEditorSharp.Windows;
 
 namespace LuaSTGEditorSharp
 {
@@ -48,10 +50,13 @@ namespace LuaSTGEditorSharp
                 Console.SetOut(sw);
                 base.OnStartup(e);
 
+                PluginHandler.DefaultPlugin = new DefaultPluginEntry();
                 if (!PluginHandler.LoadPlugin(PluginPath))
                 {
                     MessageBox.Show("Load Plugin Failed.");
                 }
+                LuaSTGEditorSharp.Windows.InputWindowSelector.Register(PluginHandler.Plugin.GetInputWindowSelectorRegister());
+                LuaSTGEditorSharp.Windows.InputWindowSelector.AfterRegister();
                 RaiseProertyChanged("m");
 
                 Lua.SyntaxHighlightLoader.LoadLuaDef();

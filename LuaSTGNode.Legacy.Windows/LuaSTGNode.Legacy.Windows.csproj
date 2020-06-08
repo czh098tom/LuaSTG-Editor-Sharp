@@ -1,0 +1,263 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A1C31871-42CD-46FA-8274-0EF22EC32D63}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>LuaSTGEditorSharp.Windows</RootNamespace>
+    <AssemblyName>LuaSTGNode.Legacy.Windows</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CSCore, Version=1.2.1.2, Culture=neutral, PublicKeyToken=5a08f2b6f4415dea, processorArchitecture=MSIL">
+      <HintPath>..\packages\CSCore.1.2.1.2\lib\net35-client\CSCore.dll</HintPath>
+    </Reference>
+    <Reference Include="NVorbis, Version=0.8.6.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NVorbis.0.8.6\lib\net35\NVorbis.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.4.0\lib\netstandard2.0\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Core" />
+    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.3\lib\netstandard2.0\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.4.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.2\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net461\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Input\ARGBInput.xaml.cs">
+      <DependentUpon>ARGBInput.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Input\BGMInput.xaml.cs">
+      <DependentUpon>BGMInput.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Input\BossBGDefInput.xaml.cs">
+      <DependentUpon>BossBGDefInput.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Input\BossDefInput.xaml.cs">
+      <DependentUpon>BossDefInput.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Input\BulletInput.xaml.cs">
+      <DependentUpon>BulletInput.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Input\Canvas\DrawingCanvas.cs" />
+    <Compile Include="Input\Canvas\PositionEditor.xaml.cs">
+      <DependentUpon>PositionEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Input\Canvas\VectorEditor.xaml.cs">
+      <DependentUpon>VectorEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Input\Canvas\Window1.xaml.cs">
+      <DependentUpon>Window1.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Input\ColorInput.xaml.cs">
+      <DependentUpon>ColorInput.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Input\Converter\StrToPicStrechConverter.cs" />
+    <Compile Include="Input\EditorObjDefInput.xaml.cs">
+      <DependentUpon>EditorObjDefInput.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Input\EditorObjParamInput.xaml.cs">
+      <DependentUpon>EditorObjParamInput.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Input\EnemyInput.xaml.cs">
+      <DependentUpon>EnemyInput.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Input\FXInput.xaml.cs">
+      <DependentUpon>FXInput.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Input\ImageInput.xaml.cs">
+      <DependentUpon>ImageInput.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Input\InputWindowSelectorRegister.cs" />
+    <Compile Include="Input\LaserInput.xaml.cs">
+      <DependentUpon>LaserInput.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Input\MediaPlayer\CodecFactory.cs" />
+    <Compile Include="Input\MediaPlayer\MediaPlayer.xaml.cs">
+      <DependentUpon>MediaPlayer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Input\MediaPlayer\OggSource.cs" />
+    <Compile Include="Input\MultilineInput.xaml.cs">
+      <DependentUpon>MultilineInput.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Input\PointSetInput.xaml.cs">
+      <DependentUpon>PointSetInput.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Input\PositionInput.xaml.cs">
+      <DependentUpon>PositionInput.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Input\SEInput.xaml.cs">
+      <DependentUpon>SEInput.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Input\SizeInput.xaml.cs">
+      <DependentUpon>SizeInput.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Input\VectorInput.xaml.cs">
+      <DependentUpon>VectorInput.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewDefinition.xaml.cs">
+      <DependentUpon>ViewDefinition.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Input\ARGBInput.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Input\BGMInput.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Input\BossBGDefInput.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Input\BossDefInput.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Input\BulletInput.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Input\Canvas\DrawingGrid.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Input\Canvas\PositionEditor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Input\Canvas\VectorEditor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Input\Canvas\Window1.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Input\ColorInput.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Input\EditorObjDefInput.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Input\EditorObjParamInput.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Input\EnemyInput.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Input\FXInput.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Input\ImageInput.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Input\LaserInput.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Input\MediaPlayer\MediaPlayer.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Input\MultilineInput.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Input\PointSetInput.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Input\PositionInput.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Input\SEInput.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Input\SizeInput.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Input\VectorInput.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ViewDefinition.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LuaSTGEditorSharp.Core.Windows\LuaSTGEditorSharp.Core.Windows.csproj">
+      <Project>{bc414cfe-4741-4a84-ac6d-827327103217}</Project>
+      <Name>LuaSTGEditorSharp.Core.Windows</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LuaSTGEditorSharp.Core\LuaSTGEditorSharp.Core.csproj">
+      <Project>{bd1ca1e6-9e34-4098-ae65-922f23670f75}</Project>
+      <Name>LuaSTGEditorSharp.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LuaSTGNode.Legacy\LuaSTGNode.Legacy.csproj">
+      <Project>{06f198ea-762c-4b34-84da-b58a6c3e6a79}</Project>
+      <Name>LuaSTGNode.Legacy</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

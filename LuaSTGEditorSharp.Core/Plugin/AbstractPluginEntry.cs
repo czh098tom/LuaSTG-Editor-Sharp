@@ -9,6 +9,7 @@ using LuaSTGEditorSharp.EditorData.Document;
 using LuaSTGEditorSharp.EditorData.Node;
 using LuaSTGEditorSharp.Execution;
 using System.Windows.Media.Imaging;
+using LuaSTGEditorSharp.Windows;
 
 namespace LuaSTGEditorSharp.Plugin
 {

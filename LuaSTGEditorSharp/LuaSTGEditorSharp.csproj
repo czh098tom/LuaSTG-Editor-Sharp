@@ -279,9 +279,6 @@
     <Content Include="Templates\Spell Card.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="LuaSTGEditorSharp.dependencies">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="Update Log.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -295,9 +292,17 @@
     </FileAssociation>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\LuaSTGEditorSharp.Core.Windows\LuaSTGEditorSharp.Core.Windows.csproj">
+      <Project>{bc414cfe-4741-4a84-ac6d-827327103217}</Project>
+      <Name>LuaSTGEditorSharp.Core.Windows</Name>
+    </ProjectReference>
     <ProjectReference Include="..\LuaSTGEditorSharp.Core\LuaSTGEditorSharp.Core.csproj">
       <Project>{bd1ca1e6-9e34-4098-ae65-922f23670f75}</Project>
       <Name>LuaSTGEditorSharp.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LuaSTGLib.Default\LuaSTGLib.Default.csproj">
+      <Project>{6e8c559f-e090-4a96-a195-6cd8b5edd22e}</Project>
+      <Name>LuaSTGLib.Default</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

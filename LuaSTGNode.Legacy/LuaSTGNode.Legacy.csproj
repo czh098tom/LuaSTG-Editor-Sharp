@@ -45,14 +45,11 @@
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="NVorbis, Version=0.8.6.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\NVorbis.0.8.6\lib\net35\NVorbis.dll</HintPath>
-    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -199,178 +196,6 @@
     <Compile Include="PluginToolbox.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="NodesConfig.cs" />
-    <Compile Include="Windows\Input\BGMInput.xaml.cs">
-      <DependentUpon>BGMInput.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Windows\Input\BossBGDefInput.xaml.cs">
-      <DependentUpon>BossBGDefInput.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Windows\Input\BossDefInput.xaml.cs">
-      <DependentUpon>BossDefInput.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Windows\Input\BulletInput.xaml.cs">
-      <DependentUpon>BulletInput.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Windows\Input\Canvas\DrawingCanvas.cs" />
-    <Compile Include="Windows\Input\Canvas\VectorEditor.xaml.cs">
-      <DependentUpon>VectorEditor.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Windows\Input\Canvas\PositionEditor.xaml.cs">
-      <DependentUpon>PositionEditor.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Windows\Input\Converter\StrToPicStrechConverter.cs" />
-    <Compile Include="Windows\Input\MediaPlayer\CodecFactory.cs" />
-    <Compile Include="Windows\Input\MediaPlayer\MediaPlayer.xaml.cs">
-      <DependentUpon>MediaPlayer.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Windows\Input\MediaPlayer\OggSource.cs" />
-    <Compile Include="Windows\Input\MultilineInput.xaml.cs">
-      <DependentUpon>MultilineInput.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Windows\Input\FXInput.xaml.cs">
-      <DependentUpon>FXInput.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Windows\Input\PointSetInput.xaml.cs">
-      <DependentUpon>PointSetInput.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Windows\Input\SEInput.xaml.cs">
-      <DependentUpon>SEInput.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Windows\Input\LaserInput.xaml.cs">
-      <DependentUpon>LaserInput.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Windows\Input\EditorObjDefInput.xaml.cs">
-      <DependentUpon>EditorObjDefInput.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Windows\Input\EnemyInput.xaml.cs">
-      <DependentUpon>EnemyInput.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Windows\Input\EditorObjParamInput.xaml.cs">
-      <DependentUpon>EditorObjParamInput.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Windows\Input\ColorInput.xaml.cs">
-      <DependentUpon>ColorInput.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Windows\Input\ImageInput.xaml.cs">
-      <DependentUpon>ImageInput.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Windows\Input\InputWindowSelectorRegister.cs" />
-    <Compile Include="Windows\Input\SizeInput.xaml.cs">
-      <DependentUpon>SizeInput.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Windows\Input\PositionInput.xaml.cs">
-      <DependentUpon>PositionInput.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Windows\Input\ARGBInput.xaml.cs">
-      <DependentUpon>ARGBInput.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Windows\Input\VectorInput.xaml.cs">
-      <DependentUpon>VectorInput.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Windows\ViewDefinition.xaml.cs">
-      <DependentUpon>ViewDefinition.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Windows\Input\Canvas\Window1.xaml.cs">
-      <DependentUpon>Window1.xaml</DependentUpon>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Page Include="Windows\Input\BulletInput.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Windows\Input\Canvas\DrawingGrid.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Windows\Input\BGMInput.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Windows\Input\BossBGDefInput.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Windows\Input\BossDefInput.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Windows\Input\Canvas\VectorEditor.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Windows\Input\Canvas\PositionEditor.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Windows\Input\MediaPlayer\MediaPlayer.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Windows\Input\MultilineInput.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Windows\Input\FXInput.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Windows\Input\PointSetInput.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Windows\Input\SEInput.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Windows\Input\LaserInput.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Windows\Input\EditorObjDefInput.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Windows\Input\EnemyInput.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Windows\Input\EditorObjParamInput.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Windows\Input\ColorInput.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Windows\Input\ImageInput.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Windows\Input\SizeInput.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Windows\Input\PositionInput.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Windows\Input\ARGBInput.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Windows\Input\VectorInput.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Windows\ViewDefinition.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Windows\Input\Canvas\Window1.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images\_node_aa.png" />
@@ -1670,9 +1495,6 @@
     <Resource Include="images\laserchangestyle.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="LuaSTGNode.Legacy.dependencies">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <None Include="packages.config" />
     <Resource Include="ResourceList\SysSE.json" />
     <Resource Include="ResourceList\SysImageGroup.json" />
