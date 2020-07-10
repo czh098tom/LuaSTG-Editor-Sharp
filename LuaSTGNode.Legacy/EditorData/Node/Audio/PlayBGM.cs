@@ -71,7 +71,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Audio
             {
                 if (!string.IsNullOrEmpty(Macrolize(2)))
                 {
-                    s = sp + "if " + Macrolize(2) + " then ex.stageframe=int(" + Macrolize(1) + "/60)\n";
+                    s = sp + "if " + Macrolize(2) + " then ex.stageframe=int(" + Macrolize(1) + "/60) end\n";
                 }
                 yield return sp + "LoadMusicRecord(" + Macrolize(0) + ")\n"
                     + sp + "_play_music(" + Macrolize(0) + "," + Macrolize(1) + ")\n" + s;
