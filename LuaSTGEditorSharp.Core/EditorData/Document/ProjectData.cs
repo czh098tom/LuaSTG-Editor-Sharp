@@ -108,7 +108,6 @@ namespace LuaSTGEditorSharp.EditorData.Document
                             VirtualDoc pdd = new VirtualDoc { DocPath = s };
                             if (!pdd.LoadMeta())
                             {
-                                MessageBox.Show(s);
                                 DocumentData newDoc = GetNewByExtension(Path.GetExtension(s), -1
                                     , Path.GetFileNameWithoutExtension(s), s);
                                 TreeNode t = newDoc.CreateNodeFromFile(s);
