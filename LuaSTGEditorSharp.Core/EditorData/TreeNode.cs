@@ -147,7 +147,8 @@ namespace LuaSTGEditorSharp.EditorData
                 {
                     isBanned = false;
                 }
-                RaiseProertyChanged("IsBanned");
+                RaiseProertyChanged("IsBanned"); 
+                parentWorkSpace?.OriginalMeta.RaisePropertyChanged(GetType().ToString());
             }
         }
         /// <summary>

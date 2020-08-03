@@ -612,7 +612,7 @@ namespace LuaSTGEditorSharp
             else
             {
                 pdd.parentProj.GatherCompileInfo(currentApp);
-                current.CompileProcess.ProgressChanged +=
+                pdd.parentProj.CompileProcess.ProgressChanged +=
                     (o, e) => CompileWorker.ReportProgress(e.ProgressPercentage, e.UserState);
                 pdd.parentProj.CompileProcess.ExecuteProcess(SCDebugger != null, StageDebugger != null, App.Current as App);
                 process = pdd.parentProj.CompileProcess;
