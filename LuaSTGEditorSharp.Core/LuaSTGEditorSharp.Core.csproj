@@ -194,6 +194,7 @@
     <Compile Include="Util\DictionaryExtension.cs" />
     <Compile Include="Windows\IInputWindowSelectorRegister.cs" />
     <Compile Include="Windows\Input\IInputWindow.cs" />
+    <Compile Include="Zip\PlainCopy.cs" />
     <Compile Include="Zip\ZipCompressor.cs" />
     <Compile Include="Zip\ZipCompressorBatch.cs" />
     <Compile Include="Zip\ZipCompressorInternal.cs" />

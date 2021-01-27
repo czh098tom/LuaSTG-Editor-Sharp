@@ -230,7 +230,7 @@ namespace LuaSTGEditorSharp
             catch (JsonException e)
             {
                 MessageBox.Show("Failed to open document. Please check whether the targeted file is in current version.\n"
-                    + "Error Message: " + e.ToString()
+                    + e.ToString()
                     , "LuaSTG Editor Sharp", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
@@ -280,7 +280,7 @@ namespace LuaSTGEditorSharp
             catch (JsonException e)
             {
                 MessageBox.Show("Failed to open document or fix attribute. Please check whether the targeted file is in current version.\n"
-                    + "Error Message: " + e.ToString()
+                    + e.ToString()
                     , "LuaSTG Editor Sharp", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
@@ -313,9 +313,10 @@ namespace LuaSTGEditorSharp
                 //newDoc.TreeNodes[0].FixBan();
                 newDoc.OriginalMeta.PropertyChanged += newDoc.OnEditing;
             }
-            catch (JsonException)
+            catch (JsonException e)
             {
-                MessageBox.Show("Failed to open document. Please check whether the targeted file is in current version"
+                MessageBox.Show("Failed to open document. Please check whether the targeted file is in current version.\n"
+                    + e
                     , "LuaSTG Editor Sharp", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
@@ -403,9 +404,9 @@ namespace LuaSTGEditorSharp
                     t.SerializeFile(sw, 0);
                     GetPresets();
                 }
-                catch
+                catch (Exception e)
                 {
-                    MessageBox.Show("Unable to write to file \"" + path + "\".", "LuaSTG Editor Sharp"
+                    MessageBox.Show($"Unable to write to file \"{path}\".\n{e}", "LuaSTG Editor Sharp"
                         , MessageBoxButton.OK, MessageBoxImage.Error);
                 }
                 finally
@@ -435,9 +436,9 @@ namespace LuaSTGEditorSharp
                     if (t.Children == null || t.Children.Count < 1 || t.Children[0] == null) throw new Exception();
                     Insert(t.Children[0], false);
                 }
-                catch
+                catch (Exception e)
                 {
-                    MessageBox.Show("Failed to load preset.");
+                    MessageBox.Show($"Failed to load preset.\n{e}");
                 }
             }
         }

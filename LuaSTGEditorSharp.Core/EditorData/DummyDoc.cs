@@ -27,7 +27,7 @@ namespace LuaSTGEditorSharp.EditorData
             catch (JsonException e)
             {
                 MessageBox.Show("Failed to open document. Please check whether the targeted file is in current version.\n"
-                    + "Error Message: " + e.ToString()
+                    + e.ToString()
                     , "LuaSTG Editor Sharp", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
