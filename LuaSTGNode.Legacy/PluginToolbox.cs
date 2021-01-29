@@ -498,12 +498,18 @@ namespace LuaSTGEditorSharp
             TreeNode newDef = new BossDefine(parent.ActivatedWorkSpaceData);
             TreeNode init = new BossInit(parent.ActivatedWorkSpaceData);
             TreeNode newSC = new BossSpellCard(parent.ActivatedWorkSpaceData);
+            TreeNode newSCBeforeStart = new BossSCBeforeStart(parent.ActivatedWorkSpaceData);
             TreeNode newSCStart = new BossSCStart(parent.ActivatedWorkSpaceData);
             TreeNode newTask = new TaskNode(parent.ActivatedWorkSpaceData);
+            TreeNode newSCBeforeFinish = new BossSCBeforeFinish(parent.ActivatedWorkSpaceData);
+            TreeNode newSCAfter = new BossSCAfter(parent.ActivatedWorkSpaceData);
             newSCStart.AddChild(newTask);
             newTask.AddChild(new TaskMoveTo(parent.ActivatedWorkSpaceData, "0,120", "60", "MOVE_NORMAL"));
+            newSC.AddChild(newSCBeforeStart);
             newSC.AddChild(newSCStart);
+            newSC.AddChild(newSCBeforeFinish);
             newSC.AddChild(new BossSCFinish(parent.ActivatedWorkSpaceData));
+            newSC.AddChild(newSCAfter);
             newDef.AddChild(init);
             newDef.AddChild(newSC);
             parent.Insert(newDef);
@@ -512,12 +518,18 @@ namespace LuaSTGEditorSharp
         private void AddBossSCNode()
         {
             TreeNode newSC = new BossSpellCard(parent.ActivatedWorkSpaceData);
+            TreeNode newSCBeforeStart = new BossSCBeforeStart(parent.ActivatedWorkSpaceData);
             TreeNode newSCStart = new BossSCStart(parent.ActivatedWorkSpaceData);
             TreeNode newTask = new TaskNode(parent.ActivatedWorkSpaceData);
+            TreeNode newSCBeforeFinish = new BossSCBeforeFinish(parent.ActivatedWorkSpaceData);
+            TreeNode newSCAfter = new BossSCAfter(parent.ActivatedWorkSpaceData);
             newSCStart.AddChild(newTask);
             newTask.AddChild(new TaskMoveTo(parent.ActivatedWorkSpaceData, "0,120", "60", "MOVE_NORMAL"));
+            newSC.AddChild(newSCBeforeStart);
             newSC.AddChild(newSCStart);
+            newSC.AddChild(newSCBeforeFinish);
             newSC.AddChild(new BossSCFinish(parent.ActivatedWorkSpaceData));
+            newSC.AddChild(newSCAfter);
             parent.Insert(newSC);
         }
 

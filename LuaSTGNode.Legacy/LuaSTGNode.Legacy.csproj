@@ -82,6 +82,9 @@
     <Compile Include="EditorData\Node\Audio\StopBGM.cs" />
     <Compile Include="EditorData\Node\Boss\BossAura.cs" />
     <Compile Include="EditorData\Node\Boss\BossMoveTo.cs" />
+    <Compile Include="EditorData\Node\Boss\BossSCBeforeFinish.cs" />
+    <Compile Include="EditorData\Node\Boss\BossSCAfter.cs" />
+    <Compile Include="EditorData\Node\Boss\BossSCBeforeStart.cs" />
     <Compile Include="EditorData\Node\Boss\BossUI.cs" />
     <Compile Include="EditorData\Node\Boss\Dialog.cs" />
     <Compile Include="EditorData\Node\Boss\Sentence.cs" />
