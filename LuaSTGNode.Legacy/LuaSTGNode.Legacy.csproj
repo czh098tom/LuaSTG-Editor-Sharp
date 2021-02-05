@@ -193,6 +193,7 @@
     <Compile Include="EditorData\Node\Task\Tasker.cs" />
     <Compile Include="EditorData\Node\Task\TaskMoveByCurve.cs" />
     <Compile Include="EditorData\Node\Task\TaskMoveToCurve.cs" />
+    <Compile Include="EditorData\Node\Task\TaskNodeForTarget.cs" />
     <Compile Include="EditorData\Node\Task\TaskNode.cs" />
     <Compile Include="EditorData\Node\Task\TaskWait.cs" />
     <Compile Include="EditorData\Node\CodeAlikeTypes.cs" />
