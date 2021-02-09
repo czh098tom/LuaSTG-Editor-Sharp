@@ -11,7 +11,7 @@ using Newtonsoft.Json;
 
 namespace LuaSTGEditorSharp.EditorData.Node.Boss
 {
-    [Serializable, NodeIcon("bossscstart.png")]
+    [Serializable, NodeIcon("taskcallback.png")]
     [CannotDelete, CannotBan]
     [RequireParent(typeof(BossSpellCard)), Uniqueness]
     public class BossSCAfter : TreeNode

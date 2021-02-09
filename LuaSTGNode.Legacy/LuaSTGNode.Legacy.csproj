@@ -1699,5 +1699,11 @@
       <Name>LuaSTGEditorSharp.Core</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\taskcallback.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\taskcallback.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
