@@ -193,7 +193,7 @@
     <Compile Include="EditorData\Node\Task\Tasker.cs" />
     <Compile Include="EditorData\Node\Task\TaskMoveByCurve.cs" />
     <Compile Include="EditorData\Node\Task\TaskMoveToCurve.cs" />
-    <Compile Include="EditorData\Node\Task\TaskNodeForTarget.cs" />
+    <Compile Include="EditorData\Node\Task\TaskForObject.cs" />
     <Compile Include="EditorData\Node\Task\TaskNode.cs" />
     <Compile Include="EditorData\Node\Task\TaskWait.cs" />
     <Compile Include="EditorData\Node\CodeAlikeTypes.cs" />
@@ -1704,6 +1704,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images\16x16\taskcallback.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\taskforobject.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\taskforobject.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

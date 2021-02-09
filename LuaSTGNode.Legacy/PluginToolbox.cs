@@ -71,8 +71,8 @@ namespace LuaSTGEditorSharp
             #region task
             task.Add(new ToolboxItemData("task", "/LuaSTGNode.Legacy;component/images/task.png", "Task")
                 , new AddNode(AddTaskNode));
-            task.Add(new ToolboxItemData("taskfortarget", "/LuaSTGNode.Legacy;component/images/task.png", "Task For Target")
-                , new AddNode(AddTaskForTargetNode));
+            task.Add(new ToolboxItemData("taskforobject", "/LuaSTGNode.Legacy;component/images/taskforobject.png", "Task For Another Object")
+                , new AddNode(AddTaskForObjectNode));
             task.Add(new ToolboxItemData("tasker", "/LuaSTGNode.Legacy;component/images/tasker.png", "Tasker")
                 , new AddNode(AddTaskerNode));
             task.Add(new ToolboxItemData("taskdefine", "/LuaSTGNode.Legacy;component/images/taskdefine.png", "Define Task")
@@ -395,9 +395,9 @@ namespace LuaSTGEditorSharp
             parent.Insert(new TaskNode(parent.ActivatedWorkSpaceData));
         }
 
-        private void AddTaskForTargetNode()
+        private void AddTaskForObjectNode()
         {
-            parent.Insert(new TaskNodeForTarget(parent.ActivatedWorkSpaceData));
+            parent.Insert(new TaskForObject(parent.ActivatedWorkSpaceData));
         }
 
         private void AddTaskerNode()

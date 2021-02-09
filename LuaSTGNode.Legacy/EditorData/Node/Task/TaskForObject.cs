@@ -10,16 +10,16 @@ using Newtonsoft.Json;
 
 namespace LuaSTGEditorSharp.EditorData.Node.Task
 {
-    [Serializable, NodeIcon("task.png")]
+    [Serializable, NodeIcon("taskforobject.png")]
     [RequireAncestor(typeof(CodeAlikeTypes))]
-    public class TaskNodeForTarget : TreeNode
+    public class TaskForObject : TreeNode
     {
         [JsonConstructor]
-        private TaskNodeForTarget() : base() { }
+        private TaskForObject() : base() { }
 
-        public TaskNodeForTarget(DocumentData workSpaceData) : this(workSpaceData, "self", "true") { }
+        public TaskForObject(DocumentData workSpaceData) : this(workSpaceData, "last", "true") { }
 
-        public TaskNodeForTarget(DocumentData workSpaceData, string target, string resettarget) : base(workSpaceData)
+        public TaskForObject(DocumentData workSpaceData, string target, string resettarget) : base(workSpaceData)
         {
             Target = target;
             ResetTargetInTask = resettarget;
@@ -68,7 +68,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Task
 
         public override object Clone()
         {
-            var n = new TaskNodeForTarget(parentWorkSpace);
+            var n = new TaskForObject(parentWorkSpace);
             n.DeepCopyFrom(this);
             return n;
         }
