@@ -66,7 +66,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Object
 
         public override string ToString()
         {
-            return "Set " + NonMacrolize(0) + " as servant of " + NonMacrolize(1) + " with damage transfer rate " + NonMacrolize(2)
+            return "Set " + NonMacrolize(1) + " as servant of " + NonMacrolize(0) + " with damage transfer rate " + NonMacrolize(2)
                 + Lua.StaticAnalysis.BoolHint(NonMacrolize(3), ", connect death", "", "");
         }
 
