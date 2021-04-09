@@ -53,7 +53,7 @@ namespace LuaSTGEditorSharp.Windows.Input
         {
             get
             {
-                if(byte.TryParse(aStr, out byte _))
+                if(byte.TryParse(aStr, out byte _) || string.IsNullOrWhiteSpace(aStr))
                 {
                     return A.ToString();
                 }
@@ -81,7 +81,7 @@ namespace LuaSTGEditorSharp.Windows.Input
         {
             get
             {
-                if (byte.TryParse(rStr, out _))
+                if (byte.TryParse(rStr, out _) || string.IsNullOrWhiteSpace(rStr))
                 {
                     return R.ToString();
                 }
@@ -109,7 +109,7 @@ namespace LuaSTGEditorSharp.Windows.Input
         {
             get
             {
-                if (byte.TryParse(gStr, out _))
+                if (byte.TryParse(gStr, out _) || string.IsNullOrWhiteSpace(gStr))
                 {
                     return G.ToString();
                 }
@@ -137,7 +137,7 @@ namespace LuaSTGEditorSharp.Windows.Input
         {
             get
             {
-                if (byte.TryParse(bStr, out _))
+                if (byte.TryParse(bStr, out _) || string.IsNullOrWhiteSpace(bStr))
                 {
                     return B.ToString();
                 }
@@ -298,8 +298,10 @@ namespace LuaSTGEditorSharp.Windows.Input
 
         public bool IsVariable()
         {
-            return !byte.TryParse(aStr, out byte _) || !byte.TryParse(rStr, out byte _)
-                || !byte.TryParse(gStr, out byte _) || !byte.TryParse(bStr, out byte _);
+            return !(byte.TryParse(aStr, out byte _) || string.IsNullOrWhiteSpace(aStr)) 
+                || !(byte.TryParse(rStr, out byte _) || string.IsNullOrWhiteSpace(rStr))
+                || !(byte.TryParse(gStr, out byte _) || string.IsNullOrWhiteSpace(gStr))
+                || !(byte.TryParse(bStr, out byte _) || string.IsNullOrWhiteSpace(bStr));
         }
 
         public void CombineResult()
