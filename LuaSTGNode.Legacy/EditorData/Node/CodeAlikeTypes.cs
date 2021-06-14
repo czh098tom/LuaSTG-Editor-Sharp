@@ -14,7 +14,8 @@ namespace LuaSTGEditorSharp.EditorData.Node
             , typeof(Boss.BossBGLayerFrame), typeof(Boss.BossBGLayerRender), typeof(Boss.BossSCStart), typeof(Boss.BossSCFinish)
             , typeof(Laser.LaserInit), typeof(Laser.BentLaserInit), typeof(Data.Function), typeof(Task.TaskDefine)
             , typeof(Boss.BossInit), typeof(Render.OnRender), typeof(Boss.Dialog), typeof(Enemy.EnemyInit)
-            , typeof(Object.ObjectInit)  };
+            , typeof(Object.ObjectInit)
+            , typeof(Boss.BossSCBeforeStart), typeof(Boss.BossSCBeforeFinish), typeof(Boss.BossSCAfter)  };
 
         public IEnumerator<Type> GetEnumerator()
         {
