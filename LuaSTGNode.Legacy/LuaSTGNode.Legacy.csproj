@@ -165,6 +165,8 @@
     <Compile Include="EditorData\Node\Object\SetBinding.cs" />
     <Compile Include="EditorData\Node\Object\SetObjectImage.cs" />
     <Compile Include="EditorData\Node\Object\SetRelativePosition.cs" />
+    <Compile Include="EditorData\Node\Object\SetScale.cs" />
+    <Compile Include="EditorData\Node\Object\SetXYVelocity.cs" />
     <Compile Include="EditorData\Node\Object\SetVelocityLimit.cs" />
     <Compile Include="EditorData\Node\Object\SetVelocity.cs" />
     <Compile Include="EditorData\Node\RenderAlikeTypes.cs" />
@@ -1710,6 +1712,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images\16x16\taskforobject.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\setvxy.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\setvxy.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

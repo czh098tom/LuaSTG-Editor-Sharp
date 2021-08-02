@@ -218,6 +218,8 @@ namespace LuaSTGEditorSharp
             obj.Add(new ToolboxItemData(true), null);
             obj.Add(new ToolboxItemData("setv", "/LuaSTGNode.Legacy;component/images/setv.png", "Set Velocity")
                 , new AddNode(AddSetVNode));
+            obj.Add(new ToolboxItemData("setvxy", "/LuaSTGNode.Legacy;component/images/setvxy.png", "Set XY-Velocity")
+                , new AddNode(AddSetVXYNode));
             obj.Add(new ToolboxItemData("seta", "/LuaSTGNode.Legacy;component/images/setaccel.png", "Set Acceleration")
                 , new AddNode(AddSetANode));
             obj.Add(new ToolboxItemData("setg", "/LuaSTGNode.Legacy;component/images/setgravity.png", "Set Gravity")
@@ -722,6 +724,11 @@ namespace LuaSTGEditorSharp
         private void AddSetVNode()
         {
             parent.Insert(new SetVelocity(parent.ActivatedWorkSpaceData));
+        }
+
+        private void AddSetVXYNode()
+        {
+            parent.Insert(new SetXYVelocity(parent.ActivatedWorkSpaceData));
         }
 
         private void AddSetANode()
