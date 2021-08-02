@@ -97,6 +97,7 @@
     <Compile Include="EditorData\EditorTypeBinder.cs" />
     <Compile Include="EditorData\Exception\EXEPathNotSetException.cs" />
     <Compile Include="EditorData\Exception\InvalidRelativeResPathException.cs" />
+    <Compile Include="EditorData\Exception\RepeatedTargetArchiveFileNameException.cs" />
     <Compile Include="EditorData\GlobalCompileData.cs" />
     <Compile Include="EditorData\Interfaces\IAggregatableMeta.cs" />
     <Compile Include="EditorData\Interfaces\IDocumentWithMeta.cs" />

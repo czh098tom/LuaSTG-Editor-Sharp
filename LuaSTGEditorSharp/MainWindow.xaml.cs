@@ -501,7 +501,7 @@ namespace LuaSTGEditorSharp
                 w.ShowDialog();
                 //SaveXML();
             }
-            catch (Exception e) { MessageBox.Show(e.ToString()); }
+            catch (Exception e) { MessageBox.Show(e.Message, "LuaSTG Editor Sharp", MessageBoxButton.OK, MessageBoxImage.Error); }
         }
 
         private void SaveXML()

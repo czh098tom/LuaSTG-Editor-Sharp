@@ -28,7 +28,7 @@ namespace LuaSTGEditorSharp.EditorData
         /// <summary>
         /// The dictionary of archive path to resources path.
         /// </summary>
-        public Dictionary<string, string> resourceFilePath = new Dictionary<string, string>();
+        private readonly Dictionary<string, string> resourceFilePath = new Dictionary<string, string>();
 
         /// <summary>
         /// The macro definitions.
@@ -152,6 +152,18 @@ namespace LuaSTGEditorSharp.EditorData
             finally
             {
                 if (file != null) file.Close();
+            }
+        }
+
+        public void AddFile(string filePath, string archivePath)
+        {
+            if (!resourceFilePath.ContainsKey(archivePath))
+            {
+                resourceFilePath.Add(archivePath, filePath);
+            }
+            else
+            {
+                //throw new RepeatedTargetArchiveFileNameException(archivePath);
             }
         }
 

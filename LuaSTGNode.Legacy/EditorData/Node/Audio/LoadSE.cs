@@ -80,10 +80,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Audio
         protected override void AddCompileSettings()
         {
             string sk = parentWorkSpace.CompileProcess.archiveSpace + Path.GetFileName(NonMacrolize(0));
-            if (!parentWorkSpace.CompileProcess.resourceFilePath.ContainsKey(NonMacrolize(0)))
-            {
-                parentWorkSpace.CompileProcess.resourceFilePath.Add(sk, attributes[0].AttrInput);
-            }
+            parentWorkSpace.CompileProcess.AddFile(NonMacrolize(0), sk);
         }
 
         public override MetaInfo GetMeta()
