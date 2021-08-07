@@ -133,7 +133,7 @@ namespace LuaSTGEditorSharp.EditorData
             FileStream file = null;
             try
             {
-                file = new FileStream(filePath, FileMode.Open);
+                file = new FileStream(filePath, FileMode.Open, FileAccess.Read);
                 var md5 = new System.Security.Cryptography.MD5CryptoServiceProvider();
                 var bytes = md5.ComputeHash(file);
                 file.Close();
