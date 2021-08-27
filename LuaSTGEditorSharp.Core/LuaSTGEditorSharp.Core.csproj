@@ -127,6 +127,10 @@
     <Compile Include="EditorData\Node\Advanced\UnidentifiedNode.cs" />
     <Compile Include="EditorData\Node\Advanced\UserDefinedNode.cs" />
     <Compile Include="EditorData\Node\AttrItemListHelper.cs" />
+    <Compile Include="EditorData\Node\Definition\DefaultPropertyCompiler.cs" />
+    <Compile Include="EditorData\Node\Definition\PropertyCaptionConverter.cs" />
+    <Compile Include="EditorData\Node\Definition\PropertyCompilerBase.cs" />
+    <Compile Include="EditorData\Node\Definition\PropertyMapper.cs" />
     <Compile Include="EditorData\Node\EditorVersion.cs" />
     <Compile Include="EditorData\Node\General\AddFile.cs" />
     <Compile Include="EditorData\Node\General\Break.cs" />
@@ -161,6 +165,7 @@
     <Compile Include="EditorData\Node\Project\ProjectRoot.cs" />
     <Compile Include="EditorData\Node\ProjSettings.cs" />
     <Compile Include="EditorData\Node\RootFolder.cs" />
+    <Compile Include="EditorData\Node\TemplatedNode.cs" />
     <Compile Include="EditorData\Node\TypeCacheData.cs" />
     <Compile Include="EditorData\RelativePathConverter.cs" />
     <Compile Include="EditorData\TreeNode.cs" />
@@ -600,5 +605,6 @@
   <ItemGroup>
     <Resource Include="images\16x16\archispace.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
