@@ -82,6 +82,9 @@
     <Compile Include="EditorData\Node\Audio\StopBGM.cs" />
     <Compile Include="EditorData\Node\Boss\BossAura.cs" />
     <Compile Include="EditorData\Node\Boss\BossMoveTo.cs" />
+    <Compile Include="EditorData\Node\Boss\BossSCBeforeFinish.cs" />
+    <Compile Include="EditorData\Node\Boss\BossSCAfter.cs" />
+    <Compile Include="EditorData\Node\Boss\BossSCBeforeStart.cs" />
     <Compile Include="EditorData\Node\Boss\BossUI.cs" />
     <Compile Include="EditorData\Node\Boss\Dialog.cs" />
     <Compile Include="EditorData\Node\Boss\Sentence.cs" />
@@ -162,6 +165,8 @@
     <Compile Include="EditorData\Node\Object\SetBinding.cs" />
     <Compile Include="EditorData\Node\Object\SetObjectImage.cs" />
     <Compile Include="EditorData\Node\Object\SetRelativePosition.cs" />
+    <Compile Include="EditorData\Node\Object\SetScale.cs" />
+    <Compile Include="EditorData\Node\Object\SetXYVelocity.cs" />
     <Compile Include="EditorData\Node\Object\SetVelocityLimit.cs" />
     <Compile Include="EditorData\Node\Object\SetVelocity.cs" />
     <Compile Include="EditorData\Node\RenderAlikeTypes.cs" />
@@ -190,6 +195,7 @@
     <Compile Include="EditorData\Node\Task\Tasker.cs" />
     <Compile Include="EditorData\Node\Task\TaskMoveByCurve.cs" />
     <Compile Include="EditorData\Node\Task\TaskMoveToCurve.cs" />
+    <Compile Include="EditorData\Node\Task\TaskForObject.cs" />
     <Compile Include="EditorData\Node\Task\TaskNode.cs" />
     <Compile Include="EditorData\Node\Task\TaskWait.cs" />
     <Compile Include="EditorData\Node\CodeAlikeTypes.cs" />
@@ -1694,6 +1700,24 @@
       <Project>{bd1ca1e6-9e34-4098-ae65-922f23670f75}</Project>
       <Name>LuaSTGEditorSharp.Core</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\taskcallback.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\taskcallback.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\taskforobject.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\taskforobject.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\setvxy.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\16x16\setvxy.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -97,9 +97,10 @@ namespace LuaSTGEditorSharp.EditorData.Node.Boss
         protected override void AddCompileSettings()
         {
             string sk = parentWorkSpace.CompileProcess.archiveSpace + Path.GetFileName(NonMacrolize(0));
-            if (!string.IsNullOrEmpty(NonMacrolize(0))
-                && !parentWorkSpace.CompileProcess.resourceFilePath.ContainsKey(sk))
-                parentWorkSpace.CompileProcess.resourceFilePath.Add(sk, NonMacrolize(0));
+            if (!string.IsNullOrEmpty(NonMacrolize(0)))
+            {
+                parentWorkSpace.CompileProcess.AddFile(NonMacrolize(0), sk);
+            }
         }
 
         public override object Clone()

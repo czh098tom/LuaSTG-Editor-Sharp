@@ -71,6 +71,8 @@ namespace LuaSTGEditorSharp
             #region task
             task.Add(new ToolboxItemData("task", "/LuaSTGNode.Legacy;component/images/task.png", "Task")
                 , new AddNode(AddTaskNode));
+            task.Add(new ToolboxItemData("taskforobject", "/LuaSTGNode.Legacy;component/images/taskforobject.png", "Task For Another Object")
+                , new AddNode(AddTaskForObjectNode));
             task.Add(new ToolboxItemData("tasker", "/LuaSTGNode.Legacy;component/images/tasker.png", "Tasker")
                 , new AddNode(AddTaskerNode));
             task.Add(new ToolboxItemData("taskdefine", "/LuaSTGNode.Legacy;component/images/taskdefine.png", "Define Task")
@@ -216,6 +218,8 @@ namespace LuaSTGEditorSharp
             obj.Add(new ToolboxItemData(true), null);
             obj.Add(new ToolboxItemData("setv", "/LuaSTGNode.Legacy;component/images/setv.png", "Set Velocity")
                 , new AddNode(AddSetVNode));
+            obj.Add(new ToolboxItemData("setvxy", "/LuaSTGNode.Legacy;component/images/setvxy.png", "Set XY-Velocity")
+                , new AddNode(AddSetVXYNode));
             obj.Add(new ToolboxItemData("seta", "/LuaSTGNode.Legacy;component/images/setaccel.png", "Set Acceleration")
                 , new AddNode(AddSetANode));
             obj.Add(new ToolboxItemData("setg", "/LuaSTGNode.Legacy;component/images/setgravity.png", "Set Gravity")
@@ -393,6 +397,11 @@ namespace LuaSTGEditorSharp
             parent.Insert(new TaskNode(parent.ActivatedWorkSpaceData));
         }
 
+        private void AddTaskForObjectNode()
+        {
+            parent.Insert(new TaskForObject(parent.ActivatedWorkSpaceData));
+        }
+
         private void AddTaskerNode()
         {
             parent.Insert(new Tasker(parent.ActivatedWorkSpaceData));
@@ -498,12 +507,18 @@ namespace LuaSTGEditorSharp
             TreeNode newDef = new BossDefine(parent.ActivatedWorkSpaceData);
             TreeNode init = new BossInit(parent.ActivatedWorkSpaceData);
             TreeNode newSC = new BossSpellCard(parent.ActivatedWorkSpaceData);
+            TreeNode newSCBeforeStart = new BossSCBeforeStart(parent.ActivatedWorkSpaceData);
             TreeNode newSCStart = new BossSCStart(parent.ActivatedWorkSpaceData);
             TreeNode newTask = new TaskNode(parent.ActivatedWorkSpaceData);
+            TreeNode newSCBeforeFinish = new BossSCBeforeFinish(parent.ActivatedWorkSpaceData);
+            TreeNode newSCAfter = new BossSCAfter(parent.ActivatedWorkSpaceData);
             newSCStart.AddChild(newTask);
             newTask.AddChild(new TaskMoveTo(parent.ActivatedWorkSpaceData, "0,120", "60", "MOVE_NORMAL"));
+            newSC.AddChild(newSCBeforeStart);
             newSC.AddChild(newSCStart);
+            newSC.AddChild(newSCBeforeFinish);
             newSC.AddChild(new BossSCFinish(parent.ActivatedWorkSpaceData));
+            newSC.AddChild(newSCAfter);
             newDef.AddChild(init);
             newDef.AddChild(newSC);
             parent.Insert(newDef);
@@ -512,12 +527,18 @@ namespace LuaSTGEditorSharp
         private void AddBossSCNode()
         {
             TreeNode newSC = new BossSpellCard(parent.ActivatedWorkSpaceData);
+            TreeNode newSCBeforeStart = new BossSCBeforeStart(parent.ActivatedWorkSpaceData);
             TreeNode newSCStart = new BossSCStart(parent.ActivatedWorkSpaceData);
             TreeNode newTask = new TaskNode(parent.ActivatedWorkSpaceData);
+            TreeNode newSCBeforeFinish = new BossSCBeforeFinish(parent.ActivatedWorkSpaceData);
+            TreeNode newSCAfter = new BossSCAfter(parent.ActivatedWorkSpaceData);
             newSCStart.AddChild(newTask);
             newTask.AddChild(new TaskMoveTo(parent.ActivatedWorkSpaceData, "0,120", "60", "MOVE_NORMAL"));
+            newSC.AddChild(newSCBeforeStart);
             newSC.AddChild(newSCStart);
+            newSC.AddChild(newSCBeforeFinish);
             newSC.AddChild(new BossSCFinish(parent.ActivatedWorkSpaceData));
+            newSC.AddChild(newSCAfter);
             parent.Insert(newSC);
         }
 
@@ -703,6 +724,11 @@ namespace LuaSTGEditorSharp
         private void AddSetVNode()
         {
             parent.Insert(new SetVelocity(parent.ActivatedWorkSpaceData));
+        }
+
+        private void AddSetVXYNode()
+        {
+            parent.Insert(new SetXYVelocity(parent.ActivatedWorkSpaceData));
         }
 
         private void AddSetANode()

@@ -51,15 +51,15 @@ namespace LuaSTGEditorSharp.EditorData.Node.Advanced
                     }
                 }
                 object[] s = list.ToArray();
-                string hstr = Macrolize(target.ExInfo1);
-                string tstr = Macrolize(target.ExInfo2);
+                Regex r = new Regex("\\n");
+                string sp = Indent(spacing);
+                string nsp = "\n" + sp;
+                string hstr = r.Replace(Macrolize(target.ExInfo1), nsp);
+                string tstr = r.Replace(Macrolize(target.ExInfo2), nsp);
                 try
                 {
-                    Regex r = new Regex("\\n");
-                    string sp = Indent(spacing);
-                    string nsp = "\n" + sp;
-                    head = sp + r.Replace(string.Format(hstr, s), nsp) + "\n";
-                    tail = sp + r.Replace(string.Format(tstr, s), nsp) + "\n";
+                    head = sp + string.Format(hstr, s) + "\n";
+                    tail = sp + string.Format(tstr, s) + "\n";
                     //head = string.Format(target.ExInfo1, s) + "\n";
                     //tail = string.Format(target.ExInfo2, s) + "\n";
                 }

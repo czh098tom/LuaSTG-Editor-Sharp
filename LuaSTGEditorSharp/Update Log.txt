@@ -1,4 +1,20 @@
-﻿-- Update Log（最近更新 2020-05-26）
+﻿-- Update Log（最近更新 2021-06-19）
+0.7.3
+修复bug：
+重复资源无法正常忽略的bug
+
+0.7.2
+实现节点：
+Lib层：
+Boss
+	BossSCBeforeStart
+	BossSCBeforeFinish
+	BossSCAfter
+Task
+	TaskForObject
+修复bug：
+RGB/ARGB编辑窗口处理错误的bug
+自定义节点错误给予参数缩进的bug
 
 0.7.1
 实现功能：插件的工具
