@@ -29,28 +29,32 @@ namespace LuaSTGEditorSharp.EditorData.Node
             }
             foreach (Type t in NodeTypes)
             {
-                TypeCacheData data = new TypeCacheData
+                string ico = t.GetCustomAttribute<NodeIconAttribute>()?.Path ?? null;
+                if (ico != null)
                 {
-                    icon = $"/{t.Assembly.GetName().Name};component/images/16x16/{t.GetCustomAttribute<NodeIconAttribute>().Path}",
-                    canDelete = !t.IsDefined(typeof(CannotDeleteAttribute), false),
-                    canBeBanned = !t.IsDefined(typeof(CannotBanAttribute), false),
-                    classNode = t.IsDefined(typeof(ClassNodeAttribute), false),
-                    leaf = t.IsDefined(typeof(LeafNodeAttribute), false),
-                    requireParent = GetTypes(t.GetCustomAttribute<RequireParentAttribute>()?.ParentType),
-                    uniqueness = t.IsDefined(typeof(UniquenessAttribute), false),
-                    ignoreValidation = t.IsDefined(typeof(IgnoreValidationAttribute), false),
-                    createInvokeID = t.GetCustomAttribute<CreateInvokeAttribute>()?.id,
-                    rightClickInvokeID = t.GetCustomAttribute<RCInvokeAttribute>()?.id
-                };
-                var attrs = t.GetCustomAttributes<RequireAncestorAttribute>();
-                data.requireAncestor = null;
-                if (attrs.Count() != 0)
-                {
-                    data.requireAncestor = (from RequireAncestorAttribute at in attrs
-                                            select GetTypes(at.RequiredTypes)).ToArray();
+                    TypeCacheData data = new TypeCacheData
+                    {
+                        icon = $"/{t.Assembly.GetName().Name};component/images/16x16/{ico}",
+                        canDelete = !t.IsDefined(typeof(CannotDeleteAttribute), false),
+                        canBeBanned = !t.IsDefined(typeof(CannotBanAttribute), false),
+                        classNode = t.IsDefined(typeof(ClassNodeAttribute), false),
+                        leaf = t.IsDefined(typeof(LeafNodeAttribute), false),
+                        requireParent = GetTypes(t.GetCustomAttribute<RequireParentAttribute>()?.ParentType),
+                        uniqueness = t.IsDefined(typeof(UniquenessAttribute), false),
+                        ignoreValidation = t.IsDefined(typeof(IgnoreValidationAttribute), false),
+                        createInvokeID = t.GetCustomAttribute<CreateInvokeAttribute>()?.id,
+                        rightClickInvokeID = t.GetCustomAttribute<RCInvokeAttribute>()?.id
+                    };
+                    var attrs = t.GetCustomAttributes<RequireAncestorAttribute>();
+                    data.requireAncestor = null;
+                    if (attrs.Count() != 0)
+                    {
+                        data.requireAncestor = (from RequireAncestorAttribute at in attrs
+                                                select GetTypes(at.RequiredTypes)).ToArray();
+                    }
+                    NodeTypeInfo.Add(t, data);
+                    StandardNode.Add(t, t.GetConstructor(new Type[] { typeof(DocumentData) }).Invoke(new object[] { null }) as TreeNode);
                 }
-                NodeTypeInfo.Add(t, data);
-                StandardNode.Add(t, t.GetConstructor(new Type[] { typeof(DocumentData) }).Invoke(new object[] { null }) as TreeNode);
             }
         }
 
