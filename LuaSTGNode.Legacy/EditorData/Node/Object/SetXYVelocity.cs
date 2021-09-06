@@ -58,7 +58,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Object
             yield return sp + Macrolize(0) + ".vx," + Macrolize(0) + ".vy=" + Macrolize(1) + "\n";
             if (SetRotation == "true")
             {
-                yield return sp + Macrolize(0) + ".rot=atan2(self.vy,self.vx)\n";
+                yield return sp + Macrolize(0) + ".rot=atan2(" + Macrolize(0) + ".vy," + Macrolize(0) + ".vx)\n";
             }
         }
 
