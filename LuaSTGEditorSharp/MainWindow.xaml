@@ -813,7 +813,8 @@
                 <ColumnDefinition Width="5"/>
                 <ColumnDefinition Width="3.8*"/>
             </Grid.ColumnDefinitions>
-            <DataGrid x:Name="propData" Margin="10,10,4,11.2" AutoGenerateColumns="False" CanUserResizeRows="False" CanUserAddRows="False"
+            <DataGrid x:Name="propData" Margin="10,10,4,11.2" AutoGenerateColumns="False" 
+                      CanUserResizeRows="False" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False"
                       Grid.Column="0" ItemsSource="{Binding ContentTemplate.VisualTree, ElementName=docTabs}" 
                       VerticalScrollBarVisibility="Visible" Style="{StaticResource ResourceKey=DataGridStyle}"
                       DataGridCell.Selected="DataGrid_GotFocus">
