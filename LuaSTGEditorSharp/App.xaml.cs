@@ -109,7 +109,7 @@ namespace LuaSTGEditorSharp
             {
                 a.Add(new EXEPathNotSetMessage(LuaSTGExecutablePath, "LuaSTG Path", 0, this));
             }
-            if (BatchPacking && (!File.Exists(ZipExecutablePath) || Path.GetFileName(ZipExecutablePath) != "7z.exe"))
+            if (PackerType == "zip-external" && (!File.Exists(ZipExecutablePath) || Path.GetFileName(ZipExecutablePath) != "7z.exe"))
             {
                 a.Add(new EXEPathNotSetMessage(ZipExecutablePath, "7z Path", 0, this));
             }
@@ -261,12 +261,12 @@ namespace LuaSTGEditorSharp
             }
         }
 
-        public bool BatchPacking
+        public string PackerType
         {
-            get => !Settings.Default.UseInternalZipCompressor;
+            get => Settings.Default.PackerType;
             set
             {
-                Settings.Default["UseInternalZipCompressor"] = !value;
+                Settings.Default["PackerType"] = value;
             }
         }
 
@@ -318,7 +318,7 @@ namespace LuaSTGEditorSharp
 
         public bool IsEXEPathSet
         {
-            get => !(BatchPacking && string.IsNullOrEmpty(ZipExecutablePath)) && !string.IsNullOrEmpty(LuaSTGExecutablePath);
+            get => !(PackerType == "zip-external" && string.IsNullOrEmpty(ZipExecutablePath)) && !string.IsNullOrEmpty(LuaSTGExecutablePath);
         }
 
         private void Application_Exit(object sender, ExitEventArgs e)

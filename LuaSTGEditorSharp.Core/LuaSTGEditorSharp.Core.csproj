@@ -200,10 +200,10 @@
     <Compile Include="Util\DictionaryExtension.cs" />
     <Compile Include="Windows\IInputWindowSelectorRegister.cs" />
     <Compile Include="Windows\Input\IInputWindow.cs" />
-    <Compile Include="Zip\PlainCopy.cs" />
-    <Compile Include="Zip\ZipCompressor.cs" />
-    <Compile Include="Zip\ZipCompressorBatch.cs" />
-    <Compile Include="Zip\ZipCompressorInternal.cs" />
+    <Compile Include="Packer\PlainCopyPacker.cs" />
+    <Compile Include="Packer\PackerBase.cs" />
+    <Compile Include="Packer\ZipPackerBatch.cs" />
+    <Compile Include="Packer\ZipPackerInternal.cs" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images\16x16\advancedrepeat.png" />

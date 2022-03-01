@@ -221,14 +221,36 @@ namespace LuaSTGEditorSharp.Windows
             }
         }
 
-        private bool batchPacking;
-        public bool BatchPacking
+        private bool batchZipPackingSelected;
+        public bool BatchZipPackingSelected
         {
-            get => batchPacking;
+            get => batchZipPackingSelected;
             set
             {
-                batchPacking = value;
-                RaiseProertyChanged("BatchPacking");
+                batchZipPackingSelected = value;
+                RaiseProertyChanged("BatchZipPackingSelected");
+            }
+        }
+
+        private bool internalZipPackingSelected;
+        public bool InternalZipPackingSelected
+        {
+            get => internalZipPackingSelected;
+            set
+            {
+                internalZipPackingSelected = value;
+                RaiseProertyChanged("InternalZipPackingSelected");
+            }
+        }
+
+        private bool plainCopyPackingSelected;
+        public bool PlainCopyPackingSelected
+        {
+            get => plainCopyPackingSelected;
+            set
+            {
+                plainCopyPackingSelected = value;
+                RaiseProertyChanged("PlainCopyPackingSelected");
             }
         }
 
@@ -367,10 +389,10 @@ namespace LuaSTGEditorSharp.Windows
             set => mainApp.AuthorName = value;
         }
 
-        public bool BatchPackingSettings
+        public string PackerTypeSettings
         {
-            get => mainApp.BatchPacking;
-            set => mainApp.BatchPacking = value;
+            get => mainApp.PackerType;
+            set => mainApp.PackerType = value;
         }
 
         public string PluginPathSettings
@@ -407,7 +429,18 @@ namespace LuaSTGEditorSharp.Windows
         {
             AuthorNameSettings = AuthorName;
             AutoMoveToNewSettings = AutoMoveToNew;
-            BatchPackingSettings = BatchPacking;
+            if (plainCopyPackingSelected)
+            {
+                PackerTypeSettings = Packer.PlainCopyPacker.name;
+            }
+            else if(batchZipPackingSelected)
+            {
+                PackerTypeSettings = Packer.ZipPackerBatch.name;
+            }
+            else
+            {
+                PackerTypeSettings = Packer.ZipPackerInternal.name;
+            }
             DebugCheatSettings = DebugCheat;
             DebugResolutionXSettings = DebugResolutionX;
             DebugResolutionYSettings = DebugResolutionY;
@@ -428,7 +461,18 @@ namespace LuaSTGEditorSharp.Windows
         {
             AuthorName = AuthorNameSettings;
             AutoMoveToNew = AutoMoveToNewSettings;
-            BatchPacking = BatchPackingSettings;
+            switch (PackerTypeSettings)
+            {
+                case Packer.ZipPackerInternal.name:
+                    internalZipPackingSelected = true;
+                    break;
+                case Packer.ZipPackerBatch.name:
+                    batchZipPackingSelected = true;
+                    break;
+                case Packer.PlainCopyPacker.name:
+                    plainCopyPackingSelected = true;
+                    break;
+            }
             DebugCheat = DebugCheatSettings;
             DebugResolutionX = DebugResolutionXSettings;
             DebugResolutionY = DebugResolutionYSettings;

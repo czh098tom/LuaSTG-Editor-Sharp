@@ -1508,7 +1508,7 @@ namespace LuaSTGEditorSharp.EditorData
         /// <returns><see cref="string"/> after applying archive space and lua escape sequences.</returns>
         protected string GetPath(int pathAttrID)
         {
-            if ((System.Windows.Application.Current as IAppSettings).BatchPacking) return Path.GetFileName(NonMacrolize(pathAttrID));
+            if (!parentWorkSpace.CompileProcess.Packer.SupportFolderInArchive) return Path.GetFileName(NonMacrolize(pathAttrID));
             string s = parentWorkSpace.CompileProcess.archiveSpace;
             if (s != "")
             {

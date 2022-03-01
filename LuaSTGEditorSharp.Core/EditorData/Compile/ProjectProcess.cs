@@ -9,6 +9,7 @@ using System.Windows;
 using LuaSTGEditorSharp.EditorData.Document;
 using LuaSTGEditorSharp.EditorData.Compile;
 using LuaSTGEditorSharp.EditorData.Exception;
+using LuaSTGEditorSharp.Packer;
 
 namespace LuaSTGEditorSharp.EditorData.Compile
 {
@@ -17,6 +18,8 @@ namespace LuaSTGEditorSharp.EditorData.Compile
     /// </summary>
     internal class ProjectProcess : CompileProcess
     {
+        public override string TargetPath => luaSTGFolder + "\\mod\\" + projName;
+
         /// <summary>
         /// The child <see cref="PartialProjectProcess"/> of the process need to do.
         /// </summary>
@@ -29,6 +32,8 @@ namespace LuaSTGEditorSharp.EditorData.Compile
         /// <param name="StageDebug">Whether Stage Debug is switched on.</param>
         public override void ExecuteProcess(bool SCDebug, bool StageDebug, IAppSettings appSettings)
         {
+            Packer = PackerBase.GetPacker(appSettings.PackerType, TargetPath, zipExePath, rootZipPackPath);
+
             GenerateCode(SCDebug, StageDebug);
             WriteRoot();
 
@@ -38,7 +43,7 @@ namespace LuaSTGEditorSharp.EditorData.Compile
 
             if (appSettings.SaveResMeta)
             {
-                if (File.Exists(projMetaPath) && File.Exists(targetZipPath))
+                if (File.Exists(projMetaPath) && Packer.TargetExists())
                 {
                     GatherResByResMeta(resNeedToPack, resPathToMD5);
                 }

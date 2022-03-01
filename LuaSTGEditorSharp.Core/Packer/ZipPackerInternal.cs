@@ -6,54 +6,50 @@ using System.Text;
 using System.Threading.Tasks;
 using ICSharpCode.SharpZipLib.Zip;
 
-namespace LuaSTGEditorSharp.Zip
+namespace LuaSTGEditorSharp.Packer
 {
-    public class ZipCompressorInternal : ZipCompressor
+    public class ZipPackerInternal : PackerBase
     {
-        private readonly string targetArchivePath;
+        public const string name = "zip-internal";
+
         private FileStream targetArchiveFS;
         private ZipFile targetArchive;
 
-        public ZipCompressorInternal(string targetArchivePath)
+        public ZipPackerInternal(string targetArchivePath) : base(targetArchivePath)
         {
-            Encoding utf8 = Encoding.UTF8;
-            //ZipStrings.CodePage = utf8.CodePage;
             ZipStrings.UseUnicode = true;
-            this.targetArchivePath = targetArchivePath;
         }
 
-        public override void PackByDict(Dictionary<string, string> path, bool removeIfExists)
+        protected override string GetTargetWithExtension(string targetPath)
         {
-            try
-            {
-                foreach (string s in PackByDictReporting(path, removeIfExists)) { }
-            }
-            catch (Exception e)
-            {
-                System.Windows.MessageBox.Show($"Packaging failed.\n{e}");
-            }
+            return targetPath + ".zip";
         }
-        
+
+        public override bool TargetExists()
+        {
+            return File.Exists(TargetArchivePath);
+        }
+
         public override IEnumerable<string> PackByDictReporting(Dictionary<string, string> path, bool removeIfExists)
         {
             HashSet<string> zipNames = new HashSet<string>();
             try
             {
-                if (File.Exists(targetArchivePath))
+                if (TargetExists())
                 {
                     if (removeIfExists)
                     {
-                        File.Delete(targetArchivePath);
-                        targetArchive = ZipFile.Create(targetArchivePath);
+                        File.Delete(TargetArchivePath);
+                        targetArchive = ZipFile.Create(TargetArchivePath);
                     }
                     else
                     {
-                        targetArchive = new ZipFile(targetArchivePath);
+                        targetArchive = new ZipFile(TargetArchivePath);
                     }
                 }
                 else
                 {
-                    targetArchive = ZipFile.Create(targetArchivePath);
+                    targetArchive = ZipFile.Create(TargetArchivePath);
                 }
             }
             catch (Exception e)
@@ -87,21 +83,21 @@ namespace LuaSTGEditorSharp.Zip
             HashSet<string> zipNames = new HashSet<string>();
             try
             {
-                if (File.Exists(targetArchivePath))
+                if (TargetExists())
                 {
                     if (removeIfExists)
                     {
-                        File.Delete(targetArchivePath);
-                        targetArchiveFS = File.Create(targetArchivePath);
+                        File.Delete(TargetArchivePath);
+                        targetArchiveFS = File.Create(TargetArchivePath);
                     }
                     else
                     {
-                        targetArchiveFS = new FileStream(targetArchivePath, FileMode.Open);
+                        targetArchiveFS = new FileStream(TargetArchivePath, FileMode.Open);
                     }
                 }
                 else
                 {
-                    targetArchiveFS = File.Create(targetArchivePath);
+                    targetArchiveFS = File.Create(TargetArchivePath);
                 }
             }
             catch (Exception e)
@@ -118,7 +114,7 @@ namespace LuaSTGEditorSharp.Zip
                 {
                     using (FileStream StreamToZip = new FileStream(kvp.Value, FileMode.Open, FileAccess.Read))
                     {
-                        yield return $"Add file \"{kvp.Value}\" into archive \"{targetArchivePath}\", internal name: \"{kvp.Key}\".";
+                        yield return $"Add file \"{kvp.Value}\" into archive \"{TargetArchivePath}\", internal name: \"{kvp.Key}\".";
                         ZipEntry ZipEntry = new ZipEntry(kvp.Key);
 
                         ZipStream.PutNextEntry(ZipEntry);
@@ -146,7 +142,7 @@ namespace LuaSTGEditorSharp.Zip
                 }
                 ZipStream.Finish();
                 ZipStream.Close();
-                yield return $"Finished archive \"{targetArchivePath}\".";
+                yield return $"Finished archive \"{TargetArchivePath}\".";
             }
             targetArchiveFS.Close();
         }

@@ -17,7 +17,7 @@ namespace LuaSTGEditorSharp
         string SLDir { get; set; }
         bool SaveResMeta { get; }
         bool PackProj { get; }
-        bool BatchPacking { get; }
+        string PackerType { get; }
 
         bool SpaceIndentation { get; }
         int IndentationSpaceLength { get;}

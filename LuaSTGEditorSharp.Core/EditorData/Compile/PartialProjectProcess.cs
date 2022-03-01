@@ -9,6 +9,7 @@ using System.Windows;
 using LuaSTGEditorSharp.EditorData.Document;
 using LuaSTGEditorSharp.EditorData.Compile;
 using LuaSTGEditorSharp.EditorData.Exception;
+using LuaSTGEditorSharp.Packer;
 
 namespace LuaSTGEditorSharp.EditorData.Compile
 {
@@ -22,6 +23,8 @@ namespace LuaSTGEditorSharp.EditorData.Compile
         /// </summary>
         internal ProjectProcess parentProcess;
 
+        public override string TargetPath => parentProcess.TargetPath;
+
         /// <summary>
         /// Execute the <see cref="CompileProcess"/>.
         /// </summary>
@@ -30,6 +33,8 @@ namespace LuaSTGEditorSharp.EditorData.Compile
         /// <param name="appSettings">App that contains settings</param>
         public override void ExecuteProcess(bool SCDebug, bool StageDebug, IAppSettings appSettings)
         {
+            Packer = PackerBase.GetPacker(appSettings.PackerType, TargetPath, zipExePath, rootZipPackPath);
+
             GenerateCode(SCDebug, StageDebug);
 
             //Gather file need to pack
@@ -38,7 +43,7 @@ namespace LuaSTGEditorSharp.EditorData.Compile
 
             if (appSettings.SaveResMeta)
             {
-                if (File.Exists(projMetaPath) && File.Exists(targetZipPath))
+                if (File.Exists(projMetaPath) && Packer.TargetExists())
                 {
                     GatherResByResMeta(resNeedToPack, resPathToMD5);
                 }

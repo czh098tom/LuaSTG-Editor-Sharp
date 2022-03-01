@@ -201,7 +201,6 @@ namespace LuaSTGEditorSharp.EditorData.Document
             }
 
             c.luaSTGFolder = Path.GetDirectoryName(c.luaSTGExePath);
-            c.targetZipPath = c.luaSTGFolder + "\\mod\\" + c.projName + ".zip";
             
             foreach (IDocumentWithMeta idwm in referencedDoc)
             {

@@ -11,7 +11,7 @@ using System.Windows;
 using LuaSTGEditorSharp.EditorData.Document;
 using LuaSTGEditorSharp.EditorData.Compile;
 using LuaSTGEditorSharp.EditorData.Exception;
-using LuaSTGEditorSharp.Zip;
+using LuaSTGEditorSharp.Packer;
 
 namespace LuaSTGEditorSharp.EditorData
 {
@@ -97,7 +97,10 @@ namespace LuaSTGEditorSharp.EditorData
         /// <summary>
         /// Path for target mod folder.
         /// </summary>
-        public string targetZipPath;
+        public abstract string TargetPath { get; }
+
+        public PackerBase Packer { get; protected set; }
+
         /// <summary>
         /// Store the method when progress changed.
         /// </summary>
@@ -429,16 +432,7 @@ namespace LuaSTGEditorSharp.EditorData
                 }
                 int entryCount = entry2File.Count;
                 float currentCount = 0;
-                ZipCompressor compressor;
-                if (currentApp.BatchPacking)
-                {
-                    compressor = new ZipCompressorBatch(targetZipPath, zipExePath, rootZipPackPath);
-                }
-                else
-                {
-                    compressor = new ZipCompressorInternal(targetZipPath);
-                }
-                foreach (string s in compressor.PackByDictReporting(entry2File, !currentApp.SaveResMeta && !preserveZip))
+                foreach (string s in Packer.PackByDictReporting(entry2File, !currentApp.SaveResMeta && !preserveZip))
                 {
                     ProgressChanged_Private?.Invoke(this, new ProgressChangedEventArgs(Convert.ToInt32(currentCount), s));
                     currentCount += 1.0f / entryCount;
@@ -450,178 +444,6 @@ namespace LuaSTGEditorSharp.EditorData
             }
             finally
             {
-                if (File.Exists(projLuaPath)) File.Delete(projLuaPath);
-            }
-        }
-
-        /// <summary>
-        /// Generate pack batch and execute it by given information.
-        /// </summary>
-        /// <param name="currentApp">The current <see cref="App"/>.</param>
-        /// <param name="resNeedToPack">The output list of resources need to pack.</param>
-        /// <param name="resPathToMD5">The dictionary of resource archivePath -> (directoryPath, MD5 Hash) 
-        /// of the resource.</param>
-        /// <param name="includeRoot">Whether regenerates root.lua.</param>
-        protected void PackFileUsingInfo_old(IAppSettings currentApp, List<string> resNeedToPack
-            , Dictionary<string, Tuple<string, string>> resPathToMD5, bool includeRoot)
-        {
-            //Pack File using info
-            FileStream packBatS = null;
-            StreamWriter packBat = null;
-            try
-            {
-                packBatS = new FileStream(rootZipPackPath, FileMode.Create);
-                packBat = new StreamWriter(packBatS, Encoding.Default);
-                if (includeRoot)
-                {
-                    packBat.WriteLine(zipExePath + " u -tzip -mcu=on \"" + targetZipPath
-                      + "\" \"" + rootLuaPath + "\" \"" + projLuaPath + "\"");
-                }
-                else
-                {
-                    packBat.WriteLine(zipExePath + " u -tzip -mcu=on \"" + targetZipPath
-                      + "\" \"" + projLuaPath + "\"");
-                }
-                if (currentApp.SaveResMeta)
-                {
-                    foreach (string resPath in resNeedToPack)
-                    {
-                        packBat.WriteLine(zipExePath + " u -tzip -mcu=on \"" + targetZipPath + "\" \""
-                            + resPath + "\"");
-                    }
-                    foreach (KeyValuePair<string, Tuple<string, string>> kvp in resPathToMD5)
-                    {
-                        packBat.WriteLine(zipExePath + " d -tzip -mcu=on \"" + targetZipPath + "\" \""
-                            + kvp.Key + "\"");
-                    }
-                }
-                else
-                {
-                    if (File.Exists(targetZipPath)) File.Delete(targetZipPath);
-                    foreach (KeyValuePair<string, string> resPath in resourceFilePath)
-                    {
-                        bool? undcPath = RelativePathConverter.IsRelativePath(resPath.Value);
-                        if (undcPath == true)
-                        {
-                            if (string.IsNullOrEmpty(projPath)) throw new InvalidRelativeResPathException(resPath.Value);
-                            packBat.WriteLine(zipExePath + " u -tzip -mcu=on \"" + targetZipPath + "\" \""
-                                + Path.GetFullPath(Path.Combine(projPath, resPath.Value)) + "\"");
-                        }
-                        else if (undcPath == false)
-                        {
-                            packBat.WriteLine(zipExePath + " u -tzip -mcu=on \"" + targetZipPath + "\" \""
-                                + resPath + "\"");
-                        }
-                    }
-                }
-
-                if (currentApp.PackProj)
-                {
-                    if (!string.IsNullOrEmpty(source.DocPath))
-                    {
-                        packBat.WriteLine(zipExePath + " u -tzip -mcu=on \"" + targetZipPath + "\" \""
-                            + source.DocPath + "\"");
-                    }
-                }
-                packBat.Close();
-                Process pack = new Process
-                {
-                    StartInfo = new ProcessStartInfo(rootZipPackPath)
-                    {
-                        UseShellExecute = true,
-                        CreateNoWindow = false
-                    }
-                };
-                pack.Start();
-                pack.WaitForExit();
-                //catch { }
-            }
-            catch (System.Exception e)
-            {
-                MessageBox.Show(e.ToString());
-            }
-            finally
-            {
-                if (packBat != null) packBat.Close();
-                if (packBatS != null) packBatS.Close();
-                if (File.Exists(projLuaPath)) File.Delete(projLuaPath);
-            }
-        }
-
-        protected void PackFileUsingInfo_old2(IAppSettings currentApp, List<string> resNeedToPack, Dictionary<string, string> resPathToMD5)
-        {
-            //Pack File using info
-            FileStream packBatS = null;
-            StreamWriter packBat = null;
-            try
-            {
-                packBatS = new FileStream(rootZipPackPath, FileMode.Create);
-                packBat = new StreamWriter(packBatS, Encoding.Default);
-                bool isRenew = false;
-                if (resPathToMD5.Count != 0 || !currentApp.SaveResMeta)
-                {
-                    isRenew = true;
-                    if (File.Exists(targetZipPath)) File.Delete(targetZipPath);
-                }
-                packBat.WriteLine(zipExePath + " u -tzip -mcu=on \"" + targetZipPath
-                    + "\" \"" + rootLuaPath + "\" \"" + projLuaPath + "\"");
-
-                if (!isRenew)
-                {
-                    foreach (string resPath in resNeedToPack)
-                    {
-                        packBat.WriteLine(zipExePath + " u -tzip -mcu=on \"" + targetZipPath + "\" \""
-                            + resPath + "\"");
-                    }
-                }
-                else
-                {
-                    foreach (KeyValuePair<string, string> resPath in resourceFilePath)
-                    {
-                        bool? undcPath = RelativePathConverter.IsRelativePath(resPath.Value);
-                        if (undcPath == true)
-                        {
-                            if (string.IsNullOrEmpty(projPath)) throw new InvalidRelativeResPathException(resPath.Value);
-                            packBat.WriteLine(zipExePath + " u -tzip -mcu=on \"" + targetZipPath + "\" \""
-                                + Path.GetFullPath(Path.Combine(projPath, resPath.Value)) + "\"");
-                        }
-                        else if (undcPath == false)
-                        {
-                            packBat.WriteLine(zipExePath + " u -tzip -mcu=on \"" + targetZipPath + "\" \""
-                                + resPath + "\"");
-                        }
-                    }
-                }
-
-                if (currentApp.PackProj)
-                {
-                    if (!string.IsNullOrEmpty(source.DocPath))
-                    {
-                        packBat.WriteLine(zipExePath + " u -tzip -mcu=on \"" + targetZipPath + "\" \""
-                            + source.DocPath + "\"");
-                    }
-                }
-                packBat.Close();
-                Process pack = new Process
-                {
-                    StartInfo = new ProcessStartInfo(rootZipPackPath)
-                    {
-                        UseShellExecute = true,
-                        CreateNoWindow = false
-                    }
-                };
-                pack.Start();
-                pack.WaitForExit();
-                //catch { }
-            }
-            catch (System.Exception e)
-            {
-                MessageBox.Show(e.ToString());
-            }
-            finally
-            {
-                if (packBat != null) packBat.Close();
-                if (packBatS != null) packBatS.Close();
                 if (File.Exists(projLuaPath)) File.Delete(projLuaPath);
             }
         }

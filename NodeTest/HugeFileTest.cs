@@ -48,7 +48,7 @@ namespace NodeTest
             zf.Add(@"D:\test.tex", @"aaa\啊♂.txt");
             zf.Close();
             */
-            var zipCompressorInternal = new LuaSTGEditorSharp.Zip.ZipCompressorInternal(@"D:\test.zip");
+            var zipCompressorInternal = new LuaSTGEditorSharp.Packer.ZipPackerInternal(@"D:\test.zip");
             var dict = new Dictionary<string, string>
             {
                 { @"aaa\啊♂.txt", @"D:\test.tex" }

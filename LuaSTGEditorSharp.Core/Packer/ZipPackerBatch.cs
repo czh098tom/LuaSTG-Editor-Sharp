@@ -6,33 +6,45 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LuaSTGEditorSharp.Zip
+namespace LuaSTGEditorSharp.Packer
 {
-    public class ZipCompressorBatch : ZipCompressor
+    public class ZipPackerBatch : PackerBase
     {
+        public const string name = "zip-external";
+
         private readonly string zipExePath;
-        private readonly string targetArchivePath;
         private readonly string batchTempPath;
 
-        public ZipCompressorBatch(string targetArchivePath, string zipExePath, string batchTempPath)
+        public override bool SupportFolderInArchive { get => false; }
+
+        public ZipPackerBatch(string targetArchivePath, string zipExePath, string batchTempPath) : base(targetArchivePath)
         {
-            this.targetArchivePath = targetArchivePath;
             this.zipExePath = zipExePath;
             this.batchTempPath = batchTempPath;
+        }
+
+        protected override string GetTargetWithExtension(string targetPath)
+        {
+            return targetPath + ".zip";
+        }
+
+        public override bool TargetExists()
+        {
+            return File.Exists(TargetArchivePath);
         }
 
         public override void PackByDict(Dictionary<string, string> fileInfo, bool removeIfExists)
         {
             FileStream packBatS = null;
             StreamWriter packBat = null;
-            if (removeIfExists && File.Exists(targetArchivePath)) File.Delete(targetArchivePath);
+            if (removeIfExists && TargetExists()) File.Delete(TargetArchivePath);
             try
             {
                 packBatS = new FileStream(batchTempPath, FileMode.Create);
                 packBat = new StreamWriter(packBatS, Encoding.Default);
                 foreach (KeyValuePair<string, string> kvp in fileInfo)
                 {
-                    packBat.WriteLine(zipExePath + " u -tzip -mcu=on \"" + targetArchivePath + "\" \"" + kvp.Value + "\"");
+                    packBat.WriteLine(zipExePath + " u -tzip -mcu=on \"" + TargetArchivePath + "\" \"" + kvp.Value + "\"");
                 }
                 packBat.Close();
                 packBatS.Close();
