@@ -30,6 +30,7 @@ namespace LuaSTGEditorSharp.Packer
                 if (removeIfExists)
                 {
                     Directory.Delete(TargetArchivePath, true);
+                    Directory.CreateDirectory(TargetArchivePath);
                 }
             }
             else
