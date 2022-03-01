@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.28803.352
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LuaSTGEditorSharp", "LuaSTGEditorSharp\LuaSTGEditorSharp.csproj", "{658393F3-C67A-4ABC-9114-48D39ED7E675}"
 EndProject
@@ -32,8 +32,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LuaSTGNode.Legacy.Windows", "LuaSTGNode.Legacy.Windows\LuaSTGNode.Legacy.Windows.csproj", "{A1C31871-42CD-46FA-8274-0EF22EC32D63}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LuaSTGLib.Default", "LuaSTGLib.Default\LuaSTGLib.Default.csproj", "{6E8C559F-E090-4A96-A195-6CD8B5EDD22E}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VisualDanmakuEditor", "VisualDanmakuEditor\VisualDanmakuEditor.csproj", "{25F1A156-C5D0-4CF9-B638-C0F708D5C831}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -177,18 +175,6 @@ Global
 		{6E8C559F-E090-4A96-A195-6CD8B5EDD22E}.Release|x64.Build.0 = Release|Any CPU
 		{6E8C559F-E090-4A96-A195-6CD8B5EDD22E}.Release|x86.ActiveCfg = Release|Any CPU
 		{6E8C559F-E090-4A96-A195-6CD8B5EDD22E}.Release|x86.Build.0 = Release|Any CPU
-		{25F1A156-C5D0-4CF9-B638-C0F708D5C831}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{25F1A156-C5D0-4CF9-B638-C0F708D5C831}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{25F1A156-C5D0-4CF9-B638-C0F708D5C831}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{25F1A156-C5D0-4CF9-B638-C0F708D5C831}.Debug|x64.Build.0 = Debug|Any CPU
-		{25F1A156-C5D0-4CF9-B638-C0F708D5C831}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{25F1A156-C5D0-4CF9-B638-C0F708D5C831}.Debug|x86.Build.0 = Debug|Any CPU
-		{25F1A156-C5D0-4CF9-B638-C0F708D5C831}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{25F1A156-C5D0-4CF9-B638-C0F708D5C831}.Release|Any CPU.Build.0 = Release|Any CPU
-		{25F1A156-C5D0-4CF9-B638-C0F708D5C831}.Release|x64.ActiveCfg = Release|Any CPU
-		{25F1A156-C5D0-4CF9-B638-C0F708D5C831}.Release|x64.Build.0 = Release|Any CPU
-		{25F1A156-C5D0-4CF9-B638-C0F708D5C831}.Release|x86.ActiveCfg = Release|Any CPU
-		{25F1A156-C5D0-4CF9-B638-C0F708D5C831}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
