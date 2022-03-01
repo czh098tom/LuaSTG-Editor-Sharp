@@ -39,7 +39,7 @@
       <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="LuaSTGNodeLibPath" Type="System.String" Scope="User">
-      <Value Profile="(Default)">LuaSTGPlusLib.dll</Value>
+      <Value Profile="(Default)">LuaSTGSubLib.dll</Value>
     </Setting>
     <Setting Name="TempPath" Type="System.String" Scope="User">
       <Value Profile="(Default)" />

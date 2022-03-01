@@ -41,6 +41,7 @@ namespace LuaSTGEditorSharp.Packer
             {
                 string tar = Path.Combine(TargetArchivePath, kvp.Key);
                 if (File.Exists(tar)) File.Delete(tar);
+                Directory.CreateDirectory(Path.GetDirectoryName(tar));
                 File.Copy(kvp.Value, tar);
                 yield return $"Copied file from \"{kvp.Value}\" to \"{tar}\".";
             }
