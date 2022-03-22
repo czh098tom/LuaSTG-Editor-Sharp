@@ -124,19 +124,12 @@ namespace LuaSTGEditorSharp.Packer
 
                         int sizeRead = 0;
 
-                        try
+                        do
                         {
-                            do
-                            {
-                                sizeRead = StreamToZip.Read(buffer, 0, buffer.Length);
-                                ZipStream.Write(buffer, 0, sizeRead);
-                            }
-                            while (sizeRead > 0);
+                            sizeRead = StreamToZip.Read(buffer, 0, buffer.Length);
+                            ZipStream.Write(buffer, 0, sizeRead);
                         }
-                        catch (Exception ex)
-                        {
-                            throw ex;
-                        }
+                        while (sizeRead > 0);
                         StreamToZip.Close();
                     }
                 }

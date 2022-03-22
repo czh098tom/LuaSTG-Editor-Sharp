@@ -51,10 +51,7 @@ namespace LuaSTGEditorSharp.Execution
                 };
                 LSTGInstance.EnableRaisingEvents = true;
                 LSTGInstance.Start();
-                DebugView debugView = new DebugView(logger, LSTGInstance.Id);
-#if !DEBUG
-                if((Application.Current as IAppDebugSettings).DynamicDebugReporting) debugView.Start();
-#endif
+
                 logger("LuaSTG is Running.\n\n");
 
                 LSTGInstance.Exited += (s, e) => {
@@ -84,9 +81,6 @@ namespace LuaSTGEditorSharp.Execution
                     {
                         if (fs != null) fs.Close();
                         if (sr != null) sr.Close();
-#if !DEBUG
-                        if ((Application.Current as IAppDebugSettings).DynamicDebugReporting) debugView.Dispose();
-#endif
                     }
                     sb.Append("\nExited with code " + LSTGInstance.ExitCode + ".");
                     logger(sb.ToString());

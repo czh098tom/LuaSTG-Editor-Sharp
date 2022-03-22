@@ -51,9 +51,10 @@ namespace LuaSTGEditorSharp
                 base.OnStartup(e);
 
                 PluginHandler.DefaultPlugin = new DefaultPluginEntry();
-                if (!PluginHandler.LoadPlugin(PluginPath))
+                Exception loadplugExc = PluginHandler.LoadPlugin(PluginPath);
+                if (loadplugExc != null)
                 {
-                    MessageBox.Show("Load Plugin Failed.");
+                    MessageBox.Show($"Load Plugin Failed.\n{loadplugExc}");
                 }
                 LuaSTGEditorSharp.Windows.InputWindowSelector.Register(PluginHandler.Plugin.GetInputWindowSelectorRegister());
                 LuaSTGEditorSharp.Windows.InputWindowSelector.AfterRegister();

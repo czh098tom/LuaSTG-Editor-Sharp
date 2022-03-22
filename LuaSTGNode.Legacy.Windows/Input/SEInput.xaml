@@ -6,7 +6,6 @@
         xmlns:local="clr-namespace:LuaSTGEditorSharp.Windows.Input;assembly=LuaSTGEditorSharp.Core.Windows"
         xmlns:cv="clr-namespace:LuaSTGEditorSharp.Windows.Input.Canvas"
         xmlns:conv="clr-namespace:LuaSTGEditorSharp.Windows.Input.Converter"
-        xmlns:m="clr-namespace:LuaSTGEditorSharp.Windows.Input.MediaPlayer"
         mc:Ignorable="d"
         Title="Choose SE" Height="475.012" Width="840.879" MinHeight="100" MinWidth="200"
                    Loaded="InputWindow_Loaded">
@@ -45,7 +44,7 @@
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
-                <m:MediaPlayer x:Name="mediaPlayer" Grid.Column="1"/>
+                <MediaElement x:Name="mediaPlayer" LoadedBehavior="Play" UnloadedBehavior="Stop" Grid.Column="1"/>
             </Grid>
         </DockPanel>
     </Grid>

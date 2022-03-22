@@ -4,7 +4,6 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LuaSTGEditorSharp.Windows.Input;assembly=LuaSTGEditorSharp.Core.Windows"
-        xmlns:m="clr-namespace:LuaSTGEditorSharp.Windows.Input.MediaPlayer"
         mc:Ignorable="d"
         Title="Choose BGM" Height="293.418" Width="539.815" MinHeight="100" MinWidth="200"
                    Loaded="InputWindow_Loaded">
@@ -36,7 +35,8 @@
                     </ListBox.ItemTemplate>
                 </ListBox>
                 <GridSplitter Grid.Column="1"/>
-                <m:MediaPlayer x:Name="mediaPlayer" Grid.Column="2"/>
+                <MediaElement x:Name="mediaPlayer" LoadedBehavior="Play" UnloadedBehavior="Stop" Grid.Column="2"/>
+                <!--<m:MediaPlayer x:Name="mediaPlayer" Grid.Column="2"/>-->
             </Grid>
         </DockPanel>
     </Grid>

@@ -79,8 +79,8 @@ namespace LuaSTGEditorSharp.Windows.Input
             if (!string.IsNullOrEmpty(m?.Result)) Result = m?.Result;
             try
             {
-                mediaPlayer.Source = new Uri(m?.ExInfo1);
-                mediaPlayer.Play();
+                mediaPlayer.Source = new Uri(m?.ExInfo1, UriKind.RelativeOrAbsolute);
+                //mediaPlayer.Play();
             }
             catch (Exception exc){ MessageBox.Show(exc.ToString()); }
             codeText.Focus();

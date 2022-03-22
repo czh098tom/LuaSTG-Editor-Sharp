@@ -8,6 +8,7 @@ using System.Security.AccessControl;
 using System.Threading.Tasks;
 using System.Diagnostics;
 using System.Windows;
+
 using LuaSTGEditorSharp.EditorData.Document;
 using LuaSTGEditorSharp.EditorData.Compile;
 using LuaSTGEditorSharp.EditorData.Exception;
@@ -137,7 +138,7 @@ namespace LuaSTGEditorSharp.EditorData
             try
             {
                 file = new FileStream(filePath, FileMode.Open, FileAccess.Read);
-                var md5 = new System.Security.Cryptography.MD5CryptoServiceProvider();
+                var md5 = System.Security.Cryptography.MD5.Create();
                 var bytes = md5.ComputeHash(file);
                 file.Close();
                 var sb = new StringBuilder();
@@ -456,8 +457,7 @@ namespace LuaSTGEditorSharp.EditorData
         public static bool HasOperationPermission(string folder)
         {
             var currentUserIdentity = Path.Combine(Environment.UserDomainName, Environment.UserName);
-
-            DirectorySecurity fileAcl = Directory.GetAccessControl(folder);
+            DirectorySecurity fileAcl = new DirectoryInfo(folder).GetAccessControl();
             var userAccessRules = fileAcl.GetAccessRules(true, true, typeof(System.Security.Principal.NTAccount)).OfType<FileSystemAccessRule>().Where(i => i.IdentityReference.Value == currentUserIdentity).ToList();
 
             return userAccessRules.Any(i => i.AccessControlType == AccessControlType.Deny);
