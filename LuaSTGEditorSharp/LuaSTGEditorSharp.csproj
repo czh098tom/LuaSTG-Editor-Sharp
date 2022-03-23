@@ -71,6 +71,7 @@
     <None Remove="Templates\Raw Resources &amp; Classes.txt" />
     <None Remove="Templates\Spell Card.lstges" />
     <None Remove="Templates\Spell Card.txt" />
+    <None Remove="Update Log.txt" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images\child.png" />
@@ -129,6 +130,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Templates\Spell Card.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Update Log.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

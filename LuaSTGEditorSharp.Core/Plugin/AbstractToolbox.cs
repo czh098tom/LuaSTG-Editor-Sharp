@@ -78,6 +78,8 @@ namespace LuaSTGEditorSharp.Plugin
                 , new AddNode(AddSinusoidalInterpolationVariableNode));
             ar.Add(new ToolboxItemData("rvarsinemov", "/LuaSTGEditorSharp.Core;component/images/SinusoidalMovementVariable.png", "Sinusoidal Movement Variable")
                 , new AddNode(AddSinusoidalMovementVariableNode));
+            ar.Add(new ToolboxItemData("rvarcustominterp", "/LuaSTGEditorSharp.Core;component/images/CustomInterpolationVariable.png", "Custom Interpolation Variable")
+                , new AddNode(AddCustomInterpolationVariableNode));
             ar.Add(new ToolboxItemData(true), null);
             ar.Add(new ToolboxItemData("rvarrebound", "/LuaSTGEditorSharp.Core;component/images/ReboundingVariable.png", "Rebounding Variable"), new AddNode(AddReboundingVariableNode));
             ar.Add(new ToolboxItemData("rvarsineosc", "/LuaSTGEditorSharp.Core;component/images/SinusoidalOscillationVariable.png", "Sinusoidal Oscillation Variable")
@@ -247,6 +249,11 @@ namespace LuaSTGEditorSharp.Plugin
         private void AddSinusoidalMovementVariableNode()
         {
             parent.Insert(new SinusoidalMovementVariable(parent.ActivatedWorkSpaceData));
+        }
+
+        private void AddCustomInterpolationVariableNode()
+        {
+            parent.Insert(new CustomInterpolationVariable(parent.ActivatedWorkSpaceData));
         }
 
         private void AddReboundingVariableNode()

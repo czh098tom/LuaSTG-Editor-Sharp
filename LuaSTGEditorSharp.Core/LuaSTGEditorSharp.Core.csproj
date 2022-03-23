@@ -12,6 +12,10 @@
     <OutputPath>..\bin\Debug\</OutputPath>
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="images\16x16\CustomInterpolationVariable.png" />
+    <None Remove="images\CustomInterpolationVariable.png" />
+  </ItemGroup>
+  <ItemGroup>
     <Resource Include="images\16x16\advancedrepeat.png" />
   </ItemGroup>
   <ItemGroup>
@@ -31,6 +35,7 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images\16x16\comment.png" />
+    <Resource Include="images\16x16\CustomInterpolationVariable.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images\16x16\definemacro.png" />
@@ -241,6 +246,7 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images\comment.png" />
+    <Resource Include="images\CustomInterpolationVariable.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images\definemacro.png" />

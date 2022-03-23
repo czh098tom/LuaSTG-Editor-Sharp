@@ -841,7 +841,10 @@ namespace LuaSTGEditorSharp
             {
                 Process log = new Process
                 {
-                    StartInfo = new ProcessStartInfo(path)
+                    StartInfo = new ProcessStartInfo(path) 
+                    {
+                        UseShellExecute = true 
+                    }
                 };
                 log.Start();
             }
