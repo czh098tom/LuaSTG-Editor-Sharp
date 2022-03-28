@@ -127,6 +127,11 @@ namespace LuaSTGEditorSharp.EditorData
             }
         }
 
+        public void GetPacker(IAppSettings appSettings)
+        {
+            Packer = PackerBase.GetPacker(appSettings.PackerType, TargetPath, zipExePath, rootZipPackPath);
+        }
+
         /// <summary>
         /// This method get the MD5 Hash from a given file.
         /// </summary>

@@ -201,7 +201,9 @@ namespace LuaSTGEditorSharp.EditorData.Document
             }
 
             c.luaSTGFolder = Path.GetDirectoryName(c.luaSTGExePath);
-            
+
+            c.GetPacker(mainAppWithInfo);
+
             foreach (IDocumentWithMeta idwm in referencedDoc)
             {
                 if (idwm is PlainDocumentData pdd)

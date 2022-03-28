@@ -28,7 +28,7 @@ namespace LuaSTGEditorSharp.EditorData.Compile
         /// <param name="appSettings">App that contains settings</param>
         public override void ExecuteProcess(bool SCDebug, bool StageDebug, IAppSettings appSettings)
         {
-            Packer = PackerBase.GetPacker(appSettings.PackerType, TargetPath, zipExePath, rootZipPackPath);
+            GetPacker(appSettings);
 
             GenerateCode(SCDebug, StageDebug);
             WriteRoot();
@@ -55,6 +55,5 @@ namespace LuaSTGEditorSharp.EditorData.Compile
 
             PackFileUsingInfo(appSettings, resNeedToPack, resPathToMD5, true);
         }
-
     }
 }

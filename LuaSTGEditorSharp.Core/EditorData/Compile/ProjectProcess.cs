@@ -32,7 +32,7 @@ namespace LuaSTGEditorSharp.EditorData.Compile
         /// <param name="StageDebug">Whether Stage Debug is switched on.</param>
         public override void ExecuteProcess(bool SCDebug, bool StageDebug, IAppSettings appSettings)
         {
-            Packer = PackerBase.GetPacker(appSettings.PackerType, TargetPath, zipExePath, rootZipPackPath);
+            GetPacker(appSettings);
 
             GenerateCode(SCDebug, StageDebug);
             WriteRoot();

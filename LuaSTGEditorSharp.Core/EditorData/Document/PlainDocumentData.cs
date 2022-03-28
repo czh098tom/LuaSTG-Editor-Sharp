@@ -166,6 +166,7 @@ namespace LuaSTGEditorSharp.EditorData.Document
 
             c.luaSTGFolder = Path.GetDirectoryName(c.luaSTGExePath);
 
+            c.GetPacker(mainAppWithInfo);
             //System.Windows.MessageBox.Show("fin.");
         }
     }
