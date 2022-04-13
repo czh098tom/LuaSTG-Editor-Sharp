@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace LuaSTGEditorSharp.EditorData.Node.NodeAttributes
 {
     /// <summary>
-    /// Identify a <see cref="TreeNode"/> is a root.
+    /// Identify a <see cref="TreeNodeBase"/> is a root.
     /// </summary>
     [AttributeUsage(AttributeTargets.Class, Inherited = true)]
     public sealed class RootNodeAttribute : Attribute

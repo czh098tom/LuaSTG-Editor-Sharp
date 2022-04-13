@@ -18,7 +18,7 @@ namespace LuaSTGEditorSharp.EditorData.Node
     [LeafNode]
     [RCInvoke(0)]
     //[XmlType(TypeName = "ProjSettings")]
-    public class ProjSettings : TreeNode
+    public class ProjSettings : FixedAttributeTreeNode
     {
         [JsonConstructor]
         private ProjSettings() : base() { }
@@ -85,9 +85,9 @@ namespace LuaSTGEditorSharp.EditorData.Node
                 "\n_allow_sc_practice =" + Macrolize(3) + "\n";
         }
 
-        public override IEnumerable<Tuple<int,TreeNode>> GetLines()
+        public override IEnumerable<Tuple<int,TreeNodeBase>> GetLines()
         {
-            yield return new Tuple<int, TreeNode>(6, this);
+            yield return new Tuple<int, TreeNodeBase>(6, this);
         }
 
         public override object Clone()

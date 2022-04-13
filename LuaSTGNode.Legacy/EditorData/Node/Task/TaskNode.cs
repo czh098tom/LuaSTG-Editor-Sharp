@@ -12,7 +12,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Task
 {
     [Serializable, NodeIcon("task.png")]
     [RequireAncestor(typeof(CodeAlikeTypes))]
-    public class TaskNode : TreeNode
+    public class TaskNode : FixedAttributeTreeNode
     {
         [JsonConstructor]
         private TaskNode() : base() { }
@@ -31,14 +31,14 @@ namespace LuaSTGEditorSharp.EditorData.Node.Task
             yield return sp + "end)\n";
         }
         
-        public override IEnumerable<Tuple<int, TreeNode>> GetLines()
+        public override IEnumerable<Tuple<int, TreeNodeBase>> GetLines()
         {
-            yield return new Tuple<int, TreeNode>(1, this);
-            foreach (Tuple<int, TreeNode> t in GetChildLines())
+            yield return new Tuple<int, TreeNodeBase>(1, this);
+            foreach (Tuple<int, TreeNodeBase> t in GetChildLines())
             {
                 yield return t;
             }
-            yield return new Tuple<int, TreeNode>(1, this);
+            yield return new Tuple<int, TreeNodeBase>(1, this);
         }
 
         public override string ToString()

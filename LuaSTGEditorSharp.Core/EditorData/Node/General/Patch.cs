@@ -19,7 +19,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.General
     [ClassNode]
     [LeafNode]
     [CreateInvoke(0), RCInvoke(0)]
-    public class Patch : TreeNode
+    public class Patch : FixedAttributeTreeNode
     {
         [JsonConstructor]
         private Patch() : base() { }
@@ -46,9 +46,9 @@ namespace LuaSTGEditorSharp.EditorData.Node.General
             yield return sp + "Include\'" + sk + "\'\n";
         }
 
-        public override IEnumerable<Tuple<int,TreeNode>> GetLines()
+        public override IEnumerable<Tuple<int,TreeNodeBase>> GetLines()
         {
-            yield return new Tuple<int, TreeNode>(1, this);
+            yield return new Tuple<int, TreeNodeBase>(1, this);
         }
 
         public override string ToString()

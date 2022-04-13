@@ -15,7 +15,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Object
     [RequireAncestor(typeof(CodeAlikeTypes))]
     [LeafNode]
     [RCInvoke(1)]
-    public class SetVelocity : TreeNode
+    public class SetVelocity : FixedAttributeTreeNode
     {
         [JsonConstructor]
         private SetVelocity() : base() { }
@@ -82,9 +82,9 @@ namespace LuaSTGEditorSharp.EditorData.Node.Object
                 + Macrolize(4) + "," + Macrolize(3) + ")\n";
         }
 
-        public override IEnumerable<Tuple<int,TreeNode>> GetLines()
+        public override IEnumerable<Tuple<int,TreeNodeBase>> GetLines()
         {
-            yield return new Tuple<int, TreeNode>(1, this);
+            yield return new Tuple<int, TreeNodeBase>(1, this);
         }
 
         public override string ToString()

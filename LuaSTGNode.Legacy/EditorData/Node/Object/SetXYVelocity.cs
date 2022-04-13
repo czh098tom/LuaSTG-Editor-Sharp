@@ -15,7 +15,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Object
     [RequireAncestor(typeof(CodeAlikeTypes))]
     [LeafNode]
     [RCInvoke(1)]
-    public class SetXYVelocity : TreeNode
+    public class SetXYVelocity : FixedAttributeTreeNode
     {
         [JsonConstructor]
         private SetXYVelocity() : base() { }
@@ -62,15 +62,15 @@ namespace LuaSTGEditorSharp.EditorData.Node.Object
             }
         }
 
-        public override IEnumerable<Tuple<int,TreeNode>> GetLines()
+        public override IEnumerable<Tuple<int,TreeNodeBase>> GetLines()
         {
             if (SetRotation == "true")
             {
-                yield return new Tuple<int, TreeNode>(2, this);
+                yield return new Tuple<int, TreeNodeBase>(2, this);
             }
             else
             {
-                yield return new Tuple<int, TreeNode>(1, this);
+                yield return new Tuple<int, TreeNodeBase>(1, this);
             }
         }
 

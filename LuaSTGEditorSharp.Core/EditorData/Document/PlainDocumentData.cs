@@ -155,11 +155,11 @@ namespace LuaSTGEditorSharp.EditorData.Document
             c.projName = Path.GetFileNameWithoutExtension(RawDocName);
 
             //Find mod name
-            foreach (TreeNode t in TreeNodes[0].Children)
+            foreach (TreeNodeBase t in TreeNodes[0].Children)
             {
-                if (t is ProjSettings)
+                if (t is ProjSettings projs)
                 {
-                    if (!string.IsNullOrEmpty(t.attributes[0].AttrInput)) c.projName = t.attributes[0].AttrInput;
+                    if (!string.IsNullOrEmpty(projs.NonMacrolize(0))) c.projName = projs.NonMacrolize(0);
                     break;
                 }
             }

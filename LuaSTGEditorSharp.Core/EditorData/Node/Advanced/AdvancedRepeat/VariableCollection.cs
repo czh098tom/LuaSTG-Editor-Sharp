@@ -16,7 +16,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Advanced.AdvancedRepeat
     [RequireParent(typeof(AdvancedRepeat))]
     [Uniqueness]
     [CannotDelete, CannotBan]
-    public class VariableCollection : TreeNode
+    public class VariableCollection : FixedAttributeTreeNode
     {
         [JsonConstructor]
         public VariableCollection() : base() { }
@@ -35,14 +35,14 @@ namespace LuaSTGEditorSharp.EditorData.Node.Advanced.AdvancedRepeat
             return "Variables";
         }
 
-        public override IEnumerable<Tuple<int, TreeNode>> GetLines()
+        public override IEnumerable<Tuple<int, TreeNodeBase>> GetLines()
         {
             yield break;
         }
 
         public IEnumerable<VariableTransformation> GetVariableTransformations()
         {
-            foreach(TreeNode t in GetLogicalChildren())
+            foreach(TreeNodeBase t in GetLogicalChildren())
             {
                 if (t is VariableTransformation && !t.IsBanned) yield return t as VariableTransformation;
             }

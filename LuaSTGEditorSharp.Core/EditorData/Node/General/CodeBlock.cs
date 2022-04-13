@@ -13,7 +13,7 @@ using LuaSTGEditorSharp.EditorData.Node.NodeAttributes;
 namespace LuaSTGEditorSharp.EditorData.Node.General
 {
     [Serializable, NodeIcon("codeblock.png")]
-    public class CodeBlock : TreeNode
+    public class CodeBlock : FixedAttributeTreeNode
     {
         [JsonConstructor]
         public CodeBlock() : base() { }
@@ -55,14 +55,14 @@ namespace LuaSTGEditorSharp.EditorData.Node.General
             return NonMacrolize(0);
         }
 
-        public override IEnumerable<Tuple<int, TreeNode>> GetLines()
+        public override IEnumerable<Tuple<int, TreeNodeBase>> GetLines()
         {
-            yield return new Tuple<int, TreeNode>(1, this);
+            yield return new Tuple<int, TreeNodeBase>(1, this);
             foreach(var a in GetChildLines())
             {
                 yield return a;
             }
-            yield return new Tuple<int, TreeNode>(1, this);
+            yield return new Tuple<int, TreeNodeBase>(1, this);
         }
     }
 }

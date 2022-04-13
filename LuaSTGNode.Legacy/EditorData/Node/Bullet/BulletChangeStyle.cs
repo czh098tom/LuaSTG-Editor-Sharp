@@ -13,7 +13,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Bullet
     [Serializable, NodeIcon("bulletchangestyle.png")]
     [RequireAncestor(typeof(CodeAlikeTypes))]
     [LeafNode]
-    public class BulletChangeStyle : TreeNode
+    public class BulletChangeStyle : FixedAttributeTreeNode
     {
         [JsonConstructor]
         private BulletChangeStyle() : base() { }
@@ -57,9 +57,9 @@ namespace LuaSTGEditorSharp.EditorData.Node.Bullet
             yield return sp + "ChangeBulletImage(" + Macrolize(0) + "," + Macrolize(1) + "," + Macrolize(2) + ")\n";
         }
 
-        public override IEnumerable<Tuple<int, TreeNode>> GetLines()
+        public override IEnumerable<Tuple<int, TreeNodeBase>> GetLines()
         {
-            yield return new Tuple<int, TreeNode>(1, this);
+            yield return new Tuple<int, TreeNodeBase>(1, this);
         }
 
         public override string ToString()

@@ -9,9 +9,9 @@ namespace LuaSTGEditorSharp.EditorData.Message
 {
     class InvalidArchiveSpaceMessage : MessageBase
     {
-        public override DocumentData SourceDoc { get => (Source as TreeNode).parentWorkSpace; }
+        public override DocumentData SourceDoc { get => (Source as TreeNodeBase).parentWorkSpace; }
 
-    public InvalidArchiveSpaceMessage(TreeNode source) : base(0, source) { }
+    public InvalidArchiveSpaceMessage(TreeNodeBase source) : base(0, source) { }
 
         public override string ToString()
         {
@@ -20,12 +20,12 @@ namespace LuaSTGEditorSharp.EditorData.Message
 
         public override object Clone()
         {
-            return new InvalidArchiveSpaceMessage((TreeNode)Source);
+            return new InvalidArchiveSpaceMessage((TreeNodeBase)Source);
         }
 
         public override void Invoke()
         {
-            (Application.Current.MainWindow as IMainWindow).Reveal(Source as TreeNode);
+            (Application.Current.MainWindow as IMainWindow).Reveal(Source as TreeNodeBase);
         }
     }
 }

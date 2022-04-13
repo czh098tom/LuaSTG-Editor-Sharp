@@ -345,10 +345,10 @@ namespace LuaSTGEditorSharp
         #region stage
         private void AddStageGroupNode()
         {
-            TreeNode newStG = new StageGroup(parent.ActivatedWorkSpaceData);
-                TreeNode newSt = new Stage(parent.ActivatedWorkSpaceData);
-                    TreeNode newTask = new TaskNode(parent.ActivatedWorkSpaceData);
-                        TreeNode newFolder = new Folder(parent.ActivatedWorkSpaceData, "Initialize");
+            TreeNodeBase newStG = new StageGroup(parent.ActivatedWorkSpaceData);
+                TreeNodeBase newSt = new Stage(parent.ActivatedWorkSpaceData);
+                    TreeNodeBase newTask = new TaskNode(parent.ActivatedWorkSpaceData);
+                        TreeNodeBase newFolder = new Folder(parent.ActivatedWorkSpaceData, "Initialize");
                             newFolder.AddChild(new StageBG(parent.ActivatedWorkSpaceData));
                         newTask.AddChild(newFolder);
                         newTask.AddChild(new TaskWait(parent.ActivatedWorkSpaceData, "240"));
@@ -359,9 +359,9 @@ namespace LuaSTGEditorSharp
 
         private void AddStageNode()
         {
-            TreeNode newSt = new Stage(parent.ActivatedWorkSpaceData);
-                TreeNode newTask = new TaskNode(parent.ActivatedWorkSpaceData);
-                    TreeNode newFolder = new Folder(parent.ActivatedWorkSpaceData, "Initialize");
+            TreeNodeBase newSt = new Stage(parent.ActivatedWorkSpaceData);
+                TreeNodeBase newTask = new TaskNode(parent.ActivatedWorkSpaceData);
+                    TreeNodeBase newFolder = new Folder(parent.ActivatedWorkSpaceData, "Initialize");
                         newFolder.AddChild(new StageBG(parent.ActivatedWorkSpaceData));
                     newTask.AddChild(newFolder);
                     newTask.AddChild(new TaskWait(parent.ActivatedWorkSpaceData, "240"));
@@ -371,7 +371,7 @@ namespace LuaSTGEditorSharp
 
         private void AddSetStageBGNode()
         {
-            TreeNode newStBG = new StageBG(parent.ActivatedWorkSpaceData);
+            TreeNodeBase newStBG = new StageBG(parent.ActivatedWorkSpaceData);
             parent.Insert(newStBG);
         }
 
@@ -434,7 +434,7 @@ namespace LuaSTGEditorSharp
 
         private void AddTaskRepeatNode()
         {
-            TreeNode repeat = new Repeat(parent.ActivatedWorkSpaceData, "_infinite");
+            TreeNodeBase repeat = new Repeat(parent.ActivatedWorkSpaceData, "_infinite");
             repeat.AddChild(new TaskWait(parent.ActivatedWorkSpaceData));
             parent.Insert(repeat);
         }
@@ -467,7 +467,7 @@ namespace LuaSTGEditorSharp
 
         private void AddAdvancedRepeatWithWait()
         {
-            TreeNode repeat = new EditorData.Node.Advanced.AdvancedRepeat.AdvancedRepeat(parent.ActivatedWorkSpaceData, "_infinite");
+            TreeNodeBase repeat = new EditorData.Node.Advanced.AdvancedRepeat.AdvancedRepeat(parent.ActivatedWorkSpaceData, "_infinite");
             repeat.AddChild(new EditorData.Node.Advanced.AdvancedRepeat.VariableCollection(parent.ActivatedWorkSpaceData));
             repeat.AddChild(new TaskWait(parent.ActivatedWorkSpaceData));
             parent.Insert(repeat);
@@ -476,7 +476,7 @@ namespace LuaSTGEditorSharp
         #region enemy
         private void AddEnemyDefineNode()
         {
-            TreeNode newDef = new EnemyDefine(parent.ActivatedWorkSpaceData);
+            TreeNodeBase newDef = new EnemyDefine(parent.ActivatedWorkSpaceData);
             newDef.AddChild(new EnemyInit(parent.ActivatedWorkSpaceData));
             parent.Insert(newDef);
         }
@@ -504,14 +504,14 @@ namespace LuaSTGEditorSharp
         #region boss
         private void AddDefineBossNode()
         {
-            TreeNode newDef = new BossDefine(parent.ActivatedWorkSpaceData);
-            TreeNode init = new BossInit(parent.ActivatedWorkSpaceData);
-            TreeNode newSC = new BossSpellCard(parent.ActivatedWorkSpaceData);
-            TreeNode newSCBeforeStart = new BossSCBeforeStart(parent.ActivatedWorkSpaceData);
-            TreeNode newSCStart = new BossSCStart(parent.ActivatedWorkSpaceData);
-            TreeNode newTask = new TaskNode(parent.ActivatedWorkSpaceData);
-            TreeNode newSCBeforeFinish = new BossSCBeforeFinish(parent.ActivatedWorkSpaceData);
-            TreeNode newSCAfter = new BossSCAfter(parent.ActivatedWorkSpaceData);
+            TreeNodeBase newDef = new BossDefine(parent.ActivatedWorkSpaceData);
+            TreeNodeBase init = new BossInit(parent.ActivatedWorkSpaceData);
+            TreeNodeBase newSC = new BossSpellCard(parent.ActivatedWorkSpaceData);
+            TreeNodeBase newSCBeforeStart = new BossSCBeforeStart(parent.ActivatedWorkSpaceData);
+            TreeNodeBase newSCStart = new BossSCStart(parent.ActivatedWorkSpaceData);
+            TreeNodeBase newTask = new TaskNode(parent.ActivatedWorkSpaceData);
+            TreeNodeBase newSCBeforeFinish = new BossSCBeforeFinish(parent.ActivatedWorkSpaceData);
+            TreeNodeBase newSCAfter = new BossSCAfter(parent.ActivatedWorkSpaceData);
             newSCStart.AddChild(newTask);
             newTask.AddChild(new TaskMoveTo(parent.ActivatedWorkSpaceData, "0,120", "60", "MOVE_NORMAL"));
             newSC.AddChild(newSCBeforeStart);
@@ -526,12 +526,12 @@ namespace LuaSTGEditorSharp
 
         private void AddBossSCNode()
         {
-            TreeNode newSC = new BossSpellCard(parent.ActivatedWorkSpaceData);
-            TreeNode newSCBeforeStart = new BossSCBeforeStart(parent.ActivatedWorkSpaceData);
-            TreeNode newSCStart = new BossSCStart(parent.ActivatedWorkSpaceData);
-            TreeNode newTask = new TaskNode(parent.ActivatedWorkSpaceData);
-            TreeNode newSCBeforeFinish = new BossSCBeforeFinish(parent.ActivatedWorkSpaceData);
-            TreeNode newSCAfter = new BossSCAfter(parent.ActivatedWorkSpaceData);
+            TreeNodeBase newSC = new BossSpellCard(parent.ActivatedWorkSpaceData);
+            TreeNodeBase newSCBeforeStart = new BossSCBeforeStart(parent.ActivatedWorkSpaceData);
+            TreeNodeBase newSCStart = new BossSCStart(parent.ActivatedWorkSpaceData);
+            TreeNodeBase newTask = new TaskNode(parent.ActivatedWorkSpaceData);
+            TreeNodeBase newSCBeforeFinish = new BossSCBeforeFinish(parent.ActivatedWorkSpaceData);
+            TreeNodeBase newSCAfter = new BossSCAfter(parent.ActivatedWorkSpaceData);
             newSCStart.AddChild(newTask);
             newTask.AddChild(new TaskMoveTo(parent.ActivatedWorkSpaceData, "0,120", "60", "MOVE_NORMAL"));
             newSC.AddChild(newSCBeforeStart);
@@ -554,7 +554,7 @@ namespace LuaSTGEditorSharp
 
         private void AddDialogNode()
         {
-            TreeNode dialog = new Dialog(parent.ActivatedWorkSpaceData);
+            TreeNodeBase dialog = new Dialog(parent.ActivatedWorkSpaceData);
             dialog.AddChild(new TaskNode(parent.ActivatedWorkSpaceData));
             parent.Insert(dialog);
         }
@@ -596,7 +596,7 @@ namespace LuaSTGEditorSharp
 
         private void AddBossBGLayerNode()
         {
-            TreeNode newDef = new BossBGLayer(parent.ActivatedWorkSpaceData);
+            TreeNodeBase newDef = new BossBGLayer(parent.ActivatedWorkSpaceData);
             newDef.AddChild(new BossBGLayerInit(parent.ActivatedWorkSpaceData));
             newDef.AddChild(new BossBGLayerFrame(parent.ActivatedWorkSpaceData));
             newDef.AddChild(new BossBGLayerRender(parent.ActivatedWorkSpaceData));
@@ -606,7 +606,7 @@ namespace LuaSTGEditorSharp
         #region bullet
         private void AddDefineBulletNode()
         {
-            TreeNode newDef = new BulletDefine(parent.ActivatedWorkSpaceData);
+            TreeNodeBase newDef = new BulletDefine(parent.ActivatedWorkSpaceData);
             newDef.AddChild(new BulletInit(parent.ActivatedWorkSpaceData));
             parent.Insert(newDef);
         }
@@ -644,10 +644,10 @@ namespace LuaSTGEditorSharp
         #region laser
         private void AddDefineLaserNode()
         {
-            TreeNode newDef = new LaserDefine(parent.ActivatedWorkSpaceData);
-            TreeNode newInit = new LaserInit(parent.ActivatedWorkSpaceData);
-            TreeNode newTask = new TaskNode(parent.ActivatedWorkSpaceData);
-            TreeNode newTurnOn = new LaserTurnOn(parent.ActivatedWorkSpaceData);
+            TreeNodeBase newDef = new LaserDefine(parent.ActivatedWorkSpaceData);
+            TreeNodeBase newInit = new LaserInit(parent.ActivatedWorkSpaceData);
+            TreeNodeBase newTask = new TaskNode(parent.ActivatedWorkSpaceData);
+            TreeNodeBase newTurnOn = new LaserTurnOn(parent.ActivatedWorkSpaceData);
             newTask.AddChild(newTurnOn);
             newInit.AddChild(newTask);
             newDef.AddChild(newInit);
@@ -661,7 +661,7 @@ namespace LuaSTGEditorSharp
 
         private void AddDefineBentLaserNode()
         {
-            TreeNode newDef = new BentLaserDefine(parent.ActivatedWorkSpaceData);
+            TreeNodeBase newDef = new BentLaserDefine(parent.ActivatedWorkSpaceData);
             newDef.AddChild(new BentLaserInit(parent.ActivatedWorkSpaceData));
             parent.Insert(newDef);
         }
@@ -699,7 +699,7 @@ namespace LuaSTGEditorSharp
         #region object
         private void AddDefineObjectNode()
         {
-            TreeNode objdef = new ObjectDefine(parent.ActivatedWorkSpaceData);
+            TreeNodeBase objdef = new ObjectDefine(parent.ActivatedWorkSpaceData);
             objdef.AddChild(new ObjectInit(parent.ActivatedWorkSpaceData));
             parent.Insert(objdef);
         }
@@ -711,7 +711,7 @@ namespace LuaSTGEditorSharp
 
         private void AddCallBackFuncNode()
         {
-            TreeNode newCBF = new CallBackFunc(parent.ActivatedWorkSpaceData);
+            TreeNodeBase newCBF = new CallBackFunc(parent.ActivatedWorkSpaceData);
             newCBF.AddChild(new DefaultAction(parent.ActivatedWorkSpaceData));
             parent.Insert(newCBF);
         }

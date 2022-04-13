@@ -12,23 +12,23 @@ namespace LuaSTGEditorSharp.EditorData.Commands.Factory
     public class ChildFac : CommandTypeFac
     {
         /// <summary>
-        /// Create a new <see cref="InsertAsChildCommand"/> of target and new <see cref="TreeNode"/>.
+        /// Create a new <see cref="InsertAsChildCommand"/> of target and new <see cref="TreeNodeBase"/>.
         /// </summary>
-        /// <param name="toOp">The target <see cref="TreeNode"/>.</param>
-        /// <param name="toIns">The <see cref="TreeNode"/> to insert.</param>
+        /// <param name="toOp">The target <see cref="TreeNodeBase"/>.</param>
+        /// <param name="toIns">The <see cref="TreeNodeBase"/> to insert.</param>
         /// <returns>A new <see cref="InsertCommand"/>.</returns>
-        public override InsertCommand NewInsert(TreeNode toOp, TreeNode toIns)
+        public override InsertCommand NewInsert(TreeNodeBase toOp, TreeNodeBase toIns)
         {
             return new InsertAsChildCommand(toOp, toIns);
         }
 
         /// <summary>
-        /// Validate the feasibility of insert if new <see cref="TreeNode"/> is child and old is parent.
+        /// Validate the feasibility of insert if new <see cref="TreeNodeBase"/> is child and old is parent.
         /// </summary>
-        /// <param name="toOp">The target <see cref="TreeNode"/>.</param>
-        /// <param name="toIns">The <see cref="TreeNode"/> to insert.</param>
+        /// <param name="toOp">The target <see cref="TreeNodeBase"/>.</param>
+        /// <param name="toIns">The <see cref="TreeNodeBase"/> to insert.</param>
         /// <returns>A <see cref="bool"/> value, true for can.</returns>
-        public override bool ValidateType(TreeNode toOp, TreeNode toIns)
+        public override bool ValidateType(TreeNodeBase toOp, TreeNodeBase toIns)
         {
             return toOp.ValidateChild(toIns);
         }

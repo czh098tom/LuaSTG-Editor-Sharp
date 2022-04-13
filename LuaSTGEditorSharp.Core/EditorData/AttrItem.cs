@@ -11,7 +11,7 @@ using Newtonsoft.Json;
 namespace LuaSTGEditorSharp.EditorData
 {
     /// <summary>
-    /// This class stores attributes in a <see cref="TreeNode"/>.
+    /// This class stores attributes in a <see cref="TreeNodeBase"/>.
     /// </summary>
     [Serializable]
     [XmlRoot("attribute", IsNullable = false)]
@@ -28,10 +28,10 @@ namespace LuaSTGEditorSharp.EditorData
         [JsonProperty, XmlAttribute("input")]
         public string attrInput;
         /// <summary>
-        /// Store parent <see cref="TreeNode"/> of this attribute.
+        /// Store parent <see cref="TreeNodeBase"/> of this attribute.
         /// </summary>
         [JsonIgnore, XmlIgnore]
-        protected TreeNode _parent;
+        protected FixedAttributeTreeNode _parent;
         /// <summary>
         /// Store edit window args.
         /// </summary>
@@ -51,13 +51,13 @@ namespace LuaSTGEditorSharp.EditorData
         }
 
         /// <summary>
-        /// Store parent <see cref="TreeNode"/> of this attribute.
+        /// Store parent <see cref="TreeNodeBase"/> of this attribute.
         /// </summary>
         [JsonIgnore, XmlIgnore]
-        public TreeNode Parent { get => _parent; set => _parent = value; }
+        public FixedAttributeTreeNode Parent { get => _parent; set => _parent = value; }
 
         /// <summary>
-        /// Used to help event get current <see cref="TreeNode"/>.
+        /// Used to help event get current <see cref="TreeNodeBase"/>.
         /// </summary>
         [JsonIgnore, XmlIgnore]
         public AttrItem This { get => this; }
@@ -73,7 +73,7 @@ namespace LuaSTGEditorSharp.EditorData
         /// </summary>
         /// <param name="capital">The capital.</param>
         /// <param name="parent">The parent.</param>
-        public AttrItem(string capital, TreeNode parent)
+        public AttrItem(string capital, FixedAttributeTreeNode parent)
         {
             _parent = parent;
             attrCap = capital;
@@ -86,7 +86,7 @@ namespace LuaSTGEditorSharp.EditorData
         /// <param name="capital">The capital.</param>
         /// <param name="parent">The parent.</param>
         /// <param name="editWindow">The edit window args.</param>
-        public AttrItem(string capital, TreeNode parent, string editWindow) : this(capital, parent)
+        public AttrItem(string capital, FixedAttributeTreeNode parent, string editWindow) : this(capital, parent)
         {
             EditWindow = editWindow;
         }
@@ -97,7 +97,7 @@ namespace LuaSTGEditorSharp.EditorData
         /// <param name="capital">The capital.</param>
         /// <param name="input">The input.</param>
         /// <param name="parent">The parent.</param>
-        public AttrItem(string capital, string input, TreeNode parent) : this(capital, parent)
+        public AttrItem(string capital, string input, FixedAttributeTreeNode parent) : this(capital, parent)
         {
             attrInput = input;
         }
@@ -109,7 +109,7 @@ namespace LuaSTGEditorSharp.EditorData
         /// <param name="input">The input.</param>
         /// <param name="parent">The parent.</param>
         /// <param name="editWindow">The edit window args.</param>
-        public AttrItem(string capital, string input, TreeNode parent, string editWindow) : this(capital, input, parent)
+        public AttrItem(string capital, string input, FixedAttributeTreeNode parent, string editWindow) : this(capital, input, parent)
         {
             EditWindow = editWindow;
         }

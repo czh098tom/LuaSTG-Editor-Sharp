@@ -34,12 +34,12 @@ namespace LuaSTGEditorSharp
             }
         }
 
-        public void Insert(TreeNode node, bool isInvoke = true)
+        public void Insert(TreeNodeBase node, bool isInvoke = true)
         {
             try
             {
                 if (selectedNode == null || selectedNode.Parent == null) return;
-                TreeNode oldSelection = selectedNode;
+                TreeNodeBase oldSelection = selectedNode;
                 bool move = (Application.Current as App).AutoMoveToNew;
                 Command c = insertState.ValidateAndNewInsert(selectedNode, node);
                 if (ActivatedWorkSpaceData.AddAndExecuteCommand(c))

@@ -18,7 +18,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Graphics
     [ClassNode]
     [LeafNode]
     [CreateInvoke(0), RCInvoke(4)]
-    public class LoadImageGroup : TreeNode
+    public class LoadImageGroup : ResourceLoadNode
     {
         [JsonConstructor]
         private LoadImageGroup() : base() { }
@@ -29,7 +29,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Graphics
         public LoadImageGroup(DocumentData workSpaceData, string path, string name, string mipmap, string cr, string collis, string rect)
             : base(workSpaceData)
         {
-            Path = path;
+            FilePath = path;
             ResourceName = name;
             Mipmap = mipmap;
             ColsAndRows = cr;
@@ -45,19 +45,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Graphics
             */
         }
 
-        [JsonIgnore, NodeAttribute]
-        public string Path
-        {
-            get => DoubleCheckAttr(0, "imageFile", isDependency: true).attrInput;
-            set => DoubleCheckAttr(0, "imageFile", isDependency: true).attrInput = value;
-        }
-
-        [JsonIgnore, NodeAttribute]
-        public string ResourceName
-        {
-            get => DoubleCheckAttr(1, name: "Resource name").attrInput;
-            set => DoubleCheckAttr(1, name: "Resource name").attrInput = value;
-        }
+        public override string FileType => "imageFile";
 
         [JsonIgnore, NodeAttribute]
         public string Mipmap
@@ -97,9 +85,9 @@ namespace LuaSTGEditorSharp.EditorData.Node.Graphics
                 + "\'," + Macrolize(2) + "," + Macrolize(3) + "," + Macrolize(4) + "," + Macrolize(5) + ")\n";
         }
 
-        public override IEnumerable<Tuple<int,TreeNode>> GetLines()
+        public override IEnumerable<Tuple<int,TreeNodeBase>> GetLines()
         {
-            yield return new Tuple<int, TreeNode>(1, this);
+            yield return new Tuple<int, TreeNodeBase>(1, this);
         }
 
         public override string ToString()

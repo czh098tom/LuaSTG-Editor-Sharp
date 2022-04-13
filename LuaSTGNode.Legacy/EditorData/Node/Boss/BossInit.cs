@@ -14,7 +14,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Boss
     [Serializable, NodeIcon("bulletinit.png")]
     [CannotDelete, CannotBan]
     [RequireParent(typeof(BossDefine)), Uniqueness]
-    public class BossInit : TreeNode
+    public class BossInit : FixedAttributeTreeNode
     {
         [JsonConstructor]
         private BossInit() : base() { }
@@ -47,13 +47,8 @@ namespace LuaSTGEditorSharp.EditorData.Node.Boss
         {
             string sp = Indent(spacing);
             string s1 = Indent(spacing);
-            TreeNode Parent = GetLogicalParent();
-            string parentName = "";
-            if (Parent?.attributes != null && Parent.AttributeCount >= 2)
-            {
-                parentName = Lua.StringParser.ParseLua(Parent.NonMacrolize(0) +
-                    (Parent.NonMacrolize(1) == "All" ? "" : ":" + Parent.NonMacrolize(1)));
-            }
+            TreeNodeBase parent = GetLogicalParent();
+            string parentName = DefinitionWithDifficulty.GetNameWithDifficulty(parent);
             string parentStr = "_editor_class[\"" + parentName + "\"]";
             string scbg = Macrolize(1);
             scbg = string.IsNullOrEmpty(scbg) || scbg == "\"\"" ? "spellcard_background" : "_editor_class[" + scbg + "]";
@@ -67,14 +62,14 @@ namespace LuaSTGEditorSharp.EditorData.Node.Boss
             yield return "end\n";
         }
 
-        public override IEnumerable<Tuple<int,TreeNode>> GetLines()
+        public override IEnumerable<Tuple<int,TreeNodeBase>> GetLines()
         {
-            yield return new Tuple<int, TreeNode>(2, this);
-            foreach(Tuple<int,TreeNode> t in GetChildLines())
+            yield return new Tuple<int, TreeNodeBase>(2, this);
+            foreach(Tuple<int,TreeNodeBase> t in GetChildLines())
             {
                 yield return t;
             }
-            yield return new Tuple<int, TreeNode>(1, this);
+            yield return new Tuple<int, TreeNodeBase>(1, this);
         }
 
         public override string ToString()
@@ -92,11 +87,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Boss
         public override List<MessageBase> GetMessage()
         {
             var a = new List<MessageBase>();
-            TreeNode p = GetLogicalParent();
-            if (p?.attributes == null || p.AttributeCount < 2)
-            {
-                a.Add(new CannotFindAttributeInParent(2, this));
-            }
+            a.AddRange(DefinitionWithDifficulty.PopulateMessageOfFinding(GetLogicalParent(), this));
             return a;
         }
     }

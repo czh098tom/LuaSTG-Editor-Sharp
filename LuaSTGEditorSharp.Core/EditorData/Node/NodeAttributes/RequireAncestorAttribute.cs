@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace LuaSTGEditorSharp.EditorData.Node.NodeAttributes
 {
     /// <summary>
-    /// Identify a <see cref="TreeNode"/> need ancestor of a given type.
+    /// Identify a <see cref="TreeNodeBase"/> need ancestor of a given type.
     /// Types are connected by OR operator.
     /// Multiple Attribute are connected by AND operator.
     /// </summary>

@@ -15,7 +15,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Stage
     [RequireAncestor(typeof(Stage))]
     [LeafNode]
     [RCInvoke(0)]
-    class StageGoto : TreeNode
+    class StageGoto : FixedAttributeTreeNode
     {
         [JsonConstructor]
         private StageGoto() : base() { }
@@ -61,9 +61,9 @@ namespace LuaSTGEditorSharp.EditorData.Node.Stage
             + sp + "task.Wait(30) stage.group.GoToStage(" + Macrolize(0) + ")" + "\n";
         }
 
-        public override IEnumerable<Tuple<int, TreeNode>> GetLines()
+        public override IEnumerable<Tuple<int, TreeNodeBase>> GetLines()
         {
-            yield return new Tuple<int, TreeNode>(13, this);
+            yield return new Tuple<int, TreeNodeBase>(13, this);
         }
 
         public override object Clone()

@@ -10,7 +10,7 @@ using LuaSTGEditorSharp.Windows;
 
 namespace LuaSTGEditorSharp.EditorData.Document.Meta
 {
-    public class BentLaserDefineMetaInfo : MetaInfo, IComparable<BentLaserDefineMetaInfo>
+    public class BentLaserDefineMetaInfo : MetaInfoWithDifficulty, IComparable<BentLaserDefineMetaInfo>
     {
         BentLaserInit Init { get; set; }
 
@@ -18,20 +18,10 @@ namespace LuaSTGEditorSharp.EditorData.Document.Meta
 
         private void TryChild()
         {
-            foreach (TreeNode t in this.target.GetLogicalChildren())
+            foreach (TreeNodeBase t in this.target.GetLogicalChildren())
             {
                 if (t is BentLaserInit) Init = t as BentLaserInit;
             }
-        }
-
-        public override string Name
-        {
-            get => Lua.StringParser.ParseLua(target.attributes[0].AttrInput);
-        }
-
-        public override string Difficulty
-        {
-            get => Lua.StringParser.ParseLua(target.attributes[1].AttrInput);
         }
 
         public string Params
@@ -59,10 +49,10 @@ namespace LuaSTGEditorSharp.EditorData.Document.Meta
 
         public string[] GetCallBackFunc()
         {
-            return (from TreeNode t 
+            return (from TreeNodeBase t 
                     in target.GetLogicalChildren()
                     where t is CallBackFunc
-                    select t.attributes[0].AttrInput).ToArray();
+                    select t.PreferredNonMacrolize(0, "Event type")).ToArray();
         }
 
         public int CompareTo(BentLaserDefineMetaInfo other)

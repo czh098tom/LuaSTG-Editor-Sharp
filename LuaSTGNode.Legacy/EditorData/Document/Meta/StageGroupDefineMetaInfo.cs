@@ -15,12 +15,12 @@ namespace LuaSTGEditorSharp.EditorData.Document.Meta
 
         public override string Name
         {
-            get => Lua.StringParser.ParseLua(target.attributes[0].AttrInput);
+            get => Lua.StringParser.ParseLua(target.PreferredNonMacrolize(0, nameof(StageGroup.Name)));
         }
 
         public override string Difficulty
         {
-            get => Lua.StringParser.ParseLua(target.attributes[0].AttrInput);
+            get => Lua.StringParser.ParseLua(target.PreferredNonMacrolize(0, nameof(StageGroup.Name)));
         }
 
         public int CompareTo(StageGroupDefineMetaInfo other)
@@ -40,10 +40,10 @@ namespace LuaSTGEditorSharp.EditorData.Document.Meta
 
         public string[] GetStages()
         {
-            return (from TreeNode t
+            return (from TreeNodeBase t
                     in target.GetLogicalChildren()
-                    where (t is Stage)
-                    select t.attributes[0].AttrInput).ToArray();
+                    where t is Stage
+                    select t.PreferredNonMacrolize(0, "Name")).ToArray();
         }
 
         public override string FullName

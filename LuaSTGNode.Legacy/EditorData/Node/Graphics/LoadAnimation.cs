@@ -16,7 +16,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Graphics
     [ClassNode]
     [LeafNode]
     [CreateInvoke(0), RCInvoke(3)]
-    public class LoadAnimation : TreeNode
+    public class LoadAnimation : ResourceLoadNode
     {
         [JsonConstructor]
         public LoadAnimation() : base() { }
@@ -27,7 +27,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Graphics
         public LoadAnimation(DocumentData workSpaceData, string path, string resName, string mipMap
             , string colRow, string animI, string colliSize, string rect) : base(workSpaceData)
         {
-            Path = path;
+            FilePath = path;
             ResourceName = resName;
             Mipmap = mipMap;
             ColRow = colRow;
@@ -36,19 +36,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Graphics
             RectangleCollision = rect;
         }
 
-        [JsonIgnore, NodeAttribute]
-        public string Path
-        {
-            get => DoubleCheckAttr(0, "imageFile", isDependency: true).attrInput;
-            set => DoubleCheckAttr(0, "imageFile", isDependency: true).attrInput = value;
-        }
-
-        [JsonIgnore, NodeAttribute]
-        public string ResourceName
-        {
-            get => DoubleCheckAttr(1, name: "Resource name").attrInput;
-            set => DoubleCheckAttr(1, name: "Resource name").attrInput = value;
-        }
+        public override string FileType => "imageFile";
 
         [JsonIgnore, NodeAttribute]
         public string Mipmap
@@ -125,9 +113,9 @@ namespace LuaSTGEditorSharp.EditorData.Node.Graphics
             return n;
         }
 
-        public override IEnumerable<Tuple<int, TreeNode>> GetLines()
+        public override IEnumerable<Tuple<int, TreeNodeBase>> GetLines()
         {
-            yield return new Tuple<int, TreeNode>(1, this);
+            yield return new Tuple<int, TreeNodeBase>(1, this);
         }
     }
 }

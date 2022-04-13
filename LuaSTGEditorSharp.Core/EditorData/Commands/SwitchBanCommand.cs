@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace LuaSTGEditorSharp.EditorData.Commands
 {
     /// <summary>
-    /// <see cref="Command"/> that switch ban state of a <see cref="TreeNode"/>.
+    /// <see cref="Command"/> that switch ban state of a <see cref="TreeNodeBase"/>.
     /// </summary>
     internal class SwitchBanCommand : Command
     {
@@ -20,16 +20,16 @@ namespace LuaSTGEditorSharp.EditorData.Commands
         /// </summary>
         readonly bool originalValue;
         /// <summary>
-        /// The target <see cref="TreeNode"/>.
+        /// The target <see cref="TreeNodeBase"/>.
         /// </summary>
-        readonly TreeNode target;
+        readonly TreeNodeBase target;
 
         /// <summary>
         /// Initialize a <see cref="Command"/> with information and target and target value.
         /// </summary>
-        /// <param name="target">The target <see cref="TreeNode"/></param>
+        /// <param name="target">The target <see cref="TreeNodeBase"/></param>
         /// <param name="value">The target value.</param>
-        internal SwitchBanCommand(TreeNode target, bool value)
+        internal SwitchBanCommand(TreeNodeBase target, bool value)
         {
             this.target = target;
             targetValue = value;

@@ -9,7 +9,7 @@ using LuaSTGEditorSharp.EditorData.Document.Meta;
 
 namespace LuaSTGEditorSharp.EditorData.Document
 {
-    public class MetaInfoDict : Dictionary<TreeNode, IAggregatableMeta>, IMetaInfoCollection
+    public class MetaInfoDict : Dictionary<TreeNodeBase, IAggregatableMeta>, IMetaInfoCollection
     {
         private readonly MetaDataEntity _parent;
 
@@ -23,7 +23,7 @@ namespace LuaSTGEditorSharp.EditorData.Document
 
         public IAggregatableMeta FindOfName(string s)
         {
-            foreach (KeyValuePair<TreeNode, IAggregatableMeta> t in this)
+            foreach (KeyValuePair<TreeNodeBase, IAggregatableMeta> t in this)
             {
                 if (t.Value.GetFullName() == s) return t.Value;
             }
@@ -33,7 +33,7 @@ namespace LuaSTGEditorSharp.EditorData.Document
         public ObservableCollection<MetaModel> GetAllSimpleWithDifficulty(string difficulty = "")
         {
             return new ObservableCollection<MetaModel>(
-                from KeyValuePair<TreeNode, IAggregatableMeta> ia
+                from KeyValuePair<TreeNodeBase, IAggregatableMeta> ia
                 in this
                 where difficulty == ia.Value.GetDifficulty() || string.IsNullOrEmpty(ia.Value.GetDifficulty()) 
                 || ia.Value.GetDifficulty() == "All"
@@ -43,7 +43,7 @@ namespace LuaSTGEditorSharp.EditorData.Document
         public ObservableCollection<MetaModel> GetAllFullWithDifficulty(string difficulty = "All")
         {
             return new ObservableCollection<MetaModel>(
-                from KeyValuePair<TreeNode, IAggregatableMeta> ia
+                from KeyValuePair<TreeNodeBase, IAggregatableMeta> ia
                 in this
                 where difficulty == ia.Value.GetDifficulty() || 
                 (string.IsNullOrEmpty(ia.Value.GetDifficulty()) && difficulty == "All")
@@ -53,7 +53,7 @@ namespace LuaSTGEditorSharp.EditorData.Document
 
         public MetaInfoCollection GetVirtualized()
         {
-            return new MetaInfoCollection(from KeyValuePair<TreeNode, IAggregatableMeta> iam
+            return new MetaInfoCollection(from KeyValuePair<TreeNodeBase, IAggregatableMeta> iam
                                           in this
                                           select iam.Value.GetSimpleMetaModel());
         }

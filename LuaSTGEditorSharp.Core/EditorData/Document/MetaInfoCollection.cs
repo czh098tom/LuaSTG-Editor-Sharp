@@ -51,7 +51,7 @@ namespace LuaSTGEditorSharp.EditorData.Document
                                           select iam.GetSimpleMetaModel());
         }
 
-        public bool Remove(TreeNode node)
+        public bool Remove(TreeNodeBase node)
         {
             throw new NotImplementedException();
         }

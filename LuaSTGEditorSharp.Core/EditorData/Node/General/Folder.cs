@@ -14,7 +14,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.General
 {
     [Serializable,NodeIcon("folder.png")]
     [RCInvoke(0)]
-    public class Folder : TreeNode
+    public class Folder : FixedAttributeTreeNode
     {
         [JsonConstructor]
         private Folder() : base() { }
@@ -32,9 +32,9 @@ namespace LuaSTGEditorSharp.EditorData.Node.General
             set => DoubleCheckAttr(0).attrInput = value;
         }
 
-        public override IEnumerable<Tuple<int,TreeNode>> GetLines()
+        public override IEnumerable<Tuple<int,TreeNodeBase>> GetLines()
         {
-            foreach(Tuple<int,TreeNode> t in GetChildLines())
+            foreach(Tuple<int,TreeNodeBase> t in GetChildLines())
             {
                 yield return t;
             }

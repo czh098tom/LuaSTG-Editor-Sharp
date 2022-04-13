@@ -18,7 +18,7 @@ namespace DanmakuRandomizer.Model
         public List<Variable> Variables { get; set; } = new List<Variable>();
         public override string Text => $"repeat {Times} times, wait {Wait} frames";
 
-        public override TreeNode GetTreeNode(DocumentData documentData)
+        public override TreeNodeBase GetTreeNode(DocumentData documentData)
         {
             var ar = new LuaSTGEditorSharp.EditorData.Node.Advanced.AdvancedRepeat.AdvancedRepeat
                 (documentData, Times.ToString());

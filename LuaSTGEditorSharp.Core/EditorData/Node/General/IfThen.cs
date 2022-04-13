@@ -13,7 +13,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.General
     [Serializable, NodeIcon("then.png")]
     [CannotDelete, CannotBan]
     [RequireParent(typeof(IfNode)), Uniqueness]
-    public class IfThen : TreeNode, IIfChild
+    public class IfThen : FixedAttributeTreeNode, IIfChild
     {
         [JsonConstructor]
         private IfThen() : base() { }
@@ -30,9 +30,9 @@ namespace LuaSTGEditorSharp.EditorData.Node.General
             }
         }
 
-        public override IEnumerable<Tuple<int,TreeNode>> GetLines()
+        public override IEnumerable<Tuple<int,TreeNodeBase>> GetLines()
         {
-            foreach(Tuple<int,TreeNode> t in GetChildLines())
+            foreach(Tuple<int,TreeNodeBase> t in GetChildLines())
             {
                 yield return t;
             }

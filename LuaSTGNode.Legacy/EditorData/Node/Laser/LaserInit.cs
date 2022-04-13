@@ -15,7 +15,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Laser
     [CannotDelete, CannotBan]
     [RequireParent(typeof(LaserDefine)), Uniqueness]
     [RCInvoke(0)]
-    public class LaserInit : TreeNode
+    public class LaserInit : FixedAttributeTreeNode
     {
         [JsonConstructor]
         private LaserInit() : base() { }
@@ -116,13 +116,8 @@ namespace LuaSTGEditorSharp.EditorData.Node.Laser
         {
             string sp = Indent(spacing);
             string s1 = Indent(1);
-            TreeNode Parent = GetLogicalParent();
-            string parentName = "";
-            if (Parent?.attributes != null && Parent.AttributeCount >= 2)
-            {
-                parentName = Lua.StringParser.ParseLua(Parent.NonMacrolize(0) +
-                    (Parent.NonMacrolize(1) == "All" ? "" : ":" + Parent.NonMacrolize(1)));
-            }
+            TreeNodeBase parent = GetLogicalParent();
+            string parentName = DefinitionWithDifficulty.GetNameWithDifficulty(parent);
             string p = (!string.IsNullOrEmpty(NonMacrolize(0)) ? NonMacrolize(0) : "_");
             yield return sp + "_editor_class[\"" + parentName + "\"].init=function(self,_x,_y," + p + ")\n"
                          + s1 + "laser.init(self," + Macrolize(1) + ",_x,_y,0," + Macrolize(3) + ","
@@ -145,14 +140,14 @@ namespace LuaSTGEditorSharp.EditorData.Node.Laser
             yield return sp + "end\n";
         }
 
-        public override IEnumerable<Tuple<int, TreeNode>> GetLines()
+        public override IEnumerable<Tuple<int, TreeNodeBase>> GetLines()
         {
-            yield return new Tuple<int, TreeNode>(3, this);
-            foreach (Tuple<int, TreeNode> t in GetChildLines())
+            yield return new Tuple<int, TreeNodeBase>(3, this);
+            foreach (Tuple<int, TreeNodeBase> t in GetChildLines())
             {
                 yield return t;
             }
-            yield return new Tuple<int, TreeNode>(1, this);
+            yield return new Tuple<int, TreeNodeBase>(1, this);
         }
 
         public override string ToString()
@@ -170,11 +165,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Laser
         public override List<MessageBase> GetMessage()
         {
             var a = new List<MessageBase>();
-            TreeNode p = GetLogicalParent();
-            if (p?.attributes == null || p.AttributeCount < 2)
-            {
-                a.Add(new CannotFindAttributeInParent(2, this));
-            }
+            a.AddRange(DefinitionWithDifficulty.PopulateMessageOfFinding(GetLogicalParent(), this));
             return a;
         }
     }

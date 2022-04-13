@@ -15,7 +15,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Stage
     [Serializable, NodeIcon("stagegroup.png")]
     [ClassNode]
     [RCInvoke(0)]
-    public class StageGroup : TreeNode
+    public class StageGroup : FixedAttributeTreeNode
     {
         [JsonConstructor]
         private StageGroup() : base() { }
@@ -110,10 +110,10 @@ namespace LuaSTGEditorSharp.EditorData.Node.Stage
             }
         }
         
-        public override IEnumerable<Tuple<int, TreeNode>> GetLines()
+        public override IEnumerable<Tuple<int, TreeNodeBase>> GetLines()
         {
-            yield return new Tuple<int, TreeNode>(1, this);
-            foreach (Tuple<int, TreeNode> t in GetChildLines())
+            yield return new Tuple<int, TreeNodeBase>(1, this);
+            foreach (Tuple<int, TreeNodeBase> t in GetChildLines())
             {
                 yield return t;
             }

@@ -14,7 +14,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.General
 {
     [Serializable, NodeIcon("if.png")]
     [RCInvoke(0)]
-    public class IfNode : TreeNode
+    public class IfNode : FixedAttributeTreeNode
     {
         [JsonConstructor]
         private IfNode() : base() { }
@@ -36,7 +36,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.General
             set => DoubleCheckAttr(0).attrInput = value;
         }
 
-        public IEnumerable<string> BaseToLua(int spacing, IEnumerable<TreeNode> children)
+        public IEnumerable<string> BaseToLua(int spacing, IEnumerable<TreeNodeBase> children)
         {
             return base.ToLua(spacing, children);
         }
@@ -45,7 +45,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.General
         {
             string sp = Indent(spacing);
             var i = GetLogicalChildren().OrderBy((s) => (s as IIfChild)?.Priority ?? 0);
-            List<TreeNode> t = new List<TreeNode>(i);
+            List<TreeNodeBase> t = new List<TreeNodeBase>(i);
 
             yield return sp + "if " + Macrolize(0);
             foreach (var a in BaseToLua(spacing, i))
@@ -55,14 +55,14 @@ namespace LuaSTGEditorSharp.EditorData.Node.General
             yield return sp + "end\n";
         }
 
-        public override IEnumerable<Tuple<int,TreeNode>> GetLines()
+        public override IEnumerable<Tuple<int,TreeNodeBase>> GetLines()
         {
-            yield return new Tuple<int, TreeNode>(1, this);
-            foreach(Tuple<int,TreeNode> t in GetChildLines())
+            yield return new Tuple<int, TreeNodeBase>(1, this);
+            foreach(Tuple<int,TreeNodeBase> t in GetChildLines())
             {
                 yield return t;
             }
-            yield return new Tuple<int, TreeNode>(1, this);
+            yield return new Tuple<int, TreeNodeBase>(1, this);
         }
 
         public override string ToString()

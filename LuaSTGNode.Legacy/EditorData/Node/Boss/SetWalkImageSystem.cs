@@ -15,7 +15,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Boss
     [RequireAncestor(typeof(CodeAlikeTypes))]
     [LeafNode]
     [CreateInvoke(0)]
-    public class SetBossWalkImageSystem : TreeNode
+    public class SetBossWalkImageSystem : FixedAttributeTreeNode
     {
         [JsonConstructor]
         private SetBossWalkImageSystem() : base() { }
@@ -110,9 +110,9 @@ namespace LuaSTGEditorSharp.EditorData.Node.Boss
             return n;
         }
 
-        public override IEnumerable<Tuple<int, TreeNode>> GetLines()
+        public override IEnumerable<Tuple<int, TreeNodeBase>> GetLines()
         {
-            yield return new Tuple<int, TreeNode>(2, this);
+            yield return new Tuple<int, TreeNodeBase>(2, this);
         }
 
         public override List<MessageBase> GetMessage()

@@ -15,7 +15,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Object
     [Serializable, NodeIcon("setrelpos.png")]
     [RequireAncestor(typeof(CodeAlikeTypes))]
     [LeafNode]
-    public class SetRelativePosition : TreeNode
+    public class SetRelativePosition : FixedAttributeTreeNode
     {
         [JsonConstructor]
         public SetRelativePosition() : base() { }
@@ -81,9 +81,9 @@ namespace LuaSTGEditorSharp.EditorData.Node.Object
             return n;
         }
 
-        public override IEnumerable<Tuple<int, TreeNode>> GetLines()
+        public override IEnumerable<Tuple<int, TreeNodeBase>> GetLines()
         {
-            yield return new Tuple<int, TreeNode>(1, this);
+            yield return new Tuple<int, TreeNodeBase>(1, this);
         }
     }
 }

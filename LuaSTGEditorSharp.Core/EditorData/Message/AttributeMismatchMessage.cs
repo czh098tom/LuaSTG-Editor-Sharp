@@ -11,7 +11,7 @@ namespace LuaSTGEditorSharp.EditorData.Message
     class AttributeMismatchMessage : MessageBase
     {
         public string AttributeName { get; set; }
-        public override DocumentData SourceDoc { get => (Source as TreeNode).parentWorkSpace; }
+        public override DocumentData SourceDoc { get => (Source as TreeNodeBase).parentWorkSpace; }
 
         public string MismatchLevel
         {

@@ -14,7 +14,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Render
 {
     [Serializable, NodeIcon("onrender.png")]
     [RequireParent(typeof(ObjectPoolTypeAlikeTypes))]
-    public class OnRender : TreeNode, ICallBackFunc
+    public class OnRender : FixedAttributeTreeNode, ICallBackFunc
     {
         [JsonConstructor]
         public OnRender() : base() { }
@@ -24,13 +24,8 @@ namespace LuaSTGEditorSharp.EditorData.Node.Render
         public override IEnumerable<string> ToLua(int spacing)
         {
             string sp = Indent(spacing);
-            TreeNode Parent = GetLogicalParent();
-            string parentName = "";
-            if (Parent?.attributes != null && Parent.AttributeCount >= 2)
-            {
-                parentName = Lua.StringParser.ParseLua(Parent.NonMacrolize(0) +
-                   (Parent.NonMacrolize(1) == "All" ? "" : ":" + Parent.NonMacrolize(1)));
-            }
+            TreeNodeBase parent = GetLogicalParent();
+            string parentName = DefinitionWithDifficulty.GetNameWithDifficulty(parent);
             yield return sp + "_editor_class[\"" + parentName + "\"].render=function(self)\n";
             foreach (var a in base.ToLua(spacing + 1))
             {
@@ -51,14 +46,14 @@ namespace LuaSTGEditorSharp.EditorData.Node.Render
             return n;
         }
 
-        public override IEnumerable<Tuple<int, TreeNode>> GetLines()
+        public override IEnumerable<Tuple<int, TreeNodeBase>> GetLines()
         {
-            yield return new Tuple<int, TreeNode>(1, this);
-            foreach (Tuple<int, TreeNode> t in base.GetChildLines())
+            yield return new Tuple<int, TreeNodeBase>(1, this);
+            foreach (Tuple<int, TreeNodeBase> t in base.GetChildLines())
             {
                 yield return t;
             }
-            yield return new Tuple<int, TreeNode>(1, this);
+            yield return new Tuple<int, TreeNodeBase>(1, this);
         }
 
         [JsonIgnore]
@@ -70,11 +65,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Render
         public override List<MessageBase> GetMessage()
         {
             var a = new List<MessageBase>();
-            TreeNode p = GetLogicalParent();
-            if (p?.attributes == null || p.AttributeCount < 2)
-            {
-                a.Add(new CannotFindAttributeInParent(2, this));
-            }
+            a.AddRange(DefinitionWithDifficulty.PopulateMessageOfFinding(GetLogicalParent(), this));
             return a;
         }
     }

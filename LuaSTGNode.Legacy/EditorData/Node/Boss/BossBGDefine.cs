@@ -15,7 +15,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Boss
     [Serializable, NodeIcon("bgdefine.png")]
     [ClassNode]
     [CreateInvoke(0), RCInvoke(0)]
-    public class BossBGDefine : TreeNode
+    public class BossBGDefine : FixedAttributeTreeNode
     {
         [JsonConstructor]
         private BossBGDefine() : base() { }
@@ -57,14 +57,14 @@ namespace LuaSTGEditorSharp.EditorData.Node.Boss
             yield return sp + "end\n";
         }
 
-        public override IEnumerable<Tuple<int, TreeNode>> GetLines()
+        public override IEnumerable<Tuple<int, TreeNodeBase>> GetLines()
         {
-            yield return new Tuple<int, TreeNode>(3, this);
-            foreach (Tuple<int, TreeNode> t in GetChildLines())
+            yield return new Tuple<int, TreeNodeBase>(3, this);
+            foreach (Tuple<int, TreeNodeBase> t in GetChildLines())
             {
                 yield return t;
             }
-            yield return new Tuple<int, TreeNode>(1, this);
+            yield return new Tuple<int, TreeNodeBase>(1, this);
         }
 
         public override object Clone()

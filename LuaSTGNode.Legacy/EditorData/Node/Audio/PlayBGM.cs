@@ -17,7 +17,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Audio
     [RequireAncestor(typeof(CodeAlikeTypes))]
     [LeafNode]
     [CreateInvoke(0), RCInvoke(1)]
-    public class PlayBGM : TreeNode
+    public class PlayBGM : FixedAttributeTreeNode
     {
         [JsonConstructor]
         private PlayBGM() : base() { }
@@ -78,15 +78,15 @@ namespace LuaSTGEditorSharp.EditorData.Node.Audio
             }
         }
 
-        public override IEnumerable<Tuple<int, TreeNode>> GetLines()
+        public override IEnumerable<Tuple<int, TreeNodeBase>> GetLines()
         {
             if ((!string.IsNullOrEmpty(Macrolize(1))) && (!string.IsNullOrEmpty(Macrolize(2))))
             {
-                yield return new Tuple<int, TreeNode>(3, this);
+                yield return new Tuple<int, TreeNodeBase>(3, this);
             }
             else
             {
-                yield return new Tuple<int, TreeNode>(2, this);
+                yield return new Tuple<int, TreeNodeBase>(2, this);
             }
         }
 

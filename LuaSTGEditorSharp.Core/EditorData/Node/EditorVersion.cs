@@ -19,14 +19,14 @@ namespace LuaSTGEditorSharp.EditorData.Node
     [CannotDelete, CannotBan]
     [LeafNode]
     //[XmlType(TypeName = "EditorVersion")]
-    public class EditorVersion : TreeNode
+    public class EditorVersion : FixedAttributeTreeNode
     {
         [JsonConstructor]
         private EditorVersion() : base() { }
 
         public EditorVersion(DocumentData workSpaceData) : base(workSpaceData)
         {
-            attributes.Add(new AttrItem("Editor version", PluginHandler.Plugin.NodeTypeCache.Version, this));
+            Version = PluginHandler.Plugin.NodeTypeCache.Version;
         }
 
         [JsonIgnore, NodeAttribute, XmlAttribute("EditorVersion")]
@@ -37,9 +37,9 @@ namespace LuaSTGEditorSharp.EditorData.Node
             set => DoubleCheckAttr(0, name: "Editor version").attrInput = value;
         }
 
-        public override IEnumerable<Tuple<int, TreeNode>> GetLines()
+        public override IEnumerable<Tuple<int, TreeNodeBase>> GetLines()
         {
-            yield return new Tuple<int, TreeNode>(0, this);
+            yield return new Tuple<int, TreeNodeBase>(0, this);
         }
 
         public override string ToString()

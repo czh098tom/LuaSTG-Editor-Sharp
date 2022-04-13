@@ -13,7 +13,7 @@ namespace LuaSTGEditorSharp.EditorData.Document.Meta
     {
         public TaskDefineMetaInfo(TaskDefine target) : base(target) { }
 
-        public override string Name => Lua.StringParser.ParseLua(target.attributes[0].AttrInput);
+        public override string Name => Lua.StringParser.ParseLua(target.PreferredNonMacrolize(0, nameof(TaskDefine.Name)));
 
         public override string ScrString => "Name: " + Name + "\nParameters: " + GetParam();
 
@@ -23,7 +23,7 @@ namespace LuaSTGEditorSharp.EditorData.Document.Meta
 
         public override string GetParam()
         {
-            return target.NonMacrolize(1);
+            return target.PreferredNonMacrolize(1, nameof(TaskDefine.Parameter));
         }
 
         public override void Create(IAggregatableMeta meta, MetaDataEntity documentMetaData)

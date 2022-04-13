@@ -16,7 +16,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Enemy
     [CannotDelete, CannotBan]
     [RequireParent(typeof(EnemyDefine)), Uniqueness]
     [RCInvoke(0)]
-    public class EnemyInit : TreeNode
+    public class EnemyInit : FixedAttributeTreeNode
     {
         [JsonConstructor]
         public EnemyInit() : base() { }
@@ -114,13 +114,8 @@ namespace LuaSTGEditorSharp.EditorData.Node.Enemy
         {
             string sp = Indent(spacing);
             string s1 = Indent(1);
-            TreeNode Parent = GetLogicalParent();
-            string parentName = "";
-            if (Parent?.attributes != null && Parent.AttributeCount >= 2)
-            {
-                parentName = Lua.StringParser.ParseLua(Parent.NonMacrolize(0) +
-                    (Parent.NonMacrolize(1) == "All" ? "" : ":" + Parent.NonMacrolize(1)));
-            }
+            TreeNodeBase parent = GetLogicalParent();
+            string parentName = DefinitionWithDifficulty.GetNameWithDifficulty(parent);
             string p = (!string.IsNullOrEmpty(NonMacrolize(0)) ? NonMacrolize(0) : "_");
             yield return sp + "_editor_class[\"" + parentName + "\"].init=function(self,_x,_y," + p + ")\n"
                          + sp + s1 + "enemy.init(self," + Macrolize(1) + "," + Macrolize(2) + "," + Macrolize(7) 
@@ -147,24 +142,20 @@ namespace LuaSTGEditorSharp.EditorData.Node.Enemy
             return "on init(" + NonMacrolize(0) + ")";
         }
 
-        public override IEnumerable<Tuple<int, TreeNode>> GetLines()
+        public override IEnumerable<Tuple<int, TreeNodeBase>> GetLines()
         {
-            yield return new Tuple<int, TreeNode>(5, this);
-            foreach (Tuple<int, TreeNode> t in GetChildLines())
+            yield return new Tuple<int, TreeNodeBase>(5, this);
+            foreach (Tuple<int, TreeNodeBase> t in GetChildLines())
             {
                 yield return t;
             }
-            yield return new Tuple<int, TreeNode>(1, this);
+            yield return new Tuple<int, TreeNodeBase>(1, this);
         }
 
         public override List<MessageBase> GetMessage()
         {
             var a = new List<MessageBase>();
-            TreeNode p = GetLogicalParent();
-            if (p?.attributes == null || p.AttributeCount < 2)
-            {
-                a.Add(new CannotFindAttributeInParent(2, this));
-            }
+            a.AddRange(DefinitionWithDifficulty.PopulateMessageOfFinding(GetLogicalParent(), this));
             return a;
         }
     }

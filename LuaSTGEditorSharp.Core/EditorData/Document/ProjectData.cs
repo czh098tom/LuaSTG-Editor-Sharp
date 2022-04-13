@@ -110,7 +110,7 @@ namespace LuaSTGEditorSharp.EditorData.Document
                             {
                                 DocumentData newDoc = GetNewByExtension(Path.GetExtension(s), -1
                                     , Path.GetFileNameWithoutExtension(s), s);
-                                TreeNode t = newDoc.CreateNodeFromFile(s);
+                                TreeNodeBase t = newDoc.CreateNodeFromFile(s);
                                 newDoc.TreeNodes.Add(t);
                                 t.RaiseCreate(new OnCreateEventArgs() { parent = null });
                                 pdd = (newDoc as PlainDocumentData)?.GetVirtualDoc();
@@ -191,11 +191,11 @@ namespace LuaSTGEditorSharp.EditorData.Document
             c.projName = Path.GetFileNameWithoutExtension(RawDocName);
 
             //Find mod name
-            foreach (TreeNode t in TreeNodes[0].Children)
+            foreach (TreeNodeBase t in TreeNodes[0].Children)
             {
-                if (t is ProjSettings)
+                if (t is ProjSettings projs)
                 {
-                    if (!string.IsNullOrEmpty(t.attributes[0].AttrInput)) c.projName = t.attributes[0].AttrInput;
+                    if (!string.IsNullOrEmpty(projs.attributes[0].AttrInput)) c.projName = projs.NonMacrolize(0);
                     break;
                 }
             }
@@ -219,7 +219,7 @@ namespace LuaSTGEditorSharp.EditorData.Document
                     {
                         DocumentData newDoc = GetNewByExtension(Path.GetExtension(s), -1
                             , Path.GetFileNameWithoutExtension(s), s, true);
-                        TreeNode t = newDoc.CreateNodeFromFile(s);
+                        TreeNodeBase t = newDoc.CreateNodeFromFile(s);
                         newDoc.TreeNodes.Add(t);
                         (newDoc as PlainDocumentData).parentProj = this;
                         newDoc.GatherCompileInfo(mainAppWithInfo);

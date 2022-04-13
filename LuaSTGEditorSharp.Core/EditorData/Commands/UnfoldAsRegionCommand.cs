@@ -10,14 +10,14 @@ using LuaSTGEditorSharp.EditorData.Node.Advanced;
 namespace LuaSTGEditorSharp.EditorData.Commands
 {
     /// <summary>
-    /// <see cref="Command"/> that unfold a <see cref="TreeNode"/> with child to a region.
+    /// <see cref="Command"/> that unfold a <see cref="TreeNodeBase"/> with child to a region.
     /// </summary>
     public class UnfoldAsRegionCommand : Command
     {
         /// <summary>
         /// Stores the range that to be unfolded.
         /// </summary>
-        private ObservableCollection<TreeNode> toAggregate;
+        private ObservableCollection<TreeNodeBase> toAggregate;
         /// <summary>
         /// Store <see cref="Region"/> mark the beginning of range.
         /// </summary>
@@ -27,15 +27,15 @@ namespace LuaSTGEditorSharp.EditorData.Commands
         /// </summary>
         private Region regionEnd;
         /// <summary>
-        /// Store the target <see cref="TreeNode"/>.
+        /// Store the target <see cref="TreeNodeBase"/>.
         /// </summary>
-        private TreeNode folderP;
+        private TreeNodeBase folderP;
 
         /// <summary>
         /// Initialize <see cref="Command"/> by its target.
         /// </summary>
-        /// <param name="folder">The target <see cref="TreeNode"/>.</param>
-        public UnfoldAsRegionCommand(TreeNode folder)
+        /// <param name="folder">The target <see cref="TreeNodeBase"/>.</param>
+        public UnfoldAsRegionCommand(TreeNodeBase folder)
         {
             folderP = folder;
         }
@@ -46,12 +46,12 @@ namespace LuaSTGEditorSharp.EditorData.Commands
         /// </summary>
         public override void Execute()
         {
-            string name = "region";
-            if (folderP.attributes.Count != 0) name = folderP.attributes[0].AttrInput;
+            string name = folderP.PreferredNonMacrolize(0, "Name");
+            if (name == "") name = "region";
             if (regionBegin == null) regionBegin = new Region(folderP.parentWorkSpace, name);
             if (regionEnd == null) regionEnd = new Region(folderP.parentWorkSpace, name);
-            toAggregate = new ObservableCollection<TreeNode>(from TreeNode t in folderP.Children select t);
-            TreeNode parent = folderP.Parent;
+            toAggregate = new ObservableCollection<TreeNodeBase>(from TreeNodeBase t in folderP.Children select t);
+            TreeNodeBase parent = folderP.Parent;
             int index = parent.Children.IndexOf(folderP);
             parent.InsertChild(regionEnd, index);
             parent.InsertChild(regionBegin, index);
@@ -67,8 +67,8 @@ namespace LuaSTGEditorSharp.EditorData.Commands
         /// </summary>
         public override void Undo()
         {
-            TreeNode parent = regionBegin.Parent;
-            foreach (TreeNode t in toAggregate) 
+            TreeNodeBase parent = regionBegin.Parent;
+            foreach (TreeNodeBase t in toAggregate) 
             {
                 parent.RemoveChild(t);
             }

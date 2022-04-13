@@ -15,7 +15,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Task
     [Serializable, NodeIcon("taskdefine.png")]
     [ClassNode]
     [CreateInvoke(0), RCInvoke(1)]
-    public class TaskDefine : TreeNode
+    public class TaskDefine : FixedAttributeTreeNode
     {
         [JsonConstructor]
         private TaskDefine() : base() { }
@@ -56,14 +56,14 @@ namespace LuaSTGEditorSharp.EditorData.Node.Task
             yield return sp + s1 + "end\n" + sp + "end\n";
         }
 
-        public override IEnumerable<Tuple<int, TreeNode>> GetLines()
+        public override IEnumerable<Tuple<int, TreeNodeBase>> GetLines()
         {
-            yield return new Tuple<int, TreeNode>(3, this);
-            foreach (Tuple<int, TreeNode> t in base.GetChildLines())
+            yield return new Tuple<int, TreeNodeBase>(3, this);
+            foreach (Tuple<int, TreeNodeBase> t in base.GetChildLines())
             {
                 yield return t;
             }
-            yield return new Tuple<int, TreeNode>(2, this);
+            yield return new Tuple<int, TreeNodeBase>(2, this);
         }
 
         public override string ToString()
@@ -78,7 +78,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Task
 
         public override object Clone()
         {
-            TreeNode n = new TaskDefine(parentWorkSpace);
+            TreeNodeBase n = new TaskDefine(parentWorkSpace);
             n.DeepCopyFrom(this);
             return n;
         }

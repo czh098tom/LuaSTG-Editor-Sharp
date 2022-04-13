@@ -15,7 +15,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Data
     [LeafNode]
     [CreateInvoke(1), RCInvoke(2)]
     [IgnoreAttributesParityCheck]
-    public class LocalVar : TreeNode
+    public class LocalVar : FixedAttributeTreeNode
     {
         [JsonConstructor]
         private LocalVar() : base() { }
@@ -50,7 +50,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Data
             }
         }
 
-        public override IEnumerable<Tuple<int,TreeNode>> GetLines()
+        public override IEnumerable<Tuple<int,TreeNodeBase>> GetLines()
         {
             int count = 0;
             if (!int.TryParse(attributes[0].AttrInput, out int nAttr)) nAttr = 0;
@@ -63,7 +63,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Data
                     count++;
                 }
             }
-            yield return new Tuple<int, TreeNode>(count, this);
+            yield return new Tuple<int, TreeNodeBase>(count, this);
         }
 
         public override string ToString()

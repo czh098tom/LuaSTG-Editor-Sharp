@@ -16,7 +16,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Advanced
     [IgnoreValidation]
     [CreateInvoke(0)]
     [IgnoreAttributesParityCheck]
-    public class UnidentifiedNode : TreeNode
+    public class UnidentifiedNode : FixedAttributeTreeNode
     {
         [JsonConstructor]
         private UnidentifiedNode() : base() { }
@@ -165,15 +165,15 @@ namespace LuaSTGEditorSharp.EditorData.Node.Advanced
             }
         }
 
-        public override IEnumerable<Tuple<int, TreeNode>> GetLines()
+        public override IEnumerable<Tuple<int, TreeNodeBase>> GetLines()
         {
             MetaModel target = GetModel();
-            yield return new Tuple<int, TreeNode>((target?.ExInfo1.Count((c) => c == '\n') ?? -1) + 1, this);
-            foreach (Tuple<int, TreeNode> t in GetChildLines())
+            yield return new Tuple<int, TreeNodeBase>((target?.ExInfo1.Count((c) => c == '\n') ?? -1) + 1, this);
+            foreach (Tuple<int, TreeNodeBase> t in GetChildLines())
             {
                 yield return t;
             }
-            yield return new Tuple<int, TreeNode>((target?.ExInfo2.Count((c) => c == '\n') ?? -1) + 1, this);
+            yield return new Tuple<int, TreeNodeBase>((target?.ExInfo2.Count((c) => c == '\n') ?? -1) + 1, this);
         }
     }
 }

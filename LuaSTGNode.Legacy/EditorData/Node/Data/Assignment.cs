@@ -15,7 +15,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Data
     [LeafNode]
     [CreateInvoke(1), RCInvoke(2)]
     [IgnoreAttributesParityCheck]
-    public class Assignment : TreeNode
+    public class Assignment : FixedAttributeTreeNode
     {
         [JsonConstructor]
         public Assignment() : base() { }
@@ -61,9 +61,9 @@ namespace LuaSTGEditorSharp.EditorData.Node.Data
             }
         }
 
-        public override IEnumerable<Tuple<int, TreeNode>> GetLines()
+        public override IEnumerable<Tuple<int, TreeNodeBase>> GetLines()
         {
-            yield return new Tuple<int, TreeNode>(1, this);
+            yield return new Tuple<int, TreeNodeBase>(1, this);
         }
 
         public override string ToString()

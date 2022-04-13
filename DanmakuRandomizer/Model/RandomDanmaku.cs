@@ -187,14 +187,14 @@ namespace DanmakuRandomizer.Model
             }
         }
 
-        internal TreeNode GetTreeNodes(DocumentData documentData)
+        internal TreeNodeBase GetTreeNodes(DocumentData documentData)
         {
-            TreeNode root = null;
-            TreeNode curr = null;
+            TreeNodeBase root = null;
+            TreeNodeBase curr = null;
             int currpos = 0;
             foreach (Node n in nodes)
             {
-                TreeNode t = n.GetTreeNode(documentData);
+                TreeNodeBase t = n.GetTreeNode(documentData);
                 if (root == null)
                 {
                     root = t;
@@ -212,11 +212,11 @@ namespace DanmakuRandomizer.Model
 
             BossDefine newDef = new BossDefine(documentData);
             newDef.Name = "random";
-            TreeNode init = new BossInit(documentData);
+            TreeNodeBase init = new BossInit(documentData);
             BossSpellCard newSC = new BossSpellCard(documentData);
             newSC.Name = $"CARD_{seed}";
-            TreeNode newSCStart = new BossSCStart(documentData);
-            TreeNode newTask = new TaskNode(documentData);
+            TreeNodeBase newSCStart = new BossSCStart(documentData);
+            TreeNodeBase newTask = new TaskNode(documentData);
             newSCStart.AddChild(newTask);
             newTask.AddChild(new TaskMoveTo(documentData, "0,120", "60", "MOVE_NORMAL"));
 

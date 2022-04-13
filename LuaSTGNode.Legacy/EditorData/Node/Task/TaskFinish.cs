@@ -15,7 +15,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Task
     [Serializable, NodeIcon("taskreturn.png")]
     [RequireAncestor(typeof(TaskTypes))]
     [LeafNode]
-    public class TaskFinish : TreeNode
+    public class TaskFinish : FixedAttributeTreeNode
     {
         [JsonConstructor]
         public TaskFinish() : base() { }
@@ -40,9 +40,9 @@ namespace LuaSTGEditorSharp.EditorData.Node.Task
             yield return sp + "do return end\n";
         }
 
-        public override IEnumerable<Tuple<int, TreeNode>> GetLines()
+        public override IEnumerable<Tuple<int, TreeNodeBase>> GetLines()
         {
-            yield return new Tuple<int, TreeNode>(1, this);
+            yield return new Tuple<int, TreeNodeBase>(1, this);
         }
     }
 }

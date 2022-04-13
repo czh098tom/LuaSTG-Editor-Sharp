@@ -14,7 +14,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Data
 {
     [Serializable, NodeIcon("func.png")]
     [CreateInvoke(0), RCInvoke(1)]
-    public class Function : TreeNode
+    public class Function : FixedAttributeTreeNode
     {
         [JsonConstructor]
         private Function() : base() { }
@@ -72,14 +72,14 @@ namespace LuaSTGEditorSharp.EditorData.Node.Data
             yield return "end\n";
         }
 
-        public override IEnumerable<Tuple<int, TreeNode>> GetLines()
+        public override IEnumerable<Tuple<int, TreeNodeBase>> GetLines()
         {
-            yield return new Tuple<int, TreeNode>(1, this);
-            foreach(Tuple<int, TreeNode> t in GetChildLines())
+            yield return new Tuple<int, TreeNodeBase>(1, this);
+            foreach(Tuple<int, TreeNodeBase> t in GetChildLines())
             {
                 yield return t;
             }
-            yield return new Tuple<int, TreeNode>(1, this);
+            yield return new Tuple<int, TreeNodeBase>(1, this);
         }
 
         public override string ToString()
@@ -97,7 +97,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Data
 
         public override object Clone()
         {
-            TreeNode t = new Function(parentWorkSpace);
+            TreeNodeBase t = new Function(parentWorkSpace);
             t.DeepCopyFrom(this);
             return t;
         }

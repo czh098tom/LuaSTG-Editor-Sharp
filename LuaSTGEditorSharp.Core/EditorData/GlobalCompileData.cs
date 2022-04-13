@@ -9,7 +9,7 @@ namespace LuaSTGEditorSharp.EditorData
 {
     public static class GlobalCompileData
     {
-        public static TreeNode SCDebugger = null;
-        public static TreeNode StageDebugger = null;
+        public static TreeNodeBase SCDebugger = null;
+        public static TreeNodeBase StageDebugger = null;
     }
 }

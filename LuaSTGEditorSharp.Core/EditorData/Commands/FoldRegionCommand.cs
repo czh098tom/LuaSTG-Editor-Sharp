@@ -17,7 +17,7 @@ namespace LuaSTGEditorSharp.EditorData.Commands
         /// <summary>
         /// Stores the range that to be folded (<see cref="Region"/> exclusive).
         /// </summary>
-        private readonly ObservableCollection<TreeNode> toAggregate;
+        private readonly ObservableCollection<TreeNodeBase> toAggregate;
         /// <summary>
         /// Store <see cref="Region"/> mark the beginning of range.
         /// </summary>
@@ -32,12 +32,12 @@ namespace LuaSTGEditorSharp.EditorData.Commands
         private Folder folderP;
 
         /// <summary>
-        /// Initializes <see cref="Command"/> by both marks and <see cref="TreeNode"/> in its range.
+        /// Initializes <see cref="Command"/> by both marks and <see cref="TreeNodeBase"/> in its range.
         /// </summary>
         /// <param name="treeNodes">Ranges that to be folded.</param>
         /// <param name="begin">The beginning of the range.</param>
         /// <param name="end">The ending of the range.</param>
-        public FoldRegionCommand(ObservableCollection<TreeNode> treeNodes, Region begin, Region end)
+        public FoldRegionCommand(ObservableCollection<TreeNodeBase> treeNodes, Region begin, Region end)
         {
             toAggregate = treeNodes;
             regionBegin = begin;
@@ -50,13 +50,13 @@ namespace LuaSTGEditorSharp.EditorData.Commands
         /// </summary>
         public override void Execute()
         {
-            TreeNode parent = regionBegin.Parent;
+            TreeNodeBase parent = regionBegin.Parent;
             bool folderPNotExist = folderP == null;
             if (folderPNotExist)
                 folderP = new Folder(parent.parentWorkSpace, regionBegin.attributes[0].AttrInput);
             int index = parent.Children.IndexOf(regionBegin);
             parent.InsertChild(folderP, index);
-            foreach (TreeNode t in toAggregate) 
+            foreach (TreeNodeBase t in toAggregate) 
             {
                 parent.RemoveChild(t);
                 if (folderPNotExist) folderP.AddChild(t);
@@ -70,7 +70,7 @@ namespace LuaSTGEditorSharp.EditorData.Commands
         /// </summary>
         public override void Undo()
         {
-            TreeNode parent = folderP.Parent;
+            TreeNodeBase parent = folderP.Parent;
             int index = parent.Children.IndexOf(folderP);
             if (regionEnd != null) parent.InsertChild(regionEnd, index);
             parent.InsertChild(regionBegin, index);

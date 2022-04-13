@@ -15,7 +15,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Laser
     [RequireAncestor(typeof(TaskAlikeTypes))]
     [LeafNode]
     [CreateInvoke(0), RCInvoke(2)]
-    public class LaserChangeStyle : TreeNode
+    public class LaserChangeStyle : FixedAttributeTreeNode
     {
         [JsonConstructor]
         private LaserChangeStyle() : base() { }
@@ -73,9 +73,9 @@ namespace LuaSTGEditorSharp.EditorData.Node.Laser
             yield return sp + "laser.ChangeImage(" + Macrolize(0) + "," + Macrolize(2) + target + ")\n";
         }
 
-        public override IEnumerable<Tuple<int, TreeNode>> GetLines()
+        public override IEnumerable<Tuple<int, TreeNodeBase>> GetLines()
         {
-            yield return new Tuple<int, TreeNode>(1, this);
+            yield return new Tuple<int, TreeNodeBase>(1, this);
         }
 
         public override string ToString()

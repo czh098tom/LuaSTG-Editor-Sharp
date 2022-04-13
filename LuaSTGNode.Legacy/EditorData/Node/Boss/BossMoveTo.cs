@@ -15,7 +15,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Boss
     [Serializable, NodeIcon("bossmoveto.png")]
     [RequireParent(typeof(BossDefine))]
     [LeafNode]
-    public class BossMoveTo : TreeNode
+    public class BossMoveTo : FixedAttributeTreeNode
     {
         [JsonConstructor]
         public BossMoveTo() : base() { }
@@ -54,13 +54,8 @@ namespace LuaSTGEditorSharp.EditorData.Node.Boss
         public override IEnumerable<string> ToLua(int spacing)
         {
             string sp = Indent(spacing);
-            TreeNode Parent = GetLogicalParent();
-            string parentName = "";
-            if (Parent?.attributes != null && Parent.AttributeCount >= 2)
-            {
-                parentName = Lua.StringParser.ParseLua(Parent.NonMacrolize(0) +
-                    (Parent.NonMacrolize(1) == "All" ? "" : ":" + Parent.NonMacrolize(1)));
-            }
+            TreeNodeBase parent = GetLogicalParent();
+            string parentName = DefinitionWithDifficulty.GetNameWithDifficulty(parent);
 
             string fr = Macrolize(1);
             fr = string.IsNullOrEmpty(fr) ? "1" : fr;
@@ -86,19 +81,15 @@ namespace LuaSTGEditorSharp.EditorData.Node.Boss
             return n;
         }
 
-        public override IEnumerable<Tuple<int, TreeNode>> GetLines()
+        public override IEnumerable<Tuple<int, TreeNodeBase>> GetLines()
         {
-            yield return new Tuple<int, TreeNode>(1, this);
+            yield return new Tuple<int, TreeNodeBase>(1, this);
         }
 
         public override List<MessageBase> GetMessage()
         {
             var a = new List<MessageBase>();
-            TreeNode p = GetLogicalParent();
-            if (p?.attributes == null || p.AttributeCount < 2)
-            {
-                a.Add(new CannotFindAttributeInParent(2, this));
-            }
+            a.AddRange(DefinitionWithDifficulty.PopulateMessageOfFinding(GetLogicalParent(), this));
             return a;
         }
     }

@@ -14,7 +14,7 @@ namespace LuaSTGEditorSharp.EditorData.Message
         public string ArgName { get; set; }
         public bool ArgOverFlow { get; set; }
 
-        public override DocumentData SourceDoc { get => (Source as TreeNode).parentWorkSpace; }
+        public override DocumentData SourceDoc { get => (Source as TreeNodeBase).parentWorkSpace; }
 
         public ArgCountInfo(string argName, bool argOverflow, IMessageThrowable source) : base(6, source)
         {
@@ -34,7 +34,7 @@ namespace LuaSTGEditorSharp.EditorData.Message
 
         public override void Invoke()
         {
-            (Application.Current.MainWindow as IMainWindow).Reveal(Source as TreeNode);
+            (Application.Current.MainWindow as IMainWindow).Reveal(Source as TreeNodeBase);
         }
     }
 }

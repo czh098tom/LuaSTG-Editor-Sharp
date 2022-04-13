@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace LuaSTGEditorSharp.EditorData.Node.NodeAttributes
 {
     /// <summary>
-    /// Identify a <see cref="TreeNode"/> invoke to edit an <see cref="AttrItem"/> when being right clicked.
+    /// Identify a <see cref="TreeNodeBase"/> invoke to edit an <see cref="AttrItem"/> when being right clicked.
     /// </summary>
     [AttributeUsage(AttributeTargets.Class)]
     public sealed class RCInvokeAttribute : Attribute

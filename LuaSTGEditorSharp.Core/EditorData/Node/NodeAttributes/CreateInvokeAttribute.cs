@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace LuaSTGEditorSharp.EditorData.Node.NodeAttributes
 {
     /// <summary>
-    /// Identify a <see cref="TreeNode"/> invoke to edit an <see cref="AttrItem"/> when create.
+    /// Identify a <see cref="TreeNodeBase"/> invoke to edit an <see cref="AttrItem"/> when create.
     /// </summary>
     [AttributeUsage(AttributeTargets.Class)]
     public sealed class CreateInvokeAttribute : Attribute

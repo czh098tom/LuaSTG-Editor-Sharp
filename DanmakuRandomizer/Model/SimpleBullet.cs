@@ -20,7 +20,7 @@ namespace DanmakuRandomizer.Model
 
         public override string Text => throw new NotImplementedException();
 
-        public override TreeNode GetTreeNode(DocumentData documentData)
+        public override TreeNodeBase GetTreeNode(DocumentData documentData)
         {
             return new CreateSimpleBullet(documentData,
                 InputWindowSelector.SelectComboBox("bulletStyle")[0],

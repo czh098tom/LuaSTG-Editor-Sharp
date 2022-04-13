@@ -11,7 +11,7 @@ namespace LuaSTGEditorSharp.Plugin
     public struct PluginToolResult
     {
         public List<Command> commands;
-        public TreeNode clipBoard;
+        public TreeNodeBase clipBoard;
         public DocumentData newDocument;
     }
 }

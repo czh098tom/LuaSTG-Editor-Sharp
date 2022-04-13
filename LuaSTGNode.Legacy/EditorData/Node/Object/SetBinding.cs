@@ -15,7 +15,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Object
     [Serializable, NodeIcon("connect.png")]
     [RequireAncestor(typeof(CodeAlikeTypes))]
     [LeafNode]
-    public class SetBinding : TreeNode
+    public class SetBinding : FixedAttributeTreeNode
     {
         [JsonConstructor]
         public SetBinding() : base() { }
@@ -77,9 +77,9 @@ namespace LuaSTGEditorSharp.EditorData.Node.Object
             return n;
         }
 
-        public override IEnumerable<Tuple<int, TreeNode>> GetLines()
+        public override IEnumerable<Tuple<int, TreeNodeBase>> GetLines()
         {
-            yield return new Tuple<int, TreeNode>(1, this);
+            yield return new Tuple<int, TreeNodeBase>(1, this);
         }
     }
 }

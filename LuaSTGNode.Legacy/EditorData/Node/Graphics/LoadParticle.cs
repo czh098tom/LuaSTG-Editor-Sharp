@@ -16,7 +16,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Graphics
     [ClassNode]
     [LeafNode]
     [CreateInvoke(0)]
-    public class LoadParticle : TreeNode
+    public class LoadParticle : ResourceLoadNode
     {
         [JsonConstructor]
         public LoadParticle() : base() { }
@@ -26,26 +26,14 @@ namespace LuaSTGEditorSharp.EditorData.Node.Graphics
         public LoadParticle(DocumentData workSpaceData, string path, string resName, string img, string colli, string rect)
             : base(workSpaceData)
         {
-            Path = path;
+            FilePath = path;
             ResourceName = resName;
             Image = img;
             CollisionSize = colli;
             RectangleCollision = rect;
         }
 
-        [JsonIgnore, NodeAttribute]
-        public string Path
-        {
-            get => DoubleCheckAttr(0, "particleFile", isDependency: true).attrInput;
-            set => DoubleCheckAttr(0, "particleFile", isDependency: true).attrInput = value;
-        }
-
-        [JsonIgnore, NodeAttribute]
-        public string ResourceName
-        {
-            get => DoubleCheckAttr(1, name: "Resource name").attrInput;
-            set => DoubleCheckAttr(1, name: "Resource name").attrInput = value;
-        }
+        public override string FileType => "particleFile";
 
         [JsonIgnore, NodeAttribute]
         public string Image
@@ -109,9 +97,9 @@ namespace LuaSTGEditorSharp.EditorData.Node.Graphics
                 + "\" with image \"" + NonMacrolize(2) + "\"";
         }
 
-        public override IEnumerable<Tuple<int, TreeNode>> GetLines()
+        public override IEnumerable<Tuple<int, TreeNodeBase>> GetLines()
         {
-            yield return new Tuple<int, TreeNode>(1, this);
+            yield return new Tuple<int, TreeNodeBase>(1, this);
         }
     }
 }

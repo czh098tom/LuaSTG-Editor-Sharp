@@ -14,7 +14,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Stage
     [Serializable, NodeIcon("stagefinishgroup.png")]
     [RequireAncestor(typeof(Stage))]
     [LeafNode]
-    class StageGroupFinish : TreeNode
+    class StageGroupFinish : FixedAttributeTreeNode
     {
         [JsonConstructor]
         private StageGroupFinish() : base() { }
@@ -37,9 +37,9 @@ namespace LuaSTGEditorSharp.EditorData.Node.Stage
                 + sp + "stage.group.FinishGroup()" + "\n";
         }
 
-        public override IEnumerable<Tuple<int, TreeNode>> GetLines()
+        public override IEnumerable<Tuple<int, TreeNodeBase>> GetLines()
         {
-            yield return new Tuple<int, TreeNode>(4, this);
+            yield return new Tuple<int, TreeNodeBase>(4, this);
         }
 
         public override object Clone()

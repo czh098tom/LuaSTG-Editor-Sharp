@@ -17,7 +17,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Advanced
     [Serializable, NodeIcon("definemacro.png")]
     [LeafNode]
     [CreateInvoke(0), RCInvoke(1)]
-    public class DefineMacro : TreeNode
+    public class DefineMacro : FixedAttributeTreeNode
     {
         [JsonConstructor]
         private DefineMacro() : base() { }
@@ -52,9 +52,9 @@ namespace LuaSTGEditorSharp.EditorData.Node.Advanced
             yield return sp + "-- #define " + NonMacrolize(0) + " " + NonMacrolize(1) + sp + "\n";
         }
 
-        public override IEnumerable<Tuple<int,TreeNode>> GetLines()
+        public override IEnumerable<Tuple<int,TreeNodeBase>> GetLines()
         {
-            yield return new Tuple<int, TreeNode>(1, this);
+            yield return new Tuple<int, TreeNodeBase>(1, this);
         }
 
         public override string ToString()

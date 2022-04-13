@@ -16,7 +16,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Task
     [RequireAncestor(typeof(CodeAlikeTypes))]
     [LeafNode]
     [IgnoreAttributesParityCheck]
-    public class SmoothSetValueTo : TreeNode
+    public class SmoothSetValueTo : FixedAttributeTreeNode
     {
         [JsonConstructor]
         private SmoothSetValueTo() : base() { }
@@ -79,7 +79,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Task
             }
         }
 
-        public override IEnumerable<Tuple<int, TreeNode>> GetLines()
+        public override IEnumerable<Tuple<int, TreeNodeBase>> GetLines()
         {
             int count = 0;
             if (!int.TryParse(NonMacrolize(3), out int nAttr)) nAttr = 0;
@@ -92,7 +92,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Task
                     count++;
                 }
             }
-            yield return new Tuple<int, TreeNode>(count, this);
+            yield return new Tuple<int, TreeNodeBase>(count, this);
         }
 
         public override string ToString()

@@ -14,7 +14,7 @@ namespace LuaSTGEditorSharp.EditorData.Message
         public string ArgName { get; set; }
 
         public override string SourceName { get => SourceDoc.RawDocName; }
-        public override DocumentData SourceDoc { get => (Source as TreeNode).parentWorkSpace; }
+        public override DocumentData SourceDoc { get => (Source as TreeNodeBase).parentWorkSpace; }
 
         public ArgNotNullMessage(string argName, int level, IMessageThrowable source) : base(level, source)
         {
@@ -33,7 +33,7 @@ namespace LuaSTGEditorSharp.EditorData.Message
 
         public override void Invoke()
         {
-            (Application.Current.MainWindow as IMainWindow).Reveal(Source as TreeNode);
+            (Application.Current.MainWindow as IMainWindow).Reveal(Source as TreeNodeBase);
         }
     }
 }

@@ -17,14 +17,14 @@ namespace LuaSTGEditorSharp.EditorData.Node
 
         public Dictionary<Type, TypeCacheData> NodeTypeInfo { get; set; } = new Dictionary<Type, TypeCacheData>();
 
-        public Dictionary<Type, TreeNode> StandardNode { get; set; } = new Dictionary<Type, TreeNode>();
+        public Dictionary<Type, TreeNodeBase> StandardNode { get; set; } = new Dictionary<Type, TreeNodeBase>();
 
         public virtual void Initialize(params Assembly[] a)
         {
             foreach (Assembly assembly in a)
             {
                 NodeTypes.AddRange(from Type t in assembly.GetTypes()
-                                   where t.IsSubclassOf(typeof(TreeNode)) && !t.IsAbstract
+                                   where t.IsSubclassOf(typeof(TreeNodeBase)) && !t.IsAbstract
                                    select t);
             }
             foreach (Type t in NodeTypes)
@@ -53,7 +53,7 @@ namespace LuaSTGEditorSharp.EditorData.Node
                                                 select GetTypes(at.RequiredTypes)).ToArray();
                     }
                     NodeTypeInfo.Add(t, data);
-                    StandardNode.Add(t, t.GetConstructor(new Type[] { typeof(DocumentData) }).Invoke(new object[] { null }) as TreeNode);
+                    StandardNode.Add(t, t.GetConstructor(new Type[] { typeof(DocumentData) }).Invoke(new object[] { null }) as TreeNodeBase);
                 }
             }
         }

@@ -14,7 +14,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Stage
     [Serializable, NodeIcon("stage.png")]
     [RequireParent(typeof(StageGroup))]
     [RCInvoke(0)]
-    public class Stage : TreeNode
+    public class Stage : FixedAttributeTreeNode
     {
         [JsonConstructor]
         private Stage() : base() { }
@@ -92,11 +92,11 @@ namespace LuaSTGEditorSharp.EditorData.Node.Stage
         {
             string sp = Indent(spacing);
             string s1 = Indent(1);
-            TreeNode Parent = GetLogicalParent();
+            TreeNodeBase Parent = GetLogicalParent();
             string parentStageGroupName = "";
-            if (Parent?.attributes != null && Parent.AttributeCount >= 1)
+            if (Parent != null)
             {
-                parentStageGroupName = Lua.StringParser.ParseLua(Parent.NonMacrolize(0));
+                parentStageGroupName = Lua.StringParser.ParseLua(Parent.PreferredNonMacrolize(0, "Name"));
             }
             string stageName = Lua.StringParser.ParseLua(NonMacrolize(0));
             yield return sp + "stage.group.AddStage(\'" + parentStageGroupName + "\',\'" 
@@ -135,14 +135,14 @@ namespace LuaSTGEditorSharp.EditorData.Node.Stage
                        + sp + "end)\n";
         }
 
-        public override IEnumerable<Tuple<int,TreeNode>> GetLines()
+        public override IEnumerable<Tuple<int,TreeNodeBase>> GetLines()
         {
-            yield return new Tuple<int, TreeNode>(6, this);
-            foreach (Tuple<int, TreeNode> t in GetChildLines())
+            yield return new Tuple<int, TreeNodeBase>(6, this);
+            foreach (Tuple<int, TreeNodeBase> t in GetChildLines())
             {
                 yield return t;
             }
-            yield return new Tuple<int, TreeNode>(19, this);
+            yield return new Tuple<int, TreeNodeBase>(19, this);
         }
 
         public override object Clone()
@@ -157,8 +157,8 @@ namespace LuaSTGEditorSharp.EditorData.Node.Stage
             List<MessageBase> messages = new List<MessageBase>();
             if (string.IsNullOrEmpty(NonMacrolize(0)))
                 messages.Add(new ArgNotNullMessage(attributes[0].AttrCap, 0, this));
-            TreeNode p = GetLogicalParent();
-            if (p?.attributes == null || p.AttributeCount < 1)
+            TreeNodeBase p = GetLogicalParent();
+            if (p == null || !p.HasPreferredProperty(0, "Name"))
             {
                 messages.Add(new CannotFindAttributeInParent(1, this));
             }

@@ -10,26 +10,16 @@ using LuaSTGEditorSharp.Windows;
 
 namespace LuaSTGEditorSharp.EditorData.Document.Meta
 { 
-    public class BossDefineMetaInfo : MetaInfo, IComparable<BossDefineMetaInfo>
+    public class BossDefineMetaInfo : MetaInfoWithDifficulty, IComparable<BossDefineMetaInfo>
     {
         public BossDefineMetaInfo(BossDefine target) : base(target) { }
 
-        public override string Name
-        {
-            get => Lua.StringParser.ParseLua(target.attributes[0].AttrInput);
-        }
-
-        public override string Difficulty
-        {
-            get => Lua.StringParser.ParseLua(target.attributes[1].AttrInput);
-        }
-
         public string[] GetSC()
         {
-            return (from TreeNode t 
+            return (from TreeNodeBase t 
                     in target.GetLogicalChildren()
-                    where t is BossSpellCard && !string.IsNullOrEmpty(t.attributes[0]?.AttrInput)
-                    select t.attributes[0].AttrInput).ToArray();
+                    where t is BossSpellCard && !string.IsNullOrEmpty(t.PreferredNonMacrolize(0, nameof(BossSpellCard.Name)))
+                    select t.PreferredNonMacrolize(0, nameof(BossSpellCard.Name))).ToArray();
         }
 
         public string PreviewSC()

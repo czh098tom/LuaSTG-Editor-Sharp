@@ -14,7 +14,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Render
 {
     [Serializable, NodeIcon("CreateRenderTarget.png")]
     [CreateInvoke(0), RCInvoke(0)]
-    public class CreateRenderTarget : TreeNode
+    public class CreateRenderTarget : FixedAttributeTreeNode
     {
         [JsonConstructor]
         public CreateRenderTarget() : base() { }
@@ -51,9 +51,9 @@ namespace LuaSTGEditorSharp.EditorData.Node.Render
             return n;
         }
 
-        public override IEnumerable<Tuple<int, TreeNode>> GetLines()
+        public override IEnumerable<Tuple<int, TreeNodeBase>> GetLines()
         {
-            yield return new Tuple<int, TreeNode>(1, this);
+            yield return new Tuple<int, TreeNodeBase>(1, this);
         }
     }
 }

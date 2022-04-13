@@ -14,7 +14,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Boss
     [Serializable, NodeIcon("bgrender.png")]
     [CannotDelete, CannotBan]
     [RequireParent(typeof(BossBGLayer)), Uniqueness]
-    public class BossBGLayerRender : TreeNode
+    public class BossBGLayerRender : FixedAttributeTreeNode
     {
         [JsonConstructor]
         private BossBGLayerRender() : base() { }
@@ -32,14 +32,14 @@ namespace LuaSTGEditorSharp.EditorData.Node.Boss
             yield return sp + "end\n";
         }
 
-        public override IEnumerable<Tuple<int,TreeNode>> GetLines()
+        public override IEnumerable<Tuple<int,TreeNodeBase>> GetLines()
         {
-            yield return new Tuple<int, TreeNode>(1, this);
-            foreach(Tuple<int,TreeNode> t in GetChildLines())
+            yield return new Tuple<int, TreeNodeBase>(1, this);
+            foreach(Tuple<int,TreeNodeBase> t in GetChildLines())
             {
                 yield return t;
             }
-            yield return new Tuple<int, TreeNode>(1, this);
+            yield return new Tuple<int, TreeNodeBase>(1, this);
         }
 
         public override string ToString()

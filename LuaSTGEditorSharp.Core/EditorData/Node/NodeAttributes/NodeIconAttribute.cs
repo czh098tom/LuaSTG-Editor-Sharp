@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace LuaSTGEditorSharp.EditorData.Node.NodeAttributes
 {
     /// <summary>
-    /// Identify the icon of a <see cref="TreeNode"/>.
+    /// Identify the icon of a <see cref="TreeNodeBase"/>.
     /// </summary>
     [AttributeUsage(AttributeTargets.Class)]
     public sealed class NodeIconAttribute : Attribute

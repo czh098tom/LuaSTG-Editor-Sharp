@@ -11,8 +11,8 @@ namespace LuaSTGEditorSharp.EditorData
 {
     internal class DummyDoc
     {
-        private readonly ObservableCollection<TreeNode> treeNodes = new ObservableCollection<TreeNode>();
-        public TreeNode Root
+        private readonly ObservableCollection<TreeNodeBase> treeNodes = new ObservableCollection<TreeNodeBase>();
+        public TreeNodeBase Root
         {
             get => treeNodes.Count > 0 ? (treeNodes[0].Children.Count > 0 ? treeNodes[0].Children[0] : null) : null;
         }
@@ -21,7 +21,7 @@ namespace LuaSTGEditorSharp.EditorData
         {
             try
             {
-                TreeNode t = await DocumentData.CreateNodeFromFileAsync(path, null);
+                TreeNodeBase t = await DocumentData.CreateNodeFromFileAsync(path, null);
                 treeNodes.Add(t);
             }
             catch (JsonException e)

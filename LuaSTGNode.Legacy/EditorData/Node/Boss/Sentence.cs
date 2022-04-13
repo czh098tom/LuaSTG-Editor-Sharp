@@ -17,7 +17,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Boss
     [RequireAncestor(typeof(TaskAlikeTypes))]
     [LeafNode]
     [RCInvoke(2)]
-    public class Sentence : TreeNode
+    public class Sentence : FixedAttributeTreeNode
     {
         [JsonConstructor]
         public Sentence() : base() { }
@@ -94,7 +94,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Boss
             return n;
         }
 
-        public override IEnumerable<Tuple<int, TreeNode>> GetLines()
+        public override IEnumerable<Tuple<int, TreeNodeBase>> GetLines()
         {
             string s = Macrolize(2);
             int i = 1;
@@ -102,7 +102,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Boss
             {
                 if (c == '\n') i++;
             }
-            yield return new Tuple<int, TreeNode>(i, this);
+            yield return new Tuple<int, TreeNodeBase>(i, this);
         }
     }
 }

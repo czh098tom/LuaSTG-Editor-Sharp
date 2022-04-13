@@ -15,7 +15,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Object
     [RequireAncestor(typeof(CodeAlikeTypes))]
     [LeafNode]
     [CreateInvoke(1), RCInvoke(1)]
-    class SetObjectImage : TreeNode
+    class SetObjectImage : FixedAttributeTreeNode
     {
         [JsonConstructor]
         private SetObjectImage() : base() { }
@@ -50,9 +50,9 @@ namespace LuaSTGEditorSharp.EditorData.Node.Object
             yield return $"{sp}{Macrolize(0)}.img={Macrolize(1)}";
         }
 
-        public override IEnumerable<Tuple<int, TreeNode>> GetLines()
+        public override IEnumerable<Tuple<int, TreeNodeBase>> GetLines()
         {
-            yield return new Tuple<int, TreeNode>(1, this);
+            yield return new Tuple<int, TreeNodeBase>(1, this);
         }
 
         public override string ToString()

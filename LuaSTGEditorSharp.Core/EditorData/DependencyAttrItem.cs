@@ -22,7 +22,7 @@ namespace LuaSTGEditorSharp.EditorData
         /// </summary>
         /// <param name="capital">The capital.</param>
         /// <param name="parent">The parent.</param>
-        public DependencyAttrItem(string capital, TreeNode parent) 
+        public DependencyAttrItem(string capital, FixedAttributeTreeNode parent) 
             : base(capital, parent) { }
 
         /// <summary>
@@ -31,7 +31,7 @@ namespace LuaSTGEditorSharp.EditorData
         /// <param name="capital">The capital.</param>
         /// <param name="parent">The parent.</param>
         /// <param name="editWindow">The edit window args.</param>
-        public DependencyAttrItem(string capital, TreeNode parent, string editWindow)
+        public DependencyAttrItem(string capital, FixedAttributeTreeNode parent, string editWindow)
             : base(capital, parent, editWindow) { }
 
         /// <summary>
@@ -40,7 +40,7 @@ namespace LuaSTGEditorSharp.EditorData
         /// <param name="capital">The capital.</param>
         /// <param name="input">The input.</param>
         /// <param name="parent">The parent.</param>
-        public DependencyAttrItem(string capital, string input, TreeNode parent) 
+        public DependencyAttrItem(string capital, string input, FixedAttributeTreeNode parent) 
             : base(capital, input, parent) { }
 
         /// <summary>
@@ -50,7 +50,7 @@ namespace LuaSTGEditorSharp.EditorData
         /// <param name="input">The input.</param>
         /// <param name="parent">The parent.</param>
         /// <param name="editWindow">The edit window args.</param>
-        public DependencyAttrItem(string capital, string input, TreeNode parent, string editWindow)
+        public DependencyAttrItem(string capital, string input, FixedAttributeTreeNode parent, string editWindow)
             : base(capital, input, parent, editWindow) { }
 
         /// <summary>
@@ -64,7 +64,7 @@ namespace LuaSTGEditorSharp.EditorData
 
         /// <summary>
         /// Non-UI triggers for <see cref="attrInput"/>. Set value and raise events.
-        /// Also tell parent <see cref="TreeNode"/> to update its <see cref="AttrItem"/>.
+        /// Also tell parent <see cref="TreeNodeBase"/> to update its <see cref="AttrItem"/>.
         /// </summary>
         [JsonIgnore, XmlIgnore]
         public override string AttrInput

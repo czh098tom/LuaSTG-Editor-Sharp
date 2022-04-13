@@ -14,7 +14,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Advanced.AdvancedRepeat
 {
     [Serializable, NodeIcon("advancedrepeat.png")]
     [CreateInvoke(0), RCInvoke(0)]
-    public class AdvancedRepeat : TreeNode
+    public class AdvancedRepeat : FixedAttributeTreeNode
     {
         [JsonConstructor]
         public AdvancedRepeat() : base() { }
@@ -75,36 +75,36 @@ namespace LuaSTGEditorSharp.EditorData.Node.Advanced.AdvancedRepeat
             yield return sp + "end\n";
         }
 
-        public override IEnumerable<Tuple<int, TreeNode>> GetLines()
+        public override IEnumerable<Tuple<int, TreeNodeBase>> GetLines()
         {
             VariableCollection vc = GetVariableCollection();
-            List<IEnumerator<Tuple<int, TreeNode>>> lines = new List<IEnumerator<Tuple<int, TreeNode>>>();
+            List<IEnumerator<Tuple<int, TreeNodeBase>>> lines = new List<IEnumerator<Tuple<int, TreeNodeBase>>>();
             foreach (VariableTransformation transformation in vc.GetVariableTransformations())
             {
                 lines.Add(transformation.GetLines().GetEnumerator());
             }
-            yield return new Tuple<int, TreeNode>(1, this);
-            foreach (IEnumerator<Tuple<int, TreeNode>> e in lines)
+            yield return new Tuple<int, TreeNodeBase>(1, this);
+            foreach (IEnumerator<Tuple<int, TreeNodeBase>> e in lines)
             {
                 e.MoveNext();
                 yield return e.Current;
             }
-            yield return new Tuple<int, TreeNode>(1, this);
-            foreach (Tuple<int, TreeNode> t in GetChildLines())
+            yield return new Tuple<int, TreeNodeBase>(1, this);
+            foreach (Tuple<int, TreeNodeBase> t in GetChildLines())
             {
                 yield return t;
             }
-            foreach (IEnumerator<Tuple<int, TreeNode>> e in lines)
+            foreach (IEnumerator<Tuple<int, TreeNodeBase>> e in lines)
             {
                 e.MoveNext();
                 yield return e.Current;
             }
-            yield return new Tuple<int, TreeNode>(2, this);
+            yield return new Tuple<int, TreeNodeBase>(2, this);
         }
 
         private VariableCollection GetVariableCollection()
         {
-            foreach(TreeNode t in GetLogicalChildren())
+            foreach(TreeNodeBase t in GetLogicalChildren())
             {
                 if (t is VariableCollection) return t as VariableCollection;
             }

@@ -15,7 +15,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Object
     [RequireAncestor(typeof(CodeAlikeTypes))]
     [LeafNode]
     [RCInvoke(2)]
-    public class SetBlend : TreeNode
+    public class SetBlend : FixedAttributeTreeNode
     {
         [JsonConstructor]
         private SetBlend() : base() { }
@@ -63,9 +63,9 @@ namespace LuaSTGEditorSharp.EditorData.Node.Object
             yield return sp + "_object.set_color(" + Macrolize(0) + "," + Macrolize(1) + "," + Macrolize(2) + ")\n";
         }
 
-        public override IEnumerable<Tuple<int,TreeNode>> GetLines()
+        public override IEnumerable<Tuple<int,TreeNodeBase>> GetLines()
         {
-            yield return new Tuple<int, TreeNode>(1, this);
+            yield return new Tuple<int, TreeNodeBase>(1, this);
         }
 
         public override string ToString()

@@ -15,7 +15,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.General
 {
     [Serializable, NodeIcon("break.png")]
     [RequireAncestor(typeof(Repeat), typeof(Advanced.AdvancedRepeat.AdvancedRepeat))]
-    public class Break : TreeNode
+    public class Break : FixedAttributeTreeNode
     {
         [JsonConstructor]
         private Break() : base() { }
@@ -47,9 +47,9 @@ namespace LuaSTGEditorSharp.EditorData.Node.General
             return string.IsNullOrEmpty(s) ? "break" : "break if " + s;
         }
 
-        public override IEnumerable<Tuple<int, TreeNode>> GetLines()
+        public override IEnumerable<Tuple<int, TreeNodeBase>> GetLines()
         {
-            yield return new Tuple<int, TreeNode>(1, this);
+            yield return new Tuple<int, TreeNodeBase>(1, this);
         }
 
         public override object Clone()

@@ -21,7 +21,7 @@ namespace DanmakuRandomizer.View
     {
         public LuaSTGEditorSharp.EditorData.DocumentData Document { get; set; }
 
-        public LuaSTGEditorSharp.EditorData.TreeNode Nodes { get; private set; }
+        public LuaSTGEditorSharp.EditorData.TreeNodeBase Nodes { get; private set; }
 
         public DanmakuRandomizer()
         {

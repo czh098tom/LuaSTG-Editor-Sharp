@@ -15,7 +15,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Object
     [RequireAncestor(typeof(CodeAlikeTypes))]
     [LeafNode]
     [CreateInvoke(0), RCInvoke(1)]
-    class DropItem : TreeNode
+    class DropItem : FixedAttributeTreeNode
     {
         [JsonConstructor]
         private DropItem() : base() { }
@@ -63,9 +63,9 @@ namespace LuaSTGEditorSharp.EditorData.Node.Object
             yield return sp + $"_drop_item({Macrolize(0)},{Macrolize(1)},{Macrolize(2)})\n";
         }
 
-        public override IEnumerable<Tuple<int, TreeNode>> GetLines()
+        public override IEnumerable<Tuple<int, TreeNodeBase>> GetLines()
         {
-            yield return new Tuple<int, TreeNode>(1, this);
+            yield return new Tuple<int, TreeNodeBase>(1, this);
         }
 
         public override object Clone()

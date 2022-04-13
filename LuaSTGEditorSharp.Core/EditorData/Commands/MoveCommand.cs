@@ -7,18 +7,18 @@ using System.Threading.Tasks;
 namespace LuaSTGEditorSharp.EditorData.Commands
 {
     /// <summary>
-    /// <see cref="Command"/> that move a <see cref="TreeNode"/> to another <see cref="TreeNode"/>.
+    /// <see cref="Command"/> that move a <see cref="TreeNodeBase"/> to another <see cref="TreeNodeBase"/>.
     /// </summary>
     internal class MoveCommand : Command
     {
         /// <summary>
         /// The source.
         /// </summary>
-        readonly TreeNode source;
+        readonly TreeNodeBase source;
         /// <summary>
         /// Parent of the source.
         /// </summary>
-        readonly TreeNode sourceParent;
+        readonly TreeNodeBase sourceParent;
         /// <summary>
         /// ID in parent of source.
         /// </summary>
@@ -26,7 +26,7 @@ namespace LuaSTGEditorSharp.EditorData.Commands
         /// <summary>
         /// Parent of target place.
         /// </summary>
-        readonly TreeNode targetParent;
+        readonly TreeNodeBase targetParent;
         /// <summary>
         /// ID in parent of target place.
         /// </summary>
@@ -38,7 +38,7 @@ namespace LuaSTGEditorSharp.EditorData.Commands
         /// <param name="source">The source.</param>
         /// <param name="targetParent">The parent target.</param>
         /// <param name="targetID">The id of target.</param>
-        public MoveCommand(TreeNode source, TreeNode targetParent, int targetID)
+        public MoveCommand(TreeNodeBase source, TreeNodeBase targetParent, int targetID)
         {
             this.source = source;
             this.targetParent = targetParent;

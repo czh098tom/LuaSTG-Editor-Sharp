@@ -14,19 +14,19 @@ namespace LuaSTGEditorSharp.EditorData.Document.Meta
     {
         public override string Name
         {
-            get => System.IO.Path.GetFileNameWithoutExtension(target.attributes[0].AttrInput);
+            get => System.IO.Path.GetFileNameWithoutExtension(target.PreferredNonMacrolize(0, nameof(ProjectFile.Path)));
         }
 
         public override string FullName
         {
-            get => target.attributes[0].AttrInput;
+            get => target.PreferredNonMacrolize(0, nameof(ProjectFile.Path));
         }
 
         public override string Difficulty => "";
 
         public string Path
         {
-            get => target.attributes[0].AttrInput;
+            get => target.PreferredNonMacrolize(0, nameof(ProjectFile.Path));
         }
 
         public override string ScrString => Name;
@@ -53,7 +53,7 @@ namespace LuaSTGEditorSharp.EditorData.Document.Meta
             MetaModel path = new MetaModel
             {
                 Icon = "/LuaSTGEditorSharp.Core;component/images/16x16/properties.png",
-                Text = target.attributes[0].AttrInput
+                Text = target.PreferredNonMacrolize(0, nameof(ProjectFile.Path))
             };
             metaModel.Children.Add(path);
             return metaModel;

@@ -28,12 +28,12 @@ namespace LuaSTGEditorSharp.EditorData
 
         public static string SerializeTreeNode(object o)
         {
-            return JsonConvert.SerializeObject(o, typeof(TreeNode), TreeNodeSettings);
+            return JsonConvert.SerializeObject(o, typeof(TreeNodeBase), TreeNodeSettings);
         }
 
         public static object DeserializeTreeNode(string s)
         {
-            return JsonConvert.DeserializeObject(s, typeof(TreeNode), TreeNodeSettings);
+            return JsonConvert.DeserializeObject(s, typeof(TreeNodeBase), TreeNodeSettings);
         }
 
         public static string SerializeMetaData(object o)

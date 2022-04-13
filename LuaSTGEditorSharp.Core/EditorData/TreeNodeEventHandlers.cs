@@ -8,12 +8,12 @@ namespace LuaSTGEditorSharp.EditorData
 {
     public struct OnCreateEventArgs
     {
-        public TreeNode parent;
+        public TreeNodeBase parent;
     }
 
     public struct OnRemoveEventArgs
     {
-        public TreeNode parent;
+        public TreeNodeBase parent;
     }
 
     public struct DependencyAttributeChangedEventArgs

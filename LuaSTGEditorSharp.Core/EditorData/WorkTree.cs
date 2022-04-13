@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 namespace LuaSTGEditorSharp.EditorData
 {
     [Serializable]
-    public class WorkTree : ObservableCollection<TreeNode>
+    public class WorkTree : ObservableCollection<TreeNodeBase>
     {
         public WorkTree() : base() { }
-        public WorkTree(IEnumerable<TreeNode> treeNodes) : base(treeNodes) { }
-        public WorkTree(List<TreeNode> treeNodes) : base(treeNodes) { }
+        public WorkTree(IEnumerable<TreeNodeBase> treeNodes) : base(treeNodes) { }
+        public WorkTree(List<TreeNodeBase> treeNodes) : base(treeNodes) { }
     }
 }

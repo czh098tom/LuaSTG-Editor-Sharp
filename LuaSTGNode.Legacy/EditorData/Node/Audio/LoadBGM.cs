@@ -18,7 +18,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Audio
     [ClassNode]
     [LeafNode]
     [CreateInvoke(0), RCInvoke(1)]
-    public class LoadBGM : TreeNode
+    public class LoadBGM : ResourceLoadNode
     {
         [JsonConstructor]
         private LoadBGM() : base() { }
@@ -36,24 +36,12 @@ namespace LuaSTGEditorSharp.EditorData.Node.Audio
             attributes.Add(new AttrItem("Loop length (sec)", llen, this));
             */
             FilePath = path;
-            ResName = name;
+            ResourceName = name;
             LoopEnd = lend;
             LoopLength = llen;
         }
 
-        [JsonIgnore, NodeAttribute]
-        public string FilePath
-        {
-            get => DoubleCheckAttr(0, "audioFile", "Path", true).attrInput;
-            set => DoubleCheckAttr(0, "audioFile", "Path", true).attrInput = value;
-        }
-
-        [JsonIgnore, NodeAttribute]
-        public string ResName
-        {
-            get => DoubleCheckAttr(1, name: "Resource name").attrInput;
-            set => DoubleCheckAttr(1, name: "Resource name").attrInput = value;
-        }
+        public override string FileType => "audioFile";
 
         [JsonIgnore, NodeAttribute]
         public string LoopEnd
@@ -78,9 +66,9 @@ namespace LuaSTGEditorSharp.EditorData.Node.Audio
                 + "\'," + Macrolize(2) + "," + Macrolize(3) + ")\n";
         }
 
-        public override IEnumerable<Tuple<int,TreeNode>> GetLines()
+        public override IEnumerable<Tuple<int,TreeNodeBase>> GetLines()
         {
-            yield return new Tuple<int, TreeNode>(1, this);
+            yield return new Tuple<int, TreeNodeBase>(1, this);
         }
 
         public override string ToString()

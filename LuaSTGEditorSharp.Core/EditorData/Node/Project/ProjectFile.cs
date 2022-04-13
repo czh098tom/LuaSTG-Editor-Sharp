@@ -19,7 +19,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Project
     [ClassNode]
     [LeafNode]
     [CreateInvoke(0), RCInvoke(0)]
-    public class ProjectFile : TreeNode
+    public class ProjectFile : FixedAttributeTreeNode
     {
         [JsonConstructor]
         private ProjectFile() : base() { }
@@ -48,9 +48,9 @@ namespace LuaSTGEditorSharp.EditorData.Node.Project
                 + StringParser.ParseLua(System.IO.Path.GetFileNameWithoutExtension(NonMacrolize(0)) + ".lua") + "\'\n";
         }
 
-        public override IEnumerable<Tuple<int,TreeNode>> GetLines()
+        public override IEnumerable<Tuple<int,TreeNodeBase>> GetLines()
         {
-            yield return new Tuple<int, TreeNode>(1, this);
+            yield return new Tuple<int, TreeNodeBase>(1, this);
         }
 
         public override string ToString()

@@ -16,7 +16,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.General
     [Serializable, NodeIcon("code.png")]
     [LeafNode]
     [RCInvoke(0)]
-    public class Code : TreeNode
+    public class Code : FixedAttributeTreeNode
     {
         [JsonConstructor]
         private Code() : base() { }
@@ -45,7 +45,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.General
             yield return sp + r.Replace(Macrolize(0), nsp) + "\n";
         }
 
-        public override IEnumerable<Tuple<int,TreeNode>> GetLines()
+        public override IEnumerable<Tuple<int,TreeNodeBase>> GetLines()
         {
             string s = Macrolize(0);
             int i = 1;
@@ -53,7 +53,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.General
             {
                 if (c == '\n') i++;
             }
-            yield return new Tuple<int, TreeNode>(i, this);
+            yield return new Tuple<int, TreeNodeBase>(i, this);
         }
 
         public override string ToString()

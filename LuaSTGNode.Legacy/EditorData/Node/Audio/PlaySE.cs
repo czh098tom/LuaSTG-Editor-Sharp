@@ -16,7 +16,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Audio
     [RequireAncestor(typeof(CodeAlikeTypes))]
     [LeafNode]
     [CreateInvoke(0),RCInvoke(0)]
-    public class PlaySE : TreeNode
+    public class PlaySE : FixedAttributeTreeNode
     {
         [JsonConstructor]
         public PlaySE() : base() { }
@@ -79,9 +79,9 @@ namespace LuaSTGEditorSharp.EditorData.Node.Audio
             return n;
         }
 
-        public override IEnumerable<Tuple<int, TreeNode>> GetLines()
+        public override IEnumerable<Tuple<int, TreeNodeBase>> GetLines()
         {
-            yield return new Tuple<int, TreeNode>(1, this);
+            yield return new Tuple<int, TreeNodeBase>(1, this);
         }
     }
 }

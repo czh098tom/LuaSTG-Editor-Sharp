@@ -16,7 +16,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Graphics
     [ClassNode]
     [LeafNode]
     [CreateInvoke(0)]
-    public class LoadFX : TreeNode
+    public class LoadFX : ResourceLoadNode
     {
         [JsonConstructor]
         public LoadFX() : base() { }
@@ -24,23 +24,11 @@ namespace LuaSTGEditorSharp.EditorData.Node.Graphics
         public LoadFX(DocumentData workSpaceData) : this(workSpaceData, "", "") { }
         public LoadFX(DocumentData workSpaceData, string path, string resName) : base(workSpaceData) 
         {
-            Path = path;
+            FilePath = path;
             ResourceName = resName;
         }
 
-        [JsonIgnore, NodeAttribute]
-        public string Path
-        {
-            get => DoubleCheckAttr(0, "fxFile", isDependency: true).attrInput;
-            set => DoubleCheckAttr(0, "fxFile", isDependency: true).attrInput = value;
-        }
-
-        [JsonIgnore, NodeAttribute]
-        public string ResourceName
-        {
-            get => DoubleCheckAttr(1, name: "Resource name").attrInput;
-            set => DoubleCheckAttr(1, name: "Resource name").attrInput = value;
-        }
+        public override string FileType => "fxFile";
 
         public override string ToString()
         {
@@ -80,9 +68,9 @@ namespace LuaSTGEditorSharp.EditorData.Node.Graphics
             return n;
         }
 
-        public override IEnumerable<Tuple<int, TreeNode>> GetLines()
+        public override IEnumerable<Tuple<int, TreeNodeBase>> GetLines()
         {
-            yield return new Tuple<int, TreeNode>(1, this);
+            yield return new Tuple<int, TreeNodeBase>(1, this);
         }
     }
 }

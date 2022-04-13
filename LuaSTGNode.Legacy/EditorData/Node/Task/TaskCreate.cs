@@ -13,7 +13,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Task
     [RequireAncestor(typeof(CodeAlikeTypes))]
     [LeafNode]
     [CreateInvoke(0), RCInvoke(1)]
-    public class TaskCreate : TreeNode
+    public class TaskCreate : FixedAttributeTreeNode
     {
         [JsonConstructor]
         private TaskCreate() : base() { }
@@ -59,14 +59,14 @@ namespace LuaSTGEditorSharp.EditorData.Node.Task
             return "Attach task " + NonMacrolize(0) + " to " + NonMacrolize(2) + " with parameter(" + NonMacrolize(1) + ")";
         }
 
-        public override IEnumerable<Tuple<int, TreeNode>> GetLines()
+        public override IEnumerable<Tuple<int, TreeNodeBase>> GetLines()
         {
-            yield return new Tuple<int, TreeNode>(1, this);
+            yield return new Tuple<int, TreeNodeBase>(1, this);
         }
 
         public override object Clone()
         {
-            TreeNode n = new TaskCreate(parentWorkSpace);
+            TreeNodeBase n = new TaskCreate(parentWorkSpace);
             n.DeepCopyFrom(this);
             return n;
         }

@@ -15,7 +15,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.General
     [Serializable, NodeIcon("repeat.png")]
     [CreateInvoke(0), RCInvoke(0)]
     [IgnoreAttributesParityCheck]
-    public class Repeat : TreeNode
+    public class Repeat : FixedAttributeTreeNode
     {
         [JsonConstructor]
         private Repeat() : base() { }
@@ -102,14 +102,14 @@ namespace LuaSTGEditorSharp.EditorData.Node.General
             }
         }
 
-        public override IEnumerable<Tuple<int,TreeNode>> GetLines()
+        public override IEnumerable<Tuple<int,TreeNodeBase>> GetLines()
         {
-            yield return new Tuple<int, TreeNode>(1, this);
-            foreach(Tuple<int,TreeNode> t in GetChildLines())
+            yield return new Tuple<int, TreeNodeBase>(1, this);
+            foreach(Tuple<int,TreeNodeBase> t in GetChildLines())
             {
                 yield return t;
             }
-            yield return new Tuple<int, TreeNode>(1, this);
+            yield return new Tuple<int, TreeNodeBase>(1, this);
         }
 
         public override string ToString()

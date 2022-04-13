@@ -13,7 +13,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Bullet
     [Serializable, NodeIcon("bulletcleanrange.png")]
     [RequireAncestor(typeof(CodeAlikeTypes))]
     [LeafNode]
-    public class BulletClearRange : TreeNode
+    public class BulletClearRange : FixedAttributeTreeNode
     {
         [JsonConstructor]
         private BulletClearRange() : base() { }
@@ -95,9 +95,9 @@ namespace LuaSTGEditorSharp.EditorData.Node.Bullet
             yield return sp + "New(bullet_cleaner" + s + ")\n";
         }
 
-        public override IEnumerable<Tuple<int, TreeNode>> GetLines()
+        public override IEnumerable<Tuple<int, TreeNodeBase>> GetLines()
         {
-            yield return new Tuple<int, TreeNode>(1, this);
+            yield return new Tuple<int, TreeNodeBase>(1, this);
         }
 
         public override string ToString()

@@ -14,12 +14,12 @@ namespace LuaSTGEditorSharp.EditorData.Document.Meta
     {
         public override string Name
         {
-            get => target.attributes[0].AttrInput;
+            get => target.PreferredNonMacrolize(0, "Name");
         }
 
         public override string FullName
         {
-            get => target.attributes[0].AttrInput;
+            get => target.PreferredNonMacrolize(0, "Name");
         }
 
         public override string Difficulty => "";
@@ -29,16 +29,16 @@ namespace LuaSTGEditorSharp.EditorData.Document.Meta
         public override string GetParam()
         {
             string s = "";
-            if (!int.TryParse(target.attributes[3].AttrInput, out int nAttr)) nAttr = 0;
+            if (!int.TryParse(target.PreferredNonMacrolize(3, "Name"), out int nAttr)) nAttr = 0;
             nAttr = nAttr > AppConstants.mxUAttr ? AppConstants.mxUAttr : nAttr;
             nAttr = nAttr < 0 ? 0 : nAttr;
             for (int i = 4; i <= nAttr * 3 + 3; i += 3)
             {
-                if (target.attributes[i].AttrInput != "")
+                if (target.PreferredNonMacrolize(i, null) != "")
                 {
-                    s += target.attributes[i].AttrInput + "\n" 
-                        + target.attributes[i + 1].AttrInput + "\n" 
-                        + target.attributes[i + 2].AttrInput + "\n";
+                    s += target.PreferredNonMacrolize(i, null) + "\n" 
+                        + target.PreferredNonMacrolize(i + 1, null) + "\n" 
+                        + target.PreferredNonMacrolize(i + 2, null) + "\n";
                 }
             }
             return s;
@@ -66,17 +66,17 @@ namespace LuaSTGEditorSharp.EditorData.Document.Meta
                 Text = Name
             };
             MetaModel sub;
-            if (!int.TryParse(target.attributes[3].AttrInput, out int nAttr)) nAttr = 0;
+            if (!int.TryParse(target.PreferredNonMacrolize(3, "Name"), out int nAttr)) nAttr = 0;
             nAttr = nAttr > AppConstants.mxUAttr ? AppConstants.mxUAttr : nAttr;
             nAttr = nAttr < 0 ? 0 : nAttr;
             for (int i = 4; i <= nAttr * 3 + 3; i += 3)
             {
-                if (target.attributes[i].AttrInput != "")
+                if (target.PreferredNonMacrolize(i, null) != "")
                 {
                     sub = new MetaModel
                     {
                         Icon = "/LuaSTGEditorSharp.Core;component/images/16x16/properties.png",
-                        Text = target.attributes[i].AttrInput
+                        Text = target.PreferredNonMacrolize(i, null)
                     };
                     metaModel.Children.Add(sub);
                 }
@@ -108,8 +108,8 @@ namespace LuaSTGEditorSharp.EditorData.Document.Meta
                 Text = Name + " (" + display + ")",
                 FullName = FullName,
                 Icon = "/LuaSTGEditorSharp.Core;component/images/16x16/userdefinednode.png",
-                ExInfo1 = target.attributes[1].AttrInput,
-                ExInfo2 = target.attributes[2].AttrInput,
+                ExInfo1 = target.PreferredNonMacrolize(1, "Head parse rule"),
+                ExInfo2 = target.PreferredNonMacrolize(2, "Tail parse rule"),
                 Param = s
             };
         }

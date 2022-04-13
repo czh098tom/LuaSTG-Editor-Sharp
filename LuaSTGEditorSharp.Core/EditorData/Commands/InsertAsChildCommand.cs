@@ -8,17 +8,17 @@ using LuaSTGEditorSharp.EditorData;
 namespace LuaSTGEditorSharp.EditorData.Commands
 {
     /// <summary>
-    /// <see cref="Command"/> that insert a <see cref="TreeNode"/> as a child of a <see cref="TreeNode"/>.
+    /// <see cref="Command"/> that insert a <see cref="TreeNodeBase"/> as a child of a <see cref="TreeNodeBase"/>.
     /// </summary>
     public class InsertAsChildCommand : InsertCommand
     {
         /// <summary>
-        /// Initializes <see cref="Command"/> by target <see cref="TreeNode"/> 
-        /// and <see cref="TreeNode"/> to insert.
+        /// Initializes <see cref="Command"/> by target <see cref="TreeNodeBase"/> 
+        /// and <see cref="TreeNodeBase"/> to insert.
         /// </summary>
-        /// <param name="toOp">The target <see cref="TreeNode"/>.</param>
-        /// <param name="toIns">The <see cref="TreeNode"/> to insert.</param>
-        public InsertAsChildCommand(TreeNode toOp, TreeNode toIns) : base(toOp, toIns) { }
+        /// <param name="toOp">The target <see cref="TreeNodeBase"/>.</param>
+        /// <param name="toIns">The <see cref="TreeNodeBase"/> to insert.</param>
+        public InsertAsChildCommand(TreeNodeBase toOp, TreeNodeBase toIns) : base(toOp, toIns) { }
 
         /// <summary>
         /// Method for forward execution like do or redo.

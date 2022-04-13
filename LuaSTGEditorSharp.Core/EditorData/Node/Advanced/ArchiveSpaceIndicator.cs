@@ -18,7 +18,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Advanced
     [Serializable, NodeIcon("archispace.png")]
     [LeafNode]
     [CreateInvoke(0), RCInvoke(0)]
-    public class ArchiveSpaceIndicator : TreeNode
+    public class ArchiveSpaceIndicator : FixedAttributeTreeNode
     {
         [JsonConstructor]
         private ArchiveSpaceIndicator() : base() { }
@@ -41,9 +41,9 @@ namespace LuaSTGEditorSharp.EditorData.Node.Advanced
             yield return sp + "-- archive space: " + NonMacrolize(0) + "\n";
         }
 
-        public override IEnumerable<Tuple<int,TreeNode>> GetLines()
+        public override IEnumerable<Tuple<int,TreeNodeBase>> GetLines()
         {
-            yield return new Tuple<int, TreeNode>(1, this);
+            yield return new Tuple<int, TreeNodeBase>(1, this);
         }
 
         public override string ToString()

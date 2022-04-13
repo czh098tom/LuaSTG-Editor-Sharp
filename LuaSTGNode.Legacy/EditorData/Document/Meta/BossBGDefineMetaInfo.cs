@@ -13,7 +13,7 @@ namespace LuaSTGEditorSharp.EditorData.Document.Meta
     {
         public BossBGDefineMetaInfo(BossBGDefine target) : base(target) { }
 
-        public override string Name { get => Lua.StringParser.ParseLua(target.attributes[0].AttrInput); }
+        public override string Name { get => Lua.StringParser.ParseLua(target.PreferredNonMacrolize(0, nameof(BossBGDefine.Name))); }
 
         public override string ScrString => Name;
 
@@ -37,10 +37,10 @@ namespace LuaSTGEditorSharp.EditorData.Document.Meta
 
         public string[] GetLayer()
         {
-            return (from TreeNode t
+            return (from TreeNodeBase t
                     in target.GetLogicalChildren()
                     where t is BossBGLayer
-                    select t.attributes[0].AttrInput).ToArray();
+                    select t.PreferredNonMacrolize(0, "Image")).ToArray();
         }
 
         public override MetaModel GetFullMetaModel()

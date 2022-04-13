@@ -156,7 +156,7 @@ namespace LuaSTGEditorSharp.Plugin
 
         private void AddIfNode()
         {
-            TreeNode newIf = new IfNode(parent.ActivatedWorkSpaceData);
+            TreeNodeBase newIf = new IfNode(parent.ActivatedWorkSpaceData);
             newIf.AddChild(new IfThen(parent.ActivatedWorkSpaceData));
             newIf.AddChild(new IfElse(parent.ActivatedWorkSpaceData));
             parent.Insert(newIf);
@@ -226,7 +226,7 @@ namespace LuaSTGEditorSharp.Plugin
         #region AdvancedRepeat
         private void AddAdvancedRepeatNode()
         {
-            TreeNode newAR = new AdvancedRepeat(parent.ActivatedWorkSpaceData);
+            TreeNodeBase newAR = new AdvancedRepeat(parent.ActivatedWorkSpaceData);
             newAR.AddChild(new VariableCollection(parent.ActivatedWorkSpaceData));
             parent.Insert(newAR);
         }

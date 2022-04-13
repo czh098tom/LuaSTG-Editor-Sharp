@@ -11,8 +11,8 @@ namespace LuaSTGEditorSharp.EditorData.Document
 {
     public abstract class MetaInfo : IAggregatableMeta
     {
-        public TreeNode target;
-        public MetaInfo(TreeNode target) { this.target = target; }
+        public TreeNodeBase target;
+        public MetaInfo(TreeNodeBase target) { this.target = target; }
 
         public abstract string Name { get; }
         public abstract string ScrString { get; }

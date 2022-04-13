@@ -16,7 +16,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Task
     [RequireAncestor(typeof(TaskAlikeTypes))]
     [LeafNode]
     [RCInvoke(0)]
-    public class TaskClear : TreeNode
+    public class TaskClear : FixedAttributeTreeNode
     {
         [JsonConstructor]
         public TaskClear() : base() { }
@@ -60,14 +60,14 @@ namespace LuaSTGEditorSharp.EditorData.Node.Task
             }
         }
 
-        public override IEnumerable<Tuple<int, TreeNode>> GetLines()
+        public override IEnumerable<Tuple<int, TreeNodeBase>> GetLines()
         {
-            yield return new Tuple<int, TreeNode>(1, this);
+            yield return new Tuple<int, TreeNodeBase>(1, this);
         }
 
         public override object Clone()
         {
-            TreeNode n = new TaskClear(parentWorkSpace);
+            TreeNodeBase n = new TaskClear(parentWorkSpace);
             n.DeepCopyFrom(this);
             return n;
         }

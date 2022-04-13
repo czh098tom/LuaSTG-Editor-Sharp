@@ -13,7 +13,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Enemy
     [Serializable, NodeIcon("enemysimple.png")]
     [RequireAncestor(typeof(CodeAlikeTypes))]
     [RCInvoke(2)]
-    class CreateSimpleEnemy : TreeNode
+    class CreateSimpleEnemy : FixedAttributeTreeNode
     {
         [JsonConstructor]
         public CreateSimpleEnemy() : base() { }
@@ -137,14 +137,14 @@ namespace LuaSTGEditorSharp.EditorData.Node.Enemy
             yield return sp + "end)\n";
         }
 
-        public override IEnumerable<Tuple<int, TreeNode>> GetLines()
+        public override IEnumerable<Tuple<int, TreeNodeBase>> GetLines()
         {
-            yield return new Tuple<int, TreeNode>(1, this);
-            foreach (Tuple<int, TreeNode> t in GetChildLines())
+            yield return new Tuple<int, TreeNodeBase>(1, this);
+            foreach (Tuple<int, TreeNodeBase> t in GetChildLines())
             {
                 yield return t;
             }
-            yield return new Tuple<int, TreeNode>(1, this);
+            yield return new Tuple<int, TreeNodeBase>(1, this);
         }
     }
 }

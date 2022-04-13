@@ -57,7 +57,7 @@ namespace LuaSTGEditorSharp
         private CommandTypeFac insertState = new AfterFac();
 
         //private object locker = new object();
-        
+
         public bool IsBeforeState { get => insertState.GetType() == typeof(BeforeFac); }
         public bool IsAfterState { get => insertState.GetType() == typeof(AfterFac); }
         public bool IsChildState { get => insertState.GetType() == typeof(ChildFac); }
@@ -77,11 +77,11 @@ namespace LuaSTGEditorSharp
             }
         }
 
-        public TreeNode clipBoard = null;
+        public TreeNodeBase clipBoard = null;
 
-        public TreeNode selectedNode = null;
+        public TreeNodeBase selectedNode = null;
 
-        public TreeNode SelectedNode
+        public TreeNodeBase SelectedNode
         {
             get => selectedNode;
             set
@@ -124,11 +124,11 @@ namespace LuaSTGEditorSharp
         {
             if (DocumentToRemove.IsUnsaved)
             {
-                switch (MessageBox.Show("Do you want to save \"" + DocumentToRemove.RawDocName 
+                switch (MessageBox.Show("Do you want to save \"" + DocumentToRemove.RawDocName
                     + "\"? ", "LuaSTG Editor Sharp", MessageBoxButton.YesNoCancel, MessageBoxImage.Question))
                 {
                     case MessageBoxResult.Yes:
-                        if(SaveDoc(DocumentToRemove))
+                        if (SaveDoc(DocumentToRemove))
                         {
                             Documents.Remove(DocumentToRemove);
                             DocumentToRemove.OnClosing();
@@ -220,7 +220,7 @@ namespace LuaSTGEditorSharp
             {
                 DocumentData newDoc = DocumentData.GetNewByExtension(Path.GetExtension(path), Documents.MaxHash, name, path);
                 Documents.AddAndAllocHash(newDoc);
-                TreeNode t = await DocumentData.CreateNodeFromFileAsync(path, newDoc);
+                TreeNodeBase t = await DocumentData.CreateNodeFromFileAsync(path, newDoc);
                 newDoc.TreeNodes.Add(t);
                 t.RaiseCreate(new OnCreateEventArgs() { parent = null });
                 newDoc.OnOpening();
@@ -257,7 +257,7 @@ namespace LuaSTGEditorSharp
             {
                 DocumentData newDoc = DocumentData.GetNewByExtension(Path.GetExtension(path), Documents.MaxHash, name, path);
                 Documents.AddAndAllocHash(newDoc);
-                TreeNode t = await DocumentData.CreateNodeFromFileAsync(path, newDoc);
+                TreeNodeBase t = await DocumentData.CreateNodeFromFileAsync(path, newDoc);
                 newDoc.TreeNodes.Add(t);
                 t.RaiseCreate(new OnCreateEventArgs() { parent = null });
                 newDoc.OnOpening();
@@ -265,13 +265,16 @@ namespace LuaSTGEditorSharp
                 newDoc.OriginalMeta.PropertyChanged += newDoc.OnEditing;
 
                 newDoc.DocPath = "";
-                Queue<TreeNode> nodes = new Queue<TreeNode>();
+                Queue<TreeNodeBase> nodes = new Queue<TreeNodeBase>();
                 nodes.Enqueue(newDoc.TreeNodes[0]);
                 while (nodes.Count > 0)
                 {
-                    TreeNode n = nodes.Dequeue();
-                    n.FixAttributesList();
-                    foreach(TreeNode tn in n.Children)
+                    TreeNodeBase n = nodes.Dequeue();
+                    if (n is FixedAttributeTreeNode fatn)
+                    {
+                        fatn.FixAttributesList();
+                    }
+                    foreach (TreeNodeBase tn in n.Children)
                     {
                         nodes.Enqueue(tn);
                     }
@@ -292,21 +295,21 @@ namespace LuaSTGEditorSharp
                 DocumentData newDoc = DocumentData.GetNewByExtension(Path.GetExtension(path), Documents.MaxHash, name, path);
                 newDoc.DocPath = "";
                 Documents.AddAndAllocHash(newDoc);
-                TreeNode t = await DocumentData.CreateNodeFromFileAsync(path, newDoc);
+                TreeNodeBase t = await DocumentData.CreateNodeFromFileAsync(path, newDoc);
                 newDoc.TreeNodes.Add(t);
                 t.RaiseCreate(new OnCreateEventArgs() { parent = null });
-                foreach (TreeNode node in t.Children)
+                foreach (TreeNodeBase node in t.Children)
                 {
-                    if (node is ProjSettings)
+                    if (node is ProjSettings projs)
                     {
-                        for (int i = 0; i < node.attributes.Count; i++)
+                        for (int i = 0; i < projs.attributes.Count; i++)
                         {
-                            node.attributes[i].AttrInput = settings.attributes[i].AttrInput;
+                            projs.attributes[i].AttrInput = settings.NonMacrolize(i);
                         }
                     }
-                    else if (node is EditorVersion)
+                    else if (node is EditorVersion ev)
                     {
-                        node.attributes[0].AttrInput = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString();
+                        ev.attributes[0].AttrInput = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString();
                     }
                 }
                 newDoc.OnOpening();
@@ -340,22 +343,22 @@ namespace LuaSTGEditorSharp
 
         private void CutNode()
         {
-            clipBoard = (TreeNode)selectedNode.Clone();
-            TreeNode prev = selectedNode.GetNearestEdited();
+            clipBoard = (TreeNodeBase)selectedNode.Clone();
+            TreeNodeBase prev = selectedNode.GetNearestEdited();
             ActivatedWorkSpaceData.AddAndExecuteCommand(new DeleteCommand(selectedNode));
             if (prev != null) Reveal(prev);
         }
 
         private void CopyNode()
         {
-            clipBoard = (TreeNode)selectedNode.Clone();
+            clipBoard = (TreeNodeBase)selectedNode.Clone();
         }
 
         private void PasteNode()
         {
             try
             {
-                TreeNode node = (TreeNode)clipBoard.Clone();
+                TreeNodeBase node = (TreeNodeBase)clipBoard.Clone();
                 node.FixParentDoc(ActivatedWorkSpaceData);
                 Insert(node, false);
             }
@@ -374,15 +377,15 @@ namespace LuaSTGEditorSharp
 
         private void DeleteNode()
         {
-            TreeNode prev = selectedNode.GetNearestEdited();
+            TreeNodeBase prev = selectedNode.GetNearestEdited();
             ActivatedWorkSpaceData.AddAndExecuteCommand(new DeleteCommand(selectedNode));
             if (prev != null) Reveal(prev);
         }
 
         private void SavePreset()
         {
-            TreeNode t = new RootFolder(null);
-            TreeNode selected = SelectedNode.Clone() as TreeNode;
+            TreeNodeBase t = new RootFolder(null);
+            TreeNodeBase selected = SelectedNode.Clone() as TreeNodeBase;
             t.AddChild(selected);
             var dialog = new System.Windows.Forms.SaveFileDialog
             {
@@ -432,7 +435,7 @@ namespace LuaSTGEditorSharp
             {
                 try
                 {
-                    TreeNode t = await DocumentData.CreateNodeFromFileAsync(s, ActivatedWorkSpaceData);
+                    TreeNodeBase t = await DocumentData.CreateNodeFromFileAsync(s, ActivatedWorkSpaceData);
                     if (t.Children == null || t.Children.Count < 1 || t.Children[0] == null) throw new Exception();
                     Insert(t.Children[0], false);
                 }
@@ -447,7 +450,7 @@ namespace LuaSTGEditorSharp
         {
             int c = 0;
             ActivatedWorkSpaceData.GatherCompileInfo(App.Current as App);
-            foreach(Tuple<int,TreeNode> tuple in ActivatedWorkSpaceData.TreeNodes[0].GetLines())
+            foreach (Tuple<int, TreeNodeBase> tuple in ActivatedWorkSpaceData.TreeNodes[0].GetLines())
             {
                 c += tuple.Item1;
                 if (c >= line)
@@ -458,19 +461,19 @@ namespace LuaSTGEditorSharp
             }
         }
 
-        public void Reveal(TreeNode node)
+        public void Reveal(TreeNodeBase node)
         {
             if (node == null) return;
-            TreeNode temp = node.Parent;
+            TreeNodeBase temp = node.Parent;
             node.parentWorkSpace.IsSelected = true;
             node.parentWorkSpace.TreeNodes[0].ClearChildSelection();
-            Stack<TreeNode> sta = new Stack<TreeNode>();
+            Stack<TreeNodeBase> sta = new Stack<TreeNodeBase>();
             while (temp != null)
             {
                 sta.Push(temp);
                 temp = temp.Parent;
             }
-            
+
             while (sta.Count > 0)
             {
                 sta.Pop().IsExpanded = true;
@@ -519,11 +522,11 @@ namespace LuaSTGEditorSharp
             MessageBox.Show("");
 
             XmlReaderSettings readerSettings = new XmlReaderSettings();
-            
+
             var sr = new StreamReader(Path.GetFullPath(Path.Combine(Path.GetTempPath(), "LuaSTG Editor/xmltest.xml")));
             DocumentData newDoc = DocumentData.GetNewByExtension(".lstges", Documents.MaxHash, "xmltest", Path.GetFullPath(Path.Combine(Path.GetTempPath(), "LuaSTG Editor/xmltest.xml")));
             Documents.AddAndAllocHash(newDoc);
-            TreeNode t = serializer.Deserialize(sr) as TreeNode;
+            TreeNodeBase t = serializer.Deserialize(sr) as TreeNodeBase;
             newDoc.TreeNodes.Add(t);
             newDoc.OnOpening();
             //newDoc.TreeNodes[0].FixBan();
@@ -551,11 +554,11 @@ namespace LuaSTGEditorSharp
             catch { }
         }
 
-        private void ExportZip(bool run, TreeNode SCDebugger = null, TreeNode StageDebugger = null)
+        private void ExportZip(bool run, TreeNodeBase SCDebugger = null, TreeNodeBase StageDebugger = null)
         {
             try
             {
-                bool saveMeta=false;
+                bool saveMeta = false;
                 propData.CommitEdit();
                 if (TestError()) return;
                 GlobalCompileData.SCDebugger = SCDebugger;
@@ -580,11 +583,11 @@ namespace LuaSTGEditorSharp
             }
             catch (EXEPathNotSetException)
             {
-                
+
             }
             catch (InvalidRelativeResPathException)
             {
-                
+
             }
             catch (InvalidOperationException)
             {
@@ -597,15 +600,15 @@ namespace LuaSTGEditorSharp
         {
             object[] arguments = args.Argument as object[];
             DocumentData current = arguments[0] as DocumentData;
-            TreeNode SCDebugger = arguments[1] as TreeNode;
-            TreeNode StageDebugger = arguments[2] as TreeNode;
+            TreeNodeBase SCDebugger = arguments[1] as TreeNodeBase;
+            TreeNodeBase StageDebugger = arguments[2] as TreeNodeBase;
 
             App currentApp = Application.Current as App;
             CompileProcess process = null;
             if (!(current is PlainDocumentData pdd && pdd.parentProj != null))
             {
                 current.GatherCompileInfo(currentApp);
-                current.CompileProcess.ProgressChanged += 
+                current.CompileProcess.ProgressChanged +=
                     (o, e) => CompileWorker.ReportProgress(e.ProgressPercentage, e.UserState);
                 current.CompileProcess.ExecuteProcess(SCDebugger != null, StageDebugger != null, App.Current as App);
                 process = current.CompileProcess;
@@ -673,54 +676,54 @@ namespace LuaSTGEditorSharp
                     lstgInstance.Start();
                     DebugString += "LuaSTG is Running.\n\n";
                     */
-                    /* 
-                     * what it should be like:
-                     * 
-                    lstg.OutputDataReceived += (s, e) => DebugString += e.Data;
-                    lstg.ErrorDataReceived += (s, e) => DebugString += e.Data;
-                     *
-                     * what it actually is:
-                     */
-                     /*
-                    lstgInstance.Exited += (s, e) => {
-                        FileStream fs = null;
-                        StreamReader sr = null;
-                        try
-                        {
-                            fs = new FileStream(Path.GetFullPath(Path.Combine(
-                                Path.GetDirectoryName(process.luaSTGExePath), "log.txt")), FileMode.Open);
-                            sr = new StreamReader(fs);
-                            DebugString += sr.ReadToEnd();
-                            //debugOutput.ScrollToEnd();
-                        }
-                        finally
-                        {
-                            if (fs != null) fs.Close();
-                            if (sr != null) sr.Close();
-                        }
-                        DebugString += "\nExited with code " + lstgInstance.ExitCode + ".";
-                    };
-                    lstgInstance.EnableRaisingEvents = true;
-                    lstgInstance.BeginOutputReadLine();
-                    lstgInstance.BeginErrorReadLine();
-                    //lstg.WaitForExit();
-                }
-                else
-                {
-                    MessageBox.Show("LuaSTG is already running, please exit first."
-                        , "LuaSTG Editor Sharp", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-            }
-            catch (Win32Exception)
-            {
-                throw new EXEPathNotSetException();
-            }
-            */
+            /* 
+             * what it should be like:
+             * 
+            lstg.OutputDataReceived += (s, e) => DebugString += e.Data;
+            lstg.ErrorDataReceived += (s, e) => DebugString += e.Data;
+             *
+             * what it actually is:
+             */
+            /*
+           lstgInstance.Exited += (s, e) => {
+               FileStream fs = null;
+               StreamReader sr = null;
+               try
+               {
+                   fs = new FileStream(Path.GetFullPath(Path.Combine(
+                       Path.GetDirectoryName(process.luaSTGExePath), "log.txt")), FileMode.Open);
+                   sr = new StreamReader(fs);
+                   DebugString += sr.ReadToEnd();
+                   //debugOutput.ScrollToEnd();
+               }
+               finally
+               {
+                   if (fs != null) fs.Close();
+                   if (sr != null) sr.Close();
+               }
+               DebugString += "\nExited with code " + lstgInstance.ExitCode + ".";
+           };
+           lstgInstance.EnableRaisingEvents = true;
+           lstgInstance.BeginOutputReadLine();
+           lstgInstance.BeginErrorReadLine();
+           //lstg.WaitForExit();
+       }
+       else
+       {
+           MessageBox.Show("LuaSTG is already running, please exit first."
+               , "LuaSTG Editor Sharp", MessageBoxButton.OK, MessageBoxImage.Error);
+       }
+   }
+   catch (Win32Exception)
+   {
+       throw new EXEPathNotSetException();
+   }
+   */
             PluginHandler.Plugin.Execution.BeforeRun(new ExecutionConfig()
             {
                 ModName = process.projName
             });
-            PluginHandler.Plugin.Execution.Run((s) => 
+            PluginHandler.Plugin.Execution.Run((s) =>
             {
                 DebugString = s;
             }
@@ -731,8 +734,8 @@ namespace LuaSTGEditorSharp
         {
             Region beg = selectedNode as Region;
             Region end = null;
-            ObservableCollection<TreeNode> toFold = new ObservableCollection<TreeNode>();
-            TreeNode p = beg.Parent;
+            ObservableCollection<TreeNodeBase> toFold = new ObservableCollection<TreeNodeBase>();
+            TreeNodeBase p = beg.Parent;
             bool inSel = false;
             for (int i = 0; i < p.Children.Count; i++)
             {
@@ -758,19 +761,22 @@ namespace LuaSTGEditorSharp
             ActivatedWorkSpaceData.AddAndExecuteCommand(new UnfoldAsRegionCommand(selectedNode));
         }
 
-        private void CreateInvoke(TreeNode newNode)
+        private void CreateInvoke(TreeNodeBase newNode)
         {
             propData.CommitEdit();
-            AttrItem ai = newNode.GetCreateInvoke();
-            if (ai != null)
+            if (newNode is FixedAttributeTreeNode fatn)
             {
-                IInputWindow iw = InputWindowSelector.SelectInputWindow(ai, ai.EditWindow, ai.AttrInput);
-                if (iw.ShowDialog() == true)
+                AttrItem ai = fatn.GetCreateInvoke();
+                if (ai != null)
                 {
-                    ActivatedWorkSpaceData.AddAndExecuteCommand(new EditAttrCommand(ai, ai.AttrInput, iw.Result));
-                    var a = propData.ItemsSource;
-                    propData.ItemsSource = null;
-                    propData.ItemsSource = a;
+                    IInputWindow iw = InputWindowSelector.SelectInputWindow(ai, ai.EditWindow, ai.AttrInput);
+                    if (iw.ShowDialog() == true)
+                    {
+                        ActivatedWorkSpaceData.AddAndExecuteCommand(new EditAttrCommand(ai, ai.AttrInput, iw.Result));
+                        var a = propData.ItemsSource;
+                        propData.ItemsSource = null;
+                        propData.ItemsSource = a;
+                    }
                 }
             }
         }
@@ -778,16 +784,19 @@ namespace LuaSTGEditorSharp
         private void ShowEditWindow()
         {
             propData.CommitEdit();
-            AttrItem ai = selectedNode?.GetRCInvoke();
-            if (ai != null)
+            if (selectedNode is FixedAttributeTreeNode fatn)
             {
-                IInputWindow iw = InputWindowSelector.SelectInputWindow(ai, ai.EditWindow, ai.AttrInput);
-                if (iw.ShowDialog() == true)
+                AttrItem ai = fatn?.GetRCInvoke();
+                if (ai != null)
                 {
-                    ActivatedWorkSpaceData.AddAndExecuteCommand(new EditAttrCommand(ai, ai.AttrInput, iw.Result));
-                    var a = propData.ItemsSource;
-                    propData.ItemsSource = null;
-                    propData.ItemsSource = a;
+                    IInputWindow iw = InputWindowSelector.SelectInputWindow(ai, ai.EditWindow, ai.AttrInput);
+                    if (iw.ShowDialog() == true)
+                    {
+                        ActivatedWorkSpaceData.AddAndExecuteCommand(new EditAttrCommand(ai, ai.AttrInput, iw.Result));
+                        var a = propData.ItemsSource;
+                        propData.ItemsSource = null;
+                        propData.ItemsSource = a;
+                    }
                 }
             }
         }
@@ -815,18 +824,18 @@ namespace LuaSTGEditorSharp
             insertState = new ParentFac();
         }
 
-        private void WorkSpaceSelectedChanged(object sender,RoutedEventArgs e)
+        private void WorkSpaceSelectedChanged(object sender, RoutedEventArgs e)
         {
             workSpace = sender as TreeView;
-            SelectedNode = ((TreeNode)(workSpace.SelectedItem));
-            if (selectedNode != null) this.propData.ItemsSource = selectedNode.attributes;
+            SelectedNode = ((TreeNodeBase)(workSpace.SelectedItem));
+            if (selectedNode != null) this.propData.ItemsSource = ((FixedAttributeTreeNode)selectedNode).attributes;
             //EditorConsole.Text = selectedNode.ToLua(0);
         }
 
         private void ComboBox_Loaded(object sender, RoutedEventArgs e)
         {
             ComboBox comboBox = sender as ComboBox;
-            foreach(string s in InputWindowSelector.SelectComboBox(comboBox.Tag?.ToString()))
+            foreach (string s in InputWindowSelector.SelectComboBox(comboBox.Tag?.ToString()))
             {
                 ComboBoxItem item = new ComboBoxItem() { Content = s };
                 comboBox.Items.Add(item);
@@ -841,9 +850,9 @@ namespace LuaSTGEditorSharp
             {
                 Process log = new Process
                 {
-                    StartInfo = new ProcessStartInfo(path) 
+                    StartInfo = new ProcessStartInfo(path)
                     {
-                        UseShellExecute = true 
+                        UseShellExecute = true
                     }
                 };
                 log.Start();
@@ -861,7 +870,7 @@ namespace LuaSTGEditorSharp
                     break;
                 }
             }
-            if(!e.Cancel) App.Current.Shutdown();
+            if (!e.Cancel) App.Current.Shutdown();
         }
 
         private void ButtonCloseFile_Click(object sender, RoutedEventArgs e)
@@ -893,16 +902,19 @@ namespace LuaSTGEditorSharp
                 && (sender as TreeViewItem).IsSelected)
             {
                 propData.CommitEdit();
-                AttrItem ai = selectedNode.GetRCInvoke();
-                if (ai != null)
+                if (selectedNode is FixedAttributeTreeNode fatn)
                 {
-                    IInputWindow iw = InputWindowSelector.SelectInputWindow(ai, ai.EditWindow, ai.AttrInput);
-                    if (iw.ShowDialog() == true)
+                    AttrItem ai = fatn.GetRCInvoke();
+                    if (ai != null)
                     {
-                        ActivatedWorkSpaceData.AddAndExecuteCommand(new EditAttrCommand(ai, ai.AttrInput, iw.Result));
-                        var a = propData.ItemsSource;
-                        propData.ItemsSource = null;
-                        propData.ItemsSource = a;
+                        IInputWindow iw = InputWindowSelector.SelectInputWindow(ai, ai.EditWindow, ai.AttrInput);
+                        if (iw.ShowDialog() == true)
+                        {
+                            ActivatedWorkSpaceData.AddAndExecuteCommand(new EditAttrCommand(ai, ai.AttrInput, iw.Result));
+                            var a = propData.ItemsSource;
+                            propData.ItemsSource = null;
+                            propData.ItemsSource = a;
+                        }
                     }
                 }
                 //e.Handled = true;
@@ -1119,7 +1131,7 @@ namespace LuaSTGEditorSharp
 
         private void GoToDefCommandExecuted(object sender, ExecutedRoutedEventArgs e)
         {
-            TreeNode t = selectedNode?.GetReferredTreeNode();
+            TreeNodeBase t = selectedNode?.GetReferredTreeNode();
             if (t != null) Reveal(t);
         }
 
@@ -1139,7 +1151,7 @@ namespace LuaSTGEditorSharp
             PluginToolResult ptr = pt.ExecutePlugin(new PluginToolParameter(SelectedNode));
             clipBoard = ptr.clipBoard;
             if (ptr.newDocument != null) Documents.AddAndAllocHash(ptr.newDocument);
-            foreach(Command c in ptr.commands)
+            foreach (Command c in ptr.commands)
             {
                 ActivatedWorkSpaceData.AddAndExecuteCommand(c);
             }
@@ -1187,7 +1199,7 @@ namespace LuaSTGEditorSharp
 
         private void SCDebugCommandExecuted(object sender, ExecutedRoutedEventArgs e)
         {
-            TreeNode t = selectedNode;
+            TreeNodeBase t = selectedNode;
             while (t != null)
             {
                 if (PluginHandler.Plugin.MatchBossSCNodeTypes(t.GetType()))
@@ -1203,10 +1215,10 @@ namespace LuaSTGEditorSharp
         {
             e.CanExecute = false;
             if (selectedNode == null) return;
-            TreeNode t = selectedNode;
-            while (t != null) 
+            TreeNodeBase t = selectedNode;
+            while (t != null)
             {
-                if(PluginHandler.Plugin.MatchBossSCNodeTypes(t.GetType()))
+                if (PluginHandler.Plugin.MatchBossSCNodeTypes(t.GetType()))
                 {
                     e.CanExecute = true;
                 }
@@ -1224,12 +1236,12 @@ namespace LuaSTGEditorSharp
         {
             e.CanExecute = false;
             if (selectedNode == null) return;
-            TreeNode t = selectedNode;
+            TreeNodeBase t = selectedNode;
             while (t != null && t?.Parent is Folder)
             {
                 t = t.Parent;
             }
-            e.CanExecute = PluginHandler.Plugin.MatchStageNodeTypes(t?.Parent?.Parent?.GetType()) && !packagingLocked 
+            e.CanExecute = PluginHandler.Plugin.MatchStageNodeTypes(t?.Parent?.Parent?.GetType()) && !packagingLocked
                 && (App.Current as App).IsEXEPathSet;
         }
 
@@ -1282,7 +1294,7 @@ namespace LuaSTGEditorSharp
             insertState = new ParentFac();
             RaiseInsertStateChanged();
         }
-        
+
         private void ViewFileFolderCommandExecuted(object sender, ExecutedRoutedEventArgs e)
         {
             try
@@ -1299,7 +1311,7 @@ namespace LuaSTGEditorSharp
             }
             catch { }
         }
-        
+
         private void ViewFileFolderCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
             e.CanExecute = ActivatedWorkSpaceData != null;
@@ -1334,7 +1346,7 @@ namespace LuaSTGEditorSharp
             propData.CommitEdit();
             PluginHandler.Plugin.GetViewDefinitionWindow(ActivatedWorkSpaceData).ShowDialog();
         }
-        
+
         private void ViewDefinitionCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
             e.CanExecute = ActivatedWorkSpaceData != null;
@@ -1342,7 +1354,7 @@ namespace LuaSTGEditorSharp
 
         private void SettingsCommandExecuted(object sender, ExecutedRoutedEventArgs e)
         {
-            if(int.TryParse(e.Parameter?.ToString(), out int i))
+            if (int.TryParse(e.Parameter?.ToString(), out int i))
             {
                 new SettingsWindow(i).ShowDialog();
             }
@@ -1411,7 +1423,7 @@ namespace LuaSTGEditorSharp
             {
                 // Starts the Edit on the row;
                 DataGrid grd = (DataGrid)sender;
-                if(!dgc.IsReadOnly)grd.BeginEdit(e);
+                if (!dgc.IsReadOnly) grd.BeginEdit(e);
             }
         }
 
@@ -1429,7 +1441,7 @@ namespace LuaSTGEditorSharp
         private void TxtLine_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key != Key.Enter) return;
-            if(ActivatedWorkSpaceData != null && int.TryParse(TxtLine.Text?.ToString(), out int i))
+            if (ActivatedWorkSpaceData != null && int.TryParse(TxtLine.Text?.ToString(), out int i))
             {
                 GotoLine(i);
             }

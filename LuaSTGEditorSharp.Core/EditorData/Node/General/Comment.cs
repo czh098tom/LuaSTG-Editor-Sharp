@@ -15,15 +15,15 @@ namespace LuaSTGEditorSharp.EditorData.Node.General
 {
     [Serializable, NodeIcon("comment.png")]
     [RCInvoke(0)]
-    public class Comment : TreeNode
+    public class Comment : FixedAttributeTreeNode
     {
         [JsonConstructor]
         private Comment() : base() { }
 
-        public Comment(DocumentData workSpaceData) 
+        public Comment(DocumentData workSpaceData)
             : this(workSpaceData, "") { }
 
-        public Comment(DocumentData workSpaceData, string code) 
+        public Comment(DocumentData workSpaceData, string code)
             : base(workSpaceData)
         {
             /*
@@ -52,17 +52,17 @@ namespace LuaSTGEditorSharp.EditorData.Node.General
         {
             string sp = Indent(spacing);
             bool incomm = false;
-            TreeNode t = Parent;
+            TreeNodeBase t = Parent;
             while (t != null)
             {
                 incomm = t is Comment;
                 if (incomm)
                 {
-                    if(t.attributes[1].AttrInput=="true") break;
+                    if ((t as Comment).NonMacrolize(1) == "true") break;
                 }
                 t = t.Parent;
             }
-            if (!incomm) 
+            if (!incomm)
             {
                 if (NonMacrolize(1) == "true")
                 {
@@ -94,14 +94,14 @@ namespace LuaSTGEditorSharp.EditorData.Node.General
             }
         }
 
-        public override IEnumerable<Tuple<int,TreeNode>> GetLines()
+        public override IEnumerable<Tuple<int, TreeNodeBase>> GetLines()
         {
-            yield return new Tuple<int, TreeNode>(1, this);
-            foreach(Tuple<int,TreeNode> t in GetChildLines())
+            yield return new Tuple<int, TreeNodeBase>(1, this);
+            foreach (Tuple<int, TreeNodeBase> t in GetChildLines())
             {
                 yield return t;
             }
-            yield return new Tuple<int, TreeNode>(1, this);
+            yield return new Tuple<int, TreeNodeBase>(1, this);
         }
 
         public override string ToString()

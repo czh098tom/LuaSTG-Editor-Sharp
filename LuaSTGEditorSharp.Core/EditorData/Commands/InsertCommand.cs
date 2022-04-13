@@ -7,26 +7,26 @@ using System.Threading.Tasks;
 namespace LuaSTGEditorSharp.EditorData.Commands
 {
     /// <summary>
-    /// <see cref="Command"/> that insert a <see cref="TreeNode"/> to somewhere of another <see cref="TreeNode"/>.
+    /// <see cref="Command"/> that insert a <see cref="TreeNodeBase"/> to somewhere of another <see cref="TreeNodeBase"/>.
     /// </summary>
     public abstract class InsertCommand : Command
     {
         /// <summary>
-        /// The target <see cref="TreeNode"/>
+        /// The target <see cref="TreeNodeBase"/>
         /// </summary>
-        protected TreeNode _toOperate;
+        protected TreeNodeBase _toOperate;
         /// <summary>
-        /// The <see cref="TreeNode"/> to insert.
+        /// The <see cref="TreeNodeBase"/> to insert.
         /// </summary>
-        protected TreeNode _toInsert;
+        protected TreeNodeBase _toInsert;
 
         /// <summary>
-        /// Initializes <see cref="Command"/> by target <see cref="TreeNode"/> 
-        /// and <see cref="TreeNode"/> to insert.
+        /// Initializes <see cref="Command"/> by target <see cref="TreeNodeBase"/> 
+        /// and <see cref="TreeNodeBase"/> to insert.
         /// </summary>
-        /// <param name="toOp">The target <see cref="TreeNode"/>.</param>
-        /// <param name="toIns">The <see cref="TreeNode"/> to insert.</param>
-        public InsertCommand(TreeNode toOp, TreeNode toIns)
+        /// <param name="toOp">The target <see cref="TreeNodeBase"/>.</param>
+        /// <param name="toIns">The <see cref="TreeNodeBase"/> to insert.</param>
+        public InsertCommand(TreeNodeBase toOp, TreeNodeBase toIns)
         {
             _toOperate = toOp;
             _toInsert = toIns;

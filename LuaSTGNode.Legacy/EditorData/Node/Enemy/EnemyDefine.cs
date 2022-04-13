@@ -16,7 +16,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Enemy
     [Serializable, NodeIcon("enemydefine.png")]
     [ClassNode]
     [CreateInvoke(0), RCInvoke(0)]
-    public class EnemyDefine : TreeNode
+    public class EnemyDefine : DefinitionWithDifficulty
     {
         [JsonConstructor]
         public EnemyDefine() : base() { }
@@ -29,20 +29,6 @@ namespace LuaSTGEditorSharp.EditorData.Node.Enemy
             Difficulty = difficulty;
         }
 
-        [JsonIgnore, NodeAttribute]
-        public string Name
-        {
-            get => DoubleCheckAttr(0).attrInput;
-            set => DoubleCheckAttr(0).attrInput = value;
-        }
-
-        [JsonIgnore, NodeAttribute]
-        public string Difficulty
-        {
-            get => DoubleCheckAttr(1, "objDifficulty").attrInput;
-            set => DoubleCheckAttr(1, "objDifficulty").attrInput = value;
-        }
-
         public override object Clone()
         {
             var n = new EnemyDefine(parentWorkSpace);
@@ -53,8 +39,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Enemy
         public override IEnumerable<string> ToLua(int spacing)
         {
             string sp = Indent(spacing);
-            string difficultyS = NonMacrolize(1) == "All" ? "" : ":" + NonMacrolize(1);
-            yield return sp + "_editor_class[\"" + Lua.StringParser.ParseLua(NonMacrolize(0) + difficultyS) + "\"]=Class(enemy)\n";
+            yield return sp + "_editor_class[\"" + GetParsedNameWithDifficulty() + "\"]=Class(enemy)\n";
             foreach (var a in base.ToLua(spacing))
             {
                 yield return a;
@@ -63,8 +48,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Enemy
 
         public override string ToString()
         {
-            string difficultyS = NonMacrolize(1) == "All" ? "" : ":" + NonMacrolize(1);
-            return "Define enemy type \"" + NonMacrolize(0) + difficultyS + "\"";
+            return "Define enemy type \"" + GetNameWithDifficulty() + "\"";
         }
 
         public override MetaInfo GetMeta()
@@ -72,15 +56,10 @@ namespace LuaSTGEditorSharp.EditorData.Node.Enemy
             return new EnemyDefineMetaInfo(this);
         }
 
-        public override string GetDifficulty()
+        public override IEnumerable<Tuple<int, TreeNodeBase>> GetLines()
         {
-            return NonMacrolize(1) == "All" ? "" : NonMacrolize(1);
-        }
-
-        public override IEnumerable<Tuple<int, TreeNode>> GetLines()
-        {
-            yield return new Tuple<int, TreeNode>(1, this);
-            foreach (Tuple<int, TreeNode> t in GetChildLines())
+            yield return new Tuple<int, TreeNodeBase>(1, this);
+            foreach (Tuple<int, TreeNodeBase> t in GetChildLines())
             {
                 yield return t;
             }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LuaSTGEditorSharp.EditorData.Node
 {
-    public class TemplatedNode : TreeNode
+    public abstract class TemplatedNode : TreeNodeBase
     {
         private Dictionary<string, string> storedProperties;
 
@@ -15,7 +15,7 @@ namespace LuaSTGEditorSharp.EditorData.Node
             throw new NotImplementedException();
         }
 
-        public override IEnumerable<Tuple<int, TreeNode>> GetLines()
+        public override IEnumerable<Tuple<int, TreeNodeBase>> GetLines()
         {
             throw new NotImplementedException();
         }

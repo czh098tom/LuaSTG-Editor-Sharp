@@ -14,7 +14,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Bullet
     [RequireAncestor(typeof(CodeAlikeTypes))]
     [LeafNode]
     [CreateInvoke(0), RCInvoke(3)]
-    public class CreateSimpleBullet : TreeNode
+    public class CreateSimpleBullet : FixedAttributeTreeNode
     {
         [JsonConstructor]
         private CreateSimpleBullet() : base() { }
@@ -179,9 +179,9 @@ namespace LuaSTGEditorSharp.EditorData.Node.Bullet
             yield return sp + "last=New(_straight" + s + ")\n";
         }
 
-        public override IEnumerable<Tuple<int,TreeNode>> GetLines()
+        public override IEnumerable<Tuple<int,TreeNodeBase>> GetLines()
         {
-            yield return new Tuple<int, TreeNode>(1, this);
+            yield return new Tuple<int, TreeNodeBase>(1, this);
         }
 
         public override string ToString()

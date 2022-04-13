@@ -15,7 +15,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Object
     [RequireAncestor(typeof(CodeAlikeTypes))]
     [LeafNode]
     [RCInvoke(1)]
-    class MakeSmear : TreeNode
+    class MakeSmear : FixedAttributeTreeNode
     {
         [JsonConstructor]
         private MakeSmear() : base() { }
@@ -55,9 +55,9 @@ namespace LuaSTGEditorSharp.EditorData.Node.Object
             yield return $"{sp}last=New(smear,{Macrolize(0)},{Macrolize(1)})";
         }
 
-        public override IEnumerable<Tuple<int, TreeNode>> GetLines()
+        public override IEnumerable<Tuple<int, TreeNodeBase>> GetLines()
         {
-            yield return new Tuple<int, TreeNode>(1, this);
+            yield return new Tuple<int, TreeNodeBase>(1, this);
         }
 
         public override object Clone()

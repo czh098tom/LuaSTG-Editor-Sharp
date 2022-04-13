@@ -12,27 +12,27 @@ namespace LuaSTGEditorSharp.EditorData.Commands.Factory
     public class ParentFac : CommandTypeFac
     {
         /// <summary>
-        /// Create a new <see cref="InsertAsParentCommand"/> of target and new <see cref="TreeNode"/>.
+        /// Create a new <see cref="InsertAsParentCommand"/> of target and new <see cref="TreeNodeBase"/>.
         /// </summary>
-        /// <param name="toOp">The target <see cref="TreeNode"/>.</param>
-        /// <param name="toIns">The <see cref="TreeNode"/> to insert.</param>
+        /// <param name="toOp">The target <see cref="TreeNodeBase"/>.</param>
+        /// <param name="toIns">The <see cref="TreeNodeBase"/> to insert.</param>
         /// <returns>A new <see cref="InsertCommand"/>.</returns>
-        public override InsertCommand NewInsert(TreeNode toOp, TreeNode toIns)
+        public override InsertCommand NewInsert(TreeNodeBase toOp, TreeNodeBase toIns)
         {
             return new InsertAsParentCommand(toOp, toIns);
         }
 
         /// <summary>
-        /// Validate the feasibility of insert if new <see cref="TreeNode"/> is parent and old is child.
+        /// Validate the feasibility of insert if new <see cref="TreeNodeBase"/> is parent and old is child.
         /// </summary>
-        /// <param name="toOp">The target <see cref="TreeNode"/>.</param>
-        /// <param name="toIns">The <see cref="TreeNode"/> to insert.</param>
+        /// <param name="toOp">The target <see cref="TreeNodeBase"/>.</param>
+        /// <param name="toIns">The <see cref="TreeNodeBase"/> to insert.</param>
         /// <returns>A <see cref="bool"/> value, true for can.</returns>
-        public override bool ValidateType(TreeNode toOp, TreeNode toIns)
+        public override bool ValidateType(TreeNodeBase toOp, TreeNodeBase toIns)
         {
-            TreeNode toInsP = TreeNode.TryLink(toIns, toOp);
+            TreeNodeBase toInsP = TreeNodeBase.TryLink(toIns, toOp);
             bool a = toIns.ValidateChild(toOp) && toIns.Parent.ValidateChild(toIns);
-            TreeNode.TryUnlink(toIns, toOp, toInsP);
+            TreeNodeBase.TryUnlink(toIns, toOp, toInsP);
             return a;
         }
     }

@@ -14,7 +14,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Enemy
     [RequireAncestor(typeof(CodeAlikeTypes))]
     [LeafNode]
     [RCInvoke(0)]
-    public class EnemyCharge : TreeNode
+    public class EnemyCharge : FixedAttributeTreeNode
     {
         [JsonConstructor]
         public EnemyCharge() : base() { }
@@ -51,9 +51,9 @@ namespace LuaSTGEditorSharp.EditorData.Node.Enemy
             return n;
         }
 
-        public override IEnumerable<Tuple<int, TreeNode>> GetLines()
+        public override IEnumerable<Tuple<int, TreeNodeBase>> GetLines()
         {
-            yield return new Tuple<int, TreeNode>(1, this);
+            yield return new Tuple<int, TreeNodeBase>(1, this);
         }
     }
 }

@@ -9,23 +9,13 @@ using LuaSTGEditorSharp.Windows;
 
 namespace LuaSTGEditorSharp.EditorData.Document.Meta
 {
-    public class FXLoadMetaInfo : MetaInfo, IComparable<FXLoadMetaInfo>
+    public class FXLoadMetaInfo : ResourceLoadMetaInfo, IComparable<FXLoadMetaInfo>
     {
-        public override string Name
-        {
-            get => Lua.StringParser.ParseLua(target.attributes[1].AttrInput);
-        }
-
         public override string Difficulty => "";
 
         public override string FullName
         {
             get => "fx:" + Name;
-        }
-
-        public string Path
-        {
-            get => target.attributes[0].AttrInput;
         }
 
         public override string ScrString => Name;
@@ -52,7 +42,7 @@ namespace LuaSTGEditorSharp.EditorData.Document.Meta
             MetaModel path = new MetaModel
             {
                 Icon = "/LuaSTGNode.Legacy;component/images/16x16/loadFX.png",
-                Text = target.attributes[0].AttrInput
+                Text = Path
             };
             metaModel.Children.Add(path);
             return metaModel;

@@ -17,7 +17,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.General
     [ClassNode]
     [LeafNode]
     [CreateInvoke(0), RCInvoke(0)]
-    class AddFile : TreeNode
+    class AddFile : FixedAttributeTreeNode
     {
         [JsonConstructor]
         private AddFile() : base() { }
@@ -42,7 +42,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.General
             yield break;
         }
 
-        public override IEnumerable<Tuple<int, TreeNode>> GetLines()
+        public override IEnumerable<Tuple<int, TreeNodeBase>> GetLines()
         {
             yield break;
         }

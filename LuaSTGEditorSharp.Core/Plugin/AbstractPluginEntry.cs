@@ -78,7 +78,7 @@ namespace LuaSTGEditorSharp.Plugin
         /// </summary>
         public virtual PluginTool[] PluginTools { get => new PluginTool[] { }; }
         /// <summary>
-        /// When overrided, indicating another assembly to hold <see cref="TreeNode"/> definitions.
+        /// When overrided, indicating another assembly to hold <see cref="TreeNodeBase"/> definitions.
         /// </summary>
         public virtual string NodeAssemblyName { get => ""; }
         /// <summary>

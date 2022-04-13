@@ -14,7 +14,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Boss
     [RequireAncestor(typeof(Stage.Stage), typeof(Data.Function))]
     [LeafNode]
     [CreateInvoke(0), RCInvoke(0)]
-    public class CreateBoss : TreeNode
+    public class CreateBoss : FixedAttributeTreeNode
     {
         [JsonConstructor]
         private CreateBoss() : base() { }
@@ -57,9 +57,9 @@ namespace LuaSTGEditorSharp.EditorData.Node.Boss
                        + sp + "if _boss_wait then while IsValid(_ref) do task.Wait() end end\n";
         }
 
-        public override IEnumerable<Tuple<int,TreeNode>> GetLines()
+        public override IEnumerable<Tuple<int,TreeNodeBase>> GetLines()
         {
-            yield return new Tuple<int, TreeNode>(4, this);
+            yield return new Tuple<int, TreeNodeBase>(4, this);
         }
 
         public override string ToString()

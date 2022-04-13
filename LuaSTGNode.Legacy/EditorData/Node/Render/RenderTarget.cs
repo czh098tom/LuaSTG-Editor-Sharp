@@ -16,7 +16,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Render
     [RequireAncestor(typeof(RenderAlikeTypes))]
     [LeafNode]
     [RCInvoke(1)]
-    public class RenderTarget : TreeNode
+    public class RenderTarget : FixedAttributeTreeNode
     {
         [JsonConstructor]
         public RenderTarget() : base() { }
@@ -61,9 +61,9 @@ namespace LuaSTGEditorSharp.EditorData.Node.Render
             return n;
         }
 
-        public override IEnumerable<Tuple<int, TreeNode>> GetLines()
+        public override IEnumerable<Tuple<int, TreeNodeBase>> GetLines()
         {
-            yield return new Tuple<int, TreeNode>(1, this);
+            yield return new Tuple<int, TreeNodeBase>(1, this);
         }
     }
 }

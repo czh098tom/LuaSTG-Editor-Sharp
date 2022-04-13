@@ -9,27 +9,18 @@ using LuaSTGEditorSharp.Windows;
 
 namespace LuaSTGEditorSharp.EditorData.Document.Meta
 {
-    public class AnimationLoadMetaInfo : MetaInfo, IComparable<AnimationLoadMetaInfo>
+    public class AnimationLoadMetaInfo : ResourceLoadMetaInfo, IComparable<AnimationLoadMetaInfo>
     {
-        public override string Name
-        {
-            get => target.attributes[1].AttrInput;
-        }
-
         public override string Difficulty => "";
 
         public override string FullName
         {
-            get => "ani:" + Lua.StringParser.ParseLua(target.attributes[1].AttrInput);
+            get => "ani:" + Lua.StringParser.ParseLua(target.PreferredNonMacrolize(1, nameof(LoadAnimation.ResourceName)));
         }
 
-        public string Path
-        {
-            get => target.attributes[0].AttrInput;
-        }
         public string ColsAndRows
         {
-            get => target.attributes[3].AttrInput;
+            get => target.PreferredNonMacrolize(3, "Cols and rows");
         }
 
         public override string ScrString => Name;
@@ -56,7 +47,7 @@ namespace LuaSTGEditorSharp.EditorData.Document.Meta
             MetaModel path = new MetaModel
             {
                 Icon = "/LuaSTGNode.Legacy;component/images/16x16/loadani.png",
-                Text = target.attributes[0].AttrInput
+                Text = Path
             };
             metaModel.Children.Add(path);
             path = new MetaModel

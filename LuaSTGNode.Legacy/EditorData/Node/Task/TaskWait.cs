@@ -15,7 +15,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Task
     [RequireAncestor(typeof(TaskAlikeTypes))]
     [LeafNode]
     [RCInvoke(0)]
-    public class TaskWait : TreeNode
+    public class TaskWait : FixedAttributeTreeNode
     {
         [JsonConstructor]
         private TaskWait() : base() { }
@@ -43,9 +43,9 @@ namespace LuaSTGEditorSharp.EditorData.Node.Task
             yield return sp + "task._Wait(" + Macrolize(0) + ")\n";
         }
         
-        public override IEnumerable<Tuple<int, TreeNode>> GetLines()
+        public override IEnumerable<Tuple<int, TreeNodeBase>> GetLines()
         {
-            yield return new Tuple<int, TreeNode>(1, this);
+            yield return new Tuple<int, TreeNodeBase>(1, this);
         }
 
         public override string ToString()

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LuaSTGEditorSharp.EditorData.Node.Advanced.AdvancedRepeat
 {
-    public abstract class VariableTransformation : TreeNode
+    public abstract class VariableTransformation : FixedAttributeTreeNode
     {
         public VariableTransformation() : base() { }
         public VariableTransformation(DocumentData workSpaceData) : base(workSpaceData) { }

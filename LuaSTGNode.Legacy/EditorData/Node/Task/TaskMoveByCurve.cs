@@ -16,7 +16,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Task
     [RequireAncestor(typeof(TaskAlikeTypes))]
     [LeafNode]
     [RCInvoke(3)]
-    public class TaskMoveByCurve : TreeNode
+    public class TaskMoveByCurve : FixedAttributeTreeNode
     {
         [JsonConstructor]
         public TaskMoveByCurve() : base() { }
@@ -97,9 +97,9 @@ namespace LuaSTGEditorSharp.EditorData.Node.Task
             return n;
         }
 
-        public override IEnumerable<Tuple<int, TreeNode>> GetLines()
+        public override IEnumerable<Tuple<int, TreeNodeBase>> GetLines()
         {
-            yield return new Tuple<int, TreeNode>(1, this);
+            yield return new Tuple<int, TreeNodeBase>(1, this);
         }
     }
 }

@@ -14,7 +14,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Boss
     [Serializable, NodeIcon("bossspellcard.png")]
     [RequireParent(typeof(BossDefine))]
     [CreateInvoke(0), RCInvoke(4)]
-    public class BossSpellCard : TreeNode
+    public class BossSpellCard : FixedAttributeTreeNode
     {
         [JsonConstructor]
         private BossSpellCard() : base() { }
@@ -132,15 +132,8 @@ namespace LuaSTGEditorSharp.EditorData.Node.Boss
         public override IEnumerable<string> ToLua(int spacing)
         {
             string sp = Indent(spacing);
-            TreeNode Parent = GetLogicalParent();
-            string tmpD = "";
-            string className = "";
-            if (Parent.attributes != null && Parent.AttributeCount > 2) 
-            {
-                tmpD = Lua.StringParser.ParseLua(Parent.NonMacrolize(1));
-                string difficultyS = tmpD == "All" ? "" : ":" + tmpD;
-                className = "\"" + Lua.StringParser.ParseLua(Parent.NonMacrolize(0) + difficultyS) + "\"";
-            }
+            TreeNodeBase parent = GetLogicalParent();
+            string className = "\"" + DefinitionWithDifficulty.GetNameWithDifficulty(parent) + "\"";
             string cardName = Lua.StringParser.ParseLua(NonMacrolize(0));
             string a = "";
             if(!string.IsNullOrEmpty(Macrolize(10)))
@@ -160,16 +153,16 @@ namespace LuaSTGEditorSharp.EditorData.Node.Boss
                       + "\",_tmp_sc,#_editor_class[" + className + "].cards," + Macrolize(9) + "})\n" : "\n");
         }
 
-        public override IEnumerable<Tuple<int,TreeNode>> GetLines()
+        public override IEnumerable<Tuple<int,TreeNodeBase>> GetLines()
         {
             int i = 1;
             if (!string.IsNullOrEmpty(Macrolize(10))) i++;
-            yield return new Tuple<int, TreeNode>(i, this);
-            foreach(Tuple<int,TreeNode> t in GetChildLines())
+            yield return new Tuple<int, TreeNodeBase>(i, this);
+            foreach(Tuple<int,TreeNodeBase> t in GetChildLines())
             {
                 yield return t;
             }
-            yield return new Tuple<int, TreeNode>(3, this);
+            yield return new Tuple<int, TreeNodeBase>(3, this);
         }
 
         public override string ToString()
@@ -194,11 +187,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Boss
         public override List<MessageBase> GetMessage()
         {
             var a = new List<MessageBase>();
-            TreeNode p = GetLogicalParent();
-            if (p?.attributes == null || p.AttributeCount < 2)
-            {
-                a.Add(new CannotFindAttributeInParent(2, this));
-            }
+            a.AddRange(DefinitionWithDifficulty.PopulateMessageOfFinding(GetLogicalParent(), this));
             return a;
         }
     }

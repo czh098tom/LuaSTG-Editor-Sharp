@@ -15,7 +15,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Object
     [Serializable, NodeIcon("defaultaction.png")]
     [RequireAncestor(typeof(CallBackFunc), typeof(Data.Function), typeof(Render.OnRender))]
     [LeafNode]
-    public class DefaultAction : TreeNode
+    public class DefaultAction : FixedAttributeTreeNode
     {
         [JsonConstructor]
         private DefaultAction() : base() { }
@@ -26,7 +26,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Object
         public override IEnumerable<string> ToLua(int spacing)
         {
             string sp = Indent(spacing);
-            TreeNode callBackFunc = this;
+            TreeNodeBase callBackFunc = this;
             while(!(callBackFunc is ICallBackFunc) && callBackFunc != null)
             {
                 callBackFunc = callBackFunc.Parent;
@@ -43,9 +43,9 @@ namespace LuaSTGEditorSharp.EditorData.Node.Object
             }
         }
 
-        public override IEnumerable<Tuple<int,TreeNode>> GetLines()
+        public override IEnumerable<Tuple<int,TreeNodeBase>> GetLines()
         {
-            yield return new Tuple<int, TreeNode>(1, this);
+            yield return new Tuple<int, TreeNodeBase>(1, this);
         }
 
         public override string ToString()
@@ -63,7 +63,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Object
         public override List<MessageBase> GetMessage()
         {
             var a = new List<MessageBase>();
-            TreeNode callBackFunc = this;
+            TreeNodeBase callBackFunc = this;
             while (!(callBackFunc is ICallBackFunc) && callBackFunc != null)
             {
                 callBackFunc = callBackFunc.Parent;

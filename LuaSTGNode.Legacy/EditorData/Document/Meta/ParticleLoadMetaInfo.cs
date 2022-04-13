@@ -9,23 +9,14 @@ using LuaSTGEditorSharp.Windows;
 
 namespace LuaSTGEditorSharp.EditorData.Document.Meta
 {
-    public class ParticleLoadMetaInfo : MetaInfo, IComparable<ParticleLoadMetaInfo>
+    public class ParticleLoadMetaInfo : ResourceLoadMetaInfo, IComparable<ParticleLoadMetaInfo>
     {
-        public override string Name
-        {
-            get => Lua.StringParser.ParseLua(target.attributes[1].AttrInput);
-        }
 
         public override string Difficulty => "";
 
         public override string FullName
         {
             get => "particle:" + Name;
-        }
-
-        public string Path
-        {
-            get => target.attributes[0].AttrInput;
         }
 
         public override string ScrString => Name;
@@ -52,7 +43,7 @@ namespace LuaSTGEditorSharp.EditorData.Document.Meta
             MetaModel path = new MetaModel
             {
                 Icon = "/LuaSTGNode.Legacy;component/images/16x16/loadparticle.png",
-                Text = target.attributes[0].AttrInput
+                Text = Path
             };
             metaModel.Children.Add(path);
             return metaModel;
@@ -90,7 +81,7 @@ namespace LuaSTGEditorSharp.EditorData.Document.Meta
                 FullName = FullName,
                 Icon = "/LuaSTGNode.Legacy;component/images/16x16/loadparticle.png",
                 ExInfo1 = ppath,
-                ExInfo2 = target.attributes[2].attrInput
+                ExInfo2 = target.PreferredNonMacrolize(2, "Image")
             };
         }
     }

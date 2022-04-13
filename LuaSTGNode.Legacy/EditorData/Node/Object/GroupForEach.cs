@@ -15,7 +15,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Object
     [Serializable, NodeIcon("unitforeach.png")]
     [RequireAncestor(typeof(CodeAlikeTypes))]
     [RCInvoke(0)]
-    public class GroupForEach : TreeNode
+    public class GroupForEach : FixedAttributeTreeNode
     {
         [JsonConstructor]
         public GroupForEach() : base() { }
@@ -57,14 +57,14 @@ namespace LuaSTGEditorSharp.EditorData.Node.Object
             return n;
         }
 
-        public override IEnumerable<Tuple<int, TreeNode>> GetLines()
+        public override IEnumerable<Tuple<int, TreeNodeBase>> GetLines()
         {
-            yield return new Tuple<int, TreeNode>(1, this);
+            yield return new Tuple<int, TreeNodeBase>(1, this);
             foreach(var i in GetChildLines())
             {
                 yield return i;
             }
-            yield return new Tuple<int, TreeNode>(1, this);
+            yield return new Tuple<int, TreeNodeBase>(1, this);
         }
     }
 }

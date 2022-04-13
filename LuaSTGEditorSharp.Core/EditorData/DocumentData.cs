@@ -128,7 +128,7 @@ namespace LuaSTGEditorSharp.EditorData
             }
         }
         /// <summary>
-        /// Store the <see cref="TreeNode"/> in the document.
+        /// Store the <see cref="TreeNodeBase"/> in the document.
         /// </summary>
         public WorkTree TreeNodes { get; set; } = new WorkTree();
 
@@ -285,15 +285,15 @@ namespace LuaSTGEditorSharp.EditorData
         }
         
         /// <summary>
-        /// Generate <see cref="TreeNode"/> from file. Asynchronous.
+        /// Generate <see cref="TreeNodeBase"/> from file. Asynchronous.
         /// </summary>
         /// <param name="fileName">The name of file.</param>
         /// <returns>The generated root.</returns>
-        public static async Task<TreeNode> CreateNodeFromFileAsync(string fileName, DocumentData target)
+        public static async Task<TreeNodeBase> CreateNodeFromFileAsync(string fileName, DocumentData target)
         {
-            TreeNode root = null;
-            TreeNode prev = null;
-            TreeNode tempN = null;
+            TreeNodeBase root = null;
+            TreeNodeBase prev = null;
+            TreeNodeBase tempN = null;
             int prevLevel = -1;
             int i;
             int levelgrad;
@@ -322,7 +322,7 @@ namespace LuaSTGEditorSharp.EditorData
                                 prev = prev.Parent;
                             }
                         }
-                        tempN = (TreeNode)EditorSerializer.DeserializeTreeNode(des);
+                        tempN = (TreeNodeBase)EditorSerializer.DeserializeTreeNode(des);
                         tempN.parentWorkSpace = target;
                         //tempN.FixAttrParent();
                         prev.AddChild(tempN);
@@ -331,7 +331,7 @@ namespace LuaSTGEditorSharp.EditorData
                     }
                     else
                     {
-                        root = (TreeNode)EditorSerializer.DeserializeTreeNode(des);
+                        root = (TreeNodeBase)EditorSerializer.DeserializeTreeNode(des);
                         //root.FixAttrParent();
                         root.parentWorkSpace = target;
                         prev = root;
@@ -351,15 +351,15 @@ namespace LuaSTGEditorSharp.EditorData
         }
 
         /// <summary>
-        /// Generate <see cref="TreeNode"/> from file.
+        /// Generate <see cref="TreeNodeBase"/> from file.
         /// </summary>
         /// <param name="fileName">The name of file.</param>
         /// <returns>The generated root.</returns>
-        public TreeNode CreateNodeFromFile(string fileName)
+        public TreeNodeBase CreateNodeFromFile(string fileName)
         {
-            TreeNode root = null;
-            TreeNode prev = null;
-            TreeNode tempN = null;
+            TreeNodeBase root = null;
+            TreeNodeBase prev = null;
+            TreeNodeBase tempN = null;
             int prevLevel = -1;
             int i;
             int levelgrad;
@@ -388,7 +388,7 @@ namespace LuaSTGEditorSharp.EditorData
                                 prev = prev.Parent;
                             }
                         }
-                        tempN = (TreeNode)EditorSerializer.DeserializeTreeNode(des);
+                        tempN = (TreeNodeBase)EditorSerializer.DeserializeTreeNode(des);
                         tempN.parentWorkSpace = this;
                         //tempN.FixAttrParent();
                         prev.AddChild(tempN);
@@ -397,7 +397,7 @@ namespace LuaSTGEditorSharp.EditorData
                     }
                     else
                     {
-                        root = (TreeNode)EditorSerializer.DeserializeTreeNode(des);
+                        root = (TreeNodeBase)EditorSerializer.DeserializeTreeNode(des);
                         //root.FixAttrParent();
                         root.parentWorkSpace = this;
                         prev = root;
@@ -529,13 +529,13 @@ namespace LuaSTGEditorSharp.EditorData
                 {
                     sw.Write(a);
                 }
-                TreeNode stage = GlobalCompileData.StageDebugger;
+                TreeNodeBase stage = GlobalCompileData.StageDebugger;
                 while (!PluginHandler.Plugin.MatchStageNodeTypes(stage?.GetType()))
                 {
                     stage = stage.Parent;
                 }
-                string parentStageGroupName = stage.Parent.attributes[0].AttrInput;
-                sw.Write("_debug_stage_name=\'" + stage.attributes[0].AttrInput + "@" + parentStageGroupName + "\'");
+                string parentStageGroupName = stage.GetLogicalParent().PreferredNonMacrolize(0, "Name");
+                sw.Write("_debug_stage_name=\'" + stage.PreferredNonMacrolize(0, "Name") + "@" + parentStageGroupName + "\'");
                 sw.Write("Include \'THlib\\\\UI\\\\debugger.lua\'");
             }
             catch (System.Exception e)
