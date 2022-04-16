@@ -24,12 +24,10 @@ namespace LuaSTGEditorSharp.EditorData.Document.Meta
 
         public override string Difficulty => "";
 
-        
-
         public override string GetParam()
         {
             string s = "";
-            if (!int.TryParse(target.PreferredNonMacrolize(3, "Name"), out int nAttr)) nAttr = 0;
+            if (!int.TryParse(target.PreferredNonMacrolize(3, "Number of prop"), out int nAttr)) nAttr = 0;
             nAttr = nAttr > AppConstants.mxUAttr ? AppConstants.mxUAttr : nAttr;
             nAttr = nAttr < 0 ? 0 : nAttr;
             for (int i = 4; i <= nAttr * 3 + 3; i += 3)
@@ -66,7 +64,7 @@ namespace LuaSTGEditorSharp.EditorData.Document.Meta
                 Text = Name
             };
             MetaModel sub;
-            if (!int.TryParse(target.PreferredNonMacrolize(3, "Name"), out int nAttr)) nAttr = 0;
+            if (!int.TryParse(target.PreferredNonMacrolize(3, "Number of prop"), out int nAttr)) nAttr = 0;
             nAttr = nAttr > AppConstants.mxUAttr ? AppConstants.mxUAttr : nAttr;
             nAttr = nAttr < 0 ? 0 : nAttr;
             for (int i = 4; i <= nAttr * 3 + 3; i += 3)
