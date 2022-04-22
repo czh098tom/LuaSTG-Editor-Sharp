@@ -25,20 +25,31 @@ namespace LuaSTGEditorSharp.Windows.Input
     {
         private readonly string difficulty;
 
-        ObservableCollection<MetaModel> BulletInfo { get; set; }
+        ObservableCollection<MetaModel> AllBossInfo { get; set; }
+        ObservableCollection<MetaModel> FilteredBossInfo { get; set; }
 
         public BossDefInput(string s, IMainWindow owner, AttrItem item)
         {
             difficulty = item.Parent.GetDifficulty();
 
-            BulletInfo = item.Parent.parentWorkSpace.Meta.aggregatableMetas[(int)MetaType.Boss].GetAllSimpleWithDifficulty(difficulty);
+            AllBossInfo = item.Parent.parentWorkSpace.Meta.aggregatableMetas[(int)MetaType.Boss].GetAllSimpleWithDifficulty(difficulty);
+            FilteredBossInfo = new ObservableCollection<MetaModel>(AllBossInfo);
 
             InitializeComponent();
 
-            BoxBossDefinitionData.ItemsSource = BulletInfo;
+            BoxBossDefinitionData.ItemsSource = FilteredBossInfo;
 
             Result = s;
             codeText.Text = Result;
+        }
+
+        private void Filter_TextChanged(object sender, RoutedEventArgs e)
+        {
+            FilteredBossInfo.Clear();
+            foreach (MetaModel mm in AllBossInfo.Where(mm => MatchFilter(mm.FullName, filter.Text)))
+            {
+                FilteredBossInfo.Add(mm);
+            }
         }
 
         private void ButtonOK_Click(object sender, RoutedEventArgs e)
@@ -61,6 +72,7 @@ namespace LuaSTGEditorSharp.Windows.Input
         private void BoxBossDefinitionData_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             MetaModel m = (BoxBossDefinitionData.SelectedItem as MetaModel);
+            if (m == null) return;
             if (!string.IsNullOrEmpty(m?.Result)) Result = m?.Result;
             codeText.Focus();
         }

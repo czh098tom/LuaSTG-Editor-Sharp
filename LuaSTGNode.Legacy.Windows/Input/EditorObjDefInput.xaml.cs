@@ -25,22 +25,33 @@ namespace LuaSTGEditorSharp.Windows.Input
     {
         private readonly string difficulty;
 
-        ObservableCollection<MetaModel> EditorObjInfo { get; set; }
+        ObservableCollection<MetaModel> AllEditorObjInfo { get; set; }
+        ObservableCollection<MetaModel> FilteredEditorObjInfo { get; set; }
 
         public EditorObjDefInput(string s, MetaType type, AttrItem item)
         {
             difficulty = item.Parent.GetDifficulty();
 
-            EditorObjInfo = item.Parent.parentWorkSpace.Meta.aggregatableMetas[(int)type].GetAllSimpleWithDifficulty(difficulty);
+            AllEditorObjInfo = item.Parent.parentWorkSpace.Meta.aggregatableMetas[(int)type].GetAllSimpleWithDifficulty(difficulty);
+            FilteredEditorObjInfo = new ObservableCollection<MetaModel>(AllEditorObjInfo);
 
             InitializeComponent();
 
             Title = "Choose " + type.ToString();
 
-            BoxEditorObjDefinitionData.ItemsSource = EditorObjInfo;
+            BoxEditorObjDefinitionData.ItemsSource = FilteredEditorObjInfo;
 
             Result = s;
             codeText.Text = Result;
+        }
+
+        private void Filter_TextChanged(object sender, RoutedEventArgs e)
+        {
+            FilteredEditorObjInfo.Clear();
+            foreach (MetaModel mm in AllEditorObjInfo.Where(mm => MatchFilter(mm.FullName, filter.Text)))
+            {
+                FilteredEditorObjInfo.Add(mm);
+            }
         }
 
         private void ButtonOK_Click(object sender, RoutedEventArgs e)
@@ -63,6 +74,7 @@ namespace LuaSTGEditorSharp.Windows.Input
         private void BoxEditorObjDefinitionData_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             MetaModel m = (BoxEditorObjDefinitionData.SelectedItem as MetaModel);
+            if (m == null) return;
             if (!string.IsNullOrEmpty(m?.Result)) Result = m?.Result;
             codeText.Focus();
         }

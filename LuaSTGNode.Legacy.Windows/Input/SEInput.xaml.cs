@@ -23,11 +23,13 @@ namespace LuaSTGEditorSharp.Windows.Input
     /// </summary>
     public partial class SEInput : InputWindow
     {
-        public ObservableCollection<MetaModel> seInfo;
-        public ObservableCollection<MetaModel> SEInfo { get => seInfo; }
+        ObservableCollection<MetaModel> allSEInfo;
+        ObservableCollection<MetaModel> allSEInfoSys;
+        ObservableCollection<MetaModel> filteredSEInfo;
+        ObservableCollection<MetaModel> filteredSEInfoSys;
 
-        public ObservableCollection<MetaModel> seInfoSys;
-        public ObservableCollection<MetaModel> SEInfoSys { get => seInfoSys; }
+        public ObservableCollection<MetaModel> FilteredSEInfo { get => filteredSEInfo; }
+        public ObservableCollection<MetaModel> FilteredSEInfoSys { get => filteredSEInfoSys; }
 
         public override string Result
         {
@@ -41,9 +43,10 @@ namespace LuaSTGEditorSharp.Windows.Input
 
         public SEInput(string s, AttrItem item)
         {
-            seInfo = item.Parent.parentWorkSpace.Meta.aggregatableMetas[(int)MetaType.SELoad].GetAllSimpleWithDifficulty();
-
+            allSEInfo = item.Parent.parentWorkSpace.Meta.aggregatableMetas[(int)MetaType.SELoad].GetAllSimpleWithDifficulty();
             AddInternalMetas();
+            filteredSEInfo = new ObservableCollection<MetaModel>(allSEInfo);
+            filteredSEInfoSys = new ObservableCollection<MetaModel>(allSEInfoSys);
 
             InitializeComponent();
 
@@ -51,9 +54,23 @@ namespace LuaSTGEditorSharp.Windows.Input
             codeText.Text = Result;
         }
 
+        private void Filter_TextChanged(object sender, RoutedEventArgs e)
+        {
+            filteredSEInfo.Clear();
+            foreach (MetaModel mm in allSEInfo.Where(mm => MatchFilter(mm.FullName, filter.Text)))
+            {
+                filteredSEInfo.Add(mm);
+            }
+            filteredSEInfoSys.Clear();
+            foreach (MetaModel mm in allSEInfoSys.Where(mm => MatchFilter(mm.FullName, filter.Text)))
+            {
+                filteredSEInfoSys.Add(mm);
+            }
+        }
+
         private void AddInternalMetas()
         {
-            seInfoSys = new ObservableCollection<MetaModel>(NodesConfig.SysSE);
+            allSEInfoSys = new ObservableCollection<MetaModel>(NodesConfig.SysSE);
         }
 
         private void ButtonOK_Click(object sender, RoutedEventArgs e)
@@ -76,13 +93,14 @@ namespace LuaSTGEditorSharp.Windows.Input
         private void BoxSEData_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             MetaModel m = (BoxSEData.SelectedItem as MetaModel);
+            if (m == null) return;
             if (!string.IsNullOrEmpty(m?.Result)) Result = m?.Result;
             try
             {
                 mediaPlayer.Source = new Uri(m?.ExInfo1, UriKind.RelativeOrAbsolute);
                 //mediaPlayer.Play();
             }
-            catch (Exception exc){ MessageBox.Show(exc.ToString()); }
+            catch (Exception exc) { MessageBox.Show(exc.ToString()); }
             codeText.Focus();
         }
 
@@ -94,7 +112,7 @@ namespace LuaSTGEditorSharp.Windows.Input
 
         private void Text_KeyDown(object sender, KeyEventArgs e)
         {
-            if(e.Key==Key.Enter)
+            if (e.Key == Key.Enter)
             {
                 DialogResult = true;
                 this.Close();

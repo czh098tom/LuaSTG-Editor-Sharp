@@ -25,22 +25,33 @@ namespace LuaSTGEditorSharp.Windows.Input
     {
         private readonly string difficulty;
 
-        ObservableCollection<MetaModel> NodeDefModel { get; set; }
+        ObservableCollection<MetaModel> AllNodeDefModel { get; set; }
+        ObservableCollection<MetaModel> FilteredNodeDefModel { get; set; }
 
         public NodeDefInput(string s, AttrItem item)
         {
             difficulty = item.Parent.GetDifficulty();
 
-            NodeDefModel = item.Parent.parentWorkSpace.Meta.aggregatableMetas[1].GetAllSimpleWithDifficulty(difficulty);
+            AllNodeDefModel = item.Parent.parentWorkSpace.Meta.aggregatableMetas[1].GetAllSimpleWithDifficulty(difficulty);
+            FilteredNodeDefModel = new ObservableCollection<MetaModel>(AllNodeDefModel);
 
             InitializeComponent();
 
             Title = "Choose node";
 
-            BoxNodeDefinitionData.ItemsSource = NodeDefModel;
+            BoxNodeDefinitionData.ItemsSource = FilteredNodeDefModel;
 
             Result = s;
             codeText.Text = Result;
+        }
+
+        private void Filter_TextChanged(object sender, RoutedEventArgs e)
+        {
+            FilteredNodeDefModel.Clear();
+            foreach (MetaModel mm in AllNodeDefModel.Where(mm => MatchFilter(mm.FullName, filter.Text)))
+            {
+                FilteredNodeDefModel.Add(mm);
+            }
         }
 
         private void ButtonOK_Click(object sender, RoutedEventArgs e)
@@ -75,7 +86,7 @@ namespace LuaSTGEditorSharp.Windows.Input
 
         private void Text_KeyDown(object sender, KeyEventArgs e)
         {
-            if(e.Key==Key.Enter)
+            if (e.Key == Key.Enter)
             {
                 DialogResult = true;
                 this.Close();

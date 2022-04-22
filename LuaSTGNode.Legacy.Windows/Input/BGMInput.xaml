@@ -13,7 +13,7 @@
                 <Button Content="OK" Margin="10,10,2,10" Padding="3" Click="ButtonOK_Click"/>
                 <Button Content="Cancel" Margin="2,10,10,10" Padding="3" Click="ButtonCancel_Click"/>
             </StackPanel>
-            <TextBox DockPanel.Dock="Top" Height="24" x:Name="codeText" Text="{Binding Result, ElementName=inputWindow, Mode=TwoWay}" 
+            <TextBox DockPanel.Dock="Top" Height ="24"  x:Name="codeText" Text="{Binding Result, ElementName=inputWindow, Mode=TwoWay}" 
                              AcceptsReturn="False" FontFamily="Courier New" KeyDown="Text_KeyDown"/>
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -21,19 +21,32 @@
                     <ColumnDefinition Width="10"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-
-                <ListBox x:Name="BoxBGMData" SelectionChanged="BoxBGMData_SelectionChanged" Grid.Column="0"
-                     MouseDoubleClick="UserControl_MouseDoubleClick">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel Orientation="Horizontal">
-                                <Image VerticalAlignment="Center" Source="{Binding Icon}"
+                <Grid Grid.Column="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="24"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="24"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Image Grid.Column="0" Source="/LuaSTGEditorSharp.Core.Windows;component/images/search.png"/>
+                        <TextBox Grid.Column="1" x:Name="filter" AcceptsReturn="False" TextChanged="Filter_TextChanged"/>
+                    </Grid>
+                    <ListBox x:Name="BoxBGMData" SelectionChanged="BoxBGMData_SelectionChanged" Grid.Row="1"
+                                MouseDoubleClick="UserControl_MouseDoubleClick">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <Image VerticalAlignment="Center" Source="{Binding Icon}"
                                        Stretch="Fill" Width="16" Height="16" Margin="0,0,2,2"/>
-                                <TextBlock VerticalAlignment="Center" Text="{Binding Text}"/>
-                            </StackPanel>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
+                                    <TextBlock VerticalAlignment="Center" Text="{Binding Text}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </Grid>
                 <GridSplitter Grid.Column="1"/>
                 <MediaElement x:Name="mediaPlayer" LoadedBehavior="Play" UnloadedBehavior="Stop" Grid.Column="2"/>
                 <!--<m:MediaPlayer x:Name="mediaPlayer" Grid.Column="2"/>-->

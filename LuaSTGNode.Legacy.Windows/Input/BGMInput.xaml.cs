@@ -25,18 +25,29 @@ namespace LuaSTGEditorSharp.Windows.Input
     /// </summary>
     public partial class BGMInput : InputWindow
     {
-        ObservableCollection<MetaModel> BGMInfo { get; set; }
+        ObservableCollection<MetaModel> AllBGMInfo { get; set; }
+        ObservableCollection<MetaModel> FilteredBGMInfo { get; set; }
 
         public BGMInput(string s, AttrItem item)
         {
-            BGMInfo = item.Parent.parentWorkSpace.Meta.aggregatableMetas[(int)MetaType.BGMLoad].GetAllSimpleWithDifficulty("");
+            AllBGMInfo = item.Parent.parentWorkSpace.Meta.aggregatableMetas[(int)MetaType.BGMLoad].GetAllSimpleWithDifficulty("");
+            FilteredBGMInfo = new ObservableCollection<MetaModel>(AllBGMInfo);
 
             InitializeComponent();
 
-            BoxBGMData.ItemsSource = BGMInfo;
+            BoxBGMData.ItemsSource = FilteredBGMInfo;
 
             Result = s;
             codeText.Text = Result;
+        }
+
+        private void Filter_TextChanged(object sender, RoutedEventArgs e)
+        {
+            FilteredBGMInfo.Clear();
+            foreach (MetaModel mm in AllBGMInfo.Where(mm => MatchFilter(mm.FullName, filter.Text)))
+            {
+                FilteredBGMInfo.Add(mm);
+            }
         }
 
         private void ButtonOK_Click(object sender, RoutedEventArgs e)
@@ -59,6 +70,7 @@ namespace LuaSTGEditorSharp.Windows.Input
         private void BoxBGMData_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             MetaModel m = (BoxBGMData.SelectedItem as MetaModel);
+            if (m == null) return;
             if (!string.IsNullOrEmpty(m?.Result)) Result = m?.Result;
             try
             {

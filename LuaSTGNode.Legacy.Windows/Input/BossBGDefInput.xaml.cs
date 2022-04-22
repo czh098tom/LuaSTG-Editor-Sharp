@@ -23,18 +23,29 @@ namespace LuaSTGEditorSharp.Windows.Input
     /// </summary>
     public partial class BossBGDefInput : InputWindow
     {
-        ObservableCollection<MetaModel> BossBGInfo { get; set; }
+        ObservableCollection<MetaModel> AllBossBGInfo { get; set; }
+        ObservableCollection<MetaModel> FilteredBossBGInfo { get; set; }
 
         public BossBGDefInput(string s, AttrItem item)
         {
-            BossBGInfo = item.Parent.parentWorkSpace.Meta.aggregatableMetas[(int)MetaType.BossBG].GetAllSimpleWithDifficulty();
+            AllBossBGInfo = item.Parent.parentWorkSpace.Meta.aggregatableMetas[(int)MetaType.BossBG].GetAllSimpleWithDifficulty();
+            FilteredBossBGInfo = new ObservableCollection<MetaModel>(AllBossBGInfo);
 
             InitializeComponent();
 
-            BoxBossBGDefinitionData.ItemsSource = BossBGInfo;
+            BoxBossBGDefinitionData.ItemsSource = FilteredBossBGInfo;
 
             Result = s;
             codeText.Text = Result;
+        }
+
+        private void Filter_TextChanged(object sender, RoutedEventArgs e)
+        {
+            FilteredBossBGInfo.Clear();
+            foreach (MetaModel mm in AllBossBGInfo.Where(mm => MatchFilter(mm.FullName, filter.Text)))
+            {
+                FilteredBossBGInfo.Add(mm);
+            }
         }
 
         private void ButtonOK_Click(object sender, RoutedEventArgs e)
@@ -57,6 +68,7 @@ namespace LuaSTGEditorSharp.Windows.Input
         private void BoxBossBGDefinitionData_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             MetaModel m = (BoxBossBGDefinitionData.SelectedItem as MetaModel);
+            if (m == null) return;
             if (!string.IsNullOrEmpty(m?.Result)) Result = m?.Result;
             codeText.Focus();
         }

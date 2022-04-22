@@ -23,23 +23,35 @@ namespace LuaSTGEditorSharp.Windows.Input
     /// </summary>
     public partial class ImageInput : InputWindow
     {
-        public ObservableCollection<MetaModel> imageInfo;
-        public ObservableCollection<MetaModel> ImageInfo { get => imageInfo; }
-        public ObservableCollection<MetaModel> imageGroupInfo;
-        public ObservableCollection<MetaModel> ImageGroupInfo { get => imageGroupInfo; }
-        public ObservableCollection<MetaModel> particleInfo;
-        public ObservableCollection<MetaModel> ParticleInfo { get => particleInfo; }
-        public ObservableCollection<MetaModel> animationInfo;
-        public ObservableCollection<MetaModel> AnimationInfo { get => animationInfo; }
+        ObservableCollection<MetaModel> allImageInfo;
+        ObservableCollection<MetaModel> allImageGroupInfo;
+        ObservableCollection<MetaModel> allParticleInfo;
+        ObservableCollection<MetaModel> allAnimationInfo;
 
-        public ObservableCollection<MetaModel> imageInfoSys;
-        public ObservableCollection<MetaModel> ImageInfoSys { get => imageInfoSys; }
-        public ObservableCollection<MetaModel> imageGroupInfoSys;
-        public ObservableCollection<MetaModel> ImageGroupInfoSys { get => imageGroupInfoSys; }
-        public ObservableCollection<MetaModel> particleInfoSys;
-        public ObservableCollection<MetaModel> ParticleInfoSys { get => particleInfoSys; }
-        public ObservableCollection<MetaModel> animationInfoSys;
-        public ObservableCollection<MetaModel> AnimationInfoSys { get => animationInfoSys; }
+        ObservableCollection<MetaModel> allImageInfoSys;
+        ObservableCollection<MetaModel> allImageGroupInfoSys;
+        ObservableCollection<MetaModel> allParticleInfoSys;
+        ObservableCollection<MetaModel> allAnimationInfoSys;
+
+        ObservableCollection<MetaModel> filteredImageInfo;
+        ObservableCollection<MetaModel> filteredImageGroupInfo;
+        ObservableCollection<MetaModel> filteredParticleInfo;
+        ObservableCollection<MetaModel> filteredAnimationInfo;
+
+        ObservableCollection<MetaModel> filteredImageInfoSys;
+        ObservableCollection<MetaModel> filteredImageGroupInfoSys;
+        ObservableCollection<MetaModel> filteredParticleInfoSys;
+        ObservableCollection<MetaModel> filteredAnimationInfoSys;
+
+        public ObservableCollection<MetaModel> FilteredImageInfo { get => filteredImageInfo; }
+        public ObservableCollection<MetaModel> FilteredImageGroupInfo { get => filteredImageGroupInfo; }
+        public ObservableCollection<MetaModel> FilteredParticleInfo { get => filteredParticleInfo; }
+        public ObservableCollection<MetaModel> FilteredAnimationInfo { get => filteredAnimationInfo; }
+
+        public ObservableCollection<MetaModel> FilteredImageInfoSys { get => filteredImageInfoSys; }
+        public ObservableCollection<MetaModel> FilteredImageGroupInfoSys { get => filteredImageGroupInfoSys; }
+        public ObservableCollection<MetaModel> FilteredParticleInfoSys { get => filteredParticleInfoSys; }
+        public ObservableCollection<MetaModel> FilteredAnimationInfoSys { get => filteredAnimationInfoSys; }
 
         int cols = 1, rows = 1;
 
@@ -79,12 +91,19 @@ namespace LuaSTGEditorSharp.Windows.Input
 
         public ImageInput(string s, AttrItem item, ImageClassType imageClassType = ImageClassType.None)
         {
-            imageInfo = item.Parent.parentWorkSpace.Meta.aggregatableMetas[(int)MetaType.ImageLoad].GetAllSimpleWithDifficulty();
-            imageGroupInfo = item.Parent.parentWorkSpace.Meta.aggregatableMetas[(int)MetaType.ImageGroupLoad].GetAllSimpleWithDifficulty();
-            particleInfo = item.Parent.parentWorkSpace.Meta.aggregatableMetas[(int)MetaType.ParticleLoad].GetAllSimpleWithDifficulty();
-            animationInfo = item.Parent.parentWorkSpace.Meta.aggregatableMetas[(int)MetaType.AnimationLoad].GetAllSimpleWithDifficulty();
-
+            allImageInfo = item.Parent.parentWorkSpace.Meta.aggregatableMetas[(int)MetaType.ImageLoad].GetAllSimpleWithDifficulty();
+            allImageGroupInfo = item.Parent.parentWorkSpace.Meta.aggregatableMetas[(int)MetaType.ImageGroupLoad].GetAllSimpleWithDifficulty();
+            allParticleInfo = item.Parent.parentWorkSpace.Meta.aggregatableMetas[(int)MetaType.ParticleLoad].GetAllSimpleWithDifficulty();
+            allAnimationInfo = item.Parent.parentWorkSpace.Meta.aggregatableMetas[(int)MetaType.AnimationLoad].GetAllSimpleWithDifficulty();
             AddInternalMetas();
+            filteredImageInfo = new ObservableCollection<MetaModel>(allImageInfo);
+            filteredImageGroupInfo = new ObservableCollection<MetaModel>(allImageGroupInfo);
+            filteredParticleInfo = new ObservableCollection<MetaModel>(allParticleInfo);
+            filteredAnimationInfo = new ObservableCollection<MetaModel>(allAnimationInfo);
+            filteredImageInfoSys = new ObservableCollection<MetaModel>(allImageInfoSys);
+            filteredImageGroupInfoSys = new ObservableCollection<MetaModel>(allImageGroupInfoSys);
+            filteredParticleInfoSys = new ObservableCollection<MetaModel>(allParticleInfoSys);
+            filteredAnimationInfoSys = new ObservableCollection<MetaModel>(allAnimationInfoSys);
 
             InitializeComponent();
 
@@ -98,25 +117,80 @@ namespace LuaSTGEditorSharp.Windows.Input
             codeText.Text = Result;
         }
 
+        private void FilterImage_TextChanged(object sender, RoutedEventArgs e)
+        {
+            filteredImageInfo.Clear();
+            foreach (MetaModel mm in allImageInfo.Where(mm => MatchFilter(mm.FullName, filterImage.Text)))
+            {
+                filteredImageInfo.Add(mm);
+            }
+            filteredImageInfoSys.Clear();
+            foreach (MetaModel mm in allImageInfoSys.Where(mm => MatchFilter(mm.FullName, filterImage.Text)))
+            {
+                filteredImageInfoSys.Add(mm);
+            }
+        }
+
+        private void FilterImageGroup_TextChanged(object sender, RoutedEventArgs e)
+        {
+            filteredImageGroupInfo.Clear();
+            foreach (MetaModel mm in allImageGroupInfo.Where(mm => MatchFilter(mm.FullName, filterImageGroup.Text)))
+            {
+                filteredImageGroupInfo.Add(mm);
+            }
+            filteredImageGroupInfoSys.Clear();
+            foreach (MetaModel mm in allImageGroupInfoSys.Where(mm => MatchFilter(mm.FullName, filterImageGroup.Text)))
+            {
+                filteredImageGroupInfoSys.Add(mm);
+            }
+        }
+
+        private void FilterParticle_TextChanged(object sender, RoutedEventArgs e)
+        {
+            filteredParticleInfo.Clear();
+            foreach (MetaModel mm in allParticleInfo.Where(mm => MatchFilter(mm.FullName, filterParticle.Text)))
+            {
+                filteredParticleInfo.Add(mm);
+            }
+            filteredParticleInfoSys.Clear();
+            foreach (MetaModel mm in allParticleInfoSys.Where(mm => MatchFilter(mm.FullName, filterParticle.Text)))
+            {
+                filteredParticleInfoSys.Add(mm);
+            }
+        }
+
+        private void FilterAnimation_TextChanged(object sender, RoutedEventArgs e)
+        {
+            filteredAnimationInfo.Clear();
+            foreach (MetaModel mm in allAnimationInfo.Where(mm => MatchFilter(mm.FullName, filterAnimation.Text)))
+            {
+                filteredAnimationInfo.Add(mm);
+            }
+            filteredAnimationInfoSys.Clear();
+            foreach (MetaModel mm in allAnimationInfoSys.Where(mm => MatchFilter(mm.FullName, filterAnimation.Text)))
+            {
+                filteredAnimationInfoSys.Add(mm);
+            }
+        }
+
         private void AddInternalMetas()
         {
-            imageInfoSys = new ObservableCollection<MetaModel>(NodesConfig.SysImage);
-
-            imageGroupInfoSys = new ObservableCollection<MetaModel>(NodesConfig.SysImageGroup);
-
-            animationInfoSys = new ObservableCollection<MetaModel>();
+            allImageInfoSys = new ObservableCollection<MetaModel>(NodesConfig.SysImage);
+            allImageGroupInfoSys = new ObservableCollection<MetaModel>(NodesConfig.SysImageGroup);
+            allAnimationInfoSys = new ObservableCollection<MetaModel>();
+            allParticleInfoSys = new ObservableCollection<MetaModel>();
         }
 
         private IEnumerable<MetaModel> EnumerateImageInfo()
         {
-            foreach (MetaModel mm in imageInfo) yield return mm;
-            foreach (MetaModel mm in imageInfoSys) yield return mm;
+            foreach (MetaModel mm in allImageInfo) yield return mm;
+            foreach (MetaModel mm in allImageInfoSys) yield return mm;
         }
 
         private IEnumerable<MetaModel> EnumerateImageGroupInfo()
         {
-            foreach (MetaModel mm in imageGroupInfo) yield return mm;
-            foreach (MetaModel mm in imageGroupInfoSys) yield return mm;
+            foreach (MetaModel mm in allImageGroupInfo) yield return mm;
+            foreach (MetaModel mm in allImageGroupInfoSys) yield return mm;
         }
 
         private ImageSource GetImage(string s)
@@ -200,6 +274,7 @@ namespace LuaSTGEditorSharp.Windows.Input
         private void RefreshAsImage()
         {
             MetaModel m = (BoxImageData.SelectedItem as MetaModel);
+            if (m == null) return;
             if (!string.IsNullOrEmpty(m?.Result)) Result = m?.Result;
             try
             {
@@ -212,6 +287,7 @@ namespace LuaSTGEditorSharp.Windows.Input
         private void RefreshAsImageGroup()
         {
             MetaModel m = (BoxImageGroupData.SelectedItem as MetaModel);
+            if (m == null) return;
             string[] colrow = m?.ExInfo2.Split(',');
             int cols = 1, rows = 1;
             if (colrow != null && colrow.Length > 1)
@@ -236,40 +312,38 @@ namespace LuaSTGEditorSharp.Windows.Input
         private void RefreshAsParticle()
         {
             MetaModel m = (BoxParticleData.SelectedItem as MetaModel);
-            if (m != null)
+            if (m == null) return;
+            if (!string.IsNullOrEmpty(m?.Result)) Result = m?.Result;
+            try
             {
-                if (!string.IsNullOrEmpty(m?.Result)) Result = m?.Result;
-                try
+                string s = m?.ExInfo2;
+                if (!string.IsNullOrEmpty(s))
                 {
-                    string s = m?.ExInfo2;
-                    if (!string.IsNullOrEmpty(s))
-                    {
-                        ParticleExample.Source = GetImage(s);
-                    }
+                    ParticleExample.Source = GetImage(s);
                 }
-                catch { }
+            }
+            catch { }
 
-                BinaryReader sr = null;
-                try
+            BinaryReader sr = null;
+            try
+            {
+                Uri uri = new Uri(m?.ExInfo1);
+                if (uri.Scheme == "file")
                 {
-                    Uri uri = new Uri(m?.ExInfo1);
-                    if (uri.Scheme == "file")
-                    {
-                        sr = new BinaryReader(new FileStream(m?.ExInfo1, FileMode.Open));
-                    }
-                    else
-                    {
-                        StreamResourceInfo info = Application.GetResourceStream(uri);
-                        sr = new BinaryReader(info.Stream);
-                    }
-                    StringBuilder sb = new StringBuilder();
-                    ReadHGEFormat(sr, sb);
-                    txtParticle.Text = sb.ToString();
+                    sr = new BinaryReader(new FileStream(m?.ExInfo1, FileMode.Open));
                 }
-                finally
+                else
                 {
-                    if (sr != null) sr.Close();
+                    StreamResourceInfo info = Application.GetResourceStream(uri);
+                    sr = new BinaryReader(info.Stream);
                 }
+                StringBuilder sb = new StringBuilder();
+                ReadHGEFormat(sr, sb);
+                txtParticle.Text = sb.ToString();
+            }
+            finally
+            {
+                if (sr != null) sr.Close();
             }
 
             codeText.Focus();
@@ -278,6 +352,7 @@ namespace LuaSTGEditorSharp.Windows.Input
         private void RefreshAsAnimation()
         {
             MetaModel m = (BoxAnimationData.SelectedItem as MetaModel);
+            if (m == null) return;
             if (!string.IsNullOrEmpty(m?.Result)) Result = m?.Result;
             try
             {
@@ -293,7 +368,7 @@ namespace LuaSTGEditorSharp.Windows.Input
             DrawingGroup dg = new DrawingGroup();
             GeometryDrawing gd = new GeometryDrawing();
             GeometryGroup gg = new GeometryGroup();
-            for(int i = 1; i < rows; i++)
+            for (int i = 1; i < rows; i++)
             {
                 gg.Children.Add(new LineGeometry(new Point(0, (double)i / rows), new Point(1, (double)i / rows)));
             }
@@ -316,7 +391,7 @@ namespace LuaSTGEditorSharp.Windows.Input
 
         private void Text_KeyDown(object sender, KeyEventArgs e)
         {
-            if(e.Key==Key.Enter)
+            if (e.Key == Key.Enter)
             {
                 DialogResult = true;
                 this.Close();

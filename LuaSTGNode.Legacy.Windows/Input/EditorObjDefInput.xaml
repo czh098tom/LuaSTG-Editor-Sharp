@@ -13,8 +13,22 @@
                 <Button Content="OK" Margin="10,10,2,10" Padding="3" Click="ButtonOK_Click"/>
                 <Button Content="Cancel" Margin="2,10,10,10" Padding="3" Click="ButtonCancel_Click"/>
             </StackPanel>
-            <TextBox DockPanel.Dock="Top" Height="24" x:Name="codeText" Text="{Binding Result, ElementName=inputWindow, Mode=TwoWay}" 
+            <Grid DockPanel.Dock="Top">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="24"/>
+                    <RowDefinition Height="24"/>
+                </Grid.RowDefinitions>
+                <TextBox Grid.Row="0" x:Name="codeText" Text="{Binding Result, ElementName=inputWindow, Mode=TwoWay}" 
                              AcceptsReturn="False" FontFamily="Courier New" KeyDown="Text_KeyDown"/>
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="24"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Grid.Column="0" Source="/LuaSTGEditorSharp.Core.Windows;component/images/search.png"/>
+                    <TextBox Grid.Column="1" x:Name="filter" AcceptsReturn="False" TextChanged="Filter_TextChanged"/>
+                </Grid>
+            </Grid>
             <ListBox x:Name="BoxEditorObjDefinitionData" SelectionChanged="BoxEditorObjDefinitionData_SelectionChanged" 
                      MouseDoubleClick="UserControl_MouseDoubleClick">
                 <ListBox.ItemTemplate>

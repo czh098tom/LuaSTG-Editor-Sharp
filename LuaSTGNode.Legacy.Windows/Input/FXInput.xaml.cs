@@ -25,11 +25,14 @@ namespace LuaSTGEditorSharp.Windows.Input
     /// </summary>
     public partial class FXInput : InputWindow
     {
-        public ObservableCollection<MetaModel> fxInfo;
-        public ObservableCollection<MetaModel> FXInfo { get => fxInfo; }
+        ObservableCollection<MetaModel> allFxInfo;
+        ObservableCollection<MetaModel> allFxInfoSys;
 
-        public ObservableCollection<MetaModel> fxInfoSys;
-        public ObservableCollection<MetaModel> FXInfoSys { get => fxInfoSys; }
+        ObservableCollection<MetaModel> filteredFxInfo;
+        ObservableCollection<MetaModel> filteredFxInfoSys;
+
+        public ObservableCollection<MetaModel> FilteredFxInfo { get => filteredFxInfo; }
+        public ObservableCollection<MetaModel> FilteredFxInfoSys { get => filteredFxInfoSys; }
 
         public override string Result
         {
@@ -43,9 +46,10 @@ namespace LuaSTGEditorSharp.Windows.Input
 
         public FXInput(string s, AttrItem item)
         {
-            fxInfo = item.Parent.parentWorkSpace.Meta.aggregatableMetas[(int)MetaType.FXLoad].GetAllSimpleWithDifficulty();
-
+            allFxInfo = item.Parent.parentWorkSpace.Meta.aggregatableMetas[(int)MetaType.FXLoad].GetAllSimpleWithDifficulty();
             AddInternalMetas();
+            filteredFxInfo = new ObservableCollection<MetaModel>(allFxInfo);
+            filteredFxInfoSys = new ObservableCollection<MetaModel>(allFxInfoSys);
 
             InitializeComponent();
 
@@ -53,9 +57,23 @@ namespace LuaSTGEditorSharp.Windows.Input
             codeText.Text = Result;
         }
 
+        private void Filter_TextChanged(object sender, RoutedEventArgs e)
+        {
+            filteredFxInfo.Clear();
+            foreach (MetaModel mm in allFxInfo.Where(mm => MatchFilter(mm.FullName, filter.Text)))
+            {
+                filteredFxInfo.Add(mm);
+            }
+            filteredFxInfoSys.Clear();
+            foreach (MetaModel mm in allFxInfoSys.Where(mm => MatchFilter(mm.FullName, filter.Text)))
+            {
+                filteredFxInfoSys.Add(mm);
+            }
+        }
+
         private void AddInternalMetas()
         {
-            fxInfoSys = new ObservableCollection<MetaModel>();
+            allFxInfoSys = new ObservableCollection<MetaModel>();
         }
 
         private void ButtonOK_Click(object sender, RoutedEventArgs e)
@@ -78,6 +96,7 @@ namespace LuaSTGEditorSharp.Windows.Input
         private void BoxSEData_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             MetaModel m = (BoxSEData.SelectedItem as MetaModel);
+            if (m == null) return;
             if (!string.IsNullOrEmpty(m?.Result)) Result = m?.Result;
 
             StreamReader sr = null;
@@ -114,7 +133,7 @@ namespace LuaSTGEditorSharp.Windows.Input
 
         private void Text_KeyDown(object sender, KeyEventArgs e)
         {
-            if(e.Key==Key.Enter)
+            if (e.Key == Key.Enter)
             {
                 DialogResult = true;
                 this.Close();

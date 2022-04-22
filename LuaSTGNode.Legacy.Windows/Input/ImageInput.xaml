@@ -109,27 +109,41 @@
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="2*"/>
                         </Grid.ColumnDefinitions>
-                        <ListBox x:Name="BoxImageData" Grid.Column="0" SelectionChanged="BoxImageData_SelectionChanged">
-                            <ListBox.Resources>
-                                <CollectionViewSource x:Key="ImageInfoSys" Source="{Binding ImageInfoSys, ElementName=inputWindow}"/>
-                                <CollectionViewSource x:Key="ImageInfo" Source="{Binding ImageInfo, ElementName=inputWindow}"/>
-                            </ListBox.Resources>
-                            <ListBox.ItemsSource>
-                                <CompositeCollection>
-                                    <CollectionContainer Collection="{Binding Source={StaticResource ImageInfoSys}}"/>
-                                    <CollectionContainer Collection="{Binding Source={StaticResource ImageInfo}}"/>
-                                </CompositeCollection>
-                            </ListBox.ItemsSource>
-                            <ListBox.ItemTemplate>
-                                <DataTemplate DataType="MetaModel">
-                                    <StackPanel Orientation="Horizontal">
-                                        <Image VerticalAlignment="Center" Source="{Binding Icon}"
+                        <Grid Grid.Column="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="24" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <Grid Grid.Row="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="24"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Image Grid.Column="0" Source="/LuaSTGEditorSharp.Core.Windows;component/images/search.png"/>
+                                <TextBox Grid.Column="1" x:Name="filterImage" AcceptsReturn="False" TextChanged="FilterImage_TextChanged"/>
+                            </Grid>
+                            <ListBox x:Name="BoxImageData" Grid.Row="1" SelectionChanged="BoxImageData_SelectionChanged">
+                                <ListBox.Resources>
+                                    <CollectionViewSource x:Key="ImageInfoSys" Source="{Binding FilteredImageInfoSys, ElementName=inputWindow}"/>
+                                    <CollectionViewSource x:Key="ImageInfo" Source="{Binding FilteredImageInfo, ElementName=inputWindow}"/>
+                                </ListBox.Resources>
+                                <ListBox.ItemsSource>
+                                    <CompositeCollection>
+                                        <CollectionContainer Collection="{Binding Source={StaticResource ImageInfoSys}}"/>
+                                        <CollectionContainer Collection="{Binding Source={StaticResource ImageInfo}}"/>
+                                    </CompositeCollection>
+                                </ListBox.ItemsSource>
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate DataType="MetaModel">
+                                        <StackPanel Orientation="Horizontal">
+                                            <Image VerticalAlignment="Center" Source="{Binding Icon}"
                                                 Stretch="Fill" Width="16" Height="16" Margin="0,0,2,2"/>
-                                        <TextBlock VerticalAlignment="Center" Text="{Binding Text}"/>
-                                    </StackPanel>
-                                </DataTemplate>
-                            </ListBox.ItemTemplate>
-                        </ListBox>
+                                            <TextBlock VerticalAlignment="Center" Text="{Binding Text}"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                        </Grid>
                         <ScrollViewer Grid.Column="1" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
                             <Grid>
                                 <Canvas Height="{Binding ActualHeight, ElementName=ImageExample}"
@@ -149,27 +163,42 @@
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="2*"/>
                         </Grid.ColumnDefinitions>
-                        <ListBox x:Name="BoxImageGroupData" Grid.Column="0" SelectionChanged="BoxImageGroupData_SelectionChanged">
-                            <ListBox.Resources>
-                                <CollectionViewSource x:Key="ImageGroupInfoSys" Source="{Binding ImageGroupInfoSys, ElementName=inputWindow}"/>
-                                <CollectionViewSource x:Key="ImageGroupInfo" Source="{Binding ImageGroupInfo, ElementName=inputWindow}"/>
-                            </ListBox.Resources>
-                            <ListBox.ItemsSource>
-                                <CompositeCollection>
-                                    <CollectionContainer Collection="{Binding Source={StaticResource ImageGroupInfoSys}}"/>
-                                    <CollectionContainer Collection="{Binding Source={StaticResource ImageGroupInfo}}"/>
-                                </CompositeCollection>
-                            </ListBox.ItemsSource>
-                            <ListBox.ItemTemplate>
-                                <DataTemplate>
-                                    <StackPanel Orientation="Horizontal">
-                                        <Image VerticalAlignment="Center" Source="{Binding Icon}"
+                        <Grid Grid.Column="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="24" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <Grid Grid.Row="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="24"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Image Grid.Column="0" Source="/LuaSTGEditorSharp.Core.Windows;component/images/search.png"/>
+                                <TextBox Grid.Column="1" x:Name="filterImageGroup" AcceptsReturn="False"
+                                         TextChanged="FilterImageGroup_TextChanged"/>
+                            </Grid>
+                            <ListBox x:Name="BoxImageGroupData" Grid.Column="0" SelectionChanged="BoxImageGroupData_SelectionChanged">
+                                <ListBox.Resources>
+                                    <CollectionViewSource x:Key="ImageGroupInfoSys" Source="{Binding FilteredImageGroupInfoSys, ElementName=inputWindow}"/>
+                                    <CollectionViewSource x:Key="ImageGroupInfo" Source="{Binding FilteredImageGroupInfo, ElementName=inputWindow}"/>
+                                </ListBox.Resources>
+                                <ListBox.ItemsSource>
+                                    <CompositeCollection>
+                                        <CollectionContainer Collection="{Binding Source={StaticResource ImageGroupInfoSys}}"/>
+                                        <CollectionContainer Collection="{Binding Source={StaticResource ImageGroupInfo}}"/>
+                                    </CompositeCollection>
+                                </ListBox.ItemsSource>
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Image VerticalAlignment="Center" Source="{Binding Icon}"
                                                 Stretch="UniformToFill" Width="16" Height="16" Margin="0,0,2,2"/>
-                                        <TextBlock VerticalAlignment="Center" Text="{Binding Text}"/>
-                                    </StackPanel>
-                                </DataTemplate>
-                            </ListBox.ItemTemplate>
-                        </ListBox>
+                                            <TextBlock VerticalAlignment="Center" Text="{Binding Text}"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                        </Grid>
                         <DockPanel Grid.Column="1">
                             <TextBox DockPanel.Dock="Bottom" Text="{Binding SelectedIndex, ElementName=inputWindow
                                 , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
@@ -206,28 +235,43 @@
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="5*"/>
                         </Grid.RowDefinitions>
-                        <ListBox x:Name="BoxParticleData" Grid.Column="0" Grid.RowSpan="2" 
+                        <Grid Grid.Column="0" Grid.Row="0" Grid.RowSpan="2">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="24" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <Grid Grid.Row="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="24"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Image Grid.Column="0" Source="/LuaSTGEditorSharp.Core.Windows;component/images/search.png"/>
+                                <TextBox Grid.Column="1" x:Name="filterParticle" AcceptsReturn="False"
+                                         TextChanged="FilterParticle_TextChanged"/>
+                            </Grid>
+                            <ListBox x:Name="BoxParticleData" Grid.Row="1"
                                  SelectionChanged="BoxParticleData_SelectionChanged">
-                            <ListBox.Resources>
-                                <CollectionViewSource x:Key="ParticleInfoSys" Source="{Binding ParticleInfoSys, ElementName=inputWindow}"/>
-                                <CollectionViewSource x:Key="ParticleInfo" Source="{Binding ParticleInfo, ElementName=inputWindow}"/>
-                            </ListBox.Resources>
-                            <ListBox.ItemsSource>
-                                <CompositeCollection>
-                                    <CollectionContainer Collection="{Binding Source={StaticResource ParticleInfoSys}}"/>
-                                    <CollectionContainer Collection="{Binding Source={StaticResource ParticleInfo}}"/>
-                                </CompositeCollection>
-                            </ListBox.ItemsSource>
-                            <ListBox.ItemTemplate>
-                                <DataTemplate>
-                                    <StackPanel Orientation="Horizontal">
-                                        <Image VerticalAlignment="Center" Source="{Binding Icon}"
+                                <ListBox.Resources>
+                                    <CollectionViewSource x:Key="ParticleInfoSys" Source="{Binding FilteredParticleInfoSys, ElementName=inputWindow}"/>
+                                    <CollectionViewSource x:Key="ParticleInfo" Source="{Binding FilteredParticleInfo, ElementName=inputWindow}"/>
+                                </ListBox.Resources>
+                                <ListBox.ItemsSource>
+                                    <CompositeCollection>
+                                        <CollectionContainer Collection="{Binding Source={StaticResource ParticleInfoSys}}"/>
+                                        <CollectionContainer Collection="{Binding Source={StaticResource ParticleInfo}}"/>
+                                    </CompositeCollection>
+                                </ListBox.ItemsSource>
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Image VerticalAlignment="Center" Source="{Binding Icon}"
                                                 Stretch="UniformToFill" Width="16" Height="16" Margin="0,0,2,2"/>
-                                        <TextBlock VerticalAlignment="Center" Text="{Binding Text}"/>
-                                    </StackPanel>
-                                </DataTemplate>
-                            </ListBox.ItemTemplate>
-                        </ListBox>
+                                            <TextBlock VerticalAlignment="Center" Text="{Binding Text}"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                        </Grid>
                         <DockPanel Grid.Column="1" Grid.Row="0">
                             <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
                                 <Grid>
@@ -251,27 +295,42 @@
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="2*"/>
                         </Grid.ColumnDefinitions>
-                        <ListBox x:Name="BoxAnimationData" Grid.Column="0" SelectionChanged="BoxAnimationData_SelectionChanged">
-                            <ListBox.Resources>
-                                <CollectionViewSource x:Key="AnimationInfoSys" Source="{Binding AnimationInfoSys, ElementName=inputWindow}"/>
-                                <CollectionViewSource x:Key="AnimationInfo" Source="{Binding AnimationInfo, ElementName=inputWindow}"/>
-                            </ListBox.Resources>
-                            <ListBox.ItemsSource>
-                                <CompositeCollection>
-                                    <CollectionContainer Collection="{Binding Source={StaticResource AnimationInfoSys}}"/>
-                                    <CollectionContainer Collection="{Binding Source={StaticResource AnimationInfo}}"/>
-                                </CompositeCollection>
-                            </ListBox.ItemsSource>
-                            <ListBox.ItemTemplate>
-                                <DataTemplate>
-                                    <StackPanel Orientation="Horizontal">
-                                        <Image VerticalAlignment="Center" Source="{Binding Icon}"
+                        <Grid Grid.Column="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="24" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <Grid Grid.Row="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="24"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Image Grid.Column="0" Source="/LuaSTGEditorSharp.Core.Windows;component/images/search.png"/>
+                                <TextBox Grid.Column="1" x:Name="filterAnimation" AcceptsReturn="False"
+                                         TextChanged="FilterAnimation_TextChanged"/>
+                            </Grid>
+                            <ListBox x:Name="BoxAnimationData" Grid.Row="1" SelectionChanged="BoxAnimationData_SelectionChanged">
+                                <ListBox.Resources>
+                                    <CollectionViewSource x:Key="AnimationInfoSys" Source="{Binding FilteredAnimationInfoSys, ElementName=inputWindow}"/>
+                                    <CollectionViewSource x:Key="AnimationInfo" Source="{Binding FilteredAnimationInfo, ElementName=inputWindow}"/>
+                                </ListBox.Resources>
+                                <ListBox.ItemsSource>
+                                    <CompositeCollection>
+                                        <CollectionContainer Collection="{Binding Source={StaticResource AnimationInfoSys}}"/>
+                                        <CollectionContainer Collection="{Binding Source={StaticResource AnimationInfo}}"/>
+                                    </CompositeCollection>
+                                </ListBox.ItemsSource>
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Image VerticalAlignment="Center" Source="{Binding Icon}"
                                                 Stretch="UniformToFill" Width="16" Height="16" Margin="0,0,2,2"/>
-                                        <TextBlock VerticalAlignment="Center" Text="{Binding Text}"/>
-                                    </StackPanel>
-                                </DataTemplate>
-                            </ListBox.ItemTemplate>
-                        </ListBox>
+                                            <TextBlock VerticalAlignment="Center" Text="{Binding Text}"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                        </Grid>
                         <DockPanel Grid.Column="1">
                             <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
                                 <Grid>
