@@ -177,7 +177,7 @@
                                 <TextBox Grid.Column="1" x:Name="filterImageGroup" AcceptsReturn="False"
                                          TextChanged="FilterImageGroup_TextChanged"/>
                             </Grid>
-                            <ListBox x:Name="BoxImageGroupData" Grid.Column="0" SelectionChanged="BoxImageGroupData_SelectionChanged">
+                            <ListBox x:Name="BoxImageGroupData" Grid.Row="1" SelectionChanged="BoxImageGroupData_SelectionChanged">
                                 <ListBox.Resources>
                                     <CollectionViewSource x:Key="ImageGroupInfoSys" Source="{Binding FilteredImageGroupInfoSys, ElementName=inputWindow}"/>
                                     <CollectionViewSource x:Key="ImageGroupInfo" Source="{Binding FilteredImageGroupInfo, ElementName=inputWindow}"/>
