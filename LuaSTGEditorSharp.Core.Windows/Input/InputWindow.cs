@@ -66,7 +66,7 @@ namespace LuaSTGEditorSharp.Windows.Input
 
         protected static bool MatchFilter(string source, string filter)
         {
-            return source.Contains(filter);
+            return source.ToLower().Contains(filter.ToLower());
         }
 
         protected string result;
