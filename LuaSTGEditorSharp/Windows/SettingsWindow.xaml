@@ -21,7 +21,7 @@
                     <Label Content="Note: The selection of plugin will only apply once you restart the application." HorizontalAlignment="Left" Height="34" Margin="10,41,0,0" VerticalAlignment="Top" Width="669"/>
                     <Label Content="Target Version:" HorizontalAlignment="Left" Margin="10,80,0,0" VerticalAlignment="Top" Width="103"/>
                     <Label Content="{Binding TargetVersion, ElementName=window}" HorizontalAlignment="Left" Margin="118,80,0,0" VerticalAlignment="Top" Width="561" Height="26"/>
-                    <Button Content="Register Extension" HorizontalAlignment="Left" Margin="10,111,0,0" VerticalAlignment="Top" Width="668" Height="30" Click="ButtonRegisterExt_Click"/>
+                    <Button Content="Register Extension" Margin="10,111,10,0" VerticalAlignment="Top" Height="30" Click="ButtonRegisterExt_Click"/>
                 </Grid>
             </TabItem>
             <TabItem x:Name="CompilerTab" Header="Compiler">
