@@ -54,8 +54,20 @@ namespace LuaSTGEditorSharp.EditorData.Node.General
 
         protected override void AddCompileSettings()
         {
-            string sk = parentWorkSpace.CompileProcess.archiveSpace + System.IO.Path.GetFileName(NonMacrolize(0));
-            parentWorkSpace.CompileProcess.AddFile(NonMacrolize(0), sk);
+            if (System.IO.Directory.Exists(NonMacrolize(0)))
+            {
+                System.IO.DirectoryInfo folder = new System.IO.DirectoryInfo(NonMacrolize(0));
+                foreach (System.IO.FileInfo fileInfo in folder.GetFiles())
+                {
+                    string sk = parentWorkSpace.CompileProcess.archiveSpace + System.IO.Path.GetFileName(fileInfo.Name);
+                    parentWorkSpace.CompileProcess.AddFile(fileInfo.Name, sk);
+                }
+            }
+            else
+            {
+                string sk = parentWorkSpace.CompileProcess.archiveSpace + System.IO.Path.GetFileName(NonMacrolize(0));
+                parentWorkSpace.CompileProcess.AddFile(NonMacrolize(0), sk);
+            }
         }
 
         public override object Clone()
