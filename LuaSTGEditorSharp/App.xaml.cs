@@ -18,6 +18,7 @@ using LuaSTGEditorSharp.Plugin;
 using LuaSTGEditorSharp.Plugin.Default;
 using LuaSTGEditorSharp.EditorData;
 using LuaSTGEditorSharp.Windows;
+using static LuaSTGEditorSharp.SimpleIPC;
 
 namespace LuaSTGEditorSharp
 {
@@ -26,6 +27,8 @@ namespace LuaSTGEditorSharp
     /// </summary>
     public partial class App : Application, IMessageThrowable, IAppSettings, IAppDebugSettings
     {
+        public Server IPC { get; private set; }
+
         public App()
         {
             PropertyChanged += new PropertyChangedEventHandler(CheckMessage);
@@ -63,12 +66,10 @@ namespace LuaSTGEditorSharp
                 Lua.SyntaxHighlightLoader.LoadLuaDef();
 
                 var mainWindow = new MainWindow();
+                MainWindow = mainWindow;
+                MainWindow.Show();
                 //string arg = AppDomain.CurrentDomain.SetupInformation.ActivationArguments?.ActivationData?[0];
-                string arg = "";
-                if (e.Args.Length > 0)
-                {
-                    arg = e.Args[0];
-                }
+                var arg = e.Args.FirstOrDefault();
                 if (!string.IsNullOrEmpty(arg))
                 {
                     Uri fileUri = new Uri(arg);
@@ -77,8 +78,28 @@ namespace LuaSTGEditorSharp
                     LoadDoc(fp);
                     //LoadDoc(arg);
                 }
-                MainWindow = mainWindow;
-                MainWindow.Show();
+                IPC = new Server();
+                IPC.MessageReceived += (sender, message) =>
+                {
+                    Dispatcher.Invoke(() =>
+                    {
+                        if (message.StartsWith("OpenFile|"))
+                        {
+                            var fp = message[9..];
+                            LoadDoc(fp);
+                            MainWindow.Dispatcher.Invoke(() =>
+                            {
+                                if (MainWindow.WindowState == WindowState.Minimized)
+                                {
+                                    MainWindow.WindowState = WindowState.Normal;
+                                }
+                                MainWindow.Activate();
+                                MainWindow.Topmost = true;
+                                MainWindow.Topmost = false;
+                            });
+                        }
+                    });
+                };
             }
             catch (Exception ex)
             {

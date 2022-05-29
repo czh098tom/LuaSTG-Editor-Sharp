@@ -211,7 +211,19 @@ namespace LuaSTGEditorSharp
 
         public void OpenDocByFile(string arg)
         {
-            if (!IsOpened(arg)) OpenDocFromPath(Path.GetFileName(arg), arg);
+            if (!IsOpened(arg))
+                OpenDocFromPath(Path.GetFileName(arg), arg);
+            else
+            {
+                foreach (DocumentData doc in Documents)
+                {
+                    if (!string.IsNullOrEmpty(doc.DocPath) && Path.GetFullPath(doc.DocPath) == Path.GetFullPath(arg))
+                    {
+                        Dispatcher.Invoke(() => docTabs.SelectedItem = doc);
+                        return;
+                    }
+                }
+            }
         }
 
         public async void OpenDocFromPath(string name, string path)

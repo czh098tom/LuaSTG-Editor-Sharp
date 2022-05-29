@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Microsoft.VisualBasic.ApplicationServices;
+using System;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using Microsoft.VisualBasic.ApplicationServices;
-using LuaSTGEditorSharp.EditorData.Node;
-
 using StartupEventArgs = Microsoft.VisualBasic.ApplicationServices.StartupEventArgs;
 
 namespace LuaSTGEditorSharp
@@ -37,17 +33,16 @@ namespace LuaSTGEditorSharp
 
         protected override void OnStartupNextInstance(StartupNextInstanceEventArgs eventArgs)
         {
-            string arg = null;
-            if (eventArgs.CommandLine.Count > 0)
+            var arg = eventArgs.CommandLine.FirstOrDefault();
+            Task.Run(() =>
             {
-                arg = eventArgs.CommandLine[0];
-            }
-            if (!string.IsNullOrEmpty(arg))
-            {
-                Uri fileUri = new Uri(arg);
-                string fp = Uri.UnescapeDataString(fileUri.AbsolutePath);
-                app.LoadDoc(fp);
-            }
+                if (!string.IsNullOrEmpty(arg))
+                {
+                    Uri fileUri = new Uri(arg);
+                    string fp = Uri.UnescapeDataString(fileUri.AbsolutePath);
+                    new SimpleIPC.Client().SendMessage("OpenFile|" + fp);
+                };
+            });
         }
     }
 }
