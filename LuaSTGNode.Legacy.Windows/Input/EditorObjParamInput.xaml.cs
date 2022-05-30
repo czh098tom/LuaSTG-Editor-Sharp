@@ -150,6 +150,7 @@ namespace LuaSTGEditorSharp.Windows.Input
 
         public void CombineParams()
         {
+            /*
             string s = "";
             bool first = true;
             foreach (ParamItem item in Items)
@@ -165,6 +166,8 @@ namespace LuaSTGEditorSharp.Windows.Input
                 }
             }
             Result = s;
+            */
+            Result = string.Join(", ", Items.Select(x => x.Value));
         }
 
         public EditorObjParamInput(AttrItem original, MetaType type, string s)

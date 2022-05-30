@@ -33,4 +33,9 @@
   <ItemGroup>
     <Resource Include="images\search.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Page Update="Input\MultiplePathInput.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
+  </ItemGroup>
 </Project>

@@ -33,8 +33,8 @@ namespace LuaSTGEditorSharp.EditorData.Node.General
 
         [JsonIgnore, NodeAttribute]
         public string Path {
-            get => DoubleCheckAttr(0, "plainFile", isDependency: true).attrInput;
-            set => DoubleCheckAttr(0, "plainFile", isDependency: true).attrInput = value;
+            get => DoubleCheckAttr(0, "plainMultipleFiles", isDependency: true).attrInput;
+            set => DoubleCheckAttr(0, "plainMultipleFiles", isDependency: true).attrInput = value;
         }
 
         public override IEnumerable<string> ToLua(int spacing)
@@ -49,13 +49,17 @@ namespace LuaSTGEditorSharp.EditorData.Node.General
 
         public override string ToString()
         {
-            return $"Add file \"{NonMacrolize(0)}\" into pack";
+            return $"Add file {string.Join(", ", NonMacrolize(0).Split("|").Select(x => $"\"{x}\""))} into pack";
         }
 
         protected override void AddCompileSettings()
         {
-            string sk = parentWorkSpace.CompileProcess.archiveSpace + System.IO.Path.GetFileName(NonMacrolize(0));
-            parentWorkSpace.CompileProcess.AddFile(NonMacrolize(0), sk);
+            var files = NonMacrolize(0).Split("|");
+            foreach (var file in files)
+            {
+                string sk = parentWorkSpace.CompileProcess.archiveSpace + System.IO.Path.GetFileName(file);
+                parentWorkSpace.CompileProcess.AddFile(file, sk);
+            }
         }
 
         public override object Clone()
