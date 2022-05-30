@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "LuaSTGNode.Legacy": {
+      "commandName": "Project",
+      "remoteDebugEnabled": false,
+      "nativeDebugging": false
+    }
+  }
+}

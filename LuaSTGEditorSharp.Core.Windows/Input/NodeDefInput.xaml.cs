@@ -32,7 +32,7 @@ namespace LuaSTGEditorSharp.Windows.Input
         {
             difficulty = item.Parent.GetDifficulty();
 
-            AllNodeDefModel = item.Parent.parentWorkSpace.Meta.aggregatableMetas[1].GetAllSimpleWithDifficulty(difficulty);
+            AllNodeDefModel = item.Parent.parentWorkSpace.Meta.UserDefinedData.GetAllSimpleWithDifficulty(difficulty);
             FilteredNodeDefModel = new ObservableCollection<MetaModel>(AllNodeDefModel);
 
             InitializeComponent();

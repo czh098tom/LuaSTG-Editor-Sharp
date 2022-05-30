@@ -169,7 +169,7 @@ namespace LuaSTGEditorSharp.Windows.Input
             target.Add("bulletStyle", (src, tar) => new BulletInput(tar));
             target.Add("laserStyle", (src, tar) => new LaserInput(tar));
             target.Add("enemyStyle", (src, tar) => new EnemyInput(tar));
-            target.Add("userDefinedNode", (src, tar) => new NodeDefInput(tar, src));
+            target.Add("userDefinedNodeDefinition", (src, tar) => new NodeDefInput(tar, src));
             target.Add("bulletDef", (src, tar) => new EditorObjDefInput(tar, MetaType.Bullet, src));
             target.Add("objectDef", (src, tar) => new EditorObjDefInput(tar, MetaType.Object, src));
             target.Add("laserDef", (src, tar) => new EditorObjDefInput(tar, MetaType.Laser, src));

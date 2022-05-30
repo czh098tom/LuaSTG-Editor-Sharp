@@ -18,13 +18,36 @@ namespace LuaSTGEditorSharp.EditorData.Node.Advanced
     [IgnoreAttributesParityCheck]
     public class UnidentifiedNode : FixedAttributeTreeNode
     {
+        public static string[,] GetProperties(MetaModel source)
+        {
+            try
+            {
+                string[] paramStrSplited = source.Param.Split('\n');
+                int n = paramStrSplited.Count();
+                string[,] props = new string[n / 3, 3];
+                //resolve exccess '\n'
+                for (int i = 0; i < n - 1; i += 3)
+                {
+                    for (int j = 0; j < 3; j++)
+                    {
+                        props[i / 3, j] = paramStrSplited[i + j];
+                    }
+                }
+                return props;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
         [JsonConstructor]
         private UnidentifiedNode() : base() { }
 
         public UnidentifiedNode(DocumentData workSpaceData)
             : base(workSpaceData)
         {
-            attributes.Add(new DependencyAttrItem("Type", this, "userDefinedNode"));
+            attributes.Add(new DependencyAttrItem("Type", this, "userDefinedNodeDefinition"));
         }
 
         [JsonIgnore, XmlIgnore]
@@ -140,29 +163,6 @@ namespace LuaSTGEditorSharp.EditorData.Node.Advanced
         {
             var metas = parentWorkSpace.Meta.aggregatableMetas[1].GetAllSimpleWithDifficulty("").ToArray();
             return metas.FirstOrDefault((mm) => mm.FullName == attributes[0].AttrInput);
-        }
-
-        private string[,] GetProperties(MetaModel source)
-        {
-            try
-            {
-                string[] paramStrSplited = source.Param.Split('\n');
-                int n = paramStrSplited.Count();
-                string[,] props = new string[n / 3, 3];
-                //resolve exccess '\n'
-                for (int i = 0; i < n - 1; i += 3)
-                {
-                    for (int j = 0; j < 3; j++)
-                    {
-                        props[i / 3, j] = paramStrSplited[i + j];
-                    }
-                }
-                return props;
-            }
-            catch
-            {
-                return null;
-            }
         }
 
         public override IEnumerable<Tuple<int, TreeNodeBase>> GetLines()

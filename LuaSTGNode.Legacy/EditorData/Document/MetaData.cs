@@ -10,10 +10,11 @@ using Newtonsoft.Json;
 
 namespace LuaSTGEditorSharp.EditorData.Document
 {
-    public enum MetaType { Proj, UserDefined
+    public enum MetaType { Proj, UserDefined, UserDefinedDefault
             , StageGroup, Boss, Bullet, ImageLoad, ImageGroupLoad
             , BGMLoad, BossBG, Laser, BentLaser, Object, Enemy, Task
-            , SELoad, AnimationLoad, ParticleLoad, TextureLoad, FXLoad, __max }
+            , SELoad, AnimationLoad, ParticleLoad, TextureLoad, FXLoad
+            , __max }
 
     //List version, used in non-immediate update cases
     [Serializable]

@@ -90,10 +90,10 @@ namespace LuaSTGEditorSharp.EditorData.Node.Advanced.AdvancedRepeat
             string beg = $"_beg_{NonMacrolize(0)}";
             string end = $"_end_{NonMacrolize(0)}";
             string func = $"_func_{NonMacrolize(0)}";
-            string begin = $"local _beg_{NonMacrolize(0)}={Macrolize(1)} local {NonMacrolize(0)}={beg} "
+            string begin = $"local _beg_{NonMacrolize(0)}={Macrolize(1)}"
                 + $" local _func_{NonMacrolize(0)}={Macrolize(4)}"
                 + $" local _w_{NonMacrolize(0)}=0 local _end_{NonMacrolize(0)}={Macrolize(2)}"
-                + $" local _d_w_{NonMacrolize(0)}=1/({times}{offchar})\n";
+                + $" local _d_w_{NonMacrolize(0)}=1/({times}{offchar}) local {NonMacrolize(0)}=({end}-{beg})*{func}(0)+{beg} \n";
             string repeat = $"_w_{NonMacrolize(0)}=_w_{NonMacrolize(0)}+_d_w_{NonMacrolize(0)}"
                 + $" {NonMacrolize(0)}=({end}-{beg})*{func}(_w_{NonMacrolize(0)})+{beg}\n";
             return new Tuple<string, string>(begin, repeat);
