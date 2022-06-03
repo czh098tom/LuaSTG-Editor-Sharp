@@ -49,7 +49,8 @@ namespace LuaSTGEditorSharp.EditorData.Node.General
 
         public override string ToString()
         {
-            return $"Add file {string.Join(", ", NonMacrolize(0).Split("|").Select(x => $"\"{x}\""))} into pack";
+            return @$"Add following file(s) into pack: \n
+{string.Join(Environment.NewLine, NonMacrolize(0).Split("|").Select(x => $"\"{x}\""))}";
         }
 
         protected override void AddCompileSettings()
