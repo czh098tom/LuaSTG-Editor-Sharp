@@ -49,7 +49,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.General
 
         public override string ToString()
         {
-            return @$"Add following file(s) into pack: \n
+            return @$"Add following file(s) into pack: 
 {string.Join(Environment.NewLine, NonMacrolize(0).Split("|").Select(x => $"\"{x}\""))}";
         }
 
