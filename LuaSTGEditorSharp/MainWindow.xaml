@@ -107,19 +107,83 @@
         
         <!--#region Linked Tree Style-->
         <tool:TreeViewLineConverter x:Key="TreeViewLineConverter"/>
-        <SolidColorBrush x:Key="TreeViewItem.TreeArrow.Static.Checked.Fill" Color="#FF595959"/>
-        <SolidColorBrush x:Key="TreeViewItem.TreeArrow.Static.Checked.Stroke" Color="#FF262626"/>
+        <SolidColorBrush x:Key="TreeViewItem.TreeArrow.Static.Stroke" Color="Black"/>
+        <!--SolidColorBrush x:Key="TreeViewItem.TreeArrow.Static.Fill" Color="#FF818181"/-->
+        <!--SolidColorBrush x:Key="TreeViewItem.TreeArrow.Static.Checked.Stroke" Color="#FF262626"/-->
+        <!--SolidColorBrush x:Key="TreeViewItem.TreeArrow.Static.Checked.Fill" Color="#FF595959"/-->
         <SolidColorBrush x:Key="TreeViewItem.TreeArrow.MouseOver.Stroke" Color="#FF27C7F7"/>
-        <SolidColorBrush x:Key="TreeViewItem.TreeArrow.MouseOver.Fill" Color="#FFCCEEFB"/>
+        <!--SolidColorBrush x:Key="TreeViewItem.TreeArrow.MouseOver.Fill" Color="#FFCCEEFB"/-->
         <SolidColorBrush x:Key="TreeViewItem.TreeArrow.MouseOver.Checked.Stroke" Color="#FF1CC4F7"/>
-        <SolidColorBrush x:Key="TreeViewItem.TreeArrow.MouseOver.Checked.Fill" Color="#FF82DFFB"/>
-        <PathGeometry x:Key="TreeArrow" Figures="M0,0 L0,6 L6,0 z"/>
-        <SolidColorBrush x:Key="TreeViewItem.TreeArrow.Static.Fill" Color="#FFFFFFFF"/>
-        <SolidColorBrush x:Key="TreeViewItem.TreeArrow.Static.Stroke" Color="#FF818181"/>
+        <!--SolidColorBrush x:Key="TreeViewItem.TreeArrow.MouseOver.Checked.Fill" Color="#FF82DFFB"/-->
+        <!--PathGeometry x:Key="TreeArrow" Figures="M0,0 L0,6 L6,0 z"/-->
+        <PathGeometry x:Key="TreeArrow+" Figures="M1,2.875 L2.875,2.875 2.875,1 3.125,1 3.75,2.875 5,2.875 5,3.125 3.125,3.125 3.125,5 2.875,5 2.875,3.125 1,3.125 z"/>
+        <PathGeometry x:Key="TreeArrow-" Figures="M1,1.35 L7,1.35 7,1.65 1,1.65 z"/>
         <Style x:Key="ExpandCollapseToggleStyle" TargetType="{x:Type ToggleButton}">
             <Setter Property="Focusable" Value="False"/>
             <Setter Property="Width" Value="16"/>
             <Setter Property="Height" Value="16"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ToggleButton}">
+                        <Border Padding="{TemplateBinding Padding}">
+                            <Grid SnapsToDevicePixels="False" Background="Transparent">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="16"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="16"/>
+                                </Grid.RowDefinitions>
+                                <Grid Grid.Column="1">
+                                    <Grid.LayoutTransform>
+                                        <TransformGroup>
+                                            <TransformGroup.Children>
+                                                <TransformCollection>
+                                                    <RotateTransform Angle="0"/>
+                                                </TransformCollection>
+                                            </TransformGroup.Children>
+                                        </TransformGroup>
+                                    </Grid.LayoutTransform>
+                                    <Rectangle x:Name="Border" Stroke="{StaticResource TreeViewItem.TreeArrow.Static.Stroke}" 
+                                               HorizontalAlignment="Center" VerticalAlignment="Center" 
+                                               Width="8" Height="8"/>
+                                    <Path x:Name="Arrow" Stroke="{StaticResource TreeViewItem.TreeArrow.Static.Stroke}"
+                                          StrokeThickness="2" 
+                                          HorizontalAlignment="Center" VerticalAlignment="Center" 
+                                          SnapsToDevicePixels="false" 
+                                          Data="{StaticResource TreeArrow+}" />
+                                </Grid>
+                                <ContentPresenter HorizontalAlignment="Center" Margin="0,4,0,0" 
+                                                  VerticalAlignment="Top" SnapsToDevicePixels="True" 
+                                                  Grid.Column="0" RecognizesAccessKey="True"/>
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="true">
+                                <Setter Property="Data" TargetName="Arrow" Value="{StaticResource TreeArrow-}" />
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Stroke" TargetName="Border" Value="{StaticResource TreeViewItem.TreeArrow.MouseOver.Stroke}"/>
+                                <Setter Property="Stroke" TargetName="Arrow" Value="{StaticResource TreeViewItem.TreeArrow.MouseOver.Stroke}"/>
+                            </Trigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsMouseOver" Value="True"/>
+                                    <Condition Property="IsChecked" Value="True"/>
+                                </MultiTrigger.Conditions>
+                                <Setter Property="Stroke" TargetName="Border" Value="{StaticResource TreeViewItem.TreeArrow.MouseOver.Checked.Stroke}"/>
+                                <Setter Property="Stroke" TargetName="Arrow" Value="{StaticResource TreeViewItem.TreeArrow.MouseOver.Checked.Stroke}"/>
+                            </MultiTrigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter Property="StrokeThickness" TargetName="Border" Value="2"/>
+                                <Setter Property="Stroke" TargetName="Border" Value="{StaticResource TreeViewItem.TreeArrow.MouseOver.Checked.Stroke}"/>
+                                <Setter Property="Stroke" TargetName="Arrow" Value="{StaticResource TreeViewItem.TreeArrow.MouseOver.Checked.Stroke}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <!--
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type ToggleButton}">
@@ -156,6 +220,7 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
+            -->
         </Style>
         <Style x:Key="TreeViewItemFocusVisual">
             <Setter Property="Control.Template">
@@ -207,16 +272,23 @@
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
 
-                            <!-- Connecting Lines 
-                            <Rectangle x:Name="HorLn" Height="1" Stroke="#8888" Margin="10,8,0,0" SnapsToDevicePixels="False" ClipToBounds="True" VerticalAlignment="Top"/>
-                            
-                            <Line x:Name="Ver" Width="5" X1="2.5" Y1="0" X2="2.5" Y2="{Binding ActualHeight, RelativeSource={RelativeSource Self}}"
-                                  StrokeDashArray="3" Stroke="#8888"
-                                  Grid.RowSpan="2" SnapsToDevicePixels="False" 
-                                  ClipToBounds="True" 
-                                  VerticalAlignment="Stretch"/>
-                            -->
-                            <Rectangle x:Name="VerLn" Width="1" Grid.RowSpan="2" SnapsToDevicePixels="False" ClipToBounds="True" VerticalAlignment="Stretch">
+                            <Rectangle x:Name="HorLn" Margin="9,8,0,0" Height="1" VerticalAlignment="Top" SnapsToDevicePixels="True">
+                                <Rectangle.Fill>
+                                    <DrawingBrush Viewport="0,0,6,3" ViewportUnits="Absolute" TileMode="Tile" Stretch="None">
+                                        <DrawingBrush.Drawing>
+                                            <GeometryDrawing>
+                                                <GeometryDrawing.Brush>
+                                                    <SolidColorBrush Color="#FF888888"/>
+                                                </GeometryDrawing.Brush>
+                                                <GeometryDrawing.Geometry>
+                                                    <RectangleGeometry Rect="0,0,3,3"/>
+                                                </GeometryDrawing.Geometry>
+                                            </GeometryDrawing>
+                                        </DrawingBrush.Drawing>
+                                    </DrawingBrush>
+                                </Rectangle.Fill>
+                            </Rectangle>
+                            <Rectangle x:Name="VerLn" Width="1" Grid.RowSpan="2" SnapsToDevicePixels="True" ClipToBounds="True" VerticalAlignment="Stretch">
                                 <Rectangle.Fill>
                                     <DrawingBrush Viewport="0,0,3,6" ViewportUnits="Absolute" TileMode="Tile" Stretch="None">
                                         <DrawingBrush.Drawing>
@@ -232,8 +304,7 @@
                                     </DrawingBrush>
                                 </Rectangle.Fill>
                             </Rectangle>
-                            
-                            
+
                             <ToggleButton x:Name="Expander"
                                           Style="{StaticResource ExpandCollapseToggleStyle}"
                                           IsChecked="{Binding Path=IsExpanded, RelativeSource={RelativeSource TemplatedParent}}"
@@ -254,28 +325,6 @@
                                             Grid.ColumnSpan="2"/>
                         </Grid>
                         <ControlTemplate.Triggers>
-
-                            <!-- This trigger changes the connecting lines if the item is the last in the list 
-                            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorLevel=1
-                                , AncestorType={x:Type Grid}}, Path=DataContext, Converter={StaticResource TreeViewLineConverter}}" 
-                                         Value="true">
-                                <Setter TargetName="VerLn"
-                                        Property="VerticalAlignment"
-                                        Value="Top"/>
-                                <Setter TargetName="VerLn"
-                                        Property="Height"
-                                        Value="9"/>
-                            </DataTrigger>
-                            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Converter={StaticResource TreeViewLineConverter}}" 
-                                         Value="false">
-                                <Setter TargetName="VerLn"
-                                        Property="VerticalAlignment"
-                                        Value="Stretch"/>
-                                <Setter TargetName="VerLn"
-                                        Property="Height"
-                                        Value="Auto"/>
-                            </DataTrigger>
-                            -->
                             <Trigger Property="IsExpanded"
                                      Value="false">
                                 <Setter TargetName="ItemsHost"
@@ -336,6 +385,11 @@
                                 <Setter Property="Foreground"
                                         Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
                             </Trigger>
+                            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, 
+Converter={StaticResource TreeViewLineConverter}}" Value="true">
+                                <Setter TargetName="VerLn" Property="Height" Value="9"/>
+                                <Setter TargetName="VerLn" Property="VerticalAlignment" Value="Top"/>
+                            </DataTrigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
