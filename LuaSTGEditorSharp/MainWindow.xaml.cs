@@ -36,6 +36,7 @@ using LuaSTGEditorSharp.EditorData.Commands.Factory;
 using Newtonsoft.Json;
 
 using Path = System.IO.Path;
+using System.Reflection;
 
 namespace LuaSTGEditorSharp
 {
@@ -505,6 +506,38 @@ namespace LuaSTGEditorSharp
             return false;
         }
 
+        private string GetNodeCode(TreeNodeBase node, TreeNodeBase parent)
+        {
+            if (node == parent)
+            {
+                return string.Concat(parent.ToLua(0));
+            }
+            for (int i = 0; i < parent.Children.Count; i++)
+            {
+                TreeNodeBase child = parent.Children[i];
+                if (child == node)
+                {
+                    return string.Concat(child.ToLua(0));
+                }
+                else
+                {
+                    string result = GetNodeCode(node, child);
+                    if (!string.IsNullOrEmpty(result))
+                    {
+                        return result;
+                    }
+                    child.ToLua(0);
+                    var m = child.GetType().GetMethod("AddCompileSettings", BindingFlags.Instance | BindingFlags.NonPublic);
+                    m.Invoke(child, null);
+                }
+            }
+            return null;
+        }
+        private string GetNodeCode(TreeNodeBase node)
+        {
+            return GetNodeCode(node, ActivatedWorkSpaceData.TreeNodes[0]);
+        }
+
         private void ViewCode()
         {
             try
@@ -512,7 +545,8 @@ namespace LuaSTGEditorSharp
                 propData.CommitEdit();
                 if (TestError()) return;
                 ActivatedWorkSpaceData.GatherCompileInfo(App.Current as App);
-                var w = new CodePreviewWindow(string.Concat(selectedNode.ToLua(0)));
+                //var w = new CodePreviewWindow(string.Concat(selectedNode.ToLua(0)));
+                var w = new CodePreviewWindow(GetNodeCode(selectedNode));
                 w.ShowDialog();
                 //SaveXML();
             }

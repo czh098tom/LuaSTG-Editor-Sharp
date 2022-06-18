@@ -303,6 +303,15 @@
                                         </DrawingBrush.Drawing>
                                     </DrawingBrush>
                                 </Rectangle.Fill>
+                                <Rectangle.Height>
+                                    <MultiBinding Converter="{StaticResource TreeViewLineConverter}">
+                                        <MultiBinding.Bindings>
+                                            <Binding RelativeSource="{RelativeSource Self}"/>
+                                            <Binding RelativeSource="{RelativeSource TemplatedParent}"/>
+                                            <Binding RelativeSource="{RelativeSource Mode=FindAncestor,AncestorType=TreeView}" Path="SelectedItem"/>
+                                        </MultiBinding.Bindings>
+                                    </MultiBinding>
+                                </Rectangle.Height>
                             </Rectangle>
 
                             <ToggleButton x:Name="Expander"
@@ -385,11 +394,6 @@
                                 <Setter Property="Foreground"
                                         Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
                             </Trigger>
-                            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, 
-Converter={StaticResource TreeViewLineConverter}}" Value="true">
-                                <Setter TargetName="VerLn" Property="Height" Value="9"/>
-                                <Setter TargetName="VerLn" Property="VerticalAlignment" Value="Top"/>
-                            </DataTrigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
