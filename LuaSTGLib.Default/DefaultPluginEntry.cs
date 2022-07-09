@@ -22,7 +22,7 @@ namespace LuaSTGEditorSharp.Plugin.Default
 
         public override Type[] BossSCNodeType => new Type[0];
 
-        public override int MetaInfoCollectionTypeCount => 2;
+        public override int MetaInfoCollectionTypeCount => 3;
 
         public override int[][] MetaInfoCollectionWatchDict => new int[][] { new int[] { 1 } };
 

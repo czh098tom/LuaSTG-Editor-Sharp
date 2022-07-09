@@ -69,7 +69,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Audio
         public override string ToString()
         {
             return "Play sound " + NonMacrolize(0)
-                + (NonMacrolize(3) == "true" ? " with default volume" : " with volume " + NonMacrolize(1)) + ", pan " + NonMacrolize(2);
+                + (NonMacrolize(3) == "true" ? " with volume " + NonMacrolize(1) : " with default volume") + ", pan " + NonMacrolize(2);
         }
 
         public override object Clone()
