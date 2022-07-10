@@ -80,7 +80,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Object
 
         public override string ToString()
         {
-            return "Set acceleration of " + NonMacrolize(0) + " : v=" + NonMacrolize(1) + " angle=" + NonMacrolize(2)
+            return "Set acceleration of " + NonMacrolize(0) + " : a=" + NonMacrolize(1) + " angle=" + NonMacrolize(2)
                 + (NonMacrolize(3) == "true" ? " , aim to player" : "");
         }
 
