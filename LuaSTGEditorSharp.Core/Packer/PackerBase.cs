@@ -18,6 +18,8 @@ namespace LuaSTGEditorSharp.Packer
                     return new ZipPackerBatch(targetPath, externalToolPath, tempPath);
                 case PlainCopyPacker.name:
                     return new PlainCopyPacker(targetPath);
+                case ZipPackerInternalQuick.name:
+                    return new ZipPackerInternalQuick(targetPath);
                 case ZipPackerInternal.name:
                 default:
                     return new ZipPackerInternal(targetPath);

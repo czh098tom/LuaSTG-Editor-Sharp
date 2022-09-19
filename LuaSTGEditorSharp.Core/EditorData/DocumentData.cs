@@ -460,6 +460,14 @@ namespace LuaSTGEditorSharp.EditorData
         /// <param name="mainAppWithInfo">Main <see cref="App"/></param>
         public abstract void GatherCompileInfo(IAppSettings mainAppWithInfo);
 
+        /// <summary>
+        /// Get the <see cref="EditorData.CompileProcess"/> of this document.
+        /// </summary>
+        /// <param name="mainAppWithInfo">Main <see cref="App"/></param>
+        /// <param name="directory"></param>
+        /// <param name="filename"></param>
+        public abstract void GatherCompileInfo(IAppSettings mainAppWithInfo, string directory = "", string filename = "");
+
         public void SaveCode(string path)
         {
             FileStream s = null;

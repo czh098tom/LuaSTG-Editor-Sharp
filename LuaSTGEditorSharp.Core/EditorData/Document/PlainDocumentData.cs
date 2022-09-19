@@ -98,6 +98,9 @@ namespace LuaSTGEditorSharp.EditorData.Document
         }
 
         public override void GatherCompileInfo(IAppSettings mainAppWithInfo)
+            => GatherCompileInfo(mainAppWithInfo, "", "");
+
+        public override void GatherCompileInfo(IAppSettings mainAppWithInfo, string directory = "", string filename = "")
         {
             CompileProcess c;
             if (parentProj == null)
@@ -166,7 +169,7 @@ namespace LuaSTGEditorSharp.EditorData.Document
 
             c.luaSTGFolder = Path.GetDirectoryName(c.luaSTGExePath);
 
-            c.GetPacker(mainAppWithInfo);
+            c.GetPacker(mainAppWithInfo, directory, filename);
             //System.Windows.MessageBox.Show("fin.");
         }
     }

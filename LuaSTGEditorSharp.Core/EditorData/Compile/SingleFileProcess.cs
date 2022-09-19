@@ -27,8 +27,17 @@ namespace LuaSTGEditorSharp.EditorData.Compile
         /// <param name="StageDebug">Whether Stage Debug is switched on.</param>
         /// <param name="appSettings">App that contains settings</param>
         public override void ExecuteProcess(bool SCDebug, bool StageDebug, IAppSettings appSettings)
+            => ExecuteProcess(SCDebug, StageDebug, appSettings, "", "");
+
+        /// <summary>
+        /// Execute the <see cref="CompileProcess"/>.
+        /// </summary>
+        /// <param name="SCDebug">Whether SCDebug is switched on.</param>
+        /// <param name="StageDebug">Whether Stage Debug is switched on.</param>
+        /// <param name="appSettings">App that contains settings</param>
+        public override void ExecuteProcess(bool SCDebug, bool StageDebug, IAppSettings appSettings, string directory = "", string filename = "")
         {
-            GetPacker(appSettings);
+            GetPacker(appSettings, directory, filename);
 
             GenerateCode(SCDebug, StageDebug);
             WriteRoot();

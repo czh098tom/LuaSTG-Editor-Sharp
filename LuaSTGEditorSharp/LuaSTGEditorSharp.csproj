@@ -169,6 +169,7 @@
     <ProjectReference Include="..\LuaSTGEditorSharp.Core.Windows\LuaSTGEditorSharp.Core.Windows.csproj" />
     <ProjectReference Include="..\LuaSTGEditorSharp.Core\LuaSTGEditorSharp.Core.csproj" />
     <ProjectReference Include="..\LuaSTGLib.Default\LuaSTGLib.Default.csproj" />
+    <ProjectReference Include="..\LuaSTGPlusLib\LuaSTGPlusLib.csproj" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />

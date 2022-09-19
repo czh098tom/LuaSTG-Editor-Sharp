@@ -127,9 +127,18 @@ namespace LuaSTGEditorSharp.EditorData
             }
         }
 
-        public void GetPacker(IAppSettings appSettings)
+        public void GetPacker(IAppSettings appSettings, string directory = "", string filename = "")
         {
-            Packer = PackerBase.GetPacker(appSettings.PackerType, TargetPath, zipExePath, rootZipPackPath);
+            string fullpath = Path.GetFullPath(TargetPath);
+            string dir = Path.GetDirectoryName(fullpath);
+            string name = Path.GetFileName(fullpath);
+            if (!string.IsNullOrWhiteSpace(directory))
+                dir = Path.GetFullPath(directory);
+            if (!dir.Replace("/", "\\").EndsWith("\\"))
+                dir += "\\";
+            if (!string.IsNullOrWhiteSpace(filename))
+                name = filename;
+            Packer = PackerBase.GetPacker(appSettings.PackerType, dir + name, zipExePath, rootZipPackPath);
         }
 
         /// <summary>
@@ -183,6 +192,14 @@ namespace LuaSTGEditorSharp.EditorData
         /// <param name="StageDebug">Whether Stage Debug is switched on.</param>
         /// <param name="appSettings">App that contains settings</param>
         public abstract void ExecuteProcess(bool SCDebug, bool StageDebug, IAppSettings appSettings);
+
+        /// <summary>
+        /// Execute the <see cref="CompileProcess"/>.
+        /// </summary>
+        /// <param name="SCDebug">Whether SCDebug is switched on.</param>
+        /// <param name="StageDebug">Whether Stage Debug is switched on.</param>
+        /// <param name="appSettings">App that contains settings</param>
+        public abstract void ExecuteProcess(bool SCDebug, bool StageDebug, IAppSettings appSettings, string directory = "", string filename = "");
 
         /// <summary>
         /// Save code based on debug mode.
