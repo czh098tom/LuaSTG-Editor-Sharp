@@ -1,0 +1,42 @@
+name: CI (.NET Core)
+
+on: [ push, pull_request, workflow_dispatch ]
+
+env:
+  DOTNET_VERSION: "6.0.401"
+  PR_PROMPT: "::warning:: Build artifact will not be uploaded due to the workflow is trigged by pull request."
+
+jobs:
+  build:
+    name: Build binary CI - windows (${{ matrix.os }}-${{ matrix.arch }})
+    runs-on: windows-latest
+    strategy:
+      matrix:
+        os: [ win, win7 ]
+        arch: [ x86, x64, arm, arm64 ]
+        exclude:
+          - os: win7
+            arch: arm
+          - os: win7
+            arch: arm64
+      fail-fast: true
+    steps:
+    - uses: actions/checkout@v3
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: ${{ env.DOTNET_VERSION }}
+    - name: Install dependencies
+      run: dotnet restore
+    - name: Build
+      env:
+        IS_PR: ${{ !!github.head_ref }}
+      run: |
+        if $IS_PR ; then echo $PR_PROMPT; fi
+        dotnet publish -c Release --output publish/ --os ${{ matrix.os }} --arch ${{ matrix.arch }}
+    - name: Upload artifact
+      uses: actions/upload-artifact@v3
+      if: ${{ !github.head_ref }}
+      with:
+        name: ${{ matrix.os }}-${{ matrix.arch }}
+        path: publish/

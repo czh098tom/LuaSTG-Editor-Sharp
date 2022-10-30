@@ -1,9 +1,0 @@
-{
-  "profiles": {
-    "LuaSTGEditorSharp.Core.Cli": {
-      "commandName": "Project",
-      "commandLineArgs": "\"D:\\QQ\\2565128043\\FileRecv\\WeekendMerger\\22nd_weekend\\22nd_weekend.lstgproj\"",
-      "nativeDebugging": true
-    }
-  }
-}
