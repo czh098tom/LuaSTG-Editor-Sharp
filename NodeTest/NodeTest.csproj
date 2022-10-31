@@ -1,6 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net6.0-windows</TargetFramework>
+    <TargetFrameworks>net6.0-windows;net48</TargetFrameworks>
+    <RuntimeIdentifiers>win-x64;win-x86;win-arm;win-arm64;win10-x64;win10-x86;win10-arm;win10-arm64;win7-x86;win7-x64</RuntimeIdentifiers>
+    <LangVersion>8.0</LangVersion>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <UseWPF>true</UseWPF>
     <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>

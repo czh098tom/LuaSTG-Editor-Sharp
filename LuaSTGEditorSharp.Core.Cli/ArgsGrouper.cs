@@ -19,7 +19,7 @@
             {
                 if (paramType != null)
                 {
-                    if (!args[i].StartsWith('-'))
+                    if (!args[i].StartsWith("-"))
                     {
                         param.Add(args[i]);
                     }
@@ -27,12 +27,12 @@
                     {
                         additionalParams.Add(paramType, param);
                         param = new();
-                        paramType = args[i][1..];
+                        paramType = args[i].Substring(1);
                     }
                 }
                 else
                 {
-                    if (!args[i].StartsWith('-'))
+                    if (!args[i].StartsWith("-"))
                     {
                         param.Add(args[i]);
                     }
@@ -40,7 +40,7 @@
                     {
                         mainParams = param.ToArray();
                         param = new();
-                        paramType = args[i][1..];
+                        paramType = args[i].Substring(1);
                     }
                 }
                 i++;

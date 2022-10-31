@@ -89,7 +89,9 @@ namespace LuaSTGEditorSharp.Windows.Input
             if (chooseFile.ShowDialog() != System.Windows.Forms.DialogResult.Cancel)
             {
                 List<string> files = new List<string>();
-                foreach (var file in ResultTXT.Split("|", StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries).Distinct())
+                foreach (var file in ResultTXT.Split('|')
+                    .Where(x => !string.IsNullOrWhiteSpace(x))
+                    .Select(x => x.Trim()).Distinct())
                 {
                     files.Add(file);
                 }
@@ -132,7 +134,8 @@ namespace LuaSTGEditorSharp.Windows.Input
         public void DecomposeParams()
         {
             Items.Clear();
-            foreach (var file in ResultTXT.Split("|", StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries).Distinct())
+            foreach (var file in ResultTXT.Split('|').Where(x => !string.IsNullOrWhiteSpace(x))
+                .Select(x => x.Trim()).Distinct())
             {
                 Items.Add(new FileItem(this)
                 {

@@ -15,7 +15,9 @@ namespace LuaSTGEditorSharp.Core.Cli
         static string OutputFilename = "";
 
         static readonly DocumentCollection Documents = new();
+#pragma warning disable CS8625 // 无法将 null 字面量转换为非 null 的引用类型。
         static DocumentData CurrentDocument = null;
+#pragma warning restore CS8625 // 无法将 null 字面量转换为非 null 的引用类型。
 
         static void Main(string[] args)
         {

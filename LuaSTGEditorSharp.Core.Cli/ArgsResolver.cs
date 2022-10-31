@@ -4,7 +4,7 @@
     {
         public bool IsHelp { get; private set; }
 
-        public string? File { get; init; }
+        public string? File { get; private set; }
 
         public string? OutputDirectory { get; private set; }
 

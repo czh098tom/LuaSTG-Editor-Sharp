@@ -1,6 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net6.0-windows</TargetFramework>
+    <TargetFrameworks>net6.0-windows;net48</TargetFrameworks>
+    <RuntimeIdentifiers>win-x64;win-x86;win-arm;win-arm64;win10-x64;win10-x86;win10-arm;win10-arm64;win7-x86;win7-x64</RuntimeIdentifiers>
+    <LangVersion>10.0</LangVersion>
     <OutputType>WinExe</OutputType>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
@@ -25,6 +27,7 @@
     <UseWindowsForms>true</UseWindowsForms>
     <UseWPF>true</UseWPF>
     <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
+    <GenerateResourceUsePreserializedResources>true</GenerateResourceUsePreserializedResources>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <OutputPath>..\bin\Debug\</OutputPath>
@@ -180,5 +183,6 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="Irony" Version="1.1.0" />
+    <PackageReference Include="System.Resources.Extensions" Version="7.0.0-rc.2.22472.3" />
   </ItemGroup>
 </Project>

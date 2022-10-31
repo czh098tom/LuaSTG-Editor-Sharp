@@ -12,7 +12,7 @@ namespace LuaSTGEditorSharp
     {
         public abstract class IPCBase
         {
-            public bool IsHost { get; init; }
+            public bool IsHost { get; }
 
             public IPCBase(bool isHost)
             {
@@ -46,7 +46,7 @@ namespace LuaSTGEditorSharp
                             MessageReceived?.Invoke(this, message);
                         }
                         server.Disconnect();
-                        await server.DisposeAsync();
+                        server.Dispose();
                     }, pipe);
                 });
             }
@@ -54,7 +54,7 @@ namespace LuaSTGEditorSharp
 
         public class Client : IPCBase
         {
-            Queue<string> MessageList { get; init; } = new Queue<string>();
+            Queue<string> MessageList { get; } = new Queue<string>();
 
             public Client() : base(false)
             {
@@ -85,7 +85,7 @@ namespace LuaSTGEditorSharp
                         {
                             await writer.WriteLineAsync(MessageList.Dequeue());
                         }
-                        await pipe.DisposeAsync();
+                        pipe.Dispose();
                     }
                 }
             }

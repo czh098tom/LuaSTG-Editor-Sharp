@@ -50,12 +50,12 @@ namespace LuaSTGEditorSharp.EditorData.Node.General
         public override string ToString()
         {
             return @$"Add following file(s) into pack: 
-{string.Join(Environment.NewLine, NonMacrolize(0).Split("|").Select(x => $"\"{x}\""))}";
+{string.Join(Environment.NewLine, NonMacrolize(0).Split('|').Select(x => $"\"{x}\""))}";
         }
 
         protected override void AddCompileSettings()
         {
-            var files = NonMacrolize(0).Split("|");
+            var files = NonMacrolize(0).Split('|');
             foreach (var file in files)
             {
                 string sk = parentWorkSpace.CompileProcess.archiveSpace + System.IO.Path.GetFileName(file);

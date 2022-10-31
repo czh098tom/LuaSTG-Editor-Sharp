@@ -85,7 +85,7 @@ namespace LuaSTGEditorSharp
                     {
                         if (message.StartsWith("OpenFile|"))
                         {
-                            var fp = message[9..];
+                            var fp = message.Substring(9);
                             LoadDoc(fp);
                             MainWindow.Dispatcher.Invoke(() =>
                             {

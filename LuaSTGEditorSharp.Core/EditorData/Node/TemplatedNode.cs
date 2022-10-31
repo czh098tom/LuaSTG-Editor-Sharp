@@ -8,8 +8,6 @@ namespace LuaSTGEditorSharp.EditorData.Node
 {
     public abstract class TemplatedNode : TreeNodeBase
     {
-        private Dictionary<string, string> storedProperties;
-
         public override object Clone()
         {
             throw new NotImplementedException();
