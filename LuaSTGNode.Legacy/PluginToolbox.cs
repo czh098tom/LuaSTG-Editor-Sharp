@@ -24,7 +24,7 @@ namespace LuaSTGEditorSharp
     public class PluginToolbox : AbstractToolbox
     {
         public PluginToolbox(IMainWindow mw) : base(mw) { }
-        
+
         public override void InitFunc()
         {
             ToolInfo["Advanced"].Add(new ToolboxItemData(true), null);
@@ -41,7 +41,7 @@ namespace LuaSTGEditorSharp
                 , new AddNode(AddFunctionNode));
             data.Add(new ToolboxItemData(true), null);
             data.Add(new ToolboxItemData("recordpos", "/LuaSTGNode.Legacy;component/images/positionVar.png", "Record Position")
-                ,  new AddNode(AddRecordPosNode));
+                , new AddNode(AddRecordPosNode));
             data.Add(new ToolboxItemData("assignpos", "/LuaSTGNode.Legacy;component/images/positionassignment.png", "Position Assignment")
                 , new AddNode(AddPositionAssignmentNode));
             #endregion
@@ -102,7 +102,23 @@ namespace LuaSTGEditorSharp
                 , new AddNode(AddSmoothSetValueNode));
             #endregion
             ToolInfo.Add("Task", task);
-            
+
+            var curve = new Dictionary<ToolboxItemData, AddNode>();
+            #region curve
+            curve.Add(new ToolboxItemData("tracknum", "/LuaSTGNode.Legacy;component/images/NumericalTrack.png", "Numerical Track")
+                , new AddNode(AddNumericalTrack));
+            curve.Add(new ToolboxItemData("curvenum", "/LuaSTGNode.Legacy;component/images/NumericalCurve.png", "Numerical Curve")
+                , new AddNode(AddNumericalCurve));
+            curve.Add(new ToolboxItemData("pointnum", "/LuaSTGNode.Legacy;component/images/NumericalPoint.png", "Numerical Point")
+                , new AddNode(AddNumericalPoint));
+            curve.Add(new ToolboxItemData(true), null);
+            curve.Add(new ToolboxItemData("trackv", "/LuaSTGNode.Legacy;component/images/NumericalTrackSetV.png", "Track Controlling Velocity")
+                , new AddNode(AddSetV2Track));
+            curve.Add(new ToolboxItemData("trackcolor", "/LuaSTGNode.Legacy;component/images/NumericalTrackSetColor.png", "Track Controlling Color")
+                , new AddNode(AddSetColorTrack));
+            #endregion
+            ToolInfo.Add("Curve", curve);
+
             var enemy = new Dictionary<ToolboxItemData, AddNode>();
             #region enemy
             enemy.Add(new ToolboxItemData("defenemy", "/LuaSTGNode.Legacy;component/images/enemydefine.png", "Define Enemy")
@@ -316,7 +332,7 @@ namespace LuaSTGEditorSharp
             var player = new Dictionary<ToolboxItemData, AddNode>();
             ToolInfo.Add("Player", player);
         }
-        
+
         #region data
         private void AddLocalVarNode()
         {
@@ -346,26 +362,26 @@ namespace LuaSTGEditorSharp
         private void AddStageGroupNode()
         {
             TreeNodeBase newStG = new StageGroup(parent.ActivatedWorkSpaceData);
-                TreeNodeBase newSt = new Stage(parent.ActivatedWorkSpaceData);
-                    TreeNodeBase newTask = new TaskNode(parent.ActivatedWorkSpaceData);
-                        TreeNodeBase newFolder = new Folder(parent.ActivatedWorkSpaceData, "Initialize");
-                            newFolder.AddChild(new StageBG(parent.ActivatedWorkSpaceData));
-                        newTask.AddChild(newFolder);
-                        newTask.AddChild(new TaskWait(parent.ActivatedWorkSpaceData, "240"));
-                    newSt.AddChild(newTask);
-                newStG.AddChild(newSt);
+            TreeNodeBase newSt = new Stage(parent.ActivatedWorkSpaceData);
+            TreeNodeBase newTask = new TaskNode(parent.ActivatedWorkSpaceData);
+            TreeNodeBase newFolder = new Folder(parent.ActivatedWorkSpaceData, "Initialize");
+            newFolder.AddChild(new StageBG(parent.ActivatedWorkSpaceData));
+            newTask.AddChild(newFolder);
+            newTask.AddChild(new TaskWait(parent.ActivatedWorkSpaceData, "240"));
+            newSt.AddChild(newTask);
+            newStG.AddChild(newSt);
             parent.Insert(newStG);
         }
 
         private void AddStageNode()
         {
             TreeNodeBase newSt = new Stage(parent.ActivatedWorkSpaceData);
-                TreeNodeBase newTask = new TaskNode(parent.ActivatedWorkSpaceData);
-                    TreeNodeBase newFolder = new Folder(parent.ActivatedWorkSpaceData, "Initialize");
-                        newFolder.AddChild(new StageBG(parent.ActivatedWorkSpaceData));
-                    newTask.AddChild(newFolder);
-                    newTask.AddChild(new TaskWait(parent.ActivatedWorkSpaceData, "240"));
-                newSt.AddChild(newTask);
+            TreeNodeBase newTask = new TaskNode(parent.ActivatedWorkSpaceData);
+            TreeNodeBase newFolder = new Folder(parent.ActivatedWorkSpaceData, "Initialize");
+            newFolder.AddChild(new StageBG(parent.ActivatedWorkSpaceData));
+            newTask.AddChild(newFolder);
+            newTask.AddChild(new TaskWait(parent.ActivatedWorkSpaceData, "240"));
+            newSt.AddChild(newTask);
             parent.Insert(newSt);
         }
 
@@ -473,6 +489,65 @@ namespace LuaSTGEditorSharp
             parent.Insert(repeat);
         }
 
+        #region curve
+        private void AddNumericalTrack()
+        {
+            TreeNodeBase track = new EditorData.Node.Curve.NumericalTrack(parent.ActivatedWorkSpaceData);
+            parent.Insert(track);
+        }
+
+        private void AddNumericalCurve()
+        {
+            TreeNodeBase curve = new EditorData.Node.Curve.NumericalCurve(parent.ActivatedWorkSpaceData);
+            TreeNodeBase point = new EditorData.Node.Curve.NumericalPoint(parent.ActivatedWorkSpaceData);
+            curve.AddChild(point);
+            parent.Insert(curve);
+        }
+
+        private void AddNumericalPoint()
+        {
+            TreeNodeBase point = new EditorData.Node.Curve.NumericalPoint(parent.ActivatedWorkSpaceData);
+            parent.Insert(point);
+        }
+
+        private void AddSetV2Track()
+        {
+            TreeNodeBase track = new EditorData.Node.Curve.NumericalTrack(parent.ActivatedWorkSpaceData
+                , "SetV2(self, {0}, {1}, true, false)");
+            TreeNodeBase curve1 = new EditorData.Node.Curve.NumericalCurve(parent.ActivatedWorkSpaceData);
+            TreeNodeBase point1 = new EditorData.Node.Curve.NumericalPoint(parent.ActivatedWorkSpaceData, "0", "3", "", "false");
+            curve1.AddChild(point1);
+            TreeNodeBase curve2 = new EditorData.Node.Curve.NumericalCurve(parent.ActivatedWorkSpaceData);
+            TreeNodeBase point2 = new EditorData.Node.Curve.NumericalPoint(parent.ActivatedWorkSpaceData);
+            curve2.AddChild(point2);
+            track.AddChild(curve1);
+            track.AddChild(curve2);
+            parent.Insert(track, false);
+        }
+
+        private void AddSetColorTrack()
+        {
+            TreeNodeBase track = new EditorData.Node.Curve.NumericalTrack(parent.ActivatedWorkSpaceData
+                , "_object.set_color(self, \"\", {0}, {1}, {2}, {3})");
+            TreeNodeBase curve1 = new EditorData.Node.Curve.NumericalCurve(parent.ActivatedWorkSpaceData);
+            TreeNodeBase point1 = new EditorData.Node.Curve.NumericalPoint(parent.ActivatedWorkSpaceData, "0", "255", "", "false");
+            curve1.AddChild(point1);
+            TreeNodeBase curve2 = new EditorData.Node.Curve.NumericalCurve(parent.ActivatedWorkSpaceData);
+            TreeNodeBase point2 = new EditorData.Node.Curve.NumericalPoint(parent.ActivatedWorkSpaceData, "0", "255", "", "false");
+            curve2.AddChild(point2);
+            TreeNodeBase curve3 = new EditorData.Node.Curve.NumericalCurve(parent.ActivatedWorkSpaceData);
+            TreeNodeBase point3 = new EditorData.Node.Curve.NumericalPoint(parent.ActivatedWorkSpaceData, "0", "255", "", "false");
+            curve3.AddChild(point3);
+            TreeNodeBase curve4 = new EditorData.Node.Curve.NumericalCurve(parent.ActivatedWorkSpaceData);
+            TreeNodeBase point4 = new EditorData.Node.Curve.NumericalPoint(parent.ActivatedWorkSpaceData, "0", "255", "", "false");
+            curve4.AddChild(point4);
+            track.AddChild(curve1);
+            track.AddChild(curve2);
+            track.AddChild(curve3);
+            track.AddChild(curve4);
+            parent.Insert(track, false);
+        }
+        #endregion
         #region enemy
         private void AddEnemyDefineNode()
         {
