@@ -82,6 +82,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Curve
             yield return sp1 + "i = i + 1\n";
             yield return sp1 + "task.Wait()\n";
             yield return sp + "end\n";
+            yield return sp + $"{name} = curr\n";
             yield return sp + "prev = curr\n";
             yield break;
         }
@@ -98,7 +99,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Curve
 
         public override IEnumerable<Tuple<int, TreeNodeBase>> GetLines()
         {
-            yield return new Tuple<int, TreeNodeBase>(11, this);
+            yield return new Tuple<int, TreeNodeBase>(12, this);
         }
 
         public override object Clone()

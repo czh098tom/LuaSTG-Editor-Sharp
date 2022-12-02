@@ -54,12 +54,12 @@ namespace LuaSTGEditorSharp.EditorData.Node.Curve
             return null;
         }
 
-        public IEnumerable<string> GetCurveTranslatedForVar(int spacing, string name)
+        public IEnumerable<string> GetCurveTranslatedForVar(int spacing, string target, string name)
         {
             string sp = Indent(spacing);
             string sp1 = Indent(spacing + 1);
             string sp2 = Indent(spacing + 2);
-            yield return sp + "task.New(self, function()\n";
+            yield return sp + $"task.New({target}, function()\n";
             yield return sp1 + $"task.Wait({Macrolize(0)})\n";
             string spa = sp1;
             int spacinga = spacing + 1;

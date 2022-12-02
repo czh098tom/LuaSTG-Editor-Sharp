@@ -16,18 +16,26 @@ namespace LuaSTGEditorSharp.EditorData.Node.Curve
         [JsonConstructor]
         public NumericalTrack() : base() { }
 
-        public NumericalTrack(DocumentData workSpaceData) : this(workSpaceData, "") { }
+        public NumericalTrack(DocumentData workSpaceData) : this(workSpaceData, "self", "") { }
 
-        public NumericalTrack(DocumentData workSpaceData, string mapping) : base(workSpaceData)
+        public NumericalTrack(DocumentData workSpaceData, string target, string mapping) : base(workSpaceData)
         {
             Mapping = mapping;
+            Target = target;
+        }
+
+        [JsonIgnore, NodeAttribute]
+        public string Target
+        {
+            get => DoubleCheckAttr(0, "target").attrInput;
+            set => DoubleCheckAttr(0, "target").attrInput = value;
         }
 
         [JsonIgnore, NodeAttribute]
         public string Mapping
         {
-            get => DoubleCheckAttr(0).attrInput;
-            set => DoubleCheckAttr(0).attrInput = value;
+            get => DoubleCheckAttr(1).attrInput;
+            set => DoubleCheckAttr(1).attrInput = value;
         }
 
         public override IEnumerable<string> ToLua(int spacing)
@@ -64,7 +72,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Curve
                 {
                     if (n is NumericalCurve nc)
                     {
-                        foreach (var code in nc.GetCurveTranslatedForVar(spacing, varNames[id]))
+                        foreach (var code in nc.GetCurveTranslatedForVar(spacing, Macrolize(0), varNames[id]))
                         {
                             yield return code;
                         }
@@ -79,9 +87,10 @@ namespace LuaSTGEditorSharp.EditorData.Node.Curve
                     }
                 }
             }
-            yield return sp + "task.New(self, function()\n";
+            yield return sp + $"task.New({Macrolize(0)}, function()\n";
+            yield return sp + $"local self = task.GetSelf()\n";
             yield return sp1 + "for _ = 1, _infinite do\n";
-            yield return sp2 + string.Format(Macrolize(0), varNames) + "\n";
+            yield return sp2 + string.Format(Macrolize(1), varNames) + "\n";
             yield return sp2 + "task.Wait()\n";
             yield return sp1 + "end\n";
             yield return sp + "end)\n";
@@ -90,7 +99,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Curve
 
         public override string ToString()
         {
-            return $"Track with mapping: {NonMacrolize(0)}";
+            return $"Track on {NonMacrolize(0)} with mapping: {NonMacrolize(1)}";
         }
 
         public override IEnumerable<Tuple<int, TreeNodeBase>> GetLines()
@@ -103,7 +112,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Curve
             {
                 yield return t;
             }
-            yield return new Tuple<int, TreeNodeBase>(6, this);
+            yield return new Tuple<int, TreeNodeBase>(7, this);
         }
 
         public override object Clone()

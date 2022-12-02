@@ -513,7 +513,7 @@ namespace LuaSTGEditorSharp
         private void AddSetV2Track()
         {
             TreeNodeBase track = new EditorData.Node.Curve.NumericalTrack(parent.ActivatedWorkSpaceData
-                , "SetV2(self, {0}, {1}, true, false)");
+                , "self", "SetV2(self, {0}, {1}, true, false)");
             TreeNodeBase curve1 = new EditorData.Node.Curve.NumericalCurve(parent.ActivatedWorkSpaceData);
             TreeNodeBase point1 = new EditorData.Node.Curve.NumericalPoint(parent.ActivatedWorkSpaceData, "0", "3", "", "false");
             curve1.AddChild(point1);
@@ -528,7 +528,7 @@ namespace LuaSTGEditorSharp
         private void AddSetColorTrack()
         {
             TreeNodeBase track = new EditorData.Node.Curve.NumericalTrack(parent.ActivatedWorkSpaceData
-                , "_object.set_color(self, \"\", {0}, {1}, {2}, {3})");
+                , "self", "_object.set_color(self, \"\", {0}, {1}, {2}, {3})");
             TreeNodeBase curve1 = new EditorData.Node.Curve.NumericalCurve(parent.ActivatedWorkSpaceData);
             TreeNodeBase point1 = new EditorData.Node.Curve.NumericalPoint(parent.ActivatedWorkSpaceData, "0", "255", "", "false");
             curve1.AddChild(point1);
