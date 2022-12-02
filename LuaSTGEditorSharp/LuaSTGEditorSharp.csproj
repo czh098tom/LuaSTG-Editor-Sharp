@@ -65,18 +65,6 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <None Remove="Templates\Empty File.lstges" />
-    <None Remove="Templates\Empty File.txt" />
-    <None Remove="Templates\Empty Project.txt" />
-    <None Remove="Templates\Extra.lstges" />
-    <None Remove="Templates\Extra.txt" />
-    <None Remove="Templates\Raw Resources &amp; Classes.lstges" />
-    <None Remove="Templates\Raw Resources &amp; Classes.txt" />
-    <None Remove="Templates\Spell Card.lstges" />
-    <None Remove="Templates\Spell Card.txt" />
-    <None Remove="Update Log.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="images\child.png" />
     <Resource Include="images\copy.png" />
     <Resource Include="images\cut.png" />
