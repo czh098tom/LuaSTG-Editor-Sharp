@@ -103,9 +103,9 @@ namespace LuaSTGEditorSharp.EditorData.Node.Bullet
         public override string ToString()
         {
             return "Clear bullets in " + NonMacrolize(1) + " from (" + NonMacrolize(0) 
-                + (NonMacrolize(4) == "true" ? ") (including indestructible)" : ")") 
+                + (NonMacrolize(5) == "true" ? ") (including indestructible)" : ")") 
                 + " expand in " + NonMacrolize(2) + " frame(s), last for " + NonMacrolize(3) 
-                + " frame(s), move with vy=" + NonMacrolize(6) + (NonMacrolize(5) == "true" ? ", and convert bullet to faith" : "");
+                + " frame(s), move with vy=" + NonMacrolize(6) + (NonMacrolize(4) == "true" ? ", and convert bullet to faith" : "");
         }
 
         public override object Clone()
