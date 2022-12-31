@@ -38,7 +38,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.General
         {
             string sp = Indent(spacing);
             string s = Macrolize(0);
-            yield return string.IsNullOrEmpty(s) ? sp + "break\n" : sp + "if " + s + " then break end\n";
+            yield return string.IsNullOrEmpty(s) ? sp + "do break end\n" : sp + "if " + s + " then break end\n";
         }
 
         public override string ToString()
