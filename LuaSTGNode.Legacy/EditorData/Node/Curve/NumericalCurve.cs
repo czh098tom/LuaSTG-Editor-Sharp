@@ -99,7 +99,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Curve
             {
                 yield return sp1 + "end\n";
             }
-            yield return spa + "__terminateCount = __terminateCount + 1\n";
+            yield return sp1 + "__terminateCount = __terminateCount + 1\n";
             yield return sp + "end)\n";
         }
 
