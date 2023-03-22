@@ -118,6 +118,8 @@ namespace LuaSTGEditorSharp.Windows.Input
                 , new string[] { "Bezier", "CR", "Basis2" });
             target.Add("renderOp"
                 , new string[] { "Push", "Pop" });
+            target.Add("curveRepeatType"
+                , new string[] { "None", "Round Robin" });
         }
 
         public void RegisterInputWindow(Dictionary<string, Func<AttrItem, string, IInputWindow>> target)

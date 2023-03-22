@@ -15,6 +15,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.General
 {
     [Serializable, NodeIcon("break.png")]
     [RequireAncestor(typeof(Repeat), typeof(Advanced.AdvancedRepeat.AdvancedRepeat))]
+    [LeafNode]
     public class Break : FixedAttributeTreeNode
     {
         [JsonConstructor]

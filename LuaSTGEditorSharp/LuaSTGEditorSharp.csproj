@@ -1,44 +1,20 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
+    <OutputType>WinExe</OutputType>
     <TargetFrameworks>net6.0-windows;net48</TargetFrameworks>
     <RuntimeIdentifiers>win-x64;win-x86;win-arm;win-arm64;win10-x64;win10-x86;win10-arm;win10-arm64;win7-x86;win7-x64</RuntimeIdentifiers>
     <LangVersion>10.0</LangVersion>
-    <OutputType>WinExe</OutputType>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
-    <PublishUrl>publish\</PublishUrl>
-    <Install>true</Install>
-    <InstallFrom>Disk</InstallFrom>
-    <UpdateEnabled>false</UpdateEnabled>
-    <UpdateMode>Foreground</UpdateMode>
-    <UpdateInterval>7</UpdateInterval>
-    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
-    <UpdatePeriodically>false</UpdatePeriodically>
-    <UpdateRequired>false</UpdateRequired>
-    <MapFileExtensions>true</MapFileExtensions>
-    <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
-    <WebPage>Setup Info.html</WebPage>
-    <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>0.7.0.%2a</ApplicationVersion>
-    <UseApplicationTrust>false</UseApplicationTrust>
-    <PublishWizardCompleted>true</PublishWizardCompleted>
-    <BootstrapperEnabled>true</BootstrapperEnabled>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-    <UseWindowsForms>true</UseWindowsForms>
     <UseWPF>true</UseWPF>
-    <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
     <GenerateResourceUsePreserializedResources>true</GenerateResourceUsePreserializedResources>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <OutputPath>..\bin\Debug\</OutputPath>
-    <DocumentationFile>
-    </DocumentationFile>
-    <NoWarn>
-    </NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <OutputPath>..\bin\Release\</OutputPath>
-    <NoWarn>MSB3178</NoWarn>
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject>LuaSTGEditorSharp.Startup</StartupObject>
@@ -64,18 +40,6 @@
   <PropertyGroup>
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
-  <ItemGroup>
-    <None Remove="Templates\Empty File.lstges" />
-    <None Remove="Templates\Empty File.txt" />
-    <None Remove="Templates\Empty Project.txt" />
-    <None Remove="Templates\Extra.lstges" />
-    <None Remove="Templates\Extra.txt" />
-    <None Remove="Templates\Raw Resources &amp; Classes.lstges" />
-    <None Remove="Templates\Raw Resources &amp; Classes.txt" />
-    <None Remove="Templates\Spell Card.lstges" />
-    <None Remove="Templates\Spell Card.txt" />
-    <None Remove="Update Log.txt" />
-  </ItemGroup>
   <ItemGroup>
     <Resource Include="images\child.png" />
     <Resource Include="images\copy.png" />
@@ -143,23 +107,12 @@
     <Folder Include="Properties\DataSources\" />
   </ItemGroup>
   <ItemGroup>
-    <BootstrapperPackage Include=".NETFramework,Version=v4.6.1">
-      <Visible>False</Visible>
-      <ProductName>Microsoft .NET Framework 4.6.1 %28x86 和 x64%29</ProductName>
-      <Install>true</Install>
-    </BootstrapperPackage>
-    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
-      <Visible>False</Visible>
-      <ProductName>.NET Framework 3.5 SP1</ProductName>
-      <Install>false</Install>
-    </BootstrapperPackage>
-  </ItemGroup>
-  <ItemGroup>
     <SplashScreen Include="SplashScreen.png" />
   </ItemGroup>
   <ItemGroup>
     <FileAssociation Include=".lstges">
-      <Visible>False</Visible>
+      <Visible>
+        False</Visible>
       <Description>LuaSTG Editor Sharp 工程文件</Description>
       <Progid>LuaSTGEditorSharp</Progid>
       <DefaultIcon>Icon.ico</DefaultIcon>
@@ -179,9 +132,6 @@
     <PackageReference Include="Microsoft.VisualBasic" Version="10.3.0" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
-    <PackageReference Include="Microsoft.DotNet.UpgradeAssistant.Extensions.Default.Analyzers" Version="0.3.310801">
-      <PrivateAssets>all</PrivateAssets>
-    </PackageReference>
     <PackageReference Include="Irony" Version="1.1.0" />
     <PackageReference Include="System.Resources.Extensions" Version="7.0.0-rc.2.22472.3" />
   </ItemGroup>
