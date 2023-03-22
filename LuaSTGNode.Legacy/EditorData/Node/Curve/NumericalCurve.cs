@@ -61,6 +61,8 @@ namespace LuaSTGEditorSharp.EditorData.Node.Curve
             string sp2 = Indent(spacing + 2);
             yield return sp + $"task.New({target}, function()\n";
             yield return sp1 + $"task.Wait({Macrolize(0)})\n";
+            yield return sp1 + "local i = 0\n";
+            yield return sp1 + "local offset = 0\n";
             string spa = sp1;
             int spacinga = spacing + 1;
             if (NonMacrolize(1) == "Round Robin")
@@ -69,10 +71,9 @@ namespace LuaSTGEditorSharp.EditorData.Node.Curve
                 spa = sp2;
                 spacinga++;
             }
-            yield return spa + "local i = 0\n";
             yield return spa + "local curr, ibeg, ky, kx\n";
             yield return spa + $"local prev = {FirstPoint().PreferredMacrolize(1, "Y")}\n";
-            yield return spa + "local target\n";
+            yield return spa + "local target = offset\n";
             foreach (var node in GetLogicalChildren())
             {
                 if (!node.IsBanned)
@@ -93,10 +94,12 @@ namespace LuaSTGEditorSharp.EditorData.Node.Curve
                     }
                 }
             }
+            yield return spa + "offset = target\n";
             if (NonMacrolize(1) == "Round Robin")
             {
                 yield return sp1 + "end\n";
             }
+            yield return spa + "__terminateCount = __terminateCount + 1\n";
             yield return sp + "end)\n";
         }
 
@@ -114,21 +117,15 @@ namespace LuaSTGEditorSharp.EditorData.Node.Curve
         {
             if (NonMacrolize(1) == "Round Robin")
             {
-                yield return new Tuple<int, TreeNodeBase>(7, this);
+                yield return new Tuple<int, TreeNodeBase>(1, this);
             }
-            else
-            {
-                yield return new Tuple<int, TreeNodeBase>(6, this);
-            }
+            yield return new Tuple<int, TreeNodeBase>(7, this);
             foreach (Tuple<int, TreeNodeBase> t in GetChildLines())
             {
                 yield return t;
             }
+            yield return new Tuple<int, TreeNodeBase>(3, this);
             if (NonMacrolize(1) == "Round Robin")
-            {
-                yield return new Tuple<int, TreeNodeBase>(2, this);
-            }
-            else
             {
                 yield return new Tuple<int, TreeNodeBase>(1, this);
             }

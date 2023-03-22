@@ -1,4 +1,29 @@
 ﻿-- Update Log（最近更新 2022-05-30）
+0.7.8
+实现节点：
+Lib层：
+Data
+	CaptureVariable
+Curve
+	NumericalTrack
+	NumericalCurve
+	NumericalPoint
+	SkipTime
+	TerminateTrack
+扩展功能说明：
+CaptureVariable节点：
+输入一组以,分割的变量名，使这些变量在子节点中被重新按当前值与名称定义。用于使闭包变量变为定值
+Curve系列节点：
+给定一系列变量随时间变化的图像，将其代入函数中以控制对象
+NumericalTrack节点定义控制的目标、使用的函数以及是否在所有曲线结束时解除控制
+使用的函数中使用{0} {1}获得第x条曲线的值，参考UserDefinedNode中的规则
+NumericalCurve节点定义一条曲线，可以给定偏移量（额外等待时间，不计入总时间中）和是否反复
+NumericalPoint节点定义曲线中的点，要求提供值、时间、插值函数（同CustomInterpolationVariable，但可留空）和时间是否为相对上一个点的时间
+曲线的形状由NumericalPoint由上到下决定，采用折线连接形成曲线
+如果有插值函数，则会使用插值函数替换“到达该点”的过程中的直线
+点中的时间可以使用变量，但注意闭包问题
+如果出现时间反向或同值进行，则会跳变到最后一个相同值的位置
+
 0.7.7
 实现功能：
 AddFile节点增加文件多选以及管理的功能，以提供更加便利的文件载入功能

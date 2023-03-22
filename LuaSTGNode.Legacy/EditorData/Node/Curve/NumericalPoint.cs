@@ -1,12 +1,13 @@
-﻿using LuaSTGEditorSharp.EditorData.Node.Advanced.AdvancedRepeat;
-using LuaSTGEditorSharp.EditorData.Node.NodeAttributes;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
 using System.Windows.Forms;
+using Newtonsoft.Json;
+
+using LuaSTGEditorSharp.EditorData.Node.Advanced.AdvancedRepeat;
+using LuaSTGEditorSharp.EditorData.Node.NodeAttributes;
 
 namespace LuaSTGEditorSharp.EditorData.Node.Curve
 {
@@ -64,7 +65,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Curve
             yield return sp + "ibeg = i\n";
             if (NonMacrolize(3) == "false")
             {
-                yield return sp + $"target = {Macrolize(0)}\n";
+                yield return sp + $"target = {Macrolize(0)} + offset\n";
             }
             else
             {

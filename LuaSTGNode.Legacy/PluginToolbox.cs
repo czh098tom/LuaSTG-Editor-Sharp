@@ -40,6 +40,9 @@ namespace LuaSTGEditorSharp
             data.Add(new ToolboxItemData("function", "/LuaSTGNode.Legacy;component/images/func.png", "Function")
                 , new AddNode(AddFunctionNode));
             data.Add(new ToolboxItemData(true), null);
+            data.Add(new ToolboxItemData("capture", "/LuaSTGNode.Legacy;component/images/CaptureVariable.png", "Capture Variable")
+                , new AddNode(AddCaptureVariableNode));
+            data.Add(new ToolboxItemData(true), null);
             data.Add(new ToolboxItemData("recordpos", "/LuaSTGNode.Legacy;component/images/positionVar.png", "Record Position")
                 , new AddNode(AddRecordPosNode));
             data.Add(new ToolboxItemData("assignpos", "/LuaSTGNode.Legacy;component/images/positionassignment.png", "Position Assignment")
@@ -111,6 +114,11 @@ namespace LuaSTGEditorSharp
                 , new AddNode(AddNumericalCurve));
             curve.Add(new ToolboxItemData("pointnum", "/LuaSTGNode.Legacy;component/images/NumericalPoint.png", "Numerical Point")
                 , new AddNode(AddNumericalPoint));
+            curve.Add(new ToolboxItemData(true), null);
+            curve.Add(new ToolboxItemData("terminatetrack", "/LuaSTGNode.Legacy;component/images/TerminateTrack.png", "Terminate Track")
+                , new AddNode(AddTerminateTrack));
+            curve.Add(new ToolboxItemData("skiptimecurve", "/LuaSTGNode.Legacy;component/images/SkipTime.png", "Skip Time In Curve")
+                , new AddNode(AddSkipTime));
             curve.Add(new ToolboxItemData(true), null);
             curve.Add(new ToolboxItemData("trackv", "/LuaSTGNode.Legacy;component/images/NumericalTrackSetV.png", "Track Controlling Velocity")
                 , new AddNode(AddSetV2Track));
@@ -343,9 +351,15 @@ namespace LuaSTGEditorSharp
         {
             parent.Insert(new Assignment(parent.ActivatedWorkSpaceData));
         }
+
         private void AddFunctionNode()
         {
             parent.Insert(new Function(parent.ActivatedWorkSpaceData));
+        }
+
+        private void AddCaptureVariableNode()
+        {
+            parent.Insert(new CaptureVariable(parent.ActivatedWorkSpaceData));
         }
 
         private void AddRecordPosNode()
@@ -510,10 +524,22 @@ namespace LuaSTGEditorSharp
             parent.Insert(point);
         }
 
+        private void AddTerminateTrack()
+        {
+            TreeNodeBase term = new EditorData.Node.Curve.TerminateTrack(parent.ActivatedWorkSpaceData);
+            parent.Insert(term);
+        }
+
+        private void AddSkipTime()
+        {
+            TreeNodeBase skip = new EditorData.Node.Curve.SkipTime(parent.ActivatedWorkSpaceData);
+            parent.Insert(skip);
+        }
+
         private void AddSetV2Track()
         {
             TreeNodeBase track = new EditorData.Node.Curve.NumericalTrack(parent.ActivatedWorkSpaceData
-                , "self", "SetV2(self, {0}, {1}, true, false)");
+                , "self", "SetV2(self, {0}, {1}, true, false)", "true");
             TreeNodeBase curve1 = new EditorData.Node.Curve.NumericalCurve(parent.ActivatedWorkSpaceData);
             TreeNodeBase point1 = new EditorData.Node.Curve.NumericalPoint(parent.ActivatedWorkSpaceData, "0", "3", "", "false");
             curve1.AddChild(point1);
@@ -528,7 +554,7 @@ namespace LuaSTGEditorSharp
         private void AddSetColorTrack()
         {
             TreeNodeBase track = new EditorData.Node.Curve.NumericalTrack(parent.ActivatedWorkSpaceData
-                , "self", "_object.set_color(self, \"\", {0}, {1}, {2}, {3})");
+                , "self", "_object.set_color(self, \"\", {0}, {1}, {2}, {3})", "true");
             TreeNodeBase curve1 = new EditorData.Node.Curve.NumericalCurve(parent.ActivatedWorkSpaceData);
             TreeNodeBase point1 = new EditorData.Node.Curve.NumericalPoint(parent.ActivatedWorkSpaceData, "0", "255", "", "false");
             curve1.AddChild(point1);

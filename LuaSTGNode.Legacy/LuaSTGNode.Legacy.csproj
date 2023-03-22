@@ -23,14 +23,20 @@
     <SignAssembly>False</SignAssembly>
   </PropertyGroup>
   <ItemGroup>
+    <Resource Include="images\16x16\CaptureVariable.png" />
     <Resource Include="images\16x16\NumericalCurve.png" />
     <Resource Include="images\16x16\NumericalPoint.png" />
     <Resource Include="images\16x16\NumericalTrack.png" />
+    <Resource Include="images\16x16\SkipTime.png" />
+    <Resource Include="images\16x16\TerminateTrack.png" />
+    <Resource Include="images\CaptureVariable.png" />
     <Resource Include="images\NumericalCurve.png" />
     <Resource Include="images\NumericalPoint.png" />
     <Resource Include="images\NumericalTrack.png" />
     <Resource Include="images\NumericalTrackSetColor.png" />
     <Resource Include="images\NumericalTrackSetV.png" />
+    <Resource Include="images\SkipTime.png" />
+    <Resource Include="images\TerminateTrack.png" />
     <Resource Include="images\_node_aa.png" />
   </ItemGroup>
   <ItemGroup>
@@ -1766,14 +1772,20 @@
     <Compile Remove="EditorData\Node\Task\ClearTasks.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Remove="images\16x16\CaptureVariable.png" />
     <None Remove="images\16x16\NumericalCurve.png" />
     <None Remove="images\16x16\NumericalPoint.png" />
     <None Remove="images\16x16\NumericalTrack.png" />
+    <None Remove="images\16x16\SkipTime.png" />
+    <None Remove="images\16x16\TerminateTrack.png" />
+    <None Remove="images\CaptureVariable.png" />
     <None Remove="images\NumericalCurve.png" />
     <None Remove="images\NumericalPoint.png" />
     <None Remove="images\NumericalTrack.png" />
     <None Remove="images\NumericalTrack.psd" />
     <None Remove="images\NumericalTrackSetColor.png" />
     <None Remove="images\NumericalTrackSetV.png" />
+    <None Remove="images\SkipTime.png" />
+    <None Remove="images\TerminateTrack.png" />
   </ItemGroup>
 </Project>
