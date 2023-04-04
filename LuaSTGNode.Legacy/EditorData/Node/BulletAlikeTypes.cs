@@ -10,7 +10,8 @@ namespace LuaSTGEditorSharp.EditorData.Node
     public class BulletAlikeTypes : ITypeEnumerable
     {
         private static readonly Type[] types =
-            { typeof(Object.CallBackFunc), typeof(Bullet.BulletInit), typeof(Data.Function), typeof(Task.TaskDefine) };
+            { typeof(Object.CallBackFunc), typeof(Bullet.BulletInit), typeof(Data.Function), typeof(Task.TaskDefine)
+                , typeof(Task.TaskForObject) };
 
         public IEnumerator<Type> GetEnumerator()
         {

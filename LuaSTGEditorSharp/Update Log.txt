@@ -1,4 +1,9 @@
-﻿-- Update Log（最近更新 2023-03-23）
+﻿-- Update Log（最近更新 2023-04-04）
+0.7.8.1
+修复bug：
+向NumericalCurve头部位置补充丢失的task.GetSelf()
+修复TaskForObject中无法插入子弹、激光与boss用的节点的bug
+
 0.7.8
 实现节点：
 Lib层：
