@@ -60,6 +60,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Curve
             string sp1 = Indent(spacing + 1);
             string sp2 = Indent(spacing + 2);
             yield return sp + $"task.New({target}, function()\n";
+            yield return sp1 + $"local self = task.GetSelf()\n";
             yield return sp1 + $"task.Wait({Macrolize(0)})\n";
             yield return sp1 + "local i = 0\n";
             yield return sp1 + "local offset = 0\n";
@@ -119,7 +120,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Curve
             {
                 yield return new Tuple<int, TreeNodeBase>(1, this);
             }
-            yield return new Tuple<int, TreeNodeBase>(7, this);
+            yield return new Tuple<int, TreeNodeBase>(8, this);
             foreach (Tuple<int, TreeNodeBase> t in GetChildLines())
             {
                 yield return t;
