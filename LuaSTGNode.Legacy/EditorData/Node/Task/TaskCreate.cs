@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 
 using LuaSTGEditorSharp.EditorData.Node.NodeAttributes;
+using LuaSTGEditorSharp.EditorData.Document;
 
 namespace LuaSTGEditorSharp.EditorData.Node.Task
 {
@@ -69,6 +70,14 @@ namespace LuaSTGEditorSharp.EditorData.Node.Task
             TreeNodeBase n = new TaskCreate(parentWorkSpace);
             n.DeepCopyFrom(this);
             return n;
+        }
+
+        public override MetaInfo GetReferredMeta()
+        {
+            AttrItem original = attributes[0];
+            AbstractMetaData metaData = original.Parent.parentWorkSpace.Meta;
+            return (metaData.aggregatableMetas[(int)MetaType.Task]
+                .FindOfName(original.Parent.NonMacrolize(0).Trim('\"'))) as MetaInfo;
         }
     }
 }
