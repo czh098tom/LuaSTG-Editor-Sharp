@@ -60,6 +60,7 @@
                     </ListBox>
                 </Grid>
                 <MediaElement x:Name="mediaPlayer" LoadedBehavior="Play" UnloadedBehavior="Stop" Grid.Column="1"/>
+                <Label x:Name="labelSEInfo" Content="Audio type: unknown" Grid.Column="1" Margin="20,20,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
             </Grid>
         </DockPanel>
     </Grid>

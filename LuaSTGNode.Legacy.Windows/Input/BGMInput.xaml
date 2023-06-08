@@ -49,6 +49,7 @@
                 </Grid>
                 <GridSplitter Grid.Column="1"/>
                 <MediaElement x:Name="mediaPlayer" LoadedBehavior="Play" UnloadedBehavior="Stop" Grid.Column="2"/>
+                <Label x:Name="labelSEInfo" Content="Audio type: unknown" Grid.Column="2" Margin="20,20,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
                 <!--<m:MediaPlayer x:Name="mediaPlayer" Grid.Column="2"/>-->
             </Grid>
         </DockPanel>

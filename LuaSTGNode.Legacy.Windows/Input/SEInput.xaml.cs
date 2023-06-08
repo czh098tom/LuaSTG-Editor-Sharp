@@ -1,20 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using LuaSTGEditorSharp.EditorData;
+﻿using LuaSTGEditorSharp.EditorData;
 using LuaSTGEditorSharp.EditorData.Document;
 using LuaSTGEditorSharp.EditorData.Document.Meta;
+using System;
+using System.Collections.ObjectModel;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace LuaSTGEditorSharp.Windows.Input
 {
@@ -97,8 +91,43 @@ namespace LuaSTGEditorSharp.Windows.Input
             if (!string.IsNullOrEmpty(m?.Result)) Result = m?.Result;
             try
             {
-                mediaPlayer.Source = new Uri(m?.ExInfo1, UriKind.RelativeOrAbsolute);
-                //mediaPlayer.Play();
+                var uri = new Uri(m?.ExInfo1, UriKind.RelativeOrAbsolute);
+                if (!string.IsNullOrEmpty(m?.ExInfo1))
+                {
+                    string type = "unknown";
+                    if (allSEInfoSys.Any(x => x.ExInfo1 == m.ExInfo1))
+                    {
+                        type = Path.GetExtension(m.ExInfo1).Substring(1);
+                    }
+                    else
+                    {
+                        var fileStream = File.OpenRead(uri.AbsolutePath);
+                        var binaryReader = new BinaryReader(fileStream, Encoding.Default);
+                        byte[] buffer = binaryReader.ReadBytes(4);
+                        binaryReader.Close();
+                        fileStream.Close();
+                        string header = string.Join("", buffer.Select(element => element.ToString("X2")));
+                        switch (header)
+                        {
+                            case "49443303":
+                                type = "mp3";
+                                break;
+                            case "52494646":
+                                type = "wav";
+                                break;
+                            case "4F676753":
+                                type = "ogg";
+                                break;
+                        }
+                    }
+                    labelSEInfo.Content = $"Audio type: {type}";
+                    mediaPlayer.Source = uri;
+                    //mediaPlayer.Play();
+                }
+                else
+                {
+                    labelSEInfo.Content = "Audio type: unknown";
+                }
             }
             catch (Exception exc) { MessageBox.Show(exc.ToString()); }
             codeText.Focus();
