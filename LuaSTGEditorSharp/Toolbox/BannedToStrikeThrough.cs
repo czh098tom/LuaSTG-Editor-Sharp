@@ -62,4 +62,29 @@ namespace LuaSTGEditorSharp.Toolbox
             return true;
         }
     }
+
+    public class BoolToOblique : IValueConverter
+    {
+        //Bool2Oblique
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (bool.TryParse(value?.ToString(), out bool b))
+            {
+                if (b)
+                {
+                    return FontStyles.Oblique;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            return null;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return FontStyles.Oblique.Equals(value);
+        }
+    }
 }

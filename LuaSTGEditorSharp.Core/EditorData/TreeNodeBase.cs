@@ -50,6 +50,11 @@ namespace LuaSTGEditorSharp.EditorData
         [JsonIgnore, XmlIgnore]
         protected bool isBanned = false;
         /// <summary>
+        /// Store whether a <see cref="TreeNodeBase"/> is locked. Use this only when you do not want to refresh the view.
+        /// </summary>
+        [JsonIgnore, XmlIgnore]
+        protected bool isLocked = false;
+        /// <summary>
         /// Store whether a <see cref="TreeNodeBase"/> is expanded in view. Using this will refresh the view.
         /// </summary>
         [JsonProperty, DefaultValue(true)]
@@ -78,6 +83,33 @@ namespace LuaSTGEditorSharp.EditorData
             }
         }
         /// <summary>
+        /// Store whether a <see cref="TreeNodeBase"/> is locked in view. Using this will refresh the view.
+        /// </summary>
+        [JsonIgnore, XmlIgnore]
+        public bool IsLocked_InvokeCommand
+        {
+            get => isLocked;
+            set
+            {
+                parentWorkSpace.AddAndExecuteCommand(new SwitchLockCommand(this, value));
+                RaiseProertyChanged(nameof(IsLocked_InvokeCommand));
+            }
+        }
+        /// <summary>
+        /// Store whether a <see cref="TreeNodeBase"/> is locked in view. Using this will refresh the view.
+        /// </summary>
+        [JsonProperty, DefaultValue(false)]
+        [XmlAttribute("locked")]
+        public bool IsLocked
+        {
+            get => isLocked;
+            set
+            {
+                isLocked = value;
+                RaiseProertyChanged("IsLocked");
+            }
+        }
+        /// <summary>
         /// Store whether a <see cref="TreeNodeBase"/> is banned. 
         /// Using setter of this will create a new <see cref="Command"/> and execute it.
         /// </summary>
@@ -96,6 +128,7 @@ namespace LuaSTGEditorSharp.EditorData
                 {
                     RaiseVirtuallyCreate(new OnCreateEventArgs() { parent = _parent });
                 }
+                RaiseProertyChanged(nameof(IsBanned_InvokeCommand));
             }
         }
         /// <summary>

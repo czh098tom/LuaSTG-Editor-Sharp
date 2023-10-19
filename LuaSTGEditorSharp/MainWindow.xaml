@@ -97,8 +97,10 @@
                 <TextBlock Text="{Binding Path=Name}"/>
             </StackPanel>
         </ControlTemplate>
+        <tool:InverseBooleanConverter x:Key="inversedBool"/>
         <tool:BannedToStrikeThrough x:Key="banned2Strike"/>
         <tool:BoolToOpacity x:Key="banned2Opacity"/>
+        <tool:BoolToOblique x:Key="locked2Oblique"/>
         <cm:BackgroundWorker x:Key="CompileWorker" WorkerReportsProgress="True"
                              DoWork="BeginPackaging"
                              ProgressChanged="PackageProgressReport"
@@ -835,77 +837,106 @@
                 <ColumnDefinition Width="5"/>
                 <ColumnDefinition Width="3.8*"/>
             </Grid.ColumnDefinitions>
-            <DataGrid x:Name="propData" Margin="10,10,4,11.2" AutoGenerateColumns="False" 
-                      CanUserResizeRows="False" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False"
-                      Grid.Column="0" ItemsSource="{Binding ContentTemplate.VisualTree, ElementName=docTabs}" 
-                      VerticalScrollBarVisibility="Visible" Style="{StaticResource ResourceKey=DataGridStyle}"
-                      DataGridCell.Selected="DataGrid_GotFocus">
-                <DataGrid.CellStyle>
-                    <Style TargetType="DataGridCell">
-                        <Setter Property="BorderBrush" Value="White"/>
-                        <Style.Triggers>
-                            <Trigger Property="IsSelected" Value="true">
-                                <Setter Property="BorderBrush" Value="White"/>
-                            </Trigger>
-                        </Style.Triggers>
-                    </Style>
-                </DataGrid.CellStyle>
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Properties" Binding="{Binding Path=AttrCap}" IsReadOnly="True">
-                        <DataGridTextColumn.CellStyle>
-                            <Style TargetType="DataGridCell">
-                                <Setter Property="Background" Value="#FFDDDDDD"/>
-                                <Setter Property="BorderBrush" Value="#FFDDDDDD"/>
-                                <Style.Triggers>
-                                    <Trigger Property="IsSelected" Value="true">
-                                        <Setter Property="Foreground" Value="Black"/>
-                                        <Setter Property="FontWeight" Value="Bold"/>
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </DataGridTextColumn.CellStyle>
-                    </DataGridTextColumn>
-                    <DataGridTemplateColumn Header="Parameters" Width="100">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding Path=AttrInput_InvokeCommand, UpdateSourceTrigger=Default, Mode=TwoWay}"/>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                        <DataGridTemplateColumn.CellEditingTemplate>
-                            <DataTemplate>
-                                <ComboBox IsEditable="True" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+            <DockPanel Grid.Column="0">
+                <Border DockPanel.Dock="Bottom">
+                    <ToolBarTray>
+                        <ToolBar Name="toolBarTreeNodeInfo">
+                            <CheckBox IsChecked="{Binding IsBanned_InvokeCommand, Mode=TwoWay}">
+                                <CheckBox.Content>
+                                    <Image Source="images/error.png" Stretch="Fill" Width="16" Height="16"/>
+                                </CheckBox.Content>
+                                <CheckBox.ToolTip>
+                                    <ToolTip>
+                                        <TextBlock Text="Ban node (F4)"/>
+                                    </ToolTip>
+                                </CheckBox.ToolTip>
+                            </CheckBox>
+                            <CheckBox Name="lockedButton" IsChecked="{Binding IsLocked_InvokeCommand, Mode=TwoWay}">
+                                <CheckBox.Content>
+                                    <Image Source="images/lock.png" Stretch="Fill" Width="16" Height="16"/>
+                                </CheckBox.Content>
+                                <CheckBox.ToolTip>
+                                    <ToolTip>
+                                        <TextBlock Text="Lock node"/>
+                                    </ToolTip>
+                                </CheckBox.ToolTip>
+                            </CheckBox>
+                        </ToolBar>
+                    </ToolBarTray>
+                </Border>
+                <DataGrid x:Name="propData" Margin="10,10,4,11.2" AutoGenerateColumns="False" 
+                          CanUserResizeRows="False" CanUserAddRows="False" CanUserDeleteRows="False" 
+                          ItemsSource="{Binding ContentTemplate.VisualTree, ElementName=docTabs}" 
+                          VerticalScrollBarVisibility="Visible" Style="{StaticResource ResourceKey=DataGridStyle}"
+                          DataGridCell.Selected="DataGrid_GotFocus" CanUserReorderColumns="False"
+                          IsEnabled="{Binding IsChecked, Converter={StaticResource inversedBool}, ElementName=lockedButton}">
+                    <DataGrid.CellStyle>
+                        <Style TargetType="DataGridCell">
+                            <Setter Property="BorderBrush" Value="White"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsSelected" Value="true">
+                                    <Setter Property="BorderBrush" Value="White"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DataGrid.CellStyle>
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Properties" Binding="{Binding Path=AttrCap}" IsReadOnly="True">
+                            <DataGridTextColumn.CellStyle>
+                                <Style TargetType="DataGridCell">
+                                    <Setter Property="Background" Value="#FFDDDDDD"/>
+                                    <Setter Property="BorderBrush" Value="#FFDDDDDD"/>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsSelected" Value="true">
+                                            <Setter Property="Foreground" Value="Black"/>
+                                            <Setter Property="FontWeight" Value="Bold"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </DataGridTextColumn.CellStyle>
+                        </DataGridTextColumn>
+                        <DataGridTemplateColumn Header="Parameters" Width="100">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Path=AttrInput_InvokeCommand, UpdateSourceTrigger=Default, Mode=TwoWay}"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                            <DataGridTemplateColumn.CellEditingTemplate>
+                                <DataTemplate>
+                                    <ComboBox IsEditable="True" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                                           Height="20" Loaded="ComboBox_Loaded" BorderThickness="0" 
                                           IsTextSearchEnabled="False"
                                           Text="{Binding Path=AttrInput_InvokeCommand, UpdateSourceTrigger=LostFocus, Mode=TwoWay}"
                                           Tag="{Binding Path=EditWindow}" BorderBrush="White"/>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellEditingTemplate>
-                    </DataGridTemplateColumn>
-                    <DataGridTemplateColumn CanUserResize="False" IsReadOnly="True">
-                        <DataGridTemplateColumn.CellStyle>
-                            <Style TargetType="DataGridCell">
-                                <Style.Triggers>
-                                    <Trigger Property="IsSelected" Value="true">
-                                        <Setter Property="Background" Value="White"/>
-                                        <Setter Property="BorderBrush" Value="White"/>
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </DataGridTemplateColumn.CellStyle>
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <Button Content="..." Width="20" 
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellEditingTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn CanUserResize="False" IsReadOnly="True">
+                            <DataGridTemplateColumn.CellStyle>
+                                <Style TargetType="DataGridCell">
+                                    <Style.Triggers>
+                                        <Trigger Property="IsSelected" Value="true">
+                                            <Setter Property="Background" Value="White"/>
+                                            <Setter Property="BorderBrush" Value="White"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </DataGridTemplateColumn.CellStyle>
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Content="..." Width="20" 
                                         Command="local:EditorRoutedCommands.AdjustProp" CommandParameter="{Binding Path=EditWindow}" 
                                         Tag="{Binding Path=This, UpdateSourceTrigger=PropertyChanged}">
-                                    <Button.CommandBindings>
-                                        <CommandBinding Command="local:EditorRoutedCommands.AdjustProp" Executed="AdjustPropCommandExecuted"/>
-                                    </Button.CommandBindings>
-                                </Button>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                </DataGrid.Columns>
-            </DataGrid>
+                                        <Button.CommandBindings>
+                                            <CommandBinding Command="local:EditorRoutedCommands.AdjustProp" Executed="AdjustPropCommandExecuted"/>
+                                        </Button.CommandBindings>
+                                    </Button>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </DockPanel>
             <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch" Opacity="0"/>
             <Grid Grid.Column="2">
                 <Grid.RowDefinitions>
@@ -976,7 +1007,7 @@
                                                    Stretch="Fill" Width="16" Height="16" Margin="0,0,2,2" VerticalAlignment="Top"
                                                    Opacity="{Binding IsBanned, Converter={StaticResource banned2Opacity}}"/>
                                             <TextBlock VerticalAlignment="Center" Text="{Binding ScreenString}" TextDecorations="{Binding IsBanned, Converter={StaticResource banned2Strike}}"
-                                                       />
+                                                       FontStyle="{Binding IsLocked, Converter={StaticResource locked2Oblique}}"/>
                                             <StackPanel.ContextMenu>
                                                 <ContextMenu DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}">
                                                     <ContextMenu.ItemsSource>

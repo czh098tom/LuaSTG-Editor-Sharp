@@ -875,6 +875,7 @@ namespace LuaSTGEditorSharp
             workSpace = sender as TreeView;
             SelectedNode = ((TreeNodeBase)(workSpace.SelectedItem));
             if (selectedNode != null) this.propData.ItemsSource = ((FixedAttributeTreeNode)selectedNode).attributes;
+            toolBarTreeNodeInfo.DataContext = selectedNode;
             //EditorConsole.Text = selectedNode.ToLua(0);
         }
 
