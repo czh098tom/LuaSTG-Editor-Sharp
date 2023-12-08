@@ -1096,6 +1096,16 @@ namespace LuaSTGEditorSharp
             else e.CanExecute = false;
         }
 
+        private void QuickDuplicateCommandExecuted(object sender, ExecutedRoutedEventArgs e)
+        {
+            QuickDuplicate();
+        }
+
+        private void QuickDuplicateCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = selectedNode != null;
+        }
+
         private void FoldTreeCommandExecuted(object sender, ExecutedRoutedEventArgs e)
         {
             selectedNode.FoldTree();

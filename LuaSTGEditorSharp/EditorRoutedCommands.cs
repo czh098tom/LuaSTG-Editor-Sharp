@@ -10,6 +10,7 @@ namespace LuaSTGEditorSharp
     public class EditorRoutedCommands
     {
         #region Extra edit commands
+        public static RoutedUICommand QuickDuplicate { get; }
         public static RoutedUICommand EditNode { get; }
         public static RoutedUICommand FoldTree { get; }
         public static RoutedUICommand UnfoldTree { get; }
@@ -57,6 +58,11 @@ namespace LuaSTGEditorSharp
         static EditorRoutedCommands()
         {
             InputGestureCollection inputs;
+            inputs = new InputGestureCollection
+            {
+                new KeyGesture(Key.D, ModifierKeys.Control)
+            };
+            QuickDuplicate = new RoutedUICommand("Quick Duplicate", "QuickDuplicate", typeof(EditorRoutedCommands), inputs);
             inputs = new InputGestureCollection
             {
                 new KeyGesture(Key.Space)

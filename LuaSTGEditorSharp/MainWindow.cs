@@ -15,6 +15,7 @@ using LuaSTGEditorSharp.EditorData.Node;
 using LuaSTGEditorSharp.EditorData.Node.General;
 using LuaSTGEditorSharp.EditorData.Node.Advanced;
 using LuaSTGEditorSharp.EditorData.Node.Project;
+using LuaSTGEditorSharp.EditorData.Commands.Factory;
 
 namespace LuaSTGEditorSharp
 {
@@ -31,6 +32,27 @@ namespace LuaSTGEditorSharp
             foreach (KeyValuePair<string, BitmapImage> kvp in PluginHandler.Plugin.GetNodeImageResources())
             {
                 if (!Resources.Contains(kvp.Key)) Resources.Add(kvp.Key, kvp.Value);
+            }
+        }
+
+        public void QuickDuplicate()
+        {
+            try
+            {
+                if (selectedNode == null || selectedNode.Parent == null) return;
+                var node = (TreeNodeBase)selectedNode.Clone();
+                node.FixParentDoc(ActivatedWorkSpaceData);
+                TreeNodeBase oldSelection = selectedNode;
+                bool move = (Application.Current as App).AutoMoveToNew;
+                Command c = insertState.ValidateAndNewInsert(selectedNode, node);
+                if (ActivatedWorkSpaceData.AddAndExecuteCommand(c))
+                {
+                    if (move) Reveal(node);
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.ToString());
             }
         }
 

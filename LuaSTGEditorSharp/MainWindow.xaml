@@ -25,6 +25,7 @@
         <CommandBinding Command="ApplicationCommands.Copy" Executed="CopyCommandExecuted" CanExecute="CopyCommand_CanExecute"/>
         <CommandBinding Command="ApplicationCommands.Paste" Executed="PasteCommandExecuted" CanExecute="PasteCommand_CanExecute"/>
         <CommandBinding Command="ApplicationCommands.Delete" Executed="DeleteCommandExecuted" CanExecute="DeleteCommand_CanExecute"/>
+        <CommandBinding Command="local:EditorRoutedCommands.QuickDuplicate" Executed="QuickDuplicateCommandExecuted" CanExecute="QuickDuplicateCommand_CanExecute"/>
         <CommandBinding Command="local:EditorRoutedCommands.EditNode" Executed="EditNodeCommandExecuted" CanExecute="EditNodeCommand_CanExecute"/>
         <CommandBinding Command="local:EditorRoutedCommands.FoldTree" Executed="FoldTreeCommandExecuted" CanExecute="FoldTreeCommand_CanExecute"/>
         <CommandBinding Command="local:EditorRoutedCommands.UnfoldTree" Executed="UnfoldTreeCommandExecuted" CanExecute="UnfoldTreeCommand_CanExecute"/>
@@ -427,6 +428,8 @@
                             <Image Source="images/delete.png"/>
                         </MenuItem.Icon>
                     </MenuItem>
+                    <Separator/>
+                    <MenuItem Header="_Quick duplicate" Command="local:EditorRoutedCommands.QuickDuplicate"/>
                     <Separator/>
                     <MenuItem Header="_Switch Ban" Command="local:EditorRoutedCommands.SwitchBan"/>
                     <Separator/>
@@ -1019,6 +1022,8 @@
                                                             <MenuItem Header="_Paste" Command="ApplicationCommands.Paste"/>
                                                             <Separator/>
                                                             <MenuItem Header="_Delete" Command="ApplicationCommands.Delete"/>
+                                                            <Separator/>
+                                                            <MenuItem Header="_Quick duplicate" Command="local:EditorRoutedCommands.QuickDuplicate"/>
                                                             <Separator/>
                                                             <MenuItem Header="_Fold Tree" Command="local:EditorRoutedCommands.FoldTree"/>
                                                             <MenuItem Header="_Unfold Tree" Command="local:EditorRoutedCommands.UnfoldTree"/>
