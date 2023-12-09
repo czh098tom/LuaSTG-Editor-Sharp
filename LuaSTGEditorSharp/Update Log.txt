@@ -1,4 +1,11 @@
-﻿-- Update Log（最近更新 2023-04-04）
+﻿-- Update Log（最近更新 2023-12-09）
+0.7.9
+实现功能：
+允许节点上锁（禁止编辑属性）
+快速复制节点
+CreateBullet, CreateBoss, CreateSimpleBullet, CreateEnemy, CreateLaser, CreateBentLaser, CreateObject, MakeSmear
+支持当有子节点时使用块封闭原last为self
+
 0.7.8.1
 修复bug：
 向NumericalCurve头部位置补充丢失的task.GetSelf()
