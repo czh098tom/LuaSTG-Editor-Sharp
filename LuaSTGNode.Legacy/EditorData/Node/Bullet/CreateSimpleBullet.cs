@@ -12,9 +12,8 @@ namespace LuaSTGEditorSharp.EditorData.Node.Bullet
 {
     [Serializable, NodeIcon("bulletcreatestraight.png")]
     [RequireAncestor(typeof(CodeAlikeTypes))]
-    [LeafNode]
     [CreateInvoke(0), RCInvoke(3)]
-    public class CreateSimpleBullet : FixedAttributeTreeNode
+    public class CreateSimpleBullet : ObjectCreatorNode
     {
         [JsonConstructor]
         private CreateSimpleBullet() : base() { }
@@ -177,11 +176,13 @@ namespace LuaSTGEditorSharp.EditorData.Node.Bullet
                 s += "," + Macrolize(at);
             }
             yield return sp + "last=New(_straight" + s + ")\n";
+            foreach (var item in ParseChildrenIfValid(spacing)) yield return item;
         }
 
         public override IEnumerable<Tuple<int,TreeNodeBase>> GetLines()
         {
             yield return new Tuple<int, TreeNodeBase>(1, this);
+            foreach (var item in GetLinesForChildrenIfValid()) yield return item;
         }
 
         public override string ToString()

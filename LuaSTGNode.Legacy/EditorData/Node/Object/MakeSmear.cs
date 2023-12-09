@@ -13,9 +13,8 @@ namespace LuaSTGEditorSharp.EditorData.Node.Object
 {
     [Serializable, NodeIcon("smear.png")]
     [RequireAncestor(typeof(CodeAlikeTypes))]
-    [LeafNode]
     [RCInvoke(1)]
-    class MakeSmear : FixedAttributeTreeNode
+    class MakeSmear : ObjectCreatorNode
     {
         [JsonConstructor]
         private MakeSmear() : base() { }
@@ -53,11 +52,13 @@ namespace LuaSTGEditorSharp.EditorData.Node.Object
         {
             string sp = Indent(spacing);
             yield return $"{sp}last=New(smear,{Macrolize(0)},{Macrolize(1)})";
+            foreach (var item in ParseChildrenIfValid(spacing)) yield return item;
         }
 
         public override IEnumerable<Tuple<int, TreeNodeBase>> GetLines()
         {
             yield return new Tuple<int, TreeNodeBase>(1, this);
+            foreach (var item in GetLinesForChildrenIfValid()) yield return item;
         }
 
         public override object Clone()

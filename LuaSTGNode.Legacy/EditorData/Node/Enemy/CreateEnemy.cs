@@ -12,9 +12,8 @@ namespace LuaSTGEditorSharp.EditorData.Node.Enemy
 {
     [Serializable, NodeIcon("enemycreate.png")]
     [RequireAncestor(typeof(CodeAlikeTypes))]
-    [LeafNode]
     [CreateInvoke(0), RCInvoke(2)]
-    public class CreateEnemy : FixedAttributeTreeNode
+    public class CreateEnemy : ObjectCreatorNode
     {
         [JsonConstructor]
         private CreateEnemy() : base() { }
@@ -63,11 +62,13 @@ namespace LuaSTGEditorSharp.EditorData.Node.Enemy
             string p = Macrolize(2);
             if (string.IsNullOrEmpty(p)) p = "_";
             yield return sp + "last=New(_editor_class[" + Macrolize(0) + "]," + Macrolize(1) + "," + p + ")\n";
+            foreach (var item in ParseChildrenIfValid(spacing)) yield return item;
         }
 
         public override IEnumerable<Tuple<int,TreeNodeBase>> GetLines()
         {
             yield return new Tuple<int, TreeNodeBase>(1, this);
+            foreach (var item in GetLinesForChildrenIfValid()) yield return item;
         }
 
         public override string ToString()

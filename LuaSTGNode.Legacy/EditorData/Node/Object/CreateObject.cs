@@ -12,9 +12,8 @@ namespace LuaSTGEditorSharp.EditorData.Node.Object
 {
     [Serializable, NodeIcon("objectcreate.png")]
     [RequireAncestor(typeof(CodeAlikeTypes))]
-    [LeafNode]
     [CreateInvoke(0), RCInvoke(2)]
-    public class CreateObject : FixedAttributeTreeNode
+    public class CreateObject : ObjectCreatorNode
     {
         [JsonConstructor]
         private CreateObject() : base() { }
@@ -63,11 +62,13 @@ namespace LuaSTGEditorSharp.EditorData.Node.Object
             string p = Macrolize(2);
             if (string.IsNullOrEmpty(p)) p = "_";
             yield return sp + "last=New(_editor_class[" + Macrolize(0) + "]," + Macrolize(1) + "," + p + ")\n";
+            foreach (var item in ParseChildrenIfValid(spacing)) yield return item;
         }
 
         public override IEnumerable<Tuple<int,TreeNodeBase>> GetLines()
         {
             yield return new Tuple<int, TreeNodeBase>(1, this);
+            foreach (var item in GetLinesForChildrenIfValid()) yield return item;
         }
 
         public override string ToString()

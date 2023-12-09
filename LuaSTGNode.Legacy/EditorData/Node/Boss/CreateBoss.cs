@@ -12,9 +12,8 @@ namespace LuaSTGEditorSharp.EditorData.Node.Boss
 {
     [Serializable, NodeIcon("bosscreate.png")]
     [RequireAncestor(typeof(Stage.Stage), typeof(Data.Function))]
-    [LeafNode]
     [CreateInvoke(0), RCInvoke(0)]
-    public class CreateBoss : FixedAttributeTreeNode
+    public class CreateBoss : ObjectCreatorNode
     {
         [JsonConstructor]
         private CreateBoss() : base() { }
@@ -53,13 +52,16 @@ namespace LuaSTGEditorSharp.EditorData.Node.Boss
             string sp = Indent(spacing);
             yield return sp + "local _boss_wait=" + Macrolize(1) + "\n"
                        + sp + "local _ref=New(_editor_class[" + Macrolize(0) + "],_editor_class[" + Macrolize(0) + "].cards)\n"
-                       + sp + "last=_ref\n"
-                       + sp + "if _boss_wait then while IsValid(_ref) do task.Wait() end end\n";
+                       + sp + "last=_ref\n";
+            foreach (var item in ParseChildrenIfValid(spacing)) yield return item;
+            yield return sp + "if _boss_wait then while IsValid(_ref) do task.Wait() end end\n";
         }
 
         public override IEnumerable<Tuple<int,TreeNodeBase>> GetLines()
         {
-            yield return new Tuple<int, TreeNodeBase>(4, this);
+            yield return new Tuple<int, TreeNodeBase>(3, this);
+            foreach (var item in GetLinesForChildrenIfValid()) yield return item;
+            yield return new Tuple<int, TreeNodeBase>(1, this);
         }
 
         public override string ToString()
