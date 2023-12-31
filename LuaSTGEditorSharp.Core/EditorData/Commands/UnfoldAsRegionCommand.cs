@@ -17,7 +17,7 @@ namespace LuaSTGEditorSharp.EditorData.Commands
         /// <summary>
         /// Stores the range that to be unfolded.
         /// </summary>
-        private ObservableCollection<TreeNodeBase> toAggregate;
+        private List<TreeNodeBase> toAggregate;
         /// <summary>
         /// Store <see cref="Region"/> mark the beginning of range.
         /// </summary>
@@ -48,9 +48,13 @@ namespace LuaSTGEditorSharp.EditorData.Commands
         {
             string name = folderP.PreferredNonMacrolize(0, "Name");
             if (name == "") name = "region";
-            if (regionBegin == null) regionBegin = new Region(folderP.parentWorkSpace, name);
-            if (regionEnd == null) regionEnd = new Region(folderP.parentWorkSpace, name);
-            toAggregate = new ObservableCollection<TreeNodeBase>(from TreeNodeBase t in folderP.Children select t);
+            regionBegin ??= new Region(folderP.parentWorkSpace, name);
+            regionEnd ??= new Region(folderP.parentWorkSpace, name);
+            toAggregate ??= new List<TreeNodeBase>(folderP.Children);
+            foreach (var node in toAggregate)
+            {
+                folderP.RemoveChild(node);
+            }
             TreeNodeBase parent = folderP.Parent;
             int index = parent.Children.IndexOf(folderP);
             parent.InsertChild(regionEnd, index);
@@ -76,6 +80,10 @@ namespace LuaSTGEditorSharp.EditorData.Commands
             parent.RemoveChild(regionBegin);
             if (regionEnd != null) parent.RemoveChild(regionEnd);
             parent.InsertChild(folderP, index);
+            foreach (var node in toAggregate)
+            {
+                folderP.InsertChild(node, folderP.Children.Count);
+            }
         }
     }
 }

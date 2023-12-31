@@ -51,15 +51,13 @@ namespace LuaSTGEditorSharp.EditorData.Commands
         public override void Execute()
         {
             TreeNodeBase parent = regionBegin.Parent;
-            bool folderPNotExist = folderP == null;
-            if (folderPNotExist)
-                folderP = new Folder(parent.parentWorkSpace, regionBegin.attributes[0].AttrInput);
+            folderP ??= new Folder(parent.parentWorkSpace, regionBegin.attributes[0].AttrInput);
             int index = parent.Children.IndexOf(regionBegin);
             parent.InsertChild(folderP, index);
             foreach (TreeNodeBase t in toAggregate) 
             {
                 parent.RemoveChild(t);
-                if (folderPNotExist) folderP.AddChild(t);
+                folderP.AddChild(t);
             }
             parent.RemoveChild(regionBegin);
             if (regionEnd != null) parent.RemoveChild(regionEnd);
@@ -73,6 +71,10 @@ namespace LuaSTGEditorSharp.EditorData.Commands
             TreeNodeBase parent = folderP.Parent;
             int index = parent.Children.IndexOf(folderP);
             if (regionEnd != null) parent.InsertChild(regionEnd, index);
+            for (int i = 0; i < toAggregate.Count; i++)
+            {
+                folderP.RemoveChild(toAggregate[i]);
+            }
             parent.InsertChild(regionBegin, index);
             parent.RemoveChild(folderP);
             for (int i = 0; i < toAggregate.Count; i++)
