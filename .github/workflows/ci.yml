@@ -13,13 +13,11 @@ jobs:
     strategy:
       matrix:
         os: [ win, win7 ]
-        arch: [ x86, x64, arm, arm64 ]
+        arch: [ x86, x64, arm64 ]
         framework: [ net6.0-windows, net48 ]
         exclude:
           - os: win7
             framework: net6.0-windows
-          - os: win7
-            arch: arm
           - os: win7
             arch: arm64
       fail-fast: true
