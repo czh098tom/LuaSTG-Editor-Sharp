@@ -1,4 +1,9 @@
-﻿-- Update Log（最近更新 2023-12-09）
+﻿-- Update Log（最近更新 2024-08-13）
+0.7.9.1
+删除特性：
+移除了 BulletInit, EnemyInit, LaserInit, BentLaserInit 在没有设定自定义参数时自动添加的 _ 参数
+移除了 CreateBullet, CreateEnemy, CreateLaser, CreateBentLaser 在没有对自定义参数进行填写时自动添加的 _ 参数
+
 0.7.9
 实现功能：
 允许节点上锁（禁止编辑属性）
