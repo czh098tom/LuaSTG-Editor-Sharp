@@ -1,1 +1,1 @@
-dotnet publish -c Release --os win --arch x64 --framework net6.0-windows --property:PublishDir=%cd%/publish/
+dotnet publish -c Release --os win --arch x64 --framework net6.0-windows --property:PublishDir=%cd%/publish/ --self-contained
