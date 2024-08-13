@@ -38,7 +38,7 @@ jobs:
       run: |
         if ($env:IS_PR -eq "true") { echo $env:PR_PROMPT }
         $outputDir=$executioncontext.sessionstate.path.getunresolvedproviderpathfrompspath(".\publish\")
-        dotnet publish -c Release --os $env:TARGET_OS --arch $env:TARGET_ARCH --framework $env:TARGET_FRAMEWORK --property:PublishDir=$outputDir --self-contained
+        dotnet publish -c Release --os $env:TARGET_OS --arch $env:TARGET_ARCH --framework $env:TARGET_FRAMEWORK --property:PublishDir=$outputDir --no-self-contained
     - name: Upload artifact
       uses: actions/upload-artifact@v4
       if: ${{ !github.head_ref }}
