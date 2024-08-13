@@ -34,7 +34,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LuaSTGLib.Default", "LuaSTG
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LuaSTGSubLib", "LuaSTGSubLib\LuaSTGSubLib.csproj", "{20925816-5537-442C-8F61-3A8D54C34E59}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LuaSTGEditorSharp.Core.Cli", "LuaSTGEditorSharp.Core.Cli\LuaSTGEditorSharp.Core.Cli.csproj", "{348D5515-2BAF-489B-A89A-C9BBA1561D72}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LuaSTGEditorSharp.Core.Cli", "LuaSTGEditorSharp.Core.Cli\LuaSTGEditorSharp.Core.Cli.csproj", "{348D5515-2BAF-489B-A89A-C9BBA1561D72}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -3,7 +3,7 @@ name: CI (.NET Core)
 on: [ push, pull_request, workflow_dispatch ]
 
 env:
-  DOTNET_VERSION: "6.0.401"
+  DOTNET_VERSION: "6"
   PR_PROMPT: "::warning:: Build artifact will not be uploaded due to the workflow is trigged by pull request."
 
 jobs:
@@ -24,9 +24,9 @@ jobs:
             arch: arm64
       fail-fast: true
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - name: Setup .NET Core
-      uses: actions/setup-dotnet@v3
+      uses: actions/setup-dotnet@v4
       with:
         dotnet-version: ${{ env.DOTNET_VERSION }}
     - name: Install dependencies
@@ -42,7 +42,7 @@ jobs:
         $outputDir=$executioncontext.sessionstate.path.getunresolvedproviderpathfrompspath(".\publish\")
         dotnet publish -c Release --os $env:TARGET_OS --arch $env:TARGET_ARCH --framework $env:TARGET_FRAMEWORK --property:PublishDir=$outputDir
     - name: Upload artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       if: ${{ !github.head_ref }}
       with:
         name: ${{ matrix.os }}-${{ matrix.arch }}-${{ matrix.framework }}
