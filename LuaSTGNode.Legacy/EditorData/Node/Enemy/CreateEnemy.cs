@@ -60,8 +60,8 @@ namespace LuaSTGEditorSharp.EditorData.Node.Enemy
         {
             string sp = Indent(spacing);
             string p = Macrolize(2);
-            if (string.IsNullOrEmpty(p)) p = "_";
-            yield return sp + "last=New(_editor_class[" + Macrolize(0) + "]," + Macrolize(1) + "," + p + ")\n";
+            yield return sp + "last=New(_editor_class[" + Macrolize(0) + "]," + Macrolize(1)
+                + (string.IsNullOrEmpty(p) ? "" : "," + p) + ")\n";
             foreach (var item in ParseChildrenIfValid(spacing)) yield return item;
         }
 

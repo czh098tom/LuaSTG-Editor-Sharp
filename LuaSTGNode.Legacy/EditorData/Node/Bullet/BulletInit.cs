@@ -81,8 +81,8 @@ namespace LuaSTGEditorSharp.EditorData.Node.Bullet
             string s1 = Indent(spacing);
             TreeNodeBase parent = GetLogicalParent();
             string parentName = DefinitionWithDifficulty.GetNameWithDifficulty(parent);
-            string p = (!string.IsNullOrEmpty(NonMacrolize(0)) ? NonMacrolize(0) : "_");
-            yield return sp + "_editor_class[\"" + parentName + "\"].init=function(self,_x,_y," + p + ")\n"
+            string p = (!string.IsNullOrEmpty(NonMacrolize(0)) ? "," + NonMacrolize(0) : string.Empty);
+            yield return sp + "_editor_class[\"" + parentName + "\"].init=function(self,_x,_y" + p + ")\n"
                          + sp + s1 + "bullet.init(self," + Macrolize(1) + "," + Macrolize(2) + "," + Macrolize(3) + "," + Macrolize(4) + ")\n"
                          + sp + s1 + "self.x,self.y=_x,_y\n";
             foreach (var a in base.ToLua(spacing + 1))

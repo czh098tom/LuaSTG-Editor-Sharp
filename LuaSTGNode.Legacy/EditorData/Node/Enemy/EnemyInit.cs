@@ -116,8 +116,8 @@ namespace LuaSTGEditorSharp.EditorData.Node.Enemy
             string s1 = Indent(1);
             TreeNodeBase parent = GetLogicalParent();
             string parentName = DefinitionWithDifficulty.GetNameWithDifficulty(parent);
-            string p = (!string.IsNullOrEmpty(NonMacrolize(0)) ? NonMacrolize(0) : "_");
-            yield return sp + "_editor_class[\"" + parentName + "\"].init=function(self,_x,_y," + p + ")\n"
+            string p = (!string.IsNullOrEmpty(NonMacrolize(0)) ? "," + NonMacrolize(0) : string.Empty);
+            yield return sp + "_editor_class[\"" + parentName + "\"].init=function(self,_x,_y" + p + ")\n"
                          + sp + s1 + "enemy.init(self," + Macrolize(1) + "," + Macrolize(2) + "," + Macrolize(7) 
                             + "," + Macrolize(8) + "," + Macrolize(9) + ")\n"
                          + sp + s1 + "self.x,self.y=_x,_y\n"

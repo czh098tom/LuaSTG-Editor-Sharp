@@ -91,8 +91,8 @@ namespace LuaSTGEditorSharp.EditorData.Node.Laser
             string s1 = Indent(1);
             TreeNodeBase parent = GetLogicalParent();
             string parentName = DefinitionWithDifficulty.GetNameWithDifficulty(parent);
-            string p = (!string.IsNullOrEmpty(NonMacrolize(0)) ? NonMacrolize(0) : "_");
-            yield return sp + "_editor_class[\"" + parentName + "\"].init=function(self,_x,_y," + p + ")\n"
+            string p = (!string.IsNullOrEmpty(NonMacrolize(0)) ? "," + NonMacrolize(0) : string.Empty);
+            yield return sp + "_editor_class[\"" + parentName + "\"].init=function(self,_x,_y" + p + ")\n"
                          + sp + s1 + "laser_bent.init(self," + Macrolize(1) + ",_x,_y," + Macrolize(2) + ","
                          + Macrolize(3) + "," + Macrolize(4) + "," + Macrolize(5) + ")\n";
             foreach (var a in base.ToLua(spacing + 1))

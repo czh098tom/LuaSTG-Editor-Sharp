@@ -119,8 +119,8 @@ namespace LuaSTGEditorSharp.EditorData.Node.Object
             string s1 = Indent(1);
             TreeNodeBase parent = GetLogicalParent();
             string parentName = DefinitionWithDifficulty.GetNameWithDifficulty(parent);
-            string p = (!string.IsNullOrEmpty(NonMacrolize(0)) ? NonMacrolize(0) : "_");
-            yield return sp + "_editor_class[\"" + parentName + "\"].init=function(self,_x,_y," + p + ")\n"
+            string p = (!string.IsNullOrEmpty(NonMacrolize(0)) ? "," + NonMacrolize(0) : string.Empty);
+            yield return sp + "_editor_class[\"" + parentName + "\"].init=function(self,_x,_y" + p + ")\n"
                          + sp + s1 + "self.x,self.y=_x,_y\n"
                          + sp + s1 + "self.img=" + Macrolize(1) + "\n"
                          + sp + s1 + "self.layer=" + Macrolize(2) + "\n"
