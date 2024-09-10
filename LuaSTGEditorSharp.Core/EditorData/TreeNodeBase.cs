@@ -1165,9 +1165,12 @@ namespace LuaSTGEditorSharp.EditorData
                 {
                     if (n is Folder)
                     {
-                        foreach (TreeNodeBase t in n.GetLogicalChildren())
+                        if (!n.IsBanned)
                         {
-                            yield return t;
+                            foreach (TreeNodeBase t in n.GetLogicalChildren())
+                            {
+                                yield return t;
+                            }
                         }
                     }
                     else
