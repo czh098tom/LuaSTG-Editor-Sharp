@@ -37,6 +37,7 @@ using Newtonsoft.Json;
 
 using Path = System.IO.Path;
 using System.Reflection;
+using LuaSTGEditorSharp.Packer;
 
 namespace LuaSTGEditorSharp
 {
@@ -496,21 +497,18 @@ namespace LuaSTGEditorSharp
 
         private bool TestError()
         {
+            // TODO: change directory check to generate error message and send to MessageContainer, prevent hard code here
             App currentApp = Application.Current as App;
-            if (ActivatedWorkSpaceData != null)
+            if (ActivatedWorkSpaceData != null && currentApp.PackerType == PlainCopyPacker.name)
             {
                 var docDir = Path.GetDirectoryName(ActivatedWorkSpaceData.DocPath);
                 ActivatedWorkSpaceData.GatherCompileInfo(currentApp);
-                if (ActivatedWorkSpaceData.CompileProcess.Packer.SupportFolderInArchive)
+                if (docDir == ActivatedWorkSpaceData.CompileProcess.Packer.TargetArchivePath)
                 {
-                    if (docDir == ActivatedWorkSpaceData.CompileProcess.Packer.TargetArchivePath)
-                    {
-                        MessageBox.Show("Project files are under output directory. The output directory will be deleted before build. DO NOT save project files in the output directory!"
-                            , "LuaSTG Editor Sharp", MessageBoxButton.OK, MessageBoxImage.Error);
-                        return true;
-                    }
+                    MessageBox.Show("Project files are under output directory. The output directory will be deleted before build. DO NOT save project files in the output directory!"
+                        , "LuaSTG Editor Sharp", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return true;
                 }
-               
             }
             if (!MessageContainer.IsNoError())
             {
