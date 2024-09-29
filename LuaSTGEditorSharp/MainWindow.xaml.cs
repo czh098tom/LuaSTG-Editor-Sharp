@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Text.RegularExpressions;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -37,6 +37,7 @@ using Newtonsoft.Json;
 
 using Path = System.IO.Path;
 using System.Reflection;
+using LuaSTGEditorSharp.Packer;
 
 namespace LuaSTGEditorSharp
 {
@@ -496,6 +497,28 @@ namespace LuaSTGEditorSharp
 
         private bool TestError()
         {
+            // TODO: change directory check to generate error message and send to MessageContainer, prevent hard code here
+            App currentApp = Application.Current as App;
+            if (ActivatedWorkSpaceData != null && currentApp.PackerType == PlainCopyPacker.name)
+            {
+                ActivatedWorkSpaceData.GatherCompileInfo(currentApp);
+                if (!Uri.TryCreate(ActivatedWorkSpaceData.DocPath, UriKind.RelativeOrAbsolute, out Uri documentUri))
+                {
+                    MessageBox.Show("Invalid document path.", "LuaSTG Editor Sharp", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return true;
+                }
+                if (!Uri.TryCreate(ActivatedWorkSpaceData.CompileProcess.Packer.TargetArchivePath, UriKind.RelativeOrAbsolute, out Uri targetUri))
+                {
+                    MessageBox.Show("Invalid output directory.", "LuaSTG Editor Sharp", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return true;
+                }
+                if (documentUri.Equals(targetUri) || targetUri.IsBaseOf(documentUri))
+                {
+                    MessageBox.Show("Project files are under output directory. The output directory will be deleted before build. DO NOT save project files in the output directory!"
+                        , "LuaSTG Editor Sharp", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return true;
+                }
+            }
             if (!MessageContainer.IsNoError())
             {
                 tabMessage.IsSelected = true;
