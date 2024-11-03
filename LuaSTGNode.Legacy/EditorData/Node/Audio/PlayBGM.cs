@@ -95,7 +95,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Audio
             string s = "";
             if (!string.IsNullOrEmpty(NonMacrolize(1)))
             {
-                s = ", start from " + NonMacrolize(1) + " frame(s)";
+                s = ", start from " + NonMacrolize(1) + " second(s)";
             }
             return "Play background music " + NonMacrolize(0) + s;
         }
