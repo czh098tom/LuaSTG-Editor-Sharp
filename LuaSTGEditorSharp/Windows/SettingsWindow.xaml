@@ -77,7 +77,7 @@
                     <Label Content="Default Author Name" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="150"/>
                     <TextBox HorizontalAlignment="Left" Height="26" Margin="178,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="470" Text="{Binding AuthorName, ElementName=window}"/>
                     <CheckBox Content="Move to new nodes Automatically" HorizontalAlignment="Left" Height="26" VerticalAlignment="Top" Width="275" IsChecked="{Binding AutoMoveToNew, ElementName=window}" Margin="10,50,0,0"/>
-                    <GroupBox Header="Indentation" Margin="10,81,10,228">
+                    <GroupBox Header="Indentation" Margin="10,107,10,202">
                         <StackPanel Orientation="Vertical" Margin="10,10,10,10">
                             <RadioButton Height="26" IsChecked="{Binding SpaceIndentation,ElementName=window}">
                                 <Grid>
@@ -95,6 +95,10 @@
                             <RadioButton Content="Tab" IsChecked="{Binding TabIndentation,ElementName=window}"/>
                         </StackPanel>
                     </GroupBox>
+                    <Label Content="TAB Display Width" HorizontalAlignment="Left" Margin="10,81,0,0"
+                           VerticalAlignment="Top" Width="150" />
+                    <TextBox HorizontalAlignment="Left" Height="26" Margin="178,81,0,0"
+                             VerticalAlignment="Top" Width="150" Text="{Binding TabDisplayWidth,ElementName=window}" />
                 </Grid>
             </TabItem>
         </TabControl>

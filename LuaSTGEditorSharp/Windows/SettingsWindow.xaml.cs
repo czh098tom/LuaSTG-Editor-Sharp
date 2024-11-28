@@ -298,6 +298,17 @@ namespace LuaSTGEditorSharp.Windows
                 RaiseProertyChanged("IndentationSpaceLength");
             }
         }
+        
+        private int tabDisplayWidth;
+        public int TabDisplayWidth
+        {
+            get => tabDisplayWidth;
+            set
+            {
+                tabDisplayWidth = value;
+                RaiseProertyChanged("TabDisplayWidth");
+            }
+        }
 
         private bool dynamicDebugReporting;
         public bool DynamicDebugReporting
@@ -418,6 +429,12 @@ namespace LuaSTGEditorSharp.Windows
             get => mainApp.IndentationSpaceLength;
             set => mainApp.IndentationSpaceLength = value;
         }
+
+        public int TabDisplayWidthSettings
+        {
+            get => mainApp.TabDisplayWidth;
+            set => mainApp.TabDisplayWidth = value;
+        }
         #endregion
 
         public string TargetVersion
@@ -455,6 +472,7 @@ namespace LuaSTGEditorSharp.Windows
             ZipExecutablePathSettings = ZipExecutablePath;
             SpaceIndentationSettings = SpaceIndentation;
             IndentationSpaceLengthSettings = IndentationSpaceLength;
+            TabDisplayWidthSettings = TabDisplayWidth;
         }
 
         private void ReadSettings()
@@ -487,6 +505,7 @@ namespace LuaSTGEditorSharp.Windows
             ZipExecutablePath = ZipExecutablePathSettings;
             SpaceIndentation = SpaceIndentationSettings;
             IndentationSpaceLength = IndentationSpaceLengthSettings;
+            TabDisplayWidth = TabDisplayWidthSettings;
         }
 
         public SettingsWindow()
@@ -579,6 +598,8 @@ namespace LuaSTGEditorSharp.Windows
         {
             WriteSettings();
             Properties.Settings.Default.Save();
+            var mainWindow = mainApp.MainWindow as MainWindow;
+            mainWindow?.workSpace.Items.Refresh();
             Close();
         }
 
@@ -591,6 +612,8 @@ namespace LuaSTGEditorSharp.Windows
         {
             WriteSettings();
             Properties.Settings.Default.Save();
+            var mainWindow = mainApp.MainWindow as MainWindow;
+            mainWindow?.workSpace.Items.Refresh();
         }
 
         private void ButtonRegisterExt_Click(object sender, RoutedEventArgs e)

@@ -338,6 +338,12 @@ namespace LuaSTGEditorSharp
             }
         }
 
+        public int TabDisplayWidth
+        {
+            get => Settings.Default.TabDisplayWidth;
+            set => Settings.Default["TabDisplayWidth"] = value;
+        }
+
         public bool IsEXEPathSet
         {
             get => !(PackerType == "zip-external" && string.IsNullOrEmpty(ZipExecutablePath)) && !string.IsNullOrEmpty(LuaSTGExecutablePath);

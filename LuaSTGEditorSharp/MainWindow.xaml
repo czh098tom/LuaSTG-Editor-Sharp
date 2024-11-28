@@ -102,6 +102,7 @@
         <tool:BannedToStrikeThrough x:Key="banned2Strike"/>
         <tool:BoolToOpacity x:Key="banned2Opacity"/>
         <tool:BoolToOblique x:Key="locked2Oblique"/>
+        <tool:TabToSpaceConverter x:Key="Tab2Space"/>
         <cm:BackgroundWorker x:Key="CompileWorker" WorkerReportsProgress="True"
                              DoWork="BeginPackaging"
                              ProgressChanged="PackageProgressReport"
@@ -1009,7 +1010,7 @@
                                             <Image Source="{tool:BindableStaticResource {Binding Icon}}"
                                                    Stretch="Fill" Width="16" Height="16" Margin="0,0,2,2" VerticalAlignment="Top"
                                                    Opacity="{Binding IsBanned, Converter={StaticResource banned2Opacity}}"/>
-                                            <TextBlock VerticalAlignment="Center" Text="{Binding ScreenString}" TextDecorations="{Binding IsBanned, Converter={StaticResource banned2Strike}}"
+                                            <TextBlock VerticalAlignment="Center" Text="{Binding ScreenString, Converter={StaticResource Tab2Space}}" TextDecorations="{Binding IsBanned, Converter={StaticResource banned2Strike}}"
                                                        FontStyle="{Binding IsLocked, Converter={StaticResource locked2Oblique}}"/>
                                             <StackPanel.ContextMenu>
                                                 <ContextMenu DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}">
