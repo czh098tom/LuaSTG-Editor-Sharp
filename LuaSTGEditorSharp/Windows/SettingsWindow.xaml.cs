@@ -598,8 +598,16 @@ namespace LuaSTGEditorSharp.Windows
         {
             WriteSettings();
             Properties.Settings.Default.Save();
-            var mainWindow = mainApp.MainWindow as MainWindow;
-            mainWindow?.workSpace.Items.Refresh();
+            try
+            {
+                var mainWindow = mainApp.MainWindow as MainWindow;
+                mainWindow?.workSpace.Items.Refresh();
+            }
+            catch
+            {
+                // ignored
+            }
+
             Close();
         }
 
@@ -612,8 +620,14 @@ namespace LuaSTGEditorSharp.Windows
         {
             WriteSettings();
             Properties.Settings.Default.Save();
-            var mainWindow = mainApp.MainWindow as MainWindow;
-            mainWindow?.workSpace.Items.Refresh();
+            try {
+                var mainWindow = mainApp.MainWindow as MainWindow;
+                mainWindow?.workSpace.Items.Refresh();
+            }
+            catch
+            {
+                // ignored
+            }
         }
 
         private void ButtonRegisterExt_Click(object sender, RoutedEventArgs e)
