@@ -110,6 +110,7 @@ namespace LuaSTGEditorSharp.Windows.Input
                         switch (header)
                         {
                             case "49443303":
+                            case "49443304":
                                 type = "mp3";
                                 break;
                             case "52494646":
