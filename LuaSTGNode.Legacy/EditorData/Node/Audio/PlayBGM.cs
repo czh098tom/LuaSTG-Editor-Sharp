@@ -71,7 +71,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Audio
             {
                 if (!string.IsNullOrEmpty(Macrolize(2)))
                 {
-                    s = sp + "if " + Macrolize(2) + " then ex.stageframe=int(" + Macrolize(1) + "/60) end\n";
+                    s = sp + "if " + Macrolize(2) + " then ex.stageframe=int(" + Macrolize(1) + "*60) end\n";
                 }
                 yield return sp + "LoadMusicRecord(" + Macrolize(0) + ")\n"
                     + sp + "_play_music(" + Macrolize(0) + "," + Macrolize(1) + ")\n" + s;
@@ -95,7 +95,7 @@ namespace LuaSTGEditorSharp.EditorData.Node.Audio
             string s = "";
             if (!string.IsNullOrEmpty(NonMacrolize(1)))
             {
-                s = ", start from " + NonMacrolize(1) + " frame(s)";
+                s = ", start from " + NonMacrolize(1) + " second(s)";
             }
             return "Play background music " + NonMacrolize(0) + s;
         }
