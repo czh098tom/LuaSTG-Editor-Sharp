@@ -1,12 +1,15 @@
 ﻿using System;
-using System.Diagnostics;
 using System.IO;
+using System.Runtime.InteropServices;
 using Microsoft.Win32;
 
 namespace ExtensionRegister
 {
     class Program
     {
+        [DllImport("user32.dll", CharSet = CharSet.Unicode)]
+        public static extern int MessageBoxW(IntPtr hWnd, string text, string caption, uint type);
+
         static void Main(string[] args)
         {
             string path = AppDomain.CurrentDomain.BaseDirectory;
@@ -33,16 +36,12 @@ namespace ExtensionRegister
             key.SetValue("", "LuaSTG.File");
             key = Registry.ClassesRoot.CreateSubKey(".lstgproj", true);
             key.SetValue("", "LuaSTG.Project");
-            Process p = new Process()
-            {
-                StartInfo = new ProcessStartInfo()
-                {
-                    FileName = "mshta.exe",
-                    Arguments = $"vbscript:msgbox(\"已成功注册扩展文件名(.lstges, .lstgproj)目标至{Environment.NewLine}{sharp_path}\",64,\"LuaSTG Sharp Editor\")(window.close)",
-                    CreateNoWindow = true
-                }
-            };
-            p.Start();
+
+            // 使用 Win32 API 弹窗
+            MessageBoxW(IntPtr.Zero,
+                $"已成功注册扩展文件名(.lstges, .lstgproj)目标至\n{sharp_path}",
+                "LuaSTG Sharp Editor",
+                0x40); // 0x40 = MB_ICONINFORMATION
         }
     }
 }
