@@ -20,8 +20,8 @@ namespace LuaSTGEditorSharp
                 + config.ModName + "\'\"";
             UseShellExecute = false;
             CreateNoWindow = true;
-            RedirectStandardError = true;
-            RedirectStandardOutput = true;
+            RedirectStandardError = false;
+            RedirectStandardOutput = false;
         }
 
         protected override string LogFileName => "lstg_log.txt";
