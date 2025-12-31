@@ -46,46 +46,65 @@ namespace LuaSTGEditorSharp.Execution
                         CreateNoWindow = CreateNoWindow,
                         WorkingDirectory = WorkingDirectory,
                         RedirectStandardError = RedirectStandardError,
-                        RedirectStandardOutput = RedirectStandardOutput
+                        RedirectStandardOutput = RedirectStandardOutput,
+                        StandardErrorEncoding = RedirectStandardError ? Encoding.UTF8 : null,
+                        StandardOutputEncoding = RedirectStandardOutput ? Encoding.UTF8 : null,
                     }
                 };
                 LSTGInstance.EnableRaisingEvents = true;
+                
+                if (RedirectStandardOutput)
+                {
+                    LSTGInstance.OutputDataReceived += (s, e) => logger(e.Data);
+                    LSTGInstance.Exited += (s, e) =>
+                    {
+                        end();
+                        logger("\nExited with code " + LSTGInstance.ExitCode + ".");
+                    };
+                }
+                else
+                {
+                    LSTGInstance.Exited += (s, e) => {
+                        FileStream fs = null;
+                        StreamReader sr = null;
+                        StringBuilder sb = new StringBuilder();
+                        try
+                        {
+                            fs = new FileStream(Path.GetFullPath(Path.Combine(
+                                Path.GetDirectoryName(LuaSTGPath), LogFileName)), FileMode.Open);
+                            sr = new StreamReader(fs);
+                            int i = 0;
+                            while (!sr.EndOfStream && i < 8192)
+                            {
+                                sb.Append(sr.ReadLine());
+                                sb.Append("\n");
+                                i++;
+                            }
+                            logger(sb.ToString());
+                            end();
+                        }
+                        catch (System.Exception exc)
+                        {
+                            System.Windows.MessageBox.Show(exc.ToString());
+                        }
+                        finally
+                        {
+                            if (fs != null) fs.Close();
+                            if (sr != null) sr.Close();
+                        }
+                        sb.Append("\nExited with code " + LSTGInstance.ExitCode + ".");
+                        logger(sb.ToString());
+                    };
+                }
+                
                 LSTGInstance.Start();
 
                 logger("LuaSTG is Running.\n\n");
 
-                LSTGInstance.Exited += (s, e) => {
-                    FileStream fs = null;
-                    StreamReader sr = null;
-                    StringBuilder sb = new StringBuilder();
-                    try
-                    {
-                        fs = new FileStream(Path.GetFullPath(Path.Combine(
-                            Path.GetDirectoryName(LuaSTGPath), LogFileName)), FileMode.Open);
-                        sr = new StreamReader(fs);
-                        int i = 0;
-                        while (!sr.EndOfStream && i < 8192)
-                        {
-                            sb.Append(sr.ReadLine());
-                            sb.Append("\n");
-                            i++;
-                        }
-                        logger(sb.ToString());
-                        end();
-                    }
-                    catch (System.Exception exc)
-                    {
-                        System.Windows.MessageBox.Show(exc.ToString());
-                    }
-                    finally
-                    {
-                        if (fs != null) fs.Close();
-                        if (sr != null) sr.Close();
-                    }
-                    sb.Append("\nExited with code " + LSTGInstance.ExitCode + ".");
-                    logger(sb.ToString());
-                };
-                
+                if (RedirectStandardOutput)
+                {
+                    LSTGInstance.BeginOutputReadLine();
+                }
             }
             else
             {

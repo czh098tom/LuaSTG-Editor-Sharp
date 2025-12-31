@@ -470,6 +470,7 @@ namespace LuaSTGEditorSharp.Windows
             PluginPathSettings = PluginPath;
             TempPathSettings = TempPath;
             ZipExecutablePathSettings = ZipExecutablePath;
+            DynamicDebugReportingSettings = DynamicDebugReporting;
             SpaceIndentationSettings = SpaceIndentation;
             IndentationSpaceLengthSettings = IndentationSpaceLength;
             TabDisplayWidthSettings = TabDisplayWidth;
@@ -503,6 +504,7 @@ namespace LuaSTGEditorSharp.Windows
             PluginPath = PluginPathSettings;
             TempPath = TempPathSettings;
             ZipExecutablePath = ZipExecutablePathSettings;
+            DynamicDebugReporting = DynamicDebugReportingSettings;
             SpaceIndentation = SpaceIndentationSettings;
             IndentationSpaceLength = IndentationSpaceLengthSettings;
             TabDisplayWidth = TabDisplayWidthSettings;
