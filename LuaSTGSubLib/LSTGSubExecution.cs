@@ -20,8 +20,8 @@ namespace LuaSTGEditorSharp
                 + config.ModName + "\'\"";
             UseShellExecute = false;
             CreateNoWindow = true;
-            RedirectStandardError = true;
-            RedirectStandardOutput = true;
+            RedirectStandardError = false;
+            RedirectStandardOutput = currentApp.DynamicDebugReporting; // LuaSTG Sub v0.21.118+ supports stdout redirect
         }
 
         protected override string LogFileName => "engine.log";
