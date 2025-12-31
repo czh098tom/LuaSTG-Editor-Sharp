@@ -48,8 +48,6 @@ namespace LuaSTGEditorSharp
     {
         DocumentCollection Documents { get; } = new DocumentCollection();
 
-        private string debugString = "";
-
         public ObservableCollection<ToolboxTab> toolboxData;
         public ObservableCollection<ToolboxTab> ToolboxData { get => toolboxData; }
 
@@ -68,16 +66,6 @@ namespace LuaSTGEditorSharp
         public ObservableCollection<MessageBase> Messages { get => MessageContainer.Messages; }
 
         private bool packagingLocked = false;
-
-        public string DebugString
-        {
-            get => debugString;
-            set
-            {
-                debugString = value;
-                RaiseProertyChanged("DebugString");
-            }
-        }
 
         public TreeNodeBase clipBoard = null;
 
@@ -647,7 +635,7 @@ namespace LuaSTGEditorSharp
                 TxtLine.Text = "";
                 if (CompileWorker.IsBusy) throw new InvalidOperationException();
                 CompileWorker.RunWorkerAsync(new object[] { current, SCDebugger, StageDebugger, run, saveMeta });
-                DebugString = "";
+                debugOutput.Clear();
                 tabOutput.IsSelected = true;
             }
             catch (EXEPathNotSetException)
@@ -696,7 +684,7 @@ namespace LuaSTGEditorSharp
         private void PackageProgressReport(object sender, ProgressChangedEventArgs args)
         {
             packagingLocked = true;
-            DebugString += args.UserState?.ToString() + "\n";
+            debugOutput.AppendText(args.UserState?.ToString() + "\n");
             debugOutput.ScrollToEnd();
         }
 
@@ -724,10 +712,14 @@ namespace LuaSTGEditorSharp
             {
                 ModName = process.projName
             });
-            DebugString = "";
+            debugOutput.Clear();
             PluginHandler.Plugin.Execution.Run((s) =>
             {
-                DebugString += s + "\n";
+                App.Current.Dispatcher.Invoke(() =>
+                {
+                    debugOutput.AppendText(s + "\n");
+                    debugOutput.ScrollToEnd();
+                });
             }
             , () => App.Current.Dispatcher.Invoke(() => debugOutput.ScrollToEnd()));
         }
