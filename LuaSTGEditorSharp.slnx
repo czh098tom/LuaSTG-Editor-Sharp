@@ -1,0 +1,26 @@
+<Solution>
+  <Configurations>
+    <Platform Name="Any CPU" />
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Folder Name="/Solution Items/">
+    <File Path=".editorconfig" />
+    <File Path="Advanced Repeat Design.md" />
+    <File Path="README.md" />
+    <File Path="Unfinished Nodes.md" />
+    <File Path="User Manual.md" />
+  </Folder>
+  <Project Path="DanmakuRandomizer/DanmakuRandomizer.csproj" />
+  <Project Path="ExtensionRegister/ExtensionRegister.csproj" />
+  <Project Path="LuaSTGEditorSharp.Core.Cli/LuaSTGEditorSharp.Core.Cli.csproj" />
+  <Project Path="LuaSTGEditorSharp.Core.Windows/LuaSTGEditorSharp.Core.Windows.csproj" />
+  <Project Path="LuaSTGEditorSharp.Core/LuaSTGEditorSharp.Core.csproj" />
+  <Project Path="LuaSTGEditorSharp/LuaSTGEditorSharp.csproj" />
+  <Project Path="LuaSTGLib.Default/LuaSTGLib.Default.csproj" />
+  <Project Path="LuaSTGNode.Legacy.Windows/LuaSTGNode.Legacy.Windows.csproj" />
+  <Project Path="LuaSTGNode.Legacy/LuaSTGNode.Legacy.csproj" />
+  <Project Path="LuaSTGPlusLib/LuaSTGPlusLib.csproj" />
+  <Project Path="LuaSTGSubLib/LuaSTGSubLib.csproj" />
+  <Project Path="LuaSTGXLib.Legacy/LuaSTGXLib.Legacy.csproj" />
+</Solution>
