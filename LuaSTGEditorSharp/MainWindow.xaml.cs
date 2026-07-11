@@ -835,6 +835,18 @@ namespace LuaSTGEditorSharp
                 ComboBoxItem item = new ComboBoxItem() { Content = s };
                 comboBox.Items.Add(item);
             }
+
+            // 把内部可编辑 TextBox 切到多行模式，避免选中有 \n 的文本时用 IME 键入
+            // 触发 System.ExecutionEngineException（WPF TextStore 已知 bug）。
+            // 必须在 Focus() 之前设置，否则 TextStore 已按单行模式创建。
+            comboBox.ApplyTemplate();
+            if (comboBox.Template.FindName("PART_EditableTextBox", comboBox) is TextBox tb)
+            {
+                tb.AcceptsReturn = true;
+                tb.TextWrapping = TextWrapping.Wrap;
+                tb.VerticalScrollBarVisibility = ScrollBarVisibility.Auto;
+            }
+
             comboBox.Focus();
         }
 
