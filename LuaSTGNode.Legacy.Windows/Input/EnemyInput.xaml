@@ -114,7 +114,7 @@
                 <Image Source="/LuaSTGNode.Legacy;component/images/enemy/enemy20.png" Style="{StaticResource SelectionImg}"/>
             </Button.Content>
         </Button>
-        <Button Click="Style_Click" Tag="20">
+        <Button Click="Style_Click" Tag="21">
             <Button.Content>
                 <Image Source="/LuaSTGNode.Legacy;component/images/enemy/enemy21.png" Style="{StaticResource SelectionImg}"/>
             </Button.Content>
